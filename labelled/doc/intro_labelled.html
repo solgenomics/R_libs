@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Joseph Larmarange" />
+
+
+<title>Introduction to labelled</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Introduction to labelled</h1>
+<h4 class="author">Joseph Larmarange</h4>
+
+
+
+<p>The purpose of the <strong>labelled</strong> package is to provide functions to manipulate metadata as variable labels, value labels and defined missing values using the <code>haven_labelled</code> and <code>haven_labelled_spss</code> classes introduced in <code>haven</code> package.</p>
+<div id="variable-labels" class="section level2">
+<h2>Variable labels</h2>
+<p>A variable label could be specified for any vector using <code>var_label</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(labelled)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">var_label</span>(iris<span class="op">$</span>Sepal.Length) &lt;-<span class="st"> &quot;Length of sepal&quot;</span></a></code></pre></div>
+<p>It’s possible to add a variable label to several columns of a data frame using a named list.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">var_label</span>(iris) &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">Petal.Length =</span> <span class="st">&quot;Length of petal&quot;</span>, <span class="dt">Petal.Width =</span> <span class="st">&quot;Width of Petal&quot;</span>)</a></code></pre></div>
+<p>To get the variable label, simply call <code>var_label</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">var_label</span>(iris<span class="op">$</span>Petal.Width)</a></code></pre></div>
+<pre><code>## [1] &quot;Width of Petal&quot;</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">var_label</span>(iris)</a></code></pre></div>
+<pre><code>## $Sepal.Length
+## [1] &quot;Length of sepal&quot;
+## 
+## $Sepal.Width
+## NULL
+## 
+## $Petal.Length
+## [1] &quot;Length of petal&quot;
+## 
+## $Petal.Width
+## [1] &quot;Width of Petal&quot;
+## 
+## $Species
+## NULL</code></pre>
+<p>To remove a variable label, use <code>NULL</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">var_label</span>(iris<span class="op">$</span>Sepal.Length) &lt;-<span class="st"> </span><span class="ot">NULL</span></a></code></pre></div>
+<p>In <strong>RStudio</strong>, variable labels will be displayed in data viewer.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">View</span>(iris)</a></code></pre></div>
+<p>You can display and search through variable names and labels with <code>look_for()</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">look_for</span>(iris)</a></code></pre></div>
+<pre><code>##       variable           label
+## 1 Sepal.Length            &lt;NA&gt;
+## 2  Sepal.Width            &lt;NA&gt;
+## 3 Petal.Length Length of petal
+## 4  Petal.Width  Width of Petal
+## 5      Species            &lt;NA&gt;</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">look_for</span>(iris, <span class="st">&quot;pet&quot;</span>)</a></code></pre></div>
+<pre><code>##       variable           label
+## 3 Petal.Length Length of petal
+## 4  Petal.Width  Width of Petal</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">look_for</span>(iris, <span class="dt">details =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>##       variable           label   class    type
+## 1 Sepal.Length            &lt;NA&gt; numeric  double
+## 2  Sepal.Width            &lt;NA&gt; numeric  double
+## 3 Petal.Length Length of petal numeric  double
+## 4  Petal.Width  Width of Petal numeric  double
+## 5      Species            &lt;NA&gt;  factor integer
+##                          levels value_labels unique_values n_na na_values
+## 1                                                       35    0          
+## 2                                                       23    0          
+## 3                                                       43    0          
+## 4                                                       22    0          
+## 5 setosa; versicolor; virginica                          3    0          
+##   na_range
+## 1         
+## 2         
+## 3         
+## 4         
+## 5</code></pre>
+</div>
+<div id="value-labels" class="section level2">
+<h2>Value labels</h2>
+<p>The first way to create a labelled vector is to use the <code>labelled</code> function. It’s not mandatory to provide a label for each value observed in your vector. You can also provide a label for values not observed.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">v &lt;-<span class="st"> </span><span class="kw">labelled</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="ot">NA</span>), <span class="kw">c</span>(<span class="dt">yes =</span> <span class="dv">1</span>, <span class="dt">no =</span> <span class="dv">3</span>, <span class="st">&quot;don't know&quot;</span> =<span class="st"> </span><span class="dv">8</span>, <span class="dt">refused =</span> <span class="dv">9</span>))</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">v</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;
+##  [1]  1  2  2  2  3  9  1  3  2 NA
+## 
+## Labels:
+##  value      label
+##      1        yes
+##      3         no
+##      8 don't know
+##      9    refused</code></pre>
+<p>Use <code>val_labels</code> to get all value labels and <code>val_label</code> to get the value label associated with a specific value.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">val_labels</span>(v)</a></code></pre></div>
+<pre><code>##        yes         no don't know    refused 
+##          1          3          8          9</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">val_label</span>(v, <span class="dv">8</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;don't know&quot;</code></pre>
+<p><code>val_labels</code> could also be used to modify all the value labels attached to a vector, while <code>val_label</code> will update only one specific value label.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">val_labels</span>(v) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">yes =</span> <span class="dv">1</span>, <span class="dt">nno =</span> <span class="dv">3</span>, <span class="dt">bug =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">v</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;
+##  [1]  1  2  2  2  3  9  1  3  2 NA
+## 
+## Labels:
+##  value label
+##      1   yes
+##      3   nno
+##      5   bug</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">val_label</span>(v, <span class="dv">3</span>) &lt;-<span class="st"> &quot;no&quot;</span></a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">v</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;
+##  [1]  1  2  2  2  3  9  1  3  2 NA
+## 
+## Labels:
+##  value label
+##      1   yes
+##      3    no
+##      5   bug</code></pre>
+<p>With <code>val_label</code>, you can also add or remove specific value labels.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">val_label</span>(v, <span class="dv">2</span>) &lt;-<span class="st"> &quot;maybe&quot;</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="kw">val_label</span>(v, <span class="dv">5</span>) &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">v</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;
+##  [1]  1  2  2  2  3  9  1  3  2 NA
+## 
+## Labels:
+##  value label
+##      1   yes
+##      3    no
+##      2 maybe</code></pre>
+<p>To remove all value labels, use <code>val_labels</code> and <code>NULL</code>. The <code>labelled</code> class will also be removed.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">val_labels</span>(v) &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">v</a></code></pre></div>
+<pre><code>##  [1]  1  2  2  2  3  9  1  3  2 NA</code></pre>
+<p>Adding a value label to a non labelled vector will apply <code>labelled</code> class to it.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">val_label</span>(v, <span class="dv">1</span>) &lt;-<span class="st"> &quot;yes&quot;</span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">v</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;
+##  [1]  1  2  2  2  3  9  1  3  2 NA
+## 
+## Labels:
+##  value label
+##      1   yes</code></pre>
+<p>Note that applying <code>val_labels</code> to a factor will have no effect!</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">f &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb31-2" data-line-number="2">f</a></code></pre></div>
+<pre><code>## [1] 1 2 3
+## Levels: 1 2 3</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">val_labels</span>(f) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">yes =</span> <span class="dv">1</span>, <span class="dt">no =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">f</a></code></pre></div>
+<pre><code>## [1] 1 2 3
+## Levels: 1 2 3</code></pre>
+<p>You could also apply value labels to several columns of a data frame.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">v1 =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">v2 =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>), <span class="dt">v3 =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb35-3" data-line-number="3"><span class="kw">val_label</span>(df, <span class="dv">1</span>) &lt;-<span class="st"> &quot;yes&quot;</span></a>
+<a class="sourceLine" id="cb35-4" data-line-number="4"><span class="kw">val_label</span>(df[, <span class="kw">c</span>(<span class="st">&quot;v1&quot;</span>, <span class="st">&quot;v3&quot;</span>)], <span class="dv">2</span>) &lt;-<span class="st"> &quot;maybe&quot;</span></a>
+<a class="sourceLine" id="cb35-5" data-line-number="5"><span class="kw">val_label</span>(df[, <span class="kw">c</span>(<span class="st">&quot;v2&quot;</span>, <span class="st">&quot;v3&quot;</span>)], <span class="dv">3</span>) &lt;-<span class="st"> &quot;no&quot;</span></a>
+<a class="sourceLine" id="cb35-6" data-line-number="6"><span class="kw">val_labels</span>(df)</a></code></pre></div>
+<pre><code>## $v1
+##   yes maybe 
+##     1     2 
+## 
+## $v2
+## yes  no 
+##   1   3 
+## 
+## $v3
+##   yes maybe    no 
+##     1     2     3</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw">val_labels</span>(df[, <span class="kw">c</span>(<span class="st">&quot;v1&quot;</span>, <span class="st">&quot;v3&quot;</span>)]) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">YES =</span> <span class="dv">1</span>, <span class="dt">MAYBE =</span> <span class="dv">2</span>, <span class="dt">NO =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="kw">val_labels</span>(df)</a></code></pre></div>
+<pre><code>## $v1
+##   YES MAYBE    NO 
+##     1     2     3 
+## 
+## $v2
+## yes  no 
+##   1   3 
+## 
+## $v3
+##   YES MAYBE    NO 
+##     1     2     3</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">val_labels</span>(df) &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="kw">val_labels</span>(df)</a></code></pre></div>
+<pre><code>## $v1
+## NULL
+## 
+## $v2
+## NULL
+## 
+## $v3
+## NULL</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">val_labels</span>(df) &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">v1 =</span> <span class="kw">c</span>(<span class="dt">yes =</span> <span class="dv">1</span>, <span class="dt">no =</span> <span class="dv">3</span>), <span class="dt">v2 =</span> <span class="kw">c</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">2</span>, <span class="dt">c =</span> <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="kw">val_labels</span>(df)</a></code></pre></div>
+<pre><code>## $v1
+## yes  no 
+##   1   3 
+## 
+## $v2
+## a b c 
+## 1 2 3 
+## 
+## $v3
+## NULL</code></pre>
+</div>
+<div id="sorting-value-labels" class="section level2">
+<h2>Sorting value labels</h2>
+<p>Value labels are sorted by default in the order they have been created.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="kw">val_label</span>(v, <span class="dv">1</span>) &lt;-<span class="st"> &quot;yes&quot;</span></a>
+<a class="sourceLine" id="cb43-3" data-line-number="3"><span class="kw">val_label</span>(v, <span class="dv">3</span>) &lt;-<span class="st"> &quot;no&quot;</span></a>
+<a class="sourceLine" id="cb43-4" data-line-number="4"><span class="kw">val_label</span>(v, <span class="dv">9</span>) &lt;-<span class="st"> &quot;refused&quot;</span></a>
+<a class="sourceLine" id="cb43-5" data-line-number="5"><span class="kw">val_label</span>(v, <span class="dv">2</span>) &lt;-<span class="st"> &quot;maybe&quot;</span></a>
+<a class="sourceLine" id="cb43-6" data-line-number="6"><span class="kw">val_label</span>(v, <span class="dv">8</span>) &lt;-<span class="st"> &quot;don't know&quot;</span></a>
+<a class="sourceLine" id="cb43-7" data-line-number="7">v</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;
+##  [1]  1  2  2  2  3  9  1  3  2 NA
+## 
+## Labels:
+##  value      label
+##      1        yes
+##      3         no
+##      9    refused
+##      2      maybe
+##      8 don't know</code></pre>
+<p>It could be useful to reorder the value labels according to their attached values.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">sort_val_labels</span>(v)</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;
+##  [1]  1  2  2  2  3  9  1  3  2 NA
+## 
+## Labels:
+##  value      label
+##      1        yes
+##      2      maybe
+##      3         no
+##      8 don't know
+##      9    refused</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw">sort_val_labels</span>(v, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;
+##  [1]  1  2  2  2  3  9  1  3  2 NA
+## 
+## Labels:
+##  value      label
+##      9    refused
+##      8 don't know
+##      3         no
+##      2      maybe
+##      1        yes</code></pre>
+<p>If you prefer, you can also sort them according to the labels.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">sort_val_labels</span>(v, <span class="dt">according_to =</span> <span class="st">&quot;l&quot;</span>)</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;
+##  [1]  1  2  2  2  3  9  1  3  2 NA
+## 
+## Labels:
+##  value      label
+##      8 don't know
+##      2      maybe
+##      3         no
+##      9    refused
+##      1        yes</code></pre>
+</div>
+<div id="user-defined-missing-values-spsss-style" class="section level2">
+<h2>User defined missing values (SPSS’s style)</h2>
+<p><code>haven</code> (&gt;= 2.0.0) introduced an additional <code>haven_labelled_spss</code> class to deal with user defined missing values. In such case, additional atributes will be used to indicate with values should be considered as missing, but such values will not be stored as internal <code>NA</code> values. You should note that most R function will not take this information into account. Therefore, you will have to convert missing values into <code>NA</code> if required before analysis. These defined missing values could co-exist with internal <code>NA</code> values.</p>
+<p>It is possible to manipulate this missing values with <code>na_values()</code> and <code>na_range()</code>. Note that <code>is.na()</code> will return <code>TRUE</code> as well for user-defined missing values.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">v &lt;-<span class="st"> </span><span class="kw">labelled</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="ot">NA</span>), <span class="kw">c</span>(<span class="dt">yes =</span> <span class="dv">1</span>, <span class="dt">no =</span> <span class="dv">3</span>, <span class="st">&quot;don't know&quot;</span> =<span class="st"> </span><span class="dv">9</span>))</a>
+<a class="sourceLine" id="cb51-2" data-line-number="2">v</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;
+##  [1]  1  2  2  2  3  9  1  3  2 NA
+## 
+## Labels:
+##  value      label
+##      1        yes
+##      3         no
+##      9 don't know</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">na_values</span>(v) &lt;-<span class="st"> </span><span class="dv">9</span></a>
+<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="kw">na_values</span>(v)</a></code></pre></div>
+<pre><code>## [1] 9</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">v</a></code></pre></div>
+<pre><code>## &lt;Labelled SPSS double&gt;
+##  [1]  1  2  2  2  3  9  1  3  2 NA
+## Missing values: 9
+## 
+## Labels:
+##  value      label
+##      1        yes
+##      3         no
+##      9 don't know</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw">is.na</span>(v)</a></code></pre></div>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="kw">na_values</span>(v) &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb59-2" data-line-number="2">v</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;
+##  [1]  1  2  2  2  3  9  1  3  2 NA
+## 
+## Labels:
+##  value      label
+##      1        yes
+##      3         no
+##      9 don't know</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="kw">na_range</span>(v) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="ot">Inf</span>)</a>
+<a class="sourceLine" id="cb61-2" data-line-number="2"><span class="kw">na_range</span>(v)</a></code></pre></div>
+<pre><code>## [1]   5 Inf</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">v</a></code></pre></div>
+<pre><code>## &lt;Labelled SPSS double&gt;
+##  [1]  1  2  2  2  3  9  1  3  2 NA
+## Missing range:  [5, Inf]
+## 
+## Labels:
+##  value      label
+##      1        yes
+##      3         no
+##      9 don't know</code></pre>
+<p>Since version 2.1.0, it is not mandatory to define at least one value label before defining missing values.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">9</span>)</a>
+<a class="sourceLine" id="cb65-2" data-line-number="2"><span class="kw">na_values</span>(x) &lt;-<span class="st"> </span><span class="dv">9</span></a>
+<a class="sourceLine" id="cb65-3" data-line-number="3">x</a></code></pre></div>
+<p>To convert user defined missing values into <code>NA</code>, simply use <code>user_na_to_na()</code>.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">v &lt;-<span class="st"> </span><span class="kw">labelled_spss</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="kw">c</span>(<span class="dt">Good =</span> <span class="dv">1</span>, <span class="dt">Bad =</span> <span class="dv">8</span>), <span class="dt">na_values =</span> <span class="kw">c</span>(<span class="dv">9</span>, <span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb66-2" data-line-number="2">v</a></code></pre></div>
+<pre><code>## &lt;Labelled SPSS integer&gt;
+##  [1]  1  2  3  4  5  6  7  8  9 10
+## Missing values: 9, 10
+## 
+## Labels:
+##  value label
+##      1  Good
+##      8   Bad</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1">v2 &lt;-<span class="st"> </span><span class="kw">user_na_to_na</span>(v)</a>
+<a class="sourceLine" id="cb68-2" data-line-number="2">v2</a></code></pre></div>
+<pre><code>## &lt;Labelled integer&gt;
+##  [1]  1  2  3  4  5  6  7  8 NA NA
+## 
+## Labels:
+##  value label
+##      1  Good
+##      8   Bad</code></pre>
+<p>You can also remove user missing values definition without converting these values to <code>NA</code>.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1">v &lt;-<span class="st"> </span><span class="kw">labelled_spss</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="kw">c</span>(<span class="dt">Good =</span> <span class="dv">1</span>, <span class="dt">Bad =</span> <span class="dv">8</span>), <span class="dt">na_values =</span> <span class="kw">c</span>(<span class="dv">9</span>, <span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb70-2" data-line-number="2">v</a></code></pre></div>
+<pre><code>## &lt;Labelled SPSS integer&gt;
+##  [1]  1  2  3  4  5  6  7  8  9 10
+## Missing values: 9, 10
+## 
+## Labels:
+##  value label
+##      1  Good
+##      8   Bad</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1">v2 &lt;-<span class="st"> </span><span class="kw">remove_user_na</span>(v)</a></code></pre></div>
+<pre><code>## Some user defined missing values have been removed but not converted to NA.</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1">v2</a></code></pre></div>
+<pre><code>## &lt;Labelled integer&gt;
+##  [1]  1  2  3  4  5  6  7  8  9 10
+## 
+## Labels:
+##  value label
+##      1  Good
+##      8   Bad</code></pre>
+<p>or</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">v &lt;-<span class="st"> </span><span class="kw">labelled_spss</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="kw">c</span>(<span class="dt">Good =</span> <span class="dv">1</span>, <span class="dt">Bad =</span> <span class="dv">8</span>), <span class="dt">na_values =</span> <span class="kw">c</span>(<span class="dv">9</span>, <span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb76-2" data-line-number="2">v</a></code></pre></div>
+<pre><code>## &lt;Labelled SPSS integer&gt;
+##  [1]  1  2  3  4  5  6  7  8  9 10
+## Missing values: 9, 10
+## 
+## Labels:
+##  value label
+##      1  Good
+##      8   Bad</code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="kw">na_values</span>(v) &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb78-2" data-line-number="2">v</a></code></pre></div>
+<pre><code>## &lt;Labelled integer&gt;
+##  [1]  1  2  3  4  5  6  7  8  9 10
+## 
+## Labels:
+##  value label
+##      1  Good
+##      8   Bad</code></pre>
+</div>
+<div id="other-conversion-to-na" class="section level2">
+<h2>Other conversion to NA</h2>
+<p>In some cases, values who don’t have an attached value label could be considered as missing. <code>nolabel_to_na</code> will convert them to <code>NA</code>.</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">v &lt;-<span class="st"> </span><span class="kw">labelled</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="ot">NA</span>), <span class="kw">c</span>(<span class="dt">yes =</span> <span class="dv">1</span>, <span class="dt">maybe =</span> <span class="dv">2</span>, <span class="dt">no =</span> <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb80-2" data-line-number="2">v</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;
+##  [1]  1  2  2  2  3  9  1  3  2 NA
+## 
+## Labels:
+##  value label
+##      1   yes
+##      2 maybe
+##      3    no</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1"><span class="kw">nolabel_to_na</span>(v)</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;
+##  [1]  1  2  2  2  3 NA  1  3  2 NA
+## 
+## Labels:
+##  value label
+##      1   yes
+##      2 maybe
+##      3    no</code></pre>
+<p>In other cases, a value label is attached only to specific values that corresponds to a missing value. For example:</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">size &lt;-<span class="st"> </span><span class="kw">labelled</span>(<span class="kw">c</span>(<span class="fl">1.88</span>, <span class="fl">1.62</span>, <span class="fl">1.78</span>, <span class="dv">99</span>, <span class="fl">1.91</span>), <span class="kw">c</span>(<span class="st">&quot;not measured&quot;</span> =<span class="st"> </span><span class="dv">99</span>))</a>
+<a class="sourceLine" id="cb84-2" data-line-number="2">size</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;
+## [1]  1.88  1.62  1.78 99.00  1.91
+## 
+## Labels:
+##  value        label
+##     99 not measured</code></pre>
+<p>In such cases, <code>val_labels_to_na</code> could be appropriate.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="kw">val_labels_to_na</span>(size)</a></code></pre></div>
+<pre><code>## [1] 1.88 1.62 1.78   NA 1.91</code></pre>
+<p>These two functions could also be applied to an overall data frame. Only labelled vectors will be impacted.</p>
+</div>
+<div id="converting-to-factor" class="section level2">
+<h2>Converting to factor</h2>
+<p>A labelled vector could easily be converted to a factor with <code>to_factor</code>.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1">v &lt;-<span class="st"> </span><span class="kw">labelled</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="ot">NA</span>), <span class="kw">c</span>(<span class="dt">yes =</span> <span class="dv">1</span>, <span class="dt">no =</span> <span class="dv">3</span>, <span class="st">&quot;don't know&quot;</span> =<span class="st"> </span><span class="dv">8</span>, <span class="dt">refused =</span> <span class="dv">9</span>))</a>
+<a class="sourceLine" id="cb88-2" data-line-number="2">v</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;
+##  [1]  1  2  2  2  3  9  1  3  2 NA
+## 
+## Labels:
+##  value      label
+##      1        yes
+##      3         no
+##      8 don't know
+##      9    refused</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1"><span class="kw">to_factor</span>(v)</a></code></pre></div>
+<pre><code>##  [1] yes     2       2       2       no      refused yes     no     
+##  [9] 2       &lt;NA&gt;   
+## Levels: yes 2 no don't know refused</code></pre>
+<p>The <code>levels</code> argument allows to specify what should be used as the factor levels, i.e. the labels (default), the values or the labels prefixed with values.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1"><span class="kw">to_factor</span>(v, <span class="dt">levels =</span> <span class="st">&quot;v&quot;</span>)</a></code></pre></div>
+<pre><code>##  [1] 1    2    2    2    3    9    1    3    2    &lt;NA&gt;
+## Levels: 1 2 3 8 9</code></pre>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1"><span class="kw">to_factor</span>(v, <span class="dt">levels =</span> <span class="st">&quot;p&quot;</span>)</a></code></pre></div>
+<pre><code>##  [1] [1] yes     [2] 2       [2] 2       [2] 2       [3] no     
+##  [6] [9] refused [1] yes     [3] no      [2] 2       &lt;NA&gt;       
+## Levels: [1] yes [2] 2 [3] no [8] don't know [9] refused</code></pre>
+<p>The <code>ordered</code> argument will create an ordinal factor.</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1"><span class="kw">to_factor</span>(v, <span class="dt">ordered =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>##  [1] yes     2       2       2       no      refused yes     no     
+##  [9] 2       &lt;NA&gt;   
+## Levels: yes &lt; 2 &lt; no &lt; don't know &lt; refused</code></pre>
+<p>The argument <code>nolabel_to_na</code> specify if the corresponding function should be applied before converting to a factor. Therefore, the two following commands are equivalent.</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="kw">to_factor</span>(v, <span class="dt">nolabel_to_na =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>##  [1] yes     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    no      refused yes     no     
+##  [9] &lt;NA&gt;    &lt;NA&gt;   
+## Levels: yes no don't know refused</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="kw">to_factor</span>(<span class="kw">nolabel_to_na</span>(v))</a></code></pre></div>
+<pre><code>##  [1] yes     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    no      refused yes     no     
+##  [9] &lt;NA&gt;    &lt;NA&gt;   
+## Levels: yes no don't know refused</code></pre>
+<p><code>sort_levels</code> specifies how the levels should be sorted: <code>&quot;none&quot;</code> to keep the order in which value labels have been defined, <code>&quot;values&quot;</code> to order the levels according to the values and <code>&quot;labels&quot;</code> according to the labels. <code>&quot;auto&quot;</code> (default) will be equivalent to <code>&quot;none&quot;</code> except if some values with no attached labels are found and are not dropped. In that case, <code>&quot;values&quot;</code> will be used.</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="kw">to_factor</span>(v, <span class="dt">sort_levels =</span> <span class="st">&quot;n&quot;</span>)</a></code></pre></div>
+<pre><code>##  [1] yes     2       2       2       no      refused yes     no     
+##  [9] 2       &lt;NA&gt;   
+## Levels: yes no don't know refused 2</code></pre>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="kw">to_factor</span>(v, <span class="dt">sort_levels =</span> <span class="st">&quot;v&quot;</span>)</a></code></pre></div>
+<pre><code>##  [1] yes     2       2       2       no      refused yes     no     
+##  [9] 2       &lt;NA&gt;   
+## Levels: yes 2 no don't know refused</code></pre>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="kw">to_factor</span>(v, <span class="dt">sort_levels =</span> <span class="st">&quot;l&quot;</span>)</a></code></pre></div>
+<pre><code>##  [1] yes     2       2       2       no      refused yes     no     
+##  [9] 2       &lt;NA&gt;   
+## Levels: 2 don't know no refused yes</code></pre>
+<p>The function <code>to_labelled</code> could be used to turn a factor into a labelled numeric vector.</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" data-line-number="1">f &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>))</a>
+<a class="sourceLine" id="cb108-2" data-line-number="2"><span class="kw">to_labelled</span>(f)</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;
+## [1] 1 2 3
+## 
+## Labels:
+##  value label
+##      1     a
+##      2     b
+##      3     c</code></pre>
+<p>Note that <code>to_labelled(to_factor(v))</code> will not be equal to <code>v</code> due to the way factors are stored internally by <strong>R</strong>.</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1">v</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;
+##  [1]  1  2  2  2  3  9  1  3  2 NA
+## 
+## Labels:
+##  value      label
+##      1        yes
+##      3         no
+##      8 don't know
+##      9    refused</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1"><span class="kw">to_labelled</span>(<span class="kw">to_factor</span>(v))</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;
+##  [1]  1  2  2  2  3  5  1  3  2 NA
+## 
+## Labels:
+##  value      label
+##      1        yes
+##      2          2
+##      3         no
+##      4 don't know
+##      5    refused</code></pre>
+</div>
+<div id="importing-labelled-data" class="section level2">
+<h2>Importing labelled data</h2>
+<p>In <strong>haven</strong> package, <code>read_spss</code>, <code>read_stata</code> and <code>read_sas</code> are natively importing data using the <code>labelled</code> class and the <code>label</code> attribute for variable labels.</p>
+<p>Functions from <strong>foreign</strong> package could also import some metadata from <strong>SPSS</strong> and <strong>Stata</strong> files. <code>to_labelled</code> can convert data imported with <strong>foreign</strong> into a labelled data frame. However, there are some limitations compared to using <strong>haven</strong>:</p>
+<ul>
+<li>For <strong>SPSS</strong> files, it will be better to set <code>use.value.labels = FALSE</code>, <code>to.data.frame = FALSE</code> and <code>use.missings = FALSE</code> when calling <code>read.spss</code>. If <code>use.value.labels = TRUE</code>, variable with value labels will be converted into factors by <code>read.spss</code> (and kept as factors by <code>foreign_to_label</code>). If <code>to.data.frame = TRUE</code>, meta data describing the missing values will not be imported. If <code>use.missings = TRUE</code>, missing values would have been converted to <code>NA</code> by <code>read.spss</code>.</li>
+<li>For <strong>Stata</strong> files, set <code>convert.factors = FALSE</code> when calling <code>read.dta</code> to avoid conversion of variables with value labels into factors. So far, missing values defined in Stata are always imported as <code>NA</code> by <code>read.dta</code> and could not be retrieved by <code>foreign_to_labelled</code>.</li>
+</ul>
+<p>The <strong>memisc</strong> package provide functions to import variable metadata and store them in specific object of class <code>data.set</code>. The <code>to_labelled</code> method can convert a data.set into a labelled data frame.</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1">  <span class="co"># from foreign</span></a>
+<a class="sourceLine" id="cb114-2" data-line-number="2">  <span class="kw">library</span>(foreign)</a>
+<a class="sourceLine" id="cb114-3" data-line-number="3">  df &lt;-<span class="st"> </span><span class="kw">to_labelled</span>(<span class="kw">read.spss</span>(</a>
+<a class="sourceLine" id="cb114-4" data-line-number="4">    <span class="st">&quot;file.sav&quot;</span>,</a>
+<a class="sourceLine" id="cb114-5" data-line-number="5">    <span class="dt">to.data.frame =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb114-6" data-line-number="6">    <span class="dt">use.value.labels =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb114-7" data-line-number="7">    <span class="dt">use.missings =</span> <span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb114-8" data-line-number="8"> ))</a>
+<a class="sourceLine" id="cb114-9" data-line-number="9"> df &lt;-<span class="st"> </span><span class="kw">to_labelled</span>(<span class="kw">read.dta</span>(</a>
+<a class="sourceLine" id="cb114-10" data-line-number="10">   <span class="st">&quot;file.dta&quot;</span>,</a>
+<a class="sourceLine" id="cb114-11" data-line-number="11">   <span class="dt">convert.factors =</span> <span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb114-12" data-line-number="12"> ))</a>
+<a class="sourceLine" id="cb114-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb114-14" data-line-number="14"> <span class="co"># from memisc</span></a>
+<a class="sourceLine" id="cb114-15" data-line-number="15"> <span class="kw">library</span>(memisc)</a>
+<a class="sourceLine" id="cb114-16" data-line-number="16"> nes1948.por &lt;-<span class="st"> </span><span class="kw">UnZip</span>(<span class="st">&quot;anes/NES1948.ZIP&quot;</span>, <span class="st">&quot;NES1948.POR&quot;</span>, <span class="dt">package=</span><span class="st">&quot;memisc&quot;</span>)</a>
+<a class="sourceLine" id="cb114-17" data-line-number="17"> nes1948 &lt;-<span class="st"> </span><span class="kw">spss.portable.file</span>(nes1948.por)</a>
+<a class="sourceLine" id="cb114-18" data-line-number="18"> df &lt;-<span class="st"> </span><span class="kw">to_labelled</span>(nes1948)</a>
+<a class="sourceLine" id="cb114-19" data-line-number="19"> ds &lt;-<span class="st"> </span><span class="kw">as.data.set</span>(nes19480)</a>
+<a class="sourceLine" id="cb114-20" data-line-number="20"> df &lt;-<span class="st"> </span><span class="kw">to_labelled</span>(ds)</a></code></pre></div>
+</div>
+<div id="using-labelled-with-dplyrmagrittr" class="section level2">
+<h2>Using labelled with dplyr/magrittr</h2>
+<p>If you are using the <code>%&gt;%</code> operator, you can use the functions <code>set_variable_labels</code>, <code>set_value_labels</code>, <code>add_value_labels</code> and <code>remove_value_labels</code>.</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a></code></pre></div>
+<pre><code>## 
+## Attaching package: 'dplyr'</code></pre>
+<pre><code>## The following objects are masked from 'package:stats':
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">s1 =</span> <span class="kw">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>), <span class="dt">s2 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb119-2" data-line-number="2"><span class="st">  </span><span class="kw">set_variable_labels</span>(<span class="dt">s1 =</span> <span class="st">&quot;Sex&quot;</span>, <span class="dt">s2 =</span> <span class="st">&quot;Question&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb119-3" data-line-number="3"><span class="st">  </span><span class="kw">set_value_labels</span>(<span class="dt">s1 =</span> <span class="kw">c</span>(<span class="dt">Male =</span> <span class="st">&quot;M&quot;</span>, <span class="dt">Female =</span> <span class="st">&quot;F&quot;</span>), <span class="dt">s2 =</span> <span class="kw">c</span>(<span class="dt">Yes =</span> <span class="dv">1</span>, <span class="dt">No =</span> <span class="dv">2</span>))</a></code></pre></div>
+<pre><code>## Warning: `data_frame()` is deprecated, use `tibble()`.
+## This warning is displayed once per session.</code></pre>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" data-line-number="1">df<span class="op">$</span>s2</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;: Question
+## [1] 1 1 2
+## 
+## Labels:
+##  value label
+##      1   Yes
+##      2    No</code></pre>
+<p><code>set_value_labels</code> will replace the list of value labels while <code>add_value_labels</code> will update it.</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb123-2" data-line-number="2"><span class="st">  </span><span class="kw">set_value_labels</span>(<span class="dt">s2 =</span> <span class="kw">c</span>(<span class="dt">Yes =</span> <span class="dv">1</span>, <span class="st">&quot;Don't know&quot;</span> =<span class="st"> </span><span class="dv">8</span>, <span class="dt">Unknown =</span> <span class="dv">9</span>))</a>
+<a class="sourceLine" id="cb123-3" data-line-number="3">df<span class="op">$</span>s2</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;: Question
+## [1] 1 1 2
+## 
+## Labels:
+##  value      label
+##      1        Yes
+##      8 Don't know
+##      9    Unknown</code></pre>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb125-2" data-line-number="2"><span class="st">  </span><span class="kw">add_value_labels</span>(<span class="dt">s2 =</span> <span class="kw">c</span>(<span class="dt">No =</span> <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb125-3" data-line-number="3">df<span class="op">$</span>s2</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;: Question
+## [1] 1 1 2
+## 
+## Labels:
+##  value      label
+##      1        Yes
+##      8 Don't know
+##      9    Unknown
+##      2         No</code></pre>
+<p>You can also remove some variable and/or value labels.</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb127-2" data-line-number="2"><span class="st">  </span><span class="kw">set_variable_labels</span>(<span class="dt">s1 =</span> <span class="ot">NULL</span>)</a>
+<a class="sourceLine" id="cb127-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb127-4" data-line-number="4"><span class="co"># removing one value label</span></a>
+<a class="sourceLine" id="cb127-5" data-line-number="5">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb127-6" data-line-number="6"><span class="st">  </span><span class="kw">remove_value_labels</span>(<span class="dt">s2 =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb127-7" data-line-number="7">df<span class="op">$</span>s2</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;: Question
+## [1] 1 1 2
+## 
+## Labels:
+##  value      label
+##      1        Yes
+##      8 Don't know
+##      9    Unknown</code></pre>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1"><span class="co"># removing several value labels</span></a>
+<a class="sourceLine" id="cb129-2" data-line-number="2">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb129-3" data-line-number="3"><span class="st">  </span><span class="kw">remove_value_labels</span>(<span class="dt">s2 =</span> <span class="dv">8</span><span class="op">:</span><span class="dv">9</span>)</a>
+<a class="sourceLine" id="cb129-4" data-line-number="4">df<span class="op">$</span>s2</a></code></pre></div>
+<pre><code>## &lt;Labelled double&gt;: Question
+## [1] 1 1 2
+## 
+## Labels:
+##  value label
+##      1   Yes</code></pre>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="co"># removing all value labels</span></a>
+<a class="sourceLine" id="cb131-2" data-line-number="2">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb131-3" data-line-number="3"><span class="st">  </span><span class="kw">set_value_labels</span>(<span class="dt">s2 =</span> <span class="ot">NULL</span>)</a>
+<a class="sourceLine" id="cb131-4" data-line-number="4">df<span class="op">$</span>s2</a></code></pre></div>
+<pre><code>## [1] 1 1 2
+## attr(,&quot;label&quot;)
+## [1] &quot;Question&quot;</code></pre>
+<p>To convert variables, you can use functions as <code>mutate_if</code> or <code>mutate_at</code>. See the example below.</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" data-line-number="1"><span class="kw">library</span>(questionr)</a></code></pre></div>
+<pre><code>## 
+## Attaching package: 'questionr'</code></pre>
+<pre><code>## The following object is masked from 'package:labelled':
+## 
+##     lookfor</code></pre>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" data-line-number="1"><span class="kw">data</span>(fertility)</a>
+<a class="sourceLine" id="cb136-2" data-line-number="2"><span class="kw">glimpse</span>(women)</a></code></pre></div>
+<pre><code>## Observations: 2,000
+## Variables: 17
+## $ id_woman          &lt;dbl&gt; 391, 1643, 85, 881, 1981, 1072, 1978, 1607, 73…
+## $ id_household      &lt;dbl&gt; 381, 1515, 85, 844, 1797, 1015, 1794, 1486, 71…
+## $ weight            &lt;dbl&gt; 1.803150, 1.803150, 1.803150, 1.803150, 1.8031…
+## $ interview_date    &lt;date&gt; 2012-05-05, 2012-01-23, 2012-01-21, 2012-01-0…
+## $ date_of_birth     &lt;date&gt; 1997-03-07, 1982-01-06, 1979-01-01, 1968-03-2…
+## $ age               &lt;dbl&gt; 15, 30, 33, 43, 25, 18, 45, 23, 49, 31, 26, 45…
+## $ residency         &lt;dbl+lbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, …
+## $ region            &lt;dbl+lbl&gt; 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 2, 2, …
+## $ instruction       &lt;dbl+lbl&gt; 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 2, …
+## $ employed          &lt;dbl+lbl&gt; 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, …
+## $ matri             &lt;dbl+lbl&gt; 0, 2, 2, 2, 1, 0, 1, 1, 2, 5, 2, 3, 0, 2, …
+## $ religion          &lt;dbl+lbl&gt; 1, 3, 2, 3, 2, 2, 3, 1, 3, 3, 2, 3, 2, 2, …
+## $ newspaper         &lt;dbl+lbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, …
+## $ radio             &lt;dbl+lbl&gt; 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, …
+## $ tv                &lt;dbl+lbl&gt; 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, …
+## $ ideal_nb_children &lt;dbl+lbl&gt; 4, 4, 4, 4, 4, 5, 10, 5, 4, 5, 6, 10, 2, 6…
+## $ test              &lt;dbl+lbl&gt; 0, 9, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, …</code></pre>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" data-line-number="1"><span class="kw">glimpse</span>(<span class="kw">to_factor</span>(women))</a></code></pre></div>
+<pre><code>## Observations: 2,000
+## Variables: 17
+## $ id_woman          &lt;dbl&gt; 391, 1643, 85, 881, 1981, 1072, 1978, 1607, 73…
+## $ id_household      &lt;dbl&gt; 381, 1515, 85, 844, 1797, 1015, 1794, 1486, 71…
+## $ weight            &lt;dbl&gt; 1.803150, 1.803150, 1.803150, 1.803150, 1.8031…
+## $ interview_date    &lt;date&gt; 2012-05-05, 2012-01-23, 2012-01-21, 2012-01-0…
+## $ date_of_birth     &lt;date&gt; 1997-03-07, 1982-01-06, 1979-01-01, 1968-03-2…
+## $ age               &lt;dbl&gt; 15, 30, 33, 43, 25, 18, 45, 23, 49, 31, 26, 45…
+## $ residency         &lt;fct&gt; rural, rural, rural, rural, rural, rural, rura…
+## $ region            &lt;fct&gt; West, West, West, West, West, South, South, So…
+## $ instruction       &lt;fct&gt; none, none, none, none, primary, none, none, n…
+## $ employed          &lt;fct&gt; yes, yes, no, yes, yes, no, yes, no, yes, yes,…
+## $ matri             &lt;fct&gt; single, living together, living together, livi…
+## $ religion          &lt;fct&gt; Muslim, Protestant, Christian, Protestant, Chr…
+## $ newspaper         &lt;fct&gt; no, no, no, no, no, no, no, no, no, no, no, no…
+## $ radio             &lt;fct&gt; no, yes, yes, no, no, yes, yes, no, no, no, ye…
+## $ tv                &lt;fct&gt; no, no, no, no, no, yes, no, no, no, no, yes, …
+## $ ideal_nb_children &lt;fct&gt; 4, 4, 4, 4, 4, 5, 10, 5, 4, 5, 6, 10, 2, 6, 6,…
+## $ test              &lt;fct&gt; no, missing, no, no, yes, no, no, no, no, yes,…</code></pre>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" data-line-number="1"><span class="kw">glimpse</span>(women <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.labelled, to_factor))</a></code></pre></div>
+<pre><code>## Observations: 2,000
+## Variables: 17
+## $ id_woman          &lt;dbl&gt; 391, 1643, 85, 881, 1981, 1072, 1978, 1607, 73…
+## $ id_household      &lt;dbl&gt; 381, 1515, 85, 844, 1797, 1015, 1794, 1486, 71…
+## $ weight            &lt;dbl&gt; 1.803150, 1.803150, 1.803150, 1.803150, 1.8031…
+## $ interview_date    &lt;date&gt; 2012-05-05, 2012-01-23, 2012-01-21, 2012-01-0…
+## $ date_of_birth     &lt;date&gt; 1997-03-07, 1982-01-06, 1979-01-01, 1968-03-2…
+## $ age               &lt;dbl&gt; 15, 30, 33, 43, 25, 18, 45, 23, 49, 31, 26, 45…
+## $ residency         &lt;fct&gt; rural, rural, rural, rural, rural, rural, rura…
+## $ region            &lt;fct&gt; West, West, West, West, West, South, South, So…
+## $ instruction       &lt;fct&gt; none, none, none, none, primary, none, none, n…
+## $ employed          &lt;fct&gt; yes, yes, no, yes, yes, no, yes, no, yes, yes,…
+## $ matri             &lt;fct&gt; single, living together, living together, livi…
+## $ religion          &lt;fct&gt; Muslim, Protestant, Christian, Protestant, Chr…
+## $ newspaper         &lt;fct&gt; no, no, no, no, no, no, no, no, no, no, no, no…
+## $ radio             &lt;fct&gt; no, yes, yes, no, no, yes, yes, no, no, no, ye…
+## $ tv                &lt;fct&gt; no, no, no, no, no, yes, no, no, no, no, yes, …
+## $ ideal_nb_children &lt;fct&gt; 4, 4, 4, 4, 4, 5, 10, 5, 4, 5, 6, 10, 2, 6, 6,…
+## $ test              &lt;fct&gt; no, missing, no, no, yes, no, no, no, no, yes,…</code></pre>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1"><span class="kw">glimpse</span>(women <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(employed<span class="op">:</span>tv), to_factor))</a></code></pre></div>
+<pre><code>## Observations: 2,000
+## Variables: 17
+## $ id_woman          &lt;dbl&gt; 391, 1643, 85, 881, 1981, 1072, 1978, 1607, 73…
+## $ id_household      &lt;dbl&gt; 381, 1515, 85, 844, 1797, 1015, 1794, 1486, 71…
+## $ weight            &lt;dbl&gt; 1.803150, 1.803150, 1.803150, 1.803150, 1.8031…
+## $ interview_date    &lt;date&gt; 2012-05-05, 2012-01-23, 2012-01-21, 2012-01-0…
+## $ date_of_birth     &lt;date&gt; 1997-03-07, 1982-01-06, 1979-01-01, 1968-03-2…
+## $ age               &lt;dbl&gt; 15, 30, 33, 43, 25, 18, 45, 23, 49, 31, 26, 45…
+## $ residency         &lt;dbl+lbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, …
+## $ region            &lt;dbl+lbl&gt; 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 2, 2, …
+## $ instruction       &lt;dbl+lbl&gt; 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 2, …
+## $ employed          &lt;fct&gt; yes, yes, no, yes, yes, no, yes, no, yes, yes,…
+## $ matri             &lt;fct&gt; single, living together, living together, livi…
+## $ religion          &lt;fct&gt; Muslim, Protestant, Christian, Protestant, Chr…
+## $ newspaper         &lt;fct&gt; no, no, no, no, no, no, no, no, no, no, no, no…
+## $ radio             &lt;fct&gt; no, yes, yes, no, no, yes, yes, no, no, no, ye…
+## $ tv                &lt;fct&gt; no, no, no, no, no, yes, no, no, no, no, yes, …
+## $ ideal_nb_children &lt;dbl+lbl&gt; 4, 4, 4, 4, 4, 5, 10, 5, 4, 5, 6, 10, 2, 6…
+## $ test              &lt;dbl+lbl&gt; 0, 9, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, …</code></pre>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

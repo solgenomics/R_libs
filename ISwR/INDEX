@@ -1,0 +1,40 @@
+IgM                     Immunoglobulin G
+alkfos                  Alkaline phosphatase data
+ashina                  Ashina's crossover trial
+bcmort                  Breast cancer mortality
+bp.obese                Obesity and blood pressure
+caesarean               Caesarean section and maternal shoe size
+coking                  Coking data
+cystfibr                Cystic fibrosis lung function data
+eba1977                 Lung cancer incidence in four Danish cities
+                        1968-1971
+energy                  Energy expenditure
+ewrates                 Rates of lung and nasal cancer mortality, and
+                        total mortality.
+fake.trypsin            Trypsin by age groups
+graft.vs.host           Graft versus host disease
+heart.rate              Heart rates after enalaprilat
+hellung                 Growth of Tetrahymena cells
+intake                  Energy intake
+juul                    Juul's IGF data
+juul2                   Juul's IGF data, extended version
+kfm                     Breast-feeding data
+lung                    Methods for determining lung volume
+malaria                 Malaria antibody data
+melanom                 Survival after malignant melanoma
+nickel                  Nickel smelters in South Wales
+nickel.expand           Nickel smelters in South Wales, expanded
+philion                 Dose response data
+react                   Tuberculin reactions
+red.cell.folate         Red cell folate data
+rmr                     Resting metabolic rate
+secher                  Birth weight and ultrasonography
+secretin                Secretin-induced blood glucose changes
+stroke                  Estonian stroke data
+tb.dilute               Tuberculin dilution assay
+thuesen                 Ventricular shortening velocity
+tlc                     Total lung capacity
+vitcap                  Vital capacity
+vitcap2                 Vital capacity, full data set
+wright                  Comparison of Wright peak-flow meters
+zelazo                  Age at walking

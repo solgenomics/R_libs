@@ -1,0 +1,8 @@
+fitted.KernS            Methods for ("KernS" classed) Results of
+                        lokerns() and glkerns()
+glkerns                 Kernel Regression Smoothing with Adaptive
+                        Plug-in Bandwidth
+lokerns                 Kernel Regression Smoothing with Local Plug-in
+                        Bandwidth
+varNPreg                Nonparametric Variance Estimator
+xSim                    Simulated Linear plus Exponential Peak

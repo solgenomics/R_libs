@@ -1,0 +1,5 @@
+calculateMAF	calculateMAF
+combineGenoData	combineGenoData
+filterGenoData	filterGenoData
+rawGenoData	rawGenoData
+roundAlleleDosage	roundAlleleDosage

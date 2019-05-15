@@ -1,0 +1,34 @@
+ARtransPars             Function to parametrize a stationary AR process
+FF                      Components of a dlm object
+NelPlo                  Nelson-Plosser macroeconomic time series
+USecon                  US macroeconomic time series
+arms                    Function to perform Adaptive Rejection
+                        Metropolis Sampling
+bdiag                   Build a block diagonal matrix
+convex.bounds           Find the boundaries of a convex set
+dlm                     dlm objects
+dlmBSample              Draw from the posterior distribution of the
+                        state vectors
+dlmFilter               DLM filtering
+dlmForecast             Prediction and simulation of future
+                        observations
+dlmGibbsDIG             Gibbs sampling for d-inverse-gamma model
+dlmLL                   Log likelihood evaluation for a state space
+                        model
+dlmMLE                  Parameter estimation by maximum likelihood
+dlmModARMA              Create a DLM representation of an ARMA process
+dlmModPoly              Create an n-th order polynomial DLM
+dlmModReg               Create a DLM representation of a regression
+                        model
+dlmModSeas              Create a DLM for seasonal factors
+dlmModTrig              Create Fourier representation of a periodic DLM
+                        component
+dlmRandom               Random DLM
+dlmSmooth               DLM smoothing
+dlmSum                  Outer sum of Dynamic Linear Models
+dlmSvd2var              Compute a nonnegative definite matrix from its
+                        Singular Value Decomposition
+dropFirst               Drop the first element of a vector or matrix
+mcmcMean                Utility functions for MCMC output analysis
+residuals.dlmFiltered   One-step forecast errors
+rwishart                Random Wishart matrix

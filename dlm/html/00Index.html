@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>R: Bayesian and Likelihood Analysis of Dynamic Linear Models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+<h1> Bayesian and Likelihood Analysis of Dynamic Linear Models
+<img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
+</h1>
+<hr/>
+<div style="text-align: center;">
+<a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
+<a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
+</div><h2>Documentation for package &lsquo;dlm&rsquo; version 1.1-5</h2>
+
+<ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+<li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
+<li><a href="../NEWS">Package NEWS</a>.</li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="dlmSum.html">%+%</a></td>
+<td>Outer sum of Dynamic Linear Models</td></tr>
+<tr><td style="width: 25%;"><a href="arms.html">arms</a></td>
+<td>Function to perform Adaptive Rejection Metropolis Sampling</td></tr>
+<tr><td style="width: 25%;"><a href="ARtransPars.html">ARtransPars</a></td>
+<td>Function to parametrize a stationary AR process</td></tr>
+<tr><td style="width: 25%;"><a href="dlm.html">as.dlm</a></td>
+<td>dlm objects</td></tr>
+<tr><td style="width: 25%;"><a href="bdiag.html">bdiag</a></td>
+<td>Build a block diagonal matrix</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">C0</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">C0.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">C0&lt;-</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">C0&lt;-.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="convex.bounds.html">convex.bounds</a></td>
+<td>Find the boundaries of a convex set</td></tr>
+<tr><td style="width: 25%;"><a href="dlm.html">dlm</a></td>
+<td>dlm objects</td></tr>
+<tr><td style="width: 25%;"><a href="dlmBSample.html">dlmBSample</a></td>
+<td>Draw from the posterior distribution of the state vectors</td></tr>
+<tr><td style="width: 25%;"><a href="dlmFilter.html">dlmFilter</a></td>
+<td>DLM filtering</td></tr>
+<tr><td style="width: 25%;"><a href="dlmForecast.html">dlmForecast</a></td>
+<td>Prediction and simulation of future observations</td></tr>
+<tr><td style="width: 25%;"><a href="dlmGibbsDIG.html">dlmGibbsDIG</a></td>
+<td>Gibbs sampling for d-inverse-gamma model</td></tr>
+<tr><td style="width: 25%;"><a href="dlmLL.html">dlmLL</a></td>
+<td>Log likelihood evaluation for a state space model</td></tr>
+<tr><td style="width: 25%;"><a href="dlmMLE.html">dlmMLE</a></td>
+<td>Parameter estimation by maximum likelihood</td></tr>
+<tr><td style="width: 25%;"><a href="dlmModARMA.html">dlmModARMA</a></td>
+<td>Create a DLM representation of an ARMA process</td></tr>
+<tr><td style="width: 25%;"><a href="dlmModPoly.html">dlmModPoly</a></td>
+<td>Create an n-th order polynomial DLM</td></tr>
+<tr><td style="width: 25%;"><a href="dlmModReg.html">dlmModReg</a></td>
+<td>Create a DLM representation of a regression model</td></tr>
+<tr><td style="width: 25%;"><a href="dlmModSeas.html">dlmModSeas</a></td>
+<td>Create a DLM for seasonal factors</td></tr>
+<tr><td style="width: 25%;"><a href="dlmModTrig.html">dlmModTrig</a></td>
+<td>Create Fourier representation of a periodic DLM component</td></tr>
+<tr><td style="width: 25%;"><a href="dlmRandom.html">dlmRandom</a></td>
+<td>Random DLM</td></tr>
+<tr><td style="width: 25%;"><a href="dlmSmooth.html">dlmSmooth</a></td>
+<td>DLM smoothing</td></tr>
+<tr><td style="width: 25%;"><a href="dlmSmooth.html">dlmSmooth.default</a></td>
+<td>DLM smoothing</td></tr>
+<tr><td style="width: 25%;"><a href="dlmSmooth.html">dlmSmooth.dlmFiltered</a></td>
+<td>DLM smoothing</td></tr>
+<tr><td style="width: 25%;"><a href="dlmSum.html">dlmSum</a></td>
+<td>Outer sum of Dynamic Linear Models</td></tr>
+<tr><td style="width: 25%;"><a href="dlmSvd2var.html">dlmSvd2var</a></td>
+<td>Compute a nonnegative definite matrix from its Singular Value Decomposition</td></tr>
+<tr><td style="width: 25%;"><a href="dropFirst.html">dropFirst</a></td>
+<td>Drop the first element of a vector or matrix</td></tr>
+<tr><td style="width: 25%;"><a href="mcmc.html">ergMean</a></td>
+<td>Utility functions for MCMC output analysis</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">FF</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">FF.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">FF&lt;-</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">FF&lt;-.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">GG</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">GG.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">GG&lt;-</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">GG&lt;-.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="dlm.html">is.dlm</a></td>
+<td>dlm objects</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">JFF</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">JFF.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">JFF&lt;-</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">JFF&lt;-.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">JGG</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">JGG.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">JGG&lt;-</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">JGG&lt;-.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">JV</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">JV.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">JV&lt;-</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">JV&lt;-.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">JW</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">JW.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">JW&lt;-</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">JW&lt;-.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">m0</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">m0.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">m0&lt;-</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">m0&lt;-.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="mcmc.html">mcmcMean</a></td>
+<td>Utility functions for MCMC output analysis</td></tr>
+<tr><td style="width: 25%;"><a href="mcmc.html">mcmcMeans</a></td>
+<td>Utility functions for MCMC output analysis</td></tr>
+<tr><td style="width: 25%;"><a href="mcmc.html">mcmcSD</a></td>
+<td>Utility functions for MCMC output analysis</td></tr>
+<tr><td style="width: 25%;"><a href="NelPlo.html">NelPlo</a></td>
+<td>Nelson-Plosser macroeconomic time series</td></tr>
+<tr><td style="width: 25%;"><a href="residuals.dlmFiltered.html">residuals.dlmFiltered</a></td>
+<td>One-step forecast errors</td></tr>
+<tr><td style="width: 25%;"><a href="rwishart.html">rwishart</a></td>
+<td>Random Wishart matrix</td></tr>
+<tr><td style="width: 25%;"><a href="USecon.html">USecon</a></td>
+<td>US macroeconomic time series</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">V</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">V.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">V&lt;-</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">V&lt;-.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">W</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">W.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">W&lt;-</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">W&lt;-.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">X</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">X.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">X&lt;-</a></td>
+<td>Components of a dlm object</td></tr>
+<tr><td style="width: 25%;"><a href="FF.html">X&lt;-.dlm</a></td>
+<td>Components of a dlm object</td></tr>
+</table>
+</body></html>

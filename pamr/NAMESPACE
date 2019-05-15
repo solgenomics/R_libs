@@ -1,0 +1,47 @@
+useDynLib(pamr)
+S3method(print,pamrtrained)
+S3method(print,pamrcved)
+
+import(survival, cluster)
+export(pamr.adaptthresh, 
+        pamr.batchadjust, 
+        pamr.confusion, 
+        pamr.cv, 
+        pamr.fdr,
+        pamr.decorrelate,
+        pamr.geneplot, 
+        pamr.listgenes,
+        pamr.makeclasses, 
+        pamr.menu, 
+        pamr.cube.root, 
+        pamr.indeterminate,
+        pamr.pairscore,
+        pamr.plotcen, 
+        pamr.plotcvprob,
+        pamr.plotcv, 
+        pamr.plotfdr, 
+        pamr.predictmany, 
+        pamr.predict, 
+        pamr.score.to.class1,
+        pamr.score.to.class2, 
+        pamr.surv.to.class2, 
+        pamr.confusion.survival,
+        pamr.plotsurvival, 
+        pamr.plotstrata,
+        pamr.pvalue.survival, 
+        pamr.train,
+        print.pamrtrained,
+        print.pamrcved,
+        pamr.test.errors.surv.compute,
+        print.pamrcved,
+        print.pamrtrained)
+
+importFrom("grDevices", "dev.off", "savePlot")
+     importFrom("graphics", "abline", "axis", "box", "legend", "lines",
+     "locator", "mtext", "par", "plot", "points", "segments",
+     "text", "title")
+     importFrom("stats", "approx", "dist", "hclust", "kmeans", "lm",
+     "median", "model.matrix", "pchisq", "predict", "quantile",
+     "runif", "update", "var")
+ importFrom("utils", "menu")
+
