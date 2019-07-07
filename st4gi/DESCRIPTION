@@ -1,8 +1,8 @@
 Package: st4gi
 Type: Package
 Title: Statistical tools for genetic improvement
-Version: 2.2.10
-Date: 2019-05-03
+Version: 2.2.13
+Date: 2019-07-05
 Author: Raul Eyzaguirre
 Maintainer: Raul Eyzaguirre <R.EYZAGUIRRE@CGIAR.ORG>
 Description: Statistical tools for the analysis of experimental data for crop
@@ -19,11 +19,11 @@ RemoteHost: api.github.com
 RemoteRepo: st4gi
 RemoteUsername: reyzaguirre
 RemoteRef: master
-RemoteSha: d16912743f4d1dff3a23987fb1a4c8b40e4ad171
+RemoteSha: beac11a5d52941f67f5960e6d392dbce65148fca
 GithubRepo: st4gi
 GithubUsername: reyzaguirre
 GithubRef: master
-GithubSHA1: d16912743f4d1dff3a23987fb1a4c8b40e4ad171
+GithubSHA1: beac11a5d52941f67f5960e6d392dbce65148fca
 NeedsCompilation: no
-Packaged: 2019-05-10 11:54:30 UTC; root
-Built: R 3.6.0; ; 2019-05-10 11:54:30 UTC; unix
+Packaged: 2019-07-07 03:25:18 UTC; vagrant
+Built: R 3.6.0; ; 2019-07-07 03:25:18 UTC; unix

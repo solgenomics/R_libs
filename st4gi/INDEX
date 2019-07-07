@@ -51,8 +51,8 @@ mve.rcbd                Estimation of missing values for a RCBD
 optim.w                 Optimize Westcott adjustment
 pesekbaker              Pesek-Baker Index
 pjpz09                  Data for a yield trial
-plot.ammi               AMMI or GGE biplots
-plot.tai                Tai plot
+plot.st4gi_ammi         AMMI or GGE biplots
+plot.st4gi_tai          Tai plot
 rsa                     Regression Stability Analysis
 rts1                    Response to selection for a single experiment
 rts2                    Response to selection with several locations
