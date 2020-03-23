@@ -1,8 +1,8 @@
 Package: phenoAnalysis
 Type: Package
 Title: Phenotype Data Analysis
-Version: 0.3.4
-Date: 25-04-2019
+Version: 0.3.6.1
+Date: 14-08-2019
 Author: Isaak Y Tecle <iyt2@cornell.edu>
 Maintainer: Isaak Y Tecle <iyt2@cornell.edu>
 Description: Calculates genotype adjusted means, anova table for a trait and more. 
@@ -18,13 +18,13 @@ RemoteHost: api.github.com
 RemoteRepo: rPackages
 RemoteUsername: solgenomics
 RemoteRef: master
-RemoteSha: a6798c4a4bf29982c16ea29744b9c8ee84690cf8
+RemoteSha: 82ccfd5a1d166254fc2167f805b2a9d2a79e6883
 RemoteSubdir: phenoAnalysis
 GithubRepo: rPackages
 GithubUsername: solgenomics
 GithubRef: master
-GithubSHA1: a6798c4a4bf29982c16ea29744b9c8ee84690cf8
+GithubSHA1: 82ccfd5a1d166254fc2167f805b2a9d2a79e6883
 GithubSubdir: phenoAnalysis
 NeedsCompilation: no
-Packaged: 2019-05-10 11:54:18 UTC; root
-Built: R 3.6.0; ; 2019-05-10 11:54:19 UTC; unix
+Packaged: 2020-03-23 11:18:06 UTC; isaak
+Built: R 3.6.3; ; 2020-03-23 11:18:06 UTC; unix

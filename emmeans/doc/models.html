@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="emmeans package, Version 1.3.4" />
+<meta name="author" content="emmeans package, Version 1.4.5" />
 
 
 <title>Models supported by emmeans</title>
@@ -20,7 +20,10 @@
 
 
 
-<link href="data:text/css;charset=utf-8,body%20%7B%0Afont%2Dsize%3A%2011pt%3B%20font%2Dfamily%3A%20%22Palatino%20Linotype%22%2C%20%22Book%20Antiqua%22%2C%20Palatino%2C%20serif%3B%0Amargin%3A%2030px%2050px%2030px%2050px%3B%20%7D%0Ah1%2Ch2%2Ch3%2Ch4%2Ch5%2Ch6%20%7B%20font%2Dfamily%3A%20Arial%2CHelvetica%2CSans%2Dserif%3B%20%7D%0Aa%20%7B%20text%2Ddecoration%3A%20none%3B%20%7D%0Aa%3Alink%20%7B%20color%3Adarkblue%3B%20%7D%20a%3Avisited%20%7B%20color%3Adarkblue%3B%20%7D%20a%3Ahover%20%7B%20color%3Adodgerblue%3B%20%7D%0Aa%3Aactive%20%7B%20color%3Adodgerblue%3B%20%7D%20code%20%7B%0Acolor%3A%20%23602000%3B%0Afont%2Dfamily%3A%20%22Lucida%20Console%22%2C%20Monaco%2C%20monospace%3B%20font%2Dsize%3A%2090%25%3B%0A%7D%0A%2Er%20%7B%20%0Acolor%3A%20darkred%3B%20%7D%0A%2Ero%20%7B%20%0Acolor%3A%20darkgreen%3B%20background%2Dcolor%3A%20%23eeeeee%3B%20%7D%0A%2Er%20code%2C%20a%20code%2C%20%2Ero%20code%20%7B%20color%3A%20inherit%3B%20%7D%0A%2Evigindex%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20none%3B%20%7D%0A%2Evigindex%20ul%20li%20%7B%20list%2Dstyle%3A%20none%3B%20%7D%0A%2Evigindex%20a%20code%20%7B%20color%3A%20inherit%3B%20%7D%0A%2Evigindex%20li%20code%20%7B%20color%3A%20inherit%3B%20%7D%0A" rel="stylesheet" type="text/css" />
+<style type="text/css">body {font-size: 11pt; font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;margin: 30px 50px 30px 50px; }h1,h2,h3,h4,h5,h6 { font-family: Arial,Helvetica,Sans-serif; }a { text-decoration: none; }a:link { color:darkblue; } a:visited { color:darkblue; } a:hover { color:dodgerblue; }a:active { color:dodgerblue; } code {color: #602000;font-family: "Lucida Console", Monaco, monospace; font-size: 90%;}.r { color: darkred; }.ro { color: darkgreen; background-color: #eeeeee; }.r code, a code, .ro code { color: inherit; }.vigindex ul { list-style-type: none; }.vigindex ul li { list-style: none; }.vigindex a code { color: inherit; }.vigindex li code { color: inherit; }</style>
+
+
+
 
 </head>
 
@@ -30,14 +33,14 @@
 
 
 <h1 class="title toc-ignore">Models supported by emmeans</h1>
-<h4 class="author"><em>emmeans package, Version 1.3.4</em></h4>
+<h4 class="author">emmeans package, Version 1.4.5</h4>
 
 
 
 <!-- @index Vignettes!Models -->
 <p>Here we document what model objects may be used with <strong>emmeans</strong>, and some special features of some of them that may be accessed by passing additional arguments through <code>ref_grid</code> or <code>emmeans()</code>.</p>
 <p>Certain objects are affected by optional arguments to functions that construct <code>emmGrid</code> objects, including <code>ref_grid()</code>, <code>emmeans()</code>, <code>emtrends()</code>, and <code>emmip()</code>. When “<em>arguments</em>” are mentioned in the subsequent quick reference and object-by-object documentation, we are talking about arguments in these constructors.</p>
-<p>Additional models can be supported by writing appropriate <code>recover_data</code> and <code>emm_basis</code> methods. See the package documentation for <code>extending-emmeans</code> and <code>vignette(&quot;extending&quot;)</code> for details.</p>
+<p>If a model type is not included here, users may be able to obtain usable results via the <code>qdrg()</code> function; see its help page. Package developers may support their models by writing appropriate <code>recover_data</code> and <code>emm_basis</code> methods. See the package documentation for <code>extending-emmeans</code> and <code>vignette(&quot;xtending&quot;)</code> for details.</p>
 <p><a href="vignette-topics.html">Index of all vignette topics</a></p>
 <div id="quickref" class="section level2">
 <h2>Quick reference for supported objects and options</h2>
@@ -284,14 +287,14 @@
 <tr class="odd">
 <td align="left">MCMCglmm</td>
 <td align="left">MCMCglmm</td>
-<td align="center"><a href="#M">M</a>,<a href="#S">S</a></td>
-<td align="left"><code>mult.name</code>, <code>mult.levs</code></td>
+<td align="center"><a href="#S">S</a></td>
+<td align="left">(see also <a href="#M#">M</a>) <code>mult.name</code>, <code>mult.levs</code>, <code>trait</code>,</td>
 </tr>
 <tr class="even">
 <td align="left"></td>
 <td align="left"></td>
 <td align="center"></td>
-<td align="left"><code>data</code> is required</td>
+<td align="left"><code>mode = c(&quot;default&quot;, &quot;multinomial&quot;)</code>; <code>data</code> is required</td>
 </tr>
 <tr class="odd">
 <td align="left">mira</td>
@@ -456,7 +459,7 @@
 <!-- @index `lme` models; `gls` models; Satterthwaite d.f.; Containment d.f.; 
      `boot-satterthwaite` method -->
 <p>The <code>sigmaAdjust</code> argument is a logical value that defaults to <code>TRUE</code>. It is comparable to the <code>adjustSigma</code> option in <code>nlme::summary.lme</code> (the name-mangling is to avoid conflicts with the often-used <code>adjust</code> argument), and determines whether or not a degrees-of-freedom adjustment is performed with models fitted using the ML method.</p>
-<p>The optional <code>mode</code> argument affects the degrees of freedom. The <code>mode = &quot;satterthwaite&quot;</code> option determines degrees of freedom via the Satterthwaite method: If <code>s^2</code> is the estimate of some variance, then its Satterthwaite d.f. is <code>2*s^4 / Var(s^2)</code>. In case our numerical methods for this fail, we also offer <code>mode = &quot;boot-satterthwaite&quot;</code> as a backup, by which quantities related to <code>Var(s^2)</code> are obtained by randomly perturbing the response values. Currently, only <code>&quot;satterthwaite&quot;</code> is unavailable for <code>lme</code> objects, and it is used if <code>&quot;satterthwaite&quot;</code> is requested.</p>
+<p>The optional <code>mode</code> argument affects the degrees of freedom. The <code>mode = &quot;satterthwaite&quot;</code> option determines degrees of freedom via the Satterthwaite method: If <code>s^2</code> is the estimate of some variance, then its Satterthwaite d.f. is <code>2*s^4 / Var(s^2)</code>. In case our numerical methods for this fail, we also offer <code>mode = &quot;boot-satterthwaite&quot;</code> as a backup, by which quantities related to <code>Var(s^2)</code> are obtained by randomly perturbing the response values. Currently, only <code>&quot;boot-satterthwaite&quot;</code> is available for <code>lme</code> objects, and it is used if <code>&quot;satterthwaite&quot;</code> is requested.</p>
 <p>The alternative method is <code>&quot;df.error&quot;</code> (for <code>gls</code>) and <code>&quot;containment&quot;</code> (for <code>lme</code>). <code>df.error</code> is just the error degrees of freedom for the model, minus the number of extra random effects estimated; it generally over-estimates the degrees of freedom. <code>&quot;containment&quot;</code> determines the degrees of freedom for the coarsest grouping involved in the contrast or linear function involved, so it tends to under-estimate the degrees of freedom. The default is <code>mode = &quot;auto&quot;</code>, which uses Satterthwaite if there are estimated random effects and the non-Satterthwaite option otherwise.</p>
 <p><a href="#quickref">Back to quick reference</a></p>
 </div>
@@ -464,8 +467,8 @@
 <h2>Group L – <code>lmerMod</code> models</h2>
 <!-- @index `lmerMod` models; Kenward-Roger d.f.; Satterthwaite d.f. -->
 <p>There is an optional <code>lmer.df</code> argument that defaults to <code>get_EMM_option(&quot;lmer.df&quot;)</code> (which in turn defaults to <code>&quot;kenward-roger&quot;</code>). The possible values are <code>&quot;kenward-roger&quot;</code>, <code>&quot;satterthwaite&quot;</code>, and <code>&quot;asymptotic&quot;</code> (these are partially matched and case-insensitive). With <code>&quot;kenward-roger&quot;</code>, d.f. are obtained using code from the <strong>pbkrtest</strong> package, if installed. With <code>&quot;satterthwaite&quot;</code>, d.f. are obtained using code from the <strong>lmerTest</strong> package, if installed. With <code>&quot;asymptotic&quot;</code>, or if the needed package is not installed, d.f. are set to <code>Inf</code>. (For backward compatibility, the user may specify <code>mode</code> in lieu of <code>lmer.df</code>.)</p>
-<p>A by-product of the Kenward-Roger method is that the covariance matrix is adjusted using <code>pbkrtest::vcovAdj()</code>. This can require considerable computation; so to avoid that overhead, the user should opt for the Satterthwaite or asymptotic method; or, for backward compatibility, may disable the use of <strong>pbkrtest</strong> via <code>emm_options(disable.pbkrtest = TRUE)</code> (this does not disable the <strong>pbkrtest</strong> package entirely, just its use in <strong>emmeans</strong>). The computation time required depends roughly on the number of observations, <em>N</em>, in the design matrix (because a major part of the computation involves inverting an <em>N</em> x <em>N</em> matrix). Thus, <strong>pbkrtest</strong> is automatically disabled if <em>N</em> exceeds the value of <code>get_emm_option(&quot;pbkrtest.limit&quot;)</code>, for which the factory default is 3000.</p>
-<p>Similarly to the above, the <code>disable.lmerTest</code> and <code>lmerTest.limit</code> options affect whether Satterthwaite methods can be implemented.</p>
+<p>A by-product of the Kenward-Roger method is that the covariance matrix is adjusted using <code>pbkrtest::vcovAdj()</code>. This can require considerable computation; so to avoid that overhead, the user should opt for the Satterthwaite or asymptotic method; or, for backward compatibility, may disable the use of <strong>pbkrtest</strong> via <code>emm_options(disable.pbkrtest = TRUE)</code> (this does not disable the <strong>pbkrtest</strong> package entirely, just its use in <strong>emmeans</strong>). The computation time required depends roughly on the number of observations, <em>N</em>, in the design matrix (because a major part of the computation involves inverting an <em>N</em> x <em>N</em> matrix). Thus, <strong>pbkrtest</strong> is automatically disabled if <em>N</em> exceeds the value of <code>get_emm_option(&quot;pbkrtest.limit&quot;)</code>, for which the factory default is 3000. (The user may also specify <code>pbkrtest.limit</code> or <code>disable.pbkrtest</code> as an argument in the call to <code>emmeans()</code> or <code>ref_grid()</code>)</p>
+<p>Similarly to the above, the <code>disable.lmerTest</code> and <code>lmerTest.limit</code> options or arguments affect whether Satterthwaite methods can be implemented.</p>
 <p>The <code>df</code> argument may be used to specify some other degrees of freedom. Note that if <code>df</code> and <code>method = &quot;kenward-roger&quot;</code> are both specified, the covariance matrix is adjusted but the K-R degrees of freedom are not used.</p>
 <p>Finally, note that a user-specified covariance matrix (via the <code>vcov.</code> argument) will also disable the Kenward-Roger method; in that case, the Satterthwaite method is used in place of Kenward-Roger.</p>
 <p><a href="#quickref">Back to quick reference</a></p>
@@ -505,6 +508,7 @@
   `as.mcmc()`; `summary()`!Bayesian models -->
 <p>Models fitted using MCMC methods contain a sample from the posterior distribution of fixed-effect coefficients. In some cases (e.g., results of <code>MCMCpack::MCMCregress()</code> and <code>MCMCpack::MCMCpoisson()</code>), the object may include a <code>&quot;call&quot;</code> attribute that <code>emmeans()</code> can use to reconstruct the data and obtain a basis for the EMMs. If not, a <code>formula</code> and <code>data</code> argument are provided that may help produce the right results. In addition, the <code>contrasts</code> specifications are not necessarily recoverable from the object, so the system default must match what was actually used in fitting the model.</p>
 <p>The <code>summary.emmGrid()</code> method provides credibility intervals (HPD intervals) of the results, and ignores the frequentist-oriented arguments (<code>infer</code>, <code>adjust</code>, etc.) An <code>as.mcmc()</code> method is provided that creates an <code>mcmc</code> object that can be summarized or plotted using the <strong>coda</strong> package (or others that support those objects). It provides a posterior sample of EMMs, or contrasts thereof, for the given reference grid, based on the posterior sample of the fixed effects from the model object.</p>
+<p>In <code>MCMCglmm</code> objects, the <code>data</code> argument is required; however, if you save it as a member of the model object (e.g., <code>object$data = quote(mydata)</code>), that removes the necessity of specifying it in each call. The special keyword <code>trait</code> is used in some models. When the response is multivariate and numeric, <code>trait</code> is generated automatically as a factor in the reference grid, and the arguments <code>mult.levels</code> can be used to name its levels. In other models such as a multinomial model, use the <code>mode</code> argument to specify the type of model, and <code>trait = &lt;factor name&gt;</code> to specify the name of the data column that contains the levels of the factor response.</p>
 <p>Support for the <strong>brms</strong> package is provided but it is quite rudimentary and usable only for the primary fixed effects and the simpler models.</p>
 <p><a href="#quickref">Back to quick reference</a></p>
 </div>
@@ -517,6 +521,9 @@
 <p><a href="vignette-topics.html">Index of all vignette topics</a></p>
 </div>
 
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

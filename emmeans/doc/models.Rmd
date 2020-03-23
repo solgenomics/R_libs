@@ -20,9 +20,11 @@ construct `emmGrid` objects, including `ref_grid()`,
 object-by-object documentation, we are talking about arguments in these
 constructors.
 
-Additional models can be supported by writing appropriate `recover_data`
+If a model type is not included here, users may be able to obtain
+usable results via the `qdrg()` function; see its help page.
+Package developers may support their models by writing appropriate `recover_data`
 and `emm_basis` methods. See the package documentation for 
-`extending-emmeans` and `vignette("extending")` for details.
+`extending-emmeans` and `vignette("xtending")` for details.
 
 [Index of all vignette topics](vignette-topics.html)
 
@@ -74,8 +76,8 @@ Scroll down or follow the links to those groups for more information.
 |manova       |stats    |[M](#M)  |`mult.name`, `mult.levs`                                     |
 |maov         |stats    |[M](#M)  |`mult.name`, `mult.levs`                                     |
 |mcmc         |mcmc     |[S](#S)  |May require `formula`, `data`                                |
-|MCMCglmm     |MCMCglmm |[M](#M),[S](#S) |`mult.name`, `mult.levs`                              |
-|             |         |         |`data` is required                                           |
+|MCMCglmm     |MCMCglmm |[S](#S)  |(see also [M](#M#))  `mult.name`, `mult.levs`, `trait`,              |
+|             |         |         |`mode = c("default", "multinomial")`; `data` is required     |
 |mira         |mice     |[I](#I)  |Optional arguments per class of `$analyses` elements         |
 |mixed        |afex     |[P](#P)  |Supported in **afex** package                                |
 |mlm          |stats    |[M](#M)  |`mult.name`, `mult.levs`                                     |
@@ -238,8 +240,8 @@ method: If `s^2` is the estimate of some variance, then its Satterthwaite d.f.
 is `2*s^4 / Var(s^2)`. In case our numerical methods for this fail, we also
 offer `mode = "boot-satterthwaite"` as a backup, by which quantities related to
 `Var(s^2)` are obtained by randomly perturbing the response values. Currently,
-only `"satterthwaite"` is unavailable for `lme` objects, and it is used
-if `"satterthwaite"` is requested.
+only `"boot-satterthwaite"` is available for `lme` objects, and it is used
+if `"satterthwaite"` is requested. 
 
 The alternative method is `"df.error"` (for `gls`) and
 `"containment"` (for `lme`). `df.error` is just the error degrees of freedom for
@@ -276,9 +278,11 @@ number of observations, *N*, in the design matrix (because a major part
 of the computation involves inverting an *N* x *N* matrix). Thus,
 **pbkrtest** is automatically disabled if *N* exceeds the value of 
 `get_emm_option("pbkrtest.limit")`, for which the factory default is 3000.
+(The user may also specify `pbkrtest.limit` or `disable.pbkrtest` as an
+argument in the call to `emmeans()` or `ref_grid()`)
 
 Similarly to the above, the `disable.lmerTest` and `lmerTest.limit` options
-affect whether Satterthwaite methods can be implemented.
+or arguments affect whether Satterthwaite methods can be implemented.
 
 The `df` argument may be used to specify some other degrees of freedom.
 Note that if `df` and `method = "kenward-roger"` are both
@@ -412,6 +416,16 @@ be summarized or plotted using the **coda** package (or others that support
 those objects). It provides a posterior sample of EMMs, or contrasts thereof,
 for the given reference grid, based on the posterior sample of the fixed effects
 from the model object.
+
+In `MCMCglmm` objects, the `data` argument is required; however, if you
+save it as a member of the model object (e.g., `object$data = quote(mydata)`),
+that removes the necessity of specifying it in each call.
+The special keyword `trait` is used in some models. 
+When the response is multivariate and numeric, `trait` is generated automatically
+as a factor in the reference grid, and the arguments `mult.levels` can be used to
+name its levels. In other models such as a multinomial model, use the
+`mode` argument to specify the type of model, and `trait = <factor name>` 
+to specify the name of the data column that contains the levels of the factor response.
 
 Support for the **brms** package is provided but it is quite rudimentary and 
 usable only for the primary fixed effects and the simpler models.

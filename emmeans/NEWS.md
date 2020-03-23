@@ -1,5 +1,159 @@
 ## NEWS for the emmeans package
 
+
+emmeans 1.4.5
+-------------
+
+  * Change to `.all.vars()` that addresses #170
+  * Addition of hidden argument `scheffe.rank` in `summary.emmGrid()`
+    to manually specify the desired dimensionality of a Scheffe 
+    adjustment (#171)
+  * Provided for `...` to be included in `options` in calls to
+    `emmeans()` and `contrast()`. This allows passing any `summary()`
+    argument more easily, e.g., 
+    `emmeans(..., type = "response", bias.adjust = TRUE, infer = c(TRUE, TRUE))`
+    (Before, we would have had to wrap this in `summary()`)
+  * Added a `plotit` argument to `plot.emmGrid()` that works similarly to
+    that in `emmip()`.
+  * Removed startup message for behavior change in 1.4.2; it's been long enough.
+  * Fixed bug with `character predictors in `at` (#175)
+  
+  
+
+emmeans 1.4.4
+---------------
+
+  * Fixed bug in `emmeans()` associated with non-factors such as `Date` (#162)
+  * Added `nesting.order` option to `emmip()` (#163)
+  * New `style` argument for `emmip()` allows plotting on a numeric scale
+  * More robust detection of response transformations (#166)
+  * Ensure `pwpp()` has tick marks on P-value axis (#167)
+  * Bug fix for `regrid()` for error when estimates exceed bounds
+  * Bug fix in auto-detecting nesting (#169) to make it less "enthusiastic"
+  * Fixes to formula operations needed because `formula.tools:::as.character.formula`
+    messes me up (thanks to Berwin Turloch, UWA, for alerting me)
+  * Making `dqrg()` more visible in the documentation (because it's often useful)
+  * Added more methods for `emm_list` objects, e.g. `rbind()` and `as.data.frame()`,
+    `as.list()`, and `as.emm_list()`
+  
+  
+
+emmeans 1.4.3.01
+----------------
+
+  * Fixed bug in post-grid support that affects, e.g., the **ggeffects** package (#161)
+  
+
+emmeans 1.4.3
+-------------
+
+  * Added `"bcnPower"` option to `make.tran()` (per `car::bcnPower()`)
+  * Scoping correction for `emmtrends()` (#153)
+  * Allow passing `...` to hook functions (need exposed by #154)
+  * Addition to `regrid()` whereby we can fake any response transformation
+    -- not just `"log"` (again inspired by #154)
+  * Informative message when **pbkrtest** or **lmerTest** is not found
+    (affects `merMod` objects) (#157)
+  * Change in `pwpp()` to make extremely small P values more distinguishable
+  
+
+
+emmeans 1.4.2
+-------------
+
+  * First argument of `emtrends()` is now `object`, not `model`, to avoid
+    potential mis-matching of the latter with optional `mode` argument
+  * `emtrends()` now uses more robust and efficient code whereby a single
+    reference grid is constructed containing all needed values of `var`. The old
+    version could fail, e.g., in cases where the reference grid involves
+    post-processing. (#145)
+  * Added `scale` argument to `contrast()`
+  * Added new `"identity"` contrast method
+  * New `eff_size()` function for Cohen effect sizes
+  * Expanded capabilities for interaction contrasts (#146)
+  * New `cov.keep` argument in `ref_grid()` for specifying covariates
+    to be treated just like factors (#148). A side effect is that the
+    system default for indicator variables as covariates is to treat
+    them like 2-level factors. *This could change the results obtained from 
+    some analyses using earlier versions*. To replicate old analyses,
+    set `emm_options(cov.keep = character(0))`.
+  * Added merMod-related options as convenience arguments (#150)
+  * Bug fixes: `regrid` ignored offsets with Bayesian models; `emtrends()` did
+    not supply `options` and `misc` arguments to `emm_basis()` (#143)
+
+
+emmeans 1.4.1
+-------------
+
+  * Added non-estimability infrastructure for Bayesian models, `stanreg`
+    in particular (#114)
+  * Added `max.degree` argument in `emtrends()` making it possible to
+    obtain higher-order trends (#133). Plus minor tuneups, e.g., smaller 
+    default increment for difference quotients
+  * Made `emmeans()` more forgiving with 'by` variables; e.g.,
+    `emmeans(model, ~ dose | treat, by = "route")` will find both `by`
+    variables whereas previously `"route"` would be ignored.
+  * Temporary fix for glitch in gls support where Satterthwaite isn't
+    always right.
+  * Attempt to make annotations clearer and more consistent regarding
+    degrees-of-freedom methods.
+  * Provisions whereby externally provided `emm_basis()` and `recover_data()`
+    methods are used in preference to internal ones - so package developers
+    can provide improvements over what I've cobbled together.
+  * Tried to produce more informative message when `recover_data()` fails
+  * Fixed bug in `contrast()` in identifying true contrasts (#134)
+  * Fixed a bug in `plot.summary_emm()` regarding `CIs` and `intervals` (#137)
+  * Improved support for response transformations. Models with formulas like
+    like `log(y + 1) ~ ...` and `2*sqrt(y + 0.5) ~ ...` are now auto-detected.
+    [This may cause discrepancies with examples in past usages, but if so, that
+    would be because the response transformation was previously incorrectly 
+    interpreted.]
+  * Added a `ratios` argument to `contrast()` to decide how to handle `log` and `logit`
+  * Added message/annotation when contrasts are summarized with `type = "response"`
+    but there is no way to back-transform them (or we opted out with `ratios = FALSE`)
+    
+
+emmeans 1.4
+-----------
+
+  * Added a courtesy function `.emm_register()` to make it easier for other
+    packages to register their **emmeans** support methods
+  * Clarified the "confidence intervals" vignette discussion of `infer`,
+    explaining that Bayesian models are handled differently (#128)
+  * Added `PIs` option to `plot.emmGrid()` and `emmip()` (#131). Also, in
+    `plot.emmGrid()`, the `intervals` argument has been changed to `CIs`
+    for sake of consistency and less confusion; `intervals` is still
+    supported for backaward compatibility.
+  * `plot.emmGrid` gains a `colors` argument so we can customize colors used.
+  * Bug fix for `glht` support (#132 contributed by Balsz Banfai)
+  * `regrid` gains `sim` and `N.sim` arguments whereby we can generate a
+    fake posterior sample from a frequentist model.
+    
+
+emmeans 1.3.5.1
+-------------
+  * Bug fix for `gls` objects with non-matrix `apVar` member (#119)
+  * Repairs faulty links in 1.3.5 vignettes
+
+
+emmeans 1.3.5
+-------------
+
+   * First steps to take prediction seriously. This includes
+     * Addition of a `sigma` argument to `ref_grid()` (defaults to
+       `sigma(object)` if available)
+     * Addition of an `interval` argument in `predict.emmGrid()`
+     * Addition of a `likelihood` argument in `as.mcmc` to allow
+       for simulating from the posterior predictive distribution
+     * Crude provisions for bias adjustment when back-transforming. This
+       is not really prediction, but it is made possible by availability
+       of `sigma` in object
+  * Further steps to lower the profile of `cld()` and `CLD()`
+  * Family size for Tukey adjustment was wrong when using `exclude` (#107)
+  * Provided for direct passing of info from `recover_data` to `emm_basis`
+  * Attempts to broaden `MCMCglmm` support
+
+
 emmeans 1.3.4
 -------------
 

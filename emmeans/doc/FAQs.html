@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="emmeans package, Version 1.3.4" />
+<meta name="author" content="emmeans package, Version 1.4.5" />
 
 
 <title>FAQs for emmeans</title>
@@ -20,7 +20,10 @@
 
 
 
-<link href="data:text/css;charset=utf-8,body%20%7B%0Afont%2Dsize%3A%2011pt%3B%20font%2Dfamily%3A%20%22Palatino%20Linotype%22%2C%20%22Book%20Antiqua%22%2C%20Palatino%2C%20serif%3B%0Amargin%3A%2030px%2050px%2030px%2050px%3B%20%7D%0Ah1%2Ch2%2Ch3%2Ch4%2Ch5%2Ch6%20%7B%20font%2Dfamily%3A%20Arial%2CHelvetica%2CSans%2Dserif%3B%20%7D%0Aa%20%7B%20text%2Ddecoration%3A%20none%3B%20%7D%0Aa%3Alink%20%7B%20color%3Adarkblue%3B%20%7D%20a%3Avisited%20%7B%20color%3Adarkblue%3B%20%7D%20a%3Ahover%20%7B%20color%3Adodgerblue%3B%20%7D%0Aa%3Aactive%20%7B%20color%3Adodgerblue%3B%20%7D%20code%20%7B%0Acolor%3A%20%23602000%3B%0Afont%2Dfamily%3A%20%22Lucida%20Console%22%2C%20Monaco%2C%20monospace%3B%20font%2Dsize%3A%2090%25%3B%0A%7D%0A%2Er%20%7B%20%0Acolor%3A%20darkred%3B%20%7D%0A%2Ero%20%7B%20%0Acolor%3A%20darkgreen%3B%20background%2Dcolor%3A%20%23eeeeee%3B%20%7D%0A%2Er%20code%2C%20a%20code%2C%20%2Ero%20code%20%7B%20color%3A%20inherit%3B%20%7D%0A%2Evigindex%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20none%3B%20%7D%0A%2Evigindex%20ul%20li%20%7B%20list%2Dstyle%3A%20none%3B%20%7D%0A%2Evigindex%20a%20code%20%7B%20color%3A%20inherit%3B%20%7D%0A%2Evigindex%20li%20code%20%7B%20color%3A%20inherit%3B%20%7D%0A" rel="stylesheet" type="text/css" />
+<style type="text/css">body {font-size: 11pt; font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;margin: 30px 50px 30px 50px; }h1,h2,h3,h4,h5,h6 { font-family: Arial,Helvetica,Sans-serif; }a { text-decoration: none; }a:link { color:darkblue; } a:visited { color:darkblue; } a:hover { color:dodgerblue; }a:active { color:dodgerblue; } code {color: #602000;font-family: "Lucida Console", Monaco, monospace; font-size: 90%;}.r { color: darkred; }.ro { color: darkgreen; background-color: #eeeeee; }.r code, a code, .ro code { color: inherit; }.vigindex ul { list-style-type: none; }.vigindex ul li { list-style: none; }.vigindex a code { color: inherit; }.vigindex li code { color: inherit; }</style>
+
+
+
 
 </head>
 
@@ -30,7 +33,7 @@
 
 
 <h1 class="title toc-ignore">FAQs for emmeans</h1>
-<h4 class="author"><em>emmeans package, Version 1.3.4</em></h4>
+<h4 class="author">emmeans package, Version 1.4.5</h4>
 
 
 
@@ -41,6 +44,7 @@
 <ol style="list-style-type: decimal">
 <li><a href="#what">What are EMMs/lsmeans?</a></li>
 <li><a href="#fastest">What is the fastest way to obtain EMMs and pairwise comparisons?</a></li>
+<li><a href="#qdrg">The model I fitted is not supported by <strong>emmeans</strong></a></li>
 <li><a href="#interactions">I have three (or two or four) factors that interact</a></li>
 <li><a href="#trends">I have covariate(s) that interact(s) with factor(s)</a></li>
 <li><a href="#polys">I have covariate(s) and am fitting a polynomial model</a></li>
@@ -74,6 +78,11 @@
 <p>The point here is that <code>emmeans()</code> summarizes the <em>model</em>, not the data directly. If you use a bad model, you will get bad results. And if you use a good model, you will get appropriate results. It’s up to you: it’s your research—is it important?</p>
 <p><a href="#contents">Back to Contents</a></p>
 </div>
+<div id="qdrg" class="section level2">
+<h2>The model I fitted is not supported by <strong>emmeans</strong></h2>
+<!-- @index Models!Unsupported; `qdrg()` -->
+<p>You may still be able to get results using <code>qdrg()</code> (quick and dirty reference grid). See <code>?qdrg</code> for details and examples.</p>
+</div>
 <div id="interactions" class="section level2">
 <h2>I have three (or two or four) factors that interact</h2>
 <!-- @index Multi-factor studies; Simple comparisons -->
@@ -89,7 +98,7 @@
 <div id="trends" class="section level2">
 <h2>I have covariate(s) that interact(s) with factor(s)</h2>
 <!-- @index Covariates!Interacting with factors -->
-<p>This is a situation where it may well be appropriate to compare the slopes of trend lines, rather than the EMMs. See the <a href="../doc/emtrends.html">help page for <code>emtrends()</code></a> and the discussion of this topic in <a href="interactions.html#covariates">the “interactions” vignette</a></p>
+<p>This is a situation where it may well be appropriate to compare the slopes of trend lines, rather than the EMMs. See the <code>help(&quot;emtrends&quot;()</code>&quot;)` and the discussion of this topic in <a href="interactions.html#covariates">the “interactions” vignette</a></p>
 </div>
 <div id="polys" class="section level2">
 <h2>I have covariate(s) and am fitting a polynomial model</h2>
@@ -107,22 +116,21 @@
 </div>
 <div id="numeric" class="section level2">
 <h2>emmeans() doesn’t work as expected</h2>
-<!-- @index Covariates!`emmeans()` doesn't work -->
+<!-- @index Covariates!`emmeans()` doesn't work; Covariates!`cov.keep; Covariates!`cov.reduce;  -->
 <p>Equivalently, users ask how to get <em>post hoc</em> comparisons when we have covariates rather than factors. Yes, it does work, but you have to tell it the appropriate reference grid.</p>
 <p>But before saying more, I have a question for you: <em>Are you sure your model is meaningful?</em></p>
 <ul>
 <li>If your question concerns <em>only</em> two-level predictors such as <code>sex</code> (coded 1 for female, 2 for male), no problem. The model will produce the same predictions as you’d get if you’d used these as factors.</li>
-<li>If <em>any</em> of the predictors has 3 or more levels, you may have fitted a nonsense model, in which case you need to fit a different model that does make sense before doing any kind of <em>post hoc</em> analysis. For instance, the model contains a covariate <code>brand</code> (coded 1 for Acme, 2 for Ajax, and 3 for Al’s), this model is implying that the difference between Acme and Ajax is exactly equal to the difference between Ajax and Al’s, owing to the fact that a linear trend in <code>brand</code> has been fitted. If you had instead coded 1 for Ajax, 2 for Al’s, and 3 for Acme, the model would produce different fitted values. You need to fit another model using <code>factor(brand)</code> in place of <code>brand</code>.</li>
+<li>If <em>any</em> of the predictors has 3 or more levels, you may have fitted a nonsense model, in which case you need to fit a different model that does make sense before doing any kind of <em>post hoc</em> analysis. For instance, the model contains a covariate <code>brand</code> (coded 1 for Acme, 2 for Ajax, and 3 for Al’s), this model is implying that the difference between Acme and Ajax is exactly equal to the difference between Ajax and Al’s, owing to the fact that a linear trend in <code>brand</code> has been fitted. If you had instead coded 1 for Ajax, 2 for Al’s, and 3 for Acme, the model would produce different fitted values. Ask yourself if it makes sense to have <code>brand = 2.319</code>. If not, you need to fit another model using <code>factor(brand)</code> in place of <code>brand</code>.</li>
 </ul>
-<p>Assuming that issue is settled, you can do something like <code>emmeans(model, &quot;sex&quot;, at = list(sex = 1:2))</code>, to get get separate EMMs for each sex rather than one EMM for the average numeric value of <code>sex</code>.</p>
-<p>An alternative to the <code>at</code> list is to use <code>cov.reduce = FALSE</code>, which specifies that the unique values of covariates are to be used rather than reducing them to their means. However, the specification applies to <em>all</em> covariates, so if you have another one, say <code>age</code>, that has 43 different values in your data, you will have a mess on your hands.</p>
+<p>Assuming that the appropriateness of the model is settled, the current version of <strong>emmeans</strong> automatically casts two-value covariates as factors, but not covariates having higher numbers of unique values. Suppose your model has a covariate <code>dose</code> which was experimentally varied over four levels, but can sensibly be interpreted as a numerical predictor. If you want to include the separate values of <code>dose</code> rather than the mean <code>dose</code>, you can do that using something like <code>emmeans(model, &quot;dose&quot;, at = list(dose = 1:4))</code>, or <code>emmeans(model, &quot;dose&quot;, cov.keep = &quot;dose&quot;)</code>, or <code>emmeans(model, &quot;dose&quot;, cov.keep = &quot;4&quot;)</code>. There are small differences between these. The last one regards any covariate having 4 or fewer unique values as a factor.</p>
 <p>See “altering the reference grid” in the <a href="basics.html#altering">“basics” vignette</a> for more discussion.</p>
 <p><a href="#contents">Back to Contents</a></p>
 </div>
 <div id="NAs" class="section level2">
 <h2>All or some of the results are NA</h2>
 <!-- @index `NA`s in the output; `NonEst` values; Estimability issues -->
-<p>The <strong>emmeans</strong> package uses tookls in the <strong>estimability</strong> package to determine whether its results are uniquely estimable. For example, in a two-way model with interactions included, if there are no observations in a particular cell (factor combination), then we cannot estimate the mean of that cell.</p>
+<p>The <strong>emmeans</strong> package uses tools in the <strong>estimability</strong> package to determine whether its results are uniquely estimable. For example, in a two-way model with interactions included, if there are no observations in a particular cell (factor combination), then we cannot estimate the mean of that cell.</p>
 <p>When <em>some</em> of the EMMs are estimable and others are not, that is information about missing information in the data. If it’s possible to remove some terms from the model (particularly interactions), that may make more things estimable if you re-fit with those terms excluded; but don’t delete terms that are really needed for the model to fit well.</p>
 <p>When <em>all</em> of the estimates are non-estimable, it could be symptomatic of something else. Some possibilities include:</p>
 <ul>
@@ -147,9 +155,9 @@ emmeans(pg.lm, consec ~ percent)</code></pre>
 ## 
 ## $contrasts
 ##  contrast estimate     SE df t.ratio p.value
-##  12 - 9     0.1796 0.0561 23 3.202   0.0112 
+##  12 - 9     0.1796 0.0561 23 3.202   0.0107 
 ##  15 - 12    0.0378 0.0582 23 0.650   0.8613 
-##  18 - 15    0.0825 0.0691 23 1.194   0.5202 
+##  18 - 15    0.0825 0.0691 23 1.194   0.5201 
 ## 
 ## Results are averaged over the levels of: source 
 ## Results are given on the log (not the response) scale. 
@@ -223,6 +231,9 @@ emmeans(mod2, pairwise ~ treat)</code></pre>
 <p><a href="vignette-topics.html">Index of all vignette topics</a></p>
 </div>
 
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

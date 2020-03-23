@@ -1,10 +1,12 @@
 emmeans-package	emmeans-package
 +.emmGrid	rbind.emmGrid
 .emm_basis	extending-emmeans
+.emm_register	extending-emmeans
 .recover_data	extending-emmeans
 add_grouping	add_grouping
 as.data.frame.emmGrid	summary.emmGrid
 as.emmGrid	as.emmGrid
+as.emm_list	as.emmGrid
 as.glht	glht-support
 as.glht.emmGrid	glht-support
 as.list.emmGrid	as.emmGrid
@@ -12,7 +14,6 @@ as.mcmc.emmGrid	mcmc-support
 as.mcmc.list.emmGrid	mcmc-support
 auto.noise	auto.noise
 CLD	CLD.emmGrid
-cld	CLD.emmGrid
 CLD.emmGrid	CLD.emmGrid
 cld.emmGrid	CLD.emmGrid
 CLD.emm_list	emm_list-object
@@ -25,6 +26,7 @@ contrast.emmGrid	contrast
 del.eff.emmc	emmc-functions
 dunnett.emmc	emmc-functions
 eff.emmc	emmc-functions
+eff_size	eff_size
 emm	glht-support
 emmc-functions	emmc-functions
 emmeans	emmeans
@@ -46,6 +48,7 @@ glht-support	glht-support
 glht.emmGrid	glht-support
 glht.emmlf	glht-support
 hpd.summary	hpd.summary
+identity.emmc	emmc-functions
 joint_tests	joint_tests
 lsm	wrappers
 lsm.options	wrappers

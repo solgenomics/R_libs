@@ -1,4 +1,7 @@
 averageTrait            calculates average trait values for genotypes
+cleanAveragePhenotypes
+                        Reads, cleans and creates phenotype data with
+                        averaged individual data points for entries.
 cleanEmptyBlocks        Removes rows with completely empty trait values
                         for a block
 cleanEmptyReps          Removes rows with completely empty trait values
