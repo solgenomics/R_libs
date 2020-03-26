@@ -329,6 +329,9 @@ class SpMat : public SpBase< eT, SpMat<eT> >
   inline void  reshape(const uword in_rows, const uword in_cols);
   inline void  reshape(const SizeMat& s);
   
+  inline void  reshape_helper_generic(const uword in_rows, const uword in_cols);  //! internal use only
+  inline void  reshape_helper_intovec();                                          //! internal use only
+  
   arma_deprecated inline void reshape(const uword in_rows, const uword in_cols, const uword dim);  //!< NOTE: don't use this form: it will be removed
   
   template<typename functor> inline const SpMat&  for_each(functor F);
@@ -337,6 +340,8 @@ class SpMat : public SpBase< eT, SpMat<eT> >
   template<typename functor> inline const SpMat& transform(functor F);
   
   inline const SpMat& replace(const eT old_val, const eT new_val);
+  
+  inline const SpMat& clean(const pod_type threshold);
   
   inline const SpMat& zeros();
   inline const SpMat& zeros(const uword in_elem);
@@ -377,15 +382,19 @@ class SpMat : public SpBase< eT, SpMat<eT> >
   // TODO: implement auto_detect for sparse matrices
   
   inline arma_cold bool save(const std::string   name, const file_type type = arma_binary, const bool print_status = true) const;
+  inline arma_cold bool save(const csv_name&     spec, const file_type type =   csv_ascii, const bool print_status = true) const;
   inline arma_cold bool save(      std::ostream& os,   const file_type type = arma_binary, const bool print_status = true) const;
   
   inline arma_cold bool load(const std::string   name, const file_type type = arma_binary, const bool print_status = true);
+  inline arma_cold bool load(const csv_name&     spec, const file_type type =   csv_ascii, const bool print_status = true);
   inline arma_cold bool load(      std::istream& is,   const file_type type = arma_binary, const bool print_status = true);
   
   inline arma_cold bool quiet_save(const std::string   name, const file_type type = arma_binary) const;
+  inline arma_cold bool quiet_save(const csv_name&     spec, const file_type type =   csv_ascii) const;
   inline arma_cold bool quiet_save(      std::ostream& os,   const file_type type = arma_binary) const;
   
   inline arma_cold bool quiet_load(const std::string   name, const file_type type = arma_binary);
+  inline arma_cold bool quiet_load(const csv_name&     spec, const file_type type =   csv_ascii);
   inline arma_cold bool quiet_load(      std::istream& is,   const file_type type = arma_binary);
   
   
@@ -648,6 +657,7 @@ class SpMat : public SpBase< eT, SpMat<eT> >
   inline arma_hot arma_warn_unused eT get_value_csc(const uword i                         ) const;
   inline arma_hot arma_warn_unused eT get_value_csc(const uword in_row, const uword in_col) const;
   
+  inline arma_hot arma_warn_unused bool try_set_value_csc(const uword in_row, const uword in_col, const eT in_val);
   inline arma_hot arma_warn_unused bool try_add_value_csc(const uword in_row, const uword in_col, const eT in_val);
   inline arma_hot arma_warn_unused bool try_sub_value_csc(const uword in_row, const uword in_col, const eT in_val);
   inline arma_hot arma_warn_unused bool try_mul_value_csc(const uword in_row, const uword in_col, const eT in_val);
@@ -661,9 +671,9 @@ class SpMat : public SpBase< eT, SpMat<eT> >
   
   arma_aligned mutable MapMat<eT> cache;
   arma_aligned mutable state_type sync_state;
-  // 0: cache needs to be updated from CSC
-  // 1: CSC needs to be updated from cache
-  // 2: no update required
+  // 0: cache needs to be updated from CSC (ie.   CSC has more recent data)
+  // 1: CSC needs to be updated from cache (ie. cache has more recent data)
+  // 2: no update required                 (ie. CSC and cache contain the same data)
   
   #if defined(ARMA_USE_CXX11)
   arma_aligned mutable std::mutex cache_mutex;
@@ -672,8 +682,10 @@ class SpMat : public SpBase< eT, SpMat<eT> >
   arma_inline void invalidate_cache() const;
   arma_inline void invalidate_csc()   const;
   
-  inline void sync_cache() const;
-  inline void sync_csc()   const;
+  inline void sync_cache()        const;
+  inline void sync_cache_simple() const;
+  inline void sync_csc()          const;
+  inline void sync_csc_simple()   const;
   
   
   friend class SpValProxy< SpMat<eT> >;  // allow SpValProxy to call insert_element() and delete_element()
@@ -682,6 +694,7 @@ class SpMat : public SpBase< eT, SpMat<eT> >
   friend class SpCol<eT>;
   friend class SpMat_MapMat_val<eT>;
   friend class SpSubview_MapMat_val<eT>;
+  friend class spdiagview<eT>;
   
   
   public:

@@ -1,6 +1,10 @@
 Baudry_etal_2010_JCGS_examples
                         Simulated Example Datasets From Baudry et al.
                         (2010)
+BrierScore              Brier score to assess the accuracy of
+                        probabilistic predictions
+EuroUnemployment        Unemployment data for European countries in
+                        2014
 GvHD                    GvHD Dataset
 Mclust                  Model-Based Clustering
 MclustBootstrap         Resampling-based Inference for Gaussian finite
@@ -9,7 +13,7 @@ MclustDA                MclustDA discriminant analysis
 MclustDR                Dimension reduction for model-based clustering
                         and classification
 MclustDRsubsel          Subset selection for GMMDR directions based on
-                        BIC.
+                        BIC
 acidity                 Acidity data
 adjustedRandIndex       Adjusted Rand Index
 banknote                Swiss banknotes data
@@ -23,6 +27,8 @@ cdfMclust               Cumulative Distribution and Quantiles for a
 chevron                 Simulated minefield data
 clPairs                 Pairwise Scatter Plots showing Classification
 classError              Classification error
+classPriorProbs         Estimation of class prior probabilities by EM
+                        algorithm
 clustCombi              Combining Gaussian Mixture Components for
                         Clustering
 clustCombiOptim         Optimal number of clusters obtained by
@@ -35,24 +41,25 @@ combiTree               Tree structure obtained from combining mixture
 coordProj               Coordinate projections of multidimensional data
                         modeled by an MVN mixture.
 covw                    Weighted means, covariance and scattering
-                        matrices conditioning on a weighted matrix.
+                        matrices conditioning on a weighted matrix
 cross                   Simulated Cross Data
 cv.MclustDA             Deprecated Functions in mclust package
 cvMclustDA              MclustDA cross-validation
 decomp2sigma            Convert mixture component covariances to matrix
-                        form.
-defaultPrior            Default conjugate prior for Gaussian mixtures.
+                        form
+defaultPrior            Default conjugate prior for Gaussian mixtures
 dens                    Density for Parameterized MVN Mixtures
 densityMclust           Density Estimation via Model-Based Clustering
 densityMclust.diagnostic
                         Diagnostic plots for 'mclustDensity' estimation
 diabetes                Diabetes data
+dmvnorm                 Density of multivariate Gaussian distribution
 em                      EM algorithm starting with E-step for
-                        parameterized Gaussian mixture models.
+                        parameterized Gaussian mixture models
 emControl               Set control values for use with the EM
-                        algorithm.
+                        algorithm
 emE                     EM algorithm starting with E-step for a
-                        parameterized Gaussian mixture model.
+                        parameterized Gaussian mixture model
 entPlot                 Plot Entropy Plots
 errorBars               Draw error bars on a plot
 estep                   E-step for parameterized Gaussian mixture
@@ -61,7 +68,8 @@ estepE                  E-step in the EM algorithm for a parameterized
                         Gaussian mixture model.
 gmmhd                   Identifying Connected Components in Gaussian
                         Finite Mixture Models for Clustering
-hc                      Model-based Hierarchical Clustering
+hc                      Model-based Agglomerative Hierarchical
+                        Clustering
 hcE                     Model-based Hierarchical Clustering
 hclass                  Classifications from Hierarchical Agglomeration
 hdrlevels               Highest Density Region (HDR) Levels
@@ -74,7 +82,7 @@ logLik.Mclust           Log-Likelihood of a 'Mclust' object
 logLik.MclustDA         Log-Likelihood of a 'MclustDA' object
 majorityVote            Majority vote
 map                     Classification given Probabilities
-mapClass                Correspondence between classifications.
+mapClass                Correspondence between classifications
 mclust-package          Gaussian Mixture Modelling for Model-Based
                         Clustering, Classification, and Density
                         Estimation
@@ -82,7 +90,7 @@ mclust.options          Default values for use with MCLUST package
 mclust1Dplot            Plot one-dimensional data modeled by an MVN
                         mixture.
 mclust2Dplot            Plot two-dimensional data modelled by an MVN
-                        mixture.
+                        mixture
 mclustBIC               BIC for Model-Based Clustering
 mclustBICupdate         Update BIC values for parameterized Gaussian
                         mixture models
@@ -96,15 +104,15 @@ mclustModelNames        MCLUST Model Names
 mclustVariance          Template for variance specification for
                         parameterized Gaussian mixture models
 me                      EM algorithm starting with M-step for
-                        parameterized MVN mixture models.
+                        parameterized MVN mixture models
 me.weighted             EM algorithm with weights starting with M-step
                         for parameterized MVN mixture models
 meE                     EM algorithm starting with M-step for a
-                        parameterized Gaussian mixture model.
+                        parameterized Gaussian mixture model
 mstep                   M-step for parameterized Gaussian mixture
-                        models.
+                        models
 mstepE                  M-step for a parameterized Gaussian mixture
-                        model.
+                        model
 mvn                     Univariate or Multivariate Normal Fit
 mvnX                    Univariate or Multivariate Normal Fit
 nMclustParams           Number of Estimated Parameters in Gaussian
@@ -114,7 +122,8 @@ nVarParams              Number of Variance Parameters in Gaussian
 partconv                Numeric Encoding of a Partitioning
 partuniq                Classifies Data According to Unique
                         Observations
-plot.Mclust             Plot Model-Based Clustering Results
+plot.Mclust             Plotting method for Mclust model-based
+                        clustering
 plot.MclustBootstrap    Plot of bootstrap distributions for mixture
                         model parameters
 plot.MclustDA           Plotting method for MclustDA discriminant
@@ -136,7 +145,9 @@ predict.densityMclust   Density estimate of multivariate observations
                         by Gaussian finite mixture modeling
 priorControl            Conjugate Prior for Gaussian Mixtures.
 randProj                Random projections of multidimensional data
-                        modeled by an MVN mixture.
+                        modeled by an MVN mixture
+randomOrthogonalMatrix
+                        Random orthogonal matrix
 randomPairs             Random hierarchical structure
 sigma2decomp            Convert mixture component covariances to
                         decomposition form.
@@ -147,7 +158,7 @@ summary.MclustBootstrap
                         Summary Function for Bootstrap Inference for
                         Gaussian Finite Mixture Models
 summary.MclustDA        Summarizing discriminant analysis based on
-                        Gaussian finite mixture modeling.
+                        Gaussian finite mixture modeling
 summary.MclustDR        Summarizing dimension reduction method for
                         model-based clustering and classification
 summary.mclustBIC       Summary function for model-based clustering via
@@ -157,4 +168,5 @@ surfacePlot             Density or uncertainty surface for bivariate
 thyroid                 Thyroid gland data
 uncerPlot               Uncertainty Plot for Model-Based Clustering
 unmap                   Indicator Variables given Classification
+wdbc                    Wisconsin diagnostic breast cancer (WDBC) data
 wreath                  Data Simulated from a 14-Component Mixture

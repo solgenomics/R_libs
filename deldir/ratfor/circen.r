@@ -5,6 +5,8 @@ subroutine circen(i,j,k,x0,y0,x,y,ntot,eps,collin,nerror)
 
 implicit double precision(a-h,o-z)
 dimension x(-3:ntot), y(-3:ntot), xt(3), yt(3)
+dimension indv(3) # To facillitate a lucid error message.
+dimension xtmp(1)
 logical collin
 
 nerror = -1
@@ -43,8 +45,13 @@ if(collin) {
         # If they're not in the right order, bring things to
         # a shuddering halt.
         if(alpha>0) {
-		nerror = 3
-		return
+            indv(1) = i
+            indv(2) = j
+            indv(3) = k
+            call intpr("Point numbers:",-1,indv,3)
+            xtmp(1) = alpha
+            call dblepr("Test value:",-1,xtmp,1)
+            call rexit("Points are collinear but in the wrong order.")
         }
         # Collinear, but in the right order; think of this as meaning
         # that the circumcircle in question has infinite radius.

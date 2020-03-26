@@ -8,13 +8,15 @@ subroutine swap(j,k1,k2,shdswp,nadj,madj,x,y,ntot,eps,nerror)
 
 implicit double precision(a-h,o-z)
 dimension nadj(-3:ntot,0:madj), x(-3:ntot), y(-3:ntot)
-logical shdswp
+logical shdswp, anticl
 
 
 # If vertices k1 and k2 are not connected there is no diagonal to swap.
 # This could happen if vertices j, k1, and k2 were colinear, but shouldn't.
 call adjchk(k1,k2,shdswp,nadj,madj,ntot,nerror)
-if(nerror > 0) return
+if(nerror > 0) {
+    return
+}
 if(!shdswp) return
 
 # Get the other vertex of the quadrilateral.

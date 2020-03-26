@@ -76,6 +76,7 @@ paste.vec	paste.vec
 pdf.do	ps.latex
 pdf.end	ps.end
 pdf.latex	ps.latex
+pkgLibs	pkgLibs
 pl.ds	sfsmisc-defunct
 plotDS	plotDS
 plotStep	plotStep

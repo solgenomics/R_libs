@@ -1,6 +1,170 @@
+# devtools 2.2.2
+
+* `install_dev_deps()` now passes formal args onto `remotes::install_deps()`
+(@t-gibson, #2166)
+
+* `spell_check()` now checks if `spelling` is installed and prompts users to 
+  install it if not (@mikemahoney218, #2172)
+
+* `submit_cran()` now returns a more informative error when the CRAN submission
+  portal is down (#1958)
+
+* `check()` gains a `vignettes` argument, to more easily disable checks for
+  vignettes (#2165).
+
+* `check_win_*()` function now resets the email to the original email after
+  execution (@muschellij2, #2152).
+
+* `check()` now sets `NOT_CRAN=true` by default, as was originally intended (#2135).
+
+* `install_deps()` now supports `options("devtools.ellipsis_action")` as well
+  (#2169)
+
+* `test()` now takes `stop_on_failure` as a formal argument (FALSE by default)
+  instead of in `...`. Its value is still passed to `testthat::test_dir` as
+  before (@infotroph, #2129).
+
+* `test()` and `test_coverage_file()` gain a `export_all` argument, which
+  controls if all functions in a package are automatically exported (#1201).
+
+* `dev_sitrep()` now works if run outside a package directory (#2127).
+
+* `release()` now works if the package root is not in the working directory.
+
+# devtools 2.2.1
+
+* `test()` now sets the collation order to `C` before running, which matches
+  the behavior of tests when run with `R CMD check` (#2121)
+
+* New `options("devtools.ellipsis_action")` option added to control the action
+  of ellipsis in devtools. This should be one of
+  - `rlang::abort` - to emit an error if arguments are unused
+  - `rlang::warn` - to emit a warning if arguments are unused
+  - `rlang::inform` - to emit a message if arguments are unused
+  - `rlang::signal` - to emit a message if arguments are unused
+  Using `rlang::signal` will produce no output unless the custom condition is
+  caught, so it is the best way to retain backwards compatibility with devtools
+  behavior prior to 2.2.0.
+  The default behavior was also changed to issue a
+  warning rather than an error if any arguments are unused, as there are some
+  cases where devtools does not need to install the package, so unused
+  arguments are false positives (#2109).
+
+* `install()` now throws an error when it fails, as intended (#2120)
+
+* `install()` now again reloads and re-attaches packages if they were
+  previously loaded (#2111).
+
+* `release()` no longer calls the deprecated `dr_devtools()` (#2105)
+
+* `test()` now explicitly passes `stop_on_failure = FALSE` to
+  `testthat::test_dir()` (@jameslamb, #2099)
+
+# devtools 2.2.0
+
+## New Features
+
+* `create()` added back, the RStudio IDE uses `create()` in the create packages
+  dialog, so removing it in version 2.1.0 broke old versions of the IDE.
+
+* New `dev_sitrep()` function to return information about your development
+  environment and diagnose common problems. The former functions
+  `dr_devtools()` and `dr_github()` have been deprecated. (#1970)
+
+* All functions taking `...` now use the ellipsis package. This catches errors
+  when arguments are misspelled or incorrectly specified (#2016)
+
+## Minor improvements and fixes
+
+* `build_vignettes()` now correctly installs the vignette builder if it is not
+  already installed (#2089).
+
+* `dev_sitrep()` now uses the same endpoint to detect the current RStudio
+  version as the IDE (#2050).
+
+* `document()` gains a `quiet` parameter, to silence output and `check()` now
+  passes its quiet argument to it (#1986).
+
+* Add the DT package as a dependency, so that `test_coverage()` and
+  `test_coverage_file()` work without having to install additional packages
+  (#2085).
+
+* `check_man()` now succeeds when `tools::undoc()` returns empty results
+  (#1944).
+
+* `check_win_*()` functions gain a `email` argument, so temporarily change the
+  email the check results will be sent to (#1723).
+
+* `install()` now explicitly unloads packages before trying to install a new
+  version (#2094).
+
+* All `install_*()` functions now attach build tools to the PATH, which makes them work on
+  Windows when RTools is not on the default PATH (#2093).
+
+* `test_coverage_file()` now works when there is not a 1 to 1 correspondence
+  between test and source files (#2011).
+
+* `release()` now works again when `pkg` is not the current working directory
+  (#1974).
+
+* `release()` now works without error when `options("repos")` is unnamed (#1956).
+* `create()` added, the RStudio IDE uses `create()`, so removing it in version 2.1.0
+  broke old versions of the IDE.
+  
+* In several places `http:` URLs were used instead of `https:`, the most 
+  critical being in the `cran_mirror`, `cran_pacakges`, and `cran_submission_url`
+  values which could have enabled discrete activity disclosure and person-in-the-middle 
+  attacks (i.e. changing the contents while uploading/downloading). All `http:` 
+  URLS have been changed to `https:` URLs. (@hrbrmstr, #2091)
+
+# devtools 2.1.0
+
+## New Features
+
+* `testthat` and `roxygen2` are now added to `Imports` rather than `Suggests`,
+  so they are automatically installed when you install devtools.
+
+## Deprecated functions now removed
+
+* `create()`, `create_description()`, `setup()`
+  `use_appveyor()`, `use_build_ignore()`, `use_code_of_conduct()`,
+  `use_coverage()`, `use_cran_badge()`, `use_cran_comments()`, `use_data()`,
+  `use_data_raw()`, `use_dev_version()`, `use_git()`, `use_git_hook()`,
+  `use_github()`, `use_github_links()`, `use_gpl3_license()`,
+  `use_mit_license()`, `use_news_md()`, `use_package()`, `use_package_doc()`,
+  `use_rcpp()`, `use_readme_md()`, `use_readme_rmd()`, `use_revdep()`,
+  `use_rstudio()`, `use_test()`, `use_testthat()`, `use_travis()`,
+  `use_vignette()`, have been removed after being deprecated in previous
+  releases. Use the versions in the [usethis](https://usethis.r-lib.org/)
+  package directly.
+
+* `check_cran()`, `revdep_check()`, `revdep_check_print_problems()`,
+  `revdep_check_reset()`, `revdep_check_resume()`, `revdep_check_save_summary()`,
+  `revdep_email()` have been removed after being
+  deprecated in previous releases. It is recommended to use the
+  [revdepcheck](https://github.com/r-lib/revdepcheck) package instead.
+
+* `system_check()`, `system_output()` have been removed after being deprecated
+  in previous releases. It is recommend to use the
+  [processx](https://processx.r-lib.org/) package instead.
+
+* `build_win()` has been removed, after being deprecated in previous releases.
+
+* `yesno()` as used in `release()` now has clearer synonyms for "yes" (@mattmalin, #1993)
+
+## Minor improvements and fixes
+
+* `check_rhub` gains a new argument `build_args` for arguments passed to 
+`R CMD build`. `...` is now passed to `rhub::check_for_cran()` (@gaborcsardi, @maelle, #2041)
+
+* `build_manual()` now fails if the manual fails to build. (#2056)
+
+* `test_file()` and `test_coverage_file()` now work with C
+  and C++ files in the src/ directory as well.
+
 # devtools 2.0.2
 
-* Two tests are not skipped when run on CRAN, as they fail due to an outdated
+* Two tests are now skipped when run on CRAN, as they fail due to an outdated
   pandoc and restrictions on writing to the package library respectively.
 
 * `load_all()` now accepts 'package' objects, regaining previous behavior in
@@ -477,7 +641,7 @@ properly pass them to internal functions. (#1502)
   package authors (#1123).
 
 * All `use_` function have been overhauled to be more consistent, particularly
-  arround notification. Most functions now also ask to overwrite if a file 
+  around notification. Most functions now also ask to overwrite if a file 
   already exists (#1074).
 
 * `use_coverage()` now adds covr to "Suggests", rather than recommending you
@@ -505,7 +669,7 @@ properly pass them to internal functions. (#1502)
 
 * Deprecated `build_github_devtools()` has been removed.
 
-## Checks and and release()
+## Checks and release()
 
 * `check()` now always succeeds (instead of throwing an error when 
   `R CMD check` finds an `ERROR`), returning an object that summarises
@@ -869,7 +1033,7 @@ There were a handful of smaller fixes:
   `utils::unzip()` (#761, @robertzk).
 
 * `release()` now reminds you to check the existing CRAN check results page
-  (#613) ands shows file size before uploading to CRAN (#683, @krlmlr).
+  (#613) and shows file size before uploading to CRAN (#683, @krlmlr).
 
 * `RCMD()` and `system_check()` are now exported so they can be used by other 
   packages. (@jimhester, #699).
@@ -1031,7 +1195,7 @@ I've also tweaked the output of `revdep_maintainers()` so it's easier to copy an
   but it will allow the development of future tools like generic update
   functions.
   
-* Vignettes are no longer installed by default because they potentally require 
+* Vignettes are no longer installed by default because they potentially require 
   all suggested packages to also be installed. Use `build_vignettes = TRUE` to 
   force building and to install all suggested packages (#573).
   
@@ -1075,7 +1239,7 @@ I've also tweaked the output of `revdep_maintainers()` so it's easier to copy an
 
 ## Other minor improvements and bug fixes
 
-* If you're using RStudio, and you you're trying to build a binary package
+* If you're using RStudio, and you're trying to build a binary package
   without the necessary build tools, RStudio will prompt to download and
   install the right thing. (#488)
 
@@ -1229,7 +1393,7 @@ Two dependencies were incremented:
 
 # devtools 1.4.1
 
-* Fixed bug in `wd()` when `path` was ommitted. (#374)
+* Fixed bug in `wd()` when `path` was omitted. (#374)
 
 * Fixed bug in `dev_help()` that prevented it from working when not using
   RStudio.
@@ -1303,7 +1467,7 @@ Two dependencies were incremented:
 
 * `source_url()` (and `source_gist()`) accept SHA1 prefixes.
 
-* `source_gist()` uses the github api to reliably locate the raw gist.
+* `source_gist()` uses the GitHub API to reliably locate the raw gist.
   Additionally it now only attempts to source files with `.R` or `.r`
   extensions, and gains a `quiet` argument. (#348)
 
@@ -1322,7 +1486,7 @@ Two dependencies were incremented:
   be doing and why.
 
 * `load_all()` now defaults to `reset = TRUE` so that changes to the NAMESPACE
-  etc are incorporated. This makes it slightly slower (but hopefully not
+  etc. are incorporated. This makes it slightly slower (but hopefully not
   noticeably so), and generally more accurate, and a better simulation of
   the install + restart + reload cycle.
 
@@ -1612,7 +1776,7 @@ Two dependencies were incremented:
 * new `clean_vignettes` function to remove pdfs in `inst/doc` that were built
   from vignettes in `vignettes/`
 
-* `load_all` does a much much better job at simulating package loading (see
+* `load_all` does a much better job at simulating package loading (see
   LOADING section). It also compiles and loads C/C++/Fortran code.
 
 * `unload()` is now an exported function, which unloads a package, trying
@@ -1667,8 +1831,8 @@ Two dependencies were incremented:
 
 * The NAMESPACE file is now used for loading imports, instead of the
   DESCRIPTION file. Previously, `load_all` loaded all objects from the
-  packages listed in DESCRIPTION. Now it loads packages (and, when
-  when 'importfrom' is used, specific objects from packages) listed in
+  packages listed in DESCRIPTION. Now it loads packages (and,
+  when 'importFrom' is used, specific objects from packages) listed in
   NAMESPACE. This more closely simulates normal package loading. It
   still checks version numbers of packages listed in DESCRIPTION.
   (Winston Chang)
@@ -1696,7 +1860,7 @@ Two dependencies were incremented:
 * `load_all` now compiles C files in the /src directory. (Winston Chang)
 
 * New functions `compile_dll()` and `clean_dll()`, which compile C/C++/
-  Fortan source code, and clean up the compiled objects, respectively.
+  Fortran source code, and clean up the compiled objects, respectively.
   (Winston Chang. Fixes #131)
 
 ## Bug fixes
@@ -1943,7 +2107,7 @@ Two dependencies were incremented:
 
 * `build_win` sends your package to the R windows builder, allowing you to
   make a binary version of your package for windows users if you're using
-  linux or a max (if you're using windows already, use `build(binary = T)`)
+  linux or macOS (if you're using windows already, use `build(binary = T)`)
 
 ## Improvements and bug fixes
 

@@ -1,6 +1,6 @@
 Package: R.utils
-Version: 2.8.0
-Depends: R (>= 2.14.0), R.oo (>= 1.22.0)
+Version: 2.9.2
+Depends: R (>= 2.14.0), R.oo (>= 1.23.0)
 Imports: methods, utils, tools, R.methodsS3 (>= 1.7.1)
 Suggests: digest (>= 0.6.10)
 Title: Various Programming Utilities
@@ -13,9 +13,8 @@ License: LGPL (>= 2.1)
 LazyLoad: TRUE
 URL: https://github.com/HenrikBengtsson/R.utils
 BugReports: https://github.com/HenrikBengtsson/R.utils/issues
-RoxygenNote: 6.1.0
 NeedsCompilation: no
-Packaged: 2019-02-14 16:15:15 UTC; hb
+Packaged: 2019-12-07 19:30:11 UTC; hb
 Repository: CRAN
-Date/Publication: 2019-02-14 21:42:21 UTC
-Built: R 3.6.0; ; 2019-05-10 11:46:51 UTC; unix
+Date/Publication: 2019-12-08 07:50:02 UTC
+Built: R 3.6.3; ; 2020-03-24 20:10:01 UTC; unix

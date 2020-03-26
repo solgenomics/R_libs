@@ -1,7 +1,7 @@
-## ----echo=FALSE----------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 library(diffobj)
 
-## ----results='asis'------------------------------------------------------
+## ----results='asis'-----------------------------------------------------------
 cat(
   as.character(
     diffPrint(
@@ -10,7 +10,7 @@ cat(
       style=list(html.output="diff.w.style")
 ) ) )
 
-## ----results='asis'------------------------------------------------------
+## ----results='asis'-----------------------------------------------------------
 cat(
   as.character(
     diffPrint(
@@ -19,25 +19,25 @@ cat(
       style=list(html.output="diff.only")   # notice this changed
 ) ) )
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  options(
 #    diffobj.format="html",
 #    diffobj.style=list(html.output="diff.only")
 #  )
 
-## ----echo=FALSE----------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 old.opts <- options(
   diffobj.format="html",
   diffobj.style=list(html.output="diff.only")
 )
 
-## ----results='asis'------------------------------------------------------
+## ----results='asis'-----------------------------------------------------------
 cat(as.character(diffPrint(1:5, 2:6)))
 
-## ----echo=FALSE----------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 options(old.opts)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  library(shiny)
 #  shinyApp(
 #    ui=fluidPage(htmlOutput('diffobj_element')),
@@ -51,7 +51,7 @@ options(old.opts)
 #              style=list(html.output="diff.w.style")
 #  ) ) )}) } )
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  options(
 #    diffobj.format="html",
 #    diffobj.style=list(html.output="diff.only")

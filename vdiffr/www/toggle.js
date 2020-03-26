@@ -7,3 +7,10 @@ document.addEventListener('toggled', function(event) {
     status.innerHTML = 'After';
   }
 });
+
+// Disable/Enable validate buttons
+Shiny.addCustomMessageHandler('toggle-validate-btns-handler', toggleBtns);
+function toggleBtns(message) {
+  document.getElementById('group_validation_button').disabled = message;
+  document.getElementById('case_validation_button').disabled = message;
+}

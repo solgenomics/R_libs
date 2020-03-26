@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;sf&rsquo; version 0.7-4</h2>
+</div><h2>Documentation for package &lsquo;sf&rsquo; version 0.9-0</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -22,7 +22,6 @@
 
 
 <p style="text-align: center;">
-<a href="# "> </a>
 <a href="#A">A</a>
 <a href="#B">B</a>
 <a href="#C">C</a>
@@ -41,14 +40,11 @@
 <a href="#S">S</a>
 <a href="#T">T</a>
 <a href="#U">U</a>
+<a href="#V">V</a>
 <a href="#W">W</a>
 <a href="#misc">misc</a>
 </p>
 
-<table width="100%">
-<tr><td style="width: 25%;"><a href="sf-deprecated.html">sf-deprecated-package</a></td>
-<td>Deprecated functions in 'sf'</td></tr>
-</table>
 
 <h2><a name="A">-- A --</a></h2>
 
@@ -62,13 +58,13 @@
 <tr><td style="width: 25%;"><a href="tidyverse.html">arrange.sf</a></td>
 <td>Tidyverse methods for sf objects (remove .sf suffix!)</td></tr>
 <tr><td style="width: 25%;"><a href="coerce-methods.html">as</a></td>
-<td>Methods to coerce simple features to 'Spatial*' and 'Spatial*DataFrame' objects</td></tr>
+<td>Methods to coerce simple features to Spatial* and 'Spatial*DataFrame' objects</td></tr>
 <tr><td style="width: 25%;"><a href="st.html">as.matrix.sfg</a></td>
 <td>Create simple feature from a numeric vector, matrix or list</td></tr>
 <tr><td style="width: 25%;"><a href="sgbp.html">as.matrix.sgbp</a></td>
 <td>Methods for dealing with sparse geometry binary predicate lists</td></tr>
 <tr><td style="width: 25%;"><a href="coerce-methods.html">as_Spatial</a></td>
-<td>Methods to coerce simple features to 'Spatial*' and 'Spatial*DataFrame' objects</td></tr>
+<td>Methods to coerce simple features to Spatial* and 'Spatial*DataFrame' objects</td></tr>
 </table>
 
 <h2><a name="B">-- B --</a></h2>
@@ -86,7 +82,7 @@
 <tr><td style="width: 25%;"><a href="bind.html">cbind.sf</a></td>
 <td>Bind rows (features) of sf objects</td></tr>
 <tr><td style="width: 25%;"><a href="coerce-methods.html">coerce-method</a></td>
-<td>Methods to coerce simple features to 'Spatial*' and 'Spatial*DataFrame' objects</td></tr>
+<td>Methods to coerce simple features to Spatial* and 'Spatial*DataFrame' objects</td></tr>
 </table>
 
 <h2><a name="D">-- D --</a></h2>
@@ -116,6 +112,10 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="tidyverse.html">filter.sf</a></td>
 <td>Tidyverse methods for sf objects (remove .sf suffix!)</td></tr>
+<tr><td style="width: 25%;"><a href="st_bbox.html">format.bbox</a></td>
+<td>Return bounding of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_crs.html">format.crs</a></td>
+<td>Retrieve coordinate reference system from object</td></tr>
 <tr><td style="width: 25%;"><a href="st.html">format.sfg</a></td>
 <td>Create simple feature from a numeric vector, matrix or list</td></tr>
 <tr><td style="width: 25%;"><a href="tidyverse.html">full_join.sf</a></td>
@@ -183,6 +183,10 @@
 <td>Return bounding of a simple feature or simple feature set</td></tr>
 <tr><td style="width: 25%;"><a href="st_crs.html">is.na.crs</a></td>
 <td>Retrieve coordinate reference system from object</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">is.na.m_range</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">is.na.z_range</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
 <tr><td style="width: 25%;"><a href="is_driver_available.html">is_driver_available</a></td>
 <td>Check if driver is available</td></tr>
 <tr><td style="width: 25%;"><a href="is_driver_can.html">is_driver_can</a></td>
@@ -216,6 +220,10 @@
 <td>Return bounding of a simple feature or simple feature set</td></tr>
 <tr><td style="width: 25%;"><a href="st_crs.html">NA_crs_</a></td>
 <td>Retrieve coordinate reference system from object</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">NA_m_range_</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">NA_z_range_</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
 <tr><td style="width: 25%;"><a href="nc.html">nc</a></td>
 <td>North Carolina SIDS data</td></tr>
 <tr><td style="width: 25%;"><a href="tidyverse.html">nest.sf</a></td>
@@ -304,9 +312,11 @@
 <td>Tidyverse methods for sf objects (remove .sf suffix!)</td></tr>
 <tr><td style="width: 25%;"><a href="tidyverse.html">separate.sf</a></td>
 <td>Tidyverse methods for sf objects (remove .sf suffix!)</td></tr>
+<tr><td style="width: 25%;"><a href="tidyverse.html">separate_rows.sf</a></td>
+<td>Tidyverse methods for sf objects (remove .sf suffix!)</td></tr>
 <tr><td style="width: 25%;"><a href="sf.html">sf</a></td>
 <td>Create sf object</td></tr>
-<tr><td style="width: 25%;"><a href="sf-deprecated.html">sf-deprecated</a></td>
+<tr><td style="width: 25%;"><a href="sf-defunct.html">sf-defunct</a></td>
 <td>Deprecated functions in 'sf'</td></tr>
 <tr><td style="width: 25%;"><a href="plot.html">sf.colors</a></td>
 <td>plot sf object</td></tr>
@@ -316,6 +326,8 @@
 <td>Provide the external dependencies versions of the libraries linked to sf</td></tr>
 <tr><td style="width: 25%;"><a href="sf_project.html">sf_project</a></td>
 <td>directly transform a set of coordinates</td></tr>
+<tr><td style="width: 25%;"><a href="st_transform.html">sf_proj_info</a></td>
+<td>Transform or convert coordinates of simple feature</td></tr>
 <tr><td style="width: 25%;"><a href="sgbp.html">sgbp</a></td>
 <td>Methods for dealing with sparse geometry binary predicate lists</td></tr>
 <tr><td style="width: 25%;"><a href="tidyverse.html">slice.sf</a></td>
@@ -354,6 +366,8 @@
 <td>Convert foreign object to an sf object</td></tr>
 <tr><td style="width: 25%;"><a href="st_as_sf.html">st_as_sf.sf</a></td>
 <td>Convert foreign object to an sf object</td></tr>
+<tr><td style="width: 25%;"><a href="st_as_sf.html">st_as_sf.sfc</a></td>
+<td>Convert foreign object to an sf object</td></tr>
 <tr><td style="width: 25%;"><a href="st_as_sf.html">st_as_sf.Spatial</a></td>
 <td>Convert foreign object to an sf object</td></tr>
 <tr><td style="width: 25%;"><a href="st_as_sfc.html">st_as_sfc</a></td>
@@ -369,6 +383,8 @@
 <tr><td style="width: 25%;"><a href="st_as_sfc.html">st_as_sfc.list</a></td>
 <td>Convert foreign geometry object to an sfc object</td></tr>
 <tr><td style="width: 25%;"><a href="st_as_sfc.html">st_as_sfc.map</a></td>
+<td>Convert foreign geometry object to an sfc object</td></tr>
+<tr><td style="width: 25%;"><a href="st_as_sfc.html">st_as_sfc.pq_geometry</a></td>
 <td>Convert foreign geometry object to an sfc object</td></tr>
 <tr><td style="width: 25%;"><a href="st_as_sfc.html">st_as_sfc.raw</a></td>
 <td>Convert foreign geometry object to an sfc object</td></tr>
@@ -392,6 +408,8 @@
 <td>Return Well-known Text representation of simple feature geometry or coordinate reference system</td></tr>
 <tr><td style="width: 25%;"><a href="st_as_text.html">st_as_text.sfg</a></td>
 <td>Return Well-known Text representation of simple feature geometry or coordinate reference system</td></tr>
+<tr><td style="width: 25%;"><a href="st_crs.html">st_axis_order</a></td>
+<td>Retrieve coordinate reference system from object</td></tr>
 <tr><td style="width: 25%;"><a href="st_bbox.html">st_bbox</a></td>
 <td>Return bounding of a simple feature or simple feature set</td></tr>
 <tr><td style="width: 25%;"><a href="st_bbox.html">st_bbox.CIRCULARSTRING</a></td>
@@ -453,6 +471,8 @@
 <tr><td style="width: 25%;"><a href="st_cast.html">st_cast.GEOMETRYCOLLECTION</a></td>
 <td>Cast geometry to another type: either simplify, or cast explicitly</td></tr>
 <tr><td style="width: 25%;"><a href="st_cast.html">st_cast.LINESTRING</a></td>
+<td>Cast geometry to another type: either simplify, or cast explicitly</td></tr>
+<tr><td style="width: 25%;"><a href="st_cast.html">st_cast.MULTICURVE</a></td>
 <td>Cast geometry to another type: either simplify, or cast explicitly</td></tr>
 <tr><td style="width: 25%;"><a href="st_cast.html">st_cast.MULTILINESTRING</a></td>
 <td>Cast geometry to another type: either simplify, or cast explicitly</td></tr>
@@ -546,6 +566,10 @@
 <td>Geometric binary predicates on pairs of simple feature geometry sets</td></tr>
 <tr><td style="width: 25%;"><a href="geos_binary_pred.html">st_equals_exact</a></td>
 <td>Geometric binary predicates on pairs of simple feature geometry sets</td></tr>
+<tr><td style="width: 25%;"><a href="st_join.html">st_filter</a></td>
+<td>spatial join, spatial filter</td></tr>
+<tr><td style="width: 25%;"><a href="st_join.html">st_filter.sf</a></td>
+<td>spatial join, spatial filter</td></tr>
 <tr><td style="width: 25%;"><a href="st_geometry.html">st_geometry</a></td>
 <td>Get, set, or replace geometry from an sf object</td></tr>
 <tr><td style="width: 25%;"><a href="st_geometry.html">st_geometry.sf</a></td>
@@ -587,7 +611,9 @@
 <tr><td style="width: 25%;"><a href="st_jitter.html">st_jitter</a></td>
 <td>jitter geometries</td></tr>
 <tr><td style="width: 25%;"><a href="st_join.html">st_join</a></td>
-<td>spatial left or inner join</td></tr>
+<td>spatial join, spatial filter</td></tr>
+<tr><td style="width: 25%;"><a href="st_join.html">st_join.sf</a></td>
+<td>spatial join, spatial filter</td></tr>
 <tr><td style="width: 25%;"><a href="st_layers.html">st_layers</a></td>
 <td>List layers in a datasource</td></tr>
 <tr><td style="width: 25%;"><a href="geos_measures.html">st_length</a></td>
@@ -600,12 +626,52 @@
 <td>Sample points on a linear geometry</td></tr>
 <tr><td style="width: 25%;"><a href="st_make_grid.html">st_make_grid</a></td>
 <td>Create a regular tesselation over the bounding box of an sf or sfc object</td></tr>
+<tr><td style="width: 25%;"><a href="valid.html">st_make_valid</a></td>
+<td>Make an invalid geometry valid</td></tr>
 <tr><td style="width: 25%;"><a href="st.html">st_multilinestring</a></td>
 <td>Create simple feature from a numeric vector, matrix or list</td></tr>
 <tr><td style="width: 25%;"><a href="st.html">st_multipoint</a></td>
 <td>Create simple feature from a numeric vector, matrix or list</td></tr>
 <tr><td style="width: 25%;"><a href="st.html">st_multipolygon</a></td>
 <td>Create simple feature from a numeric vector, matrix or list</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">st_m_range</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">st_m_range.CIRCULARSTRING</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">st_m_range.COMPOUNDCURVE</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">st_m_range.CURVEPOLYGON</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">st_m_range.GEOMETRYCOLLECTION</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">st_m_range.LINESTRING</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">st_m_range.MULTICURVE</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">st_m_range.MULTILINESTRING</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">st_m_range.MULTIPOINT</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">st_m_range.MULTIPOLYGON</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">st_m_range.MULTISURFACE</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">st_m_range.numeric</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">st_m_range.POINT</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">st_m_range.POLYGON</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">st_m_range.POLYHEDRALSURFACE</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">st_m_range.sf</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">st_m_range.sfc</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">st_m_range.TIN</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_m_range.html">st_m_range.TRIANGLE</a></td>
+<td>Return 'm' range of a simple feature or simple feature set</td></tr>
 <tr><td style="width: 25%;"><a href="st_nearest_feature.html">st_nearest_feature</a></td>
 <td>get index of nearest feature</td></tr>
 <tr><td style="width: 25%;"><a href="st_nearest_points.html">st_nearest_points</a></td>
@@ -634,21 +700,27 @@
 <td>Get precision</td></tr>
 <tr><td style="width: 25%;"><a href="st_precision.html">st_precision&lt;-</a></td>
 <td>Get precision</td></tr>
-<tr><td style="width: 25%;"><a href="st_transform.html">st_proj_info</a></td>
-<td>Transform or convert coordinates of simple feature</td></tr>
 <tr><td style="width: 25%;"><a href="st_read.html">st_read</a></td>
 <td>Read simple features or layers from file or database</td></tr>
 <tr><td style="width: 25%;"><a href="st_read.html">st_read.character</a></td>
 <td>Read simple features or layers from file or database</td></tr>
 <tr><td style="width: 25%;"><a href="st_read.html">st_read.DBIObject</a></td>
 <td>Read simple features or layers from file or database</td></tr>
-<tr><td style="width: 25%;"><a href="sf-deprecated.html">st_read_db</a></td>
+<tr><td style="width: 25%;"><a href="sf-defunct.html">st_read_db</a></td>
 <td>Deprecated functions in 'sf'</td></tr>
-<tr><td style="width: 25%;"><a href="sf-deprecated.html">st_read_db,</a></td>
+<tr><td style="width: 25%;"><a href="sf-defunct.html">st_read_db,</a></td>
 <td>Deprecated functions in 'sf'</td></tr>
 <tr><td style="width: 25%;"><a href="st_relate.html">st_relate</a></td>
 <td>Compute DE9-IM relation between pairs of geometries, or match it to a given pattern</td></tr>
+<tr><td style="width: 25%;"><a href="geos_unary.html">st_reverse</a></td>
+<td>Geometric unary operations on simple feature geometry sets</td></tr>
 <tr><td style="width: 25%;"><a href="st_sample.html">st_sample</a></td>
+<td>sample points on or in (sets of) spatial features</td></tr>
+<tr><td style="width: 25%;"><a href="st_sample.html">st_sample.sf</a></td>
+<td>sample points on or in (sets of) spatial features</td></tr>
+<tr><td style="width: 25%;"><a href="st_sample.html">st_sample.sfc</a></td>
+<td>sample points on or in (sets of) spatial features</td></tr>
+<tr><td style="width: 25%;"><a href="st_sample.html">st_sample.sfg</a></td>
 <td>sample points on or in (sets of) spatial features</td></tr>
 <tr><td style="width: 25%;"><a href="geos_unary.html">st_segmentize</a></td>
 <td>Geometric unary operations on simple feature geometry sets</td></tr>
@@ -664,6 +736,12 @@
 <td>Create sf object</td></tr>
 <tr><td style="width: 25%;"><a href="sfc.html">st_sfc</a></td>
 <td>Create simple feature geometry list column</td></tr>
+<tr><td style="width: 25%;"><a href="st_shift_longitude.html">st_shift_longitude</a></td>
+<td>Shift or re-center geographical coordinates for a Pacific view</td></tr>
+<tr><td style="width: 25%;"><a href="st_shift_longitude.html">st_shift_longitude.sf</a></td>
+<td>Shift or re-center geographical coordinates for a Pacific view</td></tr>
+<tr><td style="width: 25%;"><a href="st_shift_longitude.html">st_shift_longitude.sfc</a></td>
+<td>Shift or re-center geographical coordinates for a Pacific view</td></tr>
 <tr><td style="width: 25%;"><a href="geos_unary.html">st_simplify</a></td>
 <td>Geometric unary operations on simple feature geometry sets</td></tr>
 <tr><td style="width: 25%;"><a href="geos_binary_ops.html">st_snap</a></td>
@@ -706,10 +784,48 @@
 <td>Write simple features object to file or database</td></tr>
 <tr><td style="width: 25%;"><a href="st_write.html">st_write.sfc</a></td>
 <td>Write simple features object to file or database</td></tr>
-<tr><td style="width: 25%;"><a href="sf-deprecated.html">st_write_db</a></td>
+<tr><td style="width: 25%;"><a href="sf-defunct.html">st_write_db</a></td>
 <td>Deprecated functions in 'sf'</td></tr>
 <tr><td style="width: 25%;"><a href="st_zm.html">st_zm</a></td>
 <td>Drop or add Z and/or M dimensions from feature geometries</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">st_z_range</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">st_z_range.CIRCULARSTRING</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">st_z_range.COMPOUNDCURVE</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">st_z_range.CURVEPOLYGON</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">st_z_range.GEOMETRYCOLLECTION</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">st_z_range.LINESTRING</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">st_z_range.MULTICURVE</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">st_z_range.MULTILINESTRING</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">st_z_range.MULTIPOINT</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">st_z_range.MULTIPOLYGON</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">st_z_range.MULTISURFACE</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">st_z_range.numeric</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">st_z_range.POINT</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">st_z_range.POLYGON</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">st_z_range.POLYHEDRALSURFACE</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">st_z_range.sf</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">st_z_range.sfc</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">st_z_range.TIN</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
+<tr><td style="width: 25%;"><a href="st_z_range.html">st_z_range.TRIANGLE</a></td>
+<td>Return 'z' range of a simple feature or simple feature set</td></tr>
 <tr><td style="width: 25%;"><a href="tidyverse.html">summarise</a></td>
 <td>Tidyverse methods for sf objects (remove .sf suffix!)</td></tr>
 <tr><td style="width: 25%;"><a href="tidyverse.html">summarise.sf</a></td>
@@ -727,6 +843,8 @@
 <td>Summarize simple feature type for tibble</td></tr>
 <tr><td style="width: 25%;"><a href="tidyverse.html">tidyverse</a></td>
 <td>Tidyverse methods for sf objects (remove .sf suffix!)</td></tr>
+<tr><td style="width: 25%;"><a href="transform.sf.html">transform.sf</a></td>
+<td>transform method for sf objects</td></tr>
 <tr><td style="width: 25%;"><a href="tidyverse.html">transmute.sf</a></td>
 <td>Tidyverse methods for sf objects (remove .sf suffix!)</td></tr>
 <tr><td style="width: 25%;"><a href="tibble.html">type_sum.sfc</a></td>
@@ -742,6 +860,27 @@
 <td>Tidyverse methods for sf objects (remove .sf suffix!)</td></tr>
 <tr><td style="width: 25%;"><a href="tidyverse.html">unnest.sf</a></td>
 <td>Tidyverse methods for sf objects (remove .sf suffix!)</td></tr>
+</table>
+
+<h2><a name="V">-- V --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="valid.html">valid</a></td>
+<td>Make an invalid geometry valid</td></tr>
+<tr><td style="width: 25%;"><a href="vctrs.html">vctrs</a></td>
+<td>vctrs methods for sf objects</td></tr>
+<tr><td style="width: 25%;"><a href="vctrs.html">vec_cast.sfc</a></td>
+<td>vctrs methods for sf objects</td></tr>
+<tr><td style="width: 25%;"><a href="vctrs.html">vec_cast.sfc.default</a></td>
+<td>vctrs methods for sf objects</td></tr>
+<tr><td style="width: 25%;"><a href="vctrs.html">vec_cast.sfc.sfc</a></td>
+<td>vctrs methods for sf objects</td></tr>
+<tr><td style="width: 25%;"><a href="vctrs.html">vec_ptype2.sfc</a></td>
+<td>vctrs methods for sf objects</td></tr>
+<tr><td style="width: 25%;"><a href="vctrs.html">vec_ptype2.sfc.default</a></td>
+<td>vctrs methods for sf objects</td></tr>
+<tr><td style="width: 25%;"><a href="vctrs.html">vec_ptype2.sfc.sfc</a></td>
+<td>vctrs methods for sf objects</td></tr>
 </table>
 
 <h2><a name="W">-- W --</a></h2>

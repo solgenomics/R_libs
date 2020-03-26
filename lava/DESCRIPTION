@@ -1,8 +1,8 @@
 Package: lava
 Type: Package
 Title: Latent Variable Models
-Version: 1.6.5
-Date: 2019-02-07
+Version: 1.6.7
+Date: 2020-02-25
 Authors@R: c(person("Klaus K.", "Holst", email="klaus@holst.it", role=c("aut", "cre")),
              person("Brice", "Ozenne", role = "ctb"),
              person("Thomas", "Gerds", role = "ctb"))
@@ -33,9 +33,9 @@ Suggests: KernSmooth, Matrix, Rgraphviz, data.table, ellipse, fields,
         polycor, quantreg, rgl, testthat (>= 0.11), visNetwork, zoo
 ByteCompile: yes
 Encoding: UTF-8
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 NeedsCompilation: no
-Packaged: 2019-02-12 08:07:55 UTC; klaus
+Packaged: 2020-03-02 14:01:51 UTC; klaus
 Repository: CRAN
-Date/Publication: 2019-02-12 10:43:31 UTC
-Built: R 3.6.0; ; 2019-05-10 11:31:39 UTC; unix
+Date/Publication: 2020-03-05 12:30:02 UTC
+Built: R 3.6.3; ; 2020-03-24 20:09:16 UTC; unix

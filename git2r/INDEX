@@ -69,6 +69,7 @@ length.git_tree         Number of entries in tree
 libgit2_features        Compile time options for libgit2.
 libgit2_version         Version of the libgit2 library
 lookup                  Lookup
+lookup_commit           Lookup the commit related to a git object
 ls_tree                 List the contents of a tree object
 merge.git_branch        Merge a branch into HEAD
 merge_base              Find a merge base between two commits

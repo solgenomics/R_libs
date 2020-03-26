@@ -1,6 +1,6 @@
 Package: plotrix
-Version: 3.7-5
-Date: 2019-03-25
+Version: 3.7-7
+Date: 2019-12-05
 Title: Various Plotting Functions
 Author: Jim Lemon, Ben Bolker, Sander Oom,
 	Eduardo Klein, Barry Rowlingson,
@@ -12,13 +12,14 @@ Author: Jim Lemon, Ben Bolker, Sander Oom,
 	Christophe Dutang, Peter Solymos, Robby Engelmann, 
 	Michael Hecker, Felix Steinbeck, Hans Borchers,
 	Henrik Singmann, Ted Toal, Derek Ogle, Darshan Baral,
-	Ulrike Groemping
+	Ulrike Groemping, Bill Venables
 Maintainer: Jim Lemon <drjimlemon@gmail.com>
 Imports: grDevices, graphics, stats, utils
 Description: Lots of plots, various labeling, axis and color scaling functions.
 License: GPL (>= 2)
 NeedsCompilation: no
-Packaged: 2019-03-25 10:49:53 UTC; maechler
+Packaged: 2019-12-04 23:40:49 UTC; root
+Depends: R (>= 3.5.0)
 Repository: CRAN
-Date/Publication: 2019-04-07 09:10:03 UTC
-Built: R 3.6.0; ; 2019-05-10 11:14:31 UTC; unix
+Date/Publication: 2019-12-05 08:00:02 UTC
+Built: R 3.6.3; ; 2020-03-24 19:46:55 UTC; unix

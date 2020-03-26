@@ -339,6 +339,14 @@ class Mat : public Base< eT, Mat<eT> >
   template<typename T1, typename op_type> inline Mat& operator%=(const mtOp<eT, T1, op_type>& X);
   template<typename T1, typename op_type> inline Mat& operator/=(const mtOp<eT, T1, op_type>& X);
 
+  template<typename T1, typename op_type> inline             Mat(const CubeToMatOp<T1, op_type>& X);
+  template<typename T1, typename op_type> inline Mat&  operator=(const CubeToMatOp<T1, op_type>& X);
+  template<typename T1, typename op_type> inline Mat& operator+=(const CubeToMatOp<T1, op_type>& X);
+  template<typename T1, typename op_type> inline Mat& operator-=(const CubeToMatOp<T1, op_type>& X);
+  template<typename T1, typename op_type> inline Mat& operator*=(const CubeToMatOp<T1, op_type>& X);
+  template<typename T1, typename op_type> inline Mat& operator%=(const CubeToMatOp<T1, op_type>& X);
+  template<typename T1, typename op_type> inline Mat& operator/=(const CubeToMatOp<T1, op_type>& X);
+  
   template<typename T1, typename op_type> inline             Mat(const SpToDOp<T1, op_type>& X);
   template<typename T1, typename op_type> inline Mat&  operator=(const SpToDOp<T1, op_type>& X);
   template<typename T1, typename op_type> inline Mat& operator+=(const SpToDOp<T1, op_type>& X);
@@ -461,6 +469,8 @@ class Mat : public Base< eT, Mat<eT> >
   
   inline const Mat& replace(const eT old_val, const eT new_val);
   
+  inline const Mat& clean(const pod_type threshold);
+  
   inline const Mat& fill(const eT val);
   
   template<typename fill_type>
@@ -510,18 +520,22 @@ class Mat : public Base< eT, Mat<eT> >
   
   inline arma_cold bool save(const std::string   name, const file_type type = arma_binary, const bool print_status = true) const;
   inline arma_cold bool save(const hdf5_name&    spec, const file_type type = hdf5_binary, const bool print_status = true) const;
+  inline arma_cold bool save(const  csv_name&    spec, const file_type type =   csv_ascii, const bool print_status = true) const;
   inline arma_cold bool save(      std::ostream& os,   const file_type type = arma_binary, const bool print_status = true) const;
   
   inline arma_cold bool load(const std::string   name, const file_type type = auto_detect, const bool print_status = true);
   inline arma_cold bool load(const hdf5_name&    spec, const file_type type = hdf5_binary, const bool print_status = true);
+  inline arma_cold bool load(const  csv_name&    spec, const file_type type =   csv_ascii, const bool print_status = true);
   inline arma_cold bool load(      std::istream& is,   const file_type type = auto_detect, const bool print_status = true);
   
   inline arma_cold bool quiet_save(const std::string   name, const file_type type = arma_binary) const;
   inline arma_cold bool quiet_save(const hdf5_name&    spec, const file_type type = hdf5_binary) const;
+  inline arma_cold bool quiet_save(const  csv_name&    spec, const file_type type =   csv_ascii) const;
   inline arma_cold bool quiet_save(      std::ostream& os,   const file_type type = arma_binary) const;
   
   inline arma_cold bool quiet_load(const std::string   name, const file_type type = auto_detect);
   inline arma_cold bool quiet_load(const hdf5_name&    spec, const file_type type = hdf5_binary);
+  inline arma_cold bool quiet_load(const  csv_name&    spec, const file_type type =   csv_ascii);
   inline arma_cold bool quiet_load(      std::istream& is,   const file_type type = auto_detect);
   
   
@@ -544,7 +558,7 @@ class Mat : public Base< eT, Mat<eT> >
     
     inline row_iterator();
     inline row_iterator(const row_iterator& X);
-    inline row_iterator(Mat<eT>& in_M, const uword in_row);
+    inline row_iterator(Mat<eT>& in_M, const uword in_row, const uword in_col);
     
     inline arma_warn_unused eT& operator* ();
     
@@ -566,7 +580,6 @@ class Mat : public Base< eT, Mat<eT> >
     typedef eT&                             reference;
     
     arma_aligned Mat<eT>* M;
-    arma_aligned eT*      current_ptr;
     arma_aligned uword    current_row;
     arma_aligned uword    current_col;
     };
@@ -579,7 +592,7 @@ class Mat : public Base< eT, Mat<eT> >
     inline const_row_iterator();
     inline const_row_iterator(const       row_iterator& X);
     inline const_row_iterator(const const_row_iterator& X);
-    inline const_row_iterator(const Mat<eT>& in_M, const uword in_row);
+    inline const_row_iterator(const Mat<eT>& in_M, const uword in_row, const uword in_col);
     
     inline arma_warn_unused const eT& operator*() const;
     
@@ -601,7 +614,6 @@ class Mat : public Base< eT, Mat<eT> >
     typedef const eT&                       reference;
     
     arma_aligned const Mat<eT>* M;
-    arma_aligned const eT*      current_ptr;
     arma_aligned       uword    current_row;
     arma_aligned       uword    current_col;
     };
@@ -715,6 +727,12 @@ class Mat : public Base< eT, Mat<eT> >
   inline void  clear();
   inline bool  empty() const;
   inline uword size()  const;
+  
+  inline       eT& front();
+  inline const eT& front() const;
+  
+  inline       eT& back();
+  inline const eT& back() const;
   
   inline void swap(Mat& B);
   

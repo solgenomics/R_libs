@@ -1,3 +1,45 @@
+Changes version 1.28
+================================
+   o minor: avoid an implicit type conversion at the C level
+
+Changes version 1.27.1
+================================
+  o C level change to fix symbol clash on MacOS
+    solution kindly provided by Brian Ripley
+
+Changes version 1.27
+================================
+  o C level changes to ensure compatibility with gcc 10
+    solution kindly provided by Brian Ripley
+
+Changes version 1.26
+================================
+  o fix outdated class checks to ensure R 4.0.0 compatibility
+    (Karline, Thomas)
+  o Fortran modernization: initialization of variables (Karline)
+
+Changes version 1.25
+================================
+  o add original authors of LINPACK, ODEPACK and SPARSKIT to Authors@R
+    (Thomas, Karline, Woody)
+
+Changes version 1.24
+================================
+  o fix compiler warnings to improve Fortran compatibility 
+    (Thomas, Karline, Woody)
+    thanks to Brian Ripley and Kurt Hornik
+  o iteration: set attribute before calling diagnostics (Karline)
+  o add open researcher id, ORCID (Thomas)
+
+Changes version 1.23
+================================
+  o add FME to 'Suggests'
+
+Changes version 1.22
+================================
+  o small updates of examples (Thomas)
+  o improve Fortran compiler compatibility (Thomas)
+
 Changes version 1.21
 ================================
  o change way how PROTECT/UNPROTECT is handled (Thomas)

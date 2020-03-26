@@ -98,7 +98,6 @@ boxplot,RasterLayer-method	boxplot
 boxplot,RasterStackBrick-method	boxplot
 brick	brick
 brick,array-method	brick
-brick,big.matrix-method	brick
 brick,character-method	brick
 brick,Extent-method	brick
 brick,grf-method	brick
@@ -110,6 +109,7 @@ brick,RasterLayer-method	brick
 brick,RasterStack-method	brick
 brick,SpatialGrid-method	brick
 brick,SpatialPixels-method	brick
+brick,SpatRaster-method	brick
 buffer	buffer
 buffer,RasterLayer-method	buffer
 buffer,Spatial-method	buffer
@@ -126,6 +126,7 @@ cellFromRow	cellFrom
 cellFromRowCol	cellFrom
 cellFromRowCol,BasicRaster,numeric,numeric-method	cellFrom
 cellFromRowColCombine	cellFrom
+cellFromRowColCombine,BasicRaster,numeric,numeric-method	cellFrom
 cellFromXY	cellFrom
 cellFromXY,BasicRaster-method	cellFrom
 cellsFromExtent	cellsFromExtent
@@ -166,10 +167,14 @@ compareCRS	compareCRS
 compareRaster	compare
 contour	contour
 contour,RasterLayer-method	contour
+coordinates	xyFromCell
+coordinates,Raster-method	xyFromCell
 corLocal	corLocal
 corLocal,RasterLayer,RasterLayer-method	corLocal
 corLocal,RasterStackBrick,RasterStackBrick-method	corLocal
 couldBeLonLat	isLonLat
+couldBeLonLat,BasicRaster-method	isLonLat
+couldBeLonLat,Spatial-method	isLonLat
 cover	cover
 cover,RasterLayer,RasterLayer-method	cover
 cover,RasterStackBrick,Raster-method	cover
@@ -274,6 +279,7 @@ gain<-	gainoffset
 Geary	autocor
 GearyLocal	autocor
 geom	geom
+geom,data.frame-method	geom
 geom,SpatialLines-method	geom
 geom,SpatialPoints-method	geom
 geom,SpatialPolygons-method	geom
@@ -305,6 +311,7 @@ getZ	zvalues
 gridDistance	gridDistance
 gridDistance,RasterLayer-method	gridDistance
 hasValues	datasource
+hasValues,BasicRaster-method	datasource
 hdr	hdrFiles
 head	headtail
 head,RasterLayer-method	headtail
@@ -317,6 +324,7 @@ image	image
 image,RasterLayer-method	image
 image,RasterStackBrick-method	image
 init	init
+init,Raster-method	init
 inMemory	datasource
 interpolate	interpolate
 interpolate,Raster-method	interpolate
@@ -385,6 +393,7 @@ maxValue,RasterBrick-method	extremeValues
 maxValue,RasterLayer-method	extremeValues
 maxValue,RasterStack-method	extremeValues
 mean,Raster-method	Summary-methods
+median,Raster-method	Summary-methods
 merge	merge
 merge,Extent,ANY-method	merge
 merge,Raster,Raster-method	merge
@@ -451,7 +460,7 @@ plot,Raster,ANY-method	plot
 plot,Raster,Raster-method	plot
 plotRGB	plotRGB
 plotRGB,RasterStackBrick-method	plotRGB
-pointDistance	pointdistance
+pointDistance	pointDistance
 predict	predict
 predict,Raster-method	predict
 print,Raster-method	Raster-classes
@@ -467,7 +476,6 @@ quantile,Raster-method	quantile
 raster	raster
 raster,asc-method	raster
 raster,BasicRaster-method	raster
-raster,big.matrix-method	raster
 raster,character-method	raster
 raster,Extent-method	raster
 raster,grf-method	raster
@@ -486,6 +494,7 @@ raster,sf-method	raster
 raster,Spatial-method	raster
 raster,SpatialGrid-method	raster
 raster,SpatialPixels-method	raster
+raster,SpatRaster-method	raster
 Raster-class	Raster-classes
 RasterBrick-class	Raster-classes
 rasterFromCells	rasterFromCells
@@ -508,6 +517,7 @@ rasterToContour	rasterToContour
 rasterToPoints	rasterToPoints
 rasterToPolygons	rasterToPolygons
 ratify	factor
+ratify,Raster-method	factor
 Rcpp_SpExtent-class	Rcpp-classes
 Rcpp_SpPoly-class	Rcpp-classes
 Rcpp_SpPolygons-class	Rcpp-classes
@@ -530,6 +540,7 @@ removeTmpFiles	rasterTmpFile
 res	resolution
 res,BasicRaster-method	resolution
 res<-	resolution
+res<-,BasicRaster-method	resolution
 resample	resample
 resample,Raster,Raster-method	resample
 returnCluster	programming
@@ -591,7 +602,11 @@ SpExtent	Rcpp-classes
 spLines	spEasy
 spplot	spplot
 spplot,Raster-method	spplot
+spplot,SpatialLines-method	spplot
 spplot,SpatialPoints-method	spplot
+spplot,SpatialPolygons-method	spplot
+spplot,SpatRaster-method	spplot
+spplot,SpatVector-method	spplot
 SpPoly	Rcpp-classes
 SpPoly-class	Rcpp-classes
 SpPolygons	Rcpp-classes
@@ -607,14 +622,16 @@ stack,missing-method	stack
 stack,Raster-method	stack
 stack,SpatialGridDataFrame-method	stack
 stack,SpatialPixelsDataFrame-method	stack
+stack,SpatRaster-method	stack
 stackApply	stackApply
 stackOpen	saveStack
 stackSave	saveStack
 stackSelect	stackSelect
 stackSelect,RasterStackBrick,Raster-method	stackSelect
 stretch	strech
-subs	substitute
-subs,Raster,data.frame-method	substitute
+stretch,Raster-method	strech
+subs	subs
+subs,Raster,data.frame-method	subs
 subset	subset
 subset,Raster-method	subset
 subset,RasterStack-method	subset
@@ -632,6 +649,7 @@ tail,RasterLayer-method	headtail
 tail,RasterStackBrick-method	headtail
 tail,Spatial-method	headtail
 terrain	terrain
+terrain,RasterLayer-method	terrain
 text	text
 text,RasterLayer-method	text
 text,RasterStackBrick-method	text
@@ -709,11 +727,15 @@ xmax,BasicRaster-method	coordinates
 xmax,Extent-method	coordinates
 xmax,Spatial-method	coordinates
 xmax<-	coordinates
+xmax<-,BasicRaster,numeric-method	coordinates
+xmax<-,Extent,numeric-method	coordinates
 xmin	coordinates
 xmin,BasicRaster-method	coordinates
 xmin,Extent-method	coordinates
 xmin,Spatial-method	coordinates
 xmin<-	coordinates
+xmin<-,BasicRaster,numeric-method	coordinates
+xmin<-,Extent,numeric-method	coordinates
 xres	resolution
 xres,BasicRaster-method	resolution
 xyFromCell	xyFromCell
@@ -730,11 +752,15 @@ ymax,BasicRaster-method	coordinates
 ymax,Extent-method	coordinates
 ymax,Spatial-method	coordinates
 ymax<-	coordinates
+ymax<-,BasicRaster,numeric-method	coordinates
+ymax<-,Extent,numeric-method	coordinates
 ymin	coordinates
 ymin,BasicRaster-method	coordinates
 ymin,Extent-method	coordinates
 ymin,Spatial-method	coordinates
 ymin<-	coordinates
+ymin<-,BasicRaster,numeric-method	coordinates
+ymin<-,Extent,numeric-method	coordinates
 yres	resolution
 yres,BasicRaster-method	resolution
 zApply	zApply

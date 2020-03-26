@@ -1,3 +1,20 @@
+version 3.7-7
+
+        twoord.plot now calls axis.POSIXct for the x-axis if appropriate
+        fixed problem with conditional statements using "class"
+
+version 3.7-6
+
+        fixed color.axis when "at" values are outside the plot limits
+
+version 3.7-5
+
+        fixed the "empty list" bug in listDepth (thanks to Tingting Zhan)
+        new and elegant thigmophobe function (thanks to Bill Venables)
+        adjusted text size and placement in taylor.diagram for pos.cor=FALSE
+        added makeDensityMatrix and densityGrid functions
+        fixed functions that called 'barplot' (thanks to Martin Maechler)
+
 version 3.7-4
 
         fixed the dimension loss in color.scale when xrange specified

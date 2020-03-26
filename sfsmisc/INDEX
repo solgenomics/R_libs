@@ -73,6 +73,8 @@ p.tachoPlot             Draw Symbol on a Plot
 p.ts                    plot.ts with multi-plots and Auto-Title - on 1
                         page
 paste.vec               Utility for 'Showing' S vectors
+pkgLibs                 R Package Compiled Code Library Dependencies
+                        (on Unix-alikes)
 plotDS                  Plot Data and Smoother / Fitted Values
 plotStep                Plot a Step Function
 pmax.sa                 Deprecated 'sfsmisc' Functions

@@ -13,7 +13,7 @@ Classification, and Density Estimation
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;mclust&rsquo; version 5.4.3</h2>
+</div><h2>Documentation for package &lsquo;mclust&rsquo; version 5.4.5</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -57,6 +57,10 @@ Classification, and Density Estimation
 <td>Acidity data</td></tr>
 <tr><td style="width: 25%;"><a href="adjustedRandIndex.html">adjustedRandIndex</a></td>
 <td>Adjusted Rand Index</td></tr>
+<tr><td style="width: 25%;"><a href="hc.html">as.dendrogram.hc</a></td>
+<td>Model-based Agglomerative Hierarchical Clustering</td></tr>
+<tr><td style="width: 25%;"><a href="hc.html">as.hclust.hc</a></td>
+<td>Model-based Agglomerative Hierarchical Clustering</td></tr>
 </table>
 
 <h2><a name="B">-- B --</a></h2>
@@ -70,6 +74,8 @@ Classification, and Density Estimation
 <td>BIC for Parameterized Gaussian Mixture Models</td></tr>
 <tr><td style="width: 25%;"><a href="mclust-deprecated.html">bicEMtrain</a></td>
 <td>Deprecated Functions in mclust package</td></tr>
+<tr><td style="width: 25%;"><a href="BrierScore.html">BrierScore</a></td>
+<td>Brier score to assess the accuracy of probabilistic predictions</td></tr>
 </table>
 
 <h2><a name="C">-- C --</a></h2>
@@ -123,6 +129,8 @@ Classification, and Density Estimation
 <td>Simulated minefield data</td></tr>
 <tr><td style="width: 25%;"><a href="classError.html">classError</a></td>
 <td>Classification error</td></tr>
+<tr><td style="width: 25%;"><a href="classPriorProbs.html">classPriorProbs</a></td>
+<td>Estimation of class prior probabilities by EM algorithm</td></tr>
 <tr><td style="width: 25%;"><a href="clPairs.html">clPairs</a></td>
 <td>Pairwise Scatter Plots showing Classification</td></tr>
 <tr><td style="width: 25%;"><a href="clPairs.html">clPairsLegend</a></td>
@@ -140,7 +148,7 @@ Classification, and Density Estimation
 <tr><td style="width: 25%;"><a href="coordProj.html">coordProj</a></td>
 <td>Coordinate projections of multidimensional data modeled by an MVN mixture.</td></tr>
 <tr><td style="width: 25%;"><a href="covw.html">covw</a></td>
-<td>Weighted means, covariance and scattering matrices conditioning on a weighted matrix.</td></tr>
+<td>Weighted means, covariance and scattering matrices conditioning on a weighted matrix</td></tr>
 <tr><td style="width: 25%;"><a href="cross.html">cross</a></td>
 <td>Simulated Cross Data</td></tr>
 <tr><td style="width: 25%;"><a href="mclust-deprecated.html">cv.MclustDA</a></td>
@@ -155,9 +163,9 @@ Classification, and Density Estimation
 
 <table width="100%">
 <tr><td style="width: 25%;"><a href="decomp2sigma.html">decomp2sigma</a></td>
-<td>Convert mixture component covariances to matrix form.</td></tr>
+<td>Convert mixture component covariances to matrix form</td></tr>
 <tr><td style="width: 25%;"><a href="defaultPrior.html">defaultPrior</a></td>
-<td>Default conjugate prior for Gaussian mixtures.</td></tr>
+<td>Default conjugate prior for Gaussian mixtures</td></tr>
 <tr><td style="width: 25%;"><a href="dens.html">dens</a></td>
 <td>Density for Parameterized MVN Mixtures</td></tr>
 <tr><td style="width: 25%;"><a href="densityMclust.html">densityMclust</a></td>
@@ -166,57 +174,59 @@ Classification, and Density Estimation
 <td>Diagnostic plots for 'mclustDensity' estimation</td></tr>
 <tr><td style="width: 25%;"><a href="diabetes.html">diabetes</a></td>
 <td>Diabetes data</td></tr>
+<tr><td style="width: 25%;"><a href="dmvnorm.html">dmvnorm</a></td>
+<td>Density of multivariate Gaussian distribution</td></tr>
 </table>
 
 <h2><a name="E">-- E --</a></h2>
 
 <table width="100%">
 <tr><td style="width: 25%;"><a href="em.html">em</a></td>
-<td>EM algorithm starting with E-step for parameterized Gaussian mixture models.</td></tr>
+<td>EM algorithm starting with E-step for parameterized Gaussian mixture models</td></tr>
 <tr><td style="width: 25%;"><a href="mclustBIC.html">EMclust</a></td>
 <td>BIC for Model-Based Clustering</td></tr>
 <tr><td style="width: 25%;"><a href="emControl.html">emControl</a></td>
-<td>Set control values for use with the EM algorithm.</td></tr>
+<td>Set control values for use with the EM algorithm</td></tr>
 <tr><td style="width: 25%;"><a href="emE.html">emE</a></td>
-<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="emE.html">emEEE</a></td>
-<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="emE.html">emEEI</a></td>
-<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="emE.html">emEEV</a></td>
-<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="emE.html">emEII</a></td>
-<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="emE.html">emEVE</a></td>
-<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="emE.html">emEVI</a></td>
-<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="emE.html">emEVV</a></td>
-<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="emE.html">emV</a></td>
-<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="emE.html">emVEE</a></td>
-<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="emE.html">emVEI</a></td>
-<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="emE.html">emVEV</a></td>
-<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="emE.html">emVII</a></td>
-<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="emE.html">emVVE</a></td>
-<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="emE.html">emVVI</a></td>
-<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="emE.html">emVVV</a></td>
-<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="emE.html">emX</a></td>
-<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="emE.html">emXII</a></td>
-<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="emE.html">emXXI</a></td>
-<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="emE.html">emXXX</a></td>
-<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with E-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="entPlot.html">entPlot</a></td>
 <td>Plot Entropy Plots</td></tr>
 <tr><td style="width: 25%;"><a href="errorBars.html">errorBars</a></td>
@@ -255,6 +265,8 @@ Classification, and Density Estimation
 <td>E-step in the EM algorithm for a parameterized Gaussian mixture model.</td></tr>
 <tr><td style="width: 25%;"><a href="estepE.html">estepVVV</a></td>
 <td>E-step in the EM algorithm for a parameterized Gaussian mixture model.</td></tr>
+<tr><td style="width: 25%;"><a href="EuroUnemployment.html">EuroUnemployment</a></td>
+<td>Unemployment data for European countries in 2014</td></tr>
 <tr><td style="width: 25%;"><a href="Baudry_etal_2010_JCGS_examples.html">ex4.1</a></td>
 <td>Simulated Example Datasets From Baudry et al. (2010)</td></tr>
 <tr><td style="width: 25%;"><a href="Baudry_etal_2010_JCGS_examples.html">ex4.2</a></td>
@@ -288,7 +300,7 @@ Classification, and Density Estimation
 
 <table width="100%">
 <tr><td style="width: 25%;"><a href="hc.html">hc</a></td>
-<td>Model-based Hierarchical Clustering</td></tr>
+<td>Model-based Agglomerative Hierarchical Clustering</td></tr>
 <tr><td style="width: 25%;"><a href="hcE.html">hcE</a></td>
 <td>Model-based Hierarchical Clustering</td></tr>
 <tr><td style="width: 25%;"><a href="hcE.html">hcEEE</a></td>
@@ -337,7 +349,7 @@ Classification, and Density Estimation
 <tr><td style="width: 25%;"><a href="map.html">map</a></td>
 <td>Classification given Probabilities</td></tr>
 <tr><td style="width: 25%;"><a href="mapClass.html">mapClass</a></td>
-<td>Correspondence between classifications.</td></tr>
+<td>Correspondence between classifications</td></tr>
 <tr><td style="width: 25%;"><a href="imputeData.html">matchCluster</a></td>
 <td>Missing data imputation via the 'mix' package</td></tr>
 <tr><td style="width: 25%;"><a href="Mclust.html">Mclust</a></td>
@@ -349,7 +361,7 @@ Classification, and Density Estimation
 <tr><td style="width: 25%;"><a href="mclust1Dplot.html">mclust1Dplot</a></td>
 <td>Plot one-dimensional data modeled by an MVN mixture.</td></tr>
 <tr><td style="width: 25%;"><a href="mclust2Dplot.html">mclust2Dplot</a></td>
-<td>Plot two-dimensional data modelled by an MVN mixture.</td></tr>
+<td>Plot two-dimensional data modelled by an MVN mixture</td></tr>
 <tr><td style="width: 25%;"><a href="mclustBIC.html">mclustBIC</a></td>
 <td>BIC for Model-Based Clustering</td></tr>
 <tr><td style="width: 25%;"><a href="mclustBICupdate.html">mclustBICupdate</a></td>
@@ -363,15 +375,15 @@ Classification, and Density Estimation
 <tr><td style="width: 25%;"><a href="MclustDR.html">MclustDR</a></td>
 <td>Dimension reduction for model-based clustering and classification</td></tr>
 <tr><td style="width: 25%;"><a href="MclustDRsubsel.html">MclustDRrecoverdir</a></td>
-<td>Subset selection for GMMDR directions based on BIC.</td></tr>
+<td>Subset selection for GMMDR directions based on BIC</td></tr>
 <tr><td style="width: 25%;"><a href="MclustDRsubsel.html">MclustDRsubsel</a></td>
-<td>Subset selection for GMMDR directions based on BIC.</td></tr>
+<td>Subset selection for GMMDR directions based on BIC</td></tr>
 <tr><td style="width: 25%;"><a href="MclustDRsubsel.html">MclustDRsubsel1cycle</a></td>
-<td>Subset selection for GMMDR directions based on BIC.</td></tr>
+<td>Subset selection for GMMDR directions based on BIC</td></tr>
 <tr><td style="width: 25%;"><a href="MclustDRsubsel.html">MclustDRsubsel_classif</a></td>
-<td>Subset selection for GMMDR directions based on BIC.</td></tr>
+<td>Subset selection for GMMDR directions based on BIC</td></tr>
 <tr><td style="width: 25%;"><a href="MclustDRsubsel.html">MclustDRsubsel_cluster</a></td>
-<td>Subset selection for GMMDR directions based on BIC.</td></tr>
+<td>Subset selection for GMMDR directions based on BIC</td></tr>
 <tr><td style="width: 25%;"><a href="mclustICL.html">mclustICL</a></td>
 <td>ICL Criterion for Model-Based Clustering</td></tr>
 <tr><td style="width: 25%;"><a href="mclustLoglik.html">mclustLoglik</a></td>
@@ -383,83 +395,83 @@ Classification, and Density Estimation
 <tr><td style="width: 25%;"><a href="mclustVariance.html">mclustVariance</a></td>
 <td>Template for variance specification for parameterized Gaussian mixture models</td></tr>
 <tr><td style="width: 25%;"><a href="me.html">me</a></td>
-<td>EM algorithm starting with M-step for parameterized MVN mixture models.</td></tr>
+<td>EM algorithm starting with M-step for parameterized MVN mixture models</td></tr>
 <tr><td style="width: 25%;"><a href="me.weighted.html">me.weighted</a></td>
 <td>EM algorithm with weights starting with M-step for parameterized MVN mixture models</td></tr>
 <tr><td style="width: 25%;"><a href="meE.html">meE</a></td>
-<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="meE.html">meEEE</a></td>
-<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="meE.html">meEEI</a></td>
-<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="meE.html">meEEV</a></td>
-<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="meE.html">meEII</a></td>
-<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="meE.html">meEVE</a></td>
-<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="meE.html">meEVI</a></td>
-<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="meE.html">meEVV</a></td>
-<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="meE.html">meV</a></td>
-<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="meE.html">meVEE</a></td>
-<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="meE.html">meVEI</a></td>
-<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="meE.html">meVEV</a></td>
-<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="meE.html">meVII</a></td>
-<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="meE.html">meVVE</a></td>
-<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="meE.html">meVVI</a></td>
-<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="meE.html">meVVV</a></td>
-<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="meE.html">meX</a></td>
-<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="meE.html">meXII</a></td>
-<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="meE.html">meXXI</a></td>
-<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="meE.html">meXXX</a></td>
-<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>EM algorithm starting with M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="mstep.html">mstep</a></td>
-<td>M-step for parameterized Gaussian mixture models.</td></tr>
+<td>M-step for parameterized Gaussian mixture models</td></tr>
 <tr><td style="width: 25%;"><a href="mstepE.html">mstepE</a></td>
-<td>M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="mstepE.html">mstepEEE</a></td>
-<td>M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="mstepE.html">mstepEEI</a></td>
-<td>M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="mstepE.html">mstepEEV</a></td>
-<td>M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="mstepE.html">mstepEII</a></td>
-<td>M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="mstepE.html">mstepEVE</a></td>
-<td>M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="mstepE.html">mstepEVI</a></td>
-<td>M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="mstepE.html">mstepEVV</a></td>
-<td>M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="mstepE.html">mstepV</a></td>
-<td>M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="mstepE.html">mstepVEE</a></td>
-<td>M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="mstepE.html">mstepVEI</a></td>
-<td>M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="mstepE.html">mstepVEV</a></td>
-<td>M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="mstepE.html">mstepVII</a></td>
-<td>M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="mstepE.html">mstepVVE</a></td>
-<td>M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="mstepE.html">mstepVVI</a></td>
-<td>M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="mstepE.html">mstepVVV</a></td>
-<td>M-step for a parameterized Gaussian mixture model.</td></tr>
+<td>M-step for a parameterized Gaussian mixture model</td></tr>
 <tr><td style="width: 25%;"><a href="mvn.html">mvn</a></td>
 <td>Univariate or Multivariate Normal Fit</td></tr>
 <tr><td style="width: 25%;"><a href="mvnX.html">mvnX</a></td>
@@ -494,8 +506,10 @@ Classification, and Density Estimation
 <td>Plots for Mixture-Based Density Estimate</td></tr>
 <tr><td style="width: 25%;"><a href="gmmhd.html">plot.gmmhd</a></td>
 <td>Identifying Connected Components in Gaussian Finite Mixture Models for Clustering</td></tr>
+<tr><td style="width: 25%;"><a href="hc.html">plot.hc</a></td>
+<td>Model-based Agglomerative Hierarchical Clustering</td></tr>
 <tr><td style="width: 25%;"><a href="plot.Mclust.html">plot.Mclust</a></td>
-<td>Plot Model-Based Clustering Results</td></tr>
+<td>Plotting method for Mclust model-based clustering</td></tr>
 <tr><td style="width: 25%;"><a href="plot.mclustBIC.html">plot.mclustBIC</a></td>
 <td>BIC Plot for Model-Based Clustering</td></tr>
 <tr><td style="width: 25%;"><a href="plot.MclustBoostrap.html">plot.MclustBootstrap</a></td>
@@ -531,7 +545,7 @@ Classification, and Density Estimation
 <tr><td style="width: 25%;"><a href="gmmhd.html">print.gmmhd</a></td>
 <td>Identifying Connected Components in Gaussian Finite Mixture Models for Clustering</td></tr>
 <tr><td style="width: 25%;"><a href="hc.html">print.hc</a></td>
-<td>Model-based Hierarchical Clustering</td></tr>
+<td>Model-based Agglomerative Hierarchical Clustering</td></tr>
 <tr><td style="width: 25%;"><a href="Mclust.html">print.Mclust</a></td>
 <td>Model-Based Clustering</td></tr>
 <tr><td style="width: 25%;"><a href="mclustBIC.html">print.mclustBIC</a></td>
@@ -545,7 +559,7 @@ Classification, and Density Estimation
 <tr><td style="width: 25%;"><a href="MclustDR.html">print.MclustDR</a></td>
 <td>Dimension reduction for model-based clustering and classification</td></tr>
 <tr><td style="width: 25%;"><a href="MclustDRsubsel.html">print.MclustDRsubsel</a></td>
-<td>Subset selection for GMMDR directions based on BIC.</td></tr>
+<td>Subset selection for GMMDR directions based on BIC</td></tr>
 <tr><td style="width: 25%;"><a href="mclustICL.html">print.mclustICL</a></td>
 <td>ICL Criterion for Model-Based Clustering</td></tr>
 <tr><td style="width: 25%;"><a href="mclustLoglik.html">print.mclustLoglik</a></td>
@@ -561,7 +575,7 @@ Classification, and Density Estimation
 <tr><td style="width: 25%;"><a href="summary.MclustBootstrap.html">print.summary.MclustBootstrap</a></td>
 <td>Summary Function for Bootstrap Inference for Gaussian Finite Mixture Models</td></tr>
 <tr><td style="width: 25%;"><a href="summary.MclustDA.html">print.summary.MclustDA</a></td>
-<td>Summarizing discriminant analysis based on Gaussian finite mixture modeling.</td></tr>
+<td>Summarizing discriminant analysis based on Gaussian finite mixture modeling</td></tr>
 <tr><td style="width: 25%;"><a href="summary.MclustDR.html">print.summary.MclustDR</a></td>
 <td>Summarizing dimension reduction method for model-based clustering and classification</td></tr>
 <tr><td style="width: 25%;"><a href="mclustICL.html">print.summary.mclustICL</a></td>
@@ -584,10 +598,12 @@ Classification, and Density Estimation
 <h2><a name="R">-- R --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="randomOrthogonalMatrix.html">randomOrthogonalMatrix</a></td>
+<td>Random orthogonal matrix</td></tr>
 <tr><td style="width: 25%;"><a href="randomPairs.html">randomPairs</a></td>
 <td>Random hierarchical structure</td></tr>
 <tr><td style="width: 25%;"><a href="randProj.html">randProj</a></td>
-<td>Random projections of multidimensional data modeled by an MVN mixture.</td></tr>
+<td>Random projections of multidimensional data modeled by an MVN mixture</td></tr>
 </table>
 
 <h2><a name="S">-- S --</a></h2>
@@ -640,11 +656,11 @@ Classification, and Density Estimation
 <tr><td style="width: 25%;"><a href="summary.MclustBootstrap.html">summary.MclustBootstrap</a></td>
 <td>Summary Function for Bootstrap Inference for Gaussian Finite Mixture Models</td></tr>
 <tr><td style="width: 25%;"><a href="summary.MclustDA.html">summary.MclustDA</a></td>
-<td>Summarizing discriminant analysis based on Gaussian finite mixture modeling.</td></tr>
+<td>Summarizing discriminant analysis based on Gaussian finite mixture modeling</td></tr>
 <tr><td style="width: 25%;"><a href="summary.MclustDR.html">summary.MclustDR</a></td>
 <td>Summarizing dimension reduction method for model-based clustering and classification</td></tr>
 <tr><td style="width: 25%;"><a href="MclustDRsubsel.html">summary.MclustDRsubsel</a></td>
-<td>Subset selection for GMMDR directions based on BIC.</td></tr>
+<td>Subset selection for GMMDR directions based on BIC</td></tr>
 <tr><td style="width: 25%;"><a href="mclustICL.html">summary.mclustICL</a></td>
 <td>ICL Criterion for Model-Based Clustering</td></tr>
 <tr><td style="width: 25%;"><a href="summary.mclustBIC.html">summaryMclustBIC</a></td>
@@ -676,6 +692,8 @@ Classification, and Density Estimation
 <h2><a name="W">-- W --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="wdbc.html">wdbc</a></td>
+<td>Wisconsin diagnostic breast cancer (WDBC) data</td></tr>
 <tr><td style="width: 25%;"><a href="wreath.html">wreath</a></td>
 <td>Data Simulated from a 14-Component Mixture</td></tr>
 </table>

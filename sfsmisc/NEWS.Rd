@@ -7,8 +7,47 @@
 %%% TODO:
       %% \item New \code{rDatetime()} for random date/time sequences
       %% within a specified time range.
+\section{CHANGES in sfsmisc VERSION 1.1-5 [2020-02-06]}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item on Unix-alikes export new \code{pkgLibs()} utility even though
+      its API may change.
+    }
+  }
+  \subsection{Tweaks}{
+    \itemize{
+      \item replace \code{class(.) != ".."} in a \emph{comment}, just for
+      source code purity ;-)
+    }
+  }
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item Regression tests should not show differences, even when a
+      version of R crippled by \code{--no-long-double} is used.
 
-\section{CHANGES in sfsmisc VERSION 1.1-3 [2018-11-26]}{% << Sync w/ ../DESCRIPTION
+      \item examples now use \code{tempfile()}.
+    }
+  }
+}
+
+\section{CHANGES in sfsmisc VERSION 1.1-4 [2019-04-25]}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item \code{eaxis()} gets new optional argument \code{use.expr} in
+      order to force use of \code{pretty10exp()} in a non-log case where
+      non-exponential format would be used.
+
+      \item \code{sessionInfoX()} now also returns an element
+      \code{isRshared}, and its \code{print()} method prints that and the
+      \code{pcre_config()} information on the PCRE.
+
+      \item \code{TA.plot()} now also works for \code{lmer()} results
+      (\code{S4} objects, not \code{list}s).
+    }
+  }
+}
+
+\section{CHANGES in sfsmisc VERSION 1.1-3 [2018-11-26]}{
   \subsection{Tweaks}{
     \itemize{
       \item \file{DESCRIPTION} update, contains ORCID.

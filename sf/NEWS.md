@@ -1,3 +1,119 @@
+# version 0.9-0
+
+* see r-spatial blog post: https://www.r-spatial.org/r/2020/03/17/wkt.html
+
+* modify `crs` objects to reflect our post-proj4string world (#1146; #1225): crs objects now contain two fields, `input` with the user input (if any), and `wkt` with a well-known-text  (or WKT2) representation of the coordinate reference system. `crs` objects now have a `$` method to dynamically retrieve the `epsg` (integer) or `proj4string` representation, using e.g. `x$epsg`.
+
+* support for PostGIS 3 using WKT and the new-style `crs` objects; #1234, #1303, #1308 by @etiennebr
+
+* `st_write_db` and `st_read_db` are now defunct. Use `st_write` and `st_read` instead.
+
+* `st_write` now uses `append`, replacing (and deprecating) argument `update`; `st_write` now fails when a layer already exists and `append` has not been set explicitly to `TRUE` (append) or `FALSE` (overwrite); #1266
+
+* `st_proj_info` was renamed into `sf_proj_info`; `sf_proj_info` can now get and set the PROJ data search path and use of CDN; #1277
+
+* adapt to new `dplyr` version; https://github.com/tidyverse/dplyr/issues/4917
+
+* `st_sample` is a generic
+
+* write `stars` rasters with wkt info, rather than proj4strings
+
+* when GEOS >= 3.8.0, `st_make_valid` is provided by `sf` rather than by `lwgeom` #989
+
+* allow for single-sided buffers for linear geometries; #1001
+
+* add `st_reverse` methods to reverse points in a linestring (requires GEOS >= 3.7.0); #1246
+
+* `st_make_grid` returns grid cells or points that intersect with the target geometry, not its bounding box; #1260
+
+* allow for PROJ >= 7; #1254
+
+# version 0.8-1
+
+* `st_as_sf.map` no longer requires `maptools` and `sp`; dropped dependency on maptools.
+
+* work around a bug in 6.0.0 <= PROJ < 6.3.1: replace `+init=epsg:XXXX ...` strings with the `XXXX` EPSG integer, to work around a bug in PROJ; see https://github.com/OSGeo/PROJ/pull/1875 and links therein. If `...` arguments are present, raise a warning that these are ignored now. 
+
+* `st_as_sf.map` no longer requires `maptools` and `sp`; drop dependency on maptools.
+
+* conversion between `spatstat` classes `owin`, `ppp` and `psp` and `sf` classes no longer use `maptools`; #1204
+
+* `gdal_utils` processes open options `-oo` and `-doo` properly; https://github.com/ITSLeeds/geofabric/issues/12
+
+* `st_sample` directly interfaces `spatstat` sampling methods, e.g. `type = "Thomas"` calls `spatstat::rThomas` after converting input arguments (window) and converts returned `ppp` object to `sf`'s `POINT` geometries; #1204 with help from Ege Rubak and Jakub Nowosad
+
+* `sf_project` gains an option `keep = TRUE` to return `Inf` values for points not projectable; #1228
+
+* support `vctrs` methods for geometry list columns; this makes `unnest` work again (#1172); #1196 by Lionel Henry
+
+* `st_as_sf.pq_geometry` converts binary geom columns from RPostgres::dbGetQuery; #1195
+
+* `st_cast` can convert `MULTICURVE` to `MULTILINESTRING`; #1194
+
+* `st_read` gains a parameter `wkt_filter` for spatially filtering the features to be read; #1192
+
+* `st_area()` and `st_length()` handle `+to_meter` argument in PROJ strings; #1170
+
+* add `st_filter` generic for filtering on spatial features only; #1148
+
+* a new UBSAN error in `wkb_read` was resolved; #1154, #1152
+
+* new method `st_shift_longitude` to re-center data for a Pacific view. #1218
+
+* output of `st_as_text()` with `MULTIPOINT` now has nested parentheses around points. E.g., `MULTIPOINT ((0 0), (1 1))` instead of `MULTIPOINT (0 0, 1 1)`; #1219, #1221
+
+# version 0.8-0
+
+* fix tests for PROJ 6.2.0 not accepting +units=
+
+* fixes for tidyr 1.0-0 release; attempt to port `nest.sf` and `unnest.sf`; #1068, #1145
+
+* `gdal_utils` better closes connections after use; #1143
+
+* `st_write` gains a `drivers` options, to limit the drivers attempted; #1142
+
+* rather than replacing, `st_write` and `write_sf` append to an existing layer if `update=TRUE`; #1126
+
+* improve plotting of `POSIXct` and `Date` attributes (`Date` requiring classInt >= 0.4-2)
+
+* `NULL` geometries read by GDAL are returned as empty geometries; #1119
+
+* `gdal_utils('rasterize', ...)` accepts non-existing destinations, defined by e.g. resolution and extent options (see #1116 for an example), and overwrites if needed (see #1136 for an example)
+
+* add Dan Baston as contributor; #1120 and many others
+
+* in addition to `NULL`, `st_sfc()` also converts `NA` values into empty geometries; #1114.
+
+* `st_join` is a generic
+
+# version 0.7-7
+
+* `plot()` handles `POSIXct` values in legend
+
+* constructor functions like `st_linestring()` check and break on `NA` coordinates; #1101, #1102
+
+# version 0.7-6
+
+* have examples of `st_write` write only to the temporary R session directory
+
+# version 0.7-5
+
+* `as(x, "Spatial")` now gives a proper error message on empty geometries; #1093
+
+* `st_cast` now takes care of empty polygons; #1094
+
+* `st_nearest_*` functions now warn in case they are used with geographic coordinates; #1081
+
+* `st_union` no longer segfaults on zero row `sf` objects; #1077
+
+* `st_transform` no longer breaks on zero row `sf` objects; #1075
+
+* when PROJ >= 6.1.0 is available and sf comes with datum files (as is the case with statically linked Windows and OSX CRAN binaries), `PROJ_LIB` is no longer temporarily overwritten, but the PROJ C api is used to set the datum path; #1074, suggested by Jeroen Ooms
+
+* sf now compiles against GDAL 3.x and PROJ 6.1.0, using the new `proj.h` interface; #1070
+
+* `st_distance` returns `NA` for empty geometries, rather than 0; #1055
+
 # version 0.7-4
 
 * add example on how voronoi polygons can be tied back to the points they contain; #1030
@@ -18,7 +134,7 @@
 
 * `c.sfc` now ignores the type (class) of empty `sfc` objects when choosing the result type; #985, #982
 
-* rename the default value for `distance` to `"Eucledian"`, rather than  `"distance"` in `st_distance`
+* rename the default value for `distance` to `"Euclidean"`, rather than  `"distance"` in `st_distance`
 
 # version 0.7-3
 

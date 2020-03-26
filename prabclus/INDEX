@@ -15,6 +15,8 @@ build.nblist            Generate spatial weights from prabclus
                         neighborhood list
 cluspop.nb              Simulation of presence-absence matrices
                         (clustered)
+communities             Construct communities from individuals
+communitydist           Distances between communities
 comp.test               Compare species clustering and species groups
 con.comp                Connectivity components of an undirected graph
 con.regmat              Connected regions per species
@@ -40,8 +42,12 @@ nastats                 Missing values statistics for matrix
 nb                      Neighborhood list for Aegean islands
 nbtest                  Test of neighborhood list
 nn                      Mean distance to kth nearest neighbor
+phipt                   Distances between communities, auxiliary
+                        functions
 piecewiselin            Piecewise linear transformation for distance
                         matrices
+plotdistreg             Plots for within-groups and between-groups
+                        distance regression
 pop.sim                 p-value simulation for presence-absence
                         matrices clustering test
 prab.sarestimate        Estimates SAR model from log-abundance matrix
@@ -56,6 +62,17 @@ prabtest                Parametric bootstrap test for clustering in
 qkulczynski             Quantitative Kulczynski distance matrix
 randpop.nb              Simulation of presence-absence matrices
                         (non-clustered)
+regdist                 Regression between subsets of dissimilarity
+                        matrices
+regdistbetween          Testing equality of within-groups and
+                        between-groups distances regression
+regdistbetweenone       Testing equality of one within-group and
+                        between-two groups distances regression
+regdistdiff             Regression difference between within-group
+                        dissimilarities
+regdistdiffone          Regression difference within reference group
+                        and between-group dissimilarities
+regeqdist               Testing equality of two distance-regressions
 regpop.sar              Simulation of abundance matrices
                         (non-clustered)
 siskiyou                Herbs of the Siskiyou Mountains

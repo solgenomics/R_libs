@@ -292,6 +292,8 @@ inline
 void
 arma_ostream::print_elem_zero(std::ostream& o, const bool modify)
   {
+  typedef typename promote_type<eT, s16>::result promoted_eT;
+  
   if(modify)
     {
     const ios::fmtflags   save_flags     = o.flags();
@@ -301,109 +303,120 @@ arma_ostream::print_elem_zero(std::ostream& o, const bool modify)
     o.setf(ios::fixed);
     o.precision(0);
     
-    o << eT(0);
+    o << promoted_eT(0);
     
     o.flags(save_flags);
     o.precision(save_precision);
     }
   else
     {
-    o << eT(0);
+    o << promoted_eT(0);
     }
   }
 
 
 
-//! Print an element to the specified stream
 template<typename eT>
 inline
 void
 arma_ostream::print_elem(std::ostream& o, const eT& x, const bool modify)
   {
+  if(x == eT(0))
+    {
+    arma_ostream::print_elem_zero<eT>(o, modify);
+    }
+  else
+    {
+    arma_ostream::raw_print_elem(o, x);
+    }
+  }
+
+
+
+template<typename eT>
+inline
+void
+arma_ostream::raw_print_elem(std::ostream& o, const eT& x)
+  {
   if(is_signed<eT>::value)
     {
     typedef typename promote_type<eT, s16>::result promoted_eT;
     
-    if(x != eT(0))
+    if(arma_isfinite(x))
       {
-      if(arma_isfinite(x))
-        {
-        o << promoted_eT(x);
-        }
-      else
-        {
-        o << ( arma_isinf(x) ? ((x <= eT(0)) ? "-inf" : "inf") : "nan" );
-        }
+      o << promoted_eT(x);
       }
     else
       {
-      arma_ostream::print_elem_zero<promoted_eT>(o, modify);
+      o << ( arma_isinf(x) ? ((x <= eT(0)) ? "-inf" : "inf") : "nan" );
       }
     }
   else
     {
     typedef typename promote_type<eT, u16>::result promoted_eT;
     
-    if(x != eT(0))
-      {
-      o << promoted_eT(x);
-      }
-    else
-      {
-      arma_ostream::print_elem_zero<promoted_eT>(o, modify);
-      }
+    o << promoted_eT(x);
     }
   }
 
 
 
-//! Print a complex element to the specified stream
 template<typename T>
 inline
 void
 arma_ostream::print_elem(std::ostream& o, const std::complex<T>& x, const bool modify)
   {
-  if( (x.real() != T(0)) || (x.imag() != T(0)) || (modify == false) )
-    {
-    std::ostringstream ss;
-    ss.flags(o.flags());
-    //ss.imbue(o.getloc());
-    ss.precision(o.precision());
-    
-    ss << '(';
-    
-    const T a = x.real();
-    
-    if(arma_isfinite(a))
-      {
-      ss << a;
-      }
-    else
-      {
-      ss << ( arma_isinf(a) ? ((a <= T(0)) ? "-inf" : "+inf") : "nan" );
-      }
-    
-    ss << ',';
-    
-    const T b = x.imag();
-    
-    if(arma_isfinite(b))
-      {
-      ss << b;
-      }
-    else
-      {
-      ss << ( arma_isinf(b) ? ((b <= T(0)) ? "-inf" : "+inf") : "nan" );
-      }
-    
-    ss << ')';
-    
-    o << ss.str();
-    }
-  else
+  if( (x.real() == T(0)) && (x.imag() == T(0)) && (modify) )
     {
     o << "(0,0)";
     }
+  else
+    {
+    arma_ostream::raw_print_elem(o, x);
+    }
+  }
+
+
+
+template<typename T>
+inline
+void
+arma_ostream::raw_print_elem(std::ostream& o, const std::complex<T>& x)
+  {
+  std::ostringstream ss;
+  ss.flags(o.flags());
+  //ss.imbue(o.getloc());
+  ss.precision(o.precision());
+  
+  ss << '(';
+  
+  const T a = x.real();
+  
+  if(arma_isfinite(a))
+    {
+    ss << a;
+    }
+  else
+    {
+    ss << ( arma_isinf(a) ? ((a <= T(0)) ? "-inf" : "+inf") : "nan" );
+    }
+  
+  ss << ',';
+  
+  const T b = x.imag();
+  
+  if(arma_isfinite(b))
+    {
+    ss << b;
+    }
+  else
+    {
+    ss << ( arma_isinf(b) ? ((b <= T(0)) ? "-inf" : "+inf") : "nan" );
+    }
+  
+  ss << ')';
+  
+  o << ss.str();
   }
 
 
@@ -731,13 +744,44 @@ arma_ostream::print(std::ostream& o, const SpMat<eT>& m, const bool modify)
   o.unsetf(ios::scientific);
   o.setf(ios::right);
   o.setf(ios::fixed);
-  o.precision(2);
   
-  const uword m_n_nonzero = m.n_nonzero;
+  const uword  m_n_nonzero = m.n_nonzero;
+  const double density     = (m.n_elem > 0) ? (double(m_n_nonzero) / double(m.n_elem) * double(100)) : double(0);
   
-  o << "[matrix size: " << m.n_rows << 'x' << m.n_cols << "; n_nonzero: " << m_n_nonzero
-    << "; density: " << ((m.n_elem > 0) ? (double(m_n_nonzero) / double(m.n_elem) * double(100)) : double(0))
-    << "%]\n\n";
+  o << "[matrix size: " << m.n_rows << 'x' << m.n_cols << "; n_nonzero: " << m_n_nonzero;
+  
+  if(density == double(0))
+    {
+    o.precision(0);
+    }
+  else
+  if(density >= (double(10.0)-std::numeric_limits<double>::epsilon()))
+    {
+    o.precision(1);
+    }
+  else
+  if(density > (double(0.01)-std::numeric_limits<double>::epsilon()))
+    {
+    o.precision(2);
+    }
+  else
+  if(density > (double(0.001)-std::numeric_limits<double>::epsilon()))
+    {
+    o.precision(3);
+    }
+  else
+  if(density > (double(0.0001)-std::numeric_limits<double>::epsilon()))
+    {
+    o.precision(4);
+    }
+  else
+    {
+    o.unsetf(ios::fixed);
+    o.setf(ios::scientific);
+    o.precision(2);
+    }
+  
+  o << "; density: " << density  << "%]\n\n";
   
   if(modify == false) { stream_state.restore(o); }
   

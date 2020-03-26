@@ -2,6 +2,8 @@ eigs	eigs
 eigs.dgCMatrix	eigs
 eigs.dgeMatrix	eigs
 eigs.dgRMatrix	eigs
+eigs.dsCMatrix	eigs
+eigs.dsRMatrix	eigs
 eigs.dsyMatrix	eigs
 eigs.function	eigs
 eigs.matrix	eigs
@@ -11,6 +13,8 @@ svds	svds
 svds.dgCMatrix	svds
 svds.dgeMatrix	svds
 svds.dgRMatrix	svds
+svds.dsCMatrix	svds
+svds.dsRMatrix	svds
 svds.dsyMatrix	svds
 svds.function	svds
 svds.matrix	svds

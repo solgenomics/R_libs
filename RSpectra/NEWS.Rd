@@ -1,6 +1,40 @@
 \name{NEWS}
 \title{News for Package "RSpectra"}
 
+\section{Changes in RSpectra version 0.16-0}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item \code{svds()} now supports implicit centering and scaling of the matrix
+            via the \code{center} and \code{scale} parameters in the \code{opts}
+            argument, suggested by \href{https://github.com/robmaz}{@robmaz}
+            (\href{https://github.com/yixuan/spectra/issues/73}{#73} of Spectra).
+    }
+  }
+}
+
+\section{Changes in RSpectra version 0.15-0}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item Updated Spectra to v0.8.1.
+      \item Added support for new matrix types \strong{dsCMatrix} and
+            \strong{dsRMatrix} to handle sparse and symmetric matrices,
+            contributed by \href{https://github.com/flying-sheep}{@flying-sheep}
+            (\href{https://github.com/yixuan/RSpectra/pull/16}{#16}).
+      \item \code{eigs()} now detects the symmetry of \strong{dgRMatrix} matrices.
+    }
+  }
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item Improved the documentation about the relationship between SVD
+            and eigen decomposition for symmetric matrices, thanks to
+            \href{https://github.com/alexpghayes}{@alexpghayes}
+            (\href{https://github.com/yixuan/RSpectra/pull/17}{#17}).
+      \item (Internal) Replaced the deprecated \code{Eigen::MappedSparseMatrix}
+            class in the C++ code.
+    }
+  }
+}
+
 \section{Changes in RSpectra version 0.14-0}{
   \subsection{NEW FEATURES}{
     \itemize{
@@ -13,11 +47,11 @@
 
 \section{Changes in RSpectra version 0.13-1}{
   \subsection{BUG FIXES}{
-     \itemize{
-       \item Updated Spectra to v0.6.2 that fixes regressions in v0.6.1
-             on some edge cases.
-     }
-   }
+    \itemize{
+      \item Updated Spectra to v0.6.2 that fixes regressions in v0.6.1
+            on some edge cases.
+    }
+  }
 }
 
 \section{Changes in RSpectra version 0.13-0}{

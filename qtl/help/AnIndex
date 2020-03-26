@@ -169,6 +169,7 @@ orderMarkers	orderMarkers
 parseformula	qtl-internal
 phenames	phenames
 pickMarkerSubset	pickMarkerSubset
+plot.comparegeno	plot.comparegeno
 plot.cross	plot.cross
 plot.map	plot.map
 plot.qtl	plot.qtl
@@ -200,6 +201,7 @@ print.scanoneboot	qtl-internal
 print.scantwo	qtl-internal
 print.summary.addpair	qtl-internal
 print.summary.compactqtl	qtl-internal
+print.summary.comparegeno	qtl-internal
 print.summary.cross	qtl-internal
 print.summary.fitqtl	qtl-internal
 print.summary.map	qtl-internal
@@ -265,6 +267,7 @@ subset.scantwoperm	subset.scantwoperm
 summary.addcovarint	qtl-internal
 summary.addint	qtl-internal
 summary.compactqtl	qtl-internal
+summary.comparegeno	summary.comparegeno
 summary.cross	summary.cross
 summary.fitqtl	summary.fitqtl
 summary.map	summary.map

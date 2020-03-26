@@ -1,8 +1,8 @@
-## ---- echo = FALSE, message = FALSE--------------------------------------
+## ---- echo = FALSE, message = FALSE-------------------------------------------
 knitr::opts_chunk$set(collapse = T, comment = "#>")
 library("svglite")
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  fonts <- list(
 #    sans = "Helvetica",
 #    mono = "Consolas",
@@ -16,13 +16,13 @@ library("svglite")
 #  dev.off()
 #  ss()
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  svglite("Rplots.svg", system_fonts = list(sans = "Arial Unicode MS"))
 #  plot.new()
 #  text(0.5, 0.5, "正規分布")
 #  dev.off()
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  # Using ttf files from fontquiver here, but it could be any ttf
 #  some_file <- fontquiver::font("Liberation", "Sans", "Regular")$ttf
 #  other_file <- fontquiver::font("Liberation", "Sans", "Italic")$ttf
@@ -45,7 +45,7 @@ library("svglite")
 #  text(0.8, 0.8, "Serif text", family = "serif")
 #  dev.off()
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  file_with_alias <- list(alias = "Foobar Font", file = other_file)
 #  fonts <- list(sans = list(plain = file_with_alias))
 #  
@@ -55,7 +55,7 @@ library("svglite")
 #  dev.off()
 #  ss()
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  fonts <- fontquiver::font_families("Liberation")
 #  fonts$symbol$symbol <- fontquiver::font_symbol("Symbola")
 #  str(fonts, 2)
@@ -64,10 +64,10 @@ library("svglite")
 #  plot(1:10)
 #  dev.off()
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  gdtools::match_family("Helvetica")
 #  gdtools::match_font("Helvetica", bold = TRUE)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  gdtools::match_family("Helvetica", debug = "config")
 

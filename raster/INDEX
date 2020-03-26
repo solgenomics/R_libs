@@ -103,7 +103,7 @@ head                    Show the head or tail of a Raster* object
 hillShade               Hill shading
 hist                    Histogram
 image                   Image
-init                    Intitialize a Raster object with values
+init                    Initialize a Raster object with values
 interpolate             Interpolate
 intersect               Intersect
 is.factor               Factors
@@ -173,7 +173,7 @@ shapefile               Read or write a shapefile
 shift                   Shift
 slopeAspect             Slope and aspect
 spLines                 Create SpatialLines* or SpatialPolygons*
-spplot                  Use spplot to plot a Raster* object
+spplot                  Use spplot to plot a Raster* or other object
 stack                   Create a RasterStack object
 stackApply              Apply a function on subsets of a RasterStack or
                         RasterBrick

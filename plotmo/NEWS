@@ -1,6 +1,25 @@
 Changes to the plotmo package
 -----------------------------
 
+--- 3.5.6 Oct 26, 2019
+
+The family of a model can now be a string (as well as a "family" object).
+This allows better support of glmnet objects.
+
+--- 3.5.5 June 27, 2019
+
+S4 models wrapped in caret models are now supported
+e.g. train method="svmRadial" (which creates a kernlab ksvm model).
+
+Modifications for glmnet models:
+  The glmnet residuals plot now includes the predict arg "s" in the plot title.
+  The default ylim for glmnet probability models is now c(0,1).
+  For glmnet cv models: we now pass the predict.s argument to plotmo and plotres,
+  and plotmo now by default plots a maximum of 25 coefs (the largest coefs).
+
+Updated test scripts for the new random number generator
+that came with R version 3.6.0.
+
 --- 3.5.4 Apr 6, 2019
 
 Added a reminder to use keepxy=2 for earth if you want to use
@@ -16,7 +35,7 @@ responses using the Formula package.  Plotmo now also has partial
 support for other models also created using Formula (as well as those
 that use formula). Added "Depends: Formula" to the DESCRIPTION.
 
-Binomial pair responses are now more uni firmly converted to a
+Binomial pair responses are now more uniformly converted to a
 "fraction true" before plotting.
 
 If nresponse is not specified for multiple response models, plotmo now

@@ -1,19 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head><title>R: Functions for Clustering of Presence-Absence, Abundance and
-Multilocus Genetic Data</title>
+<head><title>R: Functions for Clustering and Testing of Presence-Absence,
+Abundance and Multilocus Genetic Data</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
-<h1> Functions for Clustering of Presence-Absence, Abundance and
-Multilocus Genetic Data
+<h1> Functions for Clustering and Testing of Presence-Absence,
+Abundance and Multilocus Genetic Data
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
 <hr/>
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;prabclus&rsquo; version 2.2-7</h2>
+</div><h2>Documentation for package &lsquo;prabclus&rsquo; version 2.3-2</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 </ul>
@@ -48,8 +48,14 @@ Multilocus Genetic Data
 <td>Internal: generates neighborhood list for diploid loci</td></tr>
 <tr><td style="width: 25%;"><a href="build.nblist.html">build.nblist</a></td>
 <td>Generate spatial weights from prabclus neighborhood list</td></tr>
+<tr><td style="width: 25%;"><a href="phipt.html">cfchord</a></td>
+<td>Distances between communities, auxiliary functions</td></tr>
 <tr><td style="width: 25%;"><a href="cluspop.nb.html">cluspop.nb</a></td>
 <td>Simulation of presence-absence matrices (clustered)</td></tr>
+<tr><td style="width: 25%;"><a href="communities.html">communities</a></td>
+<td>Construct communities from individuals</td></tr>
+<tr><td style="width: 25%;"><a href="communitydist.html">communitydist</a></td>
+<td>Distances between communities</td></tr>
 <tr><td style="width: 25%;"><a href="comp.test.html">comp.test</a></td>
 <td>Compare species clustering and species groups</td></tr>
 <tr><td style="width: 25%;"><a href="concomp.html">con.comp</a></td>
@@ -62,6 +68,8 @@ Multilocus Genetic Data
 <td>Region-wise cluster membership</td></tr>
 <tr><td style="width: 25%;"><a href="dicedist.html">dicedist</a></td>
 <td>Dice distance matrix</td></tr>
+<tr><td style="width: 25%;"><a href="phipt.html">diploidcomlist</a></td>
+<td>Distances between communities, auxiliary functions</td></tr>
 <tr><td style="width: 25%;"><a href="distratio.html">distratio</a></td>
 <td>Distance ratio test statistics for distance based clustering</td></tr>
 <tr><td style="width: 25%;"><a href="geco.html">geco</a></td>
@@ -94,8 +102,12 @@ Multilocus Genetic Data
 <td>Mean distance to kth nearest neighbor</td></tr>
 <tr><td style="width: 25%;"><a href="NNclean.html">NNclean</a></td>
 <td>Nearest neighbor based clutter/noise detection</td></tr>
+<tr><td style="width: 25%;"><a href="phipt.html">phipt</a></td>
+<td>Distances between communities, auxiliary functions</td></tr>
 <tr><td style="width: 25%;"><a href="piecewiselin.html">piecewiselin</a></td>
 <td>Piecewise linear transformation for distance matrices</td></tr>
+<tr><td style="width: 25%;"><a href="plotdistreg.html">plotdistreg</a></td>
+<td>Plots for within-groups and between-groups distance regression</td></tr>
 <tr><td style="width: 25%;"><a href="pop.sim.html">pop.sim</a></td>
 <td>p-value simulation for presence-absence matrices clustering test</td></tr>
 <tr><td style="width: 25%;"><a href="prabinit.html">prab</a></td>
@@ -118,14 +130,32 @@ Multilocus Genetic Data
 <td>Presence-absence/abundance matrix initialization</td></tr>
 <tr><td style="width: 25%;"><a href="prabclust.html">print.prabclust</a></td>
 <td>Clustering for biotic elements or for species delimitation (mixture method)</td></tr>
+<tr><td style="width: 25%;"><a href="regdistbetween.html">print.regdistbetween</a></td>
+<td>Testing equality of within-groups and between-groups distances regression</td></tr>
+<tr><td style="width: 25%;"><a href="regeqdist.html">print.regeqdist</a></td>
+<td>Testing equality of two distance-regressions</td></tr>
 <tr><td style="width: 25%;"><a href="prabtest.html">print.summary.prabtest</a></td>
 <td>Parametric bootstrap test for clustering in presence-absence matrices</td></tr>
 <tr><td style="width: 25%;"><a href="qkulczynski.html">qkulczynski</a></td>
 <td>Quantitative Kulczynski distance matrix</td></tr>
 <tr><td style="width: 25%;"><a href="randpop.nb.html">randpop.nb</a></td>
 <td>Simulation of presence-absence matrices (non-clustered)</td></tr>
+<tr><td style="width: 25%;"><a href="regdist.html">regdist</a></td>
+<td>Regression between subsets of dissimilarity matrices</td></tr>
+<tr><td style="width: 25%;"><a href="regdistbetween.html">regdistbetween</a></td>
+<td>Testing equality of within-groups and between-groups distances regression</td></tr>
+<tr><td style="width: 25%;"><a href="regdistbetweenone.html">regdistbetweenone</a></td>
+<td>Testing equality of one within-group and between-two groups distances regression</td></tr>
+<tr><td style="width: 25%;"><a href="regdistdiff.html">regdistdiff</a></td>
+<td>Regression difference between within-group dissimilarities</td></tr>
+<tr><td style="width: 25%;"><a href="regdistdiffone.html">regdistdiffone</a></td>
+<td>Regression difference within reference group and between-group dissimilarities</td></tr>
+<tr><td style="width: 25%;"><a href="regeqdist.html">regeqdist</a></td>
+<td>Testing equality of two distance-regressions</td></tr>
 <tr><td style="width: 25%;"><a href="regpop.sar.html">regpop.sar</a></td>
 <td>Simulation of abundance matrices (non-clustered)</td></tr>
+<tr><td style="width: 25%;"><a href="phipt.html">shared.problist</a></td>
+<td>Distances between communities, auxiliary functions</td></tr>
 <tr><td style="width: 25%;"><a href="siskiyou.html">siskiyou</a></td>
 <td>Herbs of the Siskiyou Mountains</td></tr>
 <tr><td style="width: 25%;"><a href="siskiyou.html">siskiyou.groups</a></td>

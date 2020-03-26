@@ -1,3 +1,13 @@
+# labelled 2.2.2
+
+* bug fix for `look_for()` (#52 by @NoahMarconi)
+* bug fix in `val_labels_to_na()` documentation
+
+# labelled 2.2.1
+
+* bug fix for `na_range()` and `na_values()`: variable labels 
+  are now preserved (#48, thanks to @mspittler)
+
 # labelled 2.2.0
 
 * new function `copy_labels_from()`, compliant with `dplyr` syntax

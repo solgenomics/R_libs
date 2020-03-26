@@ -1,3 +1,62 @@
+# usethis 1.5.1
+
+This is a patch release with various small features and bug fixes.
+
+## Using the pipe `%>%` or the tidy eval toolkit in your package
+
+* The templates used by `use_pipe()` and `use_tidy_eval()` use a more robust
+  form of cross-reference links, linking to files rather than topics. This
+  should silence some warnings seen on Windows at install time
+  (#730, #731 @jmgirard).
+
+* `use_pipe()` gains a logical `export` argument, so it can do the setup
+  necessary to use the pipe operator when it is re-exported
+  (`export = TRUE`, which is the default and preserves the previous behaviour)
+  and when it is not (`export = FALSE`) (#783).
+
+## Git, GitHub, and pull requests
+
+* `use_github()` removes newline `\n` characters from the description that 
+  can cause the initial push to fail (#493, @muschellij2).
+
+* `git_sitrep()` gives better feedback if we can't validate the GitHub PAT
+  (#725, @ijlyttle).
+
+* `create_from_github()` sets remote tracking branch of `master` to
+  `upstream/master`, when it creates (and clones) a fork (#792).
+
+* `pr_pause()` can switch back to master even if there is no remote tracking
+  branch (#715, @cderv). 
+
+## Build tools and continuous integration
+
+* `use_tidy_ci()` is updated for R 3.6, meaning that R 3.2 is the oldest version
+  of R supported through proactive testing.
+
+* `use_make()` and `use_jenkins()` add a Makefile and Jenkinsfile, respectively
+  (#501, @ryapric).
+  
+* `use_circleci()` creates a `.circleci/config.yaml` config file for CircleCI
+  (#703, @jdblischak).
+
+## Other
+
+* `use_zip()` is a new variant of `use_course()` that downloads and unpacks a
+  ZIP file, with less pedantic behaviour re: the destination directory. Both
+  functions now also work for ZIP files with MIME type
+  `"application/x-zip-compressed"` (#573).
+
+* `use_version()` can detect `"(development version)"` in a NEWS header and
+  update it with an actual version (#768, @DavisVaughan).
+
+## Dependency changes
+
+R 3.1 is no longer explicitly supported or tested. Our general practice is to support the current release (3.6, at time of writing), devel, and the 4 previous versions of R (3.5, 3.4, 3.3, 3.2).
+
+fs minimum version is stated to be v1.3.0.
+
+glue minimum version is stated to be v1.3.0.
+
 # usethis 1.5.0
 
 ## Git, GitHub (and GitLab)
@@ -197,8 +256,8 @@ welcome to use them if you find them helpful.
 
 ## Other minor bug fixes and improvements
 
-* `write_union` appends the novel `lines`, but does not remove duplicates from
-  existing lines (#583, @khailper).
+* `write_union()` appends the novel `lines`, but does not remove duplicates
+  from existing lines (#583, @khailper).
 
 * `use_rcpp("foo")` now creates `src/foo.cpp` (#117).
 
@@ -263,7 +322,7 @@ welcome to use them if you find them helpful.
 * `use_version("dev")` now creates a standard "(development version)" heading
   in `NEWS.md` (#440).
 
-* `use_vignette` now checks if the vignette name is valid (starts with letter 
+* `use_vignette()` now checks if the vignette name is valid (starts with letter
   and consists of letters, numbers, hyphen, and underscore) and throws an error 
   if not (@akgold, #555).
   
@@ -294,7 +353,7 @@ These changes make it easier for others to extend usethis, i.e. to create workfl
 * `proj_path()` is newly exported. Use it to build paths within the active project. Like `proj_get()` and `proj_set()`, it is not aimed at end users, but rather for use in extension packages. End users should use [rprojroot](https://rprojroot.r-lib.org) or its simpler companion, [here](https://here.r-lib.org), to programmatically detect a project and
 build paths within it (#415, #425).
 
-* `edit_file()`, `write_over()`, and `write_union()` are newly exported helpers. They are mostly for internal use, but can also be useful in packages that extend or customize usethis (#344, #366, #389).
+  * `edit_file()`, `write_over()`, and `write_union()` are newly exported helpers. They are mostly for internal use, but can also be useful in packages that extend or customize usethis (#344, #366, #389).
 
 * `use_template()` no longer errors when a user chooses not to overwrite an existing file and simply exits with confirmation that the file is unchanged (#348, #350, @boshek).
 
@@ -334,7 +393,7 @@ No longer in Imports: backports, httr, rematch2, rmarkdown (moved to Suggests), 
 
 # usethis 1.3.0
 
-* usethis has a website: <http://usethis.r-lib.org> (#217). It includes an article with advice on system setup, for usethis and for R development more generally.
+* usethis has a website: <https://usethis.r-lib.org> (#217). It includes an article with advice on system setup, for usethis and for R development more generally.
 
 * `edit_*()` functions now return the target path, invisibly (#255).
 
@@ -372,7 +431,7 @@ No longer in Imports: backports, httr, rematch2, rmarkdown (moved to Suggests), 
 
 * `use_blank_slate()` provides a way to opt in to an RStudio workflow where the user's workspace is neither saved nor reloaded between R sessions. Automated for `scope = "project"`. Provides UI instructions for `scope = "user"`, for now (#139).
 
-* `use_tidy_style()` styles an entire project according to <http://style.tidyverse.org> (#72, #197 @lorenzwalthert).
+* `use_tidy_style()` styles an entire project according to <https://style.tidyverse.org> (#72, #197 @lorenzwalthert).
 
 * GitHub conventions common to tidyverse packages are enacted by `use_tidy_contributing()`, `use_tidy_issue_template()`, and `use_tidy_support()` (@batpigandme, #143, #166).
 
@@ -490,7 +549,7 @@ A new class of functions make it easy to edit common config files:
   to follow standard licensing best practices while adhering to CRANs 
   requirements (#10).
 
-* `use_package_doc()` uses more modern roxygen2 template requires that 
+* `use_package_doc()` uses more a modern roxygen2 template that requires
   less duplication.
 
 * `use_test()` will use the name of the currently open file in RStudio

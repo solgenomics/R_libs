@@ -5,7 +5,9 @@ Title: Approximate String Matching and String Distance Functions
 LazyData: no
 Type: Package
 LazyLoad: yes
-Authors@R: c( person("Mark", "van der Loo", role=c("aut","cre"),email="mark.vanderloo@gmail.com")
+Authors@R: c( person("Mark", "van der Loo", role=c("aut","cre")
+             , email="mark.vanderloo@gmail.com"
+             , comment= c(ORCID="0000-0002-9807-4686"))
             , person("Jan", "van der Laan", role="ctb")
             , person("R Core Team",""     , role="ctb")
             , person("Nick","Logan"       , role="ctb")
@@ -18,20 +20,21 @@ Description: Implements an approximate string matching version of R's native
     character vectors while taking proper care of encoding or between integer
     vectors representing generic sequences. This package is built for speed and
     runs in parallel by using 'openMP'. An API for C or C++ is exposed as well.
-Version: 0.9.5.1
+Version: 0.9.5.5
 Depends: R (>= 2.15.3)
-Imports: parallel
 URL: https://github.com/markvanderloo/stringdist
 BugReports: https://github.com/markvanderloo/stringdist/issues
-Suggests: testthat
-RoxygenNote: 6.0.1
+Suggests: tinytest
+Imports: parallel
+Encoding: UTF-8
+RoxygenNote: 6.1.1
 NeedsCompilation: yes
-Packaged: 2018-06-08 11:22:22 UTC; mark
-Author: Mark van der Loo [aut, cre],
+Packaged: 2019-10-21 06:45:42 UTC; mark
+Author: Mark van der Loo [aut, cre] (<https://orcid.org/0000-0002-9807-4686>),
   Jan van der Laan [ctb],
   R Core Team [ctb],
   Nick Logan [ctb],
   Chris Muir [ctb]
 Repository: CRAN
-Date/Publication: 2018-06-08 13:52:58 UTC
-Built: R 3.6.0; x86_64-pc-linux-gnu; 2019-05-10 11:20:49 UTC; unix
+Date/Publication: 2019-10-21 07:20:03 UTC
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-03-24 19:49:50 UTC; unix

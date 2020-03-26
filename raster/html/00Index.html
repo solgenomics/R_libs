@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;raster&rsquo; version 2.8-19</h2>
+</div><h2>Documentation for package &lsquo;raster&rsquo; version 3.0-12</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -206,6 +206,8 @@
 <td>Get cell, row, or column number</td></tr>
 <tr><td style="width: 25%;"><a href="cellFrom.html">cellFromRowColCombine</a></td>
 <td>Get cell, row, or column number</td></tr>
+<tr><td style="width: 25%;"><a href="cellFrom.html">cellFromRowColCombine-method</a></td>
+<td>Get cell, row, or column number</td></tr>
 <tr><td style="width: 25%;"><a href="cellFrom.html">cellFromXY</a></td>
 <td>Get cell, row, or column number</td></tr>
 <tr><td style="width: 25%;"><a href="cellFrom.html">cellFromXY-method</a></td>
@@ -260,11 +262,17 @@
 <td>Contour plot</td></tr>
 <tr><td style="width: 25%;"><a href="contour.html">contour-method</a></td>
 <td>Contour plot</td></tr>
+<tr><td style="width: 25%;"><a href="xyFromCell.html">coordinates</a></td>
+<td>Coordinates from a row, column or cell number</td></tr>
+<tr><td style="width: 25%;"><a href="xyFromCell.html">coordinates-method</a></td>
+<td>Coordinates from a row, column or cell number</td></tr>
 <tr><td style="width: 25%;"><a href="corLocal.html">corLocal</a></td>
 <td>Local correlation coefficient</td></tr>
 <tr><td style="width: 25%;"><a href="corLocal.html">corLocal-method</a></td>
 <td>Local correlation coefficient</td></tr>
 <tr><td style="width: 25%;"><a href="isLonLat.html">couldBeLonLat</a></td>
+<td>Is this longitude/latitude data?</td></tr>
+<tr><td style="width: 25%;"><a href="isLonLat.html">couldBeLonLat-method</a></td>
 <td>Is this longitude/latitude data?</td></tr>
 <tr><td style="width: 25%;"><a href="cover.html">cover</a></td>
 <td>Replace NA values with values of other layers</td></tr>
@@ -459,6 +467,8 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="datasource.html">hasValues</a></td>
 <td>Are values in memory and/or on disk?</td></tr>
+<tr><td style="width: 25%;"><a href="datasource.html">hasValues-method</a></td>
+<td>Are values in memory and/or on disk?</td></tr>
 <tr><td style="width: 25%;"><a href="hdrFiles.html">hdr</a></td>
 <td>Header files</td></tr>
 <tr><td style="width: 25%;"><a href="headtail.html">head</a></td>
@@ -481,7 +491,9 @@
 <tr><td style="width: 25%;"><a href="image.html">image-method</a></td>
 <td>Image</td></tr>
 <tr><td style="width: 25%;"><a href="init.html">init</a></td>
-<td>Intitialize a Raster object with values</td></tr>
+<td>Initialize a Raster object with values</td></tr>
+<tr><td style="width: 25%;"><a href="init.html">init-method</a></td>
+<td>Initialize a Raster object with values</td></tr>
 <tr><td style="width: 25%;"><a href="datasource.html">inMemory</a></td>
 <td>Are values in memory and/or on disk?</td></tr>
 <tr><td style="width: 25%;"><a href="interpolate.html">interpolate</a></td>
@@ -545,7 +557,7 @@
 <tr><td style="width: 25%;"><a href="plot.html">lines-method</a></td>
 <td>Plot a Raster* object</td></tr>
 <tr><td style="width: 25%;"><a href="spplot.html">lines-method</a></td>
-<td>Use spplot to plot a Raster* object</td></tr>
+<td>Use spplot to plot a Raster* or other object</td></tr>
 <tr><td style="width: 25%;"><a href="localFun.html">localFun</a></td>
 <td>Local functions</td></tr>
 <tr><td style="width: 25%;"><a href="localFun.html">localFun-method</a></td>
@@ -580,6 +592,8 @@
 <tr><td style="width: 25%;"><a href="extremeValues.html">maxValue-method</a></td>
 <td>Minimum and maximum values</td></tr>
 <tr><td style="width: 25%;"><a href="Summary-methods.html">mean-method</a></td>
+<td>Summary methods</td></tr>
+<tr><td style="width: 25%;"><a href="Summary-methods.html">median-method</a></td>
 <td>Summary methods</td></tr>
 <tr><td style="width: 25%;"><a href="merge.html">merge</a></td>
 <td>Merge Raster* objects</td></tr>
@@ -698,7 +712,7 @@
 <td>Red-Green-Blue plot of a multi-layered Raster object</td></tr>
 <tr><td style="width: 25%;"><a href="plotRGB.html">plotRGB-method</a></td>
 <td>Red-Green-Blue plot of a multi-layered Raster object</td></tr>
-<tr><td style="width: 25%;"><a href="pointdistance.html">pointDistance</a></td>
+<tr><td style="width: 25%;"><a href="pointDistance.html">pointDistance</a></td>
 <td>Distance between points</td></tr>
 <tr><td style="width: 25%;"><a href="predict.html">predict</a></td>
 <td>Spatial model predictions</td></tr>
@@ -768,6 +782,8 @@
 <td>Raster to polygons conversion</td></tr>
 <tr><td style="width: 25%;"><a href="factor.html">ratify</a></td>
 <td>Factors</td></tr>
+<tr><td style="width: 25%;"><a href="factor.html">ratify-method</a></td>
+<td>Factors</td></tr>
 <tr><td style="width: 25%;"><a href="Rcpp-classes.html">Rcpp_SpExtent-class</a></td>
 <td>Rcpp classes</td></tr>
 <tr><td style="width: 25%;"><a href="Rcpp-classes.html">Rcpp_SpPoly-class</a></td>
@@ -803,6 +819,8 @@
 <tr><td style="width: 25%;"><a href="resolution.html">res-method</a></td>
 <td>Resolution</td></tr>
 <tr><td style="width: 25%;"><a href="resolution.html">res&lt;-</a></td>
+<td>Resolution</td></tr>
+<tr><td style="width: 25%;"><a href="resolution.html">res&lt;--method</a></td>
 <td>Resolution</td></tr>
 <tr><td style="width: 25%;"><a href="resample.html">resample</a></td>
 <td>Resample a Raster object</td></tr>
@@ -902,9 +920,9 @@
 <tr><td style="width: 25%;"><a href="spEasy.html">spLines</a></td>
 <td>Create SpatialLines* or SpatialPolygons*</td></tr>
 <tr><td style="width: 25%;"><a href="spplot.html">spplot</a></td>
-<td>Use spplot to plot a Raster* object</td></tr>
+<td>Use spplot to plot a Raster* or other object</td></tr>
 <tr><td style="width: 25%;"><a href="spplot.html">spplot-method</a></td>
-<td>Use spplot to plot a Raster* object</td></tr>
+<td>Use spplot to plot a Raster* or other object</td></tr>
 <tr><td style="width: 25%;"><a href="Rcpp-classes.html">SpPoly</a></td>
 <td>Rcpp classes</td></tr>
 <tr><td style="width: 25%;"><a href="Rcpp-classes.html">SpPoly-class</a></td>
@@ -935,9 +953,11 @@
 <td>Select cell values from a multi-layer Raster* object</td></tr>
 <tr><td style="width: 25%;"><a href="strech.html">stretch</a></td>
 <td>Stretch</td></tr>
-<tr><td style="width: 25%;"><a href="substitute.html">subs</a></td>
+<tr><td style="width: 25%;"><a href="strech.html">stretch-method</a></td>
+<td>Stretch</td></tr>
+<tr><td style="width: 25%;"><a href="subs.html">subs</a></td>
 <td>Substitute values in a Raster* object</td></tr>
-<tr><td style="width: 25%;"><a href="substitute.html">subs-method</a></td>
+<tr><td style="width: 25%;"><a href="subs.html">subs-method</a></td>
 <td>Substitute values in a Raster* object</td></tr>
 <tr><td style="width: 25%;"><a href="subset.html">subset</a></td>
 <td>Subset layers in a Raster* object</td></tr>
@@ -967,6 +987,8 @@
 <tr><td style="width: 25%;"><a href="headtail.html">tail-method</a></td>
 <td>Show the head or tail of a Raster* object</td></tr>
 <tr><td style="width: 25%;"><a href="terrain.html">terrain</a></td>
+<td>Terrain characteristics</td></tr>
+<tr><td style="width: 25%;"><a href="terrain.html">terrain-method</a></td>
 <td>Terrain characteristics</td></tr>
 <tr><td style="width: 25%;"><a href="text.html">text</a></td>
 <td>Add labels to a map</td></tr>
@@ -1090,11 +1112,15 @@
 <td>Coordinates of the Extent of a Raster object</td></tr>
 <tr><td style="width: 25%;"><a href="coordinates.html">xmax&lt;-</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
+<tr><td style="width: 25%;"><a href="coordinates.html">xmax&lt;--method</a></td>
+<td>Coordinates of the Extent of a Raster object</td></tr>
 <tr><td style="width: 25%;"><a href="coordinates.html">xmin</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
 <tr><td style="width: 25%;"><a href="coordinates.html">xmin-method</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
 <tr><td style="width: 25%;"><a href="coordinates.html">xmin&lt;-</a></td>
+<td>Coordinates of the Extent of a Raster object</td></tr>
+<tr><td style="width: 25%;"><a href="coordinates.html">xmin&lt;--method</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
 <tr><td style="width: 25%;"><a href="resolution.html">xres</a></td>
 <td>Resolution</td></tr>
@@ -1123,11 +1149,15 @@
 <td>Coordinates of the Extent of a Raster object</td></tr>
 <tr><td style="width: 25%;"><a href="coordinates.html">ymax&lt;-</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
+<tr><td style="width: 25%;"><a href="coordinates.html">ymax&lt;--method</a></td>
+<td>Coordinates of the Extent of a Raster object</td></tr>
 <tr><td style="width: 25%;"><a href="coordinates.html">ymin</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
 <tr><td style="width: 25%;"><a href="coordinates.html">ymin-method</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
 <tr><td style="width: 25%;"><a href="coordinates.html">ymin&lt;-</a></td>
+<td>Coordinates of the Extent of a Raster object</td></tr>
+<tr><td style="width: 25%;"><a href="coordinates.html">ymin&lt;--method</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
 <tr><td style="width: 25%;"><a href="resolution.html">yres</a></td>
 <td>Resolution</td></tr>

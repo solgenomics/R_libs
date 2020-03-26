@@ -1,17 +1,18 @@
 Package: raster
 Type: Package
 Title: Geographic Data Analysis and Modeling
-Version: 2.8-19
-Date: 2019-01-29
+Version: 3.0-12
+Date: 2020-01-29
 Depends: sp (>= 1.2-0), R (>= 3.0.0)
 Suggests: rgdal (>= 0.9-1), rgeos (>= 0.3-8), ncdf4, igraph, tcltk,
         parallel, rasterVis, MASS, sf, testthat
 LinkingTo: Rcpp
 Imports: Rcpp, methods
 SystemRequirements: C++11
-Description: Reading, writing, manipulating, analyzing and modeling of gridded spatial data. The package implements basic and high-level functions. Processing of very large files is supported.
+Description: Reading, writing, manipulating, analyzing and modeling of gridded spatial data. The package implements basic and high-level functions. Processing of very large files is supported. There is a also support for vector data operations such as intersections. See the manual and tutorials on <https://rspatial.org/> to get started.
 License: GPL (>= 3)
-URL: https://www.rspatial.org/
+URL: https://CRAN.R-project.org/package=raster
+BugReports: https://github.com/rspatial/raster/issues/
 Authors@R: c(
 	person("Robert J.", "Hijmans", role = c("cre", "aut"),  
 			email = "r.hijmans@gmail.com", 
@@ -29,6 +30,7 @@ Authors@R: c(
 	person("Josh", "Gray", role = "ctb"),
 	person("Jonathan A.", "Greenberg", role = "ctb"),
 	person("Paul", "Hiemstra", role = "ctb"),
+	person("Kassel", "Hingee", role = "ctb"),
 	person("Institute for Mathematics Applied Geosciences", role="cph"),
 	person("Charles", "Karney", role = "ctb"),
 	person("Matteo", "Mattiuzzi", role = "ctb"),
@@ -43,7 +45,7 @@ Authors@R: c(
 	person("Rafael", "Wueest", role = "ctb")
 	)
 NeedsCompilation: yes
-Packaged: 2019-01-29 20:47:19 UTC; rhijmans
+Packaged: 2020-01-29 10:20:04 UTC; rhijm
 Author: Robert J. Hijmans [cre, aut] (<https://orcid.org/0000-0001-5872-2872>),
   Jacob van Etten [ctb],
   Michael Sumner [ctb],
@@ -58,6 +60,7 @@ Author: Robert J. Hijmans [cre, aut] (<https://orcid.org/0000-0001-5872-2872>),
   Josh Gray [ctb],
   Jonathan A. Greenberg [ctb],
   Paul Hiemstra [ctb],
+  Kassel Hingee [ctb],
   Institute for Mathematics Applied Geosciences [cph],
   Charles Karney [ctb],
   Matteo Mattiuzzi [ctb],
@@ -72,5 +75,5 @@ Author: Robert J. Hijmans [cre, aut] (<https://orcid.org/0000-0001-5872-2872>),
   Rafael Wueest [ctb]
 Maintainer: Robert J. Hijmans <r.hijmans@gmail.com>
 Repository: CRAN
-Date/Publication: 2019-01-30 17:40:07 UTC
-Built: R 3.6.0; x86_64-pc-linux-gnu; 2019-05-10 11:37:40 UTC; unix
+Date/Publication: 2020-01-30 09:00:02 UTC
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-03-24 19:59:55 UTC; unix

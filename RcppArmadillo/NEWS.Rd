@@ -3,14 +3,140 @@
 \newcommand{\ghpr}{\href{https://github.com/RcppCore/RcppArmadillo/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/RcppCore/RcppArmadillo/issues/#1}{##1}}
 
+\section{Changes in RcppArmadillo version 0.9.850.1.0 (2020-02-09)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.850.1 (Pyrocumulus Wrath)
+    \itemize{
+      \item{faster handling of compound expressions by \code{diagmat()}}
+      \item{expanded \code{.save()} and \code{.load()} to handle CSV files with headers via
+        csv_name(filename,header) specification}
+      \item{added \code{log_normpdf()}}
+      \item{added \code{.is_zero()}}
+      \item{added \code{quantile()}}
+    }
+    \item The sparse matrix test using scipy, if available, is now
+    simplified thanks to recently added \CRANpkg{reticulate} conversions.
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.800.4.0 (2020-01-24)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.800.4 (Horizon Scraper)
+    \itemize{
+      \item fixes for incorrect type promotion in \code{normpdf()}
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.800.3.0 (2019-12-04)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.800.3 (Horizon Scraper)
+    \itemize{
+      \item fixes for matrix row iterators
+      \item better detection of non-hermitian matrices by
+      \code{eig_sym()}, \code{inv_sympd()}, \code{chol()},
+      \code{expmat_sym()}  
+    }
+    \item The \code{sample} function passes the prob vector as const allowing
+    subsequent calls (Christian Gunning in \ghpr{276} fixing \ghit{275})
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.800.1.0 (2019-10-09)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.800 (Horizon Scraper)
+    \itemize{
+      \item faster \code{solve()} in default operation; iterative
+      refinement is no longer applied by default; use
+      \code{solve_opts::refine} to explicitly enable refinement 
+      \item faster \code{expmat()}
+      \item faster handling of triangular matrices by \code{rcond()}
+      \item added \code{.front()} and \code{.back()}
+      \item added \code{.is_trimatu()} and \code{.is_trimatl()}
+      \item added \code{.is_diagmat()}
+    }
+    \item The package now uses \pkg{tinytest} for unit tests (Dirk in
+    \ghpr{269}).
+    \item The \code{configure.ac} script is now more careful about shell
+    portability (Min Kim in \ghpr{270}).
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.700.2.0 (2019-09-01)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.700.2 (Gangster Democracy)
+    \itemize{
+      \item faster handling of cubes by \code{vectorise()}
+      \item faster faster handling of sparse matrices by \code{nonzeros()}
+      \item faster row-wise \code{index_min()} and \code{index_max()}
+      \item expanded \code{join_rows()} and \code{join_cols()} to handle joining up to 4 matrices
+      \item expanded \code{.save()} and \code{.load()} to allow storing sparse matrices in CSV format
+      \item added \code{randperm()} to generate a vector with random
+      permutation of a sequence of integers 
+    }
+    \item Expanded the list of known good \code{gcc} and \code{clang}
+    versions in \code{configure.ac}
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.600.4.0 (2019-07-14)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.600.4 (Napa Invasion)
+    \itemize{
+      \item faster handling of sparse submatrices
+      \item faster handling of sparse diagonal views
+      \item faster handling of sparse matrices by \code{symmatu()} and \code{symmatl()}
+      \item faster handling of sparse matrices by \code{join_cols()}
+      \item expanded \code{clamp()} to handle sparse matrices
+      \item added \code{.clean()} to replace elements below a threshold with zeros
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.500.2.0 (2019-06-11)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.500.2 (Riot Compact)
+    \itemize{
+      \item Expanded \code{solve()} with \code{solve_opts::likely_sympd}
+      to indicate that the given matrix is likely positive definite 
+      \item more robust automatic detection of positive definite
+      matrices by \code{solve()} and \code{inv()} 
+      \item faster handling of sparse submatrices
+      \item expanded \code{eigs_sym()} to print a warning if the given
+      matrix is not symmetric 
+      \item extended LAPACK function prototypes to follow Fortran
+      passing conventions for so-called "hidden arguments", in order
+      to address GCC Bug 90329; to use previous LAPACK function
+      prototypes without the "hidden arguments",
+      \code{#define ARMA_DONT_USE_FORTRAN_HIDDEN_ARGS before
+        #include <armadillo> }
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.400.3.0 (2019-05-09)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.400.3 (Surrogate Miscreant)
+    \itemize{
+      \item check for symmetric / hermitian matrices (used by
+      decomposition functions) has been made more robust
+      \item \code{linspace()} and \code{logspace()} now honour requests
+      for generation of vectors with zero elements
+      \item fix for vectorisation / flattening of complex sparse matrices
+    }
+  }
+}
+
 \section{Changes in RcppArmadillo version 0.9.400.2.0 (2019-04-28)}{
   \itemize{
     \item Upgraded to Armadillo release 9.400.2 (Surrogate Miscreant)
     \itemize{
       \item faster \code{cov()} and \code{cor()}
+      \item added \code{.as_col()} and \code{.as_row()}
       \item expanded \code{.shed_rows()} / \code{.shed_cols()} /
       \code{.shed_slices()} to remove rows/columns/slices specified in a
       vector 
+      \item expanded \code{vectorise()} to handle sparse matrices
       \item expanded element-wise versions of \code{max()} and
       \code{min()} to handle sparse matrices
       \item optimised handling of sparse matrix expressions:
@@ -19,7 +145,7 @@
       \code{expmat_sym()}, \code{logmat_sympd()}, \code{sqrtmat_sympd()},
       \code{inv_sympd()} to print a warning if the given matrix is not
       symmetric 
-      more consistent detection of vector expressions
+      \item more consistent detection of vector expressions
     }
   }
 }

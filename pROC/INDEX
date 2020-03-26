@@ -11,6 +11,7 @@ ci.sp                   Compute the confidence interval of
                         specificities at given sensitivities
 ci.thresholds           Compute the confidence interval of thresholds
 coords                  Coordinates of a ROC curve
+coords_transpose        Transposing the output of 'coords'
 cov.roc                 Covariance of two paired ROC curves
 ggroc.roc               Plot a ROC curve with ggplot2
 groupGeneric            pROC Group Generic Functions

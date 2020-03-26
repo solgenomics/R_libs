@@ -6,6 +6,7 @@ subroutine trifnd(j,tau,nedge,nadj,madj,x,y,ntot,eps,ntri,nerror)
 
 implicit double precision(a-h,o-z)
 dimension nadj(-3:ntot,0:madj), x(-3:ntot), y(-3:ntot), xt(3), yt(3)
+dimension itmp(1)
 integer tau(3)
 logical adjace, anticl
 
@@ -25,7 +26,9 @@ tau(3) = nadj(j1,1)
 call pred(tau(2),j1,tau(3),nadj,madj,ntot,nerror)
 if(nerror > 0) return
 call adjchk(tau(2),tau(3),adjace,nadj,madj,ntot,nerror)
-if(nerror>0) return
+if(nerror>0) {
+    return
+}
 if(!adjace) {
         tau(3) = tau(2)
 	call pred(tau(2),j1,tau(3),nadj,madj,ntot,nerror)
@@ -38,13 +41,17 @@ ktri = 0
 1       continue
 
 # Check that the vertices of the triangle listed in tau are
-# in anticlockwise order.  (If they aren't then alles upgefucken
-# ist; throw an error.)
+# in anticlockwise order.  (If they aren't then reverse the order;
+# if they are *still*  not in anticlockwise order, theh alles
+# upgefucken ist; throw an error.)
 call acchk(tau(1),tau(2),tau(3),anticl,x,y,ntot,eps)
 if(!anticl) {
     call acchk(tau(3),tau(2),tau(1),anticl,x,y,ntot,eps)
     if(!anticl) {
-        call fexit("Both vertex orderings are clockwise. See help for deldir.")
+        itmp(1) = j
+        call intpr("Point number =",-1,itmp,1)
+        call intpr("Previous triangle:",-1,tau,3)
+        call rexit("Both vertex orderings are clockwise. See help for deldir.")
     } else {
         ivtmp  = tau(3)
         tau(3) = tau(1)
@@ -131,7 +138,9 @@ if(ntau==3) {
 # inside this one.
 ktri = ktri + 1
 if(ktri > ntri) {
-    call fexit("Cannot find an enclosing triangle.  See help for deldir.")
+    itmp(1) = j
+    call intpr("Point being added:",-1,itmp,1)
+    call rexit("Cannot find an enclosing triangle.  See help for deldir.")
 }
 go to 1
 

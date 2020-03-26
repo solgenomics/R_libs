@@ -1,5 +1,5 @@
-subroutine master(x,y,rw,npd,ntot,nadj,madj,tx,ty,eps,
-                  delsgs,ndel,delsum,dirsgs,ndir,dirsum,nerror)
+subroutine master(x,y,rw,npd,ntot,nadj,madj,eps,delsgs,ndel,delsum,
+                  dirsgs,ndir,dirsum,nerror)
 
 # Master subroutine:
 # One subroutine to rule them all,
@@ -8,10 +8,9 @@ subroutine master(x,y,rw,npd,ntot,nadj,madj,tx,ty,eps,
 # And in the darkness bind them.
 
 implicit double precision(a-h,o-z)
-logical adj
 dimension x(-3:ntot), y(-3:ntot)
 dimension nadj(-3:ntot,0:madj)
-dimension tx(npd), ty(npd), rw(4)
+dimension rw(4)
 dimension delsgs(6,ndel), dirsgs(10,ndir)
 dimension delsum(npd,4), dirsum(npd,3)
 
@@ -60,6 +59,9 @@ ntri = 4
 # Now add the rest of the point set
 do j = 2,npd {
 	call addpt(j,nadj,madj,x,y,ntot,eps,ntri,nerror)
+        if(nerror>0) {
+            return
+        }
         ntri = ntri + 3
 }
 

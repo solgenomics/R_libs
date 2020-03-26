@@ -11,6 +11,7 @@ xml_attr                Retrieve an attribute.
 xml_cdata               Construct a cdata node
 xml_children            Navigate around the family tree.
 xml_comment             Construct a comment node
+xml_document-class      Register S4 classes
 xml_dtd                 Construct a document type definition
 xml_find_all            Find nodes that match an xpath expression.
 xml_name                The (tag) name of an xml element.

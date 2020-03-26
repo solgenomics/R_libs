@@ -42,6 +42,16 @@ class arrayops
   replace(eT* mem, const uword n_elem, const eT old_val, const eT new_val);
   
   
+  template<typename eT>
+  arma_hot inline static void
+  clean(eT* mem, const uword n_elem, const eT abs_limit, const typename arma_not_cx<eT>::result* junk = 0);
+  
+  
+  template<typename T>
+  arma_hot inline static void
+  clean(std::complex<T>* mem, const uword n_elem, const T abs_limit);
+  
+  
   // 
   // array = convert(array)
   
@@ -186,6 +196,16 @@ class arrayops
   arma_hot inline static
   eT
   product(const eT* src, const uword n_elem);
+  
+  template<typename eT>
+  arma_hot inline static
+  bool
+  is_zero(const eT* mem, const uword n_elem, const eT abs_limit, const typename arma_not_cx<eT>::result* junk = 0);
+  
+  template<typename T>
+  arma_hot inline static
+  bool
+  is_zero(const std::complex<T>* mem, const uword n_elem, const T abs_limit);
   
   template<typename eT>
   arma_hot inline static

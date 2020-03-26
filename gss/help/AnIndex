@@ -2,6 +2,7 @@ aids	aids
 bacteriuria	bacteriuria
 buffalo	buffalo
 cdsscden	cdsscden
+cdsscopu	cdsscopu
 cdssden	cdssden
 cfit.binomial	family
 cfit.Gamma	family
@@ -14,8 +15,10 @@ cfit.weibull	family
 clim	clim
 ColoCan	ColoCan
 cpsscden	cdsscden
+cpsscopu	cdsscopu
 cpssden	cdssden
 cqsscden	cdsscden
+cqsscopu	cdsscopu
 cqssden	cdssden
 cv.binomial	family
 cv.Gamma	family
@@ -47,7 +50,9 @@ dev.resid.poisson	family
 dev.resid.weibull	family
 dev0.resid.loglogis	family
 dev0.resid.lognorm	family
+DiaRet	DiaRet
 dsscden	dsscden
+dsscopu	dsscopu
 dssden	dssden
 esc	esc
 eyetrack	eyetrack
@@ -62,6 +67,7 @@ gssanova0	gssanova0
 gssanova1	gssanova0
 hzdcurve.sshzd	hzdrate.sshzd
 hzdrate.sshzd	hzdrate.sshzd
+hzdrate.sshzd2d	hzdrate.sshzd2d
 kl.binomial	family
 kl.Gamma	family
 kl.inverse.gaussian	family
@@ -104,6 +110,7 @@ mkrk.tp	mkfun.tp
 mkrk.tp.p	mkfun.tp
 mkrk.trig	mkfun.poly
 mkterm	mkterm
+mkterm.copu	mkterm.copu
 mspcdsty	drkpk
 mspcdsty1	drkpk
 mspcox	drkpk
@@ -178,11 +185,15 @@ ssanova0	ssanova0
 ssanova9	ssanova9
 sscden	sscden
 sscden1	sscden
+sscopu	sscopu
+sscopu2	sscopu
 sscox	sscox
 ssden	ssden
 ssden1	ssden
 sshzd	sshzd
 sshzd1	sshzd
+sshzd2d	sshzd2d
+sshzd2d1	sshzd2d
 ssllrm	ssllrm
 sspcox	drkpk
 sspdsty	drkpk
@@ -198,7 +209,9 @@ summary.gssanova0	summary.gssanova0
 summary.ssanova	summary.ssanova
 summary.ssanova0	summary.ssanova
 summary.ssanova9	summary.ssanova
+summary.sscopu	summary.sscopu
 survexp.sshzd	hzdrate.sshzd
+survexp.sshzd2d	hzdrate.sshzd2d
 wesdr	wesdr
 y0.binomial	family
 y0.Gamma	family

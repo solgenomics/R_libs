@@ -1,15 +1,85 @@
+CHANGES IN VERSION 0.4.5 - Released 2019/12/02
+
+BUG FIX
+
+* Fix for Issue #47: Install failure with gcc 10
+  https://github.com/davidcsterratt/geometry/issues/47
+  Thanks to Brian Ripley for pointing this out
+
+CHANGES IN VERSION 0.4.4 - Released 2019/08/27
+
+BUG FIX
+
+* Fix for Issue #45: LTO error
+  https://github.com/davidcsterratt/retistruct/issues/45
+  Thanks to Brian Ripley for pointing this out and providing the fix
+
+CHANGES IN VERSION 0.4.3 - Released 2019/08/21
+
+BUG FIXES
+
+* Fix for Issue #39: tsearchn() returns NA for some points within
+  triangle
+  https://github.com/davidcsterratt/geometry/issues/39
+  tsearchn() failed (=return NA) for some points that lie within the
+  triangulation. Thanks to Jan Lause (https://github.com/jlause) for
+  reporting the bug and Jean-Romain Roussel for providing the fix.
+
+* Fix for Issue #40: memory misuse in src/Rtsearchn.c
+  https://github.com/davidcsterratt/geometry/issues/40
+  In src/Rtsearchn.c 'idmap' was allocated with max_facet_id elements
+  but then a value to idmap[max_facet_id] was assigned, which was one
+  element beyond the end of that allocation, potentially clobbering
+  the memory allocation system.
+  Thanks to Bill Dunlap (https://github.com/BillDunlap) for reporting
+  this, and the suggested fix.
+
+* Fix for Issue #44: R_tmpnam()/free() causes crash in TERR
+  https://github.com/davidcsterratt/geometry/issues/44
+
+  Because TERR
+  (https://docs.tibco.com/products/tibco-enterprise-runtime-for-r) is
+  not compiled with gcc (it uses either the Intel or Microsoft C++
+  compiler) on Windows, calling free() in a package's DLL for memory
+  allocated with malloc() in TERR's own DLL causes a crash. The R API
+  function R_tmpnam() causes this problem in the geometry package.
+  Thanks to Bill Dunlap (https://github.com/BillDunlap) for reporting
+  this, and the suggested fix.
+
+ENHANCEMENT
+
+* Fix for Issue #42: Improve error reporting from Qhull
+  https://github.com/davidcsterratt/geometry/issues/42
+  Full error from Qhull is now returned, rather than just the first
+  two lines.
+
+CHANGES IN VERSION 0.4.2 - Released 2019/07/05
+
+BUG FIX
+
+* Fix for Issue #35: intersectn() reports zero volume for some
+  overlapping 4D hulls
+  https://github.com/davidcsterratt/geometry/issues/35
+  intersectn() failed on a particular example. Modifying the scale
+  option given to lpSolve::lp in feasible.point() has fixed this
+  problem. feasible.point() also now returns the lpSolve::lp() error
+  message when it fails, rather than failing silently as before.
+  Thanks to Maxime Logez for reporting the bug and Sam Buttrey,
+  lpSolve maintainer, for insights into lpSolve.
+
 CHANGES IN VERSION 0.4.1 - Released 2019/03/27
 
 BUG FIXES
 
-* Fix intersectn() fails when overlapping region is not in positive quadrant
+* Fix for Issue #34: intersectn() fails when overlapping region is not
+  in positive quadrant
   https://github.com/davidcsterratt/geometry/issues/34
-  intersection() would return no intersecting hull for input hulls
+  intersectn() would return no intersecting hull for input hulls
   whose overlapping region did not overlap with the postive quadrant
   (i.e. the region where all coordinates are non-negative). Thanks to
   Maxime Logez for reporting the bug.
 
-* Fix nonsensical results from intersectn() in 4D
+* Fix for Issue #33:  nonsensical results from intersectn() in 4D
   https://github.com/davidcsterratt/geometry/issues/33
   intersectn() gave demonstrably wrong results in some cases. This was
   Because of some heuristic (non-Qhull) code in halfspacen which was

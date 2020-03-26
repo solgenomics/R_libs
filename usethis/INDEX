@@ -21,7 +21,6 @@ use_blank_slate         Don't save/load user workspace between sessions
 use_build_ignore        Add files to '.Rbuildignore'
 use_citation            Create a CITATION template
 use_code_of_conduct     Add a code of conduct
-use_course              Download course materials
 use_coverage            Test coverage
 use_cran_comments       CRAN submission comments
 use_data                Create package data
@@ -36,7 +35,9 @@ use_github              Connect a local repo with GitHub
 use_github_labels       Manage GitHub issue labels
 use_github_links        Use GitHub links in URL and BugReports
 use_github_release      Draft a GitHub release
+use_jenkins             Create Jenkinsfile for Jenkins CI Pipelines
 use_logo                Use a package logo
+use_make                Create Makefile
 use_mit_license         License a package
 use_namespace           Use a basic 'NAMESPACE'
 use_news_md             Create a simple 'NEWS.md'
@@ -62,3 +63,4 @@ use_travis              Continuous integration setup and badges
 use_tutorial            Create a learnr tutorial
 use_version             Increment package version
 use_vignette            Create a vignette or article.
+zip-utils               Download and unpack a ZIP file

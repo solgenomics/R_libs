@@ -55,6 +55,7 @@ combine	Hmisc-internal
 combine.levels	varclus
 combine<-	Hmisc-internal
 combineLabels	label
+combplotp	combplotp
 confbar	Misc
 consolidate	consolidate
 consolidate.default	consolidate
@@ -63,6 +64,7 @@ contents	contents
 contents.data.frame	contents
 contents.list	contents
 conTestkw	summary.formula
+convertPdate	Hmisc-internal
 cpower	cpower
 Cs	Cs
 csv.get	csv.get
@@ -105,6 +107,7 @@ Ecdf	Ecdf
 Ecdf.data.frame	Ecdf
 Ecdf.default	Ecdf
 Ecdf.formula	Ecdf
+ecdfpM	scat1d
 equalBins	equalBins
 errbar	errbar
 escapeBS	escapeRegex
@@ -208,6 +211,7 @@ james.stein	Misc
 jitter2	scat1d
 jitter2.data.frame	scat1d
 jitter2.default	scat1d
+keepHattrib	Misc
 Key	legendfunctions
 Key2	legendfunctions
 km.quick	Misc
@@ -442,6 +446,7 @@ relevel.labelled	label
 replace.substring.wild	sedit
 reShape	reShape
 responseSummary	Hmisc-internal
+restoreHattrib	Misc
 rlegend	rlegend
 rlegendg	rlegend
 rm.boot	rm.boot
@@ -511,6 +516,7 @@ Summary.mChoice	mChoice
 summary.mChoice	mChoice
 summary.transcan	transcan
 summaryD	dotchart3
+summaryDp	dotchart3
 summaryM	summaryM
 summaryP	summaryP
 summaryRc	summaryRc

@@ -1,6 +1,48 @@
+1.16.2 (2020-03-19)
+  * Skip test depending on Rcpp version
+
+1.16.1 (2020-01-13)
+  * Skip timing-dependent test failing occasionally on CRAN
+
+1.16.0 (2020-01-12)
+  * BACKWARD INCOMPATIBLE CHANGE: 'transpose' argument to 'coords' switched to FALSE by default (issue #54)
+  * BACKWARD INCOMPATIBLE CHANGE: 'ci.coords' return value is now of list type and easier to use
+  * Fix one-sided DeLong test for curves with 'direction=">"' (issue #64)
+  * Fix an error in 'ci.coords' due to expected NA values in some coords (like "precision") (issue #65)
+  * Ordrered predictors are converted to numeric in a more robust way (issue #63)
+  * Cleaned up 'power.roc.test' code (issue #50)
+  * Fix pairing with 'roc.formula' and warn if 'na.action' is not set to "na.pass" or "na.fail" (issue #68)
+  * Fix 'ci.coords' not working with 'smooth.roc' curves
+  
+1.15.3 (2019-07-21)
+  * Fix: previous version accidentally set transpose = FALSE, should only be for next major release
+
+1.15.2 (2019-07-20)
+  * Fix -Inf threshold in coords for curves with 'direction = ">"' (issue #60)
+  * Restore lazy loading of the data and fix an 'R CMD check' warning "Variables with usage in documentation object 'aSAH' not in code"
+
+1.15.1 (2019-07-17)
+  * Fix erroneous error in 'ci.coords' with 'ret="threshold"' (issue #57)
+  * Fix vdiffr unit tests with ggplot2 3.2.0 (issue #53)
+  * Keep list order in 'ggroc' (issue #58)
+
+1.15.0 (2019-06-01)
+  * 'roc' now prints messages when autodetecting 'levels' and 'direction' by default. Turn off with 'quiet = TRUE' or set these values explicitly
+  * Speedup with 'algorithm = 2' (issue #44) and in 'coords' (issue #52)
+  * New 'algorithm = 6' (used by default) uses 'algorithm = 2' for numeric data, and 'algorithm = 3' for ordered vectors
+  * New 'roc.data.frame' method and 'roc_' function for use in pipelines
+  * 'coords' can now returns 'youden' and 'closest.topleft" values (issue #48)
+  * New 'transpose' argument for 'coords', TRUE by default (issue #54)
+  * Use text instead of Tcl/Tk progress bar by default (issue #51)
+  * Fix 'method = "density"' smoothing when called directly from 'roc' (issue #49)
+  * Renamed 'roc' argument 'n' to 'smooth.n'
+  * Fixed 'are.paired' ignoring smoothing arguments of 'roc2' with 'return.paired.rocs'
+  * New 'ret' option "all" in 'coords' (issue #47)
+  * 'drop' in 'coords' now drops the dimension of 'ret' too (#issue 43)
+
 1.14.0 (2019-03-12)
   * The 'multiclass.roc' function now accepts multivariate decision values (code contributed by Matthias Döring)
-  * 'ggroc' supports multiple aesthetics
+  * 'ggroc' supports multiple aesthetics (issue #42)
   * Make 'ggplot2' dependency optional
   * Suggested packages can be installed interactively when required
   * Passing both 'cases' and 'controls' or 'response' and 'predictor' arguments is now an error

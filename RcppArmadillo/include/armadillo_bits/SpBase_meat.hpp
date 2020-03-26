@@ -402,6 +402,221 @@ template<typename elem_type, typename derived>
 inline
 arma_warn_unused
 bool
+SpBase<elem_type,derived>::is_zero(const typename get_pod_type<elem_type>::result tol) const
+  {
+  arma_extra_debug_sigprint();
+  
+  typedef typename get_pod_type<elem_type>::result T;
+  
+  arma_debug_check( (tol < T(0)), "is_zero(): parameter 'tol' must be >= 0" );
+  
+  const SpProxy<derived> P( (*this).get_ref() );
+  
+  if(P.get_n_elem() == 0)  { return false; }
+  
+  if( (tol == T(0)) && (P.get_n_nonzero() == 0) )  { return true; }
+  
+  if(is_SpMat<typename SpProxy<derived>::stored_type>::value)
+    {
+    const unwrap_spmat<typename SpProxy<derived>::stored_type> U(P.Q);
+    
+    return arrayops::is_zero(U.M.values, U.M.n_nonzero, tol);
+    }
+  
+  typename SpProxy<derived>::const_iterator_type it     = P.begin();
+  typename SpProxy<derived>::const_iterator_type it_end = P.end();
+  
+  if(is_cx<elem_type>::yes)
+    {
+    while(it != it_end)
+      {
+      const elem_type val = (*it);
+      
+      const T val_real = access::tmp_real(val);
+      const T val_imag = access::tmp_imag(val);
+      
+      if(std::abs(val_real) > tol)  { return false; }
+      if(std::abs(val_imag) > tol)  { return false; }
+      
+      ++it;
+      }
+    }
+  else  // not complex
+    {
+    while(it != it_end)
+      {
+      if(std::abs(*it) > tol)  { return false; }
+      
+      ++it;
+      }
+    }
+  
+  return true;
+  }
+
+
+
+template<typename elem_type, typename derived>
+inline
+arma_warn_unused
+bool
+SpBase<elem_type,derived>::is_trimatu() const
+  {
+  arma_extra_debug_sigprint();
+  
+  const SpProxy<derived> P( (*this).get_ref() );
+  
+  if(P.get_n_rows() != P.get_n_cols())  { return false; }
+  
+  typename SpProxy<derived>::const_iterator_type it     = P.begin();
+  typename SpProxy<derived>::const_iterator_type it_end = P.end();
+  
+  while(it != it_end)
+    {
+    if(it.row() > it.col())  { return false; }
+    ++it;
+    }
+  
+  return true;
+  }
+
+
+
+template<typename elem_type, typename derived>
+inline
+arma_warn_unused
+bool
+SpBase<elem_type,derived>::is_trimatl() const
+  {
+  arma_extra_debug_sigprint();
+  
+  const SpProxy<derived> P( (*this).get_ref() );
+  
+  if(P.get_n_rows() != P.get_n_cols())  { return false; }
+  
+  typename SpProxy<derived>::const_iterator_type it     = P.begin();
+  typename SpProxy<derived>::const_iterator_type it_end = P.end();
+  
+  while(it != it_end)
+    {
+    if(it.row() < it.col())  { return false; }
+    ++it;
+    }
+  
+  return true;
+  }
+
+
+
+template<typename elem_type, typename derived>
+inline
+arma_warn_unused
+bool
+SpBase<elem_type,derived>::is_diagmat() const
+  {
+  arma_extra_debug_sigprint();
+  
+  const SpProxy<derived> P( (*this).get_ref() );
+  
+  typename SpProxy<derived>::const_iterator_type it     = P.begin();
+  typename SpProxy<derived>::const_iterator_type it_end = P.end();
+  
+  while(it != it_end)
+    {
+    if(it.row() != it.col())  { return false; }
+    ++it;
+    }
+  
+  return true;
+  }
+
+
+
+template<typename elem_type, typename derived>
+inline
+arma_warn_unused
+bool
+SpBase<elem_type,derived>::is_empty() const
+  {
+  arma_extra_debug_sigprint();
+  
+  const SpProxy<derived> P( (*this).get_ref() );
+  
+  return (P.get_n_elem() == uword(0));
+  }
+
+
+
+template<typename elem_type, typename derived>
+inline
+arma_warn_unused
+bool
+SpBase<elem_type,derived>::is_square() const
+  {
+  arma_extra_debug_sigprint();
+  
+  const SpProxy<derived> P( (*this).get_ref() );
+  
+  return (P.get_n_rows() == P.get_n_cols());
+  }
+
+
+
+template<typename elem_type, typename derived>
+inline
+arma_warn_unused
+bool
+SpBase<elem_type,derived>::is_vec() const
+  {
+  arma_extra_debug_sigprint();
+  
+  if( (SpProxy<derived>::is_row) || (SpProxy<derived>::is_col) || (SpProxy<derived>::is_xvec) )  { return true; }
+  
+  const SpProxy<derived> P( (*this).get_ref() );
+  
+  return ( (P.get_n_rows() == uword(1)) || (P.get_n_cols() == uword(1)) );
+  }
+
+
+
+template<typename elem_type, typename derived>
+inline
+arma_warn_unused
+bool
+SpBase<elem_type,derived>::is_colvec() const
+  {
+  arma_extra_debug_sigprint();
+  
+  if(SpProxy<derived>::is_col)  { return true; }
+  
+  const SpProxy<derived> P( (*this).get_ref() );
+  
+  return (P.get_n_cols() == uword(1));
+  }
+
+
+
+template<typename elem_type, typename derived>
+inline
+arma_warn_unused
+bool
+SpBase<elem_type,derived>::is_rowvec() const
+  {
+  arma_extra_debug_sigprint();
+  
+  if(SpProxy<derived>::is_row)  { return true; }
+  
+  const SpProxy<derived> P( (*this).get_ref() );
+  
+  return (P.get_n_rows() == uword(1));
+  }
+
+
+
+template<typename elem_type, typename derived>
+inline
+arma_warn_unused
+bool
 SpBase<elem_type,derived>::is_finite() const
   {
   arma_extra_debug_sigprint();
@@ -427,6 +642,72 @@ SpBase<elem_type,derived>::is_finite() const
     }
   
   return true;
+  }
+
+
+
+template<typename elem_type, typename derived>
+inline
+arma_warn_unused
+bool
+SpBase<elem_type,derived>::has_inf() const
+  {
+  arma_extra_debug_sigprint();
+  
+  const SpProxy<derived> P( (*this).get_ref() );
+  
+  if(is_SpMat<typename SpProxy<derived>::stored_type>::value)
+    {
+    const unwrap_spmat<typename SpProxy<derived>::stored_type> U(P.Q);
+    
+    return U.M.has_inf();
+    }
+  else
+    {
+    typename SpProxy<derived>::const_iterator_type it     = P.begin();
+    typename SpProxy<derived>::const_iterator_type it_end = P.end();
+    
+    while(it != it_end)
+      {
+      if(arma_isinf(*it))  { return true; }
+      ++it;
+      }
+    }
+  
+  return false;
+  }
+
+
+
+template<typename elem_type, typename derived>
+inline
+arma_warn_unused
+bool
+SpBase<elem_type,derived>::has_nan() const
+  {
+  arma_extra_debug_sigprint();
+  
+  const SpProxy<derived> P( (*this).get_ref() );
+  
+  if(is_SpMat<typename SpProxy<derived>::stored_type>::value)
+    {
+    const unwrap_spmat<typename SpProxy<derived>::stored_type> U(P.Q);
+    
+    return U.M.has_nan();
+    }
+  else
+    {
+    typename SpProxy<derived>::const_iterator_type it     = P.begin();
+    typename SpProxy<derived>::const_iterator_type it_end = P.end();
+    
+    while(it != it_end)
+      {
+      if(arma_isnan(*it))  { return true; }
+      ++it;
+      }
+    }
+  
+  return false;
   }
 
 

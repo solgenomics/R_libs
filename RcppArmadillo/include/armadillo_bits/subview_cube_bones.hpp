@@ -102,6 +102,8 @@ class subview_cube : public BaseCube<eT, subview_cube<eT> >
   
   inline void replace(const eT old_val, const eT new_val);
   
+  inline void clean(const pod_type threshold);
+  
   inline void fill(const eT val);
   inline void zeros();
   inline void ones();
@@ -109,6 +111,7 @@ class subview_cube : public BaseCube<eT, subview_cube<eT> >
   inline void randn();
   
   inline arma_warn_unused bool is_finite() const;
+  inline arma_warn_unused bool is_zero(const pod_type tol = 0) const;
   
   inline arma_warn_unused bool has_inf() const;
   inline arma_warn_unused bool has_nan() const;

@@ -1,6 +1,6 @@
 Package: vdiffr
 Title: Visual Regression Testing and Graphical Diffing
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: c(
     person("Lionel", "Henry", , "lionel@rstudio.com", c("cre", "aut")),
     person("RStudio", role = "cph"),
@@ -30,13 +30,13 @@ Imports: devtools, diffobj, fontquiver (>= 0.2.0), freetypeharfbuzz (>=
         0.2.5), gdtools, glue, grDevices, htmlwidgets (>= 0.6),
         htmltools, purrr (>= 0.2.0), rlang, R6, Rcpp, shiny, testthat
         (>= 1.0.0), usethis (>= 1.4.0), xml2 (>= 1.0.0)
-Suggests: crayon, ggplot2 (>= 3.0.0), roxygen2, rstudioapi, withr, yaml
+Suggests: crayon, ggplot2 (>= 3.2.0), roxygen2, rstudioapi, withr, yaml
 LinkingTo: freetypeharfbuzz, gdtools, Rcpp, BH
 RoxygenNote: 6.1.1
 URL: https://github.com/r-lib/vdiffr
 BugReports: https://github.com/r-lib/vdiffr/issues
 NeedsCompilation: yes
-Packaged: 2019-01-02 18:46:55 UTC; lionel
+Packaged: 2019-06-24 16:16:26 UTC; lionel
 Author: Lionel Henry [cre, aut],
   RStudio [cph],
   Carl Sutherland [aut] (jg-imagediff library),
@@ -54,5 +54,5 @@ Author: Lionel Henry [cre, aut],
   Håkon Malmedal [ctb] (svglite: Opacity code)
 Maintainer: Lionel Henry <lionel@rstudio.com>
 Repository: CRAN
-Date/Publication: 2019-01-02 19:30:02 UTC
-Built: R 3.6.0; x86_64-pc-linux-gnu; 2019-05-10 11:51:17 UTC; unix
+Date/Publication: 2019-06-24 16:30:03 UTC
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-03-24 20:15:36 UTC; unix

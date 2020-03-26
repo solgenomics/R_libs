@@ -78,10 +78,11 @@ use_build_ignore	use_build_ignore
 use_c	use_rcpp
 use_cc0_license	licenses
 use_ccby_license	licenses
+use_circleci	ci
 use_citation	use_citation
 use_code_of_conduct	use_code_of_conduct
 use_conflicted	rprofile-helper
-use_course	use_course
+use_course	zip-utils
 use_course_details	use_course_details
 use_coverage	use_coverage
 use_covr_ignore	use_coverage
@@ -109,9 +110,11 @@ use_git_ignore	use_git_ignore
 use_git_protocol	git_protocol
 use_git_remote	use_git_remote
 use_gpl3_license	licenses
+use_jenkins	use_jenkins
 use_lgpl_license	licenses
 use_lifecycle_badge	badges
 use_logo	use_logo
+use_make	use_make
 use_mit_license	licenses
 use_namespace	use_namespace
 use_news_md	use_news_md
@@ -156,7 +159,9 @@ use_tutorial	use_tutorial
 use_usethis	rprofile-helper
 use_version	use_version
 use_vignette	use_vignette
+use_zip	zip-utils
 with_project	proj_utils
 write-this	write-this
 write_over	write-this
 write_union	write-this
+zip-utils	zip-utils

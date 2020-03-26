@@ -172,6 +172,7 @@ orderMarkers            Find an initial order for markers within
 phenames                Pull out the phenotypes names from a cross
 pickMarkerSubset        Identify the largest subset of markers that are
                         some distance apart
+plot.comparegeno        Plot genotype comparison
 plot.cross              Plot various features of a cross object
 plot.qtl                Plot QTL locations
 plot.rfmatrix           Plot recombination fractions or LOD scores for
@@ -256,6 +257,8 @@ subset.scanoneperm      Subsetting permutation test results
 subset.scantwo          Subsetting the results of a 2-d genome scan
 subset.scantwoperm      Subsetting two-dimensional permutation test
                         results
+summary.comparegeno     Print pairs of individuals with similar
+                        genotype data.
 summary.cross           Print summary of QTL experiment
 summary.fitqtl          Summary of fit of qtl model
 summary.qtl             Print summary of a QTL object

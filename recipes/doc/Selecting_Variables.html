@@ -1,45 +1,57 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
 
 <title>Selecting Variables</title>
 
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -48,9 +60,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -96,7 +108,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -327,6 +339,9 @@ code > span.fu { color: #900; font-weight: bold; }
 code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
+
+
+
 </head>
 
 <body>
@@ -347,68 +362,70 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 </ul>
 <p>The manual pages for <code>?selections</code> and <code>?has_role</code> have details about the available selection methods.</p>
 <p>To illustrate this, the credit data will be used:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(recipes)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">data</span>(<span class="st">&quot;credit_data&quot;</span>)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">str</span>(credit_data)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">#&gt; 'data.frame':    4454 obs. of  14 variables:</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt;  $ Status   : Factor w/ 2 levels &quot;bad&quot;,&quot;good&quot;: 2 2 1 2 2 2 2 2 2 1 ...</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">#&gt;  $ Seniority: int  9 17 10 0 0 1 29 9 0 0 ...</span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">#&gt;  $ Home     : Factor w/ 6 levels &quot;ignore&quot;,&quot;other&quot;,..: 6 6 3 6 6 3 3 4 3 4 ...</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt;  $ Time     : int  60 60 36 60 36 60 60 12 60 48 ...</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt;  $ Age      : int  30 58 46 24 26 36 44 27 32 41 ...</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt;  $ Marital  : Factor w/ 5 levels &quot;divorced&quot;,&quot;married&quot;,..: 2 5 2 4 4 2 2 4 2 2 ...</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt;  $ Records  : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 2 1 1 1 1 1 1 1 ...</span></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">#&gt;  $ Job      : Factor w/ 4 levels &quot;fixed&quot;,&quot;freelance&quot;,..: 2 1 2 1 1 1 1 1 2 4 ...</span></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co">#&gt;  $ Expenses : int  73 48 90 63 46 75 75 35 90 90 ...</span></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co">#&gt;  $ Income   : int  129 131 200 182 107 214 125 80 107 80 ...</span></a>
-<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="co">#&gt;  $ Assets   : int  0 0 3000 2500 0 3500 10000 0 15000 0 ...</span></a>
-<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co">#&gt;  $ Debt     : int  0 0 0 0 0 0 0 0 0 0 ...</span></a>
-<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co">#&gt;  $ Amount   : int  800 1000 2000 900 310 650 1600 200 1200 1200 ...</span></a>
-<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="co">#&gt;  $ Price    : int  846 1658 2985 1325 910 1645 1800 1093 1957 1468 ...</span></a>
-<a class="sourceLine" id="cb1-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb1-20" data-line-number="20">rec &lt;-<span class="st"> </span><span class="kw">recipe</span>(Status <span class="op">~</span><span class="st"> </span>Seniority <span class="op">+</span><span class="st"> </span>Time <span class="op">+</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Records, <span class="dt">data =</span> credit_data)</a>
-<a class="sourceLine" id="cb1-21" data-line-number="21">rec</a>
-<a class="sourceLine" id="cb1-22" data-line-number="22"><span class="co">#&gt; Data Recipe</span></a>
-<a class="sourceLine" id="cb1-23" data-line-number="23"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-24" data-line-number="24"><span class="co">#&gt; Inputs:</span></a>
-<a class="sourceLine" id="cb1-25" data-line-number="25"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-26" data-line-number="26"><span class="co">#&gt;       role #variables</span></a>
-<a class="sourceLine" id="cb1-27" data-line-number="27"><span class="co">#&gt;    outcome          1</span></a>
-<a class="sourceLine" id="cb1-28" data-line-number="28"><span class="co">#&gt;  predictor          4</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(recipes)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(modeldata)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">data</span>(<span class="st">&quot;credit_data&quot;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">str</span>(credit_data)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co">#&gt; &#39;data.frame&#39;:    4454 obs. of  14 variables:</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co">#&gt;  $ Status   : Factor w/ 2 levels &quot;bad&quot;,&quot;good&quot;: 2 2 1 2 2 2 2 2 2 1 ...</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co">#&gt;  $ Seniority: int  9 17 10 0 0 1 29 9 0 0 ...</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co">#&gt;  $ Home     : Factor w/ 6 levels &quot;ignore&quot;,&quot;other&quot;,..: 6 6 3 6 6 3 3 4 3 4 ...</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co">#&gt;  $ Time     : int  60 60 36 60 36 60 60 12 60 48 ...</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co">#&gt;  $ Age      : int  30 58 46 24 26 36 44 27 32 41 ...</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co">#&gt;  $ Marital  : Factor w/ 5 levels &quot;divorced&quot;,&quot;married&quot;,..: 2 5 2 4 4 2 2 4 2 2 ...</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="co">#&gt;  $ Records  : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 2 1 1 1 1 1 1 1 ...</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="co">#&gt;  $ Job      : Factor w/ 4 levels &quot;fixed&quot;,&quot;freelance&quot;,..: 2 1 2 1 1 1 1 1 2 4 ...</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="co">#&gt;  $ Expenses : int  73 48 90 63 46 75 75 35 90 90 ...</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="co">#&gt;  $ Income   : int  129 131 200 182 107 214 125 80 107 80 ...</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="co">#&gt;  $ Assets   : int  0 0 3000 2500 0 3500 10000 0 15000 0 ...</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="co">#&gt;  $ Debt     : int  0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="co">#&gt;  $ Amount   : int  800 1000 2000 900 310 650 1600 200 1200 1200 ...</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="co">#&gt;  $ Price    : int  846 1658 2985 1325 910 1645 1800 1093 1957 1468 ...</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a></span>
+<span id="cb1-22"><a href="#cb1-22"></a>rec &lt;-<span class="st"> </span><span class="kw">recipe</span>(Status <span class="op">~</span><span class="st"> </span>Seniority <span class="op">+</span><span class="st"> </span>Time <span class="op">+</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Records, <span class="dt">data =</span> credit_data)</span>
+<span id="cb1-23"><a href="#cb1-23"></a>rec</span>
+<span id="cb1-24"><a href="#cb1-24"></a><span class="co">#&gt; Data Recipe</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="co">#&gt; </span></span>
+<span id="cb1-26"><a href="#cb1-26"></a><span class="co">#&gt; Inputs:</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a><span class="co">#&gt; </span></span>
+<span id="cb1-28"><a href="#cb1-28"></a><span class="co">#&gt;       role #variables</span></span>
+<span id="cb1-29"><a href="#cb1-29"></a><span class="co">#&gt;    outcome          1</span></span>
+<span id="cb1-30"><a href="#cb1-30"></a><span class="co">#&gt;  predictor          4</span></span></code></pre></div>
 <p>Before any steps are used the information on the original variables is:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">summary</span>(rec, <span class="dt">original =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; # A tibble: 5 x 4</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt;   variable  type    role      source  </span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   </span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; 1 Seniority numeric predictor original</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; 2 Time      numeric predictor original</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; 3 Age       numeric predictor original</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; 4 Records   nominal predictor original</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; 5 Status    nominal outcome   original</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">summary</span>(rec, <span class="dt">original =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt; # A tibble: 5 x 4</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co">#&gt;   variable  type    role      source  </span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   </span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt; 1 Seniority numeric predictor original</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co">#&gt; 2 Time      numeric predictor original</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt; 3 Age       numeric predictor original</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt; 4 Records   nominal predictor original</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt; 5 Status    nominal outcome   original</span></span></code></pre></div>
 <p>We can add a step to compute dummy variables on the non-numeric data after we impute any missing data:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">dummied &lt;-<span class="st"> </span>rec <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">step_dummy</span>(<span class="kw">all_nominal</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>dummied &lt;-<span class="st"> </span>rec <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">step_dummy</span>(<span class="kw">all_nominal</span>())</span></code></pre></div>
 <p>This will capture <em>any</em> variables that are either character strings or factors: <code>Status</code> and <code>Records</code>. However, since <code>Status</code> is our outcome, we might want to keep it as a factor so we can <em>subtract</em> that variable out either by name or by role:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">dummied &lt;-<span class="st"> </span>rec <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">step_dummy</span>(Records) <span class="co"># or</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">dummied &lt;-<span class="st"> </span>rec <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">step_dummy</span>(<span class="kw">all_nominal</span>(), <span class="op">-</span><span class="st"> </span>Status) <span class="co"># or</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">dummied &lt;-<span class="st"> </span>rec <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">step_dummy</span>(<span class="kw">all_nominal</span>(), <span class="op">-</span><span class="st"> </span><span class="kw">all_outcomes</span>()) </a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>dummied &lt;-<span class="st"> </span>rec <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">step_dummy</span>(Records) <span class="co"># or</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>dummied &lt;-<span class="st"> </span>rec <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">step_dummy</span>(<span class="kw">all_nominal</span>(), <span class="op">-</span><span class="st"> </span>Status) <span class="co"># or</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>dummied &lt;-<span class="st"> </span>rec <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">step_dummy</span>(<span class="kw">all_nominal</span>(), <span class="op">-</span><span class="st"> </span><span class="kw">all_outcomes</span>()) </span></code></pre></div>
 <p>Using the last definition:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">dummied &lt;-<span class="st"> </span><span class="kw">prep</span>(dummied, <span class="dt">training =</span> credit_data)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">with_dummy &lt;-<span class="st"> </span><span class="kw">bake</span>(dummied, <span class="dt">new_data =</span> credit_data)</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">with_dummy</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; # A tibble: 4,454 x 5</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;    Status Seniority  Time   Age Records_X1</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt;    &lt;fct&gt;      &lt;int&gt; &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;  1 good           9    60    30         -1</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;  2 good          17    60    58         -1</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;  3 bad           10    36    46          1</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt;  4 good           0    60    24         -1</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt;  5 good           0    36    26         -1</span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt;  6 good           1    60    36         -1</span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt;  7 good          29    60    44         -1</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt;  8 good           9    12    27         -1</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt;  9 good           0    60    32         -1</span></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; 10 bad            0    48    41         -1</span></a>
-<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; # … with 4,444 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>dummied &lt;-<span class="st"> </span><span class="kw">prep</span>(dummied, <span class="dt">training =</span> credit_data)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>with_dummy &lt;-<span class="st"> </span><span class="kw">bake</span>(dummied, <span class="dt">new_data =</span> credit_data)</span>
+<span id="cb5-3"><a href="#cb5-3"></a>with_dummy</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt; # A tibble: 4,454 x 5</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt;    Seniority  Time   Age Status Records_X1</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt;        &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt;       &lt;dbl&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt;  1         9    60    30 good           -1</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt;  2        17    60    58 good           -1</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt;  3        10    36    46 bad             1</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt;  4         0    60    24 good           -1</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt;  5         0    36    26 good           -1</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt;  6         1    60    36 good           -1</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt;  7        29    60    44 good           -1</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="co">#&gt;  8         9    12    27 good           -1</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="co">#&gt;  9         0    60    32 good           -1</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="co">#&gt; 10         0    48    41 bad            -1</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="co">#&gt; # … with 4,444 more rows</span></span></code></pre></div>
 <p><code>Status</code> is unaffected.</p>
 <p>One important aspect about selecting variables in steps is that the variable names and types may change as steps are being executed. In the above example, <code>Records</code> is a factor variable before the step is executed. Afterwards, <code>Records</code> is gone and the binary variable <code>Records_yes</code> is in its place. One reason to have general selection routines like <code>all_predictors</code> or <code>contains</code> is to be able to select variables that have not be created yet.</p>
 
@@ -432,6 +449,9 @@ window.onload = function() {
   }
 }
 </script>
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

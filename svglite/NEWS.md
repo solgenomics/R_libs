@@ -1,7 +1,30 @@
+# svglite 1.2.3
+
+# svglite (development version)
+
+* The radius of circles is no longer expressed in pt (#93, @vandenman).
+
+* Dimensions smaller than 1 now retain two significant figures (#94, @ilia-kats).
+
+* @thomasp85 takes over as maintainer
+
+
+# svglite 1.2.2
+
+* Improvements to reproducibility of generated SVGs: Negative zeros
+  are now treated as positive, and the clip ID are now generated from
+  truncated elements.
+
+* svglite now uses the `polygon` SVG element. This ensures that
+  polygons are properly closed (#82).
+
+* Text metrics are now correctly computed for Unicode characters in
+  plotmath expressions (#81).
+
 
 # svglite 1.2.1
 
-This release makes svglite compatible with gdtools 0.1.6.
+This release makes svglite compatible with gdtools 0.1.6
 
 
 # svglite 1.2.0

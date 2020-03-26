@@ -8,6 +8,7 @@ dumpts	deldir-internal
 duplicatedxy	duplicatedxy
 get.cnrind	deldir-internal
 getCol	deldir-internal
+lawSummary	lawSummary
 mid.in	deldir-internal
 mnndR	deldir-internal
 niProperties	niProperties

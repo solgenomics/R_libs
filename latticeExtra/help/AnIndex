@@ -62,6 +62,7 @@ panel.xyarea	panel.xyarea
 panel.xyarea.default	panel.xyarea
 panel.xyarea.ts	panel.xyarea
 panel.xyarea.zoo	panel.xyarea
+panel.xyimage	panel.xyimage
 postdoc	postdoc
 prepanel.ecdfplot	ecdfplot
 prepanel.horizonplot	horizonplot

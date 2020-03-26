@@ -1,6 +1,47 @@
 Package: R.utils
 ================
 
+Version: 2.9.2 [2019-12-07]
+
+ * CRAN POLICY CRAN: The help example for FileProgressBar and its package
+   tests wrote to the user's home directory. They are now writing to a
+   temporary directory instead.
+
+
+Version: 2.9.1 [2019-12-05]
+
+BUG FIXES:
+
+ * wrap() for arrays used a list - not a numeric vector - to assign dimensions.
+   This would produce an error in R (>= 4.0.0).
+
+ * withSeed(..., seed = NULL) did not work for R (< 3.0.0).
+ 
+ * fileAccess(..., mode = 2) would update .Random.seed.
+
+ * fileAccess(path, mode = 2) could end up in an end less loop if the 'path'
+   folder contained all files of 'a, b, ..., z, A, B, ... Z'.
+ 
+
+Version: 2.9.0 [2019-06-11]
+ 
+BUG FIXES:
+
+ * sourceDirectory() did not respect argument 'modifiedOnly'.  Thanks to
+   Anton Krasikov for the report and the fix.
+
+ * createLink() could produce a spurious warning on MS Windows.
+
+DEPRECATE AND DEFUNCT:
+
+ * Previously defunct arrayIndex(), evalWithTimeout(), and resetWarnings()
+   have been removed.
+ 
+ * Assert$inherits() is defunct - use Assert$inheritsFrom() instead.
+
+ * Argument 'substitute' of withCapture() is defunct - use 'replace' instead.
+ 
+
 Version: 2.8.0 [2019-02-13]
 
 NEW FEATURES:
@@ -88,7 +129,7 @@ DEPRECATE AND DEFUNCT:
 
  * Argument 'substitute' of withCapture() has been renamed to 'replace'.
    Code that calls withCapture(..., substitute = ...) will still work, but
-   the use of 'subsitute' is deprecated and will later become defunct.
+   the use of 'substitute' is deprecated and will later become defunct.
    The purpose of this change of argument name is so that the meaning of
    'substitute' can be harmonized with the other withNnn() functions.
 

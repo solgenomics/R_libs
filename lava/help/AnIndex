@@ -12,6 +12,8 @@ as.sim	sim.default
 backdoor	backdoor
 baptize	baptize
 beta.lvm	sim
+Binary.lvm	sim
+binary.lvm	sim
 binomial.lvm	sim
 binomial.rd	binomial.rd
 binomial.rr	binomial.rd
@@ -214,6 +216,7 @@ moments	gof
 moments.lvm	gof
 multigroup	internal
 multinomial	multinomial
+multinomial.lvm	sim
 mvn.lvm	sim
 mvnmix	mvnmix
 na.pass0	internal
@@ -274,6 +277,7 @@ randomslope	internal
 randomslope<-	internal
 Range.lvm	Range.lvm
 Ratio	diagtest
+rbind.Surv	rbind.Surv
 regfix	regression-set
 regfix.lvm	regression-set
 regfix<-	regression-set
@@ -300,7 +304,7 @@ score	gof
 score.glm	internal
 score.lvmfit	gof
 semdata	semdata
-sequence.lvm	sim
+Sequence.lvm	sim
 serotonin	serotonin
 serotonin2	serotonin2
 sim	sim

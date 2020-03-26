@@ -22,7 +22,6 @@ as.POSIXct.nanotime	nanotime
 as.POSIXlt.nanotime	nanotime
 c.nanotime	nanotime
 Compare,nanotime,ANY-method	nanotime
-Compare,nanotime,nanotime-method	nanotime
 Complex,nanotime-method	nanotime
 format.nanotime	nanotime
 index2char.nanotime	nanotime
@@ -47,3 +46,4 @@ show,nanotime-method	nanotime
 Summary,nanotime-method	nanotime
 [,nanotime-method	nanotime
 [<-,nanotime-method	nanotime
+[[,nanotime-method	nanotime

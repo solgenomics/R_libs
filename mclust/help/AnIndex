@@ -1,17 +1,21 @@
 mclust-package	mclust-package
 acidity	acidity
 adjustedRandIndex	adjustedRandIndex
+as.dendrogram.hc	hc
 as.densityMclust	mclust-internal
 as.densityMclust.default	mclust-internal
 as.densityMclust.Mclust	mclust-internal
+as.hclust.hc	hc
 as.Mclust	mclust-internal
 as.Mclust.default	mclust-internal
+as.Mclust.densityMclust	mclust-internal
 balanced.folds	mclust-internal
 banknote	banknote
 Baudry_etal_2010_JCGS_examples	Baudry_etal_2010_JCGS_examples
 bic	bic
 bicEMtrain	mclust-deprecated
 bicFill	mclust-internal
+BrierScore	BrierScore
 cdens	cdens
 cdensE	cdensE
 cdensEEE	cdensE
@@ -38,6 +42,7 @@ charconv	mclust-internal
 checkModelName	mclust-internal
 chevron	chevron
 classError	classError
+classPriorProbs	classPriorProbs
 clPairs	clPairs
 clPairsLegend	clPairs
 clustCombi	clustCombi
@@ -58,7 +63,7 @@ dens	dens
 densityMclust	densityMclust
 densityMclust.diagnostic	densityMclust.diagnostic
 diabetes	diabetes
-dmvnorm	mclust-internal
+dmvnorm	dmvnorm
 eigen.decomp	mclust-internal
 ellipse	mclust-internal
 em	em
@@ -103,6 +108,7 @@ estepVII	estepE
 estepVVE	estepE
 estepVVI	estepE
 estepVVV	estepE
+EuroUnemployment	EuroUnemployment
 ex4.1	Baudry_etal_2010_JCGS_examples
 ex4.2	Baudry_etal_2010_JCGS_examples
 ex4.3	Baudry_etal_2010_JCGS_examples
@@ -215,6 +221,7 @@ pickBIC	mclust-internal
 plot.clustCombi	plot.clustCombi
 plot.densityMclust	plot.densityMclust
 plot.gmmhd	gmmhd
+plot.hc	hc
 plot.Mclust	plot.Mclust
 plot.mclustBIC	plot.mclustBIC
 plot.MclustBootstrap	plot.MclustBoostrap
@@ -258,6 +265,7 @@ projdir.MclustDR	mclust-internal
 projpar.MclustDR	mclust-internal
 qclass	mclust-internal
 quantileMclust	cdfMclust
+randomOrthogonalMatrix	randomOrthogonalMatrix
 randomPairs	randomPairs
 randProj	randProj
 shapeO	mclust-internal
@@ -298,6 +306,7 @@ uncerPlot	uncerPlot
 unchol	mclust-internal
 unmap	unmap
 vecnorm	mclust-internal
+wdbc	wdbc
 wreath	wreath
 xlog	clustCombi-internals
 [.mclustBIC	mclust-internal

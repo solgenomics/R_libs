@@ -2,13 +2,15 @@
 #define REALSHIFT_SYM_SPARSEMATRIX_H
 
 #include <RcppEigen.h>
+#include "RealShift.h"
+#include "SparseMatrixMapping.h"
 
 template <int Storage>
 class RealShift_sym_sparseMatrix: public RealShift
 {
 private:
     typedef Eigen::SparseMatrix<double, Storage> SpMat;
-    typedef Eigen::MappedSparseMatrix<double, Storage> MapSpMat;
+    typedef Eigen::Map<SpMat> MapSpMat;
     typedef Eigen::Map<const Eigen::VectorXd> MapConstVec;
     typedef Eigen::Map<Eigen::VectorXd> MapVec;
     typedef Eigen::SimplicialLDLT< Eigen::SparseMatrix<double, Eigen::ColMajor> > SpLDLSolver;
@@ -21,7 +23,7 @@ private:
 
 public:
     RealShift_sym_sparseMatrix(SEXP mat_, const int nrow_, const char uplo_ = 'L') :
-        mat(Rcpp::as<MapSpMat>(mat_)),
+        mat(map_sparse<Storage>(mat_)),
         n(nrow_),
         uplo(uplo_)
     {}

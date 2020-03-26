@@ -65,6 +65,11 @@ length.git_tree	length.git_tree
 libgit2_features	libgit2_features
 libgit2_version	libgit2_version
 lookup	lookup
+lookup_commit	lookup_commit
+lookup_commit.git_branch	lookup_commit
+lookup_commit.git_commit	lookup_commit
+lookup_commit.git_reference	lookup_commit
+lookup_commit.git_tag	lookup_commit
 ls_tree	ls_tree
 merge	reexports
 merge.character	merge

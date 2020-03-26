@@ -4,6 +4,8 @@ divchain                Dividing chain; generic.
 divchain.default        Dividing chain; default method.
 divchain.deldir         Dividing chain; "deldir" method.
 duplicatedxy            Determine duplicated points.
+lawSummary              Produce a Lewis-Aboav-Weaire summary of a
+                        tessellation.
 niProperties            Northern Ireland properties.
 plot.deldir             Plot objects produced by deldir
 plot.divchain           Plot a dividing chain.
