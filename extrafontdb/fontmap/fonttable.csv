@@ -1,0 +1,4 @@
+"package","afmfile","fontfile","FullName","FamilyName","FontName","Bold","Italic","Symbol","afmsymfile"
+NA,"RobotoCondensed-Bold.afm.gz","/home/production/cxgn/R_libs/hrbrthemes/fonts/roboto-condensed/RobotoCondensed-Bold.ttf","Roboto Condensed Bold","Roboto Condensed","RobotoCondensed-Bold",TRUE,FALSE,FALSE,NA
+NA,"RobotoCondensed-Light.afm.gz","/home/production/cxgn/R_libs/hrbrthemes/fonts/roboto-condensed/RobotoCondensed-Light.ttf","Roboto Condensed Light","Roboto Condensed","RobotoCondensed-Light",FALSE,FALSE,FALSE,NA
+NA,"RobotoCondensed-Regular.afm.gz","/home/production/cxgn/R_libs/hrbrthemes/fonts/roboto-condensed/RobotoCondensed-Regular.ttf","Roboto Condensed Regular","Roboto Condensed","RobotoCondensed-Regular",FALSE,FALSE,FALSE,NA
