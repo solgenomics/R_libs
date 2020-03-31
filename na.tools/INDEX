@@ -1,0 +1,17 @@
+NA_explicit_            NA_explicit_
+NA_logical              NA_logical
+all_na                  Tests for missing values
+coerce_safe             coerce_safe
+impute-commutative      Imputation by Cummutative Functions Impute
+                        using replacement values calculated from a
+                        univariate, cummuative function.
+impute-constant         Impute by Constant Value Replaces 'NA's by a
+                        constant
+impute-noncommutative   non-commutative imputation Impute missing
+                        values using non-commutative functions, i.e.
+                        where the order *matters*.
+n_na                    Counts how many values are NA
+na.bootstrap            na.bootstrap
+na.replace              Replace Missing Values
+na.rm                   na.rm
+na.unreplace            na.unreplace
