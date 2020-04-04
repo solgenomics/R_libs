@@ -60,8 +60,8 @@ rename.variable         Rename a data frame column
 rm.unused.levels        Remove unused levels
 rp2012                  2012 French Census - French cities of more than
                         2000 inhabitants
-rp99                    1999 French Census - Cities from the
-                        Rh<c3><b4>ne state
+rp99                    1999 French Census - Cities from the Rhône
+                        state
 rprop                   Row percentages of a two-way frequency table.
 tabs                    Weighted Crossresult
 women                   A fertility survey - "women" table

@@ -57,4 +57,4 @@ Author: Douglas Bates [aut] (<https://orcid.org/0000-0001-8316-9503>),
 Maintainer: Ben Bolker <bbolker+lme4@gmail.com>
 Repository: CRAN
 Date/Publication: 2019-03-05 22:40:10 UTC
-Built: R 3.6.0; x86_64-pc-linux-gnu; 2019-05-10 11:39:11 UTC; unix
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-04-03 23:49:30 UTC; unix

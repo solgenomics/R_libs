@@ -22,4 +22,4 @@ NeedsCompilation: yes
 Packaged: 2019-01-08 19:24:15 UTC; jefferis
 Repository: CRAN
 Date/Publication: 2019-01-08 20:00:04 UTC
-Built: R 3.6.0; x86_64-pc-linux-gnu; 2019-05-10 11:25:28 UTC; unix
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-04-03 22:50:08 UTC; unix

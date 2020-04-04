@@ -20,4 +20,4 @@ LazyData: TRUE
 NeedsCompilation: yes
 Packaged: 2020-03-06 10:02:02 UTC; jcadima
 Date/Publication: 2020-03-14 15:30:02 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-03-24 20:04:29 UTC; unix
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-04-03 23:17:23 UTC; unix

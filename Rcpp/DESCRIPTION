@@ -28,4 +28,4 @@ NeedsCompilation: yes
 Packaged: 2020-03-13 12:02:51.81453 UTC; edd
 Repository: CRAN
 Date/Publication: 2020-03-17 08:20:02 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-03-23 10:51:51 UTC; unix
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-04-03 22:51:26 UTC; unix

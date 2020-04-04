@@ -19,4 +19,4 @@ NeedsCompilation: yes
 Packaged: 2018-04-25 03:19:22 UTC; kevin
 Repository: CRAN
 Date/Publication: 2018-04-25 03:38:09 UTC
-Built: R 3.6.0; x86_64-pc-linux-gnu; 2019-05-10 11:14:08 UTC; unix
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-04-03 22:52:09 UTC; unix

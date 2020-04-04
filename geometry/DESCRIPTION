@@ -43,4 +43,4 @@ Author: Jean-Romain Roussel [cph, ctb] (wrote tsearch function with QuadTrees),
 Maintainer: David C. Sterratt <david.c.sterratt@ed.ac.uk>
 Repository: CRAN
 Date/Publication: 2019-12-04 09:40:02 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-03-24 20:06:06 UTC; unix
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-04-03 23:47:20 UTC; unix

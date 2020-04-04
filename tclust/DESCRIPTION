@@ -12,4 +12,4 @@ Repository: CRAN
 NeedsCompilation: yes
 Packaged: 2018-05-24 08:42:01 UTC; todorovv
 Date/Publication: 2018-05-24 21:50:22 UTC
-Built: R 3.6.0; x86_64-pc-linux-gnu; 2019-05-10 11:25:59 UTC; unix
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-04-03 22:40:24 UTC; unix
