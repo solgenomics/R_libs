@@ -1,3 +1,7 @@
+# labelled 2.3.0
+
+* new function `unlabelled()`
+
 # labelled 2.2.2
 
 * bug fix for `look_for()` (#52 by @NoahMarconi)

@@ -8,11 +8,12 @@ aov.lxt                 Analysis for a Line x Tester genetic design.
 aov.met                 ANOVA for MET with a RCBD
 aov.rcbd                ANOVA for a RCBD
 asc                     Data for a 2-factor factorial with a CRD
-cdt                     Compute derived traits
-check.data              Check consistency for sweetpotato experimental
-                        data
+cdt                     Compute derived traits for sweetpotato
+check.data              Check consistency for potato and sweetpotato
+                        experimental data
 check.freq              Check frequencies for complete replications
-check.names             Check fieldbook traits names
+check.names.pt          Check fieldbook traits names for potato
+check.names.sp          Check fieldbook traits names for sweetpotato
 check.pos               Check row and column positions
 ck.abd                  Check data for an ABD
 ck.crd                  Check data for a CRD
@@ -23,6 +24,7 @@ ck.lxt                  Check data for a line by tester genetic design
 ck.pos                  Check row and column positions
 ck.rcbd                 Check data for a RCBD
 ck.w                    Check data for a Wescott layout
+clean.data              Clean data
 cr.a01d                 Alpha (0,1) design
 cr.abd                  Augmented Block Design
 cr.crd                  Completely Randomized Design
@@ -37,6 +39,7 @@ dtr                     Data transformations
 ecm                     Estimate Genotypic and Phenotypic Covariance
                         and Correlation Matrices
 elston                  Elston Index
+friedman.t              Friedman test
 lxt                     Line by tester data
 megaclones              Some traits for a multi-environment trial (MET)
 megaclones2             Some traits for a multi-environment trial (MET)
@@ -53,6 +56,7 @@ pesekbaker              Pesek-Baker Index
 pjpz09                  Data for a yield trial
 plot.st4gi_ammi         AMMI or GGE biplots
 plot.st4gi_tai          Tai plot
+potatoyield             Data for a yield trial
 rsa                     Regression Stability Analysis
 rts1                    Response to selection for a single experiment
 rts2                    Response to selection with several locations
@@ -60,7 +64,8 @@ rts3                    Response to selection with several locations
                         and years
 rts4                    Response to selection with several locations in
                         two steps (two years)
-setna                   Set values to NA or zero.
+setna                   Set values to 'NA'.
+setzero                 Set values to '0'.
 spg                     Some traits for a multi-environment trial (MET)
-suma                    Compute sum of two vectors
+ssg1to3                 Stage selection gain from 1 to 3 stages
 tai                     Tai's stability analysis

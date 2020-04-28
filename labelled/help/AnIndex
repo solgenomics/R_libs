@@ -44,6 +44,7 @@ to_labelled.data.set	to_labelled
 to_labelled.factor	to_labelled
 to_labelled.importer	to_labelled
 to_labelled.list	to_labelled
+unlabelled	to_factor
 update_labelled	update_labelled
 update_labelled.data.frame	update_labelled
 update_labelled.labelled	update_labelled

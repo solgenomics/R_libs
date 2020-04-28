@@ -11,7 +11,8 @@ asc	asc
 cdt	cdt
 check.data	check.data
 check.freq	check.freq
-check.names	check.names
+check.names.pt	check.names.pt
+check.names.sp	check.names.sp
 check.pos	check.pos
 ck.abd	ck.abd
 ck.crd	ck.crd
@@ -22,6 +23,7 @@ ck.lxt	ck.lxt
 ck.pos	ck.pos
 ck.rcbd	ck.rcbd
 ck.w	ck.w
+clean.data	clean.data
 cr.a01d	cr.a01d
 cr.abd	cr.abd
 cr.crd	cr.crd
@@ -35,6 +37,7 @@ docomp	docomp
 dtr	dtr
 ecm	ecm
 elston	elston
+friedman.t	friedman.t
 lxt	lxt
 megaclones	megaclones
 megaclones2	megaclones2
@@ -48,12 +51,14 @@ pesekbaker	pesekbaker
 pjpz09	pjpz09
 plot.st4gi_ammi	plot.st4gi_ammi
 plot.st4gi_tai	plot.st4gi_tai
+potatoyield	potatoyield
 rsa	rsa
 rts1	rts1
 rts2	rts2
 rts3	rts3
 rts4	rts4
 setna	setna
+setzero	setzero
 spg	spg
-suma	suma
+ssg1to3	ssg1to3
 tai	tai

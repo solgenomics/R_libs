@@ -1,0 +1,35 @@
+PBIB.test.mod           A modified version of Analysis of the Partially
+                        Balanced Incomplete Block Design
+order.group.mod         A modified version of order.group of agricolae
+                        package
+pty                     Pepa tells you
+pty.aovmet              Pepa tells you about a MET with a RCBD
+pty.elston              Pepa tells you about the Elston index
+pty.pesekbaker          Pepa tells you about the Pesek-Baker index
+pvsf1                   Voting for selection criteria
+pvsf2                   Voting for best clones at flowering
+pvsf3                   Voting for best clones at harvest
+pvsf6                   Organoleptic scores at mother trial
+pvsf7                   Organoleptic scores at baby trials
+pvsf9                   Voting for best clones at post-harvest
+pvssg                   PVS summary global
+repo.a01d               Automatic report for an alpha (0,1) design
+repo.abd                Automatic report for an augmented block design
+                        (ABD)
+repo.crd                Automatic report for a Completely Randomized
+                        Design (CRD)
+repo.f                  Automatic report for a factorial experiment
+repo.lxt                Automatic report for a Line x Tester genetic
+                        design.
+repo.met                Automatic report for a MET with a RCBD
+repo.met.agro           Automatic report for a MET with a RCBD
+repo.nc                 Automatic report for a North Carolina genetic
+                        design.
+repo.pvs                Report for PVS
+repo.pvssg              Report for PVS - Global summary
+repo.rcbd               Automatic report for a Randomized Complete
+                        Block Design (RCBD)
+repo.spld               Automatic report for a split plot design
+repo.strd               Automatic report for a strip plot design
+repo.trend              Report for repeated measures data
+trend.data              Repeated measures data
