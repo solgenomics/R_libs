@@ -1,0 +1,146 @@
+chebyshev.c.inner.products
+                        Inner products of Chebyshev polynomials
+chebyshev.c.polynomials
+                        Create list of Chebyshev polynomials
+chebyshev.c.recurrences
+                        Recurrence relations for Chebyshev polynomials
+chebyshev.c.weight      Weight function for the Chebyshev polynomial
+chebyshev.s.inner.products
+                        Inner products of Chebyshev polynomials
+chebyshev.s.polynomials
+                        Create list of Chebyshev polynomials
+chebyshev.s.recurrences
+                        Recurrence relations for Chebyshev polynomials
+chebyshev.s.weight      Weight function for the Chebyshev polynomial
+chebyshev.t.inner.products
+                        Inner products of Chebyshev polynomials
+chebyshev.t.polynomials
+                        Create list of Chebyshev polynomials
+chebyshev.t.recurrences
+                        Recurrence relations for Chebyshev polynomials
+chebyshev.t.weight      Weight function for the Chebyshev polynomial
+chebyshev.u.inner.products
+                        Inner products of Chebyshev polynomials
+chebyshev.u.polynomials
+                        Create list of Chebyshev polynomials
+chebyshev.u.recurrences
+                        Recurrence relations for Chebyshev polynomials
+chebyshev.u.weight      Weight function for the Chebyshev polynomial
+gegenbauer.inner.products
+                        Inner products of Gegenbauer polynomials
+gegenbauer.polynomials
+                        Create list of Gegenbauer polynomials
+gegenbauer.recurrences
+                        Recurrence relations for Gegenbauer polynomials
+gegenbauer.weight       Weight function for the Gegenbauer polynomial
+ghermite.h.inner.products
+                        Inner products of generalized Hermite
+                        polynomials
+ghermite.h.polynomials
+                        Create list of generalized Hermite polynomials
+ghermite.h.recurrences
+                        Recurrence relations for generalized Hermite
+                        polynomials
+ghermite.h.weight       Weight function for the generalized Hermite
+                        polynomial
+glaguerre.inner.products
+                        Inner products of generalized Laguerre
+                        polynomials
+glaguerre.polynomials   Create list of generalized Laguerre polynomials
+glaguerre.recurrences   Recurrence relations for generalized Laguerre
+                        polynomials
+glaguerre.weight        Weight function for the generalized Laguerre
+                        polynomial
+hermite.h.inner.products
+                        Inner products of Hermite polynomials
+hermite.h.polynomials   Create list of Hermite polynomials
+hermite.h.recurrences   Recurrence relations for Hermite polynomials
+hermite.h.weight        Weight function for the Hermite polynomial
+hermite.he.inner.products
+                        Inner products of Hermite polynomials
+hermite.he.polynomials
+                        Create list of Hermite polynomials
+hermite.he.recurrences
+                        Recurrence relations for Hermite polynomials
+hermite.he.weight       Weight function for the Hermite polynomial
+jacobi.g.inner.products
+                        Inner products of Jacobi polynomials
+jacobi.g.polynomials    Create list of Jacobi polynomials
+jacobi.g.recurrences    Recurrence relations for Jacobi polynomials
+jacobi.g.weight         Weight function for the Jacobi polynomial
+jacobi.matrices         Create list of Jacobi matrices from monic
+                        recurrence parameters
+jacobi.p.inner.products
+                        Inner products of Jacobi polynomials
+jacobi.p.polynomials    Create list of Jacobi polynomials
+jacobi.p.recurrences    Recurrence relations for Jacobi polynomials
+jacobi.p.weight         Weight function for the Jacobi polynomial
+laguerre.inner.products
+                        Inner products of Laguerre polynomials
+laguerre.polynomials    Create list of Laguerre polynomials
+laguerre.recurrences    Recurrence relations for Laguerre polynomials
+laguerre.weight         Weight function for the Laguerre polynomial
+legendre.inner.products
+                        Inner products of Legendre polynomials
+legendre.polynomials    Create list of Legendre polynomials
+legendre.recurrences    Recurrence relations for Legendre polynomials
+legendre.weight         Weight function for the Legendre polynomial
+lpochhammer             Calculate the logarithm of Pochhammer's symbol
+monic.polynomial.recurrences
+                        Create data frame of monic recurrences
+monic.polynomials       Create list of monic orthogonal polynomials
+orthogonal.polynomials
+                        Create orthogonal polynomials
+orthonormal.polynomials
+                        Create orthonormal polynomials
+pochhammer              Calculate the value of Pochhammer's symbol
+polynomial.coefficients
+                        Create list of polynomial coefficient vectors
+polynomial.derivatives
+                        Create list of polynomial derivatives
+polynomial.functions    Coerce polynomials to functions
+polynomial.integrals    Create list of polynomial integrals
+polynomial.orders       Create vector of polynomial orders
+polynomial.powers       Create a list of polynomial linear combinations
+polynomial.roots        Create a list of polynomial roots
+polynomial.values       Create vector of polynomial values
+scaleX                  Scale values from [a,b] to [u.v]
+schebyshev.t.inner.products
+                        Inner products of shifted Chebyshev polynomials
+schebyshev.t.polynomials
+                        Create list of shifted Chebyshev polynomials
+schebyshev.t.recurrences
+                        Recurrence relations for shifted Chebyshev
+                        polynomials
+schebyshev.t.weight     Weight function for the shifted Chebyshev
+                        polynomial
+schebyshev.u.inner.products
+                        Inner products of shifted Chebyshev polynomials
+schebyshev.u.polynomials
+                        Create list of shifted Chebyshev polynomials
+schebyshev.u.recurrences
+                        Recurrence relations for shifted Chebyshev
+                        polynomials
+schebyshev.u.weight     Weight function for the shifted Chebyshev
+                        polynomial
+slegendre.inner.products
+                        Inner products of shifted Legendre polynomials
+slegendre.polynomials   Create list of shifted Legendre polynomials
+slegendre.recurrences   Recurrence relations for shifted Legendre
+                        polynomials
+slegendre.weight        Weight function for the shifted Legendre
+                        polynomial
+spherical.inner.products
+                        Inner products of spherical polynomials
+spherical.polynomials   Create list of spherical polynomials
+spherical.recurrences   Recurrence relations for spherical polynomials
+spherical.weight        Weight function for the spherical polynomial
+ultraspherical.inner.products
+                        Inner products of ultraspherical polynomials
+ultraspherical.polynomials
+                        Create list of ultraspherical polynomials
+ultraspherical.recurrences
+                        Recurrence relations for ultraspherical
+                        polynomials
+ultraspherical.weight   Weight function for the ultraspherical
+                        polynomial

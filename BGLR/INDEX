@@ -1,0 +1,20 @@
+BGLR                    Bayesian Generalized Linear Regression
+BLR                     Bayesian Linear Regression
+getVariances            getVariances
+mice                    mice dataset
+mice.A                  Pedigree info for the mice dataset
+mice.X                  Molecular markers
+mice.pheno              Phenotypical data for the mice dataset
+plot.BGLR               Plots for BGLR Analysis
+predict.BGLR            Model Predictions
+readBinMat              readBinMat
+read_bed                read_bed
+read_ped                read_ped
+residuals.BGLR          Extracts models residuals
+summary.BGLR            summary for BGLR fitted models
+wheat                   wheat dataset
+wheat.A                 Pedigree info for the wheat dataset
+wheat.X                 Molecular markers
+wheat.Y                 Grain yield
+wheat.sets              Sets for cross validation (CV)
+write_bed               write_bed
