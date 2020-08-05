@@ -1,7 +1,7 @@
 Package: backports
 Type: Package
 Title: Reimplementations of Functions Introduced Since R-3.0.0
-Version: 1.1.6
+Version: 1.1.8
 Authors@R: c(
     person("Michel", "Lang", NULL, "michellang@gmail.com",
       role = c("cre", "aut"), comment = c(ORCID = "0000-0001-9754-0393")),
@@ -23,9 +23,9 @@ Depends: R (>= 3.0.0)
 Imports: utils
 Encoding: UTF-8
 RoxygenNote: 7.1.0
-Packaged: 2020-04-05 06:01:58 UTC; michel
+Packaged: 2020-06-17 08:57:04 UTC; michel
 Author: Michel Lang [cre, aut] (<https://orcid.org/0000-0001-9754-0393>),
   R Core Team [aut]
 Repository: CRAN
-Date/Publication: 2020-04-05 06:30:02 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-04-24 19:50:19 UTC; unix
+Date/Publication: 2020-06-17 10:00:08 UTC
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-08-05 22:51:04 UTC; unix
