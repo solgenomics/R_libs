@@ -73,6 +73,7 @@ summary.mmer            summary form a GLMM fitted with mmer
 transformConstraints    transformConstraints
 transp                  Creating color with transparency
 uncm                    unconstrained indication matrix
+unsBLUP                 unsBLUP
 unsm                    unstructured indication matrix
 us                      unstructured covariance structure
 vs                      variance structure specification
