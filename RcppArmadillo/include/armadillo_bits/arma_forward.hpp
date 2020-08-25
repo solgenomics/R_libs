@@ -46,6 +46,8 @@ template<typename eT> class SpMat;
 template<typename eT> class SpCol;
 template<typename eT> class SpRow;
 template<typename eT> class SpSubview;
+template<typename eT> class SpSubview_col;
+template<typename eT> class SpSubview_row;
 
 template<typename eT> class diagview;
 template<typename eT> class spdiagview;
@@ -267,7 +269,7 @@ struct state_type
   {
   #if   defined(ARMA_USE_OPENMP)
                 int  state;
-  #elif defined(ARMA_USE_CXX11)
+  #elif (defined(ARMA_USE_CXX11) && !defined(ARMA_DONT_USE_CXX11_MUTEX))
     std::atomic<int> state;
   #else
                 int  state;
@@ -286,7 +288,7 @@ struct state_type
     #if   defined(ARMA_USE_OPENMP)
       #pragma omp atomic read
       out = state;
-    #elif defined(ARMA_USE_CXX11)
+    #elif (defined(ARMA_USE_CXX11) && !defined(ARMA_DONT_USE_CXX11_MUTEX))
       out = state.load();
     #else
       out = state;
@@ -302,7 +304,7 @@ struct state_type
     #if   defined(ARMA_USE_OPENMP)
       #pragma omp atomic write
       state = in_state;
-    #elif defined(ARMA_USE_CXX11)
+    #elif (defined(ARMA_USE_CXX11) && !defined(ARMA_DONT_USE_CXX11_MUTEX))
       state.store(in_state);
     #else
       state = in_state;

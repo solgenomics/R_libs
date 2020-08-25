@@ -36,6 +36,6 @@ svdpc.fit               Principal Component Regression
 validationplot          Validation Plots
 var.jack                Jackknife Variance Estimates of Regression
                         Coefficients
-widekernelpls.fit       Wide Kernel PLS (Rännar et al.)
+widekernelpls.fit       Wide Kernel PLS (R<c3><a4>nnar et al.)
 yarn                    NIR spectra and density measurements of PET
                         yarns
