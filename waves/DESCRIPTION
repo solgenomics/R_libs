@@ -26,14 +26,14 @@ RemoteHost: api.github.com
 RemoteRepo: waves
 RemoteUsername: GoreLab
 RemoteRef: master
-RemoteSha: 86ffb0486fb6955bd7c3737e2d238af3eb098037
+RemoteSha: 6b0edc6015bdf36f00284608576533c87e6e3f2b
 GithubRepo: waves
 GithubUsername: GoreLab
 GithubRef: master
-GithubSHA1: 86ffb0486fb6955bd7c3737e2d238af3eb098037
+GithubSHA1: 6b0edc6015bdf36f00284608576533c87e6e3f2b
 NeedsCompilation: no
-Packaged: 2020-08-25 23:24:40 UTC; root
+Packaged: 2020-08-26 13:02:32 UTC; root
 Author: Jenna Hershberger [aut, cre] (<https://orcid.org/0000-0002-3147-6867>),
   Michael Gore [ths],
   NSF BREAD IOS-1543958 [fnd]
-Built: R 3.6.3; ; 2020-08-25 23:24:42 UTC; unix
+Built: R 3.6.3; ; 2020-08-26 13:02:34 UTC; unix
