@@ -1,0 +1,260 @@
+---
+title: "Getting started with catchr"
+author: "Zachary Burchill"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with catchr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  eval = TRUE,
+  comment = "#>"
+)
+library(catchr)
+library(rlang)
+```
+
+```{r, echo=FALSE}
+current_options <- catchr_default_opts(catchr.default_plan,
+                                       catchr.warn_about_terms,
+                                       catchr.bare_if_possible,
+                                       catchr.drop_empty_conds)
+restore_catchr_defaults()
+
+arbitrary_code <- function() {}
+
+```
+
+
+Compared to many other programming languages, the way `R` handles "conditions"---errors, warnings, messages, and most things referred to as "exceptions" in other languages---is pretty unintuitive.^[At least, I *thought* it was. Now I understand that it's everything *else* that doesn't make sense.] R's help file on the subject is basically impenetrable,^[Accessible via `help(conditions)`.] and even though Hadley Wickham has stepped in and produced [a very helpful guide on conditions](http://adv-r.had.co.nz/beyond-exception-handling.html), understanding what's going on is still pretty hard, and actually _handling_ conditions is even harder.
+
+At its heart, catchr is designed to ~~make it so that you never have to read any of that stuff~~ make dealing with conditions easy from the get-go. 
+
+## The ol' razzle-dazzle
+
+Let's hit you with some imaginary scenarios here, before we get down to the nitty-gritty. 
+
+Suppose I want to run some code, and I want to catch any warnings it produces, "hide" them so they don't appear, and instead just store them so I can do something else with them later on.  All without making my code halt or start over.
+
+```{r, eval=FALSE}
+library(catchr)
+results <- catch_expr(arbitrary_code(), warning = c(collect, muffle))
+```
+
+Boom, done.
+
+But if I'm going to need to do that a lot, and I'm good programmer who doesn't want to retype the same code over and over again, I can make a _function_ that can catch conditions the same way for any expression.
+
+```{r, eval=FALSE}
+collect_warnings <- make_catch_fn(warning = c(collect, muffle))
+```
+
+One line. Look at my nice, portable function:
+
+```{r, eval=FALSE}
+same_results <- collect_warnings(arbitrary_code())
+```
+
+But let's say ~~I'm a _naaaaasty_ boy~~^[Ed.: you can't say that in a CRAN package] I have a complex situation which necessitates printing something when the code raises a message and immediately exiting it, but also turning any warnings into messages, and preventing any errors from crashing everything else. _\*Shiver\*_.
+
+```{r, eval=FALSE}
+weirdo_catcher <- make_catch_fn(
+  message = c(function(x) print("oops"), exit),
+  warning = c(tomessage, muffle),
+  error = muffle)
+```
+
+I can do that too, and that's only _beginning_ to scratch the surface of catchr. Although most of the detailed information can be found in the help files and manual, let's go over some of the basics.
+
+## Catching conditions with "plans"
+
+Let's take a look at some of the code we saw before:
+
+```{r, eval=FALSE}
+results <- catch_expr(arbitrary_code(), warning = c(collect, muffle))
+```
+
+This is pretty quintessential of the catchr system. You have the expression you want to evaluate and catch conditions for (here, `arbitrary_code()`), followed by the names of the types of conditions you want to catch and the plans you have for them when they're caught (`warning = c(collect, muffle)`).
+
+In catchr, users use functions like building blocks to a "plan" of what to do for particular conditions. Users can specify their own functions or use catchr functions, but `catcher` also offers a useful toolbox of behaviors that work their magic behind the scene through catchr's simple [domain-specific language](http://adv-r.had.co.nz/dsl.html).^[See `help("catchr-DSL", "catchr")` for the details.]
+
+A catchr "plan" starts off as a named argument, where its name is the type of condition it will apply to (e.g., "message", "warning", "error", etc.), and its value will eventually become a function that will take in the condition and do stuff with it. catchr's "secret sauce" lets you pass in each plan as a list of functions that will be applied to the condition in order.^[See ``help(`catchr-plans`, "catchr")``.] 
+
+But catchr also comes full of stock functions that make condition handling simple---these special functions can be inputted as strings, but catchr promotes more-readable code and saves you extra typing by letting you enter them as unquoted special terms, like `collect` and `muffle` in the example above.
+
+### Special reserved terms
+
+These special terms cover some of the most common behaviors users might want to use:
+
+Special "reserved" term | Function
+--------------------- | -------------------------------------------------------
+`tomessage`, `towarning`, `toerror` | convert conditions to other types of conditions
+`beep` | plays a short sound
+`display` | displays the contents of the condition on-screen
+`collect` | collects the condition and saves it to a list that will be returned at the end
+`muffle` | "muffles",^[i.e., "suppresses", "catches", "hides"---whatever you want to call it] a condition so it doesn't keep going up, and restarts the code
+`exit` | immediately stops the code and muffles the condition
+`raise` | raises conditions past `exit`
+
+These can be used as building blocks just like normal functions. For example, in the previous example, we saw how `collect` and `muffle` were strung together to make a plan.
+
+## Even _less_ typing
+
+Is typing out plans multiple times _still_ too much typing?  Well, catchr lets you save even _more_ space by giving you the option of passing in _unnamed_ arguments into plans!
+
+```{r}
+print(get_default_plan())
+
+my_plans <- make_plans(warning, message, error)
+```
+
+These unnamed arguments can be entered as either strings or unquoted terms, and should correspond to the name of a condition you want to catch. They will automatically be given whatever catchr's default plan is, which can be get/set via `get_default_plan()` and `set_default_plan`, respectively. Named and unnamed arguments can be mixed freely.  Other default behaviors can be get/set with `catchr_default_opts()`.
+
+## "Collecting" conditions
+
+As you might have noticed, many of the previous examples use a special term, `collect`. Having the ability to "collect" conditions is one of the most useful features in catchr.
+
+
+```{r}
+throw_a_fit <- function() {
+  message("This is message #1!")
+  rlang::warn("This is warning #1!", opt_val = "conditions can hold more data")
+  message("This is message #2")
+  stop("Code exits after this!")
+  warning("This warning won't be reached")
+}
+
+collected_results <- catch_expr(throw_a_fit(), message, warning, error)
+print(collected_results)
+```
+
+This is particularly useful if you want to catch warnings and messages, etc. from code that takes a long time to run, where having to restart the whole process from square one would be too costly. 
+
+Or if you want to collect warnings, messages, and errors from code that is running remotely, where these conditions would not be returned with the rest of the results, such as with the [future package](https://github.com/HenrikBengtsson/future/). The following isn't a very... *natural* example, but I'm trying to keep things simple:
+
+```{r, eval=FALSE}
+library(future)
+future::plan(multiprocess)
+
+possible_scenarios <- list(
+  quote(warning("Model failed to converge!")),
+  quote(message("Singular fit!")),
+  quote(stop("You couldn't something wrong")),
+  quote("Everything is good!")
+)
+
+collector <- make_catch_fn(message, warning, error,
+                           .opts = catchr_opts(default_plan = c(collect, muffle)))
+
+l %<-% {
+  # You should use `purrr::map` instead, it's much better
+  Map(function(x) collector(eval(x)), possible_scenarios)
+}
+
+# Eh, let's get rid of anything that had an error?
+Filter(function(e) length(e$error) == 0, l)
+```
+
+_OR_, maybe you're running a lot of code in parallel and want to keep track of all of the raised conditions in R (where they're easiest to manipulate), such as in a large-scale power simulation, or with packages such [purrr](https://github.com/tidyverse/purrr).
+
+```{r, eval=FALSE}
+# Let's combine both `future` and `purrr` with Davis Vaughan's `furrr` package instead
+library(furrr)
+future::plan(tweak(multiprocess, workers = 5L))
+
+# Sexy data frame format for easy analysis!
+df <- future_imap_dfr(
+  possible_scenarios,
+  function(x, i) {
+    res <- collector(eval(x))
+    data.frame(k = i,
+               messages = paste(res$message, collapse=" "),
+               warnings = paste(res$warning, collapse=" "),
+               errors =   paste(res$error, collapse=" "),
+               stringsAsFactors = FALSE) 
+  })
+
+```
+
+## Other goodies
+
+catchr offers many other benefits, to the point where trying to document them all in a single vignette doesn't make sense. I'll point out some of the more unique ones here, but the help docs are very extensive, so give them a try!
+
+### Catching "misc" conditions
+
+Sometimes we don't want to have to specify every alternative condition out there, and we might just want to divide conditions into one type and "everything else".
+
+You can do this by making plans for the "misc" condition, a term catchr reserves for any condition(s) that you haven't already specified. Thus:
+
+```{r}
+messages_or_bust <- make_catch_fn(messages = collect, misc = exit_with("Sorry, busted"))
+```
+
+will collect messages (without muffling them) but will exit the evaluation and return a conciliatory if any other types of conditions are raised. Note that using the all-purpose "condition" plan (i.e., `condition = exit_with("Sorry, busted")`) would exit when a message is raised, since it isn't muffled and qualifies as having the type "condition". Using "misc" makes sure you don't "double-dip" conditions.  
+
+The "misc" condition is particularly useful when collecting conditions---it lets you lump all the miscellaneous conditions collected into a single "misc" sublist. Since anything other than the "big three" conditions (errors, messages, and warnings) are so rare, the following makes a nice little collector that lumps anything "exotic" into the "misc" sublist and drops any condition sublist when that condition isn't raised:
+
+```{r}
+basic_collector <- make_catch_fn(
+  message, warning, error, misc,
+  .opts = catchr_opts(default_plan = c(collect, muffle),
+                      drop_empty_conds = T))
+```
+
+### Display conditions _in style_
+
+If you have the `crayon` package installed, you can display messages without raising them in whatever `crayon` stylings you want (though you won't see the styles in this vignette document): 
+
+```{r}
+make_warnings <- function() {
+  warning("This warning has a call")
+  warning("This warning does not", call. = FALSE)
+  invisible("done")
+}
+
+catch_expr(make_warnings(), warning = c(display, muffle))
+
+catch_expr(make_warnings(), warning = c(display_with(c("pink","underline","bold")), muffle))
+```
+
+### Play sounds when conditions are raised
+
+Particularly useful for when you're working in a different window and waiting for a job to finish / do something unexpected, catchr lets you play short sounds whenever conditions are raised.^[If you're going to be doing something like this, make sure `getOption("warn")==1`]  This functionality requires the [`beepr`](https://CRAN.R-project.org/package=beepr) package, which I've found absolutely worth downloading.
+
+For example, you can have it alert you when a condition is raised via sound, display the condition without raising it, and keep going:
+
+```{r, eval=FALSE}
+warning_in_middle <- function() {
+  Sys.sleep(2)
+  message("It's time!")
+  Sys.sleep(2)
+  invisible("done")
+}
+
+res <- catch_expr(warning_in_middle(), condition = c(beep, display, muffle))
+```
+
+Or you could imagine making a wrapper that screams and stop evaluation whenever it encounters _any_ unexpected condition:
+
+```{r eval=FALSE}
+tell_you_when_it_blows_up <- make_catch_fn(condition = c(display, beep_with(9), exit))
+tell_you_when_it_blows_up(message("Oopsies!"))
+```
+
+### All plans are "calling handlers"
+
+This is definitely more of a technical point, but all the plans in catchr are technically evaluated in order.  Currently (`rlang 0.3.1`) `rlang`'s condition-handling function, `with_handlers`, has the relatively unintuitive property of not checking its handlers in the order they are defined, but first checking all the "exiting" handlers, and then checking all the "calling" handlers.  catchr's main condition handling does better: it gets rid of "exiting" handlers all together.
+
+Ok, this is beginning to get _much_ more technical, but there are many other benefits to making all the plans (and therefore, handlers) "calling" handlers. For one, any plan has the option of restarting the code (via `muffle`, or invoking user-created restarts). 
+
+But each plan can also act as an "exiting" handler with the use of the `exit` term, or the `user_exit()` and `exit_with()` functions. In essence, catchr gives you the best of both worlds!
+
+
+```{r, echo=FALSE}
+catchr_default_opts(!!!current_options)
+```
