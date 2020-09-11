@@ -1,5 +1,5 @@
 Package: lokern
-Version: 1.1-8
+Version: 1.1-8.1
 Date: 2016-10-10
 Title: Kernel Regression Smoothing with Local or Global Plug-in
         Bandwidth
@@ -12,7 +12,7 @@ Description: Kernel regression smoothing with adaptive local or global plug-in
 BuildResaveData: no
 License: GPL (>= 2)
 NeedsCompilation: yes
-Packaged: 2016-10-10 15:59:32 UTC; maechler
+Packaged: 2020-07-15 04:50:27 UTC; ripley
 Repository: CRAN
-Date/Publication: 2016-10-11 01:02:52
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-04-03 23:23:06 UTC; unix
+Date/Publication: 2020-07-15 04:56:17 UTC
+Built: R 4.0.2; x86_64-pc-linux-gnu; 2020-09-11 20:27:08 UTC; unix

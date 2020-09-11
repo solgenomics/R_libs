@@ -11,4 +11,4 @@ Repository: CRAN
 Date/Publication: 2018-06-08 17:23:00 UTC
 Packaged: 2018-06-07 22:29:50 UTC; root
 NeedsCompilation: yes
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-04-03 22:43:16 UTC; unix
+Built: R 4.0.2; x86_64-pc-linux-gnu; 2020-09-11 20:20:52 UTC; unix

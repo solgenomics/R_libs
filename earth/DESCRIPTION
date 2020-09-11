@@ -22,4 +22,4 @@ Repository: CRAN
 Date/Publication: 2019-11-09 10:10:02 UTC
 RoxygenNote: 5.1.2
 NeedsCompilation: yes
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-04-03 23:50:55 UTC; unix
+Built: R 4.0.2; x86_64-pc-linux-gnu; 2020-09-11 20:36:41 UTC; unix

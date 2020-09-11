@@ -3,6 +3,65 @@
 \newcommand{\ghpr}{\href{https://github.com/RcppCore/Rcpp/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/RcppCore/Rcpp/issues/#1}{##1}}
 
+\section{Changes in Rcpp patch release version 1.0.5 (2020-07-01)}{
+  \itemize{
+    \item Changes in Rcpp API:
+    \itemize{
+      \item The exception handler code in \ghpr{1043} was updated to ensure
+      proper include behavior (Kevin in \ghpr{1047} fixing \ghit{1046}).
+      \item A missing \code{Rcpp_list6} definition was added to support
+      R 3.3.* builds (Davis Vaughan in \ghpr{1049} fixing \ghit{1048}).
+      \item Missing \code{Rcpp_list{2,3,4,5}} definition were added to
+      the Rcpp namespace (Dirk in \ghpr{1054} fixing \ghit{1053}).
+      \item A further updated corrected the header include and provided
+      a missing else branch (Mattias Ellert in \ghpr{1055}).
+      \item Two more assignments are protected with \code{Rcpp::Shield}
+      (Dirk in \ghpr{1059}).
+      \item One call to \code{abs} is now properly namespaced with
+      \code{std::} (Uwe Korn in \ghpr{1069}).
+      \item String object memory preservation was corrected/simplified
+      (Kevin in \ghpr{1082}).
+    }
+    \item Changes in Rcpp Attributes:
+    \itemize{
+      \item Empty strings are not passed to \code{R CMD SHLIB} which was
+      seen with R 4.0.0 on Windows (Kevin in \ghpr{1062} fixing
+      \ghpr{1061}).
+      \item The \code{short_file_name()} helper function is safer with
+      respect to temporaries (Kevin in \ghpr{1067} fixing \ghit{1066},
+      and \ghpr{1071} fixing \ghpr{1070}).
+    }
+    \item Changes in Rcpp Sugar:
+    \itemize{
+      \item Two \code{sample()} objects are now standard vectors and not
+      \code{R_alloc} created (Dirk in \ghpr{1075} fixing \ghpr{1074}).
+    }
+    \item Changes in Rcpp support functions:
+    \itemize{
+      \item \code{Rcpp.package.skeleton()} adjusts for a (documented)
+      change in R 4.0.0 (Dirk in \ghpr{1088} fixing \ghpr{1087}).
+    }
+    \item Changes in Rcpp Documentation:
+    \itemize{
+      \item The pdf file of the earlier introduction is again typeset
+      with bibliographic information (Dirk).
+      \item A new vignette describing how to package C++ libraries has
+      been added (Dirk in \ghpr{1078} fixing \ghit{1077}).
+    }
+    \item Changes in Rcpp Deployment:
+    \itemize{
+      \item Travis CI unit tests now run a matrix over the versions of R
+      also tested at CRAN (rel/dev/oldrel/oldoldrel), and coverage runs
+      in parallel for a net speed-up (Dirk in \ghpr{1056} and
+      \ghpr{1057}).
+      \item The exceptions test is now partially skipped on Solaris as
+      it already is on Windows (Dirk in \ghpr{1065}).
+      \item The default CI runner was upgraded to R 4.0.0 (Dirk).
+      \item The CI matrix spans R 3.5, 3.6, r-release and r-devel (Dirk).
+    }
+  }
+}
+
 \section{Changes in Rcpp version 1.0.4 (2020-03-13)}{
   \itemize{
     \item Changes in Rcpp API:
@@ -37,10 +96,10 @@
       \item The Rcpp Attributes vignette describe the new invisible return
       object option (Kun Ren in \ghpr{1025}).
       \item Vignettes are now included as pre-made pdf files (Dirk in \ghpr{1029})
-      \item The Rcpp FAQ has new entry on the recommended
+      \item The Rcpp FAQ has a new entry on the recommended
       \code{importFrom} directive (Dirk in \ghpr{1031} fixing \ghit{1030}).
       \item The bib file for the vignette was once again updated to
-      current package versions.
+      current package versions (Dirk).
     }
     \item Changes in Rcpp Deployment:
     \itemize{

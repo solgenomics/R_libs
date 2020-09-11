@@ -1,6 +1,16 @@
 Changes to the plotmo package
 -----------------------------
 
+--- 3.5.7 Apr 15, 2020
+
+Added new dot arguments "prednames.abbreviate" and "prednames.minlength".
+  o Use prednames.abbreviate=FALSE for full predictor names in graph axes.
+    (The default is prednames.abbreviate=TRUE.)
+  o The "prednames.minlength" argument is passed on internally to base::abbreviate().
+
+Reinstated the tests for the emma package (were removed before because
+emma gave the message "package 'clusterSim' could not be loaded").
+
 --- 3.5.6 Oct 26, 2019
 
 The family of a model can now be a string (as well as a "family" object).

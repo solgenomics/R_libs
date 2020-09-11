@@ -21,4 +21,4 @@ URL: http://github.com/edzer/hexbin
 Packaged: 2020-02-03 13:36:39 UTC; edzer
 Repository: CRAN
 Date/Publication: 2020-02-03 16:20:02 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-04-03 22:46:28 UTC; unix
+Built: R 4.0.2; x86_64-pc-linux-gnu; 2020-09-11 20:13:47 UTC; unix

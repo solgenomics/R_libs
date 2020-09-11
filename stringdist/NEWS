@@ -1,3 +1,12 @@
+version 0.9.6.0
+- New function 'afind': find approximate matches in text based on string distance.
+- New functions 'grab', 'grabl': fuzzy matching equivalent to 'grep' and 'grepl'.
+- New function 'extract': fuzzy matching equivalent of stringr::str_extract.
+- New algorithm 'running_cosine': fast fuzzy text search using cosine distance.
+- New function 'stringsimmatrix' (Thanks to Johannes Gruber).
+- Number of threads used is now reported when loading 'stringdist'.
+- Internal fixes (in some cases class() == 'class' was used).
+
 version 0.9.5.5
 - Changed two URLs to canonical form in README.md (https://) to comply with
   CRAN policy.

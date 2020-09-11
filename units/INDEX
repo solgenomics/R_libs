@@ -17,7 +17,6 @@ mixed_units             Create or convert to a mixed units list-column
 plot.units              create axis label with appropriate labels
 seq.units               seq method for units objects
 set_units               set_units
-tibble                  type_sum function for units
 ud_units                List containing pre-defined units from the
                         udunits2 package.
 unitless                The "unit" type for vectors that are actually

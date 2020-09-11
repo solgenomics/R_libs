@@ -8,9 +8,9 @@
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<meta name="author" content="emmeans package, Version 1.4.5" />
+<meta name="author" content="emmeans package, Version 1.5.0" />
 
 
 <title>Index of vignette topics</title>
@@ -20,7 +20,7 @@
 
 
 
-<style type="text/css">body {font-size: 11pt; font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;margin: 30px 50px 30px 50px; }h1,h2,h3,h4,h5,h6 { font-family: Arial,Helvetica,Sans-serif; }a { text-decoration: none; }a:link { color:darkblue; } a:visited { color:darkblue; } a:hover { color:dodgerblue; }a:active { color:dodgerblue; } code {color: #602000;font-family: "Lucida Console", Monaco, monospace; font-size: 90%;}.r { color: darkred; }.ro { color: darkgreen; background-color: #eeeeee; }.r code, a code, .ro code { color: inherit; }.vigindex ul { list-style-type: none; }.vigindex ul li { list-style: none; }.vigindex a code { color: inherit; }.vigindex li code { color: inherit; }</style>
+<style type="text/css">body {font-size: 11pt; font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;margin: 30px 50px 30px 50px; }h1,h2,h3,h4,h5,h6 { font-family: Arial,Helvetica,Sans-serif; }a { text-decoration: none; }a:link { color:darkblue; } a:visited { color:darkblue; } a:hover { color:dodgerblue; }a:active { color:dodgerblue; } code {color: #602000;font-family: "Lucida Console", Monaco, monospace; font-size: 90%;}.r { color: darkred; }.ro { color: darkgreen; background-color: #eeeeee; }.re { color: red;}.r code, a code, .ro code, .re code { color: inherit; }.vigindex ul { list-style-type: none; }.vigindex ul li { list-style: none; }.vigindex a code { color: inherit; }.vigindex li code { color: inherit; }</style>
 
 
 
@@ -33,7 +33,7 @@
 
 
 <h1 class="title toc-ignore">Index of vignette topics</h1>
-<h4 class="author">emmeans package, Version 1.4.5</h4>
+<h4 class="author">emmeans package, Version 1.5.0</h4>
 
 
 
@@ -54,6 +54,7 @@
 <li><a href="confidence-intervals.html#adjust">in <em>confidence-intervals: adjust</em></a></li>
 </ul></li>
 <li><a href="models.html#V"><code>afex_aov</code> objects</a></li>
+<li><a href="xplanations.html#submodels">Alias matrix</a></li>
 <li><a href="FAQs.html#model">Analysis of subsets of data</a></li>
 <li>Analysis of variance
 <ul>
@@ -61,6 +62,7 @@
 <li><a href="confidence-intervals.html#joint_tests">Type III</a></li>
 </ul></li>
 <li><a href="models.html#V"><code>aovList</code> objects</a></li>
+<li><a href="models.html#K"><code>appx-satterthwaite</code> method</a></li>
 <li><a href="utilities.html#data"><code>as.data.frame()</code></a></li>
 <li><code>as.mcmc()</code>
 <ul>
@@ -115,14 +117,21 @@
 <li><a href="models.html#O"><code>clm</code> models</a></li>
 <li><a href="sophisticated.html#bayesxtra"><strong>coda</strong> package</a></li>
 <li><a href="comparisons.html#contrasts"><code>coef()</code></a></li>
-<li><a href="comparisons.html#pairwise">Cohen’s <em>d</em></a></li>
+<li><a href="comparisons.html#pwpm">Cohen’s <em>d</em></a></li>
 <li><a href="comparisons.html#CLD">Compact letter displays</a></li>
+<li>Comparison arrows
+<ul>
+<li><a href="xplanations.html#arrows">Derivation</a></li>
+</ul></li>
 <li>Comparisons
 <ul>
 <li><a href="comparisons.html#logs">Back-transforming</a></li>
 <li><a href="comparisons.html#CLD">Displaying as groups</a></li>
 <li><a href="comparisons.html#pwpp">Displaying <em>P</em> values</a></li>
-<li><a href="comparisons.html#graphical">Graphical</a></li>
+<li><a href="comparisons.html#graphical">Graphical</a>
+<ul>
+<li><a href="xplanations.html#arrows">How arrows are determined</a></li>
+</ul></li>
 <li><a href="comparisons.html#logs">with logs</a></li>
 <li><a href="FAQs.html#CIerror">with overlapping CIs</a></li>
 </ul></li>
@@ -189,8 +198,8 @@
 <h3>E</h3>
 <ul>
 <li><a href="comparisons.html#contrasts"><code>eff</code> contrasts</a></li>
-<li><a href="comparisons.html#pairwise"><code>eff_size()</code></a></li>
-<li><a href="comparisons.html#pairwise">Effect size</a></li>
+<li><a href="comparisons.html#pwpm"><code>eff_size()</code></a></li>
+<li><a href="comparisons.html#pwpm">Effect size</a></li>
 <li><a href="xtending.html#intro"><code>emm_basis()</code></a>
 <ul>
 <li><a href="xtending.html#ebreqs">Arguments and returned value</a></li>
@@ -235,6 +244,7 @@
 <li><a href="basics.html#EMMdef">EMMs</a>
 <ul>
 <li><a href="basics.html#eqwts">Appropriateness of</a></li>
+<li><a href="xplanations.html#submodels">Projecting to a submodel</a></li>
 <li><a href="FAQs.html#what">What are they?</a></li>
 </ul></li>
 <li><code>emtrends()</code>
@@ -260,7 +270,11 @@
 </ul></li>
 <li><a href="messy-data.html#cows"><code>cows</code></a></li>
 <li><a href="predictions.html#feedlot"><code>feedlot</code></a></li>
-<li><a href="interactions.html#covariates"><code>fiber</code></a></li>
+<li><code>fiber</code>
+<ul>
+<li><a href="interactions.html#covariates">in <em>interactions: covariates</em></a></li>
+<li><a href="transformations.html#stdize">in <em>transformations: stdize</em></a></li>
+</ul></li>
 <li><a href="messy-data.html#mediators"><code>framing</code></a></li>
 <li><a href="transformations.html#tranlink">Gamma regression</a></li>
 <li><a href="transformations.html#insects"><code>InsectSprays</code></a></li>
@@ -465,6 +479,7 @@
 <li><a href="basics.html#multiv">in <em>basics: multiv</em></a></li>
 <li><a href="interactions.html#oranges">in <em>interactions: oranges</em></a></li>
 <li><a href="models.html#M">in <em>models: M</em></a></li>
+<li><a href="xplanations.html#mult.submodel">with <code>submodel</code></a></li>
 </ul></li>
 <li><a href="confidence-intervals.html#adjmore">Multivariate <em>t</em> (<code>&quot;mvt&quot;</code>) adjustment</a></li>
 <li><a href="confidence-intervals.html#adjmore"><strong>mvtnorm</strong> package</a></li>
@@ -518,9 +533,13 @@
 <li><a href="basics.html#pvalues">Interpreting</a></li>
 </ul></li>
 <li><a href="comparisons.html#pairwise"><code>pairs()</code></a></li>
-<li><a href="comparisons.html#pairwise">Pairwise comparisons</a></li>
+<li><a href="comparisons.html#pairwise">Pairwise comparisons</a>
+<ul>
+<li><a href="comparisons.html#pwpm">Matrix displays</a></li>
+</ul></li>
 <li><a href="comparisons.html#contrasts"><code>pairwise</code> contrasts</a></li>
 <li><a href="comparisons.html#pwpp">Pairwise <em>P</em>-value plots</a></li>
+<li><a href="basics.html#params"><code>params</code></a></li>
 <li><code>plot()</code>
 <ul>
 <li><a href="messy-data.html#cows">nested factors</a></li>
@@ -559,6 +578,7 @@
 <li><a href="predictions.html#feedlot">Total SD</a></li>
 </ul></li>
 <li><a href="basics.html#emmobj"><code>print.summary_emm()</code></a></li>
+<li><a href="comparisons.html#pwpm"><code>pwpm()</code></a></li>
 <li><a href="comparisons.html#pwpp"><code>pwpp()</code></a></li>
 </ul>
 <p><a href="#topnav">Back to top</a></p>
@@ -616,11 +636,13 @@
 <div id="s" class="section level3">
 <h3>S</h3>
 <ul>
+<li><a href="confidence-intervals.html#summary">Sample size, displaying</a></li>
 <li>Satterthwaite d.f.
 <ul>
 <li><a href="models.html#K">in <em>models: K</em></a></li>
 <li><a href="models.html#L">in <em>models: L</em></a></li>
 </ul></li>
+<li><a href="transformations.html#stdize"><code>scale()</code></a></li>
 <li><a href="utilities.html#brackets">Selecting results</a></li>
 <li><a href="confidence-intervals.html#adjust">Sidak adjustment</a></li>
 <li>Significance
@@ -642,10 +664,15 @@
 <ul>
 <li><a href="comparisons.html#formulas">Formula</a></li>
 </ul></li>
+<li><a href="transformations.html#stdize">Standardized response</a></li>
 <li><a href="models.html#S"><code>stanreg</code> objects</a></li>
 <li><a href="interactions.html#factors">* gazing (star gazing)</a></li>
 <li><a href="utilities.html#startup">Startup options</a></li>
 <li><a href="basics.html#emmobj"><code>str()</code></a></li>
+<li><a href="xplanations.html#submodels"><code>submodel</code></a>
+<ul>
+<li><a href="xplanations.html#mult.submodel">in a multivariate model</a></li>
+</ul></li>
 <li><a href="FAQs.html#model">Subsets of data</a></li>
 <li><code>summary()</code>
 <ul>
@@ -656,6 +683,7 @@
 <li><a href="confidence-intervals.html#summary">in <em>confidence-intervals: summary</em></a></li>
 <li><a href="models.html#S">in <em>models: S</em></a></li>
 </ul></li>
+<li><a href="confidence-intervals.html#summary">Calculated columns</a></li>
 <li><a href="confidence-intervals.html#summary">in <em>confidence-intervals: summary</em></a></li>
 <li><a href="sophisticated.html#mcmc">HPD intervals</a></li>
 <li><a href="confidence-intervals.html#summary"><code>hpd.summary()</code></a></li>
@@ -664,6 +692,7 @@
 <li><a href="comparisons.html#pairwise">in <em>comparisons: pairwise</em></a></li>
 <li><a href="confidence-intervals.html#summary">in <em>confidence-intervals: summary</em></a></li>
 </ul></li>
+<li><a href="confidence-intervals.html#summary">Show sample size</a></li>
 <li><a href="transformations.html#tranlink"><code>type = &quot;unlink&quot;</code></a></li>
 </ul></li>
 <li><a href="basics.html#emmobj"><code>summary_emm</code> object</a>
@@ -696,12 +725,15 @@
 <li><a href="confidence-intervals.html#tran">Back-transforming</a></li>
 <li><a href="transformations.html#bias-adj">Bias adjustment</a></li>
 <li><a href="transformations.html#special">Custom</a></li>
+<li><a href="transformations.html#faking">faking</a></li>
 <li><a href="transformations.html#logs">Faking a log transformation</a></li>
 <li><a href="transformations.html#tranlink">with link function</a></li>
 <li><a href="comparisons.html#logs">Log</a></li>
 <li><a href="transformations.html#overview">Overview</a></li>
 <li><a href="transformations.html#regrid">Re-gridding</a></li>
 <li><a href="transformations.html#link-bias">Response versus link functions</a></li>
+<li><a href="transformations.html#stdize"><code>scale()</code></a></li>
+<li><a href="transformations.html#stdize">Standardizing</a></li>
 <li><a href="transformations.html#timing">Timing is everything</a></li>
 </ul></li>
 <li>Trends
@@ -738,12 +770,14 @@
 <div id="v" class="section level3">
 <h3>V</h3>
 <ul>
+<li><a href="basics.html#params">Variables that are not predictors</a></li>
 <li><a href="xtending.html#hooks"><code>vcovHook</code></a></li>
 <li>Vignettes
 <ul>
 <li><a href="basics.html">Basics</a></li>
 <li><a href="comparisons.html">Comparisons</a></li>
 <li><a href="confidence-intervals.html">Confidence intervals and tests</a></li>
+<li><a href="xplanations.html">Explanations supplement</a></li>
 <li><a href="xtending.html">Extending <strong>emmeans</strong></a></li>
 <li><a href="FAQs.html">FAQS</a></li>
 <li><a href="interactions.html">Interactions</a></li>

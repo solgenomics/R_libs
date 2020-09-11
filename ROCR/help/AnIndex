@@ -1,7 +1,6 @@
 performance	performance
 performance-class	performance-class
 plot,performance,missing-method	plot-methods
-plot,performance-method	plot-methods
 plot-methods	plot-methods
 plot.performance	plot-methods
 prediction	prediction

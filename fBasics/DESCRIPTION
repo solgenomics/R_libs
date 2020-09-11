@@ -27,4 +27,4 @@ NeedsCompilation: yes
 Packaged: 2020-03-07 10:25:14 UTC; hornik
 Repository: CRAN
 Date/Publication: 2020-03-07 11:06:10 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-04-03 23:52:13 UTC; unix
+Built: R 4.0.2; x86_64-pc-linux-gnu; 2020-09-11 20:36:56 UTC; unix

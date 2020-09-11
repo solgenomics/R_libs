@@ -1,4 +1,17 @@
 
+# ps 1.3.4
+
+* `ps_cpu_count()` now reports the correct number on Windows, even if
+  the package binary was built on a Windows version with a different
+  API (#77).
+
+# ps 1.3.3
+
+* New function `errno()` returns a table of `errno.h` error codes and
+  their description.
+
+* ps now compiles again on Solaris.
+
 # ps 1.3.2
 
 * ps now compiles again on unsupported platforms like Solaris.

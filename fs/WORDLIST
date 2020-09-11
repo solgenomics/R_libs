@@ -46,7 +46,10 @@ tibbles
 tidy’
 tidyverse
 toolchain
+umask
+unicode
 valgrind
 Vectorization
 vectorized
+vctrs
 writeable

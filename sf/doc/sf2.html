@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -148,6 +147,7 @@ summary {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -176,6 +176,12 @@ summary {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -266,27 +272,27 @@ div.tocify {
 <p>The data model GDAL uses needs</p>
 <ul>
 <li>a data source, which may be a file, directory, or database</li>
-<li>a layer, which is a single geospatial dataset inside a file or directory or e.g. a table in a database.</li>
+<li>a layer, which is a single geospatial dataset inside a file or directory or e.g. a table in a database.</li>
 <li>the specification of a driver (i.e., which format)</li>
 <li>driver-specific reading or writing data sources, or layers</li>
 </ul>
-<p>This may sound complex, but it is needed to map to over 200 data formats! Package <code>sf</code> tries hard to simplify this where possible (e.g. a file contains a single layer), but this vignette will try to point you to the options.</p>
+<p>This may sound complex, but it is needed to map to over 200 data formats! Package <code>sf</code> tries hard to simplify this where possible (e.g. a file contains a single layer), but this vignette will try to point you to the options.</p>
 <div id="using-st_read" class="section level3">
 <h3>Using st_read</h3>
 <p>As an example, we read the North Carolina counties SIDS dataset, which comes shipped with the <code>sf</code> package by:</p>
 <pre class="r"><code>library(sf)
 fname &lt;- system.file(&quot;shape/nc.shp&quot;, package=&quot;sf&quot;)
 fname
-## [1] &quot;/tmp/RtmprHOBbV/Rinst6782470e2d96/sf/shape/nc.shp&quot;
+## [1] &quot;/tmp/RtmpNt5oDA/Rinst34af264cc9b4/sf/shape/nc.shp&quot;
 nc &lt;- st_read(fname)
-## Reading layer `nc' from data source `/tmp/RtmprHOBbV/Rinst6782470e2d96/sf/shape/nc.shp' using driver `ESRI Shapefile'
+## Reading layer `nc' from data source `/tmp/RtmpNt5oDA/Rinst34af264cc9b4/sf/shape/nc.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 100 features and 14 fields
 ## geometry type:  MULTIPOLYGON
 ## dimension:      XY
 ## bbox:           xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965
 ## geographic CRS: NAD27</code></pre>
-<p>Typical users will use a file name with path for <code>fname</code>, or first set R’s working directory with <code>setwd()</code> and use file name without path.</p>
-<p>We see here that a single argument is used to find both the datasource and the layer. This works when the datasource contains a single layer. In case the number of layers is zero (e.g. a database with no tables), an error message is given. In case there are more layers than one, the first layer is returned, but a message and a warning are given:</p>
+<p>Typical users will use a file name with path for <code>fname</code>, or first set R's working directory with <code>setwd()</code> and use file name without path.</p>
+<p>We see here that a single argument is used to find both the datasource and the layer. This works when the datasource contains a single layer. In case the number of layers is zero (e.g. a database with no tables), an error message is given. In case there are more layers than one, the first layer is returned, but a message and a warning are given:</p>
 <pre class="r"><code>&gt; st_read(&quot;PG:dbname=postgis&quot;)
 Multiple layers are present in data source PG:dbname=postgis, reading layer `meuse'.
 Use `st_layers' to list all layer names and their type in a data source.
@@ -314,7 +320,7 @@ Available layers:
 &gt; </code></pre>
 <p>A particular layer can now be read by e.g.</p>
 <pre class="r"><code>st_read(&quot;PG:dbname=postgis&quot;, &quot;sids&quot;)</code></pre>
-<p><code>st_layers</code> has the option to count the number of features in case these are missing: some datasources (e.g. OSM xml files) do not report the number of features, but need to be completely read for this. GDAL allows for more than one geometry column for a feature layer; these are reported by <code>st_layers</code>.</p>
+<p><code>st_layers</code> has the option to count the number of features in case these are missing: some datasources (e.g. OSM xml files) do not report the number of features, but need to be completely read for this. GDAL allows for more than one geometry column for a feature layer; these are reported by <code>st_layers</code>.</p>
 <p>In case a layer contains only geometries but no attributes (fields), <code>st_read</code> still returns an <code>sf</code> object, with a geometry column only.</p>
 <p>We see that GDAL automatically detects the driver (file format) of the datasource, by trying them all in turn.</p>
 <p><code>st_read</code> follows the conventions of base R, similar to how it reads tabular data into <code>data.frame</code>s. This means that character data are read, by default as <code>factor</code>s. For those who insist on retrieving character data as character vectors, the argument <code>stringsAsFactors</code> can be set to <code>FALSE</code>:</p>
@@ -322,7 +328,7 @@ Available layers:
 <p>Alternatively, a user can set the global option <code>stringsAsFactors</code>, and this will have the same effect:</p>
 <pre class="r"><code>options(stringsAsFactors = FALSE)
 st_read(fname)
-## Reading layer `nc' from data source `/tmp/RtmprHOBbV/Rinst6782470e2d96/sf/shape/nc.shp' using driver `ESRI Shapefile'
+## Reading layer `nc' from data source `/tmp/RtmpNt5oDA/Rinst34af264cc9b4/sf/shape/nc.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 100 features and 14 fields
 ## geometry type:  MULTIPOLYGON
 ## dimension:      XY
@@ -586,7 +592,8 @@ methods(st_as_sfc)
 ## [13] st_as_sfc.list*               st_as_sfc.map*               
 ## [15] st_as_sfc.owin*               st_as_sfc.pq_geometry*       
 ## [17] st_as_sfc.psp*                st_as_sfc.raw*               
-## [19] st_as_sfc.tess*              
+## [19] st_as_sfc.s2_geography*       st_as_sfc.tess*              
+## [21] st_as_sfc.wk_wkb*            
 ## see '?methods' for accessing help and source code</code></pre>
 <p>An example would be:</p>
 <pre class="r"><code>library(sp)
@@ -660,7 +667,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

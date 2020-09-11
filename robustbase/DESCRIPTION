@@ -50,4 +50,4 @@ Author: Martin Maechler [aut, cre] (<https://orcid.org/0000-0002-8685-9910>),
 Maintainer: Martin Maechler <maechler@stat.math.ethz.ch>
 Repository: CRAN
 Date/Publication: 2020-03-23 17:40:02 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-04-03 23:23:58 UTC; unix
+Built: R 4.0.2; x86_64-pc-linux-gnu; 2020-09-11 20:34:35 UTC; unix

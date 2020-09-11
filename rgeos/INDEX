@@ -15,6 +15,7 @@ gBuffer                 Buffer Geometry
 gCentroid               Centroid of Geometry
 gContains               Geometry Relationships - Contains and Within
 gConvexHull             Convex Hull of Geometry
+gCoverageUnion          Coverage Union
 gCrosses                Geometry Relationships - Crosses and Overlaps
 gDelaunayTriangulation
                         Compute Delaunay triangulation between points
@@ -31,6 +32,7 @@ gIsRing                 Is Geometry a Ring?
 gIsSimple               Is Geometry Simple?
 gIsValid                Is Geometry Valid?
 gLength                 Length of Geometry
+gMakeValid              Make invalid geometries valid
 gNearestPoints          Closest Points of two Geometries
 gNode                   Linestring Noder
 gPointOnSurface         Point on Surface of Geometry

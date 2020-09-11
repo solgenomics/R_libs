@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -148,6 +147,7 @@ summary {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -176,6 +176,12 @@ summary {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -259,7 +265,7 @@ div.tocify {
 </div>
 
 
-<p>This vignetted describes how simple features, i.e. records that come with a geometry, can be manipulated, for the case where these manipulations involve geometries. Manipulations include:</p>
+<p>This vignetted describes how simple features, i.e. records that come with a geometry, can be manipulated, for the case where these manipulations involve geometries. Manipulations include:</p>
 <ul>
 <li>aggregating feature sets</li>
 <li>summarising feature sets</li>
@@ -268,7 +274,7 @@ div.tocify {
 <p>Features are represented by records in an <code>sf</code> object, and have feature attributes (all non-geometry fields) and feature geometry. Since <code>sf</code> objects are a subclass of <code>data.frame</code> or <code>tbl_df</code>, operations on feature attributes work identical to how they work on <code>data.frame</code>s, e.g.</p>
 <pre class="r"><code>library(sf)
 nc &lt;- st_read(system.file(&quot;shape/nc.shp&quot;, package=&quot;sf&quot;))
-## Reading layer `nc' from data source `/tmp/RtmprHOBbV/Rinst6782470e2d96/sf/shape/nc.shp' using driver `ESRI Shapefile'
+## Reading layer `nc' from data source `/tmp/RtmpNt5oDA/Rinst34af264cc9b4/sf/shape/nc.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 100 features and 14 fields
 ## geometry type:  MULTIPOLYGON
 ## dimension:      XY
@@ -338,7 +344,7 @@ nc[Ashe,]
 ## 2       10   542     3      12 MULTIPOLYGON (((1340555 959...
 ## 18     200  3725     7     222 MULTIPOLYGON (((1402677 837...
 ## 19      17  1775     1      33 MULTIPOLYGON (((1171158 868...</code></pre>
-<p>we see that in the result set <code>Ashe</code> is included, as the default value for argument <code>op</code> in <code>[.sf</code> is <code>st_intersects</code>, and <code>Ashe</code> intersects with itself. We could exclude self-intersection by using predicate <code>st_touches</code> (overlapping features don’t touch):</p>
+<p>we see that in the result set <code>Ashe</code> is included, as the default value for argument <code>op</code> in <code>[.sf</code> is <code>st_intersects</code>, and <code>Ashe</code> intersects with itself. We could exclude self-intersection by using predicate <code>st_touches</code> (overlapping features don't touch):</p>
 <pre class="r"><code>Ashe = nc[nc$NAME == &quot;Ashe&quot;,]
 nc[Ashe, op = st_touches]
 ## Simple feature collection with 3 features and 14 fields
@@ -522,7 +528,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

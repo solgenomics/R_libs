@@ -11,7 +11,7 @@ db_drivers              Drivers for which update should be 'TRUE' by
 extension_map           Map extension to driver
 gdal                    functions to interact with gdal not meant to be
                         called directly by users (but e.g. by
-                        stars::st_stars)
+                        stars::read_stars)
 gdal_utils              Native interface to gdal utils
 geos_binary_ops         Geometric operations on pairs of simple feature
                         geometry sets
@@ -34,6 +34,8 @@ plot                    plot sf object
 prefix_map              Map prefix to driver
 rawToHex                Convert raw vector(s) into hexadecimal
                         character string(s)
+s2                      functions for spherical geometry, using s2
+                        package
 sf                      Create sf object
 sf-defunct              Deprecated functions in 'sf'
 sf_extSoftVersion       Provide the external dependencies versions of
@@ -111,5 +113,6 @@ tibble                  Summarize simple feature type for tibble
 tidyverse               Tidyverse methods for sf objects (remove .sf
                         suffix!)
 transform.sf            transform method for sf objects
-valid                   Make an invalid geometry valid
+valid                   Check validity or make an invalid geometry
+                        valid
 vctrs                   vctrs methods for sf objects

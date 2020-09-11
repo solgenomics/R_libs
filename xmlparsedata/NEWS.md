@@ -1,4 +1,12 @@
 
+# 1.0.4
+
+* Translate ] tokens to `OP-RIGHT-BRACKET` instead of
+  `OP-RIGHT-BRACE` (#11 @AshesITR).
+
+* `xml_parse_data()` now works if `includeText = FALSE`
+  (#14 @renkun-ken).
+
 # 1.0.3
 
 * Ensure that closing xml-tags for code expressions that end at the same

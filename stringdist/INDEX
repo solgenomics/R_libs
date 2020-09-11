@@ -1,3 +1,4 @@
+afind                   Stringdist-based fuzzy text search
 amatch                  Approximate string matching
 phonetic                Phonetic algorithms
 printable_ascii         Detect the presence of non-printable or

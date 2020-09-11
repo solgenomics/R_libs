@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -148,6 +147,7 @@ summary {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -176,6 +176,12 @@ summary {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -259,7 +265,7 @@ div.tocify {
 </div>
 
 
-<p>This vignette describes a number of issues that did not come up in the previous vignettes, and that may or may not be categorized as “frequently asked questions”. Readers are encouraged to provide entries for this vignette (as for the others).</p>
+<p>This vignette describes a number of issues that did not come up in the previous vignettes, and that may or may not be categorized as &quot;frequently asked questions&quot;. Readers are encouraged to provide entries for this vignette (as for the others).</p>
 <div id="what-is-this-epsg-code-all-about" class="section level1">
 <h1>What is this EPSG code all about?</h1>
 <p>EPSG stands for a maintained, well-understood set of spatial reference systems, maintained by the International Association of Oil &amp; Gass Producers (IOGP). From R, we can get access to the EPSG dataset programmatically (as a <code>data.frame</code>) by:</p>
@@ -271,7 +277,7 @@ div.tocify {
 <p><code>sf</code> objects can have more than one geometry list-column, but always only one geometry column is considered <em>active</em>, and returned by <code>st_geometry</code>. When there are multiple geometry columns, the default <code>print</code> methods reports which one is active:</p>
 <pre class="r"><code>library(sf)
 demo(nc, ask = FALSE, echo = FALSE)
-## Reading layer `nc.gpkg' from data source `/tmp/RtmprHOBbV/Rinst6782470e2d96/sf/gpkg/nc.gpkg' using driver `GPKG'
+## Reading layer `nc.gpkg' from data source `/tmp/RtmpNt5oDA/Rinst34af264cc9b4/sf/gpkg/nc.gpkg' using driver `GPKG'
 ## Simple feature collection with 100 features and 14 fields
 ## Attribute-geometry relationship: 0 constant, 8 aggregate, 6 identity
 ## geometry type:  MULTIPOLYGON
@@ -314,7 +320,7 @@ plot(st_geometry(nc))</code></pre>
 <h1>Why do dplyr verbs not work for <code>sf</code> objects?</h1>
 <p>They do! However, many developers like to write scripts that never load packages but address all functions by the <code>sf::</code> prefix, as in</p>
 <pre class="r"><code>i = sf::st_intersects(sf1, sf2)</code></pre>
-<p>This works up to the moment that a <code>dplyr</code> generic like <code>select</code> for an <code>sf</code> object is needed: should one call <code>dplyr::select</code> (won’t know it should search in package <code>sf</code>) or <code>sf::select</code> (which doesn’t exist)? Neither works. One should in this case simply load <code>sf</code>, e.g. by</p>
+<p>This works up to the moment that a <code>dplyr</code> generic like <code>select</code> for an <code>sf</code> object is needed: should one call <code>dplyr::select</code> (won't know it should search in package <code>sf</code>) or <code>sf::select</code> (which doesn't exist)? Neither works. One should in this case simply load <code>sf</code>, e.g. by</p>
 <pre class="r"><code>library(sf)</code></pre>
 </div>
 <div id="what-is-this-errorwarningmessage-about" class="section level1">
@@ -404,7 +410,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

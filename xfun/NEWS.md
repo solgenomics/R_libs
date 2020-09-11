@@ -1,4 +1,48 @@
+# CHANGES IN xfun VERSION 0.17
+
+## NEW FEATURES
+
+- Supports `xfun::pkg_attach(packages, install = "pak")`, i.e., use `pak::pkg_install()` to install a package when it is not installed (thanks, @GitHunter0, #32).
+
+- Added a new function `xfun::split_source()` to split lines of R source code into minimal complete expressions.
+
+# CHANGES IN xfun VERSION 0.16
+
+- Added a new function `base64_decode()` to decode data from the base64 encoding (thanks, @wush978, #31).
+
+# CHANGES IN xfun VERSION 0.15
+
+## NEW FEATURES
+
+- Added a new function `tree()`, which is based on `str()` in base R, but changes the output of `str()` into a tree diagram to make it easier to understand nested data structures.
+
+- Added a new function `base64_encode()` to encode data into the base64 encoding (thanks, @wush978, #27).
+
+- Added a new function `base64_uri()` to generate the Data URI (or Data URL) for a file.
+
+## BUG FIXES
+
+- Fenced code blocks commented out in `<!-- -->` are not longer recognized as code blocks but prose (thanks, @jarauh, #25).
+
+# CHANGES IN xfun VERSION 0.14
+
+## NEW FEATURES
+
+- The `cache_rds()` function can invalidate the cache automatically when the code passed to its `expr` argument has changed. Two new arguments, `hash` and `clean` were added to this function to make it more useful and powerful. See the help page `?xfun::cache_rds()` for more information.
+
+# CHANGES IN xfun VERSION 0.13
+
+## NEW FEATURES
+
+- Added a new function `cache_rds()` to cache an R expression to a `*.rds` file.
+
+- Added a new function `Rscript_call()` to call a function (with arguments) in a new R session via the command `Rscript`.
+
+- The `recheck` argument of `rev_check()` can take a vector of package names, and only these packages will be checked. See `?xfun::rev_check` for more details.
+
 # CHANGES IN xfun VERSION 0.12
+
+## NEW FEATURES
 
 - Added a new function `split_lines()`.
 

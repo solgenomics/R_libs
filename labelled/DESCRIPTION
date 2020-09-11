@@ -1,7 +1,7 @@
 Package: labelled
 Type: Package
 Title: Manipulating Labelled Data
-Version: 2.2.2
+Version: 2.6.0
 Maintainer: Joseph Larmarange <joseph@larmarange.net>
 Authors@R: c(
   person("Joseph", "Larmarange", email = "joseph@larmarange.net", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-7097-700X")),
@@ -16,21 +16,23 @@ Description: Work with labelled data imported from 'SPSS'
     "haven_labelled_spss" classes introduced by 'haven' package.
 License: GPL-3
 Encoding: UTF-8
-Imports: haven (>= 2.1.0), dplyr, stats
-Suggests: testthat, knitr, rmarkdown, questionr, snakecase
+Imports: haven (>= 2.3.1), dplyr, lifecycle, rlang, vctrs, pillar,
+        tidyr
+Suggests: testthat, knitr, rmarkdown, questionr, snakecase, utf8
 Enhances: memisc
 LazyData: true
 URL: http://larmarange.github.io/labelled/
 BugReports: https://github.com/larmarange/labelled/issues
 VignetteBuilder: knitr
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1
+RdMacros: lifecycle
 NeedsCompilation: no
-Packaged: 2020-02-03 18:30:07 UTC; jlarmarange
+Packaged: 2020-08-25 10:40:56 UTC; jlarmarange
 Author: Joseph Larmarange [aut, cre] (<https://orcid.org/0000-0001-7097-700X>),
   Daniel Ludecke [ctb],
   Hadley Wickham [ctb],
   Michal Bojanowski [ctb],
   François Briatte [ctb]
 Repository: CRAN
-Date/Publication: 2020-02-03 19:00:02 UTC
-Built: R 3.6.3; ; 2020-04-04 01:00:22 UTC; unix
+Date/Publication: 2020-08-27 06:50:08 UTC
+Built: R 4.0.2; ; 2020-09-11 20:57:47 UTC; unix

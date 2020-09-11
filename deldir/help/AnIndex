@@ -8,6 +8,7 @@ dumpts	deldir-internal
 duplicatedxy	duplicatedxy
 get.cnrind	deldir-internal
 getCol	deldir-internal
+grapherXmpl	grapherXmpl
 lawSummary	lawSummary
 mid.in	deldir-internal
 mnndR	deldir-internal
@@ -17,6 +18,7 @@ plot.divchain	plot.divchain
 plot.tile.list	plot.tile.list
 plot.triang.list	plot.triang.list
 prelimtlist	deldir-internal
+print.deldir	print.deldir
 print.tileInfo	print.tileInfo
 seaweed	seaweed
 tile.centroids	tile.centroids

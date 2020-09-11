@@ -25,4 +25,4 @@ NeedsCompilation: yes
 Packaged: 2020-03-11 15:50:01 UTC; kbroman
 Repository: CRAN
 Date/Publication: 2020-03-11 23:10:02 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-04-03 22:53:48 UTC; unix
+Built: R 4.0.2; x86_64-pc-linux-gnu; 2020-09-11 20:19:27 UTC; unix

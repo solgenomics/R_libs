@@ -1,9 +1,73 @@
 \name{NEWS}
 \title{NEWS file for the survival package}
+\section{Changes in version 3.2-3}{
+  \itemize{
+    \item Fix error in survfit.coxphms: an internal routine was being
+    called with arguments in the wrong order.  Example due to Beth
+    Atkinson.
+    \item Add support routines for the derivative of a matrix
+    exponential, needed for survival curve variance (post Cox model).
+    \item Add explicit error message to summary.survfit, when the times
+    argument asks only for times beyond the end of a curve and extend=FALSE.
+    \item Clipping could be too tight in plot.survfit.  
+}}
+
+\section{Changes in version 3.2-2}{
+  \itemize{
+    \item Add support for "timeline" style survival data.  I
+    hope this will be a step forward in usability for multi-state
+    models, since data sets can be built with standard data manipulation tools.
+    \item Fix error in survfit.coxphms, the weight vector could be the
+    wrong length when the start.time option was used.
+    \item Formulas in a multistate coxph model can now have "-x1" to
+    delete variable x1, in secondary formulas.  (Update.formula is now used
+    behind the scenes).
+    \item Multistate coxph models now handle strata in full generality
+    -- a stratum can apply to all transitions or just to some.  One
+    consequence is that the cmap element of the returned fit has been broken into
+    two portions: stratum_map contains strata information and cmap the
+    coefficient information.
+    \item Revert (partially) a change to tmerge. Using tdc() to update a
+    variable that already exists in the baseline data was a problem, so
+    tdc had been changed to replace rather than update.  Now allow updates to
+    variables created by a prior tdc.
+    \item Fix error in survfit, 0/1 status variable: the start.time
+    option worked correctly only if the data set was sorted by time,
+    which unfortunately was true of the test data in tests/survtest.R.
+    Fix code and strengthen the test.
+    \item Multiple updates to multi-state coxph models + follow-on
+    curves. A current clinical project is providing a stress test.
+}}
+
+\section{Changes in version 3.1-12}{
+  \itemize{
+    \item Change the default for a robust variance: if there is a
+    cluster argument, non-integer case weight, or an id statement and
+    at least one id has more than one event.
+    \item cox.zph would fail if the coxph fit had NA coefficients
+    (something that used to work).  Add a test case to futureproof
+    this.  Caught by Ville Ponkilainen.
+    \item Minor: pyears + data.frame option would not preserve the order
+    of factor levels from a tcut operator.  
+    \item Edge case from Andrea Jaensch: a coxph model with strata +
+    psline terms, plus a (time1, time2) data set containing observations
+    that do not overlap any events, in just the right spot, could cause an
+    infinite loop in agmart3.c.
+    \item Add subset and na.action arguments to survcheck.
+    \item Minor updates to plot.survfit and survcheck.
+    \item Add cluster= option to replace +cluster() in a formula.
+    Remove all mention of the latter from documentation and
+    examples. Make the cluster, id, and robust options consistent across
+    all the functions.
+    \item Fix bug in plot.survfit with xaxs='S'.  At some point one line
+     of code got lost.  
+}}
+
 \section{Changes in version 3.1-11}{
   \itemize{
     \item Add 'n' vector to survcheck, update tests.
     \item Improve multistate coxph printout
+    \item Fix a memory reference error in multicheck.c
 }}
 
 \section{Changes in version 3.1-10}{
