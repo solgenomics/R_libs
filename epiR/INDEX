@@ -1,0 +1,112 @@
+epi.2by2                Summary measures for count data presented in a
+                        2 by 2 table
+epi.RtoBUGS             R to WinBUGS data conversion
+epi.SClip               Lip cancer in Scotland 1975 - 1980
+epi.about               The library epiR: summary information
+epi.asc                 Write matrix to an ASCII raster file
+epi.betabuster          An R version of Wes Johnson and Chun-Lung Su's
+                        Betabuster
+epi.bohning             Bohning's test for overdispersion of Poisson
+                        data
+epi.ccc                 Concordance correlation coefficient
+epi.conf                Confidence intervals for means, proportions,
+                        incidence, and standardised mortality ratios
+epi.convgrid            Convert British National Grid georeferences to
+                        easting and northing coordinates
+epi.cp                  Extract unique covariate patterns from a data
+                        set
+epi.cpresids            Covariate pattern residuals from a logistic
+                        regression model
+epi.descriptives        Descriptive statistics
+epi.dgamma              Estimate the precision of a [structured]
+                        heterogeneity term
+epi.directadj           Directly adjusted incidence rate estimates
+epi.dms                 Decimal degrees and degrees, minutes and
+                        seconds conversion
+epi.dsl                 Mixed-effects meta-analysis of binary outcomes
+                        using the DerSimonian and Laird method
+epi.edr                 Estimated dissemination ratio
+epi.empbayes            Empirical Bayes estimates of observed event
+                        counts
+epi.epidural            Rates of use of epidural anaesthesia in trials
+                        of caregiver support
+epi.herdtest            Estimate the characteristics of diagnostic
+                        tests applied at the herd (group) level
+epi.incin               Laryngeal and lung cancer cases in Lancashire
+                        1974 - 1983
+epi.indirectadj         Indirectly adjusted incidence risk estimates
+epi.insthaz             Event instantaneous hazard based on
+                        Kaplan-Meier survival estimates
+epi.interaction         Relative excess risk due to interaction in a
+                        case-control study
+epi.iv                  Fixed-effects meta-analysis of binary outcomes
+                        using the inverse variance method
+epi.kappa               Kappa statistic
+epi.ltd                 Lactation to date and standard lactation milk
+                        yields
+epi.mh                  Fixed-effects meta-analysis of binary outcomes
+                        using the Mantel-Haenszel method
+epi.nomogram            Post-test probability of disease given
+                        sensitivity and specificity of a test
+epi.occc                Overall concordance correlation coefficient
+                        (OCCC)
+epi.offset              Create offset vector
+epi.pooled              Estimate herd test characteristics when pooled
+                        sampling is used
+epi.popsize             Estimate population size
+epi.prcc                Partial rank correlation coefficients
+epi.prev                Estimate true prevalence
+epi.smd                 Fixed-effects meta-analysis of continuous
+                        outcomes using the standardised mean difference
+                        method
+epi.smr                 Confidence intervals and tests of significance
+                        of the standardised mortality [morbidity] ratio
+epi.sscc                Sample size, power or minimum detectable odds
+                        ratio for an unmatched or matched case-control
+                        study
+epi.ssclus1estb         Sample size to estimate a binary outcome using
+                        one-stage cluster sampling
+epi.ssclus1estc         Sample size to estimate a continuous outcome
+                        using one-stage cluster sampling
+epi.ssclus2estb         Number of clusters to be sampled to estimate a
+                        binary outcome using two-stage cluster sampling
+epi.ssclus2estc         Number of clusters to be sampled to estimate a
+                        continuous outcome using two-stage cluster
+                        sampling
+epi.sscohortc           Sample size, power or minimum detectable
+                        incidence risk ratio for a cohort study using
+                        individual count data
+epi.sscohortt           Sample size, power or minimum detectable
+                        incidence rate ratio for a cohort study using
+                        person or animal time data
+epi.sscompb             Sample size, power and minimum detectable risk
+                        ratio when comparing binary outcomes
+epi.sscompc             Sample size, power and minimum detectable
+                        difference when comparing continuous outcomes
+epi.sscomps             Sample size, power and minimum detectable
+                        hazard when comparing time to event
+epi.ssdetect            Sample size to detect an event
+epi.ssequb              Sample size for a parallel equivalence trial,
+                        binary outcome
+epi.ssequc              Sample size for a parallel equivalence trial,
+                        continuous outcome
+epi.ssninfb             Sample size for a non-inferiority trial, binary
+                        outcome
+epi.ssninfc             Sample size for a non-inferiority trial,
+                        continuous outcome
+epi.sssimpleestb        Sample size to estimate a binary outcome using
+                        simple random sampling
+epi.sssimpleestc        Sample size to estimate a continuous outcome
+                        using simple random sampling
+epi.ssstrataestb        Sample size to estimate a binary outcome using
+                        stratified random sampling
+epi.ssstrataestc        Sample size to estimate a continuous outcome
+                        using a stratified random sampling design
+epi.sssupb              Sample size for a parallel superiority trial,
+                        binary outcome
+epi.sssupc              Sample size for a parallel superiority trial,
+                        continuous outcome
+epi.ssxsectn            Sample size, power or minimum detectable
+                        prevalence ratio for a cross-sectional study
+epi.tests               Sensitivity, specificity and predictive value
+                        of a diagnostic test

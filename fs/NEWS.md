@@ -1,3 +1,41 @@
+# fs 1.5.0
+
+* The libuv release used by fs was updated to 1.38.1
+
+* `dir_create()` now consults the process umask so the mode during directory creation works like `mkdir` does (#284).
+
+* `fs_path`, `fs_bytes` and `fs_perms` objects are now compatible with vctrs 0.3.0 (#266)
+
+* `fs_path` objects now sort properly when there is a mix of ASCII and unicode elements (#279)
+
+
+# fs 1.4.2
+
+* `file_info(..., follow = TRUE)`, `is_dir()`, and `is_file()`
+  follow relative symlinks in non-current directories (@heavywatal, #280)
+
+* `dir_map()` now grows its internal list safely, the 1.4.0 release introduced an unsafe regression (#268)
+
+* `file_info()` returns a tibble if the tibble package is installed, and subsets work when it is a `data.frame` (#265)
+
+* `path_real()` always fails if the file does not exist. Thus it can no longer
+be used to resolve symlinks further up the path hierarchy for files that do not
+yet exist. This reverts the feature introduced in 1.2.7 (#144, #221, #231)
+
+# fs 1.4.1
+
+* Fix compilation on Solaris.
+
+# fs 1.4.0
+
+* `[[.fs_path`, `[[.fs_bytes` and `[[.fs_perms` now preserve their classes after subsetting (#254).
+
+* `path_has_parent()` now recycles both the `path` and `parent` arguments (#253).
+
+* `path_ext_set()` now recycles both the `path` and `ext` arguments (#250).
+
+* Internally fs no longer depends on Rcpp
+
 # fs 1.3.2
 
 * fs now passes along `CPPFLAGS` during compilation of libuv, fixing an issue that could

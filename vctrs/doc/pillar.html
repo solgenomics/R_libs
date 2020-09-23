@@ -388,24 +388,29 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h2>Using in a tibble</h2>
 <p>Columns of this class can be used in a tibble right away because we’ve made a class using the vctrs infrastructure and have provided a <code>format()</code> method:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">library</span>(tibble)</span>
-<span id="cb4-2"><a href="#cb4-2"></a></span>
-<span id="cb4-3"><a href="#cb4-3"></a>loc &lt;-<span class="st"> </span><span class="kw">latlon</span>(</span>
-<span id="cb4-4"><a href="#cb4-4"></a>  <span class="kw">c</span>(<span class="fl">28.3411783</span>, <span class="fl">32.7102978</span>, <span class="fl">30.2622356</span>, <span class="fl">37.7859102</span>, <span class="fl">28.5</span>, <span class="ot">NA</span>),</span>
-<span id="cb4-5"><a href="#cb4-5"></a>  <span class="kw">c</span>(<span class="op">-</span><span class="fl">81.5480348</span>, <span class="fl">-117.1704058</span>, <span class="fl">-97.7403327</span>, <span class="fl">-122.4131357</span>, <span class="fl">-81.4</span>, <span class="ot">NA</span>)</span>
-<span id="cb4-6"><a href="#cb4-6"></a>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; </span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; Attaching package: &#39;tibble&#39;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; The following object is masked from &#39;package:vctrs&#39;:</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; </span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt;     data_frame</span></span>
 <span id="cb4-7"><a href="#cb4-7"></a></span>
-<span id="cb4-8"><a href="#cb4-8"></a>data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">venue =</span> <span class="st">&quot;rstudio::conf&quot;</span>, <span class="dt">year =</span> <span class="dv">2017</span><span class="op">:</span><span class="dv">2022</span>, <span class="dt">loc =</span> loc)</span>
-<span id="cb4-9"><a href="#cb4-9"></a></span>
-<span id="cb4-10"><a href="#cb4-10"></a>data</span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt; # A tibble: 6 x 3</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt;   venue          year              loc</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;int&gt;       &lt;erth_ltl&gt;</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt; 1 rstudio::conf  2017 28°20&#39;N  81°33&#39;W</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="co">#&gt; 2 rstudio::conf  2018 32°43&#39;N 117°10&#39;W</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#&gt; 3 rstudio::conf  2019 30°16&#39;N  97°44&#39;W</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="co">#&gt; 4 rstudio::conf  2020 37°47&#39;N 122°25&#39;W</span></span>
-<span id="cb4-18"><a href="#cb4-18"></a><span class="co">#&gt; 5 rstudio::conf  2021 28°30&#39;N  81°24&#39;W</span></span>
-<span id="cb4-19"><a href="#cb4-19"></a><span class="co">#&gt; 6 rstudio::conf  2022               NA</span></span></code></pre></div>
+<span id="cb4-8"><a href="#cb4-8"></a>loc &lt;-<span class="st"> </span><span class="kw">latlon</span>(</span>
+<span id="cb4-9"><a href="#cb4-9"></a>  <span class="kw">c</span>(<span class="fl">28.3411783</span>, <span class="fl">32.7102978</span>, <span class="fl">30.2622356</span>, <span class="fl">37.7859102</span>, <span class="fl">28.5</span>, <span class="ot">NA</span>),</span>
+<span id="cb4-10"><a href="#cb4-10"></a>  <span class="kw">c</span>(<span class="op">-</span><span class="fl">81.5480348</span>, <span class="fl">-117.1704058</span>, <span class="fl">-97.7403327</span>, <span class="fl">-122.4131357</span>, <span class="fl">-81.4</span>, <span class="ot">NA</span>)</span>
+<span id="cb4-11"><a href="#cb4-11"></a>)</span>
+<span id="cb4-12"><a href="#cb4-12"></a></span>
+<span id="cb4-13"><a href="#cb4-13"></a>data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">venue =</span> <span class="st">&quot;rstudio::conf&quot;</span>, <span class="dt">year =</span> <span class="dv">2017</span><span class="op">:</span><span class="dv">2022</span>, <span class="dt">loc =</span> loc)</span>
+<span id="cb4-14"><a href="#cb4-14"></a></span>
+<span id="cb4-15"><a href="#cb4-15"></a>data</span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#&gt; # A tibble: 6 x 3</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="co">#&gt;   venue          year              loc</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;int&gt;       &lt;erth_ltl&gt;</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="co">#&gt; 1 rstudio::conf  2017 28°20&#39;N  81°33&#39;W</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="co">#&gt; 2 rstudio::conf  2018 32°43&#39;N 117°10&#39;W</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a><span class="co">#&gt; 3 rstudio::conf  2019 30°16&#39;N  97°44&#39;W</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a><span class="co">#&gt; 4 rstudio::conf  2020 37°47&#39;N 122°25&#39;W</span></span>
+<span id="cb4-23"><a href="#cb4-23"></a><span class="co">#&gt; 5 rstudio::conf  2021 28°30&#39;N  81°24&#39;W</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a><span class="co">#&gt; 6 rstudio::conf  2022               NA</span></span></code></pre></div>
 <p>This output is ok, but we could improve it by:</p>
 <ol style="list-style-type: decimal">
 <li><p>Using a more description type abbreviation than <code>&lt;erth_ltl&gt;</code>.</p></li>

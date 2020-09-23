@@ -1,7 +1,7 @@
 Package: catchr
 Type: Package
 Title: Taking the Pain Out of Catching and Handling Conditions
-Version: 0.2.2
+Version: 0.2.3
 Authors@R: c(
     person("Zachary", "Burchill", email = "zach.burchill.code@gmail.com", 
                                   role = c("aut", "cre", "cph"))
@@ -28,8 +28,8 @@ Suggests: testthat, beepr, crayon, covr, knitr, rmarkdown, spelling
 VignetteBuilder: knitr
 Language: en-US
 NeedsCompilation: no
-Packaged: 2020-01-09 04:56:49 UTC; zburchill
+Packaged: 2020-08-30 19:32:41 UTC; zburchill
 Author: Zachary Burchill [aut, cre, cph]
 Repository: CRAN
-Date/Publication: 2020-01-09 05:40:03 UTC
-Built: R 3.6.3; ; 2020-08-22 00:53:37 UTC; unix
+Date/Publication: 2020-08-31 04:40:03 UTC
+Built: R 3.6.3; ; 2020-09-23 19:44:31 UTC; unix

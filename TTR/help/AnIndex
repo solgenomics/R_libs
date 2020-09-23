@@ -1,4 +1,3 @@
-TTR-package	TTR
 %D	stochastics
 %K	stochastics
 adjRatios	adjRatios
@@ -16,6 +15,7 @@ changes	changes
 CLV	CLV
 CMF	CMF
 CMO	CMO
+CTI	CTI
 DEMA	MovingAverages
 DI	ADX
 Donchian	DonchianChannel

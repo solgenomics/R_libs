@@ -63,6 +63,7 @@ gantt.chart	gantt.chart
 gap.barplot	gap.barplot
 gap.boxplot	gap.boxplot
 gap.plot	gap.plot
+gap_barp	gap_barp
 get.breaks	get.breaks
 get.gantt.info	get.gantt.info
 get.segs	get.segs

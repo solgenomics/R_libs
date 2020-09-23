@@ -1,4 +1,4 @@
-## ---- echo = FALSE-------------------------------------------------------
+## ---- echo = FALSE------------------------------------------------------------
 embed_png <- function(path, dpi = NULL) {
   meta <- attr(png::readPNG(path, native = TRUE, info = TRUE), "info")
   if (!is.null(dpi)) meta$dpi <- rep(dpi, 2)
@@ -13,20 +13,32 @@ embed_png <- function(path, dpi = NULL) {
 
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 
-## ---- echo = FALSE-------------------------------------------------------
-embed_png("selectorgadget-1.png")
 
-## ---- echo = FALSE-------------------------------------------------------
-embed_png("selectorgadget-2.png")
+## ----results="asis", echo=FALSE-----------------------------------------------
+# directly adding css to output html without ruining css style https://stackoverflow.com/questions/29291633/adding-custom-css-tags-to-an-rmarkdown-html-document
+cat("
+<style>
+img {
+border: 0px;
+outline: 0 ;
+}
+</style>
+")
 
-## ---- echo = FALSE-------------------------------------------------------
-embed_png("selectorgadget-3.png")
+## ---- echo = FALSE------------------------------------------------------------
+embed_png("selectorgadget-1-s.png")
 
-## ---- echo = FALSE-------------------------------------------------------
-embed_png("selectorgadget-4.png")
-embed_png("selectorgadget-5.png")
+## ---- echo = FALSE------------------------------------------------------------
+embed_png("selectorgadget-2-s.png")
 
-## ------------------------------------------------------------------------
+## ---- echo = FALSE------------------------------------------------------------
+embed_png("selectorgadget-3-s.png")
+
+## ---- echo = FALSE------------------------------------------------------------
+embed_png("selectorgadget-4-s.png")
+embed_png("selectorgadget-5-s.png")
+
+## -----------------------------------------------------------------------------
 library(rvest)
 lego_url <- "http://www.imdb.com/title/tt1490017/"
 html <- read_html(lego_url)
@@ -34,16 +46,15 @@ cast <- html_nodes(html, ".primary_photo+ td a")
 length(cast)
 cast[1:2]
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 html_text(cast, trim = TRUE)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 cast_attrs <- html_attrs(cast)
-
 length(cast_attrs)
 cast_attrs[1:2]
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 cast_rel_urls <- html_attr(cast, "href")
 length(cast_rel_urls)
 cast_rel_urls[1:2]

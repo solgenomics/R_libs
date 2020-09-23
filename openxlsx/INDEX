@@ -1,3 +1,5 @@
+addCreator              Add another author to the meta data of the
+                        file.
 addFilter               Add column filters
 addStyle                Add a style to a set of cells
 addWorksheet            Add a worksheet to a workbook
@@ -20,11 +22,15 @@ freezePane              Freeze a worksheet pane
 getBaseFont             Return the workbook default font
 getCellRefs             Return excel cell coordinates from (x,y)
                         coordinates
+getCreators             Add another author to the meta data of the
+                        file.
 getDateOrigin           Get the date origin an xlsx file is using
 getNamedRegions         Get named regions
 getSheetNames           Get names of worksheets
 getStyles               Returns a list of all styles in the workbook
 getTables               List Excel tables in a workbook
+groupColumns            Group columns
+groupRows               Group Rows
 insertImage             Insert an image into a worksheet
 insertPlot              Insert the current plot into a worksheet
 int2col                 Convert integer to Excel column
@@ -56,11 +62,15 @@ setColWidths            Set worksheet column widths
 setFooter               Set footer for all worksheets
 setHeader               Set header for all worksheets
 setHeaderFooter         Set document headers and footers
+setLastModifiedBy       Add another author to the meta data of the
+                        file.
 setRowHeights           Set worksheet row heights
 sheetVisibility         Get/set worksheet visible state
 sheetVisible            Get worksheet visible state.
 sheets                  Returns names of worksheets.
 showGridLines           Set worksheet gridlines to show or hide.
+ungroupColumns          Ungroup Columns
+ungroupRows             Ungroup Rows
 worksheetOrder          Order of worksheets in xlsx file
 write.xlsx              write data to an xlsx file
 writeComment            write a cell comment

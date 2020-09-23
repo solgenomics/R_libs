@@ -1,3 +1,7 @@
+# rvest 0.3.6
+
+* Remove failing example
+
 # rvest 0.3.5
 
 * Use web archive to fix broken example.

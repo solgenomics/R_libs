@@ -14,6 +14,22 @@
 
 <title>Two-table verbs</title>
 
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -309,7 +325,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <li><p>Filtering joins, which filter observations from one table based on whether or not they match an observation in the other table.</p></li>
 <li><p>Set operations, which combine the observations in the data sets as if they were set elements.</p></li>
 </ul>
-<p>(This discussion assumes that you have <a href="http://www.jstatsoft.org/v59/i10/">tidy data</a>, where the rows are observations and the columns are variables. If you’re not familiar with that framework, I’d recommend reading up on it first.)</p>
+<p>(This discussion assumes that you have <a href="https://www.jstatsoft.org/v59/i10/">tidy data</a>, where the rows are observations and the columns are variables. If you’re not familiar with that framework, I’d recommend reading up on it first.)</p>
 <p>All two-table verbs work similarly. The first two arguments are <code>x</code> and <code>y</code>, and provide the tables to combine. The output is always a new table with the same type as <code>x</code>.</p>
 <div id="mutating-joins" class="section level2">
 <h2>Mutating joins</h2>
@@ -391,7 +407,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h3>Types of join</h3>
 <p>There are four types of mutating join, which differ in their behaviour when a match is not found. We’ll illustrate each with a simple example:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>df1 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">y =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">1</span>)</span>
-<span id="cb5-2"><a href="#cb5-2"></a>df2 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="dt">a =</span> <span class="dv">10</span>, <span class="dt">b =</span> <span class="st">&quot;a&quot;</span>)</span></code></pre></div>
+<span id="cb5-2"><a href="#cb5-2"></a>df2 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>), <span class="dt">a =</span> <span class="dv">10</span>, <span class="dt">b =</span> <span class="st">&quot;a&quot;</span>)</span></code></pre></div>
 <ul>
 <li><p><code>inner_join(x, y)</code> only includes observations that match in both <code>x</code> and <code>y</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>df1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">inner_join</span>(df2) <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw">kable</span>()</span>
@@ -422,7 +438,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;</span></span>
 <span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; 1     1     2    10 a    </span></span>
 <span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; 2     2     1    NA &lt;NA&gt;</span></span></code></pre></div></li>
-<li><p><code>right_join(x, y)</code> includes all observations in <code>y</code>. It’s equivalent to <code>left_join(y, x)</code>, but the columns will be ordered differently.</p>
+<li><p><code>right_join(x, y)</code> includes all observations in <code>y</code>. It’s equivalent to <code>left_join(y, x)</code>, but the columns and rows will be ordered differently.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>df1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">right_join</span>(df2)</span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="co">#&gt; Joining, by = &quot;x&quot;</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; # A tibble: 2 x 4</span></span>
@@ -435,8 +451,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; # A tibble: 2 x 4</span></span>
 <span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt;       x     a b         y</span></span>
 <span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;int&gt;</span></span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt; 1     1    10 a         2</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a><span class="co">#&gt; 2     3    10 a        NA</span></span></code></pre></div></li>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt; 1     3    10 a        NA</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="co">#&gt; 2     1    10 a         2</span></span></code></pre></div></li>
 <li><p><code>full_join()</code> includes all observations from <code>x</code> and <code>y</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>df1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">full_join</span>(df2)</span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt; Joining, by = &quot;x&quot;</span></span>
@@ -469,7 +485,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 </div>
 <div id="filtering-joins" class="section level2">
 <h2>Filtering joins</h2>
-<p>Filtering joins match obserations in the same way as mutating joins, but affect the observations, not the variables. There are two types:</p>
+<p>Filtering joins match observations in the same way as mutating joins, but affect the observations, not the variables. There are two types:</p>
 <ul>
 <li><code>semi_join(x, y)</code> <strong>keeps</strong> all observations in <code>x</code> that have a match in <code>y</code>.</li>
 <li><code>anti_join(x, y)</code> <strong>drops</strong> all observations in <code>x</code> that have a match in <code>y</code>.</li>
@@ -547,64 +563,6 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb14-21"><a href="#cb14-21"></a><span class="co">#&gt;       x     y</span></span>
 <span id="cb14-22"><a href="#cb14-22"></a><span class="co">#&gt;   &lt;int&gt; &lt;int&gt;</span></span>
 <span id="cb14-23"><a href="#cb14-23"></a><span class="co">#&gt; 1     2     2</span></span></code></pre></div>
-</div>
-<div id="coercion-rules" class="section level2">
-<h2>Coercion rules</h2>
-<p>When joining tables, dplyr is a little more conservative than base R about the types of variable that it considers equivalent. This is mostly likely to surprise if you’re working factors:</p>
-<ul>
-<li><p>Factors with different levels are coerced to character with a warning:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>df1 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span>, <span class="dt">y =</span> <span class="kw">factor</span>(<span class="st">&quot;a&quot;</span>))</span>
-<span id="cb15-2"><a href="#cb15-2"></a>df2 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">2</span>, <span class="dt">y =</span> <span class="kw">factor</span>(<span class="st">&quot;b&quot;</span>))</span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="kw">full_join</span>(df1, df2) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str</span>()</span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="co">#&gt; Joining, by = c(&quot;x&quot;, &quot;y&quot;)</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="co">#&gt; Warning: Column `y` joining factors with different levels, coercing to character</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a><span class="co">#&gt; vector</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a><span class="co">#&gt; tibble [2 × 2] (S3: tbl_df/tbl/data.frame)</span></span>
-<span id="cb15-8"><a href="#cb15-8"></a><span class="co">#&gt;  $ x: num [1:2] 1 2</span></span>
-<span id="cb15-9"><a href="#cb15-9"></a><span class="co">#&gt;  $ y: chr [1:2] &quot;a&quot; &quot;b&quot;</span></span></code></pre></div></li>
-<li><p>Factors with the same levels in a different order are coerced to character with a warning:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>df1 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span>, <span class="dt">y =</span> <span class="kw">factor</span>(<span class="st">&quot;a&quot;</span>, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)))</span>
-<span id="cb16-2"><a href="#cb16-2"></a>df2 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">2</span>, <span class="dt">y =</span> <span class="kw">factor</span>(<span class="st">&quot;b&quot;</span>, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;b&quot;</span>, <span class="st">&quot;a&quot;</span>)))</span>
-<span id="cb16-3"><a href="#cb16-3"></a><span class="kw">full_join</span>(df1, df2) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str</span>()</span>
-<span id="cb16-4"><a href="#cb16-4"></a><span class="co">#&gt; Joining, by = c(&quot;x&quot;, &quot;y&quot;)</span></span>
-<span id="cb16-5"><a href="#cb16-5"></a><span class="co">#&gt; Warning: Column `y` joining factors with different levels, coercing to character</span></span>
-<span id="cb16-6"><a href="#cb16-6"></a><span class="co">#&gt; vector</span></span>
-<span id="cb16-7"><a href="#cb16-7"></a><span class="co">#&gt; tibble [2 × 2] (S3: tbl_df/tbl/data.frame)</span></span>
-<span id="cb16-8"><a href="#cb16-8"></a><span class="co">#&gt;  $ x: num [1:2] 1 2</span></span>
-<span id="cb16-9"><a href="#cb16-9"></a><span class="co">#&gt;  $ y: chr [1:2] &quot;a&quot; &quot;b&quot;</span></span></code></pre></div></li>
-<li><p>Factors are preserved only if the levels match exactly:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>df1 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span>, <span class="dt">y =</span> <span class="kw">factor</span>(<span class="st">&quot;a&quot;</span>, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)))</span>
-<span id="cb17-2"><a href="#cb17-2"></a>df2 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">2</span>, <span class="dt">y =</span> <span class="kw">factor</span>(<span class="st">&quot;b&quot;</span>, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)))</span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="kw">full_join</span>(df1, df2) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str</span>()</span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="co">#&gt; Joining, by = c(&quot;x&quot;, &quot;y&quot;)</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="co">#&gt; tibble [2 × 2] (S3: tbl_df/tbl/data.frame)</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="co">#&gt;  $ x: num [1:2] 1 2</span></span>
-<span id="cb17-7"><a href="#cb17-7"></a><span class="co">#&gt;  $ y: Factor w/ 2 levels &quot;a&quot;,&quot;b&quot;: 1 2</span></span></code></pre></div></li>
-<li><p>A factor and a character are coerced to character with a warning:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>df1 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span>, <span class="dt">y =</span> <span class="st">&quot;a&quot;</span>)</span>
-<span id="cb18-2"><a href="#cb18-2"></a>df2 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">2</span>, <span class="dt">y =</span> <span class="kw">factor</span>(<span class="st">&quot;a&quot;</span>))</span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">full_join</span>(df1, df2) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str</span>()</span>
-<span id="cb18-4"><a href="#cb18-4"></a><span class="co">#&gt; Joining, by = c(&quot;x&quot;, &quot;y&quot;)</span></span>
-<span id="cb18-5"><a href="#cb18-5"></a><span class="co">#&gt; Warning: Column `y` joining character vector and factor, coercing into character</span></span>
-<span id="cb18-6"><a href="#cb18-6"></a><span class="co">#&gt; vector</span></span>
-<span id="cb18-7"><a href="#cb18-7"></a><span class="co">#&gt; tibble [2 × 2] (S3: tbl_df/tbl/data.frame)</span></span>
-<span id="cb18-8"><a href="#cb18-8"></a><span class="co">#&gt;  $ x: num [1:2] 1 2</span></span>
-<span id="cb18-9"><a href="#cb18-9"></a><span class="co">#&gt;  $ y: chr [1:2] &quot;a&quot; &quot;a&quot;</span></span></code></pre></div></li>
-</ul>
-<p>Otherwise logicals will be silently upcast to integer, and integer to numeric, but coercing to character will raise an error:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>df1 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span>, <span class="dt">y =</span> 1L)</span>
-<span id="cb19-2"><a href="#cb19-2"></a>df2 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">2</span>, <span class="dt">y =</span> <span class="fl">1.5</span>)</span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="kw">full_join</span>(df1, df2) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str</span>()</span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="co">#&gt; Joining, by = c(&quot;x&quot;, &quot;y&quot;)</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a><span class="co">#&gt; tibble [2 × 2] (S3: tbl_df/tbl/data.frame)</span></span>
-<span id="cb19-6"><a href="#cb19-6"></a><span class="co">#&gt;  $ x: num [1:2] 1 2</span></span>
-<span id="cb19-7"><a href="#cb19-7"></a><span class="co">#&gt;  $ y: num [1:2] 1 1.5</span></span>
-<span id="cb19-8"><a href="#cb19-8"></a></span>
-<span id="cb19-9"><a href="#cb19-9"></a>df1 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span>, <span class="dt">y =</span> 1L)</span>
-<span id="cb19-10"><a href="#cb19-10"></a>df2 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">2</span>, <span class="dt">y =</span> <span class="st">&quot;a&quot;</span>)</span>
-<span id="cb19-11"><a href="#cb19-11"></a><span class="kw">full_join</span>(df1, df2) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str</span>()</span>
-<span id="cb19-12"><a href="#cb19-12"></a><span class="co">#&gt; Joining, by = c(&quot;x&quot;, &quot;y&quot;)</span></span>
-<span id="cb19-13"><a href="#cb19-13"></a><span class="co">#&gt; Error: Can&#39;t join on &#39;y&#39; x &#39;y&#39; because of incompatible types (character / integer)</span></span></code></pre></div>
 </div>
 <div id="multiple-table-verbs" class="section level2">
 <h2>Multiple-table verbs</h2>

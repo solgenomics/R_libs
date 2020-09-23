@@ -9,7 +9,7 @@ nutr.lm <- lm(gain ~ (age + group + race)^2, data = nutrition)
 car::Anova(nutr.lm)
 
 ## -----------------------------------------------------------------------------
-emmeans(nutr.lm, ~ group * race)
+emmeans(nutr.lm, ~ group * race, calc = c(n = ".wgt."))
 
 ## -----------------------------------------------------------------------------
 with(nutrition, table(race, age))
@@ -44,6 +44,19 @@ emmip(framing.glm, treat ~ educ | gender, type = "response",
 ## ----message = FALSE----------------------------------------------------------
 sapply(c("equal", "prop", "outer", "cells", "flat"), function(w)
     predict(emmeans(nutr.lm, ~ race, weights = w)))
+
+## -----------------------------------------------------------------------------
+summary(emmeans(nutr.lm, pairwise ~ group | race, submodel = ~ age + group*race), 
+        by = NULL)
+
+## -----------------------------------------------------------------------------
+emmeans(nutr.lm, ~ group * race, submodel = "minimal")
+
+## -----------------------------------------------------------------------------
+joint_tests(nutr.lm, submodel = "type2")
+
+## -----------------------------------------------------------------------------
+car::Anova(nutr.lm)
 
 ## -----------------------------------------------------------------------------
 cows <- data.frame (

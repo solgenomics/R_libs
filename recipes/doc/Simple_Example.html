@@ -443,7 +443,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; </span></span>
 <span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; Operations:</span></span>
 <span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; </span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; K-nearest neighbor imputation for all_predictors</span></span></code></pre></div>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; K-nearest neighbor imputation for all_predictors()</span></span></code></pre></div>
 <p>It is important to realize that the <em>specific</em> variables have not been declared yet (as shown when the recipe is printed above). In some preprocessing steps, variables will be added or removed from the current list of possible variables.</p>
 <p>Since some predictors are categorical in nature (i.e. nominal), it would make sense to convert these factor predictors into numeric dummy variables (aka indicator variables) using <code>step_dummy</code>. To do this, the step selects all predictors then removes those that are numeric:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>ind_vars &lt;-<span class="st"> </span>imputed <span class="op">%&gt;%</span></span>
@@ -459,8 +459,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; </span></span>
 <span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; Operations:</span></span>
 <span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt; </span></span>
-<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt; K-nearest neighbor imputation for all_predictors</span></span>
-<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt; Dummy variables from all_predictors, -, all_numeric()</span></span></code></pre></div>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt; K-nearest neighbor imputation for all_predictors()</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt; Dummy variables from all_predictors(), -all_numeric()</span></span></code></pre></div>
 <p>At this point in the recipe, all of the predictor should be encoded as numeric, we can further add more steps to center and scale them:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>standardized &lt;-<span class="st"> </span>ind_vars <span class="op">%&gt;%</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="st">  </span><span class="kw">step_center</span>(<span class="kw">all_predictors</span>())  <span class="op">%&gt;%</span></span>
@@ -476,10 +476,10 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt; </span></span>
 <span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt; Operations:</span></span>
 <span id="cb8-14"><a href="#cb8-14"></a><span class="co">#&gt; </span></span>
-<span id="cb8-15"><a href="#cb8-15"></a><span class="co">#&gt; K-nearest neighbor imputation for all_predictors</span></span>
-<span id="cb8-16"><a href="#cb8-16"></a><span class="co">#&gt; Dummy variables from all_predictors, -, all_numeric()</span></span>
-<span id="cb8-17"><a href="#cb8-17"></a><span class="co">#&gt; Centering for all_predictors</span></span>
-<span id="cb8-18"><a href="#cb8-18"></a><span class="co">#&gt; Scaling for all_predictors</span></span></code></pre></div>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="co">#&gt; K-nearest neighbor imputation for all_predictors()</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a><span class="co">#&gt; Dummy variables from all_predictors(), -all_numeric()</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a><span class="co">#&gt; Centering for all_predictors()</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a><span class="co">#&gt; Scaling for all_predictors()</span></span></code></pre></div>
 <p>If these are the only preprocessing steps for the predictors, we can now estimate the means and standard deviations from the training set. The <code>prep</code> function is used with a recipe and a data set:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>trained_rec &lt;-<span class="st"> </span><span class="kw">prep</span>(standardized, <span class="dt">training =</span> credit_train)</span>
 <span id="cb9-2"><a href="#cb9-2"></a>trained_rec</span>
@@ -538,28 +538,29 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <pre><code>#&gt;  [1] &quot;step_BoxCox&quot;        &quot;step_YeoJohnson&quot;    &quot;step_arrange&quot;      
 #&gt;  [4] &quot;step_bagimpute&quot;     &quot;step_bin2factor&quot;    &quot;step_bs&quot;           
 #&gt;  [7] &quot;step_center&quot;        &quot;step_classdist&quot;     &quot;step_corr&quot;         
-#&gt; [10] &quot;step_count&quot;         &quot;step_date&quot;          &quot;step_depth&quot;        
-#&gt; [13] &quot;step_discretize&quot;    &quot;step_downsample&quot;    &quot;step_dummy&quot;        
-#&gt; [16] &quot;step_factor2string&quot; &quot;step_filter&quot;        &quot;step_geodist&quot;      
-#&gt; [19] &quot;step_holiday&quot;       &quot;step_hyperbolic&quot;    &quot;step_ica&quot;          
-#&gt; [22] &quot;step_integer&quot;       &quot;step_interact&quot;      &quot;step_intercept&quot;    
-#&gt; [25] &quot;step_inverse&quot;       &quot;step_invlogit&quot;      &quot;step_isomap&quot;       
-#&gt; [28] &quot;step_knnimpute&quot;     &quot;step_kpca&quot;          &quot;step_kpca_poly&quot;    
-#&gt; [31] &quot;step_kpca_rbf&quot;      &quot;step_lag&quot;           &quot;step_lincomb&quot;      
-#&gt; [34] &quot;step_log&quot;           &quot;step_logit&quot;         &quot;step_lowerimpute&quot;  
-#&gt; [37] &quot;step_meanimpute&quot;    &quot;step_medianimpute&quot;  &quot;step_modeimpute&quot;   
-#&gt; [40] &quot;step_mutate&quot;        &quot;step_mutate_at&quot;     &quot;step_naomit&quot;       
-#&gt; [43] &quot;step_nnmf&quot;          &quot;step_normalize&quot;     &quot;step_novel&quot;        
-#&gt; [46] &quot;step_ns&quot;            &quot;step_num2factor&quot;    &quot;step_nzv&quot;          
-#&gt; [49] &quot;step_ordinalscore&quot;  &quot;step_other&quot;         &quot;step_pca&quot;          
-#&gt; [52] &quot;step_pls&quot;           &quot;step_poly&quot;          &quot;step_profile&quot;      
-#&gt; [55] &quot;step_range&quot;         &quot;step_ratio&quot;         &quot;step_regex&quot;        
-#&gt; [58] &quot;step_relevel&quot;       &quot;step_relu&quot;          &quot;step_rename&quot;       
-#&gt; [61] &quot;step_rename_at&quot;     &quot;step_rm&quot;            &quot;step_rollimpute&quot;   
-#&gt; [64] &quot;step_sample&quot;        &quot;step_scale&quot;         &quot;step_shuffle&quot;      
-#&gt; [67] &quot;step_slice&quot;         &quot;step_spatialsign&quot;   &quot;step_sqrt&quot;         
-#&gt; [70] &quot;step_string2factor&quot; &quot;step_unknown&quot;       &quot;step_unorder&quot;      
-#&gt; [73] &quot;step_upsample&quot;      &quot;step_window&quot;        &quot;step_zv&quot;</code></pre>
+#&gt; [10] &quot;step_count&quot;         &quot;step_cut&quot;           &quot;step_date&quot;         
+#&gt; [13] &quot;step_depth&quot;         &quot;step_discretize&quot;    &quot;step_downsample&quot;   
+#&gt; [16] &quot;step_dummy&quot;         &quot;step_factor2string&quot; &quot;step_filter&quot;       
+#&gt; [19] &quot;step_geodist&quot;       &quot;step_holiday&quot;       &quot;step_hyperbolic&quot;   
+#&gt; [22] &quot;step_ica&quot;           &quot;step_integer&quot;       &quot;step_interact&quot;     
+#&gt; [25] &quot;step_intercept&quot;     &quot;step_inverse&quot;       &quot;step_invlogit&quot;     
+#&gt; [28] &quot;step_isomap&quot;        &quot;step_knnimpute&quot;     &quot;step_kpca&quot;         
+#&gt; [31] &quot;step_kpca_poly&quot;     &quot;step_kpca_rbf&quot;      &quot;step_lag&quot;          
+#&gt; [34] &quot;step_lincomb&quot;       &quot;step_log&quot;           &quot;step_logit&quot;        
+#&gt; [37] &quot;step_lowerimpute&quot;   &quot;step_meanimpute&quot;    &quot;step_medianimpute&quot; 
+#&gt; [40] &quot;step_modeimpute&quot;    &quot;step_mutate&quot;        &quot;step_mutate_at&quot;    
+#&gt; [43] &quot;step_naomit&quot;        &quot;step_nnmf&quot;          &quot;step_normalize&quot;    
+#&gt; [46] &quot;step_novel&quot;         &quot;step_ns&quot;            &quot;step_num2factor&quot;   
+#&gt; [49] &quot;step_nzv&quot;           &quot;step_ordinalscore&quot;  &quot;step_other&quot;        
+#&gt; [52] &quot;step_pca&quot;           &quot;step_pls&quot;           &quot;step_poly&quot;         
+#&gt; [55] &quot;step_profile&quot;       &quot;step_range&quot;         &quot;step_ratio&quot;        
+#&gt; [58] &quot;step_regex&quot;         &quot;step_relevel&quot;       &quot;step_relu&quot;         
+#&gt; [61] &quot;step_rename&quot;        &quot;step_rename_at&quot;     &quot;step_rm&quot;           
+#&gt; [64] &quot;step_rollimpute&quot;    &quot;step_sample&quot;        &quot;step_scale&quot;        
+#&gt; [67] &quot;step_shuffle&quot;       &quot;step_slice&quot;         &quot;step_spatialsign&quot;  
+#&gt; [70] &quot;step_sqrt&quot;          &quot;step_string2factor&quot; &quot;step_unknown&quot;      
+#&gt; [73] &quot;step_unorder&quot;       &quot;step_upsample&quot;      &quot;step_window&quot;       
+#&gt; [76] &quot;step_zv&quot;</code></pre>
 </div>
 <div id="checks" class="section level2">
 <h2>Checks</h2>

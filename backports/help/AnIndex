@@ -24,7 +24,11 @@ list2DF	list2DF
 R_user_dir	R_user_dir
 sQuote	dQuote
 startsWith	startsWith
+str2expression	str2expression
+str2lang	str2lang
 strrep	strrep
+suppressMessages	suppressWarnings
+suppressWarnings	suppressWarnings
 trimws	trimws
 URLencode	URLencode
 vignetteInfo	vignetteInfo

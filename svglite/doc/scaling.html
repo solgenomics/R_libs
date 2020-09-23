@@ -8,10 +8,10 @@
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-<meta name="date" content="2020-02-07" />
+<meta name="date" content="2020-06-19" />
 
 <title>Scaling Issues</title>
 
@@ -36,7 +36,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -116,9 +116,6 @@ padding-right: 2em;
 font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 font-size: 14px;
 line-height: 1.35;
-}
-#header {
-text-align: center;
 }
 #TOC {
 clear: both;
@@ -287,7 +284,8 @@ code > span.st { color: #d14; }
 code > span.co { color: #888888; font-style: italic; } 
 code > span.ot { color: #007020; } 
 code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
 
@@ -301,7 +299,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 
 <h1 class="title toc-ignore">Scaling Issues</h1>
-<h4 class="date">2020-02-07</h4>
+<h4 class="date">2020-06-19</h4>
 
 
 
@@ -317,14 +315,14 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div id="natural-scaling" class="section level3">
 <h3>Natural scaling</h3>
 <p>Another strategy is needed in order to scale the figure to make the text within the SVG consistent with the text in the surrounding web page. That could be useful, for instance, to create a consistent appearance in an HTML presentation. Since the user coordinate system defined by the viewBox is unitless, we need to map the figure to its natural dimensions. This will ensure a correspondence between the scale of the figure and that of the web page.</p>
-<p>As mentioned above, the natural scale of svglite’s figures is in points and is determined by the <code>width</code> and <code>height</code> arguments that you supply to the device functions (10’’ x 8’’ being the default). Although those dimensions are specified in inches, the coordinate system is scaled in points. Counting 72 points per inch, the default SVG surface is thus 720 x 576 pt. Note that the CSS standard defines 12pt to be equal to 16px, the default size of text in most browsers. Since 12pt is the default text size in svglite as well, a SVG scaled to its natural dimensions will appear seamless with web text of 16px. If the text in your web page has another size, you will have to compute a scale factor and adjust the dimensions of the SVG accordingly.</p>
+<p>As mentioned above, the natural scale of svglite’s figures is in points and is determined by the <code>width</code> and <code>height</code> arguments that you supply to the device functions (10’’ x 8’’ being the default). Although those dimensions are specified in inches, the coordinate system is scaled in points. Counting 72 points per inch, the default SVG surface is thus 720 x 576 pt. Note that the CSS standard defines 12pt to be equal to 16px, the default size of text in most browsers. Since 12pt is the default text size in svglite as well, a SVG scaled to its natural dimensions will appear seamless with web text of 16px. If the text in your web page has another size, you will have to compute a scale factor and adjust the dimensions of the SVG accordingly.</p>
 <p>To sum up, displaying a plot according to its natural dimensions requires providing the user agent with information about what the lengths defined within the SVG actually mean. There are several ways to achieve this. First you can edit the SVG and enclose it in another pair of <code>&lt;svg&gt;</code> tags that defines <code>height</code> and <code>width</code>. The root <code>&lt;svg&gt;</code> element determines the final dimensions of the figure.</p>
 <p>A second way is to enclose the figure in a <code>&lt;div&gt;</code> tag with appropriate dimensions and let the SVG figure rescale itself to that container (cf. the section on fluid scaling):</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">&lt;div</span><span class="ot"> style=</span><span class="st">&quot;width: 720pt; height: 576pt&quot;</span><span class="kw">&gt;</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;figure.svg&quot;</span><span class="kw">&gt;</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">&lt;/div&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">&lt;div</span><span class="ot"> style=</span><span class="st">&quot;width: 720pt; height: 576pt&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;figure.svg&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">&lt;/div&gt;</span></a></code></pre></div>
 <p>Finally, you can directly specify the dimensions in the <code>&lt;img&gt;</code> or <code>&lt;object&gt;</code> tag that is embedding the figure. Note that the dimension attributes of those tags do not accept arbitrary units, so you will have to supply the dimensions in pixels. Just multiply the width and height measured in points with a factor of 16/12:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;figure.svg&quot;</span><span class="ot"> width=</span><span class="st">&quot;960&quot;</span><span class="ot"> height=</span><span class="st">&quot;768&quot;</span><span class="kw">&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;figure.svg&quot;</span><span class="ot"> width=</span><span class="st">&quot;960&quot;</span><span class="ot"> height=</span><span class="st">&quot;768&quot;</span><span class="kw">&gt;</span></a></code></pre></div>
 </div>
 </div>
 <div id="internal-notes" class="section level2">

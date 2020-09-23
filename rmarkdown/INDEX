@@ -8,6 +8,7 @@ default_output_format   Determine the default output format for an R
 draft                   Create a new document based on a template
 find_external_resources
                         Find External Resource References
+find_pandoc             Find the 'pandoc' executable
 github_document         Convert to GitHub Flavored Markdown
 html-dependencies       Provide common HTML dependencies for R Markdown
                         formats
@@ -54,6 +55,7 @@ parse_html_notebook     Parse an HTML Notebook
 pdf_document            Convert to a PDF/LaTeX document
 powerpoint_presentation
                         Convert to a PowerPoint presentation
+publish_site            Publish an R Markdown Website
 relative_to             Relative path utility function
 render                  Render R Markdown
 render_delayed          Delay Rendering for an Expression
