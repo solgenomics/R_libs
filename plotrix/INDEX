@@ -68,6 +68,8 @@ gap.barplot             Display a barplot with a gap (missing range) on
 gap.boxplot             Display a boxplot with a gap (missing range)
 gap.plot                Display a plot with one or two gaps (missing
                         ranges) on one axis
+gap_barp                Display a barplot with a gap (missing range) on
+                        one axis
 get.breaks              Get the breakpoints for a weighted histogram
 get.gantt.info          Gather the information to create a Gantt chart
 get.segs                Calculate the midpoints and limits for a

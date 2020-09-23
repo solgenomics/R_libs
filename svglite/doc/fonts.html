@@ -8,10 +8,10 @@
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-<meta name="date" content="2020-02-07" />
+<meta name="date" content="2020-06-19" />
 
 <title>Specifying fonts</title>
 
@@ -36,7 +36,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -116,9 +116,6 @@ padding-right: 2em;
 font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 font-size: 14px;
 line-height: 1.35;
-}
-#header {
-text-align: center;
 }
 #TOC {
 clear: both;
@@ -287,7 +284,8 @@ code > span.st { color: #d14; }
 code > span.co { color: #888888; font-style: italic; } 
 code > span.ot { color: #007020; } 
 code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
 
@@ -301,7 +299,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 
 <h1 class="title toc-ignore">Specifying fonts</h1>
-<h4 class="date">2020-02-07</h4>
+<h4 class="date">2020-06-19</h4>
 
 
 
@@ -341,74 +339,74 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div id="system-font-aliases" class="section level2">
 <h2>System font aliases</h2>
 <p><code>system_fonts</code> takes a named list of font families as argument. The names typically correspond to standard R faces but they can also alias non-standard families (though this is less useful):</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">fonts &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="dt">sans =</span> <span class="st">&quot;Helvetica&quot;</span>,</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="dt">mono =</span> <span class="st">&quot;Consolas&quot;</span>,</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="st">`</span><span class="dt">Times New Roman</span><span class="st">`</span> =<span class="st"> &quot;DejaVu Serif&quot;</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">)</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">ss &lt;-<span class="st"> </span><span class="kw">svgstring</span>(<span class="dt">system_fonts =</span> fonts)</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="kw">text</span>(<span class="fl">0.8</span>, <span class="fl">0.8</span>, <span class="st">&quot;Some text&quot;</span>, <span class="dt">family =</span> <span class="st">&quot;mono&quot;</span>)</a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="kw">text</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="st">&quot;Other text&quot;</span>, <span class="dt">family =</span> <span class="st">&quot;Times New Roman&quot;</span>)</a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="kw">dev.off</span>()</a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="kw">ss</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">fonts &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">sans =</span> <span class="st">&quot;Helvetica&quot;</span>,</a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">mono =</span> <span class="st">&quot;Consolas&quot;</span>,</a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="st">`</span><span class="dt">Times New Roman</span><span class="st">`</span> =<span class="st"> &quot;DejaVu Serif&quot;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">)</a>
+<a class="sourceLine" id="cb1-6" title="6"></a>
+<a class="sourceLine" id="cb1-7" title="7">ss &lt;-<span class="st"> </span><span class="kw">svgstring</span>(<span class="dt">system_fonts =</span> fonts)</a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="kw">text</span>(<span class="fl">0.8</span>, <span class="fl">0.8</span>, <span class="st">&quot;Some text&quot;</span>, <span class="dt">family =</span> <span class="st">&quot;mono&quot;</span>)</a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="kw">text</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="st">&quot;Other text&quot;</span>, <span class="dt">family =</span> <span class="st">&quot;Times New Roman&quot;</span>)</a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="kw">dev.off</span>()</a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="kw">ss</span>()</a></code></pre></div>
 <p>If you need support for non-latin characters, choose fonts with good Unicode coverage. “Arial Unicode MS” is a sans serif font with good coverage that is available on macOS and Windows systems (on the latter, only if MS Office is installed). Note that this font does not support kerning and has no bold or italic faces.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">svglite</span>(<span class="st">&quot;Rplots.svg&quot;</span>, <span class="dt">system_fonts =</span> <span class="kw">list</span>(<span class="dt">sans =</span> <span class="st">&quot;Arial Unicode MS&quot;</span>))</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">plot.new</span>()</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">text</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="st">&quot;正規分布&quot;</span>)</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">dev.off</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">svglite</span>(<span class="st">&quot;Rplots.svg&quot;</span>, <span class="dt">system_fonts =</span> <span class="kw">list</span>(<span class="dt">sans =</span> <span class="st">&quot;Arial Unicode MS&quot;</span>))</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">plot.new</span>()</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw">text</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="st">&quot;正規分布&quot;</span>)</a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="kw">dev.off</span>()</a></code></pre></div>
 <p>The <a href="https://www.google.com/get/noto/">Noto fontset</a> provided by Google as well as the <a href="https://github.com/adobe-fonts/source-han-sans">Han Sans family</a> by Adobe have excellent coverage but may not be available at the time of rendering. This can be a concern if you distribute the SVG files on the Internet.</p>
 </div>
 <div id="user-font-aliases" class="section level2">
 <h2>User font aliases</h2>
 <p>In addition to system fonts, you can also provide fonts that are not necessarily installed on the system (i.e., fonts that live in user space). The main reason to do this is to generate reproducible SVG files as different platforms can have different versions of a font and thus produce different text metrics. The <code>user_fonts</code> arguments takes either paths to font files, fonts from the <code>fontquiver</code> package, or a list that specifies the alias. Whereas <code>system_fonts</code> gets a named list of families as argument, <code>user_fonts</code> takes a named tree of lists of families (<code>sans</code>, <code>serif</code>, <code>mono</code> and <code>symbol</code>) and faces (<code>plain</code>, <code>italic</code>, <code>bold</code>, <code>bolditalic</code>, <code>symbol</code>):</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Using ttf files from fontquiver here, but it could be any ttf</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">some_file &lt;-<span class="st"> </span>fontquiver<span class="op">::</span><span class="kw">font</span>(<span class="st">&quot;Liberation&quot;</span>, <span class="st">&quot;Sans&quot;</span>, <span class="st">&quot;Regular&quot;</span>)<span class="op">$</span>ttf</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">other_file &lt;-<span class="st"> </span>fontquiver<span class="op">::</span><span class="kw">font</span>(<span class="st">&quot;Liberation&quot;</span>, <span class="st">&quot;Sans&quot;</span>, <span class="st">&quot;Italic&quot;</span>)<span class="op">$</span>ttf</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">serif_file &lt;-<span class="st"> </span>fontquiver<span class="op">::</span><span class="kw">font</span>(<span class="st">&quot;Liberation&quot;</span>, <span class="st">&quot;serif&quot;</span>, <span class="st">&quot;Italic&quot;</span>)<span class="op">$</span>ttf</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co"># The outer named list contains families while the inner named list</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co"># contains faces:</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">fonts &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">  <span class="dt">sans =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb3-10" data-line-number="10">    <span class="dt">plain =</span> some_file,</a>
-<a class="sourceLine" id="cb3-11" data-line-number="11">    <span class="dt">italic =</span> other_file</a>
-<a class="sourceLine" id="cb3-12" data-line-number="12">  ),</a>
-<a class="sourceLine" id="cb3-13" data-line-number="13">  <span class="dt">serif =</span> <span class="kw">list</span>(<span class="dt">plain =</span> serif_file)</a>
-<a class="sourceLine" id="cb3-14" data-line-number="14">)</a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb3-16" data-line-number="16">ss &lt;-<span class="st"> </span><span class="kw">svglite</span>(<span class="st">&quot;plot.svg&quot;</span>, <span class="dt">user_fonts =</span> fonts)</a>
-<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="kw">plot.new</span>()</a>
-<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="kw">text</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="st">&quot;Sans Plain text&quot;</span>)</a>
-<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="kw">text</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="st">&quot;Sans Italic text&quot;</span>, <span class="dt">font =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="kw">text</span>(<span class="fl">0.8</span>, <span class="fl">0.8</span>, <span class="st">&quot;Serif text&quot;</span>, <span class="dt">family =</span> <span class="st">&quot;serif&quot;</span>)</a>
-<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="kw">dev.off</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Using ttf files from fontquiver here, but it could be any ttf</span></a>
+<a class="sourceLine" id="cb3-2" title="2">some_file &lt;-<span class="st"> </span>fontquiver<span class="op">::</span><span class="kw">font</span>(<span class="st">&quot;Liberation&quot;</span>, <span class="st">&quot;Sans&quot;</span>, <span class="st">&quot;Regular&quot;</span>)<span class="op">$</span>ttf</a>
+<a class="sourceLine" id="cb3-3" title="3">other_file &lt;-<span class="st"> </span>fontquiver<span class="op">::</span><span class="kw">font</span>(<span class="st">&quot;Liberation&quot;</span>, <span class="st">&quot;Sans&quot;</span>, <span class="st">&quot;Italic&quot;</span>)<span class="op">$</span>ttf</a>
+<a class="sourceLine" id="cb3-4" title="4">serif_file &lt;-<span class="st"> </span>fontquiver<span class="op">::</span><span class="kw">font</span>(<span class="st">&quot;Liberation&quot;</span>, <span class="st">&quot;serif&quot;</span>, <span class="st">&quot;Italic&quot;</span>)<span class="op">$</span>ttf</a>
+<a class="sourceLine" id="cb3-5" title="5"></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="co"># The outer named list contains families while the inner named list</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="co"># contains faces:</span></a>
+<a class="sourceLine" id="cb3-8" title="8">fonts &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="dt">sans =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb3-10" title="10">    <span class="dt">plain =</span> some_file,</a>
+<a class="sourceLine" id="cb3-11" title="11">    <span class="dt">italic =</span> other_file</a>
+<a class="sourceLine" id="cb3-12" title="12">  ),</a>
+<a class="sourceLine" id="cb3-13" title="13">  <span class="dt">serif =</span> <span class="kw">list</span>(<span class="dt">plain =</span> serif_file)</a>
+<a class="sourceLine" id="cb3-14" title="14">)</a>
+<a class="sourceLine" id="cb3-15" title="15"></a>
+<a class="sourceLine" id="cb3-16" title="16">ss &lt;-<span class="st"> </span><span class="kw">svglite</span>(<span class="st">&quot;plot.svg&quot;</span>, <span class="dt">user_fonts =</span> fonts)</a>
+<a class="sourceLine" id="cb3-17" title="17"><span class="kw">plot.new</span>()</a>
+<a class="sourceLine" id="cb3-18" title="18"><span class="kw">text</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="st">&quot;Sans Plain text&quot;</span>)</a>
+<a class="sourceLine" id="cb3-19" title="19"><span class="kw">text</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="st">&quot;Sans Italic text&quot;</span>, <span class="dt">font =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb3-20" title="20"><span class="kw">text</span>(<span class="fl">0.8</span>, <span class="fl">0.8</span>, <span class="st">&quot;Serif text&quot;</span>, <span class="dt">family =</span> <span class="st">&quot;serif&quot;</span>)</a>
+<a class="sourceLine" id="cb3-21" title="21"><span class="kw">dev.off</span>()</a></code></pre></div>
 <p>You can also control which font gets written in the <code>font-family</code> fields of SVGs by supplying a list containing <code>alias</code> and <code>file</code> elements:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">file_with_alias &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">alias =</span> <span class="st">&quot;Foobar Font&quot;</span>, <span class="dt">file =</span> other_file)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">fonts &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">sans =</span> <span class="kw">list</span>(<span class="dt">plain =</span> file_with_alias))</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">ss &lt;-<span class="st"> </span><span class="kw">svgstring</span>(<span class="dt">user_fonts =</span> fonts)</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="kw">text</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="st">&quot;Sans text&quot;</span>)</a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="kw">dev.off</span>()</a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="kw">ss</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">file_with_alias &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">alias =</span> <span class="st">&quot;Foobar Font&quot;</span>, <span class="dt">file =</span> other_file)</a>
+<a class="sourceLine" id="cb4-2" title="2">fonts &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">sans =</span> <span class="kw">list</span>(<span class="dt">plain =</span> file_with_alias))</a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4">ss &lt;-<span class="st"> </span><span class="kw">svgstring</span>(<span class="dt">user_fonts =</span> fonts)</a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="kw">text</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="st">&quot;Sans text&quot;</span>)</a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="kw">dev.off</span>()</a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="kw">ss</span>()</a></code></pre></div>
 <p><code>fontquiver</code> fonts are particularly useful for creating reproducible SVG files. The <code>vdiffr</code> package uses svglite with fontquiver fonts to create visual unit tests reliably across platforms. The Liberation fontset is appropriate for this usage because it features all 12 combinations of standard R families and faces. In addition fontquiver provides Symbola for the symbol font. The function <code>fontquiver::font_families()</code> produces a list with the appropriate structure and can be directly supplied to svglite:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">fonts &lt;-<span class="st"> </span>fontquiver<span class="op">::</span><span class="kw">font_families</span>(<span class="st">&quot;Liberation&quot;</span>)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">fonts<span class="op">$</span>symbol<span class="op">$</span>symbol &lt;-<span class="st"> </span>fontquiver<span class="op">::</span><span class="kw">font_symbol</span>(<span class="st">&quot;Symbola&quot;</span>)</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw">str</span>(fonts, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw">svglite</span>(<span class="st">&quot;reproducible.svg&quot;</span>, <span class="dt">user_fonts =</span> fonts)</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="kw">dev.off</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">fonts &lt;-<span class="st"> </span>fontquiver<span class="op">::</span><span class="kw">font_families</span>(<span class="st">&quot;Liberation&quot;</span>)</a>
+<a class="sourceLine" id="cb5-2" title="2">fonts<span class="op">$</span>symbol<span class="op">$</span>symbol &lt;-<span class="st"> </span>fontquiver<span class="op">::</span><span class="kw">font_symbol</span>(<span class="st">&quot;Symbola&quot;</span>)</a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="kw">str</span>(fonts, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb5-4" title="4"></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="kw">svglite</span>(<span class="st">&quot;reproducible.svg&quot;</span>, <span class="dt">user_fonts =</span> fonts)</a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="kw">dev.off</span>()</a></code></pre></div>
 </div>
 <div id="debugging-font-matching" class="section level2">
 <h2>Debugging font matching</h2>
 <p>The C library Fontconfig is used as backend to find fonts installed on the system. Fontconfig is the standard interface to system fonts on Linux systems. It is also provided on macOS alongside the X11 graphics system and comes with R on Windows. A warning is issued if Fontconfig cannot find a system font. The gdtools package provides tools in case you have trouble with a particular font:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">gdtools<span class="op">::</span><span class="kw">match_family</span>(<span class="st">&quot;Helvetica&quot;</span>)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">gdtools<span class="op">::</span><span class="kw">match_font</span>(<span class="st">&quot;Helvetica&quot;</span>, <span class="dt">bold =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">gdtools<span class="op">::</span><span class="kw">match_family</span>(<span class="st">&quot;Helvetica&quot;</span>)</a>
+<a class="sourceLine" id="cb6-2" title="2">gdtools<span class="op">::</span><span class="kw">match_font</span>(<span class="st">&quot;Helvetica&quot;</span>, <span class="dt">bold =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>Sometimes Fontconfig cannot find a font because it is not configured correctly. Use the <code>debug</code> argument to find out which configuration files Fontconfig is currently using:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">gdtools<span class="op">::</span><span class="kw">match_family</span>(<span class="st">&quot;Helvetica&quot;</span>, <span class="dt">debug =</span> <span class="st">&quot;config&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">gdtools<span class="op">::</span><span class="kw">match_family</span>(<span class="st">&quot;Helvetica&quot;</span>, <span class="dt">debug =</span> <span class="st">&quot;config&quot;</span>)</a></code></pre></div>
 <p>See <a href="https://www.freedesktop.org/software/fontconfig/fontconfig-user.html" class="uri">https://www.freedesktop.org/software/fontconfig/fontconfig-user.html</a> for more information on configuring Fontconfig.</p>
 </div>
 

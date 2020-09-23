@@ -2,6 +2,7 @@
 all_models_equal	all_models_equal
 all_models_same_class	all_models_equal
 clean_names	clean_names
+clean_names.character	clean_names
 clean_parameters	clean_parameters
 color_if	color_if
 colour_if	color_if

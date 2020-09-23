@@ -1,23 +1,20 @@
 ---
 title: "5. Plotting Simple Features"
-output:
-  html_document:
-    toc: true
-    toc_float:
-      collapsed: false
-      smooth_scroll: false
-    toc_depth: 2
+author: "Edzer Pebesma"
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{5. Plotting Simple Features}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
+**For a better version of the sf vignettes see** https://r-spatial.github.io/sf/articles/
+
 ```{r echo=FALSE, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE)
-#tmap_fixed = utils::packageVersion("tmap") >= "2.3-1"
-tmap_fixed = FALSE
+tmap_fixed = TRUE
 user_edzer_or_travis = Sys.getenv("USER") %in% c("travis", "edzer")
+knitr::opts_chunk$set(fig.height = 4.5)
+knitr::opts_chunk$set(fig.width = 6)
 ```
 This vignette describes the functions in `sf` that can help to plot 
 simple features. It tries to be complete about the plot methods 
@@ -218,5 +215,5 @@ tm_shape(nc) + tm_fill("BIR74", palette = sf.colors(5))
 replotting the last map in non-interactive mode is as simple as:
 ```{r,eval=tmap_fixed}
 ttm()
-last_map()
+tmap_last()
 ```

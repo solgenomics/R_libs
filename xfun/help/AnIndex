@@ -1,6 +1,9 @@
 $.xfun_strict_list	strict_list
 as_strict_list	strict_list
 attr	attr
+base64_decode	base64_encode
+base64_encode	base64_encode
+base64_uri	base64_uri
 cache_rds	cache_rds
 compare_Rcheck	rev_check
 download_file	download_file
@@ -50,10 +53,12 @@ same_path	same_path
 sans_ext	file_ext
 session_info	session_info
 split_lines	split_lines
+split_source	split_source
 strict_list	strict_list
 stringsAsStrings	stringsAsStrings
 strings_please	stringsAsStrings
 tojson	tojson
+tree	tree
 try_silent	try_silent
 upload_ftp	upload_ftp
 upload_win_builder	upload_ftp

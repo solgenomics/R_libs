@@ -1,3 +1,57 @@
+# labelled 2.7.0
+
+* a `.values` argument has been added to `set_na_values()` and `set_na_range()`, allowing to pass a list of values
+* a `.strict` option has been added to `set_variable_labels()`,
+  `set_value_labels()`, `add_value_labels()`,  `remove_value_labels()`,
+  `set_na_values()` and `set_na_range()`,
+  allowing to pass values for columns not observed in the data (it could be useful
+  for using a same list of labels for several data.frame sharing some 
+  variables) (#70)
+* `copy_labels()` is less restrictive for non labelled vectors, copying variable label
+  even if the two vectors are not of the same type (#71)
+* a `.strict` option has been added to `copy_labels()` (#71)
+
+# labelled 2.6.0
+
+* `look_for()` has been redesigned:
+    - `look_for()` now returns a tibble
+    - columns with multiple values for each variable are now stored as named lists
+    - a print method has been added for a clearer presentation of results in the console
+    - use `lookfor_to_long_format()` to convert results with one row per factor level
+      and per value label
+    - use `convert_list_columns_to_character()` to convert list columns to 
+      simpler character vectors
+    - `generate_dictionary()` is an equivalent of `look_for()`
+* `set_variable_labels`, `set_value_labels`, `add_value_labels`,
+  and `remove_value_labels` now accept "tidy dots" (#67 @psanker)
+* new function `names_prefixed_by_values()` to get the names of a vector
+  prefixed by their corresponding value
+
+# labelled 2.5.0
+
+* new `.keep_value_labels` argument for `recode.haven_labelled()`
+* new `.combine_value_labels` argument for `recode.haven_labelled()` (#61)
+* new `drop_unused_value_labels()` method
+* an additional `.labels` argument for `set_value_labels()`
+* `user_na_to_na` argument has been added to `to_character.haven_labelled()`
+* `%>%` is now imported from `dplyr`
+* a cheatsheet has been added (#47)
+* internal documentation is now using **roxygen2** markdown support
+
+# labelled 2.4.0
+
+* fixes for haven 2.3.0 (#59 by @hadley)
+* correct re-export of functions from `haven`
+* `update_labelled()` has been improved to allow to reconstruct
+  all labelled vectors created with a previous versiob of `haven`
+
+# labelled 2.3.1
+
+* an additional argument `keep_var_label` for `remove_labels()`
+* bug fix for `unlabelled()` when applied on a vector
+* when using `unclass = TRUE` with `to_factor()`, attributes 
+  are not removed anymore
+
 # labelled 2.3.0
 
 * new function `unlabelled()`

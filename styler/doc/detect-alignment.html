@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Alignment detection</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Alignment detection</h1>
+
+
+
+<p>Sometimes, you deliberately align code to make it more readable.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">call</span>(</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="dt">a =</span>       <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="dt">b =</span> <span class="dv">3213232</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">)</a></code></pre></div>
+<p>Until styler 1.1.1.9002 (with <code>strict = TRUE</code>, e.g. as in <code>styler::style_file(..., strict = TRUE)</code>), this was formatted as follows:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">call</span>(</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="dt">a =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="dt">b =</span> <span class="dv">3213232</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">)</a></code></pre></div>
+<p>because no alignment detection was built in.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>styler &gt;= 1.1.1.9003 detects aforementioned alignment for function calls. This vignette describes how aligned code is defined in styler and gives some examples so users can format their aligned code to match the definition styler uses to ensure their code is not unintentionally reformatted.</p>
+<p>An important definition used in the remainder is the one of a <strong>column</strong>. All arguments of a function call that have the same position but are placed on different lines form a column. The below call shows a call with two columns and two rows. Columns separate arguments of the function call, so the separator is the comma. The first row is named because all arguments are named, the second is unnamed:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">call</span>(</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="co"># column 1  | column 2 |</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="dt">abkj =</span> <span class="kw">f</span>(<span class="dv">2</span>),         <span class="dv">7</span>,</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="dt">more_ =</span> <span class="st">&quot;a&quot;</span>, <span class="dv">2</span> <span class="co"># more</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">)</a></code></pre></div>
+<div id="function-calls" class="section level2">
+<h2>Function calls</h2>
+<div id="non-technical-definition" class="section level3">
+<h3>Non-technical definition</h3>
+<p>Below, we try to explain in an intuitive way how your code should look like to be recognized as aligned.</p>
+<p><strong>If all arguments in the first column are named</strong>: Make commas match position vertically and right align everything between commas:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># all arguments of first column named -&gt; must right align</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co"># aligned if the (imaginary) comma on the last line is in line with the commas </span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co"># from the two top lines.</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="kw">fell</span>(</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="dt">x  =</span>    <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  <span class="dt">y  =</span>   <span class="dv">23</span>,</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">  <span class="dt">zz =</span> <span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">)</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co"># this works also with more than one column</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="kw">fell</span>(</a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">  <span class="dt">x  =</span>    <span class="dv">1</span>, <span class="dt">annoying =</span> <span class="dv">3</span>, </a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">  <span class="dt">y  =</span>   <span class="dv">23</span>, <span class="co"># nothing in column 2 for row 2</span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14">  <span class="dt">zz =</span> <span class="ot">NULL</span>, <span class="dt">finally =</span> <span class="st">&quot;&quot;</span></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15">)</a></code></pre></div>
+<p><strong>If not all arguments of the first column are named:</strong><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> Make <strong>all except the first column’s commas</strong> match position</p>
+<ul>
+<li><p>vertically</p></li>
+<li><p>right align everything between the commas</p></li>
+<li><p>except before the first comma on a line</p></li>
+<li><p>give priority to correctly indent (i.e. left align):</p></li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># not all arguments of first column named, hence, only </span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co"># commas of all but the first column must agree.</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw">gell</span>(</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">  <span class="dt">p =</span> <span class="dv">2</span>,   <span class="dt">g =</span> <span class="kw">gg</span>(x),  <span class="dt">n =</span> <span class="dv">3</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span>, <span class="co">#</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="dv">31</span>,    <span class="dt">fds =</span>    <span class="dv">-1</span>, <span class="dt">gz =</span> f <span class="op">/</span><span class="st"> </span><span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">)</a></code></pre></div>
+<p>By <em>align everything in between the commas</em>, we mean put zero space before a comma and at least one after. Note that the arguments on the first line are ignored when detecting alignment, which is best shown when code is formatted such that no line breaks will be modified by <em>styler</em>. This applies if all names on the first line are unnamed and all subsequent are named:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">map</span>(x, f, </a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"> <span class="dt">arg1 =</span>  <span class="dv">121</span>,</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"> <span class="dt">arg2 =</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">)</a></code></pre></div>
+<p><strong>Examples</strong></p>
+<p>These typical examples match <em>styler</em>’s definition of alignment.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">tibble<span class="op">::</span><span class="kw">tribble</span>(</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="op">~</span>key_here,  <span class="op">~</span>value_here,</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="st">&quot;left&quot;</span>,         <span class="st">&quot;right&quot;</span>, <span class="co"># comments are allowed</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">  <span class="st">&quot;long string&quot;</span>,   <span class="st">&quot;shrt&quot;</span> <span class="co"># columns can overlap ('~' above ',')</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">)</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">purrr<span class="op">::</span><span class="kw">map</span>(x, fun, <span class="co"># arguments on same line as opening brace are not considered</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">  <span class="dt">arg2  =</span>    <span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">  <span class="dt">ar    =</span> <span class="kw">f</span>(x)</a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">)</a></code></pre></div>
+</div>
+<div id="technical-definition" class="section level3">
+<h3>Technical definition</h3>
+<p>This section closely follows the implementation of the alignment detection and is mostly aimed at developers for understanding <em>styler</em> internals.</p>
+<p>Function calls are aligned if <strong>all</strong> of the following conditions hold (for all but the very first line (i.e. <code>call(</code> below):</p>
+<ul>
+<li>all rows in first column have the same number of lag spaces. This basically means that the indention is identical for all columns (except for the closing brace if it is on its own line). The below example has one column, because the maximal number of commas on one line is one.</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># holds</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">call</span>(</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">  <span class="dt">a =</span>  <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">  <span class="dt">b =</span> <span class="dv">32</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">)</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co"># doesn't hold</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="kw">call</span>(</a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">  <span class="dt">a =</span>  <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">   <span class="dt">b =</span> <span class="dv">32</span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11">)</a></code></pre></div>
+<ul>
+<li>spacing around comma (0 before, &gt; 1 after, &gt;= 0 after last column on line) and spacing around <code>=</code> (at least one before and after).</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># holds</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">call</span>(</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">  <span class="dt">a =</span>  <span class="dv">3</span>, <span class="dt">k  =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">  <span class="dt">b =</span> <span class="dv">32</span>,    <span class="dv">222</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5">)</a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co"># doesn't hold</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="kw">call</span>(</a>
+<a class="sourceLine" id="cb9-9" data-line-number="9">  <span class="dt">a =</span>  <span class="dv">3</span> ,</a>
+<a class="sourceLine" id="cb9-10" data-line-number="10">  <span class="dt">b =</span> <span class="dv">32</span></a>
+<a class="sourceLine" id="cb9-11" data-line-number="11">)</a></code></pre></div>
+<ul>
+<li>All commas from all columns are aligned. This means that for every column, all commas must be on the same positions as the commas from the other lines. If not all arguments are named in the first column, this column is not considered. The reason to exclude the first column is that, as in the example below, it is possible that some arguments are named while others are not. Then, it is not generally possible to keep the first rule (i.e. indention identical across lines). Also ensuring that the comma does not have any spaces before it and its alignment with other lines does not hold true. This is shown below with the line <code>f(x, y),</code>. For this reason, the requirements exclude the first column in such cases. The <em>holds</em> example shows that is is possible (but not required) for named arguments to also have the commas separating the first and second column aligned.</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># holds</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw">call</span>(</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">  <span class="dt">a =</span>  <span class="kw">ff</span>(<span class="st">&quot;pk&quot;</span>), <span class="dt">k  =</span> <span class="dv">3</span>, <span class="dt">x =</span>  <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">  <span class="dt">b =</span>     <span class="kw">f</span>(<span class="op">-</span>g), <span class="dv">22</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">yy =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">  <span class="dt">c =</span>         <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">  <span class="kw">f</span>(x, y), </a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">  k</a>
+<a class="sourceLine" id="cb10-8" data-line-number="8">)</a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co"># doesn't hold</span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="kw">call</span>(</a>
+<a class="sourceLine" id="cb10-12" data-line-number="12">  <span class="dt">a =</span>   <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb10-13" data-line-number="13">  <span class="dt">b =</span> <span class="dv">32</span>, <span class="dt">c =</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14">)</a></code></pre></div>
+<p>Note that the above definition does not check alignment of <code>=</code>, so <em>styler</em> will treat the following as aligned:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">rge</span>(</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">  <span class="dt">x  =</span> <span class="dv">99</span>, <span class="dt">x =</span>  <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">  <span class="dt">fs =</span>  <span class="dv">1</span>,  <span class="dt">y =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">)</a></code></pre></div>
+</div>
+</div>
+<div id="comments" class="section level2">
+<h2>Comments</h2>
+<p>not supported yet.</p>
+</div>
+<div id="assignment" class="section level2">
+<h2>Assignment</h2>
+<p>not supported yet.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>With <code>strict = FALSE</code>, the spacing would have been kept, however, <code>strict = FALSE</code> has a number of other implications because it is in general less invasive. For example, it would not add braces and line breaks to “if (TRUE) return()”.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>In the below example, the first argument of the first column is named (<code>p = 2</code>). The second argument of the first column is not (<code>31</code>).<a href="#fnref2" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

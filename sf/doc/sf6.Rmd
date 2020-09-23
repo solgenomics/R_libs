@@ -1,21 +1,20 @@
 ---
 title: "6. Miscellaneous"
-output:
-  html_document:
-    toc: true
-    toc_float:
-      collapsed: false
-      smooth_scroll: false
-    toc_depth: 2
+author: "Edzer Pebesma"
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{6. Miscellaneous}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
+**For a better version of the sf vignettes see** https://r-spatial.github.io/sf/articles/
+
 ```{r echo=FALSE, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
 ```
+knitr::opts_chunk$set(fig.height = 4.5)
+knitr::opts_chunk$set(fig.width = 6)
 This vignette describes a number of issues that did not come up in
 the previous vignettes, and that may or may not be categorized as
 "frequently asked questions". Readers are encouraged to provide

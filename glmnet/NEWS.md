@@ -1,3 +1,27 @@
+# glmnet 4.0-2
+
+* Biggest change. Cindex and auc calculations now use the `concordance`
+  function from package `survival`
+* Minor changes. Allow coefficient warm starts for glmnet.fit. The print
+  method for glmnet now really prints %dDev rather than the fraction.
+
+# glmnet 4.0
+
+Major revision with added functionality. Any GLM family can be used
+now with `glmnet`, not just the built-in families. By passing a
+"family" object as the family argument (rather than a character
+string), one gets access to all families supported by `glm`. This
+development was programmed by our newest member of the `glmnet` team,
+Kenneth Tay.
+
+# glmnet 3.0-3
+
+Bug fixes
+
+* `Intercept=FALSE` with "Gaussian" is fixed. The `dev.ratio` comes out
+  correctly now. The mortran code was changed directly in 4
+  places. look for "standard". Thanks to Kenneth Tay.
+  
 # glmnet 3.0-2
 
 Bug fixes

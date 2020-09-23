@@ -912,7 +912,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb49-2"><a href="#cb49-2"></a><span class="co">#&gt; [1] FALSE  TRUE FALSE</span></span></code></pre></div>
 <p>But we can’t order them because lists are not comparable:</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">sort</span>(p)</span>
-<span id="cb50-2"><a href="#cb50-2"></a><span class="co">#&gt; Error: Invalid type returned by `vec_proxy_compare()`.</span></span></code></pre></div>
+<span id="cb50-2"><a href="#cb50-2"></a><span class="co">#&gt; &lt;polynomial[3]&gt;</span></span>
+<span id="cb50-3"><a href="#cb50-3"></a><span class="co">#&gt; [1] 1         1⋅x^2 + 1 1⋅x^4 + 2</span></span></code></pre></div>
 <p>So we need to define a <code>vec_proxy_compare()</code> method:</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>vec_proxy_compare.vctrs_poly &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...) {</span>
 <span id="cb51-2"><a href="#cb51-2"></a>  x_raw &lt;-<span class="st"> </span><span class="kw">vec_data</span>(x)</span>
@@ -928,17 +929,17 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb51-12"><a href="#cb51-12"></a></span>
 <span id="cb51-13"><a href="#cb51-13"></a><span class="kw">sort</span>(<span class="kw">poly</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>))</span>
 <span id="cb51-14"><a href="#cb51-14"></a><span class="co">#&gt; &lt;polynomial[3]&gt;</span></span>
-<span id="cb51-15"><a href="#cb51-15"></a><span class="co">#&gt; [1] 1 2 3</span></span>
+<span id="cb51-15"><a href="#cb51-15"></a><span class="co">#&gt; [1] 3 2 1</span></span>
 <span id="cb51-16"><a href="#cb51-16"></a><span class="kw">sort</span>(<span class="kw">poly</span>(<span class="dv">1</span>, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)))</span>
 <span id="cb51-17"><a href="#cb51-17"></a><span class="co">#&gt; &lt;polynomial[3]&gt;</span></span>
-<span id="cb51-18"><a href="#cb51-18"></a><span class="co">#&gt; [1] 1     1⋅x^1 1⋅x^2</span></span></code></pre></div>
+<span id="cb51-18"><a href="#cb51-18"></a><span class="co">#&gt; [1] 1     1⋅x^2 1⋅x^1</span></span></code></pre></div>
 </div>
 </div>
 <div id="arithmetic" class="section level2">
 <h2>Arithmetic</h2>
 <p>vctrs also provides two mathematical generics that allow you to define a broad swath of mathematical behaviour at once:</p>
 <ul>
-<li><p><code>vec_math(fn, x, ...)</code> specifies the behaviour of mathematical functions like <code>abs()</code>, <code>sum()</code>, and <code>mean()</code>. (See <code>?vec_math()</code> for the complete list.)</p></li>
+<li><p><code>vec_math(fn, x, ...)</code> specifies the behaviour of mathematical functions like <code>abs()</code>, <code>sum()</code>, and <code>mean()</code>. (Note that <code>var()</code> and <code>sd()</code> can’t be overridden, see <code>?vec_math()</code> for the complete list supported by <code>vec_math()</code>.)</p></li>
 <li><p><code>vec_arith(op, x, y)</code> specifies the behaviour of the arithmetic operations like <code>+</code>, <code>-</code>, and <code>%%</code>. (See <code>?vec_arith()</code> for the complete list.)</p></li>
 </ul>
 <p>Both generics define the behaviour for multiple functions because <code>sum.vctrs_vctr(x)</code> calls <code>vec_math.vctrs_vctr(&quot;sum&quot;, x)</code>, and <code>x + y</code> calls <code>vec_math.x_class.y_class(&quot;+&quot;, x, y)</code>. They’re accompanied by <code>vec_math_base()</code> and <code>vec_arith_base()</code> which make it easy to call the underlying base R functions.</p>

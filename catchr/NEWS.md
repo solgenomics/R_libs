@@ -1,8 +1,15 @@
+# catchr 0.2.3
+
+## Patches
+
+ * I hate to waffle on features, but I realized that treating expressions with the `!!` and `!!!` operators differently in catchr doesn't make as much sense to me as it did before. (I honestly can't see why I ever even allowed this behavior.) The use-case Stephen (yogat3ch) pointed out made this clear, so expressions with these operators are now treated like normal expressions. This is basically a reverse of the previous `0.2.2` patch, but on reflection, I think it makes more sense to do it this way.
+ 
+
 # catchr 0.2.2
 
 ## Patches
 
-I added quasiquotation capabilities to `catchr::catch_expr()` and `catchr::make_catch_fn()`, letting you unquote with the tidyverse's `!!` and `!!!` functions. Hopefully this doesn't break anything---it hasn't caused any errors in tests or code so far, but if you have something weird happen, try version 0.2.1 and report the bug fix on GitHub.
+I added quasiquotation capabilities to `catchr::catch_expr()` and `catchr::make_catch_fn()`, letting you unquote with the tidyverse's `!!` and `!!!` functions. Hopefully this doesn't break anything---it hasn't caused any errors in my tests or code so far, but if you have something weird happen, try version 0.2.1 and report the bug fix on GitHub.
 
 ## Bug fixes
 

@@ -3,16 +3,90 @@
 \newcommand{\ghpr}{\href{https://github.com/RcppCore/RcppArmadillo/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/RcppCore/RcppArmadillo/issues/#1}{##1}}
 
+\section{Changes in RcppArmadillo version 0.9.900.3.0 (2020-09-02)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.900.3 (Nocturnal Misbehaviour)
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.900.3.0 (2020-07-17)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.900.3 (Nocturnal Misbehaviour)
+    \itemize{
+      \item More efficient code for initialising matrices with \code{fill::zeros}
+      \item Fixes for various error messages
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.900.1.0 (2020-06-08)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.900.1 (Nocturnal Misbehaviour)
+    \itemize{
+      \item faster \code{solve()} for under/over-determined systems
+      \item faster \code{eig_gen()} and \code{eig_pair()} for large matrices
+      \item expanded \code{eig_gen()} and \code{eig_pair()} to
+      optionally provide left and right eigenvectors
+    }
+    \item Switch Travis CI testing to R 4.0.0, use bionic as base distro
+    and test R 3.6.3 and 4.0.0 in a matrix (Dirk in \ghpr{298}).
+    \item Add two badges to README for indirect use and the CSDA paper.
+    \item Adapt \code{RcppArmadillo.package.skeleton()} to a change in R
+    4.0.0 affecting what it exports in \code{NAMESPACE}.
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.880.1.0 (2020-05-15)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.880.1 (Roasted Mocha Detox)
+    \itemize{
+      \item expanded \code{qr()} to optionally use pivoted decomposition
+      \item updated physical constants to NIST 2018 CODATA values
+      \item added \code{ARMA_DONT_USE_CXX11_MUTEX} confguration option
+      to disable use of \code{std::mutex} 
+    }
+    \item OpenMP capability is tested explicitly (Kevin Ushey and Dirk
+    in \ghpr{294}, \ghpr{295}, and \ghpr{296} all fixing \ghit{290}).
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.870.2.0 (2020-04-24)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.870.2 (Roasted Mocha Retox)
+    \itemize{
+      \item faster handling of matrix multiplication expressions by
+      \code{diagvec()} and \code{diagmat()} 
+      \item added \code{trimatu_ind()} and \code{trimatl_ind()}
+      \item more consistent detection of sparse vector expressions
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.860.2.0 (2020-04-13)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.860.2 (Roasted Mocha Fix)
+    \itemize{
+      \item added \code{powmat()}
+      \item faster access to columns in sparse submatrix views
+      \item faster handling of relational expressions by \code{accu()}
+      \item faster handling of sympd matrices by \code{expmat()}, \code{logmat()}, \code{sqrtmat()}
+      \item workaround for save/load issues with HDF5 v1.12
+    }
+    \item Vignettes are now pre-made and include (\ghpr{285})
+    \item Two test files are now skipped on 32-bit Windows
+  }
+}
+
 \section{Changes in RcppArmadillo version 0.9.850.1.0 (2020-02-09)}{
   \itemize{
     \item Upgraded to Armadillo release 9.850.1 (Pyrocumulus Wrath)
     \itemize{
-      \item{faster handling of compound expressions by \code{diagmat()}}
-      \item{expanded \code{.save()} and \code{.load()} to handle CSV files with headers via
-        csv_name(filename,header) specification}
-      \item{added \code{log_normpdf()}}
-      \item{added \code{.is_zero()}}
-      \item{added \code{quantile()}}
+      \item faster handling of compound expressions by \code{diagmat()}
+      \item expanded \code{.save()} and \code{.load()} to handle CSV files with headers via
+        csv_name(filename,header) specification
+      \item added \code{log_normpdf()}
+      \item added \code{.is_zero()}
+      \item added \code{quantile()}
     }
     \item The sparse matrix test using scipy, if available, is now
     simplified thanks to recently added \CRANpkg{reticulate} conversions.

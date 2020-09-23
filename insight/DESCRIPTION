@@ -9,7 +9,7 @@ Description: A tool to provide an easy, intuitive and consistent access to
    'find_', and functions that get the underlying data, starting with 'get_'. 
    The package has a consistent syntax and works with many different model 
    objects, where otherwise functions to access these information are missing.
-Version: 0.9.5
+Version: 0.9.6
 Authors@R: c(person("Daniel", "Lüdecke", role = c("aut", "cre"), email = "d.luedecke@uke.de", comment = c(ORCID = "0000-0002-8895-3206")),
              person("Dominique", "Makowski", role = c("aut", "ctb"), email = "dom.makowski@gmail.com", comment = c(ORCID = "0000-0001-5375-9967")),
              person("Indrajeet", "Patil", role = c("aut", "ctb"), email = "patilindrajeet.science@gmail.com", comment = c(ORCID = "0000-0003-1995-6531")),
@@ -34,11 +34,11 @@ RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 Language: en-US
 NeedsCompilation: no
-Packaged: 2020-09-06 18:13:55 UTC; Daniel
+Packaged: 2020-09-20 19:03:16 UTC; Daniel
 Author: Daniel Lüdecke [aut, cre] (<https://orcid.org/0000-0002-8895-3206>),
   Dominique Makowski [aut, ctb] (<https://orcid.org/0000-0001-5375-9967>),
   Indrajeet Patil [aut, ctb] (<https://orcid.org/0000-0003-1995-6531>),
   Philip Waggoner [aut, ctb] (<https://orcid.org/0000-0002-7825-7573>)
 Repository: CRAN
-Date/Publication: 2020-09-07 10:20:03 UTC
-Built: R 3.6.3; ; 2020-09-14 18:08:36 UTC; unix
+Date/Publication: 2020-09-20 19:50:03 UTC
+Built: R 3.6.3; ; 2020-09-23 19:50:17 UTC; unix

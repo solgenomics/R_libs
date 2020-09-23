@@ -168,11 +168,13 @@ compareRaster	compare
 contour	contour
 contour,RasterLayer-method	contour
 coordinates	xyFromCell
+coordinates,Extent-method	xyFromCell
 coordinates,Raster-method	xyFromCell
 corLocal	corLocal
 corLocal,RasterLayer,RasterLayer-method	corLocal
 corLocal,RasterStackBrick,RasterStackBrick-method	corLocal
 couldBeLonLat	isLonLat
+couldBeLonLat,ANY-method	isLonLat
 couldBeLonLat,BasicRaster-method	isLonLat
 couldBeLonLat,Spatial-method	isLonLat
 cover	cover
@@ -367,6 +369,7 @@ levels,Raster-method	factor
 levels,RasterStack-method	factor
 levels<-	factor
 levels<-,Raster-method	factor
+lines,Extent-method	plot
 lines,RasterLayer-method	plot
 lines,SpatialPolygons-method	spplot
 localFun	localFun
@@ -536,6 +539,7 @@ readStop,RasterStack-method	programming
 reclassify	reclassify
 reclassify,Raster-method	reclassify
 rectify	rectify
+rectify,Raster-method	rectify
 removeTmpFiles	rasterTmpFile
 res	resolution
 res,BasicRaster-method	resolution
@@ -704,6 +708,9 @@ whiches.max	which.minmax
 whiches.max,RasterStackBrick-method	which.minmax
 whiches.min	which.minmax
 whiches.min,RasterStackBrick-method	which.minmax
+wkt	projection
+wkt,ANY-method	projection
+wkt,Raster-method	projection
 writeFormats	writeFormats
 writeRaster	writeRaster
 writeRaster,RasterLayer,character-method	writeRaster

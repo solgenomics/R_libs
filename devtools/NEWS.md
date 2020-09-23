@@ -1,3 +1,24 @@
+# devtools 2.3.2
+
+* Fix for compatibility with withr 2.3.0
+
+# devtools 2.3.1
+
+* `run_examples()` arguments `run` and `test` are deprecated in favor of the (hopefully) more clear `run_dontrun` and `run_donttest` (pkgload/#107).
+
+* Previously deprecated functions `dr_devtools()` and `dr_github()` have been removed.
+
+* Documentation has been synced with remotes 2.2.0
+
+# devtools 2.3.0
+
+* `build()` now errors with a more informative error message when passed an
+  invalid `pkg`. (#2177)
+
+* New `build_rmd()` can build any `.Rmd` file in a clean session.
+
+* `dev_sitrep()` now works correctly when R is out of date (#2204)
+
 # devtools 2.2.2
 
 * `install_dev_deps()` now passes formal args onto `remotes::install_deps()`

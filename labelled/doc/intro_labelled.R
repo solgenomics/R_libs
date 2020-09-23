@@ -98,10 +98,10 @@ na_range(v) <- c(5, Inf)
 na_range(v)
 v
 
-## ---- eval=FALSE--------------------------------------------------------------
-#  x <- c(1, 2, 2, 9)
-#  na_values(x) <- 9
-#  x
+## -----------------------------------------------------------------------------
+x <- c(1, 2, 2, 9)
+na_values(x) <- 9
+x
 
 ## -----------------------------------------------------------------------------
 v <- labelled_spss(1:10, c(Good = 1, Bad = 8), na_values = c(9, 10))
@@ -161,6 +161,52 @@ to_labelled(f)
 ## -----------------------------------------------------------------------------
 v
 to_labelled(to_factor(v))
+
+## -----------------------------------------------------------------------------
+v
+to_character(v)
+
+## -----------------------------------------------------------------------------
+unclass(v)
+
+## -----------------------------------------------------------------------------
+remove_val_labels(v)
+
+## -----------------------------------------------------------------------------
+remove_val_labels(v)
+
+## -----------------------------------------------------------------------------
+x <- c(1, 2, 2, 9)
+na_values(x) <- 9
+val_labels(x) <- c(yes = 1, no = 2)
+var_label(x) <- "A test variable"
+x
+remove_val_labels(x)
+remove_user_na(x)
+remove_user_na(x, user_na_to_na = TRUE)
+remove_val_labels(remove_user_na(x))
+unclass(x)
+
+## -----------------------------------------------------------------------------
+remove_labels(x, user_na_to_na = TRUE)
+remove_labels(x, user_na_to_na = TRUE, keep_var_label = TRUE)
+
+## -----------------------------------------------------------------------------
+df <- data.frame(
+  a = labelled(c(1, 1, 2, 3), labels = c(No = 1, Yes = 2)),
+  b = labelled(c(1, 1, 2, 3), labels = c(No = 1, Yes = 2, DK = 3)),
+  c = labelled(c(1, 1, 2, 2), labels = c(No = 1, Yes = 2, DK = 3)),
+  d = labelled(c("a", "a", "b", "c"), labels = c(No = "a", Yes = "b")),
+  e = labelled_spss(
+    c(1, 9, 1, 2), 
+    labels = c(No = 1, Yes = 2),
+    na_values = 9
+    )
+)
+dplyr::glimpse(df)
+dplyr::glimpse(unlabelled(df))
+dplyr::glimpse(unlabelled(df, user_na_to_na = TRUE))
+dplyr::glimpse(unlabelled(df, drop_unused_labels = TRUE))
 
 ## ---- eval=FALSE--------------------------------------------------------------
 #    # from foreign
@@ -224,7 +270,10 @@ df$s2
 library(questionr)
 data(fertility)
 glimpse(women)
+glimpse(women %>% unlabelled())
+
+## -----------------------------------------------------------------------------
 glimpse(to_factor(women))
 glimpse(women %>% mutate_if(is.labelled, to_factor))
-glimpse(women %>% mutate_at(vars(employed:tv), to_factor))
+glimpse(women %>% mutate_at(vars(employed:religion), to_factor))
 

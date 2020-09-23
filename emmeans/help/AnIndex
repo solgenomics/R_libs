@@ -16,7 +16,6 @@ auto.noise	auto.noise
 CLD	CLD.emmGrid
 CLD.emmGrid	CLD.emmGrid
 cld.emmGrid	CLD.emmGrid
-CLD.emm_list	emm_list-object
 coef.emmGrid	contrast
 confint.emmGrid	summary.emmGrid
 consec.emmc	emmc-functions
@@ -79,6 +78,7 @@ poly.emmc	emmc-functions
 predict.emmGrid	summary.emmGrid
 print.emmGrid	emmGrid-methods
 print.xtable_emm	xtable.emmGrid
+pwpm	pwpm
 pwpp	pwpp
 qdrg	qdrg
 rbind.emmGrid	rbind.emmGrid
@@ -95,6 +95,7 @@ trt.vs.ctrl.emmc	emmc-functions
 trt.vs.ctrl1.emmc	emmc-functions
 trt.vs.ctrlk.emmc	emmc-functions
 tukey.emmc	emmc-functions
+ubds	ubds
 update.emmGrid	update.emmGrid
 vcov.emmGrid	emmGrid-methods
 wrappers	wrappers
