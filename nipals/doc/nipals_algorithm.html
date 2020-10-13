@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Kevin Wright" />
+
+<meta name="date" content="2017-10-27" />
+
+<title>The NIPALS algorithm</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">The NIPALS algorithm</h1>
+<h4 class="author">Kevin Wright</h4>
+<h4 class="date">2017-10-27</h4>
+
+
+
+<p>The principal components of <span class="math inline">\(\bf X&#39;X\)</span>, where <span class="math inline">\(\bf X\)</span> is a column-centered matrix, can be found by several methods, including SVD and NIPALS.</p>
+<div id="singular-value-decomposition" class="section level1">
+<h1>Singular value decomposition</h1>
+<p>The SVD (Singular Value Decomposition) of a matrix <span class="math inline">\(X\)</span> is <span class="math display">\[
+\bf X = U S V&#39;,
+\]</span> where <span class="math inline">\(\bf U\)</span> <span class="math inline">\((n \times r)\)</span> and <span class="math inline">\(\bf V\)</span> <span class="math inline">\((k \times r)\)</span> are orthogonal matrices and <span class="math inline">\(\bf S\)</span> is a diagonal matrix of <span class="math inline">\(r\)</span> singular values.</p>
+<p>SVD does not allow missing values in the data.</p>
+</div>
+<div id="nipals" class="section level1">
+<h1>NIPALS</h1>
+<p>The NIPALS (Nonlinear Iterative Partial Least Squares) algorithm can be used to find the first few (or all) principal components with the decomposition <span class="math display">\[
+\bf X = \bf T \bf P &#39;
+\]</span> where the columns of <span class="math inline">\(\bf T\)</span> are called <em>scores</em> and the columns of <span class="math inline">\(\bf P\)</span> (the rows of <span class="math inline">\(\bf P&#39;\)</span>) are called the <em>loadings</em>.</p>
+<p>The algorithm begins by initializing <span class="math inline">\(h=1\)</span> and <span class="math inline">\(\bf X_h = \bf X\)</span>, then proceeds through the following basic steps:</p>
+<ol style="list-style-type: decimal">
+<li>Choose <span class="math inline">\(\bf t_h\)</span> as any column of <span class="math inline">\(\bf X_h\)</span>.</li>
+<li>Compute loadings <span class="math inline">\(\bf p_h = X_h&#39; t_h / t_h&#39; t_h\)</span>.</li>
+<li>Let <span class="math inline">\(\bf p_h = p_h / \sqrt{p_h&#39; p_h}\)</span>.</li>
+<li>Compute scores <span class="math inline">\(\bf t_h = X_h p_h / p_h&#39; p_h\)</span>.</li>
+</ol>
+<p>Repeat (3) and (4) until convergence for the <span class="math inline">\(h^{th}\)</span> principal component.</p>
+<p>Let <span class="math inline">\(\bf X_{h+1} = \bf X_h - t_h p_h&#39;\)</span>. Let <span class="math inline">\(\lambda_h = \bf t_h&#39; t\)</span> (eigen value). Increment <span class="math inline">\(h = h + 1\)</span> and repeat for the next principal component.</p>
+<p>Assemble the columns of <span class="math inline">\(\bf T\)</span> from the <span class="math inline">\(\bf t_h\)</span> and the columns of <span class="math inline">\(\bf P\)</span> from the vectors <span class="math inline">\(\bf p_h\)</span>.</p>
+<p>The resulting PCs may be scaled in different ways. One way to scale the PCA solution is to define the loadings <span class="math inline">\(\bf P = V\)</span> and <span class="math inline">\(\bf T = U&#39;S\)</span>.</p>
+<div id="missing-data" class="section level2">
+<h2>Missing data</h2>
+<p>The NIPALS algorithm can be modified to accommodate missing values using the method of <span class="citation">Martens and Martens (2001)</span> (p. 381).</p>
+<p>If, for a certain variable <span class="math inline">\(k\)</span> [column of <span class="math inline">\(\bf X\)</span>], a missing value is encountered in <span class="math inline">\(\bf X\)</span> for a certain object <span class="math inline">\(i\)</span> [row of <span class="math inline">\(\bf X\)</span>], then the corresponding elements in <span class="math inline">\(\bf t_{ih}\)</span> must also be skipped in the calculation of the loadings, which for <span class="math inline">\(\bf X\)</span>-variable <span class="math inline">\(k\)</span> is <span class="math display">\[ 
+\bf p_{hk} = X_{k,h-1} t_h&#39;  / (t_h&#39; t_h) .
+\]</span></p>
+<p>Likewise, if, for a certain sample <span class="math inline">\(i\)</span> [row of <span class="math inline">\(\bf X\)</span>], a missing value is encountered in <span class="math inline">\(\bf X\)</span> for a certain variable <span class="math inline">\(k\)</span> [column of <span class="math inline">\(\bf X\)</span>], then the corresponding elements in <span class="math inline">\(\bf p_{kh}\)</span> must also be skipped in calculating the scores, which for sample <span class="math inline">\(i\)</span> is <span class="math display">\[ 
+\bf t_{ih} = X_{i,h-1} p_h / (p_h&#39; p_h) 
+\]</span> This method may have convergence problems if there are many missing values.</p>
+</div>
+<div id="gram-schmidt-orthogonalization" class="section level2">
+<h2>Gram-Schmidt orthogonalization</h2>
+<p>Because of the accumulation of floating-point errors, the orthogonality of the principal components is quickly lost as the number of components increases. <span class="citation">Andrecut (2009)</span> provided a Gram-Schmidt modified version of NIPALS that stabilizes the orthogonality by re-orthogonalizing the scores and loadings at each iteration. The ‘corrected’ terms are:</p>
+<p><span class="math display">\[
+\bf p_c = p - P_{1:h} P_{1:h}&#39; p
+\]</span> and</p>
+<p><span class="math display">\[
+\bf t_c = t - T_{1:h} T_{1:h}&#39; t
+\]</span> where <span class="math inline">\(\bf P_{1:h}\)</span> and <span class="math inline">\(\bf T_{1:h}\)</span> are the loadings and scores matrices based on the first <span class="math inline">\(h\)</span> principal components. Since <span class="math inline">\(\bf P_{1:h} P_{1:h}&#39;\)</span> only needs to be calculated once for each PC (and incrementally), the orthogonalization is not very computationally expensive.</p>
+<p>This correction method is also used by SAS PROC HPPRINCOMP (which does not allow missing values).</p>
+</div>
+<div id="example-1" class="section level2">
+<h2>Example 1</h2>
+<p>A small dataset with two missing values.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">require</span>(nipals)</a></code></pre></div>
+<pre><code>## Loading required package: nipals</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">B &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">67</span>, <span class="dv">90</span>, <span class="dv">98</span>, <span class="dv">120</span>,</a>
+<a class="sourceLine" id="cb3-2" title="2">              <span class="dv">55</span>, <span class="dv">71</span>, <span class="dv">93</span>, <span class="dv">102</span>, <span class="dv">129</span>,</a>
+<a class="sourceLine" id="cb3-3" title="3">              <span class="dv">65</span>, <span class="dv">76</span>, <span class="dv">95</span>, <span class="dv">105</span>, <span class="dv">134</span>,</a>
+<a class="sourceLine" id="cb3-4" title="4">              <span class="dv">50</span>, <span class="dv">80</span>, <span class="dv">102</span>, <span class="dv">130</span>, <span class="dv">138</span>,</a>
+<a class="sourceLine" id="cb3-5" title="5">              <span class="dv">60</span>, <span class="dv">82</span>, <span class="dv">97</span>, <span class="dv">135</span>, <span class="dv">151</span>,</a>
+<a class="sourceLine" id="cb3-6" title="6">              <span class="dv">65</span>, <span class="dv">89</span>, <span class="dv">106</span>, <span class="dv">137</span>, <span class="dv">153</span>,</a>
+<a class="sourceLine" id="cb3-7" title="7">              <span class="dv">75</span>, <span class="dv">95</span>, <span class="dv">117</span>, <span class="dv">133</span>, <span class="dv">155</span>), <span class="dt">ncol=</span><span class="dv">5</span>, <span class="dt">byrow=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb3-8" title="8">B2 &lt;-<span class="st"> </span>B</a>
+<a class="sourceLine" id="cb3-9" title="9">B2[<span class="dv">1</span>,<span class="dv">1</span>] &lt;-<span class="st"> </span>B2[<span class="dv">2</span>,<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb3-10" title="10">m0 &lt;-<span class="st"> </span><span class="kw">svd</span>(<span class="kw">scale</span>(B)) <span class="co"># center and scale</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">require</span>(<span class="st">&quot;nipals&quot;</span>)</a>
+<a class="sourceLine" id="cb4-2" title="2">m1 &lt;-<span class="st"> </span>nipals<span class="op">::</span><span class="kw">nipals</span>(B2, <span class="dt">gramschmidt=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb4-3" title="3">m2 &lt;-<span class="st"> </span>nipals<span class="op">::</span><span class="kw">nipals</span>(B2, <span class="dt">gramschmidt=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<p>Model <code>m1</code> omits the Gram-Schmidt orthogonalization step at each iteration. Model <code>m2</code> includes it.</p>
+<p>The eigenvalues for the two models are very similar.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">round</span>( m1<span class="op">$</span>eig, <span class="dv">3</span>)</a></code></pre></div>
+<pre><code>## [1] 4.876 2.044 1.073 0.237 0.143</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">round</span>( m2<span class="op">$</span>eig, <span class="dv">3</span>)</a></code></pre></div>
+<pre><code>## [1] 4.876 2.035 1.079 0.234 0.133</code></pre>
+<p>In theory, the loadings matrix <span class="math inline">\(\bf P\)</span> is orthogonal so that <span class="math inline">\(\bf P&#39; P = I\)</span>. If there are missing values, however, then the calculation of approximate PCs causes numerical errors to accumulate, so that in practice only the first few components can be accurately calculated. (The coordinates of the last PC can often be quite poor.)</p>
+<p>In this small example, the first 3 PCs of model <code>m1</code> are fairly orthogonal, but the 4th and 5th PC are not so good. For model <code>m2</code>, the PCs are nearly exactly orthogonal.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># loadings</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw">round</span>( <span class="kw">crossprod</span>(m1<span class="op">$</span>loadings), <span class="dv">3</span>) <span class="co"># P&#39;P = t(P) %*% P</span></a></code></pre></div>
+<pre><code>##        PC1    PC2    PC3    PC4    PC5
+## PC1  1.000  0.011  0.006 -0.043 -0.416
+## PC2  0.011  1.000 -0.011 -0.003  0.125
+## PC3  0.006 -0.011  1.000 -0.050 -0.058
+## PC4 -0.043 -0.003 -0.050  1.000 -0.006
+## PC5 -0.416  0.125 -0.058 -0.006  1.000</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">round</span>( <span class="kw">crossprod</span>(m2<span class="op">$</span>loadings), <span class="dv">3</span>)</a></code></pre></div>
+<pre><code>##     PC1 PC2 PC3 PC4 PC5
+## PC1   1   0   0   0   0
+## PC2   0   1   0   0   0
+## PC3   0   0   1   0   0
+## PC4   0   0   0   1   0
+## PC5   0   0   0   0   1</code></pre>
+<p>Also in theory, <span class="math inline">\(\bf T&#39; T = I\)</span> (if eigenvalues are removed from T), but missing values again invalidate this identity, unless the Gram-Schmidt method is used.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># scores</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="kw">round</span>( <span class="kw">crossprod</span>(m1<span class="op">$</span>scores), <span class="dv">3</span>) <span class="co"># T&#39;T = t(T) %*% T</span></a></code></pre></div>
+<pre><code>##        PC1    PC2    PC3    PC4    PC5
+## PC1  1.000 -0.086  0.058 -0.287  0.218
+## PC2 -0.086  1.000  0.003 -0.014  0.003
+## PC3  0.058  0.003  1.000  0.013 -0.002
+## PC4 -0.287 -0.014  0.013  1.000  0.004
+## PC5  0.218  0.003 -0.002  0.004  1.000</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">round</span>( <span class="kw">crossprod</span>(m2<span class="op">$</span>scores), <span class="dv">3</span>)</a></code></pre></div>
+<pre><code>##     PC1 PC2 PC3 PC4 PC5
+## PC1   1   0   0   0   0
+## PC2   0   1   0   0   0
+## PC3   0   0   1   0   0
+## PC4   0   0   0   1   0
+## PC5   0   0   0   0   1</code></pre>
+</div>
+</div>
+<div id="bibliography" class="section level1 unnumbered">
+<h1>Bibliography</h1>
+<div id="refs" class="references">
+<div id="ref-andrecut2009parallel">
+<p>Andrecut, Mircea. 2009. “Parallel GPU Implementation of Iterative PCA Algorithms.” <em>Journal of Computational Biology</em> 16 (11): 1593–9. <a href="https://doi.org/10.1089/cmb.2008.0221">https://doi.org/10.1089/cmb.2008.0221</a>.</p>
+</div>
+<div id="ref-martens2001multivariate">
+<p>Martens, Harald, and Magni Martens. 2001. <em>Multivariate Analysis of Quality: An Introduction</em>. J.Wiley &amp; Sons.</p>
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

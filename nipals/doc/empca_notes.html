@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Kevin Wright" />
+
+<meta name="date" content="2019-03-16" />
+
+<title>EMPCA notes</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">EMPCA notes</h1>
+<h4 class="author">Kevin Wright</h4>
+<h4 class="date">16 Mar 2019</h4>
+
+
+
+<p>Compare nipals/empca with no missing Compare nipals/empca with missing, equal weight Compare nipals/empca with missing, unequal weight</p>
+<div id="complete-data" class="section level2">
+<h2>Complete data</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Python - Coeff (scores)</span></a>
+<a class="sourceLine" id="cb1-2" title="2">[[<span class="op">-</span><span class="fl">2.809</span>  <span class="fl">0.097</span>  <span class="fl">0.244</span>  <span class="fl">0.050</span>]</a>
+<a class="sourceLine" id="cb1-3" title="3"> [<span class="op">-</span><span class="fl">1.834</span>  <span class="fl">0.286</span>  <span class="fl">0.010</span> <span class="fl">-0.135</span>]</a>
+<a class="sourceLine" id="cb1-4" title="4"> [<span class="op">-</span><span class="fl">0.809</span>  <span class="fl">0.963</span> <span class="fl">-0.341</span>  <span class="fl">0.078</span>]</a>
+<a class="sourceLine" id="cb1-5" title="5"> [<span class="op">-</span><span class="fl">0.155</span> <span class="fl">-1.129</span>  <span class="fl">0.548</span>  <span class="fl">0.026</span>]</a>
+<a class="sourceLine" id="cb1-6" title="6"> [<span class="fl">0.707</span>  <span class="fl">-0.723</span> <span class="fl">-0.736</span> <span class="fl">-0.024</span>]</a>
+<a class="sourceLine" id="cb1-7" title="7"> [<span class="fl">1.830</span>  <span class="fl">-0.290</span> <span class="fl">-0.157</span>  <span class="fl">0.030</span>]</a>
+<a class="sourceLine" id="cb1-8" title="8"> [<span class="fl">3.070</span>   <span class="fl">0.796</span>  <span class="fl">0.431</span> <span class="fl">-0.026</span>]]</a>
+<a class="sourceLine" id="cb1-9" title="9"></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="co"># m1e &lt;- empca(x=B1, w=B1wt, ncomp=4)</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="co"># Un-sweep the eigenvalues to compare to python results</span></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="co"># R round( sweep( m1e$scores, 2, m1e$eig, &quot;*&quot;), 3)</span></a>
+<a class="sourceLine" id="cb1-13" title="13">      PC1    PC2    PC3    PC4</a>
+<a class="sourceLine" id="cb1-14" title="14">G1 <span class="fl">-2.809</span>  <span class="fl">0.097</span> <span class="fl">-0.244</span>  <span class="fl">0.050</span></a>
+<a class="sourceLine" id="cb1-15" title="15">G2 <span class="fl">-1.834</span>  <span class="fl">0.286</span> <span class="fl">-0.010</span> <span class="fl">-0.135</span></a>
+<a class="sourceLine" id="cb1-16" title="16">G3 <span class="fl">-0.809</span>  <span class="fl">0.963</span>  <span class="fl">0.341</span>  <span class="fl">0.078</span></a>
+<a class="sourceLine" id="cb1-17" title="17">G4 <span class="fl">-0.155</span> <span class="fl">-1.129</span> <span class="fl">-0.548</span>  <span class="fl">0.026</span></a>
+<a class="sourceLine" id="cb1-18" title="18">G5  <span class="fl">0.707</span> <span class="fl">-0.723</span>  <span class="fl">0.736</span> <span class="fl">-0.024</span></a>
+<a class="sourceLine" id="cb1-19" title="19">G6  <span class="fl">1.830</span> <span class="fl">-0.290</span>  <span class="fl">0.157</span>  <span class="fl">0.030</span></a>
+<a class="sourceLine" id="cb1-20" title="20">G7  <span class="fl">3.070</span>  <span class="fl">0.796</span> <span class="fl">-0.431</span> <span class="fl">-0.026</span></a>
+<a class="sourceLine" id="cb1-21" title="21"></a>
+<a class="sourceLine" id="cb1-22" title="22"><span class="co"># Matlab - P (scores)</span></a>
+<a class="sourceLine" id="cb1-23" title="23">  <span class="fl">0.5590</span>   <span class="fl">0.0517</span>   <span class="fl">0.2210</span>   <span class="fl">0.2910</span></a>
+<a class="sourceLine" id="cb1-24" title="24">  <span class="fl">0.3650</span>   <span class="fl">0.1520</span>   <span class="fl">0.0095</span>  <span class="fl">-0.7840</span></a>
+<a class="sourceLine" id="cb1-25" title="25">  <span class="fl">0.1610</span>   <span class="fl">0.5120</span>  <span class="fl">-0.3080</span>   <span class="fl">0.4530</span></a>
+<a class="sourceLine" id="cb1-26" title="26">  <span class="fl">0.0309</span>  <span class="fl">-0.6010</span>   <span class="fl">0.4950</span>   <span class="fl">0.1510</span></a>
+<a class="sourceLine" id="cb1-27" title="27"> <span class="fl">-0.1410</span>  <span class="fl">-0.3850</span>  <span class="fl">-0.6640</span>  <span class="fl">-0.1380</span></a>
+<a class="sourceLine" id="cb1-28" title="28"> <span class="fl">-0.3650</span>  <span class="fl">-0.1540</span>  <span class="fl">-0.1420</span>   <span class="fl">0.1760</span></a>
+<a class="sourceLine" id="cb1-29" title="29"><span class="fl">-0.6110</span>   <span class="fl">0.4230</span>   <span class="fl">0.3890</span>  <span class="fl">-0.1490</span></a>
+<a class="sourceLine" id="cb1-30" title="30"></a>
+<a class="sourceLine" id="cb1-31" title="31"><span class="co"># R round(m1e$scores, 3)</span></a>
+<a class="sourceLine" id="cb1-32" title="32">      PC1    PC2    PC3    PC4</a>
+<a class="sourceLine" id="cb1-33" title="33">G1 <span class="fl">-0.559</span> <span class="fl">-0.052</span>  <span class="fl">0.221</span> <span class="fl">-0.291</span></a>
+<a class="sourceLine" id="cb1-34" title="34">G2 <span class="fl">-0.365</span> <span class="fl">-0.152</span>  <span class="fl">0.009</span>  <span class="fl">0.784</span></a>
+<a class="sourceLine" id="cb1-35" title="35">G3 <span class="fl">-0.161</span> <span class="fl">-0.512</span> <span class="fl">-0.308</span> <span class="fl">-0.453</span></a>
+<a class="sourceLine" id="cb1-36" title="36">G4 <span class="fl">-0.031</span>  <span class="fl">0.601</span>  <span class="fl">0.495</span> <span class="fl">-0.151</span></a>
+<a class="sourceLine" id="cb1-37" title="37">G5  <span class="fl">0.141</span>  <span class="fl">0.385</span> <span class="fl">-0.664</span>  <span class="fl">0.138</span></a>
+<a class="sourceLine" id="cb1-38" title="38">G6  <span class="fl">0.365</span>  <span class="fl">0.154</span> <span class="fl">-0.142</span> <span class="fl">-0.176</span></a>
+<a class="sourceLine" id="cb1-39" title="39">G7  <span class="fl">0.611</span> <span class="fl">-0.423</span>  <span class="fl">0.389</span>  <span class="fl">0.149</span></a></code></pre></div>
+</div>
+<div id="missing-data" class="section level2">
+<h2>Missing data</h2>
+<pre><code># Python with initial Identity matrix
+
+[[2.791 0.125 0.325 -0.035]
+ [1.528 -0.989 -0.211 0.172]
+ [0.990 -0.651 -0.117 -0.186]
+ [0.159 1.463 0.530 0.020]
+ [-0.628 0.862 -0.730 -0.032]
+ [-1.738 0.406 -0.139 -0.071]
+ [-2.917 -0.712 0.520 -0.047]]
+ 
+Eigvec (loadings)
+[[-0.309 -0.839 -0.298 0.300]
+ [-0.502 0.014 0.154 -0.615]
+ [-0.470 -0.086 0.766 0.219]
+ [-0.441 0.521 -0.236 0.615]
+ [-0.487 0.128 -0.496 -0.326]]
+ 
+
+# R 
+
+R&gt; m2e &lt;- empca(x=B2, w=B2wt, ncomp=4, seed=NULL)
+# # Un-sweep the eigenvalues to compare to python results
+R&gt; round( sweep( m2e$scores, 2, m2e$eig, &quot;*&quot;), 3)
+      PC1    PC2    PC3    PC4
+G1 -2.791  0.216 -0.356  0.066
+G2 -1.528 -0.942  0.187 -0.150
+G3 -0.990 -0.620  0.101  0.207
+G4 -0.159  1.472 -0.522 -0.032
+G5  0.628  0.844  0.744  0.021
+G6  1.738  0.351  0.161  0.050
+G7  2.917 -0.808 -0.493  0.019
+R&gt; round( m2e$loadings, 3)
+     PC1    PC2    PC3    PC4
+E1 0.309 -0.839  0.298 -0.300
+E2 0.502  0.014 -0.154  0.615
+E3 0.470 -0.086 -0.766 -0.219
+E4 0.441  0.521  0.236 -0.615
+E5 0.487  0.128  0.496  0.326
+</code></pre>
+</div>
+<div id="python" class="section level2">
+<h2>Python</h2>
+<p>Python code by <span class="citation">Bailey (2012)</span>, retrieved 1 Mar 2019 from <a href="https://github.com/sbailey/empca" class="uri">https://github.com/sbailey/empca</a> .</p>
+<p>The Python code is difficult to read in places for a person [like me] not well-versed with Python. Three examples:</p>
+<ol style="list-style-type: decimal">
+<li>It is not clear what values <code>k</code> takes in <code>for k in range(self.nvec)</code>.</li>
+<li>Gram-Schmidt orthogonalization is accomplished with a pair of nested <code>for</code> loops instead of a function.</li>
+<li>The <code>Model</code> class structure makes it a bit tricky to figure out what objects have actually been modified inside a function.</li>
+</ol>
+<p>The Python code iterates these two EM steps:</p>
+<ol style="list-style-type: decimal">
+<li>Calculate the coefficient matrix C.</li>
+<li>Calculate ALL <code>ncomp</code> principal components P simultaneously (iterate each to convergence). Orthogonalize P.</li>
+</ol>
+<p>For a complete-data problem, python and R give similar results. Note the <code>Coeff</code> matrix in python does NOT have eigenvalues swept out of the columns.</p>
+<p>For the missing-data problem, the python results are somewhat different from R.</p>
+</div>
+<div id="matlab" class="section level2">
+<h2>Matlab</h2>
+<p>Matlab code by Vicente Parot, retrieved 1 Mar 2019 from <a href="https://www.mathworks.com/matlabcentral/fileexchange/45353-empca" class="uri">https://www.mathworks.com/matlabcentral/fileexchange/45353-empca</a>.</p>
+<p>The Matlab code feels similar to R.</p>
+<p>The Matlab code calculates principal components sequentially, one at time. For each principal component, the algorithm iterates between these two steps:</p>
+<ol style="list-style-type: decimal">
+<li>Calculate C[,h]</li>
+<li>Calculate P[,h]</li>
+</ol>
+<p>While this is a type of EM algorithm, it is not the algorithm described by Bailey (2012) and is considered further.</p>
+<div id="refs" class="references">
+<div id="ref-bailey2012principal">
+<p>Bailey, Stephen. 2012. “Principal Component Analysis with Noisy and/or Missing Data.” <em>Publications of the Astronomical Society of the Pacific</em> 124 (919): 1015–23.</p>
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
