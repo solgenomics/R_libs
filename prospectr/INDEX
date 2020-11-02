@@ -1,0 +1,29 @@
+NIRsoil                 NIRSoil
+binning                 Signal binning
+blockNorm               Sum of squares block weighting
+blockScale              Hard or soft block scaling
+cochranTest             Cochran _C_ Test
+continuumRemoval        Continuum Removal
+detrend                 Detrending spectral data
+duplex                  DUPLEX algorithm for calibration sampling
+gapDer                  Gap-Segment derivative
+honigs                  Honigs algorithm for calibration sampling
+kenStone                Kennard-Stone algorithm for calibration
+                        sampling
+movav                   Moving average
+msc                     Multiplicative Scatter Correction (msc)
+naes                    k-means sampling
+prospectr-package       Overview of the functions in the prospectr
+                        package
+puchwein                Puchwein algorithm for calibration sampling
+readASD                 Read ASD FieldSpec Pro binary and ASCII files
+read_nircal             Import BUCHI NIRCal files
+resample                Resample spectral data
+resample2               Resample a high resolution signal to a low
+                        resolution signal using full width half maximum
+                        (FWHM) values
+savitzkyGolay           Savitzky-Golay smoothing and differentiation
+shenkWest               SELECT algorithm for calibration sampling
+spliceCorrection        Splice correction of a spectral matrix acquired
+                        with an ASD spectrometer
+standardNormalVariate   Standard normal variate transformation

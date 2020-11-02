@@ -1,0 +1,55 @@
+Spectra                 Constructor for the Spectra class.
+Spectra-class           Spectra* classes
+SpectraDataFrame        Constructor for the SpectraDataFrame class.
+aggregate_spectra       Aggregates spectral and data information
+apply_spectra           Apply a function on the spectra of a Spectra*
+                        object
+australia               Australia spectra library data set
+base_line               Baseline correction using the baseline
+                        package#'
+big.head                Return the First or Last Part of an Object
+continuum_removal       Continuum removal
+cut                     Manipulating the wavelength range of a
+                        'Spectra' object
+dimensions              Retrieve dimensions of Spectra* objects
+extraction-methods      Extracting and replacing parts of Spectra*
+                        objects
+features                Retrieves or sets the data slot of a
+                        SpectraDataFrame object.
+fill_spectra            Fill missing wavelengths of a Spectra* object
+                        with a given value
+ids                     Retrieves or sets the ids of a 'Spectra*'
+                        object.
+kenstone                Kennard-Stone algorithm for optimal calibration
+                        set selection.
+load_oz                 Load the australia dataset
+melt_spectra            Melts the spectra data of a Spectra object and
+                        returns it as wide format.
+mutate                  Mutate a Spectra* object by transforming the
+                        spectra values, and/or adding new or replacing
+                        existing attributes.
+plot-Spectra            Plots an object inheriting from the Spectra
+                        class
+plot_offset             Offset plot of a collection of spectra
+plot_stack              Stacked plot of a collection of spectra
+plot_summary            Summary plot of a collection of spectra
+postResampleSpectro     Calculates performance indictors across
+                        resamples
+rbind                   Stacking 'Spectra' objects together
+res,numeric-method      Spectral resolution
+separate                Separates a 'Spectra*' object into a
+                        calibration and a validation set.
+snv                     Standard and Robust Normal Variate
+                        transformations
+spectacles-package      Storing, Manipulating and Analysis Spectroscopy
+                        and Associated Data in R
+spectra-methods         Retrieves or sets the spectra of a 'Spectra*'
+                        objects.
+splice                  Splice correction of a spectra collected using
+                        ASD hardware
+split                   Split a Spectra* object using factors
+subset                  Subset SpectraDataFrame object
+summary                 Summary
+wl                      Retrieves or sets the wavelengths of a
+                        'Spectra*' object.
+wl_units                Wavelengths of Spectra* objects
