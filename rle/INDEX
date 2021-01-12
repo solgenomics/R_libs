@@ -1,0 +1,13 @@
+Extract.rle             Indexing Methods for 'rle' Objects
+Math.rle                Mathematical functions for 'rle' Objects
+Ops.rle                 Unary and Binary Operations for 'rle' Objects
+Summary.rle             Summary methods for 'rle' objects.
+as.rle                  Coerce to 'rle' if not already an 'rle' object
+compress                A generic function for compressing a data
+                        structure.
+compress.rle            Compress the 'rle' object by merging adjacent
+                        runs
+rep.rle                 A 'rep' method for 'rle' objects
+rle-deprecated          Deprecated functions from 'rle'
+rle-methods             Miscellaneous Common Methods for 'rle' Objects
+rle-package             The 'rle' Package

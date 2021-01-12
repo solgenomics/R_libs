@@ -1,0 +1,56 @@
+Moutlier                Plots classical and robust Mahalanobis
+                        distances
+NIR                     NIR data
+PAC                     GC retention indices
+Phenyl                  Phenyl data set
+RPvectors               Generating random projection directions
+alr                     additive logratio transformation
+ash                     ash data
+cereal                  Data from cereals
+chemometrics-package    This package is the R companion to the book
+                        "Introduction to Multivariate Statistical
+                        Analysis in Chemometrics" written by K. Varmuza
+                        and P. Filzmoser (2009).
+clr                     centered logratio transformation
+clvalidity              compute and plot cluster validity
+delintercept            Delete intercept from model matrix
+drawMahal               Draws ellipses according to Mahalanobis
+                        distances
+glass                   glass vessels data
+glass.grp               glass types of the glass data
+hyptis                  Hyptis data set
+ilr                     isometric logratio transformation
+knnEval                 kNN evaluation by CV
+lassoCV                 CV for Lasso regression
+lassocoef               Plot Lasso coefficients
+lmCV                    Repeated Cross Validation for lm
+mvr_dcv                 Repeated double-cross-validation for PLS and
+                        PCR
+nipals                  PCA calculation with the NIPALS algorithm
+nnetEval                Neural network evaluation by CV
+pcaCV                   Determine the number of PCA components with
+                        repeated cross validation
+pcaDiagplot             Diagnostics plot for PCA
+pcaVarexpl              PCA diagnostics for variables
+plotRidge               Plot results of Ridge regression
+plotSEPmvr              Plot SEP from repeated DCV
+plotSEPprm              Plot trimmed SEP from repeated DCV of PRM
+plotcompmvr             Component plot for repeated DCV
+plotcompprm             Component plot for repeated DCV of PRM
+plotpredmvr             Plot predictions from repeated DCV
+plotpredprm             Plot predictions from repeated DCV of PRM
+plotprm                 Plot results from robust PLS
+plotresmvr              Plot residuals from repeated DCV
+plotresprm              Plot residuals from repeated DCV of PRM
+plotsom                 Plot SOM results
+pls1_nipals             PLS1 by NIPALS
+pls2_nipals             PLS2 by NIPALS
+pls_eigen               Eigenvector algorithm for PLS
+prm                     Robust PLS
+prm_cv                  Cross-validation for robust PLS
+prm_dcv                 Repeated double-cross-validation for robust PLS
+ridgeCV                 Repeated CV for Ridge regression
+sd_trim                 Trimmed standard deviation
+stepwise                Stepwise regression
+svmEval                 Support Vector Machine evaluation by CV
+treeEval                Classification tree evaluation by CV

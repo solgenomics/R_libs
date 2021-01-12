@@ -1,0 +1,65 @@
+# Export all names
+exportPattern(".")
+
+# Import all packages listed as Imports or Depends
+#import(
+#)
+
+importFrom("grDevices", "gray")
+importFrom("graphics", "abline", "axis", "barplot", "boxplot",
+             "layout", "legend", "lines", "matplot", "par", "plot",
+             "points", "segments", "text", "title")
+importFrom("stats", "AIC", "IQR", "as.formula", "cov", "dist",
+             "kmeans", "lm", "mad", "mahalanobis", "median",
+             "model.matrix", "model.response", "predict", "qchisq",
+             "qnorm", "quantile", "rnorm", "runif", "sd", "step",
+             "update", "var")
+importFrom("utils", "write.table")
+
+importFrom(class,knn)
+importFrom(e1071,cmeans)
+importFrom(e1071,svm)
+importFrom(MASS,lm.ridge)
+importFrom(nnet,nnet)
+importFrom(nnet,class.ind)
+importFrom(pcaPP,l1median)
+#importFrom(rpart,rpart)
+#importFrom(rpart,rpart.control)
+#importFrom(rpart,prune)
+importFrom(robustbase,covMcd)
+importFrom(som,som)
+importFrom(pls,mvr)
+importFrom(pls,cvsegments)
+#importFrom(pls,delete.intercept)
+importFrom(lars,lars)
+importFrom(lars,cv.folds)
+importFrom(mclust,Mclust)
+importFrom(mclust,mclustBIC)
+#importFrom(gclus,wine)
+
+import(rpart)
+
+### OLD ###
+
+#import(class)
+#import(e1071)
+#import(MASS)
+#import(nnet)
+#import(pcaPP)
+#import(rpart)
+#import(robustbase)
+#import(som)
+
+
+## Imports:
+#importFrom(pls,mvr)
+
+## Exported functions:
+#export(alr,lassocoef,nnetEval,plotpredmvr,plotSEPmvr,prm_cv, stepwise,
+#       clr,lassoCV,pcaCV,plotpredprm,plotSEPprm,prm_dcv,svmEval,
+#       clvalidity,lmCV,pcaDiagplot,plotprm,plotsom,prm,treeEval,
+#       drawMahal,Moutlier,pcaVarexpl,plotresmvr,pls1_nipals,ridgeCV,
+#       ilr,mvr_dcv,plotcompmvr,plotresprm,pls2_nipals,RPvectors,
+#       knnEval,nipals,plotcompprm,plotRidge,pls_eigen,sd_trim)
+
+
