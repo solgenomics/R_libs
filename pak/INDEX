@@ -1,0 +1,15 @@
+lib_status              Status of packages in a library
+local_install           Install a package tree
+local_install_deps      Install the dependencies of a package tree
+local_install_dev_deps
+                        Install all dependencies of a package tree
+local_package_trees     Local package trees
+pak_cleanup             Clean up pak caches and/or the pak library
+pak_package_sources     Package sources
+pak_private_library     The pak private library
+pak_setup               Install pak's dependencies into its private
+                        library
+pak_sitrep              pak SITuation REPort
+pkg_install             Install a package
+pkg_remove              Remove installed packages
+pkg_status              Display installed locations of a package

@@ -1,0 +1,12 @@
+%^%	grapes-pow-grapes
+Cols	Cols
+getAffinityMatrix	getAffinityMatrix
+getMetricOfType	getMetricOfType
+klfda	klfda
+kmatrixGauss	kmatrixGauss
+lfda	lfda
+plot.lfda	plot.lfda
+predict.lfda	predict.lfda
+print.lfda	print.lfda
+repmat	repmat
+self	self

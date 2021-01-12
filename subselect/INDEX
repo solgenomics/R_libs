@@ -1,0 +1,37 @@
+anneal                  Simulated Annealing Search for an optimal
+                        k-variable subset
+ccr12.coef              First Squared Canonical Correlation for a
+                        multivariate linear hypothesis
+eleaps                  A Leaps and Bounds Algorithm for finding the
+                        best variable subsets
+farm                    Sixty-two economic indicators from 99
+                        Portuguese farms.
+gcd.coef                Computes Yanai's GCD in the context of the
+                        variable-subset selection problem
+genetic                 Genetic Algorithm searching for an optimal
+                        k-variable subset
+glhHmat                 Total and Effect Deviation Matrices for General
+                        Linear Hypothesis
+glmHmat                 Input matrices for subselect search routines in
+                        generalized linear models
+improve                 Restricted Local Improvement search for an
+                        optimal k-variable subset
+ldaHmat                 Total and Between-Group Deviation Matrices in
+                        Linear Discriminant Analysis
+lmHmat                  Total and Effect Deviation Matrices for Linear
+                        Regression and Canonical Correlation Analysis
+rm.coef                 Computes the RM coefficient for variable subset
+                        selection
+rv.coef                 Computes the RV-coefficient applied to the
+                        variable subset selection problem
+tau2.coef               Computes the Tau squared coefficient for a
+                        multivariate linear hypothesis
+trim.matrix             Given an ill-conditioned square matrix, deletes
+                        rows/columns until a well-conditioned submatrix
+                        is obtained.
+wald.coef               Wald statistic for variable selection in
+                        generalized linear models
+xi2.coef                Computes the Xi squared coefficient for a
+                        multivariate linear hypothesis
+zeta2.coef              Computes the Zeta squared coefficient for a
+                        multivariate linear hypothesis

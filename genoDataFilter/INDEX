@@ -1,0 +1,6 @@
+calculateMAF            calculates minimum allele frequency (MAF)
+combineGenoData         combine genotype data
+convertToNumeric        convert to numeric
+filterGenoData          filters genotype dataset
+rawGenoData             Sample genotype dataset
+roundAlleleDosage       rounds decimals

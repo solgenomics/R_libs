@@ -1,0 +1,18 @@
+year <- sub("-.*", "", meta$Date)
+note <- sprintf("R package version %s", meta$Version)
+
+c(bibentry(bibtype = "Manual",
+           title = "{profileModel}: Tools for profiling inference functions for various model classes",
+           author = c(person(given = "Ioannis", family = "Kosmidis")),
+           year = year,
+           note = note,
+           url = "https://CRAN.R-project.org/package=profileModel"),
+  bibentry(bibtype = "article",
+           title = "The profileModel {R} package: Profiling objectives for models with linear predictors",
+           author = c(person(given = "Ioannis", family = "Kosmidis")),
+           year = 2008,
+           pages = "12--18",
+           journal = "R News",
+           volume = "8/2",
+           url = "https://www.r-project.org/doc/Rnews/Rnews_2008-2.pdf"))
+

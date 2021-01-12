@@ -1,0 +1,26 @@
+averageTrait            calculates average trait values for genotypes
+cleanAveragePhenotypes
+                        Reads, cleans and creates phenotype data with
+                        averaged individual data points for entries.
+cleanEmptyBlocks        Removes rows with completely empty trait values
+                        for a block
+cleanEmptyReps          Removes rows with completely empty trait values
+                        for a replication
+cleanMetaCols           Removes meta data columns from the phenotype
+                        data
+combinePhenoData        combine phenotype data
+extractPhenotype        Reads phenotype data from one or more files.
+getAdjMeans             calculates the genotype adjusted means for a
+                        trait.
+getAnovaTable           Generates the anova table
+getModelSummary         fits model and returns the model output summary
+mergeVariables          merges variables from 2 or more data files.
+models                  fits linear mixed model
+runAnova                fits model and returns the model output summary
+sortTraitData           sorts trait data by design factors for further
+                        analysis
+structureAdjMeans       calculates the genotype adjusted means for a
+                        trait.
+structureTraitData      structures trait data for further analysis
+summarizeTraits         groups by given factor and calculates summary
+                        data
