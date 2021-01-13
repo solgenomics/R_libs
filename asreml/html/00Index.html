@@ -1,0 +1,718 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>R: Fits the Linear Mixed Model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+<h1> Fits the Linear Mixed Model
+<img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
+</h1>
+<hr/>
+<div style="text-align: center;">
+<a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
+<a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
+</div><h2>Documentation for package &lsquo;asreml&rsquo; version 4.1.0.126</h2>
+
+<ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+<li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<p style="text-align: center;">
+<a href="#A">A</a>
+<a href="#B">B</a>
+<a href="#C">C</a>
+<a href="#D">D</a>
+<a href="#E">E</a>
+<a href="#F">F</a>
+<a href="#G">G</a>
+<a href="#H">H</a>
+<a href="#I">I</a>
+<a href="#K">K</a>
+<a href="#L">L</a>
+<a href="#M">M</a>
+<a href="#N">N</a>
+<a href="#O">O</a>
+<a href="#P">P</a>
+<a href="#R">R</a>
+<a href="#S">S</a>
+<a href="#T">T</a>
+<a href="#U">U</a>
+<a href="#V">V</a>
+<a href="#W">W</a>
+</p>
+
+
+<h2><a name="A">-- A --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="metric-2d.html">aexp</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">aexph</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">aexpv</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">agau</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">agauh</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">agauv</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="ainverse.html">ainverse</a></td>
+<td>Calculate an inverse relationship matrix.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">and</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">ante</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">ar1</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">ar1h</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">ar1v</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">ar2</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">ar2h</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">ar2v</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">ar3</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">ar3h</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">ar3v</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">arma</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">armah</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">armav</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="asreml.html">asreml</a></td>
+<td>Fit the linear mixed model.</td></tr>
+<tr><td style="width: 25%;"><a href="asreml.object.html">asreml.object</a></td>
+<td>ASReml object</td></tr>
+<tr><td style="width: 25%;"><a href="asreml.options.html">asreml.options</a></td>
+<td>Set asreml options.</td></tr>
+<tr><td style="width: 25%;"><a href="asreml.read.table.html">asreml.read.table</a></td>
+<td>Read in a data frame.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_aexp</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_aexph</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_aexpv</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_agau</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_agauh</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_agauv</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">asr_and</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">asr_ante</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_ar1</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_ar1h</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_ar1v</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_ar2</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_ar2h</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_ar2v</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_ar3</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_ar3h</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_ar3v</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_arma</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_armah</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_armav</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">asr_at</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="asr_families.html">asr_binomial</a></td>
+<td>GLM family objects for asreml.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">asr_C</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">asr_chol</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_cir</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_cirh</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_cirv</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">asr_con</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">asr_cor</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">asr_corb</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">asr_corbh</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">asr_corbv</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">asr_corg</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">asr_corgh</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">asr_corgv</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">asr_corh</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">asr_corv</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">asr_dev</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">asr_diag</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">asr_dsum</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-1d.html">asr_exp</a></td>
+<td>Metric based models in one dimension.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-1d.html">asr_exph</a></td>
+<td>Metric based models in one dimension.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-1d.html">asr_expv</a></td>
+<td>Metric based models in one dimension.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">asr_fa</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">asr_facv</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="asr_families.html">asr_families</a></td>
+<td>GLM family objects for asreml.</td></tr>
+<tr><td style="width: 25%;"><a href="asr_families.html">asr_Gamma</a></td>
+<td>GLM family objects for asreml.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-1d.html">asr_gau</a></td>
+<td>Metric based models in one dimension.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-1d.html">asr_gauh</a></td>
+<td>Metric based models in one dimension.</td></tr>
+<tr><td style="width: 25%;"><a href="asr_families.html">asr_gaussian</a></td>
+<td>GLM family objects for asreml.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-1d.html">asr_gauv</a></td>
+<td>Metric based models in one dimension.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">asr_grp</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="id.html">asr_id</a></td>
+<td>Default identity variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="knownStruc.html">asr_ide</a></td>
+<td>Known variance structures.</td></tr>
+<tr><td style="width: 25%;"><a href="id.html">asr_idh</a></td>
+<td>Default identity variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="id.html">asr_idv</a></td>
+<td>Default identity variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_ieuc</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_ieuch</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_ieucv</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_iexp</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_iexph</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_iexpv</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_igau</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_igauh</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_igauv</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_ilv</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_ilvh</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_ilvv</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="asr_families.html">asr_inverse.gaussian</a></td>
+<td>GLM family objects for asreml.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">asr_leg</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">asr_lin</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-1d.html">asr_lvr</a></td>
+<td>Metric based models in one dimension.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-1d.html">asr_lvrh</a></td>
+<td>Metric based models in one dimension.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-1d.html">asr_lvrv</a></td>
+<td>Metric based models in one dimension.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">asr_ma</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_ma1</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_ma1h</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_ma1v</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_ma2</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_ma2h</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_ma2v</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">asr_mbf</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="matern.html">asr_mtrn</a></td>
+<td>Matern variance structure.</td></tr>
+<tr><td style="width: 25%;"><a href="matern.html">asr_mtrnh</a></td>
+<td>Matern variance structure.</td></tr>
+<tr><td style="width: 25%;"><a href="matern.html">asr_mtrnv</a></td>
+<td>Matern variance structure.</td></tr>
+<tr><td style="width: 25%;"><a href="asr_families.html">asr_multinomial</a></td>
+<td>GLM family objects for asreml.</td></tr>
+<tr><td style="width: 25%;"><a href="asr_families.html">asr_negative.binomial</a></td>
+<td>GLM family objects for asreml.</td></tr>
+<tr><td style="width: 25%;"><a href="own.html">asr_own</a></td>
+<td>User-defined variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="asr_families.html">asr_poisson</a></td>
+<td>GLM family objects for asreml.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">asr_pol</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">asr_pow</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">asr_rr</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_sar</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_sar2</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_sar2h</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_sar2v</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_sarh</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">asr_sarv</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">asr_sfa</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_sph</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_sphh</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">asr_sphv</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">asr_spl</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="str.html">asr_str</a></td>
+<td>General variance structures.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">asr_us</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="knownStruc.html">asr_vm</a></td>
+<td>Known variance structures.</td></tr>
+<tr><td style="width: 25%;"><a href="asv.html">asv</a></td>
+<td>Approximate stratum variances method.</td></tr>
+<tr><td style="width: 25%;"><a href="asv.asreml.html">asv.asreml</a></td>
+<td>Approximate stratum variances.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">at</a></td>
+<td>Model term constructor functions.</td></tr>
+</table>
+
+<h2><a name="B">-- B --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="binnor.html">binnor</a></td>
+<td>Footrot scores on lambs.</td></tr>
+</table>
+
+<h2><a name="C">-- C --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="modelFunctions.html">C</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="captions.html">captions</a></td>
+<td>Axis captions</td></tr>
+<tr><td style="width: 25%;"><a href="cheese.html">cheese</a></td>
+<td>Cheese tasting.</td></tr>
+<tr><td style="width: 25%;"><a href="cheese.cat.html">cheese.cat</a></td>
+<td>Cheese tasting incidence.</td></tr>
+<tr><td style="width: 25%;"><a href="chkPed.html">chkPed</a></td>
+<td>Check a pedigree</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">chol</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">cir</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">cirh</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">cirv</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="coef.asreml.html">coef</a></td>
+<td>Extract model coefficients</td></tr>
+<tr><td style="width: 25%;"><a href="coef.asreml.html">coef.asreml</a></td>
+<td>Extract model coefficients</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">con</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">cor</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">corb</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">corbh</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">corbv</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">corg</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">corgh</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">corgv</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">corh</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">corv</a></td>
+<td>General structure variance models.</td></tr>
+</table>
+
+<h2><a name="D">-- D --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="modelFunctions.html">dev</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">diag</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">dsum</a></td>
+<td>Model term constructor functions.</td></tr>
+</table>
+
+<h2><a name="E">-- E --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="ebay.html">ebay</a></td>
+<td>Nested correlated observations.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-1d.html">exp</a></td>
+<td>Metric based models in one dimension.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-1d.html">exph</a></td>
+<td>Metric based models in one dimension.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-1d.html">expv</a></td>
+<td>Metric based models in one dimension.</td></tr>
+</table>
+
+<h2><a name="F">-- F --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="unstructured.html">fa</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="fa.init.html">fa.init</a></td>
+<td>Factor analytic initial values</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">facv</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="fitted.asreml.html">fitted.asreml</a></td>
+<td>Extract fitted values.</td></tr>
+</table>
+
+<h2><a name="G">-- G --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="metric-1d.html">gau</a></td>
+<td>Metric based models in one dimension.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-1d.html">gauh</a></td>
+<td>Metric based models in one dimension.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-1d.html">gauv</a></td>
+<td>Metric based models in one dimension.</td></tr>
+<tr><td style="width: 25%;"><a href="grass.html">grass</a></td>
+<td>Plant height</td></tr>
+<tr><td style="width: 25%;"><a href="grassUV.html">grassUV</a></td>
+<td>Plant height (univariate form)</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">grp</a></td>
+<td>Model term constructor functions.</td></tr>
+</table>
+
+<h2><a name="H">-- H --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="harvey.html">harvey</a></td>
+<td>Weights of cattle.</td></tr>
+<tr><td style="width: 25%;"><a href="harvey.ped.html">harvey.ped</a></td>
+<td>Pedigree of cattle.</td></tr>
+<tr><td style="width: 25%;"><a href="harveyg.ped.html">harveyg.ped</a></td>
+<td>Pedigree of cattle.</td></tr>
+</table>
+
+<h2><a name="I">-- I --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="id.html">id</a></td>
+<td>Default identity variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="knownStruc.html">ide</a></td>
+<td>Known variance structures.</td></tr>
+<tr><td style="width: 25%;"><a href="id.html">idh</a></td>
+<td>Default identity variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="id.html">idv</a></td>
+<td>Default identity variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">ieuc</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">ieuch</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">ieucv</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">iexp</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">iexph</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">iexpv</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">igau</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">igauh</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">igauv</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">ilv</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">ilvh</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">ilvv</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+</table>
+
+<h2><a name="K">-- K --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="knownStruc.html">knownStruc</a></td>
+<td>Known variance structures.</td></tr>
+</table>
+
+<h2><a name="L">-- L --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="lamb.html">lamb</a></td>
+<td>Footrot counts on lambs.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">leg</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="Levels.html">Levels</a></td>
+<td>Combine factor levels.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">lin</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="lrt.html">lrt</a></td>
+<td>Likelihood ratio tests.</td></tr>
+<tr><td style="width: 25%;"><a href="lrt.asreml.html">lrt.asreml</a></td>
+<td>REML Likelihood ratio tests</td></tr>
+<tr><td style="width: 25%;"><a href="metric-1d.html">lvr</a></td>
+<td>Metric based models in one dimension.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-1d.html">lvrh</a></td>
+<td>Metric based models in one dimension.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-1d.html">lvrv</a></td>
+<td>Metric based models in one dimension.</td></tr>
+</table>
+
+<h2><a name="M">-- M --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="modelFunctions.html">ma</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">ma1</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">ma1h</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">ma1v</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">ma2</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">ma2h</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">ma2v</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="matern.html">matern</a></td>
+<td>Matern variance structure.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">mbf</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="meff.html">meff</a></td>
+<td>Marker effects.</td></tr>
+<tr><td style="width: 25%;"><a href="meff.asreml.html">meff.asreml</a></td>
+<td>Marker effects.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-1d.html">metric-1d</a></td>
+<td>Metric based models in one dimension.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">metric-2d</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">modelFunctions</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="matern.html">mtrn</a></td>
+<td>Matern variance structure.</td></tr>
+<tr><td style="width: 25%;"><a href="matern.html">mtrnh</a></td>
+<td>Matern variance structure.</td></tr>
+<tr><td style="width: 25%;"><a href="matern.html">mtrnv</a></td>
+<td>Matern variance structure.</td></tr>
+</table>
+
+<h2><a name="N">-- N --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="na.method.html">na.method</a></td>
+<td>Missing value action for asreml dataframes.</td></tr>
+<tr><td style="width: 25%;"><a href="naf.html">naf</a></td>
+<td>MBF example</td></tr>
+<tr><td style="width: 25%;"><a href="naf31H.html">naf31H</a></td>
+<td>naf marker scores</td></tr>
+<tr><td style="width: 25%;"><a href="naf32H.html">naf32H</a></td>
+<td>naf marker scores</td></tr>
+<tr><td style="width: 25%;"><a href="nassau.html">nassau</a></td>
+<td>Clone data.</td></tr>
+<tr><td style="width: 25%;"><a href="nassau.grm.html">nassau.grm</a></td>
+<td>Genetic relationship matrix.</td></tr>
+<tr><td style="width: 25%;"><a href="nassau.snp.html">nassau.snp</a></td>
+<td>Genetic marker scores.</td></tr>
+<tr><td style="width: 25%;"><a href="nin89.html">nin89</a></td>
+<td>Advanced breeding trial.</td></tr>
+</table>
+
+<h2><a name="O">-- O --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="oats.html">oats</a></td>
+<td>Split plot design.</td></tr>
+<tr><td style="width: 25%;"><a href="orange.html">orange</a></td>
+<td>Tree circumference.</td></tr>
+<tr><td style="width: 25%;"><a href="own.html">own</a></td>
+<td>User-defined variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="owt.html">owt</a></td>
+<td>Orange whether trial</td></tr>
+</table>
+
+<h2><a name="P">-- P --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="plot.asreml.html">plot</a></td>
+<td>Plot diagnostics for an asreml object.</td></tr>
+<tr><td style="width: 25%;"><a href="plot.asreml.html">plot.asreml</a></td>
+<td>Plot diagnostics for an asreml object.</td></tr>
+<tr><td style="width: 25%;"><a href="plot.varioGram.html">plot.varioGram</a></td>
+<td>Plot a variogram.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">pol</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">pow</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="predict.asreml.html">predict.asreml</a></td>
+<td>Predict linear functions of effects.</td></tr>
+<tr><td style="width: 25%;"><a href="print.asreml.predict.html">print.asreml.predict</a></td>
+<td>Print predictions.</td></tr>
+<tr><td style="width: 25%;"><a href="print.wald.html">print.wald</a></td>
+<td>Print a wald object.</td></tr>
+</table>
+
+<h2><a name="R">-- R --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="rats.html">rats</a></td>
+<td>Reproductive study on rats</td></tr>
+<tr><td style="width: 25%;"><a href="residuals.asreml.html">resid</a></td>
+<td>Extract model residuals.</td></tr>
+<tr><td style="width: 25%;"><a href="residuals.asreml.html">residuals.asreml</a></td>
+<td>Extract model residuals.</td></tr>
+<tr><td style="width: 25%;"><a href="rice.html">rice</a></td>
+<td>Rice bloodworms.</td></tr>
+<tr><td style="width: 25%;"><a href="riceMV.html">riceMV</a></td>
+<td>Rice bloodworms (multivariate form).</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">rr</a></td>
+<td>General structure variance models.</td></tr>
+</table>
+
+<h2><a name="S">-- S --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="timeSeries.html">sar</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">sar2</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">sar2h</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">sar2v</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">sarh</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="timeSeries.html">sarv</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">sfa</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="shf.html">shf</a></td>
+<td>Slate Hall farm wheat variety trial.</td></tr>
+<tr><td style="width: 25%;"><a href="sp2mat.html">sp2mat</a></td>
+<td>Convert sparse matrix.</td></tr>
+<tr><td style="width: 25%;"><a href="sp2Matrix.html">sp2Matrix</a></td>
+<td>Convert sparse matrix.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">sph</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">sphh</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="metric-2d.html">sphv</a></td>
+<td>Metric based models in two dimensions.</td></tr>
+<tr><td style="width: 25%;"><a href="modelFunctions.html">spl</a></td>
+<td>Model term constructor functions.</td></tr>
+<tr><td style="width: 25%;"><a href="str.html">str</a></td>
+<td>General variance structures.</td></tr>
+<tr><td style="width: 25%;"><a href="Subset.html">Subset</a></td>
+<td>Subset a factor.</td></tr>
+<tr><td style="width: 25%;"><a href="summary.asreml.html">summary</a></td>
+<td>Summarize an asreml object</td></tr>
+<tr><td style="width: 25%;"><a href="summary.asreml.html">summary.asreml</a></td>
+<td>Summarize an asreml object</td></tr>
+</table>
+
+<h2><a name="T">-- T --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="timeSeries.html">timeSeries</a></td>
+<td>Time series type variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="tr.html">tr</a></td>
+<td>Trace convergence.</td></tr>
+<tr><td style="width: 25%;"><a href="tr.asreml.html">tr.asreml</a></td>
+<td>Convergence trace for asreml objects.</td></tr>
+</table>
+
+<h2><a name="U">-- U --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="Units.html">Units</a></td>
+<td>Unit level numbers.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">unstructured</a></td>
+<td>General structure variance models.</td></tr>
+<tr><td style="width: 25%;"><a href="update.asreml.html">update</a></td>
+<td>Update an asreml model.</td></tr>
+<tr><td style="width: 25%;"><a href="update.asreml.html">update.asreml</a></td>
+<td>Update an asreml model.</td></tr>
+<tr><td style="width: 25%;"><a href="unstructured.html">us</a></td>
+<td>General structure variance models.</td></tr>
+</table>
+
+<h2><a name="V">-- V --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="varioGram.html">varioGram</a></td>
+<td>Empirical variogram method.</td></tr>
+<tr><td style="width: 25%;"><a href="varioGram.asreml.html">varioGram.asreml</a></td>
+<td>Empirical variogram constructor.</td></tr>
+<tr><td style="width: 25%;"><a href="vcm.lm.html">vcm.lm</a></td>
+<td>Specify constraints among variance parameters.</td></tr>
+<tr><td style="width: 25%;"><a href="knownStruc.html">vm</a></td>
+<td>Known variance structures.</td></tr>
+<tr><td style="width: 25%;"><a href="voltage.html">voltage</a></td>
+<td>Voltage regulators</td></tr>
+<tr><td style="width: 25%;"><a href="vpc.char.html">vpc.char</a></td>
+<td>Variance parameter constraint codes</td></tr>
+<tr><td style="width: 25%;"><a href="vpredict.html">vpredict</a></td>
+<td>Functions of variance parameters.</td></tr>
+<tr><td style="width: 25%;"><a href="vpt.char.html">vpt.char</a></td>
+<td>Variance parameter type codes</td></tr>
+</table>
+
+<h2><a name="W">-- W --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="wald.html">wald</a></td>
+<td>Wald statistics method.</td></tr>
+<tr><td style="width: 25%;"><a href="wald.asreml.html">wald.asreml</a></td>
+<td>Wald test constructor for asreml objects.</td></tr>
+<tr><td style="width: 25%;"><a href="wheat.html">wheat</a></td>
+<td>Wheat variety trial</td></tr>
+<tr><td style="width: 25%;"><a href="wolfinger.html">wolfinger</a></td>
+<td>Growth curve study on rats</td></tr>
+</table>
+</body></html>

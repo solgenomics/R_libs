@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+        /* BOF: Read any GET paramters */
+        //Here to add params to the global scope.
+            var params = {};
+            if (location.search) {
+                var parts = location.search.substring(1).split('&');
+
+                for (var i = 0; i < parts.length; i++) {
+                    var nv = parts[i].split('=');
+                    if (!nv[0]) continue;
+                    params[nv[0]] = nv[1] || true;
+                }
+            }
+        /* EOF: Read any GET paramters */
+
+        //base 64 injected into template || if in design mode, show example base 64
+        var app_info = {
+            b64: (typeof params.design === 'undefined') ? "{{vsni_base64_info}}" : "eyJhcHBfaW5mbyI6eyJhY3RfY29kZSI6IlhYWFgtWFhYWC1YWFhYLVhYWFgiLCJhY3Rpb24iOiJzaG93X2RldGFpbHMiLCJsYXN0X21zZyI6Ik5vIGVycm9yIiwic3VtbWFyeSI6Ik5vIHN1bW1hcnkgYXZhaWxhYmxlLiJ9LCJsaWNfaW5mbyI6eyJwcm9kdWN0IjoicHJvZHVjdCIsInN0YXR1cyI6MCwidXNlcl9uYW1lIjoidXNlciIsInBsYXRmb3JtIjoicGxhdGZvcm0iLCJ0dGJpdCI6InR0Yml0IiwiZHNuIjoiZHNuIiwiZXRoZXIiOiJldGhlciIsImhvc3RfbmFtZSI6Imhvc3RfbmFtZSIsImlwIjoiaXAiLCJpcHY2IjoiIiwidmVyc2lvbiI6InZlcnNpb24iLCJ2ZXJzaW9uQ29udHJvbCI6InZlcnNpb25Db250cm9sIiwiY29udHJhY3QiOiIiLCJjdXN0b21lciI6IiIsImV4cGlyeSI6ImV4cGlyeSIsImlzc3VlZCI6Imlzc3VlZCIsImlzc3VlciI6IiIsImxpbmVpdGVtIjoiIiwiZXhwaXJ5RGF5cyI6ImV4cGlyeURheXMiLCJjYWNoZWQiOmZhbHNlLCJjbGllbnRDYWNoZSI6MCwiaG9sZCI6MCwiaG9zdEJhc2VkIjpmYWxzZSwibWF4Um9hbSI6MCwibWF4Um9hbUNvdW50IjowLCJtYXhTaGFyZSI6MCwibWluQ2hlY2tvdXQiOjAsIm1pblJlbW92ZSI6MCwibWluVGltZW91dCI6MCwibmFtZWRVc2VyQ291bnQiOjAsIm5hbWVkVXNlck1pbkhvdXJzIjowLCJvcHRpb25zIjoiIiwicGxhdGZvcm1zIjoiIiwiYWtleSI6IiIsInJvYW1pbmciOmZhbHNlLCJzaGFyZSI6ZmFsc2UsInNpbmdsZSI6ZmFsc2UsInNvZnRMaW1pdCI6MCwic3RhcnQiOiIiLCJob3N0QmFzZWQiOmZhbHNlLCJ0eXBlIjowLCJjYXRlZ29yeSI6IiIsInRpbWV6b25lIjowfX0="
+        }
+
+        //Are we in design mode? Set path to assets accordingly so it can be used by the script.
+        var assetsLocation = (typeof params.design !== 'undefined') ? "" : "{{vsni_assets}}/"
+
+        var dependanciesToAdd = [
+            {
+                "name": "Material_Icons.css",
+                "type": "css",
+                "location": assetsLocation + "css/Material_Icons.css",
+                "rel": "stylesheet",
+                "defer": false
+            },
+            {
+                "name": "material.min.css",
+                "type": "css",
+                "location": assetsLocation + "css/material.min.css",
+                "rel": "stylesheet",
+                "defer": false
+            },
+            {
+                "name": "styles.css",
+                "type": "css",
+                "location": assetsLocation + "css/styles.css",
+                "rel": "stylesheet",
+                "defer": false
+            },
+            {
+                "name": "material.min.js",
+                "type": "js",
+                "location": assetsLocation + "js/material.min.js",
+                "rel": "",
+                "defer": true
+            },
+            {
+                "name": "clipboard.min.js",
+                "type": "js",
+                "location": assetsLocation + "js/clipboard.min.js",
+                "rel": "",
+                "defer": false
+            },
+            {
+                "name": "data.js",
+                "type": "js",
+                "location": assetsLocation + "js/data.js",
+                "rel": "",
+                "defer": false
+            }
+        ]
+        
+        dependanciesToAdd.forEach(function(dependancy) {
+            //console.log(JSON.stringify(dependancy))
+            console.info('Processing dependancy: ' + dependancy.name)
+            var element
+            if (dependancy.type === "css") {
+                element = document.createElement('link')
+                element.id = dependancy.name
+                element.rel = dependancy.rel
+                element.href = dependancy.location
+            } else if (dependancy.type === "js") {
+                element = document.createElement('script')
+                element.id = dependancy.name
+                element.type  = "text/javascript"
+                element.src = dependancy.location
+                if (dependancy.defer) element.setAttribute("defer", "defer")
+            } else {
+                element = document.createComment('Failed to add element' + dependancy.name)
+                console.error('Dependancy not a js or a css file. Name: ' + dependancy.name)
+            }
+            document.head.appendChild(element)
+        })
+        </script>
+        <script type="text/javascript">
+        function init() {
+            if (params.design) {
+                //Show navigation menu if in design mode.
+                removeClass(document.getElementById('designMenu'), 'hidden')
+                removeClass(document.getElementById('supportEmailForm'), 'hidden')
+                console.info('Design mode on.')
+            }
+            
+            /* BOF: Dynamic styling dependant on product */
+            //Now that the DOM is loaded, we will change non-core assets (images or text). 
+            dependanciesToChange = [
+                {
+                    "id": "vsni_logo",//Our company logo
+                    "src": assetsLocation + "images/logo.png"
+                },
+                {
+                    "id": "example.mp4",
+                    "src": assetsLocation + "images/example.mp4"
+                }
+            ]
+            dependanciesToChange.forEach(function (dependancy) {
+                //console.log(JSON.stringify(dependancy))
+                document.getElementById(dependancy.id).src = dependancy.src
+            })
+            //Check for script load before referencing DATA.
+            document.getElementById('data.js').addEventListener('load', function () {
+                if (typeof data === 'undefined') {
+                    //Template is defined below if data has not been included
+                    data = {
+                        colorScheme: {
+                            primary: "mdl-color--blue-grey-900",
+                            secondary: "mdl-color--blue-grey-200"
+                        },
+                        instructions: "<p>As we have been unable to directly activate your installation we have validated your activation code through your browser.<br><b>Please copy this replacement code below then paste it, overwriting the previous code.</b></p>",
+                        errors: {}
+                    }
+                }
+                //Colour changes
+                var elementsToColorizePrimary = document.querySelectorAll('.mdl-color--primary')
+                var elementsToColorizeSecondary = document.querySelectorAll('.mdl-color--secondary')
+                elementsToColorizePrimary.forEach(function (el) {
+                    removeClass(el, 'mdl-color--primary')
+                    addClass(el, data.colorScheme.primary)
+                })
+                elementsToColorizeSecondary.forEach(function (el) {
+                    removeClass(el, 'mdl-color--secondary')
+                    addClass(el, data.colorScheme.secondary)
+                })
+                //Replace instructions to be product specific
+                document.querySelector('#instructions').innerHTML = data.instructions
+            //TODO USE ERROR MESSAGES DEFINED IN DATA
+            });
+            /* EOF: Dynamic styling dependant on product */
+
+            //Check for script load before referencing Clipboard.
+            document.getElementById('clipboard.min.js').addEventListener('load', function() {
+                if(Clipboard.isSupported()) {
+                    //Can we use the Copy to Clipboard functionality?
+                    new Clipboard('#copyLicenseButton');
+                    removeClass(document.getElementById('copyLicenseButton'), 'hidden')
+                } else {
+                    console.info('Clipboard.js is not supported.')
+                    //Add instructions for manual copy
+                }
+            });
+
+            //Decode request and work out mode. LICENSE INFO MODE || ACTIVATION MODE || Others
+            var dataRAW = decodeBase64(app_info.b64)
+            var dataJSON = JSON.parse(dataRAW)
+            if (dataJSON.app_info.action) {
+
+                console.log('Requested Action: ' + dataJSON.app_info.action)
+
+                if (dataJSON.app_info.action === 'show_details') {
+                /* BOF: Handle "how_details" request. */
+                    //Basic Information
+                    document.getElementById('dataUserNameInitial').innerHTML = dataJSON.lic_info.user_name[0].toUpperCase()
+                    document.getElementById('dataUserName').innerHTML = dataJSON.lic_info.user_name
+                    document.getElementById('dataStatus').innerHTML = dataJSON.lic_info.roaming ? 'Online' : 'Offline'
+                    document.getElementById('dataProduct').innerHTML = dataJSON.lic_info.product.charAt(0).toUpperCase() + dataJSON.lic_info.product.slice(1) + " - " + "${VSN_VERSION_MAJOR}.${VSN_VERSION_MINOR}.${VSN_VERSION_PATCH}.${VSN_VERSION_BUILD}"
+                    document.getElementById('dataContract').innerHTML = dataJSON.lic_info.contract
+                    document.getElementById('dataCustomer').innerHTML = dataJSON.lic_info.customer
+                    document.getElementById('dataIssued').innerHTML = dataJSON.lic_info.issued
+                    document.getElementById('dataExpires').innerHTML =  dataJSON.lic_info.expiry
+                    document.getElementById('dataDaysLeft').innerHTML = dataJSON.lic_info.expiryDays
+                    document.getElementById('dataSummary').innerHTML =  (dataJSON.app_info.summary === 'No summary available.') ? "" : dataJSON.app_info.summary
+
+                    //Extra Info
+                    document.getElementById('dataPlatform').innerHTML = dataJSON.lic_info.platform
+                    document.getElementById('dataTtbit').innerHTML = dataJSON.lic_info.ttbit
+                    document.getElementById('dataDiskSN').innerHTML = dataJSON.lic_info.dsn
+                    document.getElementById('dataEther').innerHTML = dataJSON.lic_info.ether
+                    document.getElementById('dataHost').innerHTML = dataJSON.lic_info.host_name
+                    document.getElementById('dataIp').innerHTML = dataJSON.lic_info.ip
+                    document.getElementById('dataIpv6').innerHTML = dataJSON.lic_info.ipv6
+
+                    //Create email support link and button
+
+                    //Show Filled Information Pane
+                    removeClass(document.getElementById('showLicense'), 'hidden')
+
+                /* EOF: Handle "how_details" request. */
+                } else if (dataJSON.app_info.action === 'activate') {
+                /* BOF: Handle "activate" request. */
+                    //Show Static Activation Pane
+                    removeClass(document.getElementById('automaticRequest'), 'hidden')
+
+                    // Set timeout Time.
+                    var timeoutTime = 10000; // 10 seconds
+                    //Start the timer
+                    var timerRunning = true
+                    timeoutTimer = setTimeout(function() {
+                        document.getElementById('activationErrorMessage').innerHTML = "The request has timed out. Click retry and if you still cannot connect please contact us."
+                        timerRunning = false
+                        addClass(document.getElementById('automaticRequest'), 'hidden')
+                        removeClass(document.getElementById('activationError'), 'hidden')
+
+                    }, timeoutTime)
+
+                    //Submit the request
+                    getJSON("{{vsni_services_url}}?d=" + app_info.b64)
+                        .then(function(response) {
+                            console.log(JSON.stringify(response))
+                            if (response.code === 0) {
+                            //License Gateway has successfully handled the request.
+                                if (typeof timeoutTimer !== "undefined") {
+                                    clearTimeout(timeoutTimer);
+                                }
+
+                                let act_info = response.data[0];
+                                if(act_info.act_token && act_info.act_token.split("-").length >= 4 && timerRunning !== false) {
+                                //Check for token return || Check for token format || Check that hard timeout did not already occur
+                                    //Fill in act code
+                                    document.getElementById('activatedToken').value = act_info.act_token
+                                    //Show successful Activation dialog
+                                    addClass(document.getElementById('automaticRequest'), 'hidden')
+                                    removeClass(document.getElementById('activationSuccess'), 'hidden')
+                                    var vid = document.getElementById('exampleVideo')
+                                    vid.loop = true;
+                                    vid.play()
+                                } else {
+                                    document.getElementById('activationErrorMessage').innerHTML = "We are unable to process your request at this time. Click retry or try again later, if you still cannot connect please contact us."
+                                    addClass(document.getElementById('automaticRequest'), 'hidden')
+                                    removeClass(document.getElementById('activationError'), 'hidden')
+                                }
+                            } else {
+                                document.getElementById('activationErrorMessage').innerHTML = "Sorry, but we did not recognize the activation code you entered. Please check the code you entered in the software and try again. For reference quote the following error code: " + response.code
+                                addClass(document.getElementById('automaticRequest'), 'hidden')
+                                removeClass(document.getElementById('activationError'), 'hidden')
+                            }
+                        },
+                        function(status) {
+                            dataJSON.app_info.staticPageError = status
+                            document.getElementById('troubleshootingData').value = JSON.stringify(dataJSON)
+                            //Promise Failed, most likely a timeout issue. Should be handled by our HARD timeout feature.
+                            document.getElementById('activationErrorMessage').innerHTML = "We are unable to process your request at this time. Click retry or try again later, if you still cannot connect please contact us. Error for later reference: " + status
+                            addClass(document.getElementById('automaticRequest'), 'hidden')
+                            removeClass(document.getElementById('activationError'), 'hidden')
+                        })
+
+                /* EOF: Handle "activate" request. */
+                } else if (dataJSON.app_info.action === 'buy') { //Send them to webstore
+                    window.location.replace("https://www.vsni.co.uk/webstore/")
+                } else if (dataJSON.app_info.action === 'renew') {
+                    window.location.replace("https://www.vsni.co.uk/about-vsni/contact-us/")
+                } else {
+                    console.error('No valid request passed.')
+                }
+            } else {
+                console.error('No request passed.')
+            }
+        }
+        /*---------------BOF: Functions ----------------*/
+        var getJSON = function(url) {
+            "use strict";
+            return new Promise(function(resolve, reject) {
+                var xhr = new XMLHttpRequest()
+                xhr.open('post', url, true)
+                xhr.responseType = 'json'
+                xhr.onload = function() {
+                    var status = xhr.status
+                    if (status == 200) {
+                        resolve(xhr.response)
+                    } else {
+                        reject(status)//Connection Failure
+                    }
+                }
+                xhr.send()
+            })
+        }
+
+        function decodeBase64(s) {
+            "use strict";
+            var e={},i,b=0,c,x,l=0,a,r='',w=String.fromCharCode,L=s.length;
+            var A="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+            for(i=0;i<64;i++){e[A.charAt(i)]=i;}
+            for(x=0;x<L;x++){
+                c=e[s.charAt(x)];b=(b<<6)+c;l+=6;
+                while(l>=8){((a=(b>>>(l-=8))&0xff)||(x<(L-2)))&&(r+=w(a));}
+            }
+            return r
+        }
+        function hasClass(el, className) {
+            "use strict";
+            return el.classList ? el.classList.contains(className) : new RegExp('\\b'+ className+'\\b').test(el.className);
+        }
+
+        function addClass(el, className) {
+            "use strict";
+            if (el.classList) el.classList.add(className);
+            else if (!hasClass(el, className)) el.className += ' ' + className;
+        }
+
+        function removeClass(el, className) {
+            "use strict";
+            if (el.classList) el.classList.remove(className);
+            else el.className = el.className.replace(new RegExp('\\b'+ className+'\\b', 'g'), '');
+        }
+        function toggleClass(el, className) {
+            "use strict";
+            var newClass = ' ' + el.className.replace( /[\t\r\n]/g, ' ' ) + ' ';
+            if (hasClass(el, className)) {
+                while (newClass.indexOf(' ' + className + ' ') >= 0 ) {
+                    newClass = newClass.replace( ' ' + className + ' ' , ' ' );
+                }
+                el.className = newClass.replace(/^\s+|\s+$/g, '');
+            } else {
+                el.className += ' ' + className;
+            }
+        }
+
+        function sendDiagnostics() {
+            var dataJSON = JSON.parse(document.getElementById('troubleshootingData').value)
+            dataJSON.app_info.action = 'troubleshoot'
+            dataJSON.app_info.ts.name = document.getElementById('Name').value
+            dataJSON.app_info.ts.email = document.getElementById('Email').value
+            dataJSON.app_info.ts.error = dataJSON.app_info.staticPageError
+            var encodedData = btoa(JSON.stringify(dataJSON))
+            var troubleshootRequest = new Promise(function(resolve, reject) {
+                    var xhr = new XMLHttpRequest()
+                    xhr.open('post', "{{vsni_services_url}}?d="+encodedData, true)
+                    xhr.responseType = 'json'
+                    xhr.onload = function() {
+                        if (status == 200) {
+                            resolve(xhr.response)
+                        } else {
+                            reject(xhr.status)//Connection Failure
+                        }
+                    }
+                    xhr.send()
+            })
+            troubleshootRequest().then(
+                function(response) {
+                    var data = {message:'Thank you, we will reply to you soon.'}
+                    document.querySelector('toast').MaterialSnackbar.showSnackbar(data);
+                },
+                function(status){
+
+                })
+        }
+
+        // Used to navigate pages in design mode
+        function designModeSwitch(page) {
+            var c = document.getElementById('page-content').children
+            for (var i=0; i<c.length; i++) {
+                addClass(c[i], 'hidden')
+            }
+            removeClass(document.getElementById(page), 'hidden')
+        }
+        /*---------------EOF: Functions ----------------*/
+
+
+        //Start the script
+            // in case the document is already rendered
+            if (document.readyState != 'loading') init();
+            // modern browsers
+            else if (document.addEventListener) document.addEventListener('DOMContentLoaded', init);
+            // IE <= 8
+            else document.attachEvent('onreadystatechange', function () {
+                if (document.readyState == 'complete') init();
+            });
+        </script>
+    </head>
+    <body>
+
+        <!--BOF:Activation Page-->
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <header class="mdl-layout__header mdl-color--blue-grey-900">
+                <div class="mdl-layout__header-row">
+                    <span>
+                        <a href="https://www.vsni.co.uk/"><figure><img id="vsni_logo" src="images/logo.png" class="VSNiLogo" alt="VSNi Website"></img></figure></a>
+                    </span>
+                    <div class="mdl-layout-spacer"></div>
+                </div>
+            </header>
+			<main class="mdl-layout__content">
+            <div class="page-content" id="page-content">
+                <!--BOF:Enable JS Message-->
+                <noscript class="noscript">
+                    <div id="div100">
+                    <div id="noJavaScript">
+                        <h1>We cannot display this page.</h1>
+                        <p>
+                            You need to <a href="http://www.enable-javascript.com/" target="_blank">enable JavaScript</a> to activate your product this way. Please enable it now or contact our support team.
+                        </p>
+                    </div>
+                </div>
+                </noscript>
+                <!--EOF:Enable JS Message-->
+
+                <div id="showLicense" class="hidden">
+
+                    <h3>License Information</h3>
+                                        <!-- Contact Chip -->
+                    <span class="mdl-chip mdl-chip--contact">
+                        <span class="mdl-chip__contact mdl-color--primary mdl-color-text--white" id="dataUserNameInitial"></span>
+                        <span class="mdl-chip__text" id="dataUserName"></span>
+                    </span>
+                    <br>
+                    <br>
+                    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                    <thead>
+                        <tr>
+                            <th class="mdl-data-table__cell--non-numeric">Status</th>
+                            <th class="mdl-data-table__cell--non-numeric">Product</th>
+                            <th class="mdl-data-table__cell--non-numeric">Contract</th>
+                            <th class="mdl-data-table__cell--non-numeric">Customer</th>
+                            <th class="mdl-data-table__cell--non-numeric">Issued</th>
+                            <th class="mdl-data-table__cell--non-numeric">Expires</th>
+                            <th class="mdl-data-table__cell--non-numeric">Days Left</th>
+                            <th class="mdl-data-table__cell--non-numeric">Errors Summary</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric" id="dataStatus"></td>
+                            <td class="mdl-data-table__cell--non-numeric" id="dataProduct"></td>
+                            <td class="mdl-data-table__cell--non-numeric" id="dataContract"></td>
+                            <td class="mdl-data-table__cell--non-numeric" id="dataCustomer"></td>
+                            <td class="mdl-data-table__cell--non-numeric" id="dataIssued"></td>
+                            <td class="mdl-data-table__cell--non-numeric" id="dataExpires"></td>
+                            <td class="mdl-data-table__cell--non-numeric" id="dataDaysLeft"></td>
+                            <td class="mdl-data-table__cell--non-numeric" id="dataSummary"></td>
+                        </tr>
+                    </tbody>
+                    </table>
+
+                    <br>
+
+                    <!-- Accent-colored flat button -->
+                    <button class="mdl-button mdl-js-button mdl-color--primary mdl-color-text--white" onclick="toggleClass(document.getElementById('extraInformation'), 'hidden')">
+                      Extra Information
+                    </button>
+
+                    <div class="hidden" id="extraInformation">
+                    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                    <thead>
+                        <tr>
+                            <th class="mdl-data-table__cell--non-numeric">Platform</th>
+                            <th class="mdl-data-table__cell--non-numeric">ttbit</th>
+                            <th class="mdl-data-table__cell--non-numeric">Disk Serial #</th>
+                            <th class="mdl-data-table__cell--non-numeric">Ether</th>
+                            <th class="mdl-data-table__cell--non-numeric">Host</th>
+                            <th class="mdl-data-table__cell--non-numeric">IP</th>
+                            <th class="mdl-data-table__cell--non-numeric">IPV6</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric" id="dataPlatform"></td>
+                            <td class="mdl-data-table__cell--non-numeric" id="dataTtbit"></td>
+                            <td class="mdl-data-table__cell--non-numeric" id="dataDiskSN"></td>
+                            <td class="mdl-data-table__cell--non-numeric" id="dataEther"></td>
+                            <td class="mdl-data-table__cell--non-numeric" id="dataHost"></td>
+                            <td class="mdl-data-table__cell--non-numeric" id="dataIp"></td>
+                            <td class="mdl-data-table__cell--non-numeric" id="dataIpv6"></td>
+                        </tr>
+                    </tbody>
+                    </table>
+                    </div>
+
+
+                </div>
+
+                <div id="automaticRequest" class="hidden">
+                    <h3>Attempting to Activate</h3>
+                    <p>
+                        Please do not close this page. We could not directly connect to the license server. Potential reasons include proxies or firewalls.
+                        <br>
+                        Please wait up to 10 seconds to connect via your browser.
+                    </p>
+                    <!-- MDL Progress Bar with Indeterminate Progress -->
+                    <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate mdl-color--primary"></div>
+                    <br>
+                </div>
+
+				<div id="activationError" class="hidden">
+                    <h3>Unable to connect.</h3>
+                    <p>
+                        <span id="activationErrorMessage">Unfortunately there seems to be an issue with connecting to our server.</span>
+                    </p>
+                    <br>
+
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary mdl-color--primary mdl-color-text--white" onclick="window.location.reload(false)">Retry</button>
+
+                    <br>
+                    <br>
+                    <br>
+                    <!-- Square card -->
+                    <style>
+                    .demo-card-square.mdl-card {
+                      width: 512px;
+                    }
+                    .demo-card-square > .mdl-card__title {
+                      color: #fff;
+                      background: #3F51B5  top left / cover;
+                    }
+                    </style>
+
+                    <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                      <div class="mdl-card__title mdl-card--expand mdl-color--primary">
+                        <h2 class="mdl-card__title-text">Having Trouble?</h2>
+                      </div>
+                      <div class="mdl-card__supporting-text">
+                        Perhaps you'd like to talk to our support team? Head over to our website for contact info.
+                      </div>
+                      <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-color-text--primary mdl-js-button mdl-js-ripple-effect" href="https://www.vsni.co.uk/about-vsni/contact-us/">
+                          Contact Us
+                        </a>
+                      </div>
+                    </div>
+                    <br>
+                    <div id="supportEmailForm" class="hidden">
+                        <p>
+                            <span>Send diagnostic information.</span>
+                        </p>
+                        <br>
+
+                        <div>
+                            <input type="hidden" id="troubleshootingData" data="">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="Name">
+                                <label class="mdl-textfield__label" for="Name">Name...</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="Email">
+                                <label class="mdl-textfield__label" for="Email">Email address...</label>
+                            </div>
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary mdl-color--primary mdl-color-text--white" onclick="sendDiagnostics()" id="troubleshootButton">Send</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="activationSuccess" class="hidden">
+                    <h3>Your activation code</h3>
+                    <br>
+                    <div id="instructions">
+
+                    </div>
+					<div class="mdl-textfield mdl-js-textfield">
+						<input class="mdl-textfield__input mdl-textfield" type="text" id="activatedToken" value="" size="32" readonly="readonly" value="XXXX-XXXX-XXXX-XXXX-XXXX">
+					</div>
+                    <!-- Trigger -->
+                    <button id="copyLicenseButton" class="hidden mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--secondary" alt="Copy to clipboard" data-clipboard-target="#activatedToken">
+                        <i class="material-icons">content_paste</i><b>Copy</b>
+                    </button>
+					<br>
+                    <br>
+                    <br>
+                    <div id="videoInstructions">
+                        <button class="hidden mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary mdl-color--primary mdl-color-text--white" onclick="toggleClass(document.getElementById('exampleVideo'), 'hidden');document.getElementById('exampleVideo').play()">
+                        Video Guide
+                        </button>
+                        <br>
+                        <video width="750" height="500" controls="controls" class="hidden" id="exampleVideo">
+                            <source id="example.mp4" src="images/example.mp4" type="video/mp4">
+                            <p>Your browser doesn't support HTML5 video.</p>
+                        </video>
+                        <br>
+                        <br>
+                    </div>
+
+                </div>
+                <div id="toast" class="mdl-js-snackbar mdl-snackbar">
+                    <div class="mdl-snackbar__text"></div>
+                    <button class="mdl-snackbar__action" type="button"></button>
+                </div>
+            </div>
+            </main>
+            <!--EOF:Activation Page-->
+            <footer class="mdl-mini-footer mdl-color--blue-grey-900">
+                <div class="mdl-mini-footer__left-section">
+                    <div class="hidden mdl-mini-footer__link-list" id="designMenu">
+                        <button class="mdl-button mdl-js-button mdl-button--accent" onclick="designModeSwitch('showLicense')">License Info</button>
+                        <button class="mdl-button mdl-js-button mdl-button--accent" onclick="designModeSwitch('automaticRequest')">Auto Activation</button>
+                        <button class="mdl-button mdl-js-button mdl-button--accent" onclick="designModeSwitch('activationError')">Error</button>
+                        <button class="mdl-button mdl-js-button mdl-button--accent" onclick="designModeSwitch('activationSuccess')">Success</button>
+                    </div>
+                </div>
+                <div class="mdl-mini-footer__right-section mdl-color-text--white">
+                    <ul class="mdl-mini-footer__link-list">
+                        <li><a href="https://www.vsni.co.uk/about-vsni/legal/privacy-policy/">Privacy & Terms</a></li>
+                    </ul>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>
