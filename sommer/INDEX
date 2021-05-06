@@ -15,6 +15,7 @@ DT_fulldiallel          Full diallel data for corn hybrids
 DT_gryphon              Gryphon data from the Journal of Animal Ecology
 DT_h2                   Broad sense heritability calculation.
 DT_halfdiallel          half diallel data for corn hybrids
+DT_ige                  Data to fit indirect genetic effects.
 DT_legendre             Simulated data for random regression
 DT_mohring              Full diallel data for corn hybrids
 DT_polyploid            Genotypic and Phenotypic data for a potato
@@ -33,6 +34,7 @@ H.mat                   Combined relationship matrix H
 LD.decay                Calculation of linkage disequilibrium decay
 MEMMA                   Multivariate Efficient Mixed Model Association
                         Algorithm
+add.diallel.vars        add.diallel.vars
 adiag1                  Binds arrays corner-to-corner
 anova.mmer              anova form a GLMM fitted with mmer
 at                      at covariance structure
@@ -49,6 +51,7 @@ ds                      diagonal covariance structure
 fcm                     fixed effect constraint indication matrix
 fitted.mmer             fitted form a LMM fitted with mmer
 fixm                    fixed indication matrix
+gvs                     general variance structure specification
 h2.fun                  Obtain heritabilities with three different
                         methods
 imputev                 Imputing a numeric or character vector
@@ -76,6 +79,6 @@ transp                  Creating color with transparency
 uncm                    unconstrained indication matrix
 unsm                    unstructured indication matrix
 us                      unstructured covariance structure
-vpredict                vpredict functionality
+vpredict                vpredict form of a LMM fitted with mmer
 vs                      variance structure specification
 wald.test               Wald Test for Model Coefficients
