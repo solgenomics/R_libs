@@ -256,7 +256,7 @@ new_rational <- function(n = integer(), d = integer()) {
 }
 
 ## -----------------------------------------------------------------------------
-rational <- function(n, d) {
+rational <- function(n = integer(), d = integer()) {
   c(n, d) %<-% vec_cast_common(n, d, .to = integer())
   c(n, d) %<-% vec_recycle_common(n, d)
 
@@ -272,6 +272,16 @@ length(x)
 ## -----------------------------------------------------------------------------
 fields(x)
 field(x, "n")
+
+## ---- error = TRUE------------------------------------------------------------
+x
+
+str(x)
+
+## -----------------------------------------------------------------------------
+vec_data(x)
+
+str(vec_data(x))
 
 ## -----------------------------------------------------------------------------
 format.vctrs_rational <- function(x, ...) {
@@ -597,18 +607,16 @@ is_percent <- function(x) {
 #    "prcnt"
 #  }
 
-## -----------------------------------------------------------------------------
-#' @export
-vec_ptype2.vctrs_percent.vctrs_percent <- function(x, y, ...) new_percent()
-#' @export
-vec_ptype2.double.vctrs_percent <- function(x, y, ...) double()
-
-## ----eval = FALSE-------------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
+#  #' @export
+#  vec_ptype2.vctrs_percent.vctrs_percent <- function(x, y, ...) new_percent()
+#  #' @export
+#  vec_ptype2.double.vctrs_percent <- function(x, y, ...) double()
+#  
 #  #' @export
 #  vec_cast.pizza_percent.pizza_percent <- function(x, to, ...) x
 #  #' @export
 #  vec_cast.pizza_percent.double <- function(x, to, ...) percent(x)
-#  #' @method vec_cast.double pizza_percent
 #  #' @export
 #  vec_cast.double.pizza_percent <- function(x, to, ...) vec_data(x)
 

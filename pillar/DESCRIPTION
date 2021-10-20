@@ -1,6 +1,6 @@
 Package: pillar
 Title: Coloured Formatting for Columns
-Version: 1.4.6
+Version: 1.6.4
 Authors@R: 
     c(person(given = "Kirill",
              family = "M\u00fcller",
@@ -14,21 +14,28 @@ Authors@R:
 Description: Provides 'pillar' and 'colonnade' generics designed
     for formatting columns of data using the full range of colours
     provided by modern terminals.
-License: GPL-3
-URL: https://github.com/r-lib/pillar
+License: MIT + file LICENSE
+URL: https://pillar.r-lib.org/, https://github.com/r-lib/pillar
 BugReports: https://github.com/r-lib/pillar/issues
-Imports: cli, crayon (>= 1.3.4), ellipsis, fansi, lifecycle, rlang (>=
-        0.3.0), utf8 (>= 1.1.0), vctrs (>= 0.2.0)
-Suggests: bit64, knitr, lubridate, testthat (>= 2.0.0), withr
+Imports: cli, crayon (>= 1.3.4), ellipsis (>= 0.3.2), fansi, lifecycle,
+        rlang (>= 0.3.0), utf8 (>= 1.1.0), utils, vctrs (>= 0.3.8)
+Suggests: bit64, debugme, DiagrammeR, dplyr, formattable, ggplot2,
+        knitr, lubridate, nycflights13, palmerpenguins, rmarkdown,
+        scales, stringi, survival, testthat (>= 3.0.2), tibble, units
+        (>= 0.7.2), withr
+VignetteBuilder: knitr
 Encoding: UTF-8
-LazyData: true
-RoxygenNote: 7.1.1.9000
+RoxygenNote: 7.1.2
+Config/testthat/edition: 3
+Config/testthat/parallel: true
+Config/testthat/start-first: format_multi_fuzz, format_multi_fuzz_2,
+        format_multi, ctl_colonnade, ctl_colonnade_1, ctl_colonnade_2
 NeedsCompilation: no
-Packaged: 2020-07-10 13:36:04 UTC; kirill
+Packaged: 2021-10-18 19:26:34 UTC; kirill
 Author: Kirill Müller [aut, cre],
   Hadley Wickham [aut],
   RStudio [cph]
 Maintainer: Kirill Müller <krlmlr+r@mailbox.org>
 Repository: CRAN
-Date/Publication: 2020-07-10 17:10:13 UTC
-Built: R 3.6.3; ; 2020-08-05 22:52:21 UTC; unix
+Date/Publication: 2021-10-18 19:50:01 UTC
+Built: R 3.6.3; ; 2021-10-20 13:24:59 UTC; unix
