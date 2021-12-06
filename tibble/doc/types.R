@@ -6,6 +6,7 @@ knitr::opts_chunk$set(
 library(dplyr)
 library(tidyr)
 library(purrr)
+requireNamespace("hms", quietly = TRUE)
 
 ## ----setup--------------------------------------------------------------------
 library(tibble)
@@ -64,12 +65,11 @@ data <- list(
   ),
 
   "vctrs types" = rlang::quos(
-    unspecified = vctrs::unspecified(1L),
+    unspecified = vctrs::unspecified(1),
 
     vctrs_list_of = vctrs::list_of(c(1L)),
     vctrs_vctr = vctrs::new_vctr(1L),
 
-    vctrs_unspecified = vctrs::unspecified(1),
     vctrs_partial_factor = vctrs::partial_factor(letters),
     vctrs_partial_frame = vctrs::partial_frame(a = 1)
   ),
@@ -109,6 +109,6 @@ tbl %>%
   as_tibble() %>% 
   glimpse()
 
-## ----type_sum_default---------------------------------------------------------
+## ----type_sum_default, results = if (Sys.getenv("IN_GALLEY") != "") "hide" else "markup"----
 pillar:::type_sum.default
 

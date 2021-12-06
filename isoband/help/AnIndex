@@ -11,6 +11,7 @@ isolines	isobands
 isolines_grob	isolines_grob
 iso_to_sfg	iso_to_sfg
 label_placer_manual	label_placer
+label_placer_middle	label_placer
 label_placer_minmax	label_placer
 label_placer_none	label_placer
 label_placer_simple	label_placer_simple
