@@ -1,0 +1,25 @@
+GCD                     Greatest common divisor
+GroupGenerics           Summary and Math methods for polynomials
+LCM                     Lowest Common Multiple
+Ops.polynom             Polynomial arithmetic
+[.polylist              Extract components of a list of polynomials
+as.character.polynom    Polynomial coercion to character
+as.function.polynom     Coercion to function
+c.polynom               Concatenation of polynomial objects into lists
+change_origin           Change origin of a polynomial
+coef.polynom            Polynomial coefficients
+deriv.polynom           Polynomial Calculus
+plot.polylist           Plot method for polynomials
+poly_calc               Lagrange interpolation polynomial
+poly_orth               Simpl orthogonal polynomials
+poly_orth_general       General Orthogonal Polynomials
+polynom                 Polynomial construction
+predict.polynom         Evaluate a polynomial
+print.polylist          Print method for polynomial objects
+print.polynom           Print method for polynomial objects
+rep.polylist            Component repition
+solve.polynom           Find Polynomial Zeros
+summary.polynom         Polynomial summary
+tangent                 Tangent lines
+unique.polylist         Unique components
+zap                     Remove minuscule coefficients
