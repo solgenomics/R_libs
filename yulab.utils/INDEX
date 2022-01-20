@@ -1,0 +1,8 @@
+get_fun_from_pkg        get_fun_from_pkg
+install_zip             install_zip
+install_zip_gh          install_zip_gh
+is.installed            is.installed
+o                       o
+read.cb                 read.cb
+scihub_dl               download publication via scihub
+str_wrap                str_wrap
