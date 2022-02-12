@@ -7,6 +7,116 @@
 %%% TODO:
       %% \item New \code{rDatetime()} for random date/time sequences
       %% within a specified time range.
+
+\section{CHANGES in sfsmisc VERSION 1.1-12 [2021-09-10]}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item new \code{helppdf(topic)} mostly for interactive use.
+    }
+  }
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item \code{shortRversion()} \emph{still} failed with \code{"RC"}.
+
+      \item \code{relErrV(x1, x2)} now works when both objects are of
+      length zero, but no longer when only one of them is.
+    }
+  }
+  %% \subsection{DEPRECATED & DEFUNCT}{
+  %%   \itemize{
+  %%     \item
+  %%   }
+  %% }
+}
+
+\section{CHANGES in sfsmisc VERSION 1.1-11 [2021-04-03]}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item \code{sessionInfoX(TRUE)} now choose chooses \emph{all} loaded
+      packages (which were accidentally chosen since 1.1-9, see the bug fixes).
+    }
+  }
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item \code{sessionInfoX()} no longer (since 1.1-9, accidentally) chooses \emph{all} packages.
+      \item The \code{nearcor()} tests are less platform dependent.
+    }
+  }
+  \subsection{DEPRECATED & DEFUNCT}{
+    \itemize{
+      \item \code{u.assign0()} and \code{u.get0()} are defunct now.
+    }
+  }
+}
+
+\section{CHANGES in sfsmisc VERSION 1.1-10 [2021-03-29]}{
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item \code{shortRversion()} no longer fails for "beta" or "RC" status.
+    }
+  }
+}
+
+\section{CHANGES in sfsmisc VERSION 1.1-9 [2021-03-22]}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item \code{sessionInfoX()} now also reports \code{grSoftVersion()}
+      and, when \pkg{tcltk} is loaded, \code{tclVersion()}.
+
+      %% partly TODO: not yet giving deprecation warning
+      \item \code{repChar()} is deprecated in favour of \R (>= 3.3.0)'s
+      \code{\link{strrep}()}.
+
+      \item new \code{shortRversion()} (from an old \R script of mine).
+
+      \item new \code{relErrV()} and \code{relErr()}, improved from the
+      \CRANpkg{Matrix} package \file{test-tools.R}
+    }
+  }
+}
+
+\section{CHANGES in sfsmisc VERSION 1.1-8 [2021-01-06]}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item \code{isRshared()} has been \dQuote{factorized out} of
+      \code{sessionInfoX()}, as it maybe useful elsewhere, e.g., in
+      \code{\link{Startup}} code setting \code{\link{.libPaths}()}.
+
+      \item New utilities \code{pkgDesc()} and \code{pkgBuilt()}, giving
+      named \code{character} result of \code{packageDescription()}.
+    }
+  }
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item \code{sessionInfoX()}'s \code{isRshared()} is now based on
+      \code{tools::Rcmd()} instead of \code{system()}, so possibly slightly
+      more portable.
+
+      \item Fixed not-yet--as-cran \file{NOTE} about undeclared packages in Rd xrefs.
+    }
+  }
+}
+\section{CHANGES in sfsmisc VERSION 1.1-7 [2020-05-05]}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item \code{eaxis()} gets new option \code{equidist.at.tol = 0.002},
+      previously hardwired to 0.001.
+
+      \item \code{seqXtend(<Date>, *, "interpolate")} now also works with
+      changed \code{base::c.Date()} from R(4.1.0)-devel.
+    }
+  }
+}
+
+\section{CHANGES in sfsmisc VERSION 1.1-6 [2020-04-04]}{
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item \code{pkgLibs()} now works on macOS, thanks to a hint by
+      Brian Ripley.
+    }
+  }
+}
+
 \section{CHANGES in sfsmisc VERSION 1.1-5 [2020-02-06]}{
   \subsection{NEW FEATURES}{
     \itemize{

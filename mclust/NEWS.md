@@ -1,6 +1,41 @@
+# mclust 5.4.9
+
+- Added `crimcoords()` to compute discriminant coordinates or crimcoords.
+- Fixed man page for `cvMclustDA()`.
+
+# mclust 5.4.8
+
+- `densityMclust()` by default draw a graph of the density estimate.
+- Fixed a bug in computing mixture density if the noise component is present.
+- Changed default behaviour of `hc()` when called to perform agglomerative hierarchical clustering instead of using for EM initialization.
+- The default `mclust.options("hcModelName")` now returns only the model to be used.
+- Changed default `partition` argument of `hc()` function by adding `dupPartion()` to remove data duplicates.
+- Added checks to `mclustBootstrapLRT()` to stop if an invalid `modelName` is provided or a one-component mixture model is provided. 
+- Extended the functionality of `cvMclustDA()` by including as cross-validated metrics both the classification error and the Brier score.
+- Updated info on dataset man pages. 
+
+# mclust 5.4.7
+
+- Updated plot method (dendrogram) for hierarchical clustering --- now based on classification likelihood.
+- Added `MclustSSC()` function (and related `print`, `summary`, `plot`, and `predict`, methods) for semi-supervised classification.
+- Exchanged order of models VEE and EVE to account for increasing complexity of EVE.
+- Added `cex` argument to `clPairs()` to control character expansion used in plotting symbols.
+- `em()` and `me()` have now `data` as first argument.
+
+# mclust 5.4.6
+
+- Fixed issues with source Fortran code with gfortran 10 as reported by CRAN.
+- Clean code of `hcCriterion()`.
+- Replaced `CEX` argument in functions with standard base graph `cex` argument.
+- Removed `ylim` argument in function; it can be passed via `...`.
+- MclustDA models use the default SVD transformation of the data for initialisation of the EM algorithm.
+- Added `icl` criterion to object returned by `Mclust()`.
+- Fixed number of pages for the RJ reference.
+- quantileMclust() uses bisection line search method for numerically computing quantiles.
+
 # mclust 5.4.5
 
-* Fixed warnings in Fortran calls raised by CRAN.
+- Fixed warnings in Fortran calls raised by CRAN.
 
 # mclust 5.4.4
 

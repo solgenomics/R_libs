@@ -4,6 +4,10 @@ options(tibble.print_min = 4L, tibble.print_max = 4L)
 library(dplyr)
 set.seed(1014)
 
+if (!rlang::is_installed("Lahman")) {
+  knitr::opts_chunk$set(eval = FALSE)
+}
+
 ## -----------------------------------------------------------------------------
 library(Lahman)
 
@@ -26,7 +30,7 @@ players <- batting %>% group_by(playerID)
 #  # For each player, compute avg change in games played per year
 #  mutate(players, G_change = (G - lag(G)) / (yearID - lag(yearID)))
 #  
-#  # For each player, find all where they played more games than average
+#  # For each player, find all years where they played more games than they did on average
 #  filter(players, G > mean(G))
 #  # For each, player compute a z score based on number of games played
 #  mutate(players, G_z = (G - mean(G)) / sd(G))

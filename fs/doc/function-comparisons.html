@@ -14,19 +14,32 @@
 
 <title>Comparison of fs functions, base R, and shell commands</title>
 
-<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
-// be compatible with the behavior of Pandoc < 2.8).
-document.addEventListener('DOMContentLoaded', function(e) {
-  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
-  var i, h, a;
-  for (i = 0; i < hs.length; i++) {
-    h = hs[i];
-    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
-    a = h.attributes;
-    while (a.length > 0) h.removeAttribute(a[0].name);
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
   }
 });
 </script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
 
 
 
@@ -402,61 +415,66 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <td><code>top_dir/nested_dir/file.ext</code></td>
 </tr>
 <tr class="even">
+<td><code>path_temp()</code>, <code>path_temp(&quot;path&quot;)</code></td>
+<td><code>tempdir()</code>, <code>file.path(tempdir(), &quot;path&quot;)</code></td>
+<td><code>mktemp -d</code></td>
+</tr>
+<tr class="odd">
 <td><code>path_expand(&quot;~/path&quot;)</code></td>
 <td><code>path.expand()</code></td>
 <td><code>realpath -m -s ~/path</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>path_dir(&quot;path&quot;)</code></td>
 <td><code>dirname(&quot;path&quot;)</code></td>
 <td><code>dirname path</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>path_file(&quot;path&quot;)</code></td>
 <td><code>basename(&quot;path&quot;)</code></td>
 <td><code>basename path</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>path_home()</code></td>
 <td><code>path.expand(&quot;~&quot;)</code></td>
 <td><code>$HOME</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>path_package(&quot;pkgname&quot;, &quot;dir&quot;, &quot;file&quot;)</code></td>
 <td><code>system.file(&quot;dir&quot;, &quot;file&quot;, package = &quot;pkgname&quot;)</code></td>
 <td><em>No direct equivalent</em></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>path_norm(&quot;path&quot;)</code></td>
 <td><code>normalizePath()</code></td>
 <td><code>realpath</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>path_real(&quot;path&quot;)</code></td>
 <td><code>normalizePath(mustWork = TRUE)</code></td>
 <td><code>realpath</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>path_rel(&quot;path/foo&quot;, &quot;path/bar&quot;)</code></td>
 <td><em>No direct equivalent</em></td>
 <td><em>No direct equivalent</em></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>path_common(c(&quot;path/foo&quot;, &quot;path/bar&quot;, &quot;path/baz&quot;))</code></td>
 <td><em>No direct equivalent</em></td>
 <td><em>No direct equivalent</em></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>path_ext_remove(&quot;path&quot;)</code></td>
 <td><code>sub(&quot;\\.[a-zA-Z0-9]*$&quot;, &quot;&quot;, &quot;path&quot;)</code></td>
 <td><em>No direct equivalent</em></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>path_ext_set(&quot;path&quot;, &quot;new_ext&quot;)</code></td>
 <td><code>sub(&quot;\\.[a-zA-Z0-9]*$&quot;, &quot;new_ext&quot;, &quot;path&quot;)</code></td>
 <td><em>No direct equivalent</em></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>path_sanitize(&quot;path&quot;)</code></td>
 <td><em>No direct equivalent</em></td>
 <td><em>No direct equivalent</em></td>

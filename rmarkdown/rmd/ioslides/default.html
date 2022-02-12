@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html$if(lang)$ lang="$lang$" xml:lang="$lang$"$endif$>
 <head>
   <title>$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$</title>
 
@@ -59,6 +59,9 @@ $endif$
 $for(header-includes)$
   $header-includes$
 $endfor$
+$if(shiny-prerendered)$
+  <!-- HEAD_CONTENT -->
+$endif$
 
   <style type="text/css">
 
@@ -93,6 +96,22 @@ $endfor$
 slide:not(.current) .plotly.html-widget{
   display: block;
 }
+
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    $if(quotes)$
+    q { quotes: "“" "”" "‘" "’"; }
+    $endif$
+    $if(highlighting-css)$
+    $highlighting-css$
+    $endif$
+    $if(displaymath-css)$
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    $endif$
 
 $if(logo)$
     slides > slide:not(.nobackground):before {

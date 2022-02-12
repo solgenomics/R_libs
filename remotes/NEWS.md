@@ -1,3 +1,85 @@
+# remotes 2.4.2
+
+* Gábor Csárdi is now the maintainer.
+* `bioc_version()` now points to the most recent (2021-10-27) Bioconductor
+  release, `v3.14` (@stufield, #664).
+* Fix regex to handle user names in URL in `git_remote`, add regression tests (@achimgaedke, #646).
+
+# remotes 2.4.1
+
+* pkgbuild is no longer accidentally loaded even in standalone mode (#548)
+* The internal GitHub token used to increase rate limits has been regenerated.
+* Using `remote_package_name.git2r_remote` now passes credentials when looking up the package `DESCRIPTION` (#633, @rnorberg)
+* Using `remote_package_name.git2r_remote` and `remote_package_name.xgit_remote`, http responses returning an invalid `DESCRIPTION` or that redirect to another page will now fallback to return `NA` instead of throwing an error when trying to parse the unexpected content (#628, @dgkf).
+* Fix regex that breaks git protocol in `git_remote` (@niheaven #630).
+* Clarify `github_pull()` documentation (@ms609 #640).
+
+# remotes 2.4.0
+
+* Re-license as MIT. (#551)
+* Fix bug in install_bioc() when using version='devel'. The code will now pull from the git HEAD, not a branch named 'HEAD' (@bbimber, #612).
+
+* skip tests for `download.file(method = "internal")`, on R > 4.1, since that method is now defunct on those versions.
+
+* `system_requirements()` now works as intended if only the `os` argument is used (@mdneuzerling, #609)
+
+* `remote_package_name.git2r_remote` and `remote_package_name.xgit_remote` now get correct package name from HTTP(S) git repo's `DESCRIPTION` file, and thus package's `DESCRIPTION` file's `Remotes` field could have `git::http(s)://<host>/<username>/<repo>[.git][@ref]` items that install remote packages using git via HTTP(S) protocal (@niheaven, #603).
+
+# remotes 2.3.0
+
+## Major changes
+
+* `install_*()` functions will no longer fail by default if there warnings from `install.packages()`. Concretely the default value of `R_REMOTES_NO_ERRORS_FROM_WARNINGS` has changed to `true` from the previous value of `false`. (#403)
+
+## Minor improvements and fixes
+
+* `install_bioc()` now respects the environment variable R_BIOC_VERSION, and will use the git branch corresponding to this Bioconductor version (@bbimber, #580).
+
+* remotes without package names are now unconditionally installed (#532, @jakubkovac)
+
+* It is now possible to specify a custom host for dependencies listed in the `DESCRIPTION` file with `Remotes: <type>[@host]::<username>/<repo>[@ref]`. The `ref` now supports `/` in it for `GitLab` repositories as it did for `GitHub`repositories. (@dagola, #448)
+
+* Internal `package2remote()` function now supports local remotes created by pak.
+
+* `github_pat()` will now check if `GITHUB_TOKEN` is set if it cannot find `GITHUB_PAT`. (@coatless)
+
+* `system_requirements()` now supports querying released packages as well as development dependencies (#545)
+
+* `system_requirements()` now supports OS name + version in the `os` argument (#549, @krlmlr).
+
+# remotes 2.2.0
+
+##  New functions and features
+
+* New `system_requirements()` function to query the Public RStudio Package Manager for system requirements for a package (and its dependencies)
+
+* Remotes functions can now install dependencies from additional DESCRIPTION fields, e.g. passing `dependencies = "Config/Needs/website"` will install the dependencies listed in the `Config/Needs/website: ` field in the package's DESCRIPTION.
+  Prefixing fields with `Config/Needs` allows them to pass `R CMD check` without a NOTE, so it is the recommended format for these extra dependencies.
+
+* `install_*()` family of functions now use the default branch in the repository, not the `master` branch (@MyKo101,#508).
+
+## Minor improvements and fixes
+
+* Internal functions `remote_download()`, `remote_metadata()`, `remote_package_name()` and `remote_sha()` are now exported, so 3rd party packages could provide methods for new remote types (#509, #56)
+
+* Internal functions `add_metadata()`, `github_remote()` are now exported. They are mainly for 3rd party extensions and should not be used by most users (#485).
+
+* `install_version()` now keeps searching subsequent repositories for the requested version, rather than failing if the version it finds in an early repository is unsuitable. (#305, @kenahoo)
+
+* `install_version()` now understands specifications like '>= 1.0' or '>= 1.12.0, < 1.14' to install the first version of the package it can find that satisfies the criteria. (#305, @kenahoo)
+
+* `install_version()` now avoids use of `base::url()`, as prior to R 3.6.2 it had a bug when downloading large files (#463)
+
+* `parse_submodules()` internal regular expression is now PCRE 2 compatible (#502, @jan-glx)
+
+* `update_packages()` argument `force` has been deprecated and no longer has any effect (#521)
+
+* Another fix for the mixed binary and source dependency issue, it should hopefully be fully squashed now (#296)
+
+* The upgrade menu is now interruptible in RStudio (#489).
+
+* Internal GitHub functions now correctly handle cases when characters are not representable in the default locale, but are representable in UTF-8 (#492).
+
 # remotes 2.1.1
 
 ## Minor improvements and fixes
@@ -16,8 +98,8 @@
   field. In such a case, the values for `getOption("repos")` and
   `getOption("pkgType")` will be used (respectively).
 
-* `install_gitlab()` now installs from repositories in subgroups and with dots 
-  in their name. `subdir` is now an explicit argument instead of implicit in 
+* `install_gitlab()` now installs from repositories in subgroups and with dots
+  in their name. `subdir` is now an explicit argument instead of implicit in
   `repo` (@robertdj, #259, #420).
 
 * `install()` now passes the ellipsis `...` to `install_deps()` (@Neil-Schneider, #411)

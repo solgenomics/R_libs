@@ -16,8 +16,10 @@ local_environment	with_package
 local_envvar	with_envvar
 local_file	with_file
 local_jpeg	devices
+local_language	with_language
 local_libpaths	with_libpaths
 local_locale	with_locale
+local_makevars	with_makevars
 local_message_sink	with_sink
 local_namespace	with_package
 local_options	with_options
@@ -28,8 +30,11 @@ local_path	with_path
 local_pdf	devices
 local_png	devices
 local_postscript	devices
+local_preserve_seed	with_seed
 local_rng_version	with_rng_version
+local_seed	with_seed
 local_svg	devices
+local_tempdir	with_tempfile
 local_tempfile	with_tempfile
 local_temp_libpaths	with_temp_libpaths
 local_tiff	devices
@@ -53,6 +58,7 @@ with_envvar	with_envvar
 with_file	with_file
 with_gctorture2	with_gctorture2
 with_jpeg	devices
+with_language	with_language
 with_libpaths	with_libpaths
 with_locale	with_locale
 with_makevars	with_makevars
@@ -71,7 +77,7 @@ with_rng_version	with_rng_version
 with_seed	with_seed
 with_sink	with_sink
 with_svg	devices
-with_tempdir	with_dir
+with_tempdir	with_tempfile
 with_tempfile	with_tempfile
 with_temp_libpaths	with_temp_libpaths
 with_tiff	devices

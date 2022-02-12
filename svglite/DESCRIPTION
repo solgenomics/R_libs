@@ -1,5 +1,5 @@
 Package: svglite
-Version: 1.2.3
+Version: 2.0.0
 Title: An 'SVG' Graphics Device
 Description: A graphics device for R that produces 'Scalable Vector Graphics'.
   'svglite' is a fork of the older 'RSvgDevice' package.
@@ -11,24 +11,25 @@ Authors@R: c(
   person("Matthieu", "Decorde", , "matthieu.decorde@ens-lyon.fr", "aut"),
   person("Vaudor", "Lise", , "lise.vaudor@ens-lyon.fr", "aut"),
   person("Tony", "Plate", role = "ctb", comment = "Early line dashing code"),
-  person("David", "Gohel", role = "ctb", comment = "Line dashing code and raster code"),
+  person("David", "Gohel", role = "ctb", comment = "Line dashing code and early raster code"),
   person("Yixuan", "Qiu", role = "ctb", comment = "Improved styles; polypath implementation"),
   person("Håkon", "Malmedal", role = "ctb", comment = "Opacity code"),
   person("RStudio", role = "cph")
   )
 Encoding: UTF-8
+SystemRequirements: C++11, libpng
 Depends: R (>= 3.0.0)
-Imports: Rcpp, gdtools (>= 0.1.6)
-LinkingTo: Rcpp, gdtools, BH
+Imports: systemfonts (>= 1.0.0)
+LinkingTo: cpp11, systemfonts
 Suggests: htmltools, testthat, xml2 (>= 1.0.0), covr, fontquiver (>=
         0.2.0), knitr, rmarkdown
 License: GPL (>= 2)
-URL: https://github.com/r-lib/svglite
+URL: https://svglite.r-lib.org, https://github.com/r-lib/svglite
 BugReports: https://github.com/r-lib/svglite/issues
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2020-02-07 13:03:51 UTC; thomas
+Packaged: 2021-02-18 13:52:01 UTC; thomas
 Author: Hadley Wickham [aut],
   Lionel Henry [aut],
   Thomas Lin Pedersen [cre, aut]
@@ -37,11 +38,11 @@ Author: Hadley Wickham [aut],
   Matthieu Decorde [aut],
   Vaudor Lise [aut],
   Tony Plate [ctb] (Early line dashing code),
-  David Gohel [ctb] (Line dashing code and raster code),
+  David Gohel [ctb] (Line dashing code and early raster code),
   Yixuan Qiu [ctb] (Improved styles; polypath implementation),
   Håkon Malmedal [ctb] (Opacity code),
   RStudio [cph]
 Maintainer: Thomas Lin Pedersen <thomas.pedersen@rstudio.com>
 Repository: CRAN
-Date/Publication: 2020-02-07 17:20:02 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-03-24 20:11:57 UTC; unix
+Date/Publication: 2021-02-20 01:30:06 UTC
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2021-12-06 15:43:43 UTC; unix

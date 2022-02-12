@@ -1,4 +1,4 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   eval = TRUE,
@@ -7,7 +7,7 @@ knitr::opts_chunk$set(
 library(catchr)
 library(rlang)
 
-## ---- echo=FALSE---------------------------------------------------------
+## ---- echo=FALSE--------------------------------------------------------------
 current_options <- catchr_default_opts(catchr.default_plan,
                                        catchr.warn_about_terms,
                                        catchr.bare_if_possible,
@@ -17,31 +17,31 @@ restore_catchr_defaults()
 arbitrary_code <- function() {}
 
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  library(catchr)
 #  results <- catch_expr(arbitrary_code(), warning = c(collect, muffle))
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  collect_warnings <- make_catch_fn(warning = c(collect, muffle))
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  same_results <- collect_warnings(arbitrary_code())
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  weirdo_catcher <- make_catch_fn(
 #    message = c(function(x) print("oops"), exit),
 #    warning = c(tomessage, muffle),
 #    error = muffle)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  results <- catch_expr(arbitrary_code(), warning = c(collect, muffle))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 print(get_default_plan())
 
 my_plans <- make_plans(warning, message, error)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 throw_a_fit <- function() {
   message("This is message #1!")
   rlang::warn("This is warning #1!", opt_val = "conditions can hold more data")
@@ -53,7 +53,7 @@ throw_a_fit <- function() {
 collected_results <- catch_expr(throw_a_fit(), message, warning, error)
 print(collected_results)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  library(future)
 #  future::plan(multiprocess)
 #  
@@ -75,7 +75,7 @@ print(collected_results)
 #  # Eh, let's get rid of anything that had an error?
 #  Filter(function(e) length(e$error) == 0, l)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  # Let's combine both `future` and `purrr` with Davis Vaughan's `furrr` package instead
 #  library(furrr)
 #  future::plan(tweak(multiprocess, workers = 5L))
@@ -93,16 +93,16 @@ print(collected_results)
 #    })
 #  
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 messages_or_bust <- make_catch_fn(messages = collect, misc = exit_with("Sorry, busted"))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 basic_collector <- make_catch_fn(
   message, warning, error, misc,
   .opts = catchr_opts(default_plan = c(collect, muffle),
                       drop_empty_conds = T))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 make_warnings <- function() {
   warning("This warning has a call")
   warning("This warning does not", call. = FALSE)
@@ -113,7 +113,7 @@ catch_expr(make_warnings(), warning = c(display, muffle))
 
 catch_expr(make_warnings(), warning = c(display_with(c("pink","underline","bold")), muffle))
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  warning_in_middle <- function() {
 #    Sys.sleep(2)
 #    message("It's time!")
@@ -123,10 +123,10 @@ catch_expr(make_warnings(), warning = c(display_with(c("pink","underline","bold"
 #  
 #  res <- catch_expr(warning_in_middle(), condition = c(beep, display, muffle))
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  tell_you_when_it_blows_up <- make_catch_fn(condition = c(display, beep_with(9), exit))
 #  tell_you_when_it_blows_up(message("Oopsies!"))
 
-## ---- echo=FALSE---------------------------------------------------------
+## ---- echo=FALSE--------------------------------------------------------------
 catchr_default_opts(!!!current_options)
 

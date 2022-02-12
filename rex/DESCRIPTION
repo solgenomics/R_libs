@@ -1,30 +1,32 @@
-Package: rex
 Type: Package
+Package: rex
 Title: Friendly Regular Expressions
-Version: 1.1.2
+Version: 1.2.1
 Authors@R: c(
-    person("Kevin", "Ushey", email = "kevinushey@gmail.com", role = "aut"),
-    person("Jim", "Hester", email = "james.f.hester@gmail.com", role = c("aut", "cre")),
-    person("Robert", "Krzyzanowski", email = "rkrzyzanowski@gmail.com", role = "aut")
-    )
-Maintainer: Jim Hester <james.f.hester@gmail.com>
+    person("Kevin", "Ushey", , "kevinushey@gmail.com", role = c("aut", "cre")),
+    person("Jim", "Hester", , "james.f.hester@gmail.com", role = "aut"),
+    person("Robert", "Krzyzanowski", , "rkrzyzanowski@gmail.com", role = "aut")
+  )
+Description: A friendly interface for the construction of regular
+    expressions.
+License: MIT + file LICENSE
 URL: https://github.com/kevinushey/rex
 BugReports: https://github.com/kevinushey/rex/issues
-Description: A friendly interface for the construction of regular expressions.
-Imports: magrittr, lazyeval
-License: MIT + file LICENSE
-Suggests: testthat, knitr, rmarkdown, dplyr, ggplot2, Hmisc, stringr,
-        rvest, roxygen2, covr
+Imports: lazyeval
+Suggests: covr, dplyr, ggplot2, Hmisc, knitr, magrittr, rmarkdown,
+        roxygen2, rvest, stringr, testthat
 VignetteBuilder: knitr
+Encoding: UTF-8
+RoxygenNote: 7.1.2
 Collate: 'aaa.R' 'utils.R' 'escape.R' 'capture.R' 'character_class.R'
         'counts.R' 'lookarounds.R' 'match.R' 'or.R' 'rex-mode.R'
         'rex.R' 'shortcuts.R' 'wildcards.R' 'zzz.R'
-RoxygenNote: 6.0.1.9000
 NeedsCompilation: no
-Packaged: 2017-10-19 19:22:40 UTC; jhester
-Author: Kevin Ushey [aut],
-  Jim Hester [aut, cre],
+Packaged: 2021-11-24 20:51:05 UTC; jhester
+Author: Kevin Ushey [aut, cre],
+  Jim Hester [aut],
   Robert Krzyzanowski [aut]
+Maintainer: Kevin Ushey <kevinushey@gmail.com>
 Repository: CRAN
-Date/Publication: 2017-10-19 19:54:00 UTC
-Built: R 3.6.0; ; 2019-05-10 11:33:41 UTC; unix
+Date/Publication: 2021-11-26 16:11:02 UTC
+Built: R 3.6.3; ; 2021-12-06 15:22:09 UTC; unix

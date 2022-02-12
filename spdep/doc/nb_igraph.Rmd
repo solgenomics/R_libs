@@ -4,9 +4,13 @@ author: "Roger Bivand"
 output:
   html_document:
     toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    toc_depth: 2
 vignette: >
   %\VignetteIndexEntry{Spatial weights objects as sparse matrices and graphs}
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -197,6 +201,9 @@ In spatial regression, the domain of the spatial coefficient is given by the inv
 ```{r, echo=dothis, eval=dothis}
 1/range(eigenw(nb_B))
 if (!require("RSpectra", quietly=TRUE)) dothis <- FALSE
+```
+
+```{r, echo=dothis, eval=dothis}
 1/c(eigs(B, k=1, which="SR")$values, eigs(B, k=1, which="LR")$values)
 ```
 

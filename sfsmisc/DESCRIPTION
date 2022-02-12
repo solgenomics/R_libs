@@ -1,7 +1,8 @@
 Package: sfsmisc
 Title: Utilities from 'Seminar fuer Statistik' ETH Zurich
-Version: 1.1-5
-Date: 2020-02-06
+Version: 1.1-12
+VersionNote: Last CRAN: 1.1-11 on 2021-04-03
+Date: 2021-09-10
 Authors@R: c(person("Martin","Maechler", role=c("aut","cre"), email="maechler@stat.math.ethz.ch",
 	                                 comment = c(ORCID = "0000-0002-8685-9910"))
 	   , person("Werner", "Stahel", role = "ctb",
@@ -39,7 +40,7 @@ Authors@R: c(person("Martin","Maechler", role=c("aut","cre"), email="maechler@st
  )
 Maintainer: Martin Maechler <maechler@stat.math.ethz.ch>
 Description: Useful utilities ['goodies'] from Seminar fuer Statistik ETH Zurich,
-   some of which were ported from S-plus in the 1990's.
+   some of which were ported from S-plus in the 1990s.
  For graphics, have pretty (Log-scale) axes, an enhanced Tukey-Anscombe
    plot, combining histogram and boxplot, 2d-residual plots, a 'tachoPlot()',
    pretty arrows, etc.
@@ -48,15 +49,19 @@ Description: Useful utilities ['goodies'] from Seminar fuer Statistik ETH Zurich
    more access to system and CPU information.
  Finally, miscellaneous utilities such as simple efficient prime numbers,
    integer codes, Duplicated(), toLatex.numeric() and is.whole().
-Depends: R (>= 3.2.0)
-Imports: grDevices, methods, utils, stats
+Depends: R (>= 3.3.0)
+Imports: grDevices, methods, utils, stats, tools
 Suggests: datasets, tcltk, cluster, lattice, MASS, Matrix, nlme, lokern
-Enhances: mgcv, rpart, nor1mix, polycor, sm, tikzDevice
+Enhances: mgcv, rpart, nor1mix, polycor, sm, tikzDevice, e1071, Hmisc,
+        gmp, pastecs, polynom, robustbase
+EnhancesNote: 2nd line: packages mentioned in Rd xrefs
 Encoding: latin1
 ByteCompile: yes
 License: GPL (>= 2)
+URL: https://github.com/mmaechler/sfsmisc
+BugReports: https://github.com/mmaechler/sfsmisc/issues
 NeedsCompilation: no
-Packaged: 2020-02-07 08:16:18 UTC; maechler
+Packaged: 2021-09-13 20:40:15 UTC; maechler
 Author: Martin Maechler [aut, cre] (<https://orcid.org/0000-0002-8685-9910>),
   Werner Stahel [ctb] (Functions: compresid2way(), f.robftest(), last(),
     p.scales(), p.dnorm()),
@@ -85,5 +90,5 @@ Author: Martin Maechler [aut, cre] (<https://orcid.org/0000-0002-8685-9910>),
   Charles Geyer [ctb],
   Jens Oehlschlägel [ctb]
 Repository: CRAN
-Date/Publication: 2020-02-09 17:10:06 UTC
-Built: R 3.6.3; ; 2020-03-24 19:49:24 UTC; unix
+Date/Publication: 2021-09-14 09:10:02 UTC
+Built: R 3.6.3; ; 2021-12-06 15:22:27 UTC; unix

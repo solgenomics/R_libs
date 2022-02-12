@@ -1,3 +1,11 @@
+## 1.5.1 (2020-10-12)
+
+- Maintainer change (Michelle Wallig; Michelle.Wallig@microsoft.com)
+
+## 1.5.0 (2020-03-29)
+
+- Changed the default value for the `foreachDoparLocal` system option to TRUE.
+
 ## 1.4.8 (2020-02-04)
 
 <ul>

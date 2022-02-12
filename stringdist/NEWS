@@ -1,3 +1,44 @@
+version 0.9.8
+- Fixed some issues on C-level causing problems with the
+  CLANG compiler. (Thanks to Brian Ripley for not only
+  reporting this, but also sending updated code with 
+  fixes).
+
+
+version 0.9.7
+- Fixes in use of INTEGER() and VECTOR_ELT() after updates in R's C API.
+  this affected 'afind' and 'max_length' (internally). (Thanks to Luke
+  Tierny and Kurt Hornik for the notification).
+- Fix in 'amatch' causing utf-8 characters to be ignored in some
+  cases (thanks to Joan Mime for reporting #78).
+- Fix: segfault when 'afind' was called with many search patterns or many
+  texts to be searched.
+- Fix: stringsimmatrix was not normalized correctly (Thanks to Tamas Ferenci
+  for reporting GH).
+
+
+version 0.9.6.3
+- Resubmit. Fixed an URL redirect that was detected by CRAN.
+
+version 0.9.6.2
+- Resubmit. Fixed url issues detected by CRAN, added doi to description
+  as per CRAN request.
+
+version 0.9.6.1
+- Bugfix: afind/grab/grabl returned wrong results on MacOS only.  
+  (thanks to Prof. Brian Ripley for the notification and for running tests 
+   on his personal machine and to Tomas Kalibera for making the 
+   ubuntu-rchk docker image available).
+
+version 0.9.6
+- New function 'afind': find approximate matches in text based on string distance.
+- New functions 'grab', 'grabl': fuzzy matching equivalent to 'grep' and 'grepl'.
+- New function 'extract': fuzzy matching equivalent of stringr::str_extract.
+- New algorithm 'running_cosine': fast fuzzy text search using cosine distance.
+- New function 'stringsimmatrix' (Thanks to Johannes Gruber).
+- Number of threads used is now reported when loading 'stringdist'.
+- Internal fixes (in some cases class() == 'class' was used).
+
 version 0.9.5.5
 - Changed two URLs to canonical form in README.md (https://) to comply with
   CRAN policy.

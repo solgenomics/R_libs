@@ -57,6 +57,7 @@ cov.smooth.roc	cov
 ggroc	ggroc
 ggroc.list	ggroc
 ggroc.roc	ggroc
+ggroc.smooth.roc	ggroc
 groupGeneric	groupGeneric
 groupGeneric.auc	groupGeneric
 groupGeneric.ci.coords	groupGeneric

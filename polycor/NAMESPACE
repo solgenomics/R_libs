@@ -1,9 +1,14 @@
-# last modified 2016-08-25 by J. Fox
+# last modified 2020-04-20 by J. Fox
 
 importFrom("stats", "complete.cases", "cor", "dnorm", "na.omit",
          "optim", "optimise", "pchisq", "pnorm", "qnorm", "sd")
 
+importFrom("parallel", "detectCores")
+
 export(hetcor, polychor, polyserial)
+
+export(detectCores)
+
 S3method(hetcor, data.frame)
 S3method(hetcor, default)
 S3method(print, polycor)

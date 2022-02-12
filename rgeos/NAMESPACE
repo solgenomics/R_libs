@@ -55,9 +55,13 @@ export( bbox2SP )
 export( RGEOSEnvelope, RGEOSConvexHull, RGEOSBoundary, RGEOSGetCentroid, 
 		RGEOSPointOnSurface, RGEOSLineMerge, RGEOSUnionCascaded)
 export( gEnvelope, gConvexHull, gBoundary, gCentroid, 
-		gPointOnSurface, gLineMerge, gUnionCascaded, gUnaryUnion)
+		gPointOnSurface, gLineMerge, gUnionCascaded, gUnaryUnion,
+                gCoverageUnion, gMinumumRotatedRectangle,
+                gMaximumInscribedCircle)
 
 export(	gSimplify, gPolygonize, gDelaunayTriangulation, gNode)
+
+export( gMakeValid)
 		
 # GEOS binary topology functions
 export( gDifference, gSymdifference, gIntersection, gUnion)# RSB FIXME

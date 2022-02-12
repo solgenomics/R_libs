@@ -1,3 +1,100 @@
+# vdiffr 1.0.2
+
+* testthat no longer auto-deletes snapshot files that were not
+  generated because of an unexpected error or a `skip()`
+  (r-lib/testthat#1393).
+
+
+# vdiffr 1.0.0
+
+This release includes two major changes:
+
+1. The internal SVG engine has been updated. It is now lighter, more
+   robust, with fewer dependencies. It also generates more correct
+   SVG. The main user visible change is that points look smaller than
+   with older snapshots. Because of this update you will have to
+   regenerate all existing snapshots with the new engine.
+
+2. The snapshot management system now uses testthat (see
+   https://testthat.r-lib.org/articles/snapshotting.html). Most of the
+   R and javascript code has been removed from vdiffr as a consequence.
+   vdiffr now serves as a reproducible SVG generation engine for
+   testthat snapshots.
+
+
+## Migration of existing snapshots
+
+There are two steps to update your snapshots to vdiffr 1.0.
+
+1. This step is optional. Install the github-only 0.4.0 version of
+   vdiffr with `remotes::install_github("r-lib/vdiffr@v0.4.0")`. This
+   release only contains the new SVG engine. Review the snapshot
+   changes as usual with `vdiffr::manage_cases()`.
+
+2. Install vdiffr 1.0.0 from CRAN, delete the `tests/figs` directory,
+   run `devtools::test()`, and then `testthat::snapshot_review()`.
+
+
+## Other changes
+
+* `expect_doppelganger()` now supports grid objects such as `gtable`
+  and `grob` (#36).
+
+
+# vdiffr 0.4.0
+
+This is a github-only release that is meant to help you migrate from
+vdiffr 0.3.x to vdiffr 1.0.0. The 1.0 release of vdiffr includes two
+major changes. It switches to testthat 3e for snapshot management and
+it uses an updated SVG engine for the generation of snapshots. The
+github-only 0.4.0 release only includes the new SVG engine to make it
+easy to compare cases with `manage_cases()`.
+
+This intermediate step in the migration of snapshots is optional. You
+can also choose to update directly with the 1.0.0 release but you
+won't be able to compare the new snapshots to your old ones.
+
+Note that smaller points are expected in the new snapshots because of
+a bugfix.
+
+- Following an update to the graphics engine of R 4.1.0 that causes
+  spurious failures due to subtle changes in graphics generation,
+  vdiffr snapshots are now skipped on old versions of R. The plots are
+  still generated on all versions so any errors during plot drawing
+  will be detected by testthat.
+
+- The SVG generation engine of vdiffr has been updated (@thomasp85).
+  Font sizes are now precomputed for the first 50000 unicode points.
+  This allows deterministic computation of text box extents without
+  the freetype and harfbuzz dependencies.
+  
+  Note: The main visible change of this update is that points now look
+  smaller. Points generated with the previous SVG engine were too large.
+
+- vdiffr is now licensed as MIT (#95).
+
+
+# vdiffr 0.3.3
+
+- Compatibility with r-devel (@pmur002).
+- Compatibility with testthat 3.
+
+
+# vdiffr 0.3.2
+
+- Fixed CRAN checks on r-devel.
+
+- Keyboard short cuts for common interactions:
+    Right/Left arrows = Next/Previous case
+    Down/Up arrows = Next/Previous type
+    ENTER = Validate active case
+    shift + ENTER = Validate active group
+    ESC = Quit app
+
+- Failure diffs are now logged in `vdiffr.Rout.fail` when the `CI`
+  environment variable is set. This makes it easier to investigate
+  remote failures on Travis etc (#79).
+
 
 # vdiffr 0.3.1
 

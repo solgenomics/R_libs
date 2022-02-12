@@ -13,6 +13,7 @@ equation	equation
 estfun	estfun
 evaluate	evaluate
 explain	explain
+explore	explore
 fit	fit
 fit_xy	fit_xy
 generate	generate
@@ -23,14 +24,18 @@ interpolate	interpolate
 intersect	setops
 is.element	setops
 learn	learn
+min_grid	min_grid
 prune	prune
 refit	refit
+required_pkgs	required_pkgs
 setdiff	setops
 setequal	setops
 setops	setops
 specify	specify
 tidy	tidy
 train	train
+tunable	tunable
+tune_args	tune_args
 union	setops
 varying_args	varying_args
 var_imp	var_imp

@@ -3,6 +3,28 @@
 \newcommand{\ghpr}{\href{https://github.com/eddelbuettel/rcppcctz/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/eddelbuettel/rcppcctz/issues/#1}{##1}}
 
+\section{Changes in version 0.2.10 (2021-12-14)}{
+  \itemize{
+    \item Switch CI use to \href{https://eddelbuettel.github.io/r-ci/}{r-ci}
+    \item Applied patch by Tomas Kalibera for Windows UCRT under the
+    upcoming R 4.2.0 expected for April.
+  }
+}
+
+\section{Changes in version 0.2.9 (2020-08-30)}{
+  \itemize{
+    \item Provide a header \code{RcppCCZT_API.h} for client packages.
+    \item Show a simple example of parsing a YYYYMMDD HHMMSS.FFFFFF date.
+  }
+}
+
+\section{Changes in version 0.2.8 (2020-08-04)}{
+  \itemize{
+    \item Added three new \code{nothrow} variants (needed for win32) needed 
+    by the expanded \pkg{nanotime} package (Leonardo in \ghpr{37})
+  }
+}
+
 \section{Changes in version 0.2.7 (2020-03-18)}{
   \itemize{
     \item Added functions \code{_RcppCCTZ_convertToCivilSecond} that

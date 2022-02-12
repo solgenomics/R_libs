@@ -16,8 +16,24 @@
 <title>diffobj - Diffs for R Objects</title>
 
 
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
-<style type="text/css">code{white-space: pre;}</style>
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
@@ -105,6 +121,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 })();
 </script>
+
 
 
 
@@ -691,7 +708,7 @@ mode=“context”
 </div>
 <div id="output-formats" class="section level3">
 <h3>Output Formats</h3>
-<p>If your terminal supports it <code>diffobj</code> will format the output with ANSI escape sequences. <code>diffobj</code> uses Gábor Csárdi’s <a href="https://github.com/gaborcsardi/crayon"><code>crayon</code></a> package to detect ANSI support and to apply ANSI based formatting. If you are using RStudio or another IDE that supports <code>getOption(&quot;viewer&quot;)</code>, <code>diffobj</code> will output an HTML/CSS formatted diff to the viewport. In other terminals that do not support ANSI colors, <code>diffobj</code> will attempt to output to an HTML/CSS formatted diff to your browser using <code>browseURL</code>.</p>
+<p>If your terminal supports it <code>diffobj</code> will format the output with ANSI escape sequences. <code>diffobj</code> uses Gábor Csárdi’s <a href="https://github.com/r-lib/crayon"><code>crayon</code></a> package to detect ANSI support and to apply ANSI based formatting. If you are using RStudio or another IDE that supports <code>getOption(&quot;viewer&quot;)</code>, <code>diffobj</code> will output an HTML/CSS formatted diff to the viewport. In other terminals that do not support ANSI colors, <code>diffobj</code> will attempt to output to an HTML/CSS formatted diff to your browser using <code>browseURL</code>.</p>
 <p>You can explicitly specify the output format with the <code>format</code> parameter:</p>
 <ul>
 <li><code>format=&quot;raw&quot;</code> for unformatted diffs</li>

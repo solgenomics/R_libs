@@ -1,9 +1,12 @@
 Package: mclust
-Version: 5.4.5
-Date: 2019-07-07
+Version: 5.4.9
+Date: 2021-12-17
 Title: Gaussian Mixture Modelling for Model-Based Clustering,
         Classification, and Density Estimation
-Description: Gaussian finite mixture models fitted via EM algorithm for model-based clustering, classification, and density estimation, including Bayesian regularization, dimension reduction for visualisation, and resampling-based inference.
+Description: Gaussian finite mixture models fitted via EM algorithm for
+  model-based clustering, classification, and density estimation, 
+  including Bayesian regularization, dimension reduction for 
+  visualisation, and resampling-based inference.
 Authors@R: c(person("Chris", "Fraley", role = "aut"),
              person("Adrian E.", "Raftery", role = "aut",
                     comment = c(ORCID = "0000-0002-6589-301X")),
@@ -23,15 +26,15 @@ URL: https://mclust-org.github.io/mclust/
 VignetteBuilder: knitr
 Repository: CRAN
 ByteCompile: true
-LazyData: yes
-RoxygenNote: 6.1.1
 NeedsCompilation: yes
-Packaged: 2019-07-07 15:54:41 UTC; luca
+LazyData: yes
+Encoding: UTF-8
+Packaged: 2021-12-17 14:26:42 UTC; luca
 Author: Chris Fraley [aut],
   Adrian E. Raftery [aut] (<https://orcid.org/0000-0002-6589-301X>),
   Luca Scrucca [aut, cre] (<https://orcid.org/0000-0003-3826-0484>),
   Thomas Brendan Murphy [ctb] (<https://orcid.org/0000-0002-5668-7046>),
   Michael Fop [ctb] (<https://orcid.org/0000-0003-3936-2757>)
 Maintainer: Luca Scrucca <luca.scrucca@unipg.it>
-Date/Publication: 2019-07-08 18:51:30 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-03-24 19:45:42 UTC; unix
+Date/Publication: 2021-12-17 15:10:02 UTC
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2021-12-20 15:19:10 UTC; unix

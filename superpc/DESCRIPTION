@@ -1,17 +1,30 @@
 Package: superpc
-Title: Supervised principal components
-Version: 1.09
-Author: Eric Bair, R. Tibshirani
-Description: Supervised principal components for regression and
-        survival analsysis. Especially useful for high-dimnesional
-        data, including microarray data.
-Maintainer: Rob Tibshirani <tibs@stanford.edu>
-Depends: survival
-LazyLoad: false
-LazyData: false
-License: GPL-2
-URL: http://www-stat.stanford.edu/~tibs/superpc
-Packaged: 2012-02-26 20:06:30 UTC; tibs
+Type: Package
+Title: Supervised Principal Components
+Version: 1.12
+Date: 2020-10-19
+Authors@R: c(person("Eric", "Bair",
+                    role = "aut",
+                    email = "ebair@email.unc.edu"),
+             person("Jean-Eudes", "Dazard",
+                    role = c("cre", "ctb"),
+                    email = "jean-eudes.dazard@case.edu"),
+             person("Rob", "Tibshirani",
+                    role = "ctb",
+	               email = "tibs@stanford.edu"))
+Author: Eric Bair [aut],
+  Jean-Eudes Dazard [cre, ctb],
+  Rob Tibshirani [ctb]
+Maintainer: Jean-Eudes Dazard <jean-eudes.dazard@case.edu>
+Description: Does prediction in the case of a censored survival outcome, or a regression outcome, using the "supervised principal component" approach. 'Superpc' is especially useful for high-dimensional data when the number of features p dominates the number of samples n (p >> n paradigm), as generated, for instance, by high-throughput technologies.
+Depends: R (>= 3.5.0)
+Imports: survival, stats, graphics, grDevices
+NeedsCompilation: no
+URL: http://www-stat.stanford.edu/~tibs/superpc,
+        https://github.com/jedazard/superpc
 Repository: CRAN
-Date/Publication: 2012-02-27 07:36:05
-Built: R 3.6.0; ; 2019-05-10 11:25:34 UTC; unix
+Date/Publication: 2020-10-19 22:10:03 UTC
+License: GPL (>= 3) | file LICENSE
+Archs: i386, x64
+Packaged: 2020-10-19 18:31:57 UTC; JE D
+Built: R 3.6.3; ; 2021-12-06 15:43:29 UTC; unix

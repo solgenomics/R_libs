@@ -1,10 +1,32 @@
-## forecast (development version)
-* The axis for `gglagplot()` have been reversed for consistency with `stats::lag.plot()`.
+# forecast 8.15 (1 June 2021)
+  * Changed `summary()` methods to defer console output until `print()`
+  * Changed default `s.window` values for `mstl()`, `stlf()` and `stlm()`. The new defaults are based on extensive empirical testing.
+
+# forecast 8.14 (11 March 2021)
+  * Changed default `BoxCox(lambda = "auto")` lower bound to -0.9.
+  * Use better variance estimates for `ets()` bias adjustments.
+  * Improved robustness of `autoplot.seas()` for non-seasonal decomposition.
+  * Fixed scoping of parameters in `auto.arima(parallel = TRUE)` (#874).
+  * Fixed handling of `xreg` in `tsCV()`.
+
+# forecast 8.13 (11 September 2020)
+  * Fixed forecasts from Arima with drift with initial NAs.
+  * Fixed season colours in `gglagplot()` to match y-axis (original data).
+  * Fixed facet order for classical decomposition `autoplot()`
+  * Fixed `summary()` erroring for `tslm()` models containing NA values.
+
+## forecast 8.12 (21 March 2020)
+  * Fixed bias adjusted forecast mean for ARIMA forecasts.
+  * Improved naming of `accuracy()` generic formals.
+  * Fix seasonal periods for `taylor` dataset.
+
+## forecast 8.11 (9 February 2020)
+  * The axis for `gglagplot()` have been reversed for consistency with `stats::lag.plot()`.
 
 ## forecast 8.10 (4 December 2019)
   * Updates to remove new CRAN errors
   * Bug fixes
-  
+
 ## forecast 8.9 (22 August 2019)
   * Updates for CRAN policies on Suggests packages
   * Bug fixes
@@ -411,7 +433,7 @@
 
 ## Version 3.16 (24 December 2011)
   * Corrected problem with AIC computation in bats and tbats
-  * Fixed handlng of non-seasonal data in bats()
+  * Fixed handling of non-seasonal data in bats()
   * Changed dependency to >= R 2.14.0 in order to ensure parallel package available.
 
 ## Version 3.15 (22 December 2011)

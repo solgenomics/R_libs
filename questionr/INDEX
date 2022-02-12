@@ -22,6 +22,7 @@ first_non_null          Return first non-null of two values
 format.proptab          S3 format method for proptab objects.
 freq                    Generate frequency tables.
 freq.na                 Generate frequency table of missing values.
+ggsurvey                Easy ggplot2 with survey objects
 happy                   Data related to happiness from the General
                         Social Survey, 1972-2006.
 hdv2003                 Histoire de vie 2003
@@ -34,8 +35,6 @@ ifunc_show_alert        Display an alert, only on first launch for the
                         current session
 iorder                  Interactive reordering of factor levels
 irec                    Interactive recoding
-lookfor                 Look for keywords variable names and
-                        descriptions
 ltabs                   Cross tabulation with labelled variables
 menages                 A fertility survey - "menages" table
 multi.split             Split a multiple choices variable in a series
@@ -53,15 +52,14 @@ qscan                   Scan R scripts and load/install all detected
                         packages
 quant.cut               Transform a quantitative variable into a
                         qualitative variable
-questionr               questionr
 recode.na               Recode values of a variable to missing values,
                         using exact or regular expression matching.
 rename.variable         Rename a data frame column
 rm.unused.levels        Remove unused levels
 rp2012                  2012 French Census - French cities of more than
                         2000 inhabitants
-rp99                    1999 French Census - Cities from the
-                        Rh<c3><b4>ne state
+rp99                    1999 French Census - Cities from the Rhône
+                        state
 rprop                   Row percentages of a two-way frequency table.
 tabs                    Weighted Crossresult
 women                   A fertility survey - "women" table

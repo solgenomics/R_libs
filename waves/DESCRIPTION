@@ -1,6 +1,6 @@
 Package: waves
 Title: Vis-NIR Spectral Analysis Wrapper
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
               person(given = "Jenna", family = "Hershberger", role = c("aut", "cre"),
                 email = "jmh579@cornell.edu",
@@ -14,7 +14,8 @@ Description: Originally designed application in the context of resource-limited 
     This package is wrapper for functions related to the analysis of point visible and 
     near-infrared reflectance measurements. It includes visualization, filtering, aggregation, 
     preprocessing, cross-validation set formation, model training, and prediction functions to 
-    enable open-source association of spectral and reference data. 
+    enable open-source association of spectral and reference data. This package is documented 
+    in a peer-reviewed manuscript in the Plant Phenome Journal <doi:10.1002/ppj2.20012>.
     Specialized cross-validation schemes are described in detail in Jarquín et al. (2017) 
     <doi:10.3835/plantgenome2016.12.0130>. Example data is from Ikeogu et al. (2017) 
     <doi:10.1371/journal.pone.0188918>.
@@ -28,13 +29,13 @@ LazyData: true
 Imports: dplyr, prospectr, spectacles, caret, pls, randomForest,
         wesanderson, magrittr, tidyselect, ggplot2, tidyr (>= 1.0),
         stringr, rlang
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Suggests: testthat (>= 2.1.0)
 NeedsCompilation: no
-Packaged: 2020-09-10 14:54:09 UTC; Jenna
+Packaged: 2021-04-20 22:58:43 UTC; Jenna
 Author: Jenna Hershberger [aut, cre] (<https://orcid.org/0000-0002-3147-6867>),
   Michael Gore [ths],
   NSF BREAD IOS-1543958 [fnd]
 Repository: CRAN
-Date/Publication: 2020-09-17 12:10:02 UTC
-Built: R 3.6.3; ; 2020-11-02 14:06:26 UTC; unix
+Date/Publication: 2021-04-21 09:30:03 UTC
+Built: R 3.6.3; ; 2021-12-06 15:55:08 UTC; unix

@@ -85,6 +85,7 @@ find.pheno	find.pheno
 find.pseudomarker	find.pseudomarker
 find.pseudomarkerpos	qtl-internal
 findDupMarkers	findDupMarkers
+find_large_intervals	find_large_intervals
 fitqtl	fitqtl
 fitqtlengine	qtl-internal
 fitstahl	fitstahl

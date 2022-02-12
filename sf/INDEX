@@ -6,12 +6,14 @@ as                      Methods to coerce simple features to Spatial*
 bind                    Bind rows (features) of sf objects
 dbDataType,PostgreSQLConnection,sf-method
                         Determine database type for R vector
+dbWriteTable,PostgreSQLConnection,character,sf-method
+                        Write 'sf' object to Database
 db_drivers              Drivers for which update should be 'TRUE' by
                         default
 extension_map           Map extension to driver
 gdal                    functions to interact with gdal not meant to be
                         called directly by users (but e.g. by
-                        stars::st_stars)
+                        stars::read_stars)
 gdal_utils              Native interface to gdal utils
 geos_binary_ops         Geometric operations on pairs of simple feature
                         geometry sets
@@ -24,6 +26,7 @@ geos_query              Dimension, simplicity, validity or is_empty
 geos_unary              Geometric unary operations on simple feature
                         geometry sets
 internal                Internal functions
+interpolate_aw          Areal-weighted interpolation of polygon data
 is_driver_available     Check if driver is available
 is_driver_can           Check if a driver can perform an action
 is_geometry_column      Check if the columns could be of a coercable
@@ -32,8 +35,11 @@ merge.sf                merge method for sf and data.frame object
 nc                      North Carolina SIDS data
 plot                    plot sf object
 prefix_map              Map prefix to driver
+proj_tools              Manage PROJ settings
 rawToHex                Convert raw vector(s) into hexadecimal
                         character string(s)
+s2                      functions for spherical geometry, using s2
+                        package
 sf                      Create sf object
 sf-defunct              Deprecated functions in 'sf'
 sf_extSoftVersion       Provide the external dependencies versions of
@@ -70,7 +76,6 @@ st_drivers              Get GDAL drivers
 st_geometry             Get, set, or replace geometry from an sf object
 st_geometry_type        Return geometry type of an object
 st_graticule            Compute graticules and their parameters
-st_interpolate_aw       Areal-weighted interpolation of polygon data
 st_is                   test equality between the geometry type and a
                         class or set of classes
 st_is_longlat           Assert whether simple feature coordinates are
@@ -111,5 +116,6 @@ tibble                  Summarize simple feature type for tibble
 tidyverse               Tidyverse methods for sf objects (remove .sf
                         suffix!)
 transform.sf            transform method for sf objects
-valid                   Make an invalid geometry valid
+valid                   Check validity or make an invalid geometry
+                        valid
 vctrs                   vctrs methods for sf objects

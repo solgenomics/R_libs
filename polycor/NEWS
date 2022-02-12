@@ -1,3 +1,11 @@
+version 0.8-0
+
+o hetcor() can optionally use parallel computations (suggestion of Marc Segond).
+
+o polychor() and polyserial() now allow user-specified start values (suggestion of someone whose name is lost to antiquity, with my apologies).
+
+o cases where correlations can't be computed (e.g., because a factor as only one level in the data) are handled more gracefully.
+
 version 0.7-10
 
 o Let hetcor() work with objects that inherit from "data.frame" (suggestion of Emil O. W. Kirkegaard).
@@ -14,7 +22,7 @@ o  Protect against out-of-order thresholds during optimization (suggestion of Ev
 
 o  hetcor() doesn't die when an error is thrown computing a correlation, which is now set to NA.
 
-o  hetcor() now uses Matrix::nearPD() to force a postitive-definite results rather than the depricated sfsmisc::nearcor() (suggestion of Timothy Bates).
+o  hetcor() now uses Matrix::nearPD() to force a postitive-definite result rather than the deprecated sfsmisc::nearcor() (suggestion of Timothy Bates).
 
 o  Improved clarity of documentation.
 

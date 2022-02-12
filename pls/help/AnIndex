@@ -28,6 +28,7 @@ MSEP	mvrVal
 MSEP.mvr	mvrVal
 mvr	mvr
 mvrCv	mvrCv
+mvrVal	mvrVal
 mvrValstats	mvrVal
 naExcludeMvr	naExcludeMvr
 oliveoil	oliveoil
@@ -37,6 +38,7 @@ plot.loadings	scoreplot
 plot.mvr	plot.mvr
 plot.mvrVal	validationplot
 plot.scores	scoreplot
+pls	pls
 pls.options	pls.options
 plsr	mvr
 predict.msc	msc

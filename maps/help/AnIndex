@@ -9,7 +9,6 @@ closed.polygon	polygon
 county	county
 county.fips	county.fips
 countyMapEnv	county
-Deprecated	maps-deprecated
 france	france
 franceMapEnv	france
 gp.smooth	internal2
@@ -31,10 +30,6 @@ kernel.region.x	internal2
 kernel.smooth	internal2
 lakes	lakes
 lakesMapEnv	lakes
-legacy_world	legacy_world
-legacy_world2	legacy_world
-legacy_world2MapEnv	legacy_world
-legacy_worldMapEnv	legacy_world
 makepoly	internal
 map	map
 map.axes	map.axes
@@ -49,7 +44,6 @@ map.wrap.poly	internal2
 mapgetg	internal
 mapgetl	internal
 mapname	internal
-maps-deprecated	maps-deprecated
 mapthin	internal
 maptype	internal
 match.map	match.map
@@ -82,7 +76,6 @@ usaMapEnv	usa
 votes.repub	ozone
 world	world
 world.cities	world.cities
-world.legacy	world.legacy
 world2	world2
 world2MapEnv	world2
 worldMapEnv	world

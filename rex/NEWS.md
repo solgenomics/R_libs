@@ -1,3 +1,11 @@
+## Rex Version 1.2.1 ##
+
+* Kevin Ushey is now the maintainer
+
+## Rex Version 1.2.0 ##
+
+* `%>%` is no longer imported and then re-exported from rex
+
 ## Rex Version 1.1.2 ##
 
 * Updating tests to work with testthat version 1.0.2.9000.

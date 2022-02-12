@@ -56,13 +56,14 @@ emptyspace	emptyspace
 fan.plot	fan.plot
 feather.plot	feather.plot
 fill.corner	fill.corner
+find_max_cell	find_max_cell
 floating.pie	floating.pie
 fullaxis	fullaxis
-furc	furc
 gantt.chart	gantt.chart
 gap.barplot	gap.barplot
 gap.boxplot	gap.boxplot
 gap.plot	gap.plot
+gap_barp	gap_barp
 get.breaks	get.breaks
 get.gantt.info	get.gantt.info
 get.segs	get.segs
@@ -89,8 +90,6 @@ ladderplot	ladderplot
 ladderplot.default	ladderplot
 legendg	legendg
 lengthKey	lengthKey
-listDepth	listDepth
-makeDendrite	makeDendrite
 makeDensityMatrix	makeDensityMatrix
 makeIntersectList	makeIntersectList
 maxEmptyRect	maxEmptyRect
@@ -109,7 +108,6 @@ pie.labels	pie.labels
 pie3D	pie3D
 pie3D.labels	pie3D.labels
 placeLabels	placeLabels
-plot.dendrite	plot.dendrite
 plotCI	plotCI
 plotH	plotH
 plotH.default	plotH
@@ -153,7 +151,6 @@ starPie	starPie
 staxlab	staxlab
 std.error	std.error
 sumbrk	sumbrk
-sumDendrite	sumDendrite
 symbolbarplot	symbolbarplot
 symbolbox	symbolbox
 tab.title	tab.title

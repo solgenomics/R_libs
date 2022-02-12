@@ -1,8 +1,25 @@
+# catchr 0.2.31
+
+## Patches
+
+ * I incorporated a push request from Lionel (lionel-) due to a change in `rlang`. catchr should work with newer versions of `rlang` from now on.
+ * I made catchr throw an error if plans are made with `beep` and `beepr` is not installed. This was expected by the unit tests, but not implemented.
+ * I fixed some boilerplate stuff so CRAN wouldn't complain.
+ * I updated some presentational stuff and made some minor fixes to the package (non-functional changes).
+
+
+# catchr 0.2.3
+
+## Patches
+
+ * I hate to waffle on features, but I realized that treating expressions with the `!!` and `!!!` operators differently in catchr doesn't make as much sense to me as it did before. (I honestly can't see why I ever even allowed this behavior.) The use-case Stephen (yogat3ch) pointed out made this clear, so expressions with these operators are now treated like normal expressions. This is basically a reverse of the previous `0.2.2` patch, but on reflection, I think it makes more sense to do it this way.
+ 
+
 # catchr 0.2.2
 
 ## Patches
 
-I added quasiquotation capabilities to `catchr::catch_expr()` and `catchr::make_catch_fn()`, letting you unquote with the tidyverse's `!!` and `!!!` functions. Hopefully this doesn't break anything---it hasn't caused any errors in tests or code so far, but if you have something weird happen, try version 0.2.1 and report the bug fix on GitHub.
+I added quasiquotation capabilities to `catchr::catch_expr()` and `catchr::make_catch_fn()`, letting you unquote with the tidyverse's `!!` and `!!!` functions. Hopefully this doesn't break anything---it hasn't caused any errors in my tests or code so far, but if you have something weird happen, try version 0.2.1 and report the bug fix on GitHub.
 
 ## Bug fixes
 

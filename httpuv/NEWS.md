@@ -1,8 +1,47 @@
+httpuv 1.6.4
+============
+
+* Added zlib to SystemRequirements in DESCRIPTION file. (#315)
+
+* Closed #280: Fix builds on Alpine Linux (and other versions which have automake >1.16.1). (#319)
+
+httpuv 1.6.3
+============
+
+* Increased required version of Rcpp to 1.0.7, to work around an incompatibility between Rcpp 1.0.6 and packages compiled with Rcpp 1.0.7.
+
+httpuv 1.6.2
+============
+
+* Fixed #282: `startPipeServer()` failed with "invalid argument" error after update to libuv 1.37.0. (#283)
+
+* Fixed #303: Don't return Content-Length header when the HTTP status is "101 Switching Protocols". (#305)
+
+* Added support for gzip-compressed HTTP responses. (#305)
+
+httpuv 1.6.1
+============
+
+* The `timegm()` function is a non-standard GNU extension, so it has been replaced with an internal `timegm2()` function. (#300)
+
+httpuv 1.6.0
+============
+
+* Remove BH dependency. httpuv now requires a compiler which supports C++11. (#297)
+
+httpuv 1.5.5
+============
+
+* Fix SHA1 calculation, and thus WebSocket server handshakes, on big-endian systems. (#284)
+
+* Fixed #195: Responses required `headers` to be a named list. Now it can also be `NULL`, an empty unnamed list, or it can be unset. (#289)
+
+* Allow responses to omit `body` (or set it as `NULL`) to avoid sending a body or setting the `Content-Length` header. This is intended for use with HTTP 204/304 responses. (#288)
+
 httpuv 1.5.4
 ============
 
-* Fixed #275: Large HTTP request headers could get truncated if they spanned
-  more than one TCP message. (#277)
+* Fixed #275: Large HTTP request headers could get truncated if they spanned more than one TCP message. (#277)
 
 * Fixed build for Solaris. (#271)
 

@@ -1,3 +1,19 @@
+# mathjaxr 1.4-0 (2021-03-01)
+
+* fixed issue with minifying the javascript files upon installation under Windows
+
+* `preview_rd()` now loads package macros
+
+# mathjaxr 1.2-0 (2021-01-30)
+
+* upgraded MathJax version to 3.1.2
+
+* MathJax is now bundled with non-minified javascript files; upon installation from the source package, the javascript files are minified if the `js` package is available
+
+* `preview_rd()` now tries to load any package-specific macros before rendering a help page
+
+* `preview_rd()` gains a `dark` argument (for the option to render HTML pages in dark mode)
+
 # mathjaxr 1.0-1 (2020-06-25)
 
 * added `\mjteqn` and `\mjtdeqn` macros (triple-argument versions)

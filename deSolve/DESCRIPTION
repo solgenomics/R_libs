@@ -1,5 +1,5 @@
 Package: deSolve
-Version: 1.28
+Version: 1.30
 Title: Solvers for Initial Value Problems of Differential Equations
         ('ODE', 'DAE', 'DDE')
 Authors@R: c(person("Karline","Soetaert", role = c("aut"), 
@@ -60,7 +60,7 @@ License: GPL (>= 2)
 URL: http://desolve.r-forge.r-project.org/
 LazyData: yes
 NeedsCompilation: yes
-Packaged: 2020-03-07 16:59:31 UTC; thpe
+Packaged: 2021-10-07 06:36:26 UTC; user
 Repository: CRAN
-Date/Publication: 2020-03-08 23:00:05 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-03-24 19:39:35 UTC; unix
+Date/Publication: 2021-10-07 08:40:05 UTC
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2021-12-06 15:11:55 UTC; unix

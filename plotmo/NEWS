@@ -1,6 +1,46 @@
 Changes to the plotmo package
 -----------------------------
 
+--- 3.6.1 Jun 2, 2021
+
+  Minor updates for R version 4.1.0.
+  These updates quieten some warnings from sprintf when plotmo's trace flag is set.
+  Alsp updated some of the test scripts.
+
+--- 3.6.0 Sep 12, 2020
+
+We now have better support for models with unusual variable names.
+For example, variable names with spaces in them, and formula terms
+like "as.numeric(x1)". This required a fairly large change to the
+handling of formulas.
+
+We now support models like "earth(formula, data=func(data))",
+where the data argument is a function call.
+
+Minor code change because base::range no longer seems to work with Date objects.
+
+Better support for residuals plots for earth-glm models.
+
+Support for the "ordinal" package ("clm" models).
+
+Basic support for "parsnip" models.
+
+Minor documentation updates.
+
+Updated the libraries shared with the earth and plotmo packages.
+
+Extended the test scripts and updated them for R version 4.0.2.
+
+--- 3.5.7 Apr 15, 2020
+
+Added new dot arguments "prednames.abbreviate" and "prednames.minlength".
+  o Use prednames.abbreviate=FALSE for full predictor names in graph axes.
+    (The default is prednames.abbreviate=TRUE.)
+  o The "prednames.minlength" argument is passed on internally to base::abbreviate().
+
+Reinstated the tests for the emma package (were removed before because
+emma gave the message "package 'clusterSim' could not be loaded").
+
 --- 3.5.6 Oct 26, 2019
 
 The family of a model can now be a string (as well as a "family" object).

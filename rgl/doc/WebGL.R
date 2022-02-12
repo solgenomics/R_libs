@@ -1,5 +1,6 @@
 ## ----setup, echo=FALSE, results="asis"----------------------------------------
 source("setup.R")
+setupKnitr(autoprint = FALSE)
 set.seed(123)
 
 ## -----------------------------------------------------------------------------
@@ -19,42 +20,53 @@ unclass(plotids)
 rglwidget() %>%
 toggleWidget(ids = plotids["data"], label = "Data")
 
+## ----eval=FALSE---------------------------------------------------------------
+#  rglwidget() |>
+#  toggleWidget(ids = plotids["data"], label = "Data")
+
 ## -----------------------------------------------------------------------------
 toggleWidget(NA, ids = plotids["data"], label = "Data") %>%
 rglwidget(controllers = .) 
 
+## ----eval=FALSE---------------------------------------------------------------
+#  toggleWidget(NA, ids = plotids["data"], label = "Data") |>
+#    w => rglwidget(controllers = w)
+
 ## -----------------------------------------------------------------------------
 clear3d() # Remove the earlier display
 
-setosa <- with(subset(iris, Species == "setosa"), 
+with(subset(iris, Species == "setosa"), 
      spheres3d(Sepal.Length, Sepal.Width, Petal.Length, 
                   col=as.numeric(Species),
-                  radius = 0.211))
-versicolor <- with(subset(iris, Species == "versicolor"), 
+                  radius = 0.211,
+                  tag = "setosa"))
+with(subset(iris, Species == "versicolor"), 
      spheres3d(Sepal.Length, Sepal.Width, Petal.Length, 
                col=as.numeric(Species),
-     	       radius = 0.211))
-virginica <- with(subset(iris, Species == "virginica"), 
+     	       radius = 0.211, 
+     	       tag = "versicolor"))
+with(subset(iris, Species == "virginica"), 
      spheres3d(Sepal.Length, Sepal.Width, Petal.Length, 
                col=as.numeric(Species),
-     	       radius = 0.211))
+     	       radius = 0.211,
+     	       tag = "virginica"))
 aspect3d(1,1,1)
-axesid <- decorate3d()
+decorate3d(tag = "axes")
 rglwidget() %>%
-toggleWidget(ids = setosa) %>%
-toggleWidget(ids = versicolor) %>%
-toggleWidget(ids = virginica) %>%
-toggleWidget(ids = axesid) %>% 
+toggleWidget(tags = "setosa") %>%
+toggleWidget(tags = "versicolor") %>%
+toggleWidget(tags = "virginica") %>%
+toggleWidget(tags = "axes") %>% 
 asRow(last = 4)
 
 ## -----------------------------------------------------------------------------
 rglwidget() %>%
 playwidget(start = 0, stop = 3, interval = 1,
 	   subsetControl(1, subsets = list(
-	   			 Setosa = setosa,
-	   			 Versicolor = versicolor,
-	   			 Virginica = virginica,
-	   			 All = c(setosa, versicolor, virginica)
+	   			 Setosa = tagged3d("setosa"),
+	   			 Versicolor = tagged3d("versicolor"),
+	   			 Virginica = tagged3d("virginica"),
+	   			 All = tagged3d(c("setosa", "versicolor", "virginica"))
 	   			 )))
 
 ## -----------------------------------------------------------------------------
@@ -76,7 +88,7 @@ playwidget(
                                      8,   1,   1,   1), 
                                 nrow = 2, byrow = TRUE),
                 attributes = c("x", "red", "green", "blue"),
-                vertices = which, objid = setosa),
+                vertices = which, tag = "setosa"),
 	step = 0.01)
 
 ## -----------------------------------------------------------------------------
@@ -95,14 +107,20 @@ playwidget(list(
                  "Reset", "Slider", "Label"),
   loop = TRUE)
 
-## -----------------------------------------------------------------------------
+## ----eval = requireNamespace("crosstalk")-------------------------------------
+# This example requires the crosstalk package
+# We skip it if crosstalk is not available. 
+
 ids <- with(iris, plot3d(Sepal.Length, Sepal.Width, Petal.Length, 
                   type="s", col=as.numeric(Species)))
 par3d(mouseMode = "selecting")
 rglwidget(shared = rglShared(ids["data"])) %>% 
 rglMouse()
 
-## -----------------------------------------------------------------------------
+## ----eval=requireNamespace("crosstalk")---------------------------------------
+# This example requires the crosstalk package.  
+# We skip it if crosstalk is not available. 
+
 library(crosstalk)
 sd <- SharedData$new(mtcars)
 ids <- plot3d(sd$origData(), col = mtcars$cyl, type = "s")

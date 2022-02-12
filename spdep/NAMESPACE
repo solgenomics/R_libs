@@ -11,7 +11,7 @@ importFrom(stats, influence.measures, lag, punif, lm, var, integrate,
              aggregate, "coefficients", "fitted", "gaussian",
              "model.frame", "model.matrix", "model.response", "na.fail",
              "na.omit", "naresid", "optimise", "printCoefmat", "resid",
-             "terms", "uniroot", "weighted.residuals", "weights")
+             "terms", "uniroot", "weighted.residuals", "weights", "median")
 
 importFrom(stats, model.matrix, model.response, model.extract, coefficients, residuals, deviance, optimize, optim, nlminb, na.fail, as.formula, terms, coef, gaussian, model.weights, model.offset, glm.fit, logLik, predict, formula, lm.fit, model.frame, AIC, anova, napredict, nlm, optimHess, resid, fitted, weighted.residuals, weights, naresid, optimise, fitted.values, delete.response, printCoefmat, uniroot, na.omit, predict.lm, "dbeta", "rchisq", "runif", "spline") # deprecated
 
@@ -22,6 +22,10 @@ importFrom(graphics, par, locator, lines, text, plot.new, plot.window, segments,
 importFrom(utils, write.table, object.size, read.table, read.csv, packageDescription)
 importFrom(grDevices, rainbow)
 if (.Platform$OS.type == "windows") importFrom(grDevices, bringToTop)
+importFrom(utils, packageVersion)
+importFrom(units, set_units)
+importFrom(s2, s2_distance, s2_closest_edges, s2_buffer_cells, s2_intersects_matrix, s2_dwithin_matrix)
+importFrom(e1071, skewness, kurtosis)
 
 importFrom(MASS, mvrnorm) # deprecated
 importFrom(coda, as.mcmc, HPDinterval) # deprecated
@@ -48,17 +52,16 @@ exportMethods(coerce)
 
 export(EBImoran.mc, probmap, choynowski, EBest, EBlocal)
 
-export(airdist, card, rookcell, queencell, mrc2vi, vi2mrc, cell2nb,
-	n.comp.nb, diffnb, dnearneigh, droplinks)
+export(airdist, card, cell2nb, vi2mrc, n.comp.nb, diffnb, dnearneigh, droplinks)
 
 export(gabrielneigh, geary.test, geary, geary.mc, globalG.test, graph2nb, 
 	joincount.test, joincount.mc, joincount.multi, print.jcmulti,
 	knearneigh, knn2nb)
 
 export(listw2sn, sn2listw, read.gwt2nb,	write.sn2gwt, lm.LMtests, 
-	lm.morantest, localG, localmoran, moran,
+	lm.morantest, localG, localG_perm, localmoran, localmoran_perm, moran,
 	moran.test, moran.mc, moran.plot, localmoran.sad, lm.morantest.sad,
-	nb2listw, nb2mat, listw2mat, mat2listw, invIrM, invIrW, nbdists, nblag,
+	nb2listw, nb2listwdist, nb2mat, listw2mat, mat2listw, invIrM, invIrW, nbdists, nblag,
 	nblag_cumul, poly2nb, read.gal, write.nb.gal, read.geoda, relativeneigh,
 	soi.graph, sp.correlogram, sp.mantel.mc, set.spChkOption, chkIDs,
 	get.spChkOption, spNamedVec, tri2nb,
@@ -88,6 +91,8 @@ export(tolerance.nb, Rotation)
 export(lee.mc, lee, lee.test)
 
 export(LOSH, LOSH.cs, LOSH.mc)
+
+export(localC, localC_perm)
 
 export(grid2nb)
 
@@ -199,6 +204,14 @@ S3method(plot, spcor)
 
 S3method(plot, mst)
 S3method(plot, skater)
+
+S3method(localC, default)
+S3method(localC, formula)
+S3method(localC, list)
+S3method(localC, matrix)
+S3method(localC, data.frame)
+S3method(localC_perm, default)
+S3method(localC_perm, formula)
 
 # deprecate candidates
 

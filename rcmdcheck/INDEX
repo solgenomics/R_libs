@@ -14,6 +14,7 @@ print.rcmdcheck         Print R CMD check results
 print.rcmdcheck_comparison
                         Print R CMD check result comparisons
 rcmdcheck               Run R CMD check from R and Capture Results
-rcmdcheck_process       Run an 'R CMD check' process in the background
+rcmdcheck-config        rcmdcheck configuration
+rcmdcheck_process       Run an R CMD check process in the background
 xopen.rcmdcheck         Open the check directory in a file browser
                         window

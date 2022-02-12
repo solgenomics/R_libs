@@ -16,6 +16,15 @@ load(system.file("unitTests/output.MA.rda", package="TTR"))
 
 #################################################
 
+# ALMA
+test.ALMA.output.length.eq.input.length <- function() {
+  v <- 1:10
+  x <- xts::.xts(v, seq_along(v))
+  av <- ALMA(v)
+  ax <- ALMA(x)
+  checkEquals(NROW(av), NROW(ax))
+}
+
 # Simple Moving Average
 test.SMA <- function() {
   checkEqualsNumeric( SMA(input$all$Close), output$allSMA )
@@ -37,11 +46,17 @@ test.EMA <- function() {
   checkException( EMA(input$all$Close, n = -1) )
   checkException( EMA(input$all$Close, n = NROW(input$all) + 1) )
 }
+
 test.EMA.n.ratio <- function() {
   out <- 0:9 * 1.0
   is.na(out) <- 1:2
   checkEqualsNumeric(EMA(1:10, ratio = 0.5), out)
   checkEqualsNumeric(EMA(1:10, n = 3), out)
+  checkEqualsNumeric(EMA(1:10, n = 3, ratio = 0.5), out)
+}
+
+test.EMA.ratio.eq.0 <- function() {
+  checkException(EMA(1:10, ratio = 0.0))
 }
 
 # Exponential Moving Average, Wilder ratio
@@ -61,6 +76,16 @@ test.DEMA <- function() {
   checkEquals( attributes(DEMA(input$top$Close)), attributes(output$topDEMA) )
   checkException( DEMA(input$mid$Close) )
   checkException( DEMA(input$all[,1:2]) )
+}
+
+# Hull Moving Average
+test.HMA <- function() {
+  hma <- HMA(1:10, 2)
+  checkEqualsNumeric(hma, c(NA, 2:10 + 1/3))
+}
+test.HMA.odd.n <- function() {
+  hma <- HMA(1:10, 3)
+  checkEqualsNumeric(hma, c(rep(NA, 2), 3:10 + 2/3))
 }
 
 # Weighted Moving Average, 1:n
@@ -87,6 +112,12 @@ test.WMAvol <- function() {
   checkException( WMA(input$all$Close, wts=input$all[,1:2]) )
 }
 
+test.WMA_returns_xts <- function() {
+  x <- xts::.xts(x = c(NA, 1:3), 1:4)
+  wma <- WMA(x, 2)
+  checkTrue(inherits(wma, "xts"))
+}
+
 # Exponential, Volume-Weighted Moving Average
 test.EVWMA <- function() {
   checkEqualsNumeric( EVWMA(input$all$Close, input$all$Volume), output$allEVWMA )
@@ -110,3 +141,23 @@ test.ZLEMA <- function() {
   checkException( ZLEMA(input$mid$Close) )
   checkException( ZLEMA(input$all[,1:2]) )
 }
+
+test.ZLEMA.n.ratio <- function() {
+  out <- c(rep(NA, 6), 4.0, 6.0, 7.75, 9.3125)
+  checkEqualsNumeric(ZLEMA(1:10, ratio = 0.25), out)
+  checkEqualsNumeric(ZLEMA(1:10, n = 7), out)
+  checkEqualsNumeric(ZLEMA(1:10, n = 7, ratio = 0.25), out)
+}
+
+test.ZLEMA.ratio.eq.0 <- function() {
+  checkException(ZLEMA(1:10, ratio = 0.0))
+}
+
+test.EMA.non.na.eq.n.does.not.error <- function() {
+  x <- c(NA, rnorm(10))
+  e <- EMA(x, 10)
+  z <- ZLEMA(x, 10)
+  # error will prevent reaching here, failing test
+  return(TRUE)
+}
+

@@ -8,37 +8,76 @@
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-<meta name="date" content="2020-02-07" />
+<meta name="date" content="2021-02-18" />
 
 <title>Scaling Issues</title>
 
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -47,9 +86,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -106,6 +145,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
+
 <style type="text/css">body {
 background-color: #fff;
 margin: 1em auto;
@@ -116,9 +156,6 @@ padding-right: 2em;
 font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 font-size: 14px;
 line-height: 1.35;
-}
-#header {
-text-align: center;
 }
 #TOC {
 clear: both;
@@ -287,7 +324,8 @@ code > span.st { color: #d14; }
 code > span.co { color: #888888; font-style: italic; } 
 code > span.ot { color: #007020; } 
 code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
 
@@ -301,7 +339,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 
 <h1 class="title toc-ignore">Scaling Issues</h1>
-<h4 class="date">2020-02-07</h4>
+<h4 class="date">2021-02-18</h4>
 
 
 
@@ -311,27 +349,27 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div id="fluid-scaling" class="section level3">
 <h3>Fluid scaling</h3>
 <p>The viewBox is determined by the <code>width</code> and <code>height</code> arguments of svglite’s device functions (with 10’’ x 8’’ the default). Although those dimensions are supplied in inches, the viewBox’s user coordinate system is completely unit agnostic. The main effect is thus to determine an aspect ratio. Since dimensions are not provided, the dimensions of the enclosing container are used instead and the SVG is rescaled to fit the container (although Internet Explorer currently requires some CSS tricks to get this behaviour, see <a href="http://tympanus.net/codrops/2014/08/19/making-svgs-responsive-with-css/" class="uri">http://tympanus.net/codrops/2014/08/19/making-svgs-responsive-with-css/</a>).</p>
-<p>Aspect ratio is preserved by default when the figure is scaled up or down. The details of how the aspect ratio is preserved can be adjusted in multiple ways via the <code>preserveAspectRatio</code> attribute. See <a href="https://sarasoueidan.com/blog/svg-coordinate-systems/" class="uri">https://sarasoueidan.com/blog/svg-coordinate-systems/</a> for more information about this property.</p>
+<p>Aspect ratio is preserved by default when the figure is scaled up or down. The details of how the aspect ratio is preserved can be adjusted in multiple ways via the <code>preserveAspectRatio</code> attribute. See <a href="https://www.sarasoueidan.com/blog/svg-coordinate-systems/" class="uri">https://www.sarasoueidan.com/blog/svg-coordinate-systems/</a> for more information about this property.</p>
 <p>Other useful resource: <a href="https://css-tricks.com/scale-svg/" class="uri">https://css-tricks.com/scale-svg/</a></p>
 </div>
 <div id="natural-scaling" class="section level3">
 <h3>Natural scaling</h3>
 <p>Another strategy is needed in order to scale the figure to make the text within the SVG consistent with the text in the surrounding web page. That could be useful, for instance, to create a consistent appearance in an HTML presentation. Since the user coordinate system defined by the viewBox is unitless, we need to map the figure to its natural dimensions. This will ensure a correspondence between the scale of the figure and that of the web page.</p>
-<p>As mentioned above, the natural scale of svglite’s figures is in points and is determined by the <code>width</code> and <code>height</code> arguments that you supply to the device functions (10’’ x 8’’ being the default). Although those dimensions are specified in inches, the coordinate system is scaled in points. Counting 72 points per inch, the default SVG surface is thus 720 x 576 pt. Note that the CSS standard defines 12pt to be equal to 16px, the default size of text in most browsers. Since 12pt is the default text size in svglite as well, a SVG scaled to its natural dimensions will appear seamless with web text of 16px. If the text in your web page has another size, you will have to compute a scale factor and adjust the dimensions of the SVG accordingly.</p>
+<p>As mentioned above, the natural scale of svglite’s figures is in points and is determined by the <code>width</code> and <code>height</code> arguments that you supply to the device functions (10’’ x 8’’ being the default). Although those dimensions are specified in inches, the coordinate system is scaled in points. Counting 72 points per inch, the default SVG surface is thus 720 x 576 pt. Note that the CSS standard defines 12pt to be equal to 16px, the default size of text in most browsers. Since 12pt is the default text size in svglite as well, a SVG scaled to its natural dimensions will appear seamless with web text of 16px. If the text in your web page has another size, you will have to compute a scale factor and adjust the dimensions of the SVG accordingly.</p>
 <p>To sum up, displaying a plot according to its natural dimensions requires providing the user agent with information about what the lengths defined within the SVG actually mean. There are several ways to achieve this. First you can edit the SVG and enclose it in another pair of <code>&lt;svg&gt;</code> tags that defines <code>height</code> and <code>width</code>. The root <code>&lt;svg&gt;</code> element determines the final dimensions of the figure.</p>
 <p>A second way is to enclose the figure in a <code>&lt;div&gt;</code> tag with appropriate dimensions and let the SVG figure rescale itself to that container (cf. the section on fluid scaling):</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">&lt;div</span><span class="ot"> style=</span><span class="st">&quot;width: 720pt; height: 576pt&quot;</span><span class="kw">&gt;</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;figure.svg&quot;</span><span class="kw">&gt;</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">&lt;/div&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">&lt;div</span><span class="ot"> style=</span><span class="st">&quot;width: 720pt; height: 576pt&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;figure.svg&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
 <p>Finally, you can directly specify the dimensions in the <code>&lt;img&gt;</code> or <code>&lt;object&gt;</code> tag that is embedding the figure. Note that the dimension attributes of those tags do not accept arbitrary units, so you will have to supply the dimensions in pixels. Just multiply the width and height measured in points with a factor of 16/12:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;figure.svg&quot;</span><span class="ot"> width=</span><span class="st">&quot;960&quot;</span><span class="ot"> height=</span><span class="st">&quot;768&quot;</span><span class="kw">&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;figure.svg&quot;</span><span class="ot"> width=</span><span class="st">&quot;960&quot;</span><span class="ot"> height=</span><span class="st">&quot;768&quot;</span><span class="kw">&gt;</span></span></code></pre></div>
 </div>
 </div>
 <div id="internal-notes" class="section level2">
 <h2>Internal notes</h2>
 <div id="device-scaling" class="section level3">
 <h3>Device scaling</h3>
-<p>As other graphics devices, svglite is scaled in big points (1/72 inch) rather than pica points (1/72.27 inch). Note that in LaTeX and in the <code>grid</code> graphics system on which ggplot2 is based, points refer to pica points. Big points are denoted in LaTeX by <code>bp</code> and in CSS by <code>pt</code>. We use the latter notation. See <a href="http://tex.stackexchange.com/a/200968/19755" class="uri">http://tex.stackexchange.com/a/200968/19755</a> for some historical background about these units.</p>
+<p>As other graphics devices, svglite is scaled in big points (1/72 inch) rather than pica points (1/72.27 inch). Note that in LaTeX and in the <code>grid</code> graphics system on which ggplot2 is based, points refer to pica points. Big points are denoted in LaTeX by <code>bp</code> and in CSS by <code>pt</code>. We use the latter notation. See <a href="https://tex.stackexchange.com/a/200968/19755" class="uri">https://tex.stackexchange.com/a/200968/19755</a> for some historical background about these units.</p>
 <p>The conversion between device units and physical dimensions is determined by the DevDesc parameter <code>ipr</code>. IPR stands for inches per raster (native device coordinates are sometimes called rasters in R terminology) and is set to 1/72 in svglite. The device’s physical dimensions are set by the following DevDesc parameters (with <code>width</code> and <code>height</code> the plot dimensions set by the user in inches):</p>
 <table>
 <thead>
@@ -364,7 +402,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div id="scaling-of-graphical-elements" class="section level3">
 <h3>Scaling of graphical elements</h3>
 <p>It is conventional for the fundamental line width (<code>lwd = 1</code>) to correspond to a line width of 1/96 inch and svglite obeys this convention. Also, like other R graphics devices, svglite interprets all point sizes directly as big points (e.g. the <code>ps</code> graphical parameter and the <code>fontsize</code> argument of device functions). The default font size is 12pt.</p>
-<p>Text metrics are computed by Cairo thanks to David Gohel’s gdtools package. gdtools instantiates a PDF Cairo surface scaled in big points. When svglite needs to compute metrics for a string of text, it supplies the current scaled font size to Cairo: <code>cex * ps</code>.</p>
+<p>Text metrics are computed by systemfonts, which uses freetype to extract metrics for each glyph and calculate string dimensions from that. Text metrics are calculated at 1000dpi based on <code>cex * ps</code> font size.</p>
 <p>The Base graphics system also makes use of the obscure <code>cra</code> parameter and its relatives (<code>cin</code>, <code>cxy</code>, and <code>csi</code>). <code>cra</code> serves as a crude measure for a default character height and width for the default fontsize provided when the device is called (12pt in svgilte). The main effect of this parameter (more specifically, the height component) is to change the relationship between the margin parameters <code>mar</code>/<code>mai</code> and <code>oma</code>/<code>omi</code>. The margins <code>mar</code> and <code>oma</code> are specified in line units and character height is used as a measure of line spacing to convert margins measured in lines to physical margins. As in other devices, <code>cra[0]</code> is set to <code>0.9 * pointsize</code> and <code>cra[1]</code> to <code>1.2 * pointsize</code>. These parameters are completely unused in the Grid graphics system.</p>
 </div>
 <div id="svg-output" class="section level3">

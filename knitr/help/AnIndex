@@ -13,6 +13,15 @@ engine_output	engine_output
 extract_raw_output	raw_output
 fig_chunk	fig_chunk
 fig_path	fig_path
+hooks_asciidoc	output_hooks
+hooks_html	output_hooks
+hooks_jekyll	output_hooks
+hooks_latex	output_hooks
+hooks_listings	output_hooks
+hooks_markdown	output_hooks
+hooks_rst	output_hooks
+hooks_sweave	output_hooks
+hooks_textile	output_hooks
 hook_ffmpeg_html	hook_animation
 hook_gifski	hook_animation
 hook_mogrify	chunk_hook
@@ -38,7 +47,9 @@ include_url	include_url
 inline_expr	inline_expr
 is_html_output	output_type
 is_latex_output	output_type
+is_low_change	is_low_change
 kable	kable
+kables	kable
 knit	knit
 knit2html	knit2html
 knit2pandoc	knit2pandoc
@@ -71,6 +82,8 @@ opts_hooks	opts_hooks
 opts_knit	opts_knit
 opts_template	opts_template
 pandoc	pandoc
+pandoc_from	output_type
+pandoc_to	output_type
 pat_asciidoc	pat_fun
 pat_brew	pat_fun
 pat_html	pat_fun
@@ -104,6 +117,7 @@ rst2pdf	rst2pdf
 set_alias	set_alias
 set_header	set_header
 set_parent	set_parent
+sew	sew
 spin	spin
 spin_child	spin_child
 stitch	stitch

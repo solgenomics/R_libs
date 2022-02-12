@@ -1,3 +1,39 @@
+# backports 1.4.1
+
+* Patched `...names()` to match the new implementation in r-devel (svn rev 81283).
+
+# backports 1.4.0
+
+* Added `paste()` with support for argument `recycle0` for R versions prior to 4.0.1.
+* Added `paste0()` with support for argument `recycle0` for R versions prior to 4.0.1.
+* Added backport for `...names()` for R versions prior to 4.1.0.
+
+# backports 1.3.0
+
+* Added backport for `stopifnot()` for R versions prior to 4.0.0.
+* Adapted `list2DF()` to new behaviour introduced in r81038: the inputs are not recycled anymore
+  to common length. Instead, an error is thrown.
+
+# backports 1.2.1
+
+* Adapted `get0()` to work with R-devel / R-4.1.0 for first argument having length greater than 1.
+
+# backports 1.2.0
+
+* Switched to semantic versioning.
+* Added backport for `asplit()` for R versions prior to 3.6.0 (#47).
+* Added backport for `removeSource()` which also supports language objects for R versions prior to 3.6.0 (#50).
+* Added backport for `isNamespaceLoaded` for R versions prior to 3.2.0 (#49).
+
+
+# backports 1.1.10
+* Added `suppressMessages()` and `suppressWarnings()` with support for argument `classes` for R versions prior to 4.0.0
+
+# backports 1.1.9
+* Added backports for `str2lang()` and `str2expression()` (#42)
+  Thanks to @dmurdoch.
+* `import()` imported too many functions and has been fixed.
+
 # backports 1.1.8
 * Added backport for `tools::vignetteInfo()` for R versions prior to 3.6.0
 * Fixed import of `list2DF()` and `deparse1()`

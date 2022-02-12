@@ -1,3 +1,97 @@
+# labelled 2.9.0
+
+**look_for() improvements:**
+
+* new function `look_for_and_select()` (#87)
+* `look_for()` can now search within factor levels and value labels (#104)
+
+**improvements for tagged NAs:**
+
+* better printing of value labels (#89)
+* new functions `user_na_to_tagged_na()`, `tagged_na_to_user_na()` and
+  `tagged_na_to_regular_na()`
+* new option `explicit_tagged_na` in `to_factor()` and `to_character()`
+* new functions `unique_tagged_na()`, `duplicated_tagged_na()`, 
+  `order_tagged_na()`, `sort_tagged_na()` (#90, #91)
+
+**other improvements:**
+
+* new functions `is_user_na()` and `is_regular_na()`
+* new set of unit tests (#99)
+* trying to apply a value label, `na_range()` or `na_values()` to a factor 
+  will now produce an error
+* bug fix in `foreign_to_labelled()` for Stata files (#100)
+
+# labelled 2.8.0
+
+* new helper `recode_if()` for recoding values based on condition, variable
+  and value labels being preserved (#82)
+* `look_for()` could be time consuming for big data frames. Now, by default,
+  only basic details of each variable are computed. You can compute all details
+  with `details = "full"` (#77)
+* printing of `look_for()` results has been updated and do not rely anymore
+  on `pillar` (#85)
+* `to_labelled()` can properly manage factors whose levels are coded as 
+  "[code] level", as produced by `to_factor(levels = "prefixed")` 
+  (#74 @courtiol)
+* new function `is_prefixed()` to check if a factor is prefixed
+* bug fix for `na_range<-` and `na_values<-` when applied to a data.frame (#80)
+
+# labelled 2.7.0
+
+* a `.values` argument has been added to `set_na_values()` and `set_na_range()`, 
+  allowing to pass a list of values
+* a `.strict` option has been added to `set_variable_labels()`,
+  `set_value_labels()`, `add_value_labels()`,  `remove_value_labels()`,
+  `set_na_values()` and `set_na_range()`,
+  allowing to pass values for columns not observed in the data (it could be useful
+  for using a same list of labels for several data.frame sharing some 
+  variables) (#70)
+* `copy_labels()` is less restrictive for non labelled vectors, copying variable label
+  even if the two vectors are not of the same type (#71)
+* a `.strict` option has been added to `copy_labels()` (#71)
+
+# labelled 2.6.0
+
+* `look_for()` has been redesigned:
+    - `look_for()` now returns a tibble
+    - columns with multiple values for each variable are now stored as named lists
+    - a print method has been added for a clearer presentation of results in the console
+    - use `lookfor_to_long_format()` to convert results with one row per factor level
+      and per value label
+    - use `convert_list_columns_to_character()` to convert list columns to 
+      simpler character vectors
+    - `generate_dictionary()` is an equivalent of `look_for()`
+* `set_variable_labels`, `set_value_labels`, `add_value_labels`,
+  and `remove_value_labels` now accept "tidy dots" (#67 @psanker)
+* new function `names_prefixed_by_values()` to get the names of a vector
+  prefixed by their corresponding value
+
+# labelled 2.5.0
+
+* new `.keep_value_labels` argument for `recode.haven_labelled()`
+* new `.combine_value_labels` argument for `recode.haven_labelled()` (#61)
+* new `drop_unused_value_labels()` method
+* an additional `.labels` argument for `set_value_labels()`
+* `user_na_to_na` argument has been added to `to_character.haven_labelled()`
+* `%>%` is now imported from `dplyr`
+* a cheatsheet has been added (#47)
+* internal documentation is now using **roxygen2** markdown support
+
+# labelled 2.4.0
+
+* fixes for haven 2.3.0 (#59 by @hadley)
+* correct re-export of functions from `haven`
+* `update_labelled()` has been improved to allow to reconstruct
+  all labelled vectors created with a previous version of `haven`
+
+# labelled 2.3.1
+
+* an additional argument `keep_var_label` for `remove_labels()`
+* bug fix for `unlabelled()` when applied on a vector
+* when using `unclass = TRUE` with `to_factor()`, attributes 
+  are not removed anymore
+
 # labelled 2.3.0
 
 * new function `unlabelled()`
@@ -91,8 +185,10 @@
 
 # labelled 0.2.0
 
-* Following evolution of `haven`, `labelled` deosn't support missing values anymore (cf. https://github.com/hadley/haven/commit/4b12ff9d51ddb9e7486966b85e0bcff44992904d)
+* Following evolution of `haven`, `labelled` doesn't support missing values anymore 
+  (cf. https://github.com/hadley/haven/commit/4b12ff9d51ddb9e7486966b85e0bcff44992904d)
 * New function `to_character()` (cf. https://github.com/larmarange/labelled/commit/3d32852587bb707d06627e56407eed1c9d5a49de)
 * `to_factor()` could now be applied to a data.frame (cf. https://github.com/larmarange/labelled/commit/ce1d750681fe0c9bcd767cb83a8d72ed4c5fc5fb)
-* If `data.table` is available, labelled attribute are now changed by _reference_ (cf. https://github.com/larmarange/labelled/commit/c8b163f706122844d798e6625779e8a65e5bbf41)
+* If `data.table` is available, labelled attribute are now changed by _reference_ 
+  (cf. https://github.com/larmarange/labelled/commit/c8b163f706122844d798e6625779e8a65e5bbf41)
 * `zap_labels()` added as a synonym of `remove_labels()`

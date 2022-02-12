@@ -44,4 +44,5 @@ showfile.gds            Enumerate opened GDS files
 summarize.gdsn          GDS object Summaries
 sync.gds                Synchronize a GDS file
 system.gds              Get the parameters in the GDS system
+unload.gdsn             Unload a GDS node
 write.gdsn              Write data to a GDS node

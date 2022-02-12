@@ -1,4 +1,7 @@
 > # test.mem.R: test earth C code memory usage under both normal and error conditions
+> #
+> # TODO With some versions of R, test.mem gives different results per run.
+> #      First seen Sep 2020, R 4.0.3.
 > 
 > source("test.prolog.R")
 > library(earth)
@@ -98,11 +101,11 @@ F-statistic: 0.303 on 1 and 8 DF,  p-value: 0.597
 +     } else
 +         nlm[i] <- max.mem.change(mem.start, gc.start)
 + }
-mem 5.39 ncells 20 vcells 30
-mem 5.21 ncells 1585 vcells 3675
-mem 5.37 ncells 1785 vcells 4255
-mem 5.37 ncells 1785 vcells 4255
-mem 5.37 ncells 1785 vcells 4255
+mem 1.93 ncells 19 vcells 29
+mem 1.75 ncells 1577 vcells 3666
+mem 1.91 ncells 1777 vcells 4246
+mem 1.91 ncells 1777 vcells 4246
+mem 1.91 ncells 1777 vcells 4246
 > cat("actual run of lm\n")
 actual run of lm
 > # We use 0:nmodels, because we build the first model at iter 0,
@@ -137,11 +140,11 @@ F-statistic: 0.303 on 1 and 8 DF,  p-value: 0.597
 +     } else
 +         nlm[i] <- max.mem.change(mem.start, gc.start)
 + }
-mem 0 ncells 9 vcells 1
-mem 0 ncells 9 vcells 1
-mem 0 ncells 9 vcells 1
-mem 0 ncells 9 vcells 1
-mem 0 ncells 9 vcells 1
+mem 0 ncells 8 vcells 0
+mem 0 ncells 8 vcells 0
+mem 0 ncells 8 vcells 0
+mem 0 ncells 8 vcells 0
+mem 0 ncells 8 vcells 0
 > # standard earth model
 > cat("earth(y~x)\n")
 earth(y~x)
@@ -167,11 +170,11 @@ GCV 0.01888444    RSS 0.0472111    GRSq 0.8107224    RSq 0.941581
 +     } else
 +         nstandardearth[i] <- max.mem.change(mem.start, gc.start)
 + }
-mem 0 ncells 9 vcells 1
-mem 0 ncells 9 vcells 1
-mem 0 ncells 9 vcells 1
-mem 0 ncells 9 vcells 1
-mem 0 ncells 9 vcells 1
+mem 0 ncells 8 vcells 0
+mem 0 ncells 8 vcells 0
+mem 0 ncells 8 vcells 0
+mem 0 ncells 8 vcells 0
+mem 0 ncells 8 vcells 0
 > # earth model with an allowed func
 > cat("earth(y~x, allowed = good.allowedfunc)\n")
 earth(y~x, allowed = good.allowedfunc)
@@ -197,18 +200,18 @@ GCV 0.01888444    RSS 0.0472111    GRSq 0.8107224    RSq 0.941581
 +     } else
 +         ngoodallowed[i] <- max.mem.change(mem.start, gc.start)
 + }
-mem 0 ncells 9 vcells 1
-mem 0 ncells 9 vcells 1
-mem 0 ncells 9 vcells 1
-mem 0 ncells 9 vcells 1
-mem 0 ncells 9 vcells 1
+mem 0 ncells 8 vcells 0
+mem 0 ncells 8 vcells 0
+mem 0 ncells 8 vcells 0
+mem 0 ncells 8 vcells 0
+mem 0 ncells 8 vcells 0
 > # try earth model with an allowed func which causes an error
 > cat("earth(y~x, allowed = bad.allowedfunc)\n")
 earth(y~x, allowed = bad.allowedfunc)
 > expect.err(try(earth(y~x, allowed = bad.allowedfunc), silent=FALSE), "early exit from bad.allowedfunc")
 Error in (function (degree, pred, parents, namesx, first)  : 
   early exit from bad.allowedfunc
-Got error as expected from try(earth(y ~ x, allowed = bad.allowedfunc), silent = FALSE)
+Got expected error from try(earth(y ~ x, allowed = bad.allowedfunc), silent = FALSE)
 > for(i in 0:nmodels) {
 +     try(earth(y~x, allowed = bad.allowedfunc), silent=TRUE)
 +     gc <- gc(full=TRUE)
@@ -218,18 +221,19 @@ Got error as expected from try(earth(y ~ x, allowed = bad.allowedfunc), silent =
 +     } else
 +         nbadallowed[i] <- max.mem.change(mem.start, gc.start)
 + }
-mem 0 ncells 9 vcells 1
-mem 0 ncells 9 vcells 1
-mem 0 ncells 9 vcells 1
-mem 0 ncells 9 vcells 1
-mem 0 ncells 9 vcells 1
+mem 0 ncells 8 vcells 0
+mem 0 ncells 8 vcells 0
+mem 0 ncells 8 vcells 0
+mem 0 ncells 8 vcells 0
+mem 0 ncells 8 vcells 0
+> 
 > # try earth model with an arg that causes error in ForwardPass in earth.c
 > cat("earth(y~x, Adjust.endspan = -999\n")
 earth(y~x, Adjust.endspan = -999
 > expect.err(try(earth(y~x, Adjust.endspan = -999), silent=FALSE), "Adjust.endspan is -999 but should be between 0 and 10")
 Error in forward.pass(x, y, yw, weights, trace, degree, penalty, nk, thresh,  : 
   Adjust.endspan is -999 but should be between 0 and 10
-Got error as expected from try(earth(y ~ x, Adjust.endspan = -999), silent = FALSE)
+Got expected error from try(earth(y ~ x, Adjust.endspan = -999), silent = FALSE)
 > for(i in 0:nmodels) {
 +     try(earth(y~x, Adjust.endspan = -999), silent=TRUE)
 +     gc <- gc(full=TRUE)
@@ -239,21 +243,22 @@ Got error as expected from try(earth(y ~ x, Adjust.endspan = -999), silent = FAL
 +     } else
 +         nbadendspan[i] <- max.mem.change(mem.start, gc.start)
 + }
-mem 0 ncells 9 vcells 1
-mem 0 ncells 9 vcells 1
-mem 0 ncells 9 vcells 1
-mem 0 ncells 9 vcells 1
-mem 0 ncells 9 vcells 1
+mem 0 ncells 8 vcells 0
+mem 0 ncells 8 vcells 0
+mem 0 ncells 8 vcells 0
+mem 0 ncells 8 vcells 0
+mem 0 ncells 8 vcells 0
+> 
 > cat("nlm           "); print(nlm)
-nlm           [1] 9 9 9 9 9
+nlm           [1] 8 8 8 8 8
 > cat("nstandardearth"); print(nstandardearth)
-nstandardearth[1] 9 9 9 9 9
+nstandardearth[1] 8 8 8 8 8
 > cat("ngoodallowed  "); print(ngoodallowed)
-ngoodallowed  [1] 9 9 9 9 9
+ngoodallowed  [1] 8 8 8 8 8
 > cat("nbadallowed   "); print(nbadallowed)
-nbadallowed   [1] 9 9 9 9 9
+nbadallowed   [1] 8 8 8 8 8
 > cat("nbadendspan   "); print(nbadendspan)
-nbadendspan   [1] 9 9 9 9 9
+nbadendspan   [1] 8 8 8 8 8
 > 
 > # printf("\n                             Min       1stQ     Median       Mean      3rdQ        Max\n")
 > # printf("lm                    %s\n", paste0(sprintf("% 10.3f", summary(nlm)), collapse=" "))

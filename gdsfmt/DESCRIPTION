@@ -1,14 +1,15 @@
 Package: gdsfmt
 Type: Package
 Title: R Interface to CoreArray Genomic Data Structure (GDS) Files
-Version: 1.16.0
-Date: 2018-04-15
+Version: 1.22.0
+Date: 2019-10-25
 Depends: R (>= 2.15.0), methods
 Suggests: parallel, digest, crayon, RUnit, knitr, BiocGenerics
-Author: Xiuwen Zheng [aut, cre], Stephanie Gogarten [ctb], Jean-loup
-        Gailly and Mark Adler [ctb] (for the included zlib sources),
+Author: Xiuwen Zheng [aut, cre] (<https://orcid.org/0000-0002-1390-0708>),
+        Stephanie Gogarten [ctb],
+        Jean-loup Gailly and Mark Adler [ctb] (for the included zlib sources),
         Yann Collet [ctb] (for the included LZ4 sources),
-        xz contributors (for the included liblzma sources)
+        xz contributors [ctb] (for the included liblzma sources)
 Maintainer: Xiuwen Zheng <zhengx@u.washington.edu>
 Description: This package provides a high-level R interface to
         CoreArray Genomic Data Structure (GDS) data files, which are
@@ -35,7 +36,12 @@ ByteCompile: TRUE
 BugReports: http://github.com/zhengxwen/gdsfmt/issues
 URL: http://corearray.sourceforge.net/,
         http://github.com/zhengxwen/gdsfmt
-biocViews: Software, Infrastructure, DataImport
+biocViews: Infrastructure, DataImport
+git_url: https://git.bioconductor.org/packages/gdsfmt
+git_branch: RELEASE_3_10
+git_last_commit: d1a0ec9
+git_last_commit_date: 2019-10-29
+Date/Publication: 2019-10-29
 NeedsCompilation: yes
-Packaged: 2018-05-01 00:20:24 UTC; biocbuild
-Built: R 3.6.0; x86_64-pc-linux-gnu; 2019-05-10 11:54:51 UTC; unix
+Packaged: 2019-10-30 01:20:23 UTC; biocbuild
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2021-12-06 15:13:18 UTC; unix

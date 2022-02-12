@@ -1,3 +1,19 @@
+# later 1.3.0
+
+* Closed #148: When later was attached, `parallel::makeForkCluster()` would fail. (#149)
+
+* Fixed #150: It was possible for callbacks to execute in the wrong order if the clock time was changed in between the scheduling of two callbacks. (#151)
+
+## later 1.2.0
+
+* Closed #138: later is now licensed as MIT. (#139)
+
+* Closed #140: Previously, the event loop stopped running if the R process was forked. (#141)
+
+* Closed #143: Packages which link to later no longer need to take a direct dependency on Rcpp, because `later.h` no longer includes `Rcpp.h`. (#144)
+
+* Removed dependency on the BH package. C++11 is now required. (#147)
+
 ## later 1.1.0.1
 
 * Private event loops are now automatically run by their parent. That is, whenever an event loop is run, its children event loops are automatically run. The `create_loop()` function has a new parameter `parent`, which defaults to the current loop. The auto-running behavior can be disabled by using `create_loop(parent=NULL)`. (#119)

@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;shiny&rsquo; version 1.5.0</h2>
+</div><h2>Documentation for package &lsquo;shiny&rsquo; version 1.7.1</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 </ul>
@@ -30,12 +30,12 @@
 <a href="#G">G</a>
 <a href="#H">H</a>
 <a href="#I">I</a>
-<a href="#K">K</a>
 <a href="#L">L</a>
 <a href="#M">M</a>
 <a href="#N">N</a>
 <a href="#O">O</a>
 <a href="#P">P</a>
+<a href="#Q">Q</a>
 <a href="#R">R</a>
 <a href="#S">S</a>
 <a href="#T">T</a>
@@ -71,6 +71,10 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="bootstrapPage.html">basicPage</a></td>
 <td>Create a Bootstrap page</td></tr>
+<tr><td style="width: 25%;"><a href="bindCache.html">bindCache</a></td>
+<td>Add caching with reactivity to an object</td></tr>
+<tr><td style="width: 25%;"><a href="bindEvent.html">bindEvent</a></td>
+<td>Make an object respond only to specified reactive events</td></tr>
 <tr><td style="width: 25%;"><a href="bookmarkButton.html">bookmarkButton</a></td>
 <td>Create a button for bookmarking/sharing</td></tr>
 <tr><td style="width: 25%;"><a href="bootstrapLib.html">bootstrapLib</a></td>
@@ -95,13 +99,13 @@
 <tr><td style="width: 25%;"><a href="checkboxInput.html">checkboxInput</a></td>
 <td>Checkbox Input Control</td></tr>
 <tr><td style="width: 25%;"><a href="clickOpts.html">clickOpts</a></td>
-<td>Create an object representing click options</td></tr>
+<td>Control interactive plot point events</td></tr>
 <tr><td style="width: 25%;"><a href="column.html">column</a></td>
 <td>Create a column within a UI definition</td></tr>
 <tr><td style="width: 25%;"><a href="conditionalPanel.html">conditionalPanel</a></td>
 <td>Conditional Panel</td></tr>
 <tr><td style="width: 25%;"><a href="createRenderFunction.html">createRenderFunction</a></td>
-<td>Implement render functions</td></tr>
+<td>Implement custom render functions</td></tr>
 <tr><td style="width: 25%;"><a href="createWebDependency.html">createWebDependency</a></td>
 <td>Create a web dependency</td></tr>
 </table>
@@ -109,20 +113,22 @@
 <h2><a name="D">-- D --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="tableOutput.html">dataTableOutput</a></td>
-<td>Create a table output element</td></tr>
+<tr><td style="width: 25%;"><a href="renderDataTable.html">dataTableOutput</a></td>
+<td>Table output with the JavaScript DataTables library</td></tr>
 <tr><td style="width: 25%;"><a href="dateInput.html">dateInput</a></td>
 <td>Create date input</td></tr>
 <tr><td style="width: 25%;"><a href="dateRangeInput.html">dateRangeInput</a></td>
 <td>Create date range input</td></tr>
-<tr><td style="width: 25%;"><a href="dblclickOpts.html">dblclickOpts</a></td>
-<td>Create an object representing double-click options</td></tr>
+<tr><td style="width: 25%;"><a href="clickOpts.html">dblclickOpts</a></td>
+<td>Control interactive plot point events</td></tr>
 <tr><td style="width: 25%;"><a href="debounce.html">debounce</a></td>
 <td>Slow down a reactive expression with debounce/throttle</td></tr>
+<tr><td style="width: 25%;"><a href="devmode.html">devmode</a></td>
+<td>Shiny Developer Mode</td></tr>
+<tr><td style="width: 25%;"><a href="devmode.html">devmode_inform</a></td>
+<td>Shiny Developer Mode</td></tr>
 <tr><td style="width: 25%;"><a href="viewer.html">dialogViewer</a></td>
 <td>Viewer options</td></tr>
-<tr><td style="width: 25%;"><a href="diskCache.html">diskCache</a></td>
-<td>Create a disk cache object</td></tr>
 <tr><td style="width: 25%;"><a href="domains.html">domains</a></td>
 <td>Reactive domains</td></tr>
 <tr><td style="width: 25%;"><a href="downloadButton.html">downloadButton</a></td>
@@ -142,8 +148,6 @@
 <td>Event handler</td></tr>
 <tr><td style="width: 25%;"><a href="exportTestValues.html">exportTestValues</a></td>
 <td>Register expressions for export in test mode</td></tr>
-<tr><td style="width: 25%;"><a href="exprToFunction.html">exprToFunction</a></td>
-<td>Convert an expression to a function</td></tr>
 </table>
 
 <h2><a name="F">-- F --</a></h2>
@@ -188,6 +192,8 @@
 <td>Get or set Shiny options</td></tr>
 <tr><td style="width: 25%;"><a href="getQueryString.html">getUrlHash</a></td>
 <td>Get the query string / hash component from the URL</td></tr>
+<tr><td style="width: 25%;"><a href="devmode.html">get_devmode_option</a></td>
+<td>Shiny Developer Mode</td></tr>
 </table>
 
 <h2><a name="H">-- H --</a></h2>
@@ -197,8 +203,8 @@
 <td>Create a help text element</td></tr>
 <tr><td style="width: 25%;"><a href="showTab.html">hideTab</a></td>
 <td>Dynamically hide/show a tabPanel</td></tr>
-<tr><td style="width: 25%;"><a href="hoverOpts.html">hoverOpts</a></td>
-<td>Create an object representing hover options</td></tr>
+<tr><td style="width: 25%;"><a href="clickOpts.html">hoverOpts</a></td>
+<td>Control interactive plot point events</td></tr>
 <tr><td style="width: 25%;"><a href="htmlOutput.html">htmlOutput</a></td>
 <td>Create an HTML output element</td></tr>
 </table>
@@ -218,10 +224,12 @@
 <td>Dynamically insert/remove a tabPanel</td></tr>
 <tr><td style="width: 25%;"><a href="insertUI.html">insertUI</a></td>
 <td>Insert and remove UI objects</td></tr>
-<tr><td style="width: 25%;"><a href="installExprFunction.html">installExprFunction</a></td>
-<td>Install an expression as a function</td></tr>
+<tr><td style="width: 25%;"><a href="createRenderFunction.html">installExprFunction</a></td>
+<td>Implement custom render functions</td></tr>
 <tr><td style="width: 25%;"><a href="invalidateLater.html">invalidateLater</a></td>
 <td>Scheduled Invalidation</td></tr>
+<tr><td style="width: 25%;"><a href="devmode.html">in_devmode</a></td>
+<td>Shiny Developer Mode</td></tr>
 <tr><td style="width: 25%;"><a href="reactive.html">is.reactive</a></td>
 <td>Create a reactive expression</td></tr>
 <tr><td style="width: 25%;"><a href="is.reactivevalues.html">is.reactivevalues</a></td>
@@ -230,21 +238,8 @@
 <td>Create a non-reactive scope for an expression</td></tr>
 <tr><td style="width: 25%;"><a href="isRunning.html">isRunning</a></td>
 <td>Check whether a Shiny application is running</td></tr>
-<tr><td style="width: 25%;"><a href="req.html">isTruthy</a></td>
-<td>Check for required values</td></tr>
-</table>
-
-<h2><a name="K">-- K --</a></h2>
-
-<table width="100%">
-<tr><td style="width: 25%;"><a href="knitr_methods.html">knitr_methods</a></td>
-<td>Knitr S3 methods</td></tr>
-<tr><td style="width: 25%;"><a href="knitr_methods.html">knit_print.reactive</a></td>
-<td>Knitr S3 methods</td></tr>
-<tr><td style="width: 25%;"><a href="knitr_methods.html">knit_print.shiny.appobj</a></td>
-<td>Knitr S3 methods</td></tr>
-<tr><td style="width: 25%;"><a href="knitr_methods.html">knit_print.shiny.render.function</a></td>
-<td>Knitr S3 methods</td></tr>
+<tr><td style="width: 25%;"><a href="isTruthy.html">isTruthy</a></td>
+<td>Truthy and falsy values</td></tr>
 </table>
 
 <h2><a name="L">-- L --</a></h2>
@@ -259,20 +254,16 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="sidebarLayout.html">mainPanel</a></td>
 <td>Layout a sidebar and main area</td></tr>
-<tr><td style="width: 25%;"><a href="makeReactiveBinding.html">makeReactiveBinding</a></td>
-<td>Make a reactive variable</td></tr>
 <tr><td style="width: 25%;"><a href="markdown.html">markdown</a></td>
 <td>Insert inline Markdown</td></tr>
 <tr><td style="width: 25%;"><a href="markRenderFunction.html">markRenderFunction</a></td>
 <td>Mark a function as a render function</td></tr>
 <tr><td style="width: 25%;"><a href="maskReactiveContext.html">maskReactiveContext</a></td>
 <td>Evaluate an expression without a reactive context</td></tr>
-<tr><td style="width: 25%;"><a href="memoryCache.html">memoryCache</a></td>
-<td>Create a memory cache object</td></tr>
 <tr><td style="width: 25%;"><a href="MockShinySession.html">MockShinySession</a></td>
 <td>Mock Shiny Session</td></tr>
-<tr><td style="width: 25%;"><a href="modalButton.html">modalButton</a></td>
-<td>Create a button for a modal dialog</td></tr>
+<tr><td style="width: 25%;"><a href="modalDialog.html">modalButton</a></td>
+<td>Create a modal dialog UI</td></tr>
 <tr><td style="width: 25%;"><a href="modalDialog.html">modalDialog</a></td>
 <td>Create a modal dialog UI</td></tr>
 <tr><td style="width: 25%;"><a href="moduleServer.html">moduleServer</a></td>
@@ -348,6 +339,13 @@
 <td>Reporting progress (object-oriented API)</td></tr>
 </table>
 
+<h2><a name="Q">-- Q --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="createRenderFunction.html">quoToFunction</a></td>
+<td>Implement custom render functions</td></tr>
+</table>
+
 <h2><a name="R">-- R --</a></h2>
 
 <table width="100%">
@@ -375,6 +373,8 @@
 <td>Reactive Log Visualizer</td></tr>
 <tr><td style="width: 25%;"><a href="registerInputHandler.html">registerInputHandler</a></td>
 <td>Register an Input Handler</td></tr>
+<tr><td style="width: 25%;"><a href="devmode.html">register_devmode_option</a></td>
+<td>Shiny Developer Mode</td></tr>
 <tr><td style="width: 25%;"><a href="removeInputHandler.html">removeInputHandler</a></td>
 <td>Deregister an Input Handler</td></tr>
 <tr><td style="width: 25%;"><a href="showModal.html">removeModal</a></td>
@@ -390,16 +390,16 @@
 <tr><td style="width: 25%;"><a href="renderCachedPlot.html">renderCachedPlot</a></td>
 <td>Plot output with cached images</td></tr>
 <tr><td style="width: 25%;"><a href="renderDataTable.html">renderDataTable</a></td>
-<td>Table output with the JavaScript library DataTables</td></tr>
+<td>Table output with the JavaScript DataTables library</td></tr>
 <tr><td style="width: 25%;"><a href="renderImage.html">renderImage</a></td>
 <td>Image file output</td></tr>
 <tr><td style="width: 25%;"><a href="renderPlot.html">renderPlot</a></td>
 <td>Plot Output</td></tr>
 <tr><td style="width: 25%;"><a href="renderPrint.html">renderPrint</a></td>
-<td>Printable Output</td></tr>
+<td>Text Output</td></tr>
 <tr><td style="width: 25%;"><a href="renderTable.html">renderTable</a></td>
 <td>Table Output</td></tr>
-<tr><td style="width: 25%;"><a href="renderText.html">renderText</a></td>
+<tr><td style="width: 25%;"><a href="renderPrint.html">renderText</a></td>
 <td>Text Output</td></tr>
 <tr><td style="width: 25%;"><a href="renderUI.html">renderUI</a></td>
 <td>UI Output</td></tr>
@@ -444,6 +444,8 @@
 <td>Exclude inputs from bookmarking</td></tr>
 <tr><td style="width: 25%;"><a href="withProgress.html">setProgress</a></td>
 <td>Reporting progress (functional API)</td></tr>
+<tr><td style="width: 25%;"><a href="setSerializer.html">setSerializer</a></td>
+<td>Add a function for serializing an input before bookmarking application state</td></tr>
 <tr><td style="width: 25%;"><a href="shiny-package.html">shiny</a></td>
 <td>Web Application Framework for R</td></tr>
 <tr><td style="width: 25%;"><a href="shinyOptions.html">shiny-options</a></td>
@@ -464,8 +466,6 @@
 <td>Show or remove a modal dialog</td></tr>
 <tr><td style="width: 25%;"><a href="showNotification.html">showNotification</a></td>
 <td>Show or remove a notification</td></tr>
-<tr><td style="width: 25%;"><a href="reactlog.html">showReactLog</a></td>
-<td>Reactive Log Visualizer</td></tr>
 <tr><td style="width: 25%;"><a href="showTab.html">showTab</a></td>
 <td>Dynamically hide/show a tabPanel</td></tr>
 <tr><td style="width: 25%;"><a href="sidebarLayout.html">sidebarLayout</a></td>
@@ -493,8 +493,8 @@
 <h2><a name="T">-- T --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="tableOutput.html">tableOutput</a></td>
-<td>Create a table output element</td></tr>
+<tr><td style="width: 25%;"><a href="renderTable.html">tableOutput</a></td>
+<td>Table Output</td></tr>
 <tr><td style="width: 25%;"><a href="tabPanel.html">tabPanel</a></td>
 <td>Create a tab panel</td></tr>
 <tr><td style="width: 25%;"><a href="tabPanel.html">tabPanelBody</a></td>
@@ -590,5 +590,7 @@
 <td>Reporting progress (functional API)</td></tr>
 <tr><td style="width: 25%;"><a href="domains.html">withReactiveDomain</a></td>
 <td>Reactive domains</td></tr>
+<tr><td style="width: 25%;"><a href="devmode.html">with_devmode</a></td>
+<td>Shiny Developer Mode</td></tr>
 </table>
 </body></html>

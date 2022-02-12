@@ -1,4 +1,15 @@
-Changes since version 0.5.7
+Changes since version 0.6.0:
+----------------------------
+* Fixed internal bug when extracting formals from fitters.
+* Updated contact details.
+* Fixed missing link from documentation.
+
+Changes since version 0.5.8:
+----------------------------
+* Avoid warnings due to vector matrix multiplication + minor edits.
+* Updated contact details
+
+Changes since version 0.5.7:
 ----------------------------
 * Updated contact and citation information. 
 

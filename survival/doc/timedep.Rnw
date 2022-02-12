@@ -104,7 +104,7 @@ interpolation between the creatinine values 0.9 and 1.5 to get a
 predicted value of 1.1 on day 100; on day 100 the later value of 1.5 has
 not yet been seen.
 
-A an example consider a recent analysis from the Mayo Clinic
+As an example consider a recent analysis from the Mayo Clinic
 study of aging (MCSA), a study which enrolled a stratified random sample from
 the population of Olmsted County and then has followed them forward in
 time.  The occurrence of mild cognitive impairment (MCI), dementia, and
@@ -154,9 +154,9 @@ with a p-value of less than 1 in 1000.
 The alarm about this incorrect approach has been sounded often
 \cite{Anderson83, Buyse96, Suissa08} but the analysis is routinely 
 re-discovered.
-A slightly subtler form of the error is discussed in Redmond et al
+A slightly subtler form of the error is discussed in Redmond et al.
 \cite{Redmond83}.  The exploration was motivated by a flawed analysis presented
-in Bonadonna et. al \cite{Bref} which looked at the effect of total dose.
+in Bonadonna et al. \cite{Bonadonna81} which looked at the effect of total dose.
 Breast cancer chemotherapy patients were
 divided into three groups based on whether the patient eventually
 received $>85$\%, 65--85\% or $<65$\% of the dose planned at the start of
@@ -172,7 +172,7 @@ This false result actively harmed patients.
 Redmond looked at a variant of this: create a variable $p$ for each subject
 which
 is the fraction of the target dose \emph{up to} the last entry for that subject.
-A subject who died after recieving only 6 weeks of a planned 12 week regimen
+A subject who died after receiving only 6 weeks of a planned 12 week regimen
 could still score 100\%.
 This looks like it should cure the bias issue,
 but as it turns out it leads to bias in the other direction.  The reason
@@ -347,9 +347,9 @@ newcgd <- tmerge(newcgd, cgd0, id=id, infect = event(etime7))
 newcgd <- tmerge(newcgd, newcgd, id, enum=cumtdc(tstart))
 dim(newcgd)
 newcgd[1:5,c(1, 4:6, 13:17)]
-attr(newcgd, "tcount")
-coxph(Surv(tstart, tstop, infect) ~ treat + inherit + steroids +
-      + cluster(id), newcgd)
+summary(newcgd)
+coxph(Surv(tstart, tstop, infect) ~ treat + inherit + steroids,
+      data =newcgd, cluster = id)
 @ 
 
 These lines show the canonical way to use tmerge: each call adds one
@@ -364,15 +364,15 @@ more bit of information to the data set.
     This first result has \Sexpr{nrow(cgd0)} rows, the same number as
     \code{cgd0}.
   \item Each additional call then adds either an endpoint or a covariate,
-    splitting individual rows of the input in two as necessary.
+    splitting individual rows of the input into two as necessary.
     An \code{event} or \code{cumevent} directive adds events, while
-    a \code{tdc} or \code{cumtdc} one adds a time dependent covariate.
+    a \code{tdc} or \code{cumtdc} command adds a time dependent covariate.
     Events happen at the ends of intervals and time-dependent covariates 
     change at the start of an interval.  
   \item Additions from \code{data2} with a missing time value are ignored.
   \item The result of \code{tmerge} is a data frame with a few extra
     attributes. One of these, tcount, is designed to help visualize
-    the process and was printed out after the last step above.
+    the process, it is printed out by the summary function.
     Assume that a subject already had 3 intervals of (2,5), (5,10)
     and (14,40).
     A new event added at time 1 would be ``early'' while one at time 50
@@ -380,16 +380,18 @@ more bit of information to the data set.
     An event at
     time 3 is within an interval, one at 5 is on the border of two
     intervals, one at 14 is at the leading edge of an interval, one at
-    time 10 in on the trailing edge and at time 11 is in a gap.
+    time 10 in on the trailing edge, and one at time 11 is in a gap.
     In this data set all new additions fell strictly within prior intervals.
     We also see that etime6 and etime7 each added only a single event to 
-    the data.
+    the data.  Only one subject had more than 5 infections.
   \item If two observations in data2 for a single person share exactly
     the same time, the created value will be the later contribution for
     tdc() or event() calls, cumtdc() and cumevent() will add.
     The ``tied'' column tells how often this happened; in some
     data sets this behavior might not be desired and one would need to
     break the ties before calling tmerge.
+  \item If there are observations in \code{data2} that do not match any
+    of the identifiers in \code{data1} they count in the `missid' column.
   \item The last tmerge call adds a
     simple time-dependent variable \code{enum} which is a running observation
     count for each subject.  This can often be a useful variable in later
@@ -397,9 +399,11 @@ more bit of information to the data set.
     for each subject.
   \item The extra attributes of the data frame are ephemeral: they will be
     lost as soon as any further manipulation is done.  This is intentional.
+    The reason is that these may be invalid if, for instance, a subset of
+    the data was selected.
   \item One can verify that the resulting data set is equivalent to
     \code{cgd}, a (start, stop] version of the CGD data in the
-    survival library which had been created by hand several years earlier.
+    survival library, which had been created by hand several years earlier.
 \end{itemize}
 
 The \code{tmerge} function processes arguments sequentially, and the 
@@ -465,6 +469,10 @@ tdata <- with(jasa, data.frame(subject = subject,
                                               (tx.date - accept.dt)),
                                fustat = fustat
                              ))
+xdata <- tmerge(jasa, tdata, id=subject,
+                  death = event(futime, fustat),
+                  transplant   =  tdc(txtime), 
+                  options= list(idname="subject"))
 
 sdata <- tmerge(jasa, tdata, id=subject,
                   death = event(futime, fustat),
@@ -482,35 +490,40 @@ coxph(Surv(tstart, tstop, death) ~ age*trt + surgery + year,
 This example shows a special case for the \code{tmerge} function that 
 is quite common: if the first
 created variable is an event then the time range for each subject is
-inferred to be from 0 to the event time: explicit \code{tstop} 
+inferred to be from 0 to that event time: explicit \code{tstop} 
 and \code{tstart} arguments are not required.
 It also makes use of a two argument form of \code{event}.
-Each of the \code{event}, \code{cumevent}, \code{tdc} and \code{cumtdc}
-functions
+Each of the \code{event} and \code{cumevent} functions
 may have a second argument, which if present will be used as the value
-for the event code or time dependent covariate.
+for the event code.
 If this second argument is not present a value of 1 is used.
-
-If a created variable is not already in data1, 
-the starting value \emph{before} the first definition of that
-variable is a NA for a
-\code{tdc} or \code{cumtdc} call that has two arguments and 0
-in all other cases.
-If the variable being created is already a part of data1, 
-then our updates make changes to that variable; in the case of
-an \code{event} call it results in an addition, for \code{tdc}
-it results in wholesale replacement of any prior values.
-Be careful of this.  This feature is what allowed for the 
+If an event variable is already a part of data1, 
+then our updates make changes to that variable, possibly adding more events.
+This feature is what allowed for the 
 \code{infection} indicator to be build up incrementally in the cgd
-example above, but quite surprising results can occur when you
-think a new variable is being created de novo but its name is already
-in use.  For example, if we name the new variable
-`transplant' in the third line of \code{sdata} above it collides
-with an existing variable in the \code{jasa} data set; the result
-is to not create a time-dependent transplant variable at all.
-(The author made this mistake himself when creating this vignette,
- and then spent several hours searching the tmerge
-code for an error that wasn't there.)
+example above.
+
+The \code{tdc} and \code{cumtdc} arguments can have 1, 2 or three
+arguments.
+The first is always the time point, the second, if present, is the
+value to be inserted, and an optional third argument is the initial value.
+If the \code{tdc} call has a single argument the result is always a
+0/1 variable, 0 before the time point and 1 after.
+For the 2 or three argument form, the starting value \emph{before} the 
+first definition of the new variable (before the first time point)
+will be the initial value.
+The default for the initial value is NA, the value of the 
+\code{tdcstart} option.
+If the \code{tdc} variable being created is already a part of data1,
+the old value is replaced wholesale, it is not updated.
+This differs from the behavior for events.
+Although there is a use case for updating an existing time-dependent value, 
+say from a new data source, our experience had been that the much more
+common case was accidental reuse of an existing name, resulting in
+a chimeric mishmash between an existing baseline covariate and the additions,
+and creating a column which was valid for neither.
+Equally, some examples showed that we can not reliably update a tdc, i.e., 
+cases where the correct answer is unclear.
 
 The \code{tcount} table for the above fit shows all the deaths at the
 trailing edge of their interval, which is expected since the time
@@ -601,7 +614,7 @@ a boundary of two intervals.
 Another \Sexpr{atemp[1, 'late']} non-missing alkaline phosphotase
 values occurred after the last follow-up date
 of the pbc data set and are ignored.  
-Bilirubin is missing on no subjects, so it's addition creates a few more
+Bilirubin is missing on no subjects, so its addition creates a few more
 unique break points in the follow-up, namely those clinical visits for
 which the ascites value was missing.
 
@@ -1164,7 +1177,7 @@ the number of covariates.
 Much of the algorithmic effort in the underlying code is to use 
 updating methods for
 the mean and variance matrices, reducing the compute time to $O((n+d) p^2)$.
-Updating is not possible across a time split and the compuatation starts
+Updating is not possible across a time split and the computation starts
 anew, for a \code{tt} term we never update at all; for even moderate size
 data sets the impact of $nd$ versus $n+d$ can be surprising.
 

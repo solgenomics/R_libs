@@ -1,22 +1,23 @@
 Package: epiR
-Version: 1.0-15
-Date: 2020-06-13
+Version: 2.0.40
+Date: 2021-12-16
 Title: Tools for the Analysis of Epidemiological Data
-Author: Mark Stevenson <mark.stevenson1@unimelb.edu.au> with contributions from Telmo Nunes, Cord Heuer, Jonathon Marshall, Javier Sanchez, Ron Thornton, Jeno Reiczigel, Jim Robison-Cox, Paola Sebastiani, Peter Solymos, Kazuki Yoshida, Geoff Jones, Sarah Pirikahu, Simon Firestone, Ryan Kyle, Johann Popp, Mathew Jay and Charles Reynard.
+Author: Mark Stevenson <mark.stevenson1@unimelb.edu.au> and Evan Sergeant <evansergeant@gmail.com> with contributions from Telmo Nunes, Cord Heuer, Jonathon Marshall, Javier Sanchez, Ron Thornton, Jeno Reiczigel, Jim Robison-Cox, Paola Sebastiani, Peter Solymos, Kazuki Yoshida, Geoff Jones, Sarah Pirikahu, Simon Firestone, Ryan Kyle, Johann Popp, Mathew Jay, Charles Reynard, Allison Cheung, Nagendra Singanallur and Aniko Szabo.
 Maintainer: Mark Stevenson <mark.stevenson1@unimelb.edu.au>
-Description: Tools for the analysis of epidemiological data. Contains functions for directly and indirectly adjusting measures of disease frequency, quantifying measures of association on the basis of single or multiple strata of count data presented in a contingency table, and computing confidence intervals around incidence risk and incidence rate estimates. Miscellaneous functions for use in meta-analysis, diagnostic test interpretation, and sample size calculations.
+Description: Tools for the analysis of epidemiological and surveillance data. Contains functions for directly and indirectly adjusting measures of disease frequency, quantifying measures of association on the basis of single or multiple strata of count data presented in a contingency table, computation of confidence intervals around incidence risk and incidence rate estimates and sample size calculations for cross-sectional, case-control and cohort studies. Surveillance tools include functions to calculate an appropriate sample size for 1- and 2-stage representative freedom surveys, functions to estimate surveillance system sensitivity and functions to support scenario tree modelling analyses.   
 Depends: R (>= 3.0.0), survival
-Imports: BiasedUrn, methods
+Imports: BiasedUrn, pander, methods, sf, lubridate
 Suggests: MASS (>= 3.1-20), knitr, rmarkdown, RColorBrewer, ggplot2,
         plyr, rgdal, scales, spData, spatstat, foreign, maptools,
-        rgeos, mapproj
+        rgeos, mapproj, tidyverse, kableExtra
 VignetteBuilder: knitr
 License: GPL (>= 2)
-Packaged: 2020-06-13 09:02:04 UTC; Mark Stevenson
+Packaged: 2021-12-16 01:23:21 UTC; marks1
 URL:
         https://fvas.unimelb.edu.au/research/groups/veterinary-epidemiology-melbourne
+        and https://www.ausvet.com.au/
 RoxygenNote: 7.1.0
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2020-06-14 14:30:07 UTC
-Built: R 3.6.3; ; 2020-11-02 14:05:50 UTC; unix
+Date/Publication: 2021-12-16 03:30:06 UTC
+Built: R 3.6.3; ; 2021-12-20 15:27:29 UTC; unix

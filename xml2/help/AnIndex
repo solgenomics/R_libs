@@ -34,6 +34,7 @@ xml_document-class	oldclass
 xml_double	xml_text
 xml_dtd	xml_dtd
 xml_find_all	xml_find_all
+xml_find_all.xml_nodeset	xml_find_all
 xml_find_chr	xml_find_all
 xml_find_first	xml_find_all
 xml_find_lgl	xml_find_all

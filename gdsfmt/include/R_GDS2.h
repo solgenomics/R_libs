@@ -8,7 +8,7 @@
 //
 // R_GDS2.h: C interface to gdsfmt dynamic library
 //
-// Copyright (C) 2014-2017    Xiuwen Zheng
+// Copyright (C) 2014-2018    Xiuwen Zheng
 //
 // This file is part of CoreArray.
 //
@@ -27,9 +27,9 @@
 
 /**
  *	\file     R_GDS2.h
- *	\author   Xiuwen Zheng
+ *	\author   Xiuwen Zheng [zhengxwen@gmail.com]
  *	\version  1.0
- *	\date     2014 - 2017
+ *	\date     2014 - 2018
  *	\brief    C interface to gdsfmt dynamic library
  *	\details
 **/
@@ -648,11 +648,12 @@ COREARRAY_DLL_LOCAL void GDS_ArrayRead_BalanceBuffer(PdArrayRead array[],
 /// initialize the GDS routines
 void Init_GDS_Routines()
 {
-	#define LOAD(var, name)    \
-		*((DL_FUNC*)&var) = R_GetCCallable(gdsfmt_pkg_name, name)
+	static const char *PKG_GDSFMT = "gdsfmt";
 
-	static const char *gdsfmt_pkg_name = "gdsfmt";
-
+	#define LOAD(var, name)    { \
+	    DL_FUNC f = R_GetCCallable(PKG_GDSFMT, name); \
+		memcpy(&var, &f, sizeof(f)); \
+	}
 
 	// R objects
 	LOAD(func_R_SEXP2File, "GDS_R_SEXP2File");

@@ -55,6 +55,7 @@ lm.morantest            Moran's I test for residual spatial
 lm.morantest.exact      Exact global Moran's I test
 lm.morantest.sad        Saddlepoint approximation of global Moran's I
                         test
+localC                  Compute Local Geary statistic
 localG                  G and Gstar local spatial statistics
 localmoran              Local Moran's I statistic
 localmoran.exact        Exact local Moran's Ii tests
@@ -75,6 +76,8 @@ nb2blocknb              Block up neighbour list for location-less
 nb2lines                Use vector files for import and export of
                         weights
 nb2listw                Spatial weights for neighbours lists
+nb2listwdist            Distance-based spatial weights for neighbours
+                        lists
 nb2mat                  Spatial weights matrices for neighbours lists
 nbcosts                 Compute cost of edges
 nbdists                 Spatial link distance measures

@@ -4,10 +4,14 @@ author: "Roger Bivand"
 output:
   html_document:
     toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    toc_depth: 2
 bibliography: refs.bib
 vignette: >
   %\VignetteIndexEntry{Introduction to the North Carolina SIDS data set (re-revised)}
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -59,6 +63,7 @@ using the `st_centroid` method from **sf** as an **sfc** POINT object, and can
 be used to place labels after the extraction of the coordinate matrix:
 
 ```{r echo=TRUE}
+sf_use_s2(FALSE)
 plot(st_geometry(nc), axes=TRUE)
 text(st_coordinates(st_centroid(st_geometry(nc), of_largest_polygon=TRUE)), label=nc$FIPSNO, cex=0.5)
 ```
@@ -102,10 +107,13 @@ Next, let's download the GeoDa files and repeat the comparisons:
 
 ```{r echo=TRUE,eval=TRUE}
 td <- tempdir()
-download.file("https://s3.amazonaws.com/geoda/data/sids.zip", file.path(td, "sids.zip"), quiet=TRUE)
+#download.file("https://geodacenter.github.io/data-and-lab//data/sids.zip", file.path(td, "sids.zip"), quiet=TRUE) 
+# local copy (2020-10-22) as repository sometimes offline
+file.copy(system.file("etc/misc/sids.zip", package="spdep"), td)
 unzip(file.path(td, "sids.zip"), c("sids/sids.dbf", "sids/sids.prj", "sids/sids.shp", "sids/sids.shx"), exdir=td)
 sids_sf <- st_read(file.path(td, "sids/sids.shp"), quiet=TRUE)
-download.file("https://s3.amazonaws.com/geoda/data/sids2.zip", file.path(td, "sids2.zip"), quiet=TRUE)
+#download.file("https://geodacenter.github.io/data-and-lab//data/sids2.zip", file.path(td, "sids2.zip"), quiet=TRUE)
+file.copy(system.file("etc/misc/sids2.zip", package="spdep"), td)
 unzip(file.path(td, "sids2.zip"), c("sids2/sids2.dbf", "sids2/sids2.prj", "sids2/sids2.shp", "sids2/sids2.shx"), exdir=td)
 sids2_sf <- st_read(file.path(td, "sids2/sids2.shp"), quiet=TRUE)
 ```
@@ -249,7 +257,7 @@ tm_shape(nc) + tm_fill(c("low", "high"), palette="Set1", title="p-values") +
 ```
 
 For more complicated thematic maps, it may be helpful to use ColorBrewer
-(<http://colorbrewer2.org>) colour palettes. Here we use 
+(<https://colorbrewer2.org>) colour palettes. Here we use 
 palettes accessed through **tmap**, available in R in the **RColorBrewer** package.
 
 While the [`choynowski()`]{} function only provides the probability map
@@ -413,7 +421,11 @@ effect, row and column effects, and residuals:
 
 ```{r echo=TRUE,eval=TRUE}
 mFT <- sqrt(1000)*(sqrt(mSID74/mBIR74) + sqrt((mSID74+1)/mBIR74))
-mFT1 <- t(matrix(mFT, 4, 4, byrow=TRUE))
+# mFT1 <- t(matrix(mFT, 4, 4, byrow=TRUE))
+# wrong assignment of 12 elements to a 4x4 matrix detected by CRAN test 2021-05-22
+rc <- do.call("rbind", lapply(strsplit(names(mFT), ":"), as.integer))
+mFT1 <- matrix(as.numeric(NA), 4, 4)
+for (i in 1:nrow(rc)) mFT1[rc[i,1], rc[i,2]] <- mFT[i]
 med <- medpolish(mFT1, na.rm=TRUE, trace.iter=FALSE)
 med
 ```

@@ -10,6 +10,8 @@ estfun                  Extracting the estimating functions of a fitted
                         model.
 evaluate                Evaluate an object.
 explain                 Explain details of an object
+explore                 Create an interactive visualization appropriate
+                        to a particular object type
 fit                     Estimate model parameters.
 fit_xy                  Estimate model parameters.
 generate                Generate values based on inputs
@@ -17,12 +19,16 @@ glance                  Glance at an object
 hypothesize             Construct hypotheses.
 interpolate             Interpolate missing values
 learn                   Estimate model parameters.
+min_grid                Determine the minimum set of model fits
 prune                   Prune or reduce an object
 refit                   Refitting models
+required_pkgs           Determine packages required by objects
 setops                  Set operations
 specify                 Specify variables or other quantities.
 tidy                    Turn an object into a tidy tibble
 train                   Estimate model parameters.
+tunable                 Declare tunable parameters
+tune_args               Determine arguments tagged for tuning
 var_imp                 Calculation of variable importance
 varying_args            Find any arguments that are not fully
                         specified.

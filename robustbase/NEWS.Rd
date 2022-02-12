@@ -4,6 +4,93 @@
 \title{News for \R Package \pkg{robustbase}}
 \encoding{UTF-8}
 
+  % --- 1.0-0  if we fix  adjOutlyingness() properly !
+  %     =====  *and* fix  mc()  nicely according to Lukas Graz' MSc thesis !!
+
+\section{CHANGES in robustbase VERSION 0.93-9 (2021-09-27, svn r888)}{
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item \code{Qn(x)} and \code{Sn(x)} gain an \code{na.rm = FALSE}
+      option and now work when \code{x} has \code{NA}s and contains
+      \eqn{\pm}{+/-} \code{Inf}.
+    }
+  }
+  \subsection{Misc}{
+    \itemize{
+      \item No longer include \file{Rdefines.h} as it is somewhat deprecated.
+
+      \item In \file{src/lmrob.c} add \code{USE_FC_LEN_T} and use \code{FCONE}
+      rather than the older FCLEN approach.
+    }
+  }
+}
+
+\section{CHANGES in robustbase VERSION 0.93-8 (2021-06-01, svn r879)}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item \code{scaleTau2()} gets new optional \code{iter = 1} and
+      \code{tol.iter} arguments; mostly experimentally to see if or when
+      iteration makes sense.
+
+      \item \code{Qn(x, *)} gets new optional \code{k = .} to indicate the
+      \dQuote{quantile} i.e., order statistic to be computed (with default as
+      previously hard-coded).\cr
+      Experimentally to try for cases where more than n/2 observations
+      coincide (with the median), i.e., \code{x[i] == x0 == median(x[])},
+      and hence \code{Qn(x)} and \code{mad(x)} are zero.
+
+      \item \code{adjOutlyingness()} gets new option \code{IQRtype = 7}.
+    }
+  }
+  \subsection{Tweaks}{
+    \itemize{
+      \item For tests: *again* differences found in the non-sensical
+      \code{adjOutlyingness()} example (with large p/n, hence many "random" values
+      in the order of 1e15).
+      Disable the test for now (and record the result in *.Rout).
+    }
+  }
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item The \code{test()} utility in \file{tests/lmrob-ex12.R} no
+      longer calls \code{matrix(x, n,4)} where the length of x does not
+      match \code{4n}.   Similar change in \file{tests/mc-strict.R}
+    }
+  }
+}
+
+\section{CHANGES in robustbase VERSION 0.93-7 (2021-01-03, svn r865)}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item Use \command{\\CRANpkg\{.\}} in most places, providing web
+      links to the respective CRAN package page.
+
+      \item \code{adjOutlyingness()} now gains optional parameters to be
+      passed to \code{mc()}.
+    }
+  }
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item update the internal man page, so new \code{checkRdContents()}
+      is happy.
+      \item fix several \samp{\\url{.}}'s that now are diagnosed as
+      \sQuote{moved}.
+
+      \item \code{adjOutlyingness()} finally works with \code{p.samp > p}.
+
+      \item \code{scaleTau2()} now works with \code{Inf} and very large
+      values, and obeys new \code{na.rm = FALSE} argument.
+
+      \item add \code{check.environment=FALSE} to some of the
+      \code{all.equal()} calls (for 'R-devel', i.e., future R 4.1.x).
+
+      \item \code{wgt.himedian(numeric())} now returns \code{NA} instead of
+      occasionally seg.faulting or inf.looping.  Ditto for a case when
+      called from \code{Qn()}.
+    }
+  }
+}
+
 \section{CHANGES in robustbase VERSION 0.93-6 (2020-03-20, svn r854)}{
   \subsection{NEW FEATURES}{
     \itemize{
@@ -106,7 +193,7 @@
       \code{data(<..>, package="robustbase")}.
 
       \item The \file{lmrob_simulation} vignette now should continue
-      to work with upcoming \pkg{ggplot2}.
+      to work with upcoming package \CRANpkg{ggplot2}.
     }
   }
   \subsection{BUG FIXES}{
@@ -147,7 +234,7 @@
       %% which also depicts the \dQuote{non-robust} behavior of \code{lmrob(setting="KS2014")}
 
       \item Vignette \file{lmrob_simulation.Rnw}: fixed the wrong
-      \dQuote{emprical power} plots; with faster \pkg{ggplot2}, remove
+      \dQuote{emprical power} plots; with faster \CRANpkg{ggplot2}, remove
       all \code{eval=FALSE} for plots and longer store the
       \file{*.pdf}s.
 

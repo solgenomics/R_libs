@@ -150,6 +150,25 @@ legend("topleft",
        col = c("black", "red"))
 par(new = FALSE)
 
+## ----baselined, fig.cap = "Absorbance spectra, baseline spectra and baseline corrected spectra", fig.height = 4, fig.width = 6, fig.retina = 1, out.extra='style= "background-color: #FFFFFF; border: 10px solid transparent; padding:0px"'----
+data(NIRsoil)
+
+wav <- as.numeric(colnames(NIRsoil$spc))
+# plot of the 3 first absorbance spectra
+matplot(wav,
+        t(NIRsoil$spc[1:3, ]),
+        type = "l",
+        ylim = c(0, .6),
+        xlab = "Wavelength /nm",
+        ylab = "Absorbance")
+grid()
+ 
+bs <- baseline(NIRsoil$spc, wav)
+matlines(wav, t(bs[1:3, ]))
+ 
+fitted_baselines <- attr(bs, "baselines")
+matlines(wav, t(fitted_baselines[1:3, ]))
+
 ## ----bscale, tidy = TRUE------------------------------------------------------
 # X = spectral matrix
 # type = "soft" or "hard"

@@ -1,7 +1,7 @@
 Package: profileModel
 Type: Package
 Title: Profiling Inference Functions for Various Model Classes
-Version: 0.6.0
+Version: 0.6.1
 Authors@R: person(given = "Ioannis", family = "Kosmidis", role = c("aut", "cre"), email = "ioannis.kosmidis@warwick.ac.uk", comment = c(ORCID = "0000-0003-1556-0302"))
 URL: https://github.com/ikosmidis/profileModel
 BugReports: https://github.com/ikosmidis/profileModel/issues
@@ -9,11 +9,11 @@ Description: Provides tools that can be used to calculate, evaluate, plot and us
 License: GPL (>= 2)
 Depends: R (>= 2.6.0)
 Suggests: MASS, gnm
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2019-04-03 09:43:32 UTC; yiannis
+Packaged: 2021-01-08 16:34:01 UTC; yiannis
 Author: Ioannis Kosmidis [aut, cre] (<https://orcid.org/0000-0003-1556-0302>)
 Maintainer: Ioannis Kosmidis <ioannis.kosmidis@warwick.ac.uk>
 Repository: CRAN
-Date/Publication: 2019-04-03 11:40:03 UTC
-Built: R 3.6.0; ; 2019-05-10 11:14:30 UTC; unix
+Date/Publication: 2021-01-08 19:30:02 UTC
+Built: R 3.6.3; ; 2021-12-06 15:20:36 UTC; unix

@@ -2,7 +2,7 @@
 @rem Stephen Milborrow Jan 2014 Berea
 
 @echo test.mods.bat
-@"C:\PROGRA~1\R\R-3.6.1\bin\x64\R.exe" CMD BATCH --quiet --vanilla test.mods.R
+@"C:\PROGRA~1\R\R-4.1.0\bin\x64\R.exe" CMD BATCH --quiet --vanilla test.mods.R
 @if %errorlevel% equ 0 goto good1
 @echo R returned errorlevel %errorlevel%, see test.mods.Rout:
 @echo.
@@ -11,15 +11,8 @@
 @exit /B 1
 :good1
 @echo diff test.mods.Rout test.mods.Rout.save
-@rem egreps to deal with times
-@C:\Rtools\bin\echo -n "new "
-@egrep "^\[total time" test.mods.Rout
-@C:\Rtools\bin\echo -n "old "
-@egrep "^\[total time" test.mods.Rout.save
-@egrep -v "^\[total time" test.mods.Rout      >test.mods.Rout1
-@egrep -v "^\[total time" test.mods.Rout.save >test.mods.Rout.save1
 @rem -w to treat \n same as \r\n
-@mks.diff -w test.mods.Rout1 test.mods.Rout.save1
+@mks.diff -w test.mods.Rout test.mods.Rout.save
 @if %errorlevel% equ 0 goto good2
 @echo === Files are different ===
 @diffps -s Rplots.ps ..\..\.#\test-reference\test.mods.save.ps
@@ -32,6 +25,6 @@ diffps Rplots.ps ..\..\.#\test-reference\test.mods.save.ps
 @echo === Files are different ===
 @exit /B 1
 :good3
-@rm -f test.mods.Rout test.mods.Rout1 test.mods.Rout.save1
+@rm -f test.mods.Rout
 @rem @rm -f test.mods.pdf
 @exit /B  0

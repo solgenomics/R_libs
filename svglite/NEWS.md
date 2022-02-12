@@ -1,6 +1,48 @@
-# svglite 1.2.3
+# svglite 2.0.0
 
-# svglite (development version)
+* svglite now uses systemfonts for text metric calculations and font family 
+  lookup.
+  
+* svglite can now encode OpenType font features into the CSS if the used font
+  contains registered features
+  
+* svglite now directly encodes raster data into png instead of rendering it 
+  through cairo. If the provided raster is smaller than the final requested size
+  it will be resized.
+  
+* SVG's can now get a top-level id so that style definitions doesn't spill into 
+  the surrounding HTML (#91)
+  
+* Dimensions are now encoded into the top-level `<svg>` tag (#90)
+
+* Starting a new page creates a new file if the filename supports it (#98, @vandenman).
+
+* The _inline_ devices now defaults to the same dimensions as `svglite()` (#89)
+
+* Clip defs are now only written if they don't already exist (#110)
+
+* Clipping is now defined with outer groups instead of on each element (#109)
+
+* svglite now uses cpp11 instead of Rcpp (#100)
+
+* svgz output is now supported natively (#6)
+
+* Text adjustments are now encoded in css where possible (#107)
+
+* The use of textLength CSS property can now be turned off (#118)
+
+* web font imports can now be given when creating an svg (#108)
+
+* Add scaling argument to devices to control line-width and text scaling (#115)
+
+* svg files that are being written are now only valid at all times if `always_valid`
+  is set to `TRUE` in the `svglite()` call.
+
+* svglite now guards against attempts at writing to the device before a new page 
+  has been requested (#126)
+
+
+# svglite 1.2.3
 
 * The radius of circles is no longer expressed in pt (#93, @vandenman).
 

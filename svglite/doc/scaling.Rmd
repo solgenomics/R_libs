@@ -35,7 +35,7 @@ requires some CSS tricks to get this behaviour, see
 Aspect ratio is preserved by default when the figure is scaled up or
 down. The details of how the aspect ratio is preserved can be adjusted
 in multiple ways via the `preserveAspectRatio` attribute. See
-<https://sarasoueidan.com/blog/svg-coordinate-systems/> for more
+<https://www.sarasoueidan.com/blog/svg-coordinate-systems/> for more
 information about this property.
 
 Other useful resource: <https://css-tricks.com/scale-svg/>
@@ -100,7 +100,7 @@ As other graphics devices, svglite is scaled in big points (1/72 inch)
 rather than pica points (1/72.27 inch). Note that in LaTeX and in the
 `grid` graphics system on which ggplot2 is based, points refer to pica
 points. Big points are denoted in LaTeX by `bp` and in CSS by `pt`. We
-use the latter notation. See <http://tex.stackexchange.com/a/200968/19755>
+use the latter notation. See <https://tex.stackexchange.com/a/200968/19755>
 for some historical background about these units.
 
 The conversion between device units and physical dimensions is
@@ -129,10 +129,9 @@ all point sizes directly as big points (e.g. the `ps` graphical
 parameter and the `fontsize` argument of device functions). The
 default font size is 12pt.
 
-Text metrics are computed by Cairo thanks to David Gohel's gdtools
-package. gdtools instantiates a PDF Cairo surface scaled in big
-points. When svglite needs to compute metrics for a string of text, it
-supplies the current scaled font size to Cairo: `cex * ps`.
+Text metrics are computed by systemfonts, which uses freetype to extract metrics 
+for each glyph and calculate string dimensions from that. Text metrics are 
+calculated at 1000dpi based on `cex * ps` font size.
 
 The Base graphics system also makes use of the obscure `cra` parameter
 and its relatives (`cin`, `cxy`, and `csi`). `cra` serves as a crude

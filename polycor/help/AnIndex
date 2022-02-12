@@ -1,4 +1,5 @@
 as.matrix.hetcor	hetcor
+detectCores	hetcor
 hetcor	hetcor
 hetcor.data.frame	hetcor
 hetcor.default	hetcor

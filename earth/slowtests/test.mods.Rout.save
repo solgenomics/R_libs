@@ -1,5 +1,5 @@
 > # test.mods.R: test earth's ability to build various models
->
+> 
 > source("test.prolog.R")
 > library(earth)
 Loading required package: Formula
@@ -7,7 +7,7 @@ Loading required package: plotmo
 Loading required package: plotrix
 Loading required package: TeachingDemos
 > options(digits=4)
->
+> 
 > SHORTTEST <- TRUE # use TRUE for production testing against test.mods.Rout.save
 > TRACE <- 0
 > PRINT.DATA <- FALSE
@@ -20,7 +20,7 @@ Loading required package: TeachingDemos
 > TIME <- FALSE
 > COMPARE_TO_WEIGHTED_MODEL <- FALSE
 > RANDOMFOREST <- FALSE
-> MARS <- FALSE
+> MARS <- TRUE
 > RPROF <- FALSE
 > if(SHORTTEST) {
 +     GLOBAL.SEEDS <- 1
@@ -30,21 +30,21 @@ Loading required package: TeachingDemos
 +     TIME <- FALSE
 +     COMPARE_TO_WEIGHTED_MODEL <- FALSE
 +     RANDOMFOREST <- FALSE
-+     MARS <- FALSE
++     # MARS <- FALSE
 +     RPROF <- FALSE
 + }
 > itest <- 0
->
+> 
 > test.rsqs.global <- nterms.global <- delta.rsqs.global <- nknots.global <- NULL
 > other.rsqs.global <- NULL
 > mars.rsqs.global <- mars.nterms.global <- NULL
->
+> 
 > printf <- function(format, ...) cat(sprint(format, ...)) # like c printf
->
+> 
 > sq <- function(x) x * x
->
+> 
 > sos <- function(x) sum(as.vector(x^2)) # sum of squares
->
+> 
 > test.mod <- function(func, x, xtest, collinear.x2, npreds, nk=NULL, degree=2, ...)
 + {
 +     itest <<- itest + 1
@@ -85,7 +85,7 @@ Loading required package: TeachingDemos
 +         delta.rsq <- test.rsq - max(0, mod$grsq)
 +     } else
 +         delta.rsq <- test.rsq - mod$grsq
-+
++ 
 +     extra.msg <- ""
 +     if(COMPARE_TO_WEIGHTED_MODEL && !FORCE.WEIGHTS) {
 +         # build a weighted model and print a message if significantly different
@@ -118,7 +118,7 @@ Loading required package: TeachingDemos
 +         mars.rsqs.global   <<- c(mars.rsqs.global, rsq.mars)
 +         mars.nterms.global <<- c(mars.nterms.global, length(mars$selected.terms))
 +         delta <- test.rsq - rsq.mars
-+         extra.msg <- sprint("%s rsq.mars % 4.2f delta % 4.2f%s",
++         extra.msg <- sprint("%s rsq.mars % 4.3f delta % 4.2f%s",
 +                                extra.msg, rsq.mars, delta,
 +                                if(abs(delta) > .5) "!" else "")
 +     }
@@ -154,7 +154,7 @@ Loading required package: TeachingDemos
 + }
 > ran <- function(n) runif(n, -1, 1)
 > # ran <- function(n) 2 * rnorm(n)
->
+> 
 > testn <- function(n, collinear.x2=FALSE)
 + {
 +     itest <<- 0
@@ -165,20 +165,20 @@ Loading required package: TeachingDemos
 +     if(collinear.x2)
 +         x[,2] <- x[,1] + .3 * rnorm(nrow(x))
 +     colnames(x) <- paste("x", 1:ncol(x), sep="")
-+
++ 
 +     xtest <- matrix(ran(max.ncol * 1e4), ncol=max.ncol)
 +     if(collinear.x2)
 +         xtest[,2] <- xtest[,1] + .3 * rnorm(nrow(xtest))
 +     xtest <- xtest[order(xtest[,1]), , drop=FALSE]
 +     colnames(xtest) <- c(paste("x", 1:max.ncol, sep=""))
-+
++ 
 +     univariate <- function(x)
 +     {
 +         x[,1] + .3 * rnorm(nrow(x))
 +     }
 +     test.mod(univariate, x, xtest, collinear.x2, npreds=1, degree=1)
 +     test.mod(univariate, x, xtest, collinear.x2, npreds=2, degree=2) # extra predictor
-+
++ 
 +     bi <- function(x)
 +     {
 +         x[,1] + x[,2] + .3 * rnorm(nrow(x))
@@ -186,7 +186,7 @@ Loading required package: TeachingDemos
 +     test.mod(bi, x, xtest, collinear.x2, npreds=2, degree=1)
 +     test.mod(bi, x, xtest, collinear.x2, npreds=2, degree=2)
 +     test.mod(bi, x, xtest, collinear.x2, npreds=3, degree=2) # extra predictor
-+
++ 
 +     bi.interact <- function(x)
 +     {
 +         x[,1] + x[,2] + (x[,1] * x[,2]) + .3 * rnorm(nrow(x))
@@ -194,7 +194,7 @@ Loading required package: TeachingDemos
 +     test.mod(bi.interact, x, xtest, collinear.x2, npreds=2, degree=1)
 +     test.mod(bi.interact, x, xtest, collinear.x2, npreds=2, degree=2)
 +     test.mod(bi.interact, x, xtest, collinear.x2, npreds=3, degree=2) # extra predictor
-+
++ 
 +     bi.interact2 <- function(x)
 +     {
 +         x[,1] - x[,2] + (x[,1] * x[,2]) + .3 * rnorm(nrow(x))
@@ -202,7 +202,7 @@ Loading required package: TeachingDemos
 +     test.mod(bi.interact2, x, xtest, collinear.x2, npreds=2, degree=1)
 +     test.mod(bi.interact2, x, xtest, collinear.x2, npreds=2, degree=2)
 +     test.mod(bi.interact2, x, xtest, collinear.x2, npreds=3, degree=2) # extra predictor
-+
++ 
 +     bi.interact3 <- function(x)
 +     {
 +         x[,1] + x[,2] - .5 * (x[,1] * x[,2]) + .3 * rnorm(nrow(x))
@@ -211,7 +211,7 @@ Loading required package: TeachingDemos
 +     test.mod(bi.interact3, x, xtest, collinear.x2, npreds=2, degree=2)
 +     test.mod(bi.interact3, x, xtest, collinear.x2, npreds=3, degree=2) # extra predictor
 +     printf("\n")
-+
++ 
 +     tri <- function(x)
 +     {
 +         x[,1] + x[,2] - x[,3] + .1 * rnorm(nrow(x))
@@ -219,7 +219,7 @@ Loading required package: TeachingDemos
 +     test.mod(tri, x, xtest, collinear.x2, npreds=3, degree=1)
 +     test.mod(tri, x, xtest, collinear.x2, npreds=3, degree=2)
 +     test.mod(tri, x, xtest, collinear.x2, npreds=4, degree=2) # extra predictor
-+
++ 
 +     tri.interact <- function(x)
 +     {
 +         x[,1] - x[,2] + sin(x[,3]) + (x[,1] * x[,2]) + .2 * rnorm(nrow(x))
@@ -227,7 +227,7 @@ Loading required package: TeachingDemos
 +     test.mod(tri.interact, x, xtest, collinear.x2, npreds=3, degree=1)
 +     test.mod(tri.interact, x, xtest, collinear.x2, npreds=3, degree=2)
 +     test.mod(tri.interact, x, xtest, collinear.x2, npreds=3, degree=3)
-+
++ 
 +     # TODO this and next function often cause a negative test.rsq (even though grsq is high)
 +     tri.interact2 <- function(x)
 +     {
@@ -236,7 +236,7 @@ Loading required package: TeachingDemos
 +     test.mod(tri.interact2, x, xtest, collinear.x2, npreds=3, degree=1)
 +     test.mod(tri.interact2, x, xtest, collinear.x2, npreds=3, degree=2)
 +     test.mod(tri.interact2, x, xtest, collinear.x2, npreds=3, degree=3)
-+
++ 
 +     tri.interact3 <- function(x)
 +     {
 +         x[,1] - x[,2] + sq(x[,3]) + (x[,1] * x[,2]) + .2 * rnorm(nrow(x))
@@ -244,7 +244,7 @@ Loading required package: TeachingDemos
 +     test.mod(tri.interact3, x, xtest, collinear.x2, npreds=3, degree=1)
 +     test.mod(tri.interact3, x, xtest, collinear.x2, npreds=3, degree=2)
 +     test.mod(tri.interact3, x, xtest, collinear.x2, npreds=3, degree=3)
-+
++ 
 +     tri.two.interacts <- function(x)
 +     {
 +         x[,1] + x[,2] - sq(x[,3]) + (x[,1] * x[,2]) + sq(x[,1] * sq(x[,3])) + .1 * rnorm(nrow(x))
@@ -252,7 +252,7 @@ Loading required package: TeachingDemos
 +     test.mod(tri.two.interacts, x, xtest, collinear.x2, npreds=3, degree=1)
 +     test.mod(tri.two.interacts, x, xtest, collinear.x2, npreds=3, degree=2)
 +     printf("\n")
-+
++ 
 +     sin.3.x1 <- function(x)
 +     {
 +         # curve looks like this   /\
@@ -263,7 +263,7 @@ Loading required package: TeachingDemos
 +     test.mod(sin.3.x1, x, xtest, collinear.x2, npreds=2, nk=51, degree=1) # x2 is noise
 +     test.mod(sin.3.x1, x, xtest, collinear.x2, npreds=2, nk=51, degree=2)
 +     printf("\n")
-+
++ 
 +     sin.5.x1 <- function(x)
 +     {
 +         # curve looks like this   \  /\
@@ -274,7 +274,7 @@ Loading required package: TeachingDemos
 +     test.mod(sin.5.x1, x, xtest, collinear.x2, npreds=2, nk=51, degree=1) # x2 is noise
 +     test.mod(sin.5.x1, x, xtest, collinear.x2, npreds=2, nk=51, degree=2)
 +     printf("\n")
-+
++ 
 +     if(n > 30) {
 +         sin.5.x1.noise <- function(x)
 +         {
@@ -357,7 +357,7 @@ Loading required package: TeachingDemos
 +     test.mod(sin.3.x1.plus.x2, x, xtest, collinear.x2, npreds=2, degree=1)
 +     test.mod(sin.3.x1.plus.x2, x, xtest, collinear.x2, npreds=2, degree=2)
 +     printf("\n")
-+
++ 
 +     # TODO this function tends to have the most rsq discrepancies with randomForest models
 +     sin.2.x1.times.x2 <- function(x)
 +     {
@@ -366,7 +366,7 @@ Loading required package: TeachingDemos
 +     test.mod(sin.2.x1.times.x2, x, xtest, collinear.x2, npreds=2, degree=1)
 +     test.mod(sin.2.x1.times.x2, x, xtest, collinear.x2, npreds=2, degree=2)
 +     printf("\n")
-+
++ 
 +     # TODO this and the next function seem to most often cause a big
 +     #      discrepancy between grsq and test.rsq
 +     cos.2.x1.times.x2 <- function(x) # cos(2 * x1) looks like /\
@@ -376,7 +376,7 @@ Loading required package: TeachingDemos
 +     test.mod(cos.2.x1.times.x2, x, xtest, collinear.x2, npreds=2, degree=1)
 +     test.mod(cos.2.x1.times.x2, x, xtest, collinear.x2, npreds=2, degree=2)
 +     printf("\n")
-+
++ 
 +     cos.2.x1.times.x2.noise <- function(x)
 +     {
 +         cos(2 * x[,1]) * x[,2] + .3 * rnorm(nrow(x))
@@ -384,7 +384,7 @@ Loading required package: TeachingDemos
 +     test.mod(cos.2.x1.times.x2.noise, x, xtest, collinear.x2, npreds=2, degree=1)
 +     test.mod(cos.2.x1.times.x2.noise, x, xtest, collinear.x2, npreds=2, degree=2)
 +     printf("\n")
-+
++ 
 +     eqn56 <- function(x) # Friedman MARS paper equation 56 (note that this is additive)
 +     {
 +         0.1 * exp(4 * x[,1]) +
@@ -400,7 +400,7 @@ Loading required package: TeachingDemos
 +     test.mod(eqn56, x, xtest, collinear.x2, npreds=5, nk=99, degree=2)
 +     test.mod(eqn56, x, xtest, collinear.x2, npreds=5, nk=99, degree=3)
 +     printf("\n")
-+
++ 
 +     eqn56.extra.preds <- function(x)
 +     {
 +         eqn56(x)
@@ -414,7 +414,7 @@ Loading required package: TeachingDemos
 +     if(n > 30)
 +         test.mod(eqn56.extra.preds, x, xtest, collinear.x2, npreds=9, degree=3, nk=99)
 +     printf("\n")
-+
++ 
 +     eqn56.noise <- function(x)
 +     {
 +         eqn56(x) + rnorm(nrow(x))
@@ -427,7 +427,7 @@ Loading required package: TeachingDemos
 +     # test.mod(eqn56.noise, x, xtest, collinear.x2, npreds=5, nk=99, degree=2)
 +     # test.mod(eqn56.noise, x, xtest, collinear.x2, npreds=5, nk=99, degree=3)
 +     printf("\n")
-+
++ 
 +     if(n > 30) {
 +         eqn56.noise.extra.preds <- function(x)
 +         {
@@ -445,7 +445,7 @@ Loading required package: TeachingDemos
 +     # force linpreds in 1 and 2 degree terms
 +     test.mod(eqn56, x, xtest, collinear.x2, npreds=5, linpreds=c("^x1$","x3","5"))
 +     test.mod(eqn56, x, xtest, collinear.x2, npreds=5, linpreds=c(3,5))
-+
++ 
 +     # check symmetry by using negative of eqn56 (may not be completely symmetric)
 +     neg.eqn56 <- function(x)
 +     {
@@ -453,7 +453,7 @@ Loading required package: TeachingDemos
 +     }
 +     test.mod(neg.eqn56, x, xtest, collinear.x2, npreds=5, linpreds=c(3,5))
 +     printf("\n")
-+
++ 
 +     five.preds <- function(x) # x1 and x2, and x3 and x4 interact
 +     {
 +         y <- 0
@@ -469,7 +469,7 @@ Loading required package: TeachingDemos
 +     # test.mod(five.preds, x, xtest, collinear.x2, npreds=5, degree=2, nk=51)
 +     # test.mod(five.preds, x, xtest, collinear.x2, npreds=5, degree=3, nk=51)
 +     printf("\n")
-+
++ 
 +     if(n > 30) {
 +         five.preds.noise <- function(x)
 +         {
@@ -504,7 +504,7 @@ Loading required package: TeachingDemos
 +     # commented out the following because it is slow
 +     # test.mod(pure.noise, x, xtest, collinear.x2, npreds=5, degree=2, nk=51)
 +     printf("\n")
-+
++ 
 +     if(n > 100) { # need many points (Fast MARS paper uses 400 and 800 for robot.arm)
 +         robot.arm <- function(x) # Friedman Fast MARS paper
 +         {
@@ -513,11 +513,11 @@ Loading required package: TeachingDemos
 +             theta1 <- x[,3]
 +             theta2 <- x[,4]
 +             phi    <- x[,5]
-+
++ 
 +             x1 <- l1 * cos(theta1) - l2 * cos(theta1 + theta2) * cos(phi)
 +             y <-  l1 * sin(theta1) - l2 * sin(theta1 + theta2) * cos(phi)
 +             z <-  l2 * sin(theta2) * sin(phi)
-+
++ 
 +             sqrt(x1^2 + y^2 + z^2)
 +         }
 +         x[,1] <- (x[,1] + 1) / 2    # l1  0..1
@@ -526,14 +526,14 @@ Loading required package: TeachingDemos
 +         x[,4] <- pi * (x[,4] + 1)   # theta2
 +         x[,5] <- pi * x[,5] / 2     # phi
 +         colnames(x) <- c("l1", "l2", "theta1", "theta2", "phi", paste("x", 6:ncol(x), sep=""))
-+
++ 
 +         xtest[,1] <- (xtest[,1] + 1) / 2    # l1  0..1
 +         xtest[,2] <- (xtest[,2] + 1) / 2    # l2  0..1
 +         xtest[,3] <- pi * (xtest[,3] + 1)   # theta1
 +         xtest[,4] <- pi * (xtest[,4] + 1)   # theta2
 +         xtest[,5] <- pi * xtest[,5] / 2     # phi
 +         colnames(xtest) <- c("l1", "l2", "theta1", "theta2", "phi", paste("x", 6:ncol(x), sep=""))
-+
++ 
 +             test.mod(robot.arm, x, xtest, collinear.x2, npreds=5, nk=51, degree=3)
 +             test.mod(robot.arm, x, xtest, collinear.x2, npreds=5, nk=99, degree=2)
 +             test.mod(robot.arm, x, xtest, collinear.x2, npreds=5, nk=99, degree=3)
@@ -585,113 +585,117 @@ begin GLOBAL.SEEDS 1 FORCE.WEIGHTS FALSE
 +     if(COLLINEAR.TESTS)
 +         testn(100, collinear.x2=TRUE) # collinear.x2 preds expose the need for Adjust.endspan
 + }
-TEST 1  n 100 p 1 univariate       nk 21  deg 1 nterms 3  grsq  0.79 test.rsq  0.78 grsq-test.rsq -0.01
-TEST 2  n 100 p 2 univariate       nk 21  deg 2 nterms 3  grsq  0.80 test.rsq  0.75 grsq-test.rsq -0.05
-TEST 3  n 100 p 2 bi               nk 21  deg 1 nterms 5  grsq  0.83 test.rsq  0.87 grsq-test.rsq  0.04
-TEST 4  n 100 p 2 bi               nk 21  deg 2 nterms 4  grsq  0.87 test.rsq  0.88 grsq-test.rsq  0.01
-TEST 5  n 100 p 3 bi               nk 21  deg 2 nterms 5  grsq  0.86 test.rsq  0.87 grsq-test.rsq  0.01
-TEST 6  n 100 p 2 bi.interact      nk 21  deg 1 nterms 4  grsq  0.78 test.rsq  0.73 grsq-test.rsq -0.05
-TEST 7  n 100 p 2 bi.interact      nk 21  deg 2 nterms 6  grsq  0.89 test.rsq  0.89 grsq-test.rsq -0.01
-TEST 8  n 100 p 3 bi.interact      nk 21  deg 2 nterms 6  grsq  0.91 test.rsq  0.89 grsq-test.rsq -0.03
-TEST 9  n 100 p 2 bi.interact2     nk 21  deg 1 nterms 4  grsq  0.81 test.rsq  0.68 grsq-test.rsq -0.12
-TEST 10 n 100 p 2 bi.interact2     nk 21  deg 2 nterms 6  grsq  0.90 test.rsq  0.86 grsq-test.rsq -0.04
-TEST 11 n 100 p 3 bi.interact2     nk 21  deg 2 nterms 5  grsq  0.89 test.rsq  0.81 grsq-test.rsq -0.08
-TEST 12 n 100 p 2 bi.interact3     nk 21  deg 1 nterms 4  grsq  0.79 test.rsq  0.84 grsq-test.rsq  0.05
-TEST 13 n 100 p 2 bi.interact3     nk 21  deg 2 nterms 4  grsq  0.85 test.rsq  0.87 grsq-test.rsq  0.02
-TEST 14 n 100 p 3 bi.interact3     nk 21  deg 2 nterms 8  grsq  0.84 test.rsq  0.85 grsq-test.rsq  0.01
+TEST 1  n 100 p 1 univariate       nk 21  deg 1 Loading required package: mda
+Loading required package: class
+Loaded mda 0.5-2
 
-TEST 15 n 100 p 3 tri              nk 21  deg 1 nterms 7  grsq  0.99 test.rsq  0.99 grsq-test.rsq  0.00
-TEST 16 n 100 p 3 tri              nk 21  deg 2 nterms 7  grsq  0.98 test.rsq  0.99 grsq-test.rsq  0.01
-TEST 17 n 100 p 4 tri              nk 21  deg 2 nterms 7  grsq  0.98 test.rsq  0.99 grsq-test.rsq  0.01
-TEST 18 n 100 p 3 tri.interact     nk 21  deg 1 nterms 7  grsq  0.87 test.rsq  0.80 grsq-test.rsq -0.07
-TEST 19 n 100 p 3 tri.interact     nk 21  deg 2 nterms 8  grsq  0.94 test.rsq  0.96 grsq-test.rsq  0.01
-TEST 20 n 100 p 3 tri.interact     nk 21  deg 3 nterms 8  grsq  0.95 test.rsq  0.96 grsq-test.rsq  0.01
-TEST 21 n 100 p 3 tri.interact2    nk 21  deg 1 nterms 5  grsq  0.86 test.rsq  0.79 grsq-test.rsq -0.07
-TEST 22 n 100 p 3 tri.interact2    nk 21  deg 2 nterms 7  grsq  0.94 test.rsq  0.96 grsq-test.rsq  0.02
-TEST 23 n 100 p 3 tri.interact2    nk 21  deg 3 nterms 9  grsq  0.95 test.rsq  0.93 grsq-test.rsq -0.02
-TEST 24 n 100 p 3 tri.interact3    nk 21  deg 1 nterms 7  grsq  0.88 test.rsq  0.79 grsq-test.rsq -0.09
-TEST 25 n 100 p 3 tri.interact3    nk 21  deg 2 nterms 10 grsq  0.93 test.rsq  0.91 grsq-test.rsq -0.02
-TEST 26 n 100 p 3 tri.interact3    nk 21  deg 3 nterms 11 grsq  0.94 test.rsq  0.93 grsq-test.rsq -0.01
-TEST 27 n 100 p 3 tri.two.interact nk 21  deg 1 nterms 7  grsq  0.88 test.rsq  0.78 grsq-test.rsq -0.10
-TEST 28 n 100 p 3 tri.two.interact nk 21  deg 2 nterms 14 grsq  0.98 test.rsq  0.98 grsq-test.rsq -0.00
+nterms 3  grsq  0.79 test.rsq  0.78 grsq-test.rsq -0.01 rsq.mars  0.782 delta  0.00
+TEST 2  n 100 p 2 univariate       nk 21  deg 2 nterms 3  grsq  0.80 test.rsq  0.75 grsq-test.rsq -0.05 rsq.mars  0.751 delta  0.00
+TEST 3  n 100 p 2 bi               nk 21  deg 1 nterms 5  grsq  0.83 test.rsq  0.87 grsq-test.rsq  0.04 rsq.mars  0.872 delta  0.00
+TEST 4  n 100 p 2 bi               nk 21  deg 2 nterms 4  grsq  0.87 test.rsq  0.88 grsq-test.rsq  0.01 rsq.mars  0.876 delta  0.00
+TEST 5  n 100 p 3 bi               nk 21  deg 2 nterms 5  grsq  0.86 test.rsq  0.87 grsq-test.rsq  0.01 rsq.mars  0.872 delta -0.00
+TEST 6  n 100 p 2 bi.interact      nk 21  deg 1 nterms 4  grsq  0.78 test.rsq  0.73 grsq-test.rsq -0.05 rsq.mars  0.743 delta -0.01
+TEST 7  n 100 p 2 bi.interact      nk 21  deg 2 nterms 6  grsq  0.89 test.rsq  0.89 grsq-test.rsq -0.01 rsq.mars  0.887 delta -0.00
+TEST 8  n 100 p 3 bi.interact      nk 21  deg 2 nterms 6  grsq  0.91 test.rsq  0.89 grsq-test.rsq -0.03 rsq.mars  0.849 delta  0.04
+TEST 9  n 100 p 2 bi.interact2     nk 21  deg 1 nterms 4  grsq  0.81 test.rsq  0.68 grsq-test.rsq -0.12 rsq.mars  0.667 delta  0.02
+TEST 10 n 100 p 2 bi.interact2     nk 21  deg 2 nterms 6  grsq  0.90 test.rsq  0.86 grsq-test.rsq -0.04 rsq.mars  0.842 delta  0.01
+TEST 11 n 100 p 3 bi.interact2     nk 21  deg 2 nterms 5  grsq  0.89 test.rsq  0.81 grsq-test.rsq -0.08 rsq.mars  0.863 delta -0.05
+TEST 12 n 100 p 2 bi.interact3     nk 21  deg 1 nterms 4  grsq  0.79 test.rsq  0.84 grsq-test.rsq  0.05 rsq.mars  0.841 delta -0.00
+TEST 13 n 100 p 2 bi.interact3     nk 21  deg 2 nterms 4  grsq  0.85 test.rsq  0.87 grsq-test.rsq  0.02 rsq.mars  0.861 delta  0.01
+TEST 14 n 100 p 3 bi.interact3     nk 21  deg 2 nterms 8  grsq  0.84 test.rsq  0.85 grsq-test.rsq  0.01 rsq.mars  0.858 delta -0.01
 
-TEST 29 n 100 p 1 sin.3.x1         nk 51  deg 1 nterms 7  grsq  1.00 test.rsq  1.00 grsq-test.rsq  0.00
-TEST 30 n 100 p 2 sin.3.x1         nk 51  deg 1 nterms 7  grsq  1.00 test.rsq  1.00 grsq-test.rsq  0.00
-TEST 31 n 100 p 2 sin.3.x1         nk 51  deg 2 nterms 7  grsq  1.00 test.rsq  1.00 grsq-test.rsq  0.00
+TEST 15 n 100 p 3 tri              nk 21  deg 1 nterms 7  grsq  0.99 test.rsq  0.99 grsq-test.rsq  0.00 rsq.mars  0.989 delta  0.00
+TEST 16 n 100 p 3 tri              nk 21  deg 2 nterms 7  grsq  0.98 test.rsq  0.99 grsq-test.rsq  0.01 rsq.mars  0.976 delta  0.01
+TEST 17 n 100 p 4 tri              nk 21  deg 2 nterms 7  grsq  0.98 test.rsq  0.99 grsq-test.rsq  0.01 rsq.mars  0.982 delta  0.01
+TEST 18 n 100 p 3 tri.interact     nk 21  deg 1 nterms 7  grsq  0.87 test.rsq  0.80 grsq-test.rsq -0.07 rsq.mars  0.792 delta  0.01
+TEST 19 n 100 p 3 tri.interact     nk 21  deg 2 nterms 8  grsq  0.94 test.rsq  0.96 grsq-test.rsq  0.01 rsq.mars  0.952 delta  0.00
+TEST 20 n 100 p 3 tri.interact     nk 21  deg 3 nterms 8  grsq  0.95 test.rsq  0.96 grsq-test.rsq  0.01 rsq.mars  0.955 delta  0.00
+TEST 21 n 100 p 3 tri.interact2    nk 21  deg 1 nterms 5  grsq  0.86 test.rsq  0.79 grsq-test.rsq -0.07 rsq.mars  0.794 delta  0.00
+TEST 22 n 100 p 3 tri.interact2    nk 21  deg 2 nterms 7  grsq  0.94 test.rsq  0.96 grsq-test.rsq  0.02 rsq.mars  0.956 delta -0.00
+TEST 23 n 100 p 3 tri.interact2    nk 21  deg 3 nterms 9  grsq  0.95 test.rsq  0.93 grsq-test.rsq -0.02 rsq.mars  0.920 delta  0.01
+TEST 24 n 100 p 3 tri.interact3    nk 21  deg 1 nterms 7  grsq  0.88 test.rsq  0.79 grsq-test.rsq -0.09 rsq.mars  0.788 delta  0.00
+TEST 25 n 100 p 3 tri.interact3    nk 21  deg 2 nterms 10 grsq  0.93 test.rsq  0.91 grsq-test.rsq -0.02 rsq.mars  0.950 delta -0.04
+TEST 26 n 100 p 3 tri.interact3    nk 21  deg 3 nterms 11 grsq  0.94 test.rsq  0.93 grsq-test.rsq -0.01 rsq.mars  0.908 delta  0.02
+TEST 27 n 100 p 3 tri.two.interact nk 21  deg 1 nterms 7  grsq  0.88 test.rsq  0.78 grsq-test.rsq -0.10 rsq.mars  0.779 delta -0.00
+TEST 28 n 100 p 3 tri.two.interact nk 21  deg 2 nterms 14 grsq  0.98 test.rsq  0.98 grsq-test.rsq -0.00 rsq.mars  0.963 delta  0.01
 
-TEST 32 n 100 p 1 sin.5.x1         nk 51  deg 1 nterms 7  grsq  0.97 test.rsq  0.98 grsq-test.rsq  0.01
-TEST 33 n 100 p 2 sin.5.x1         nk 51  deg 1 nterms 5  grsq  0.94 test.rsq  0.95 grsq-test.rsq  0.01
-TEST 34 n 100 p 2 sin.5.x1         nk 51  deg 2 nterms 10 grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00
+TEST 29 n 100 p 1 sin.3.x1         nk 51  deg 1 nterms 7  grsq  1.00 test.rsq  1.00 grsq-test.rsq  0.00 rsq.mars  0.998 delta -0.00
+TEST 30 n 100 p 2 sin.3.x1         nk 51  deg 1 nterms 7  grsq  1.00 test.rsq  1.00 grsq-test.rsq  0.00 rsq.mars  0.998 delta  0.00
+TEST 31 n 100 p 2 sin.3.x1         nk 51  deg 2 nterms 7  grsq  1.00 test.rsq  1.00 grsq-test.rsq  0.00 rsq.mars  0.998 delta  0.00
 
-TEST 35 n 100 p 1 sin.5.x1.noise   nk 21  deg 1 nterms 5  grsq  0.54 test.rsq  0.64 grsq-test.rsq  0.10
-TEST 36 n 100 p 2 sin.5.x1.noise   nk 21  deg 1 nterms 8  grsq  0.54 test.rsq  0.49 grsq-test.rsq -0.05
-TEST 37 n 100 p 2 sin.5.x1.noise   nk 21  deg 2 nterms 4  grsq  0.64 test.rsq  0.59 grsq-test.rsq -0.06
-TEST 38 n 100 p 1 sin.5.x1.noise   nk 51  deg 1 nterms 5  grsq  0.66 test.rsq  0.59 grsq-test.rsq -0.07
-TEST 39 n 100 p 2 sin.5.x1.noise   nk 51  deg 1 nterms 6  grsq  0.69 test.rsq  0.61 grsq-test.rsq -0.08
-TEST 40 n 100 p 2 sin.5.x1.noise   nk 51  deg 2 nterms 8  grsq  0.61 test.rsq  0.58 grsq-test.rsq -0.02
+TEST 32 n 100 p 1 sin.5.x1         nk 51  deg 1 nterms 7  grsq  0.97 test.rsq  0.98 grsq-test.rsq  0.01 rsq.mars  0.983 delta  0.00
+TEST 33 n 100 p 2 sin.5.x1         nk 51  deg 1 nterms 5  grsq  0.94 test.rsq  0.95 grsq-test.rsq  0.01 rsq.mars  0.983 delta -0.04
+TEST 34 n 100 p 2 sin.5.x1         nk 51  deg 2 nterms 10 grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00 rsq.mars  0.972 delta  0.02
 
-TEST 41 n 100 p 2 sin.3.x1.plus.x2 nk 21  deg 1 nterms 7  grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00
-TEST 42 n 100 p 2 sin.3.x1.plus.x2 nk 21  deg 2 nterms 7  grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00
+TEST 35 n 100 p 1 sin.5.x1.noise   nk 21  deg 1 nterms 5  grsq  0.54 test.rsq  0.64 grsq-test.rsq  0.10 rsq.mars  0.638 delta -0.00
+TEST 36 n 100 p 2 sin.5.x1.noise   nk 21  deg 1 nterms 8  grsq  0.54 test.rsq  0.49 grsq-test.rsq -0.05 rsq.mars  0.533 delta -0.04
+TEST 37 n 100 p 2 sin.5.x1.noise   nk 21  deg 2 nterms 4  grsq  0.64 test.rsq  0.59 grsq-test.rsq -0.06 rsq.mars  0.536 delta  0.05
+TEST 38 n 100 p 1 sin.5.x1.noise   nk 51  deg 1 nterms 5  grsq  0.66 test.rsq  0.59 grsq-test.rsq -0.07 rsq.mars  0.584 delta  0.01
+TEST 39 n 100 p 2 sin.5.x1.noise   nk 51  deg 1 nterms 6  grsq  0.69 test.rsq  0.61 grsq-test.rsq -0.08 rsq.mars  0.606 delta  0.00
+TEST 40 n 100 p 2 sin.5.x1.noise   nk 51  deg 2 nterms 8  grsq  0.61 test.rsq  0.58 grsq-test.rsq -0.02 rsq.mars  0.594 delta -0.01
 
-TEST 43 n 100 p 2 sin.2.x1.times.x nk 21  deg 1 nterms 6  grsq  0.08 test.rsq -0.10 grsq-test.rsq -0.18
-TEST 44 n 100 p 2 sin.2.x1.times.x nk 21  deg 2 nterms 11 grsq  0.98 test.rsq  0.98 grsq-test.rsq -0.01
+TEST 41 n 100 p 2 sin.3.x1.plus.x2 nk 21  deg 1 nterms 7  grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00 rsq.mars  0.999 delta -0.00
+TEST 42 n 100 p 2 sin.3.x1.plus.x2 nk 21  deg 2 nterms 7  grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00 rsq.mars  0.999 delta -0.00
 
-TEST 45 n 100 p 2 cos.2.x1.times.x nk 21  deg 1 nterms 5  grsq  0.60 test.rsq  0.28 grsq-test.rsq -0.32 baddelta
-TEST 46 n 100 p 2 cos.2.x1.times.x nk 21  deg 2 nterms 11 grsq  1.00 test.rsq  0.97 grsq-test.rsq -0.03
+TEST 43 n 100 p 2 sin.2.x1.times.x nk 21  deg 1 nterms 6  grsq  0.08 test.rsq -0.10 grsq-test.rsq -0.18 rsq.mars -0.121 delta  0.02
+TEST 44 n 100 p 2 sin.2.x1.times.x nk 21  deg 2 nterms 11 grsq  0.98 test.rsq  0.98 grsq-test.rsq -0.01 rsq.mars  0.997 delta -0.02
 
-TEST 47 n 100 p 2 cos.2.x1.times.x nk 21  deg 1 nterms 2  grsq  0.29 test.rsq  0.31 grsq-test.rsq  0.03
-TEST 48 n 100 p 2 cos.2.x1.times.x nk 21  deg 2 nterms 7  grsq  0.61 test.rsq  0.50 grsq-test.rsq -0.11
+TEST 45 n 100 p 2 cos.2.x1.times.x nk 21  deg 1 nterms 5  grsq  0.60 test.rsq  0.28 grsq-test.rsq -0.32 baddelta rsq.mars  0.262 delta  0.02
+TEST 46 n 100 p 2 cos.2.x1.times.x nk 21  deg 2 nterms 11 grsq  1.00 test.rsq  0.97 grsq-test.rsq -0.03 rsq.mars  0.981 delta -0.01
 
-TEST 49 n 100 p 5 eqn56            nk 21  deg 1 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00
-TEST 50 n 100 p 5 eqn56            nk 21  deg 2 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq  0.00
-TEST 51 n 100 p 5 eqn56            nk 21  deg 3 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq  0.00
-TEST 52 n 100 p 5 eqn56            nk 99  deg 1 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00
-TEST 53 n 100 p 5 eqn56            nk 99  deg 2 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq  0.00
-TEST 54 n 100 p 5 eqn56            nk 99  deg 3 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq  0.00
+TEST 47 n 100 p 2 cos.2.x1.times.x nk 21  deg 1 nterms 2  grsq  0.29 test.rsq  0.31 grsq-test.rsq  0.03 rsq.mars  0.312 delta -0.00
+TEST 48 n 100 p 2 cos.2.x1.times.x nk 21  deg 2 nterms 7  grsq  0.61 test.rsq  0.50 grsq-test.rsq -0.11 rsq.mars  0.521 delta -0.02
 
-TEST 55 n 100 p 9 eqn56.extra.pred nk 21  deg 1 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00
-TEST 56 n 100 p 9 eqn56.extra.pred nk 21  deg 2 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00
-TEST 57 n 100 p 9 eqn56.extra.pred nk 21  deg 3 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00
-TEST 58 n 100 p 9 eqn56.extra.pred nk 99  deg 1 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00
-TEST 59 n 100 p 9 eqn56.extra.pred nk 99  deg 2 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00
-TEST 60 n 100 p 9 eqn56.extra.pred nk 99  deg 3 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00
+TEST 49 n 100 p 5 eqn56            nk 21  deg 1 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00 rsq.mars  0.998 delta -0.00
+TEST 50 n 100 p 5 eqn56            nk 21  deg 2 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq  0.00 rsq.mars  0.995 delta  0.00
+TEST 51 n 100 p 5 eqn56            nk 21  deg 3 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq  0.00 rsq.mars  0.995 delta  0.00
+TEST 52 n 100 p 5 eqn56            nk 99  deg 1 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00 rsq.mars  0.998 delta -0.00
+TEST 53 n 100 p 5 eqn56            nk 99  deg 2 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq  0.00 rsq.mars  0.995 delta  0.00
+TEST 54 n 100 p 5 eqn56            nk 99  deg 3 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq  0.00 rsq.mars  0.995 delta  0.00
 
-TEST 61 n 100 p 5 eqn56.noise      nk 21  deg 1 nterms 13 grsq  0.93 test.rsq  0.83 grsq-test.rsq -0.09
-TEST 62 n 100 p 5 eqn56.noise      nk 21  deg 2 nterms 10 grsq  0.92 test.rsq  0.80 grsq-test.rsq -0.12
-TEST 63 n 100 p 5 eqn56.noise      nk 21  deg 3 nterms 12 grsq  0.90 test.rsq  0.81 grsq-test.rsq -0.08
-TEST 64 n 100 p 5 eqn56.noise      nk 99  deg 1 nterms 8  grsq  0.89 test.rsq  0.85 grsq-test.rsq -0.04
+TEST 55 n 100 p 9 eqn56.extra.pred nk 21  deg 1 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00 rsq.mars  0.998 delta -0.00
+TEST 56 n 100 p 9 eqn56.extra.pred nk 21  deg 2 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00 rsq.mars  0.995 delta  0.00
+TEST 57 n 100 p 9 eqn56.extra.pred nk 21  deg 3 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00 rsq.mars  0.995 delta  0.00
+TEST 58 n 100 p 9 eqn56.extra.pred nk 99  deg 1 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00 rsq.mars  0.998 delta -0.00
+TEST 59 n 100 p 9 eqn56.extra.pred nk 99  deg 2 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00 rsq.mars  0.995 delta  0.00
+TEST 60 n 100 p 9 eqn56.extra.pred nk 99  deg 3 nterms 12 grsq  1.00 test.rsq  1.00 grsq-test.rsq -0.00 rsq.mars  0.995 delta  0.00
 
-TEST 65 n 100 p 9 eqn56.noise.extr nk 21  deg 1 nterms 12 grsq  0.88 test.rsq  0.85 grsq-test.rsq -0.03
-TEST 66 n 100 p 9 eqn56.noise.extr nk 21  deg 2 nterms 12 grsq  0.90 test.rsq  0.80 grsq-test.rsq -0.10
-TEST 67 n 100 p 9 eqn56.noise.extr nk 21  deg 3 nterms 13 grsq  0.85 test.rsq  0.81 grsq-test.rsq -0.03
-TEST 68 n 100 p 9 eqn56.noise.extr nk 99  deg 1 nterms 9  grsq  0.89 test.rsq  0.80 grsq-test.rsq -0.09
+TEST 61 n 100 p 5 eqn56.noise      nk 21  deg 1 nterms 13 grsq  0.93 test.rsq  0.83 grsq-test.rsq -0.09 rsq.mars  0.834 delta  0.00
+TEST 62 n 100 p 5 eqn56.noise      nk 21  deg 2 nterms 10 grsq  0.92 test.rsq  0.80 grsq-test.rsq -0.12 rsq.mars  0.800 delta -0.00
+TEST 63 n 100 p 5 eqn56.noise      nk 21  deg 3 nterms 12 grsq  0.90 test.rsq  0.81 grsq-test.rsq -0.08 rsq.mars  0.837 delta -0.02
+TEST 64 n 100 p 5 eqn56.noise      nk 99  deg 1 nterms 8  grsq  0.89 test.rsq  0.85 grsq-test.rsq -0.04 rsq.mars  0.852 delta -0.00
 
-TEST 69 n 100 p 5 eqn56            nk 21  deg 2 nterms 7  grsq  0.96 test.rsq  0.92 grsq-test.rsq -0.05
-TEST 70 n 100 p 5 eqn56            nk 21  deg 2 nterms 10 grsq  1.00 test.rsq  1.00 grsq-test.rsq  0.00
-TEST 71 n 100 p 5 neg.eqn56        nk 21  deg 2 nterms 10 grsq  1.00 test.rsq  1.00 grsq-test.rsq  0.00
+TEST 65 n 100 p 9 eqn56.noise.extr nk 21  deg 1 nterms 12 grsq  0.88 test.rsq  0.85 grsq-test.rsq -0.03 rsq.mars  0.833 delta  0.01
+TEST 66 n 100 p 9 eqn56.noise.extr nk 21  deg 2 nterms 12 grsq  0.90 test.rsq  0.80 grsq-test.rsq -0.10 rsq.mars  0.786 delta  0.01
+TEST 67 n 100 p 9 eqn56.noise.extr nk 21  deg 3 nterms 13 grsq  0.85 test.rsq  0.81 grsq-test.rsq -0.03 rsq.mars  0.758 delta  0.06
+TEST 68 n 100 p 9 eqn56.noise.extr nk 99  deg 1 nterms 9  grsq  0.89 test.rsq  0.80 grsq-test.rsq -0.09 rsq.mars  0.860 delta -0.06
 
-TEST 72 n 100 p 5 five.preds       nk 21  deg 1 nterms 12 grsq  0.88 test.rsq  0.83 grsq-test.rsq -0.05
-TEST 73 n 100 p 5 five.preds       nk 21  deg 2 nterms 16 grsq  0.93 test.rsq  0.86 grsq-test.rsq -0.07
-TEST 74 n 100 p 5 five.preds       nk 21  deg 3 nterms 16 grsq  0.93 test.rsq  0.86 grsq-test.rsq -0.07
-TEST 75 n 100 p 5 five.preds       nk 51  deg 1 nterms 14 grsq  0.89 test.rsq  0.83 grsq-test.rsq -0.05
+TEST 69 n 100 p 5 eqn56            nk 21  deg 2 nterms 7  grsq  0.96 test.rsq  0.92 grsq-test.rsq -0.05 rsq.mars  0.995 delta -0.08
+TEST 70 n 100 p 5 eqn56            nk 21  deg 2 nterms 10 grsq  1.00 test.rsq  1.00 grsq-test.rsq  0.00 rsq.mars  0.995 delta  0.00
+TEST 71 n 100 p 5 neg.eqn56        nk 21  deg 2 nterms 10 grsq  1.00 test.rsq  1.00 grsq-test.rsq  0.00 rsq.mars  0.995 delta  0.00
 
-TEST 76 n 100 p 5 five.preds.noise nk 21  deg 1 nterms 12 grsq  0.82 test.rsq  0.79 grsq-test.rsq -0.02
-TEST 77 n 100 p 5 five.preds.noise nk 21  deg 2 nterms 13 grsq  0.89 test.rsq  0.86 grsq-test.rsq -0.03
-TEST 78 n 100 p 5 five.preds.noise nk 21  deg 3 nterms 11 grsq  0.87 test.rsq  0.80 grsq-test.rsq -0.07
-TEST 79 n 100 p 5 five.preds.noise nk 51  deg 1 nterms 12 grsq  0.87 test.rsq  0.79 grsq-test.rsq -0.08
+TEST 72 n 100 p 5 five.preds       nk 21  deg 1 nterms 12 grsq  0.88 test.rsq  0.83 grsq-test.rsq -0.05 rsq.mars  0.843 delta -0.02
+TEST 73 n 100 p 5 five.preds       nk 21  deg 2 nterms 16 grsq  0.93 test.rsq  0.86 grsq-test.rsq -0.07 rsq.mars  0.945 delta -0.08
+TEST 74 n 100 p 5 five.preds       nk 21  deg 3 nterms 16 grsq  0.93 test.rsq  0.86 grsq-test.rsq -0.07 rsq.mars  0.945 delta -0.08
+TEST 75 n 100 p 5 five.preds       nk 51  deg 1 nterms 14 grsq  0.89 test.rsq  0.83 grsq-test.rsq -0.05 rsq.mars  0.835 delta -0.00
 
-TEST 80 n 100 p 1 pure.noise       nk 21  deg 1 nterms 1  grsq  0.00 test.rsq -0.00 grsq-test.rsq -0.00
-TEST 81 n 100 p 2 pure.noise       nk 21  deg 1 nterms 1  grsq  0.00 test.rsq -0.02 grsq-test.rsq -0.02
-TEST 82 n 100 p 2 pure.noise       nk 21  deg 2 nterms 1  grsq  0.00 test.rsq -0.03 grsq-test.rsq -0.03
-TEST 83 n 100 p 1 pure.noise       nk 51  deg 1 nterms 1  grsq  0.00 test.rsq -0.00 grsq-test.rsq -0.00
-TEST 84 n 100 p 2 pure.noise       nk 51  deg 2 nterms 1  grsq  0.00 test.rsq -0.00 grsq-test.rsq -0.00
-TEST 85 n 100 p 2 pure.noise       nk 51  deg 2 nterms 1  grsq  0.00 test.rsq -0.00 grsq-test.rsq -0.00
-TEST 86 n 100 p 5 pure.noise       nk 21  deg 1 nterms 1  grsq  0.00 test.rsq -0.02 grsq-test.rsq -0.02
-TEST 87 n 100 p 5 pure.noise       nk 21  deg 2 nterms 2  grsq  0.00 test.rsq -0.09 grsq-test.rsq -0.09
-TEST 88 n 100 p 5 pure.noise       nk 51  deg 1 nterms 2  grsq  0.01 test.rsq -0.06 grsq-test.rsq -0.07
+TEST 76 n 100 p 5 five.preds.noise nk 21  deg 1 nterms 12 grsq  0.82 test.rsq  0.79 grsq-test.rsq -0.02 rsq.mars  0.799 delta -0.01
+TEST 77 n 100 p 5 five.preds.noise nk 21  deg 2 nterms 13 grsq  0.89 test.rsq  0.86 grsq-test.rsq -0.03 rsq.mars  0.797 delta  0.06
+TEST 78 n 100 p 5 five.preds.noise nk 21  deg 3 nterms 11 grsq  0.87 test.rsq  0.80 grsq-test.rsq -0.07 rsq.mars  0.796 delta  0.00
+TEST 79 n 100 p 5 five.preds.noise nk 51  deg 1 nterms 12 grsq  0.87 test.rsq  0.79 grsq-test.rsq -0.08 rsq.mars  0.803 delta -0.01
 
-TEST 89 n 100 p 2 sin.sin          nk 99  deg 2 nterms 17 grsq  0.90 test.rsq  0.53 grsq-test.rsq -0.37 baddelta
-TEST 90 n 100 p 4 sin.sin          nk 99  deg 2 nterms 15 grsq  0.80 test.rsq  0.71 grsq-test.rsq -0.09
+TEST 80 n 100 p 1 pure.noise       nk 21  deg 1 nterms 1  grsq  0.00 test.rsq -0.00 grsq-test.rsq -0.00 rsq.mars -0.003 delta  0.00
+TEST 81 n 100 p 2 pure.noise       nk 21  deg 1 nterms 1  grsq  0.00 test.rsq -0.02 grsq-test.rsq -0.02 rsq.mars -0.019 delta  0.00
+TEST 82 n 100 p 2 pure.noise       nk 21  deg 2 nterms 1  grsq  0.00 test.rsq -0.03 grsq-test.rsq -0.03 rsq.mars -0.027 delta  0.00
+TEST 83 n 100 p 1 pure.noise       nk 51  deg 1 nterms 1  grsq  0.00 test.rsq -0.00 grsq-test.rsq -0.00 rsq.mars -0.004 delta  0.00
+TEST 84 n 100 p 2 pure.noise       nk 51  deg 2 nterms 1  grsq  0.00 test.rsq -0.00 grsq-test.rsq -0.00 rsq.mars -0.003 delta  0.00
+TEST 85 n 100 p 2 pure.noise       nk 51  deg 2 nterms 1  grsq  0.00 test.rsq -0.00 grsq-test.rsq -0.00 rsq.mars -0.000 delta  0.00
+TEST 86 n 100 p 5 pure.noise       nk 21  deg 1 nterms 1  grsq  0.00 test.rsq -0.02 grsq-test.rsq -0.02 rsq.mars -0.019 delta  0.00
+TEST 87 n 100 p 5 pure.noise       nk 21  deg 2 nterms 2  grsq  0.00 test.rsq -0.09 grsq-test.rsq -0.09 rsq.mars -0.099 delta  0.01
+TEST 88 n 100 p 5 pure.noise       nk 51  deg 1 nterms 2  grsq  0.01 test.rsq -0.06 grsq-test.rsq -0.07 rsq.mars -0.193 delta  0.14
+
+TEST 89 n 100 p 2 sin.sin          nk 99  deg 2 nterms 17 grsq  0.90 test.rsq  0.53 grsq-test.rsq -0.37 baddelta rsq.mars  0.776 delta -0.25
+TEST 90 n 100 p 4 sin.sin          nk 99  deg 2 nterms 15 grsq  0.80 test.rsq  0.71 grsq-test.rsq -0.09 rsq.mars  0.590 delta  0.12
 
 > if(RPROF) {
 +     Rprof(NULL)
@@ -703,24 +707,24 @@ end GLOBAL.SEEDS 1 FORCE.WEIGHTS FALSE COLLINEAR.TESTS FALSE
 > printf("test.rsq (bigger is better):\n")
 test.rsq (bigger is better):
 > print(my.summary(test.rsqs.global))
-   min     1%     5%    10%   mean median    95%    max
--0.100 -0.090 -0.019 -0.001  0.753  0.853  0.997  0.998
+   min     1%     5%    10%   mean median    95%    max 
+-0.100 -0.090 -0.019 -0.001  0.753  0.853  0.997  0.998 
 > printf("grsq-test.rsq (closest to zero is best, but positive is better than negative):\n")
 grsq-test.rsq (closest to zero is best, but positive is better than negative):
 > print(my.summary(delta.rsqs.global))
-   min     1%     5%    10%   mean median    95%    max
--0.372 -0.326 -0.116 -0.094 -0.035 -0.013  0.010  0.095
+   min     1%     5%    10%   mean median    95%    max 
+-0.372 -0.326 -0.116 -0.094 -0.035 -0.013  0.010  0.095 
 > # printf("%.3f ", my.summary(delta.rsqs.global)); printf("\n")
 > printf("nterms (smaller is better):\n")
 nterms (smaller is better):
 > print(my.summary(nterms.global))
-   min     1%     5%    10%   mean median    95%    max
- 1.000  1.000  1.000  2.000  8.056  7.000 12.100 17.000
+   min     1%     5%    10%   mean median    95%    max 
+ 1.000  1.000  1.000  2.000  8.056  7.000 12.100 17.000 
 > printf("nknots (smaller is better):\n")
 nknots (smaller is better):
 > print(my.summary(nknots.global))
-   min     1%     5%    10%   mean median    95%    max
-  4.00   4.00   5.45   6.00  10.96  11.00  22.00  38.00
+   min     1%     5%    10%   mean median    95%    max 
+  4.00   4.00   5.45   6.00  10.96  11.00  22.00  38.00 
 > if(!is.null(other.rsqs.global)) {
 +     printf("rf.rsq:\n")
 +     print(my.summary(other.rsqs.global))
@@ -731,6 +735,12 @@ nknots (smaller is better):
 +     printf("mars.nterms:\n")
 +     print(my.summary(mars.nterms.global))
 + }
+mars.rsq:
+   min     1%     5%    10%   mean median    95%    max 
+-0.193 -0.129 -0.019 -0.001  0.754  0.855  0.997  0.999 
+mars.nterms:
+   min     1%     5%    10%   mean median    95%    max 
+ 1.000  1.000  1.000  2.900  8.733  9.000 14.000 18.000 
 > if(TIME)
 +     printf("[testn time %.3f]\n", (proc.time() - start.time)[3])
 > source("test.epilog.R")

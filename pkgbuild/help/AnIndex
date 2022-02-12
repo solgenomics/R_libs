@@ -24,5 +24,7 @@ rtools_path	has_rtools
 setup_rtools	has_rtools
 without_cache	without_compiler
 without_compiler	without_compiler
+without_latex	without_compiler
 with_build_tools	has_build_tools
 with_debug	with_debug
+with_latex	without_compiler

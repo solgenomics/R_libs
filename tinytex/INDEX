@@ -1,6 +1,8 @@
+check_installed         Check if certain LaTeX packages are installed
 copy_tinytex            Copy TinyTeX to another location and use it in
                         another system
 install_tinytex         Install/Uninstall TinyTeX
+is_tinytex              Check if the LaTeX installation is TinyTeX
 latexmk                 Compile a LaTeX document
 parse_install           Parse the LaTeX log and install missing LaTeX
                         packages if possible
