@@ -1,0 +1,25 @@
+Package: snpStats
+Title: SnpMatrix and XSnpMatrix classes and methods
+Version: 1.36.0
+Date: 2019-10-08
+Author: David Clayton <dc208@cam.ac.uk> 
+Description: Classes and statistical methods for large SNP association studies. This extends the earlier snpMatrix package, allowing for uncertainty in genotypes.
+Maintainer: David Clayton <dc208@cam.ac.uk>
+Depends: R(>= 2.10.0), survival, Matrix, methods
+Imports: graphics, grDevices, stats, utils, BiocGenerics, zlibbioc
+Suggests: hexbin
+License: GPL-3
+Collate: ss.R contingency.table.R convert.R compare.R glm-test.R
+        imputation.R indata.R long.R misc.R ld.R mvtests.R pedfile.R
+        outdata.R plink.R qc.R qq-chisq.R single.R tdt-single.R
+        structure.R xstuff.R
+LazyLoad: yes
+biocViews: Microarray, SNP, GeneticVariability
+Packaged: 2019-10-29 23:47:30 UTC; biocbuild
+git_url: https://git.bioconductor.org/packages/snpStats
+git_branch: RELEASE_3_10
+git_last_commit: 6838a7c
+git_last_commit_date: 2019-10-29
+Date/Publication: 2019-10-29
+NeedsCompilation: yes
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2021-12-20 15:15:06 UTC; unix
