@@ -1,0 +1,30 @@
+admisc-package          Adrian Dusa's Miscellaneous
+agtb                    Check difference and / or (in)equality of
+                        numbers
+asNumeric               Numeric vectors
+asSOP                   Functions to interpret and manupulate a SOP/DNF
+                        expression
+coerceMode              Coerce an atomic vector to numeric or integer,
+                        if possible
+combnk                  Generate all combinations of n numbers, taken k
+                        at a time
+export                  Export a dataframe to a file or a connection
+factorize               Factorize Boolean expressions
+finvert                 Inverts the values of a factor
+frelevel                Modified 'relevel()' function
+getName                 Get the name of the object being used in a
+                        function call
+hastilde                Tildae operations
+hclr                    Colors from the HCL spectrum
+insideBrackets          Extract information from a multi-value SOP/DNF
+                        expression
+intersection            Intersect expressions
+list.rda                Load and list objects from an .rda file
+negate                  Negate Boolean expressions
+permutations            Calculates the permutations of a vector
+recode                  Recode a variable
+recreate                Facilitate expression substitution
+replaceText             Replace text in a string
+tryCatchWEM             Try functions to capture warnings, errors and
+                        messages.
+using                   Evaluate an expression in a data environment
