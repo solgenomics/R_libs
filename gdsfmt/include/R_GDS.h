@@ -8,7 +8,7 @@
 //
 // R_GDS.h: C interface to gdsfmt dynamic library
 //
-// Copyright (C) 2014-2019    Xiuwen Zheng
+// Copyright (C) 2014-2021    Xiuwen Zheng
 //
 // This file is part of CoreArray.
 //
@@ -29,7 +29,7 @@
  *	\file     R_GDS.h
  *	\author   Xiuwen Zheng [zhengxwen@gmail.com]
  *	\version  1.0
- *	\date     2014 - 2019
+ *	\date     2014 - 2021
  *	\brief    C interface to gdsfmt dynamic library
  *	\details
 **/
@@ -71,8 +71,8 @@ extern "C" {
 
 	// ==================================================================
 
-	/// Version of R package gdsfmt: v1.22.0
-	#define GDSFMT_R_VERSION       0x011600
+	/// Version of R package gdsfmt: v1.28.0
+	#define GDSFMT_R_VERSION       0x011C00
 
 
 	// [[ ********
@@ -127,19 +127,24 @@ extern "C" {
 	/// the maximum number of GDS files
 	#define GDSFMT_MAX_NUM_GDS_FILES     1024
 
-	/// the maximun number of dimensions in GDS array (requiring >= v1.5.3, it has been specified in the library)
+	/// the maximun number of dimensions in GDS array
 	#define GDS_MAX_NUM_DIMENSION        256
 
-	/// to specify the default mode of R data type, used in GDS_R_Array_Read
+	/// the default mode of R data type, used in GDS_R_Array_Read
 	#define GDS_R_READ_DEFAULT_MODE      0x00
-
-	/// to specify the mode of R data type, used in GDS_R_Array_Read
+	/// the mode of R data allowing raw type, used in GDS_R_Array_Read
 	#define GDS_R_READ_ALLOW_RAW_TYPE    0x01
+	/// the mode of R data allowing sparse matrix, used in GDS_R_Array_Read (requiring >= v1.23.6)
+	#define GDS_R_READ_ALLOW_SP_MATRIX   0x10
 
 
 
 	// ==================================================================
 	// R objects
+
+	// return from GDS_R_Is_ExtType (requiring >= v1.27.5)
+	const int GDS_R_ExtType_Logical = 1;
+	const int GDS_R_ExtType_Factor  = 2;
 
 	/// convert "SEXP  --> (CdGDSFile*)"
 	extern PdGDSFile GDS_R_SEXP2File(SEXP File);
@@ -155,6 +160,8 @@ extern "C" {
 	extern C_BOOL GDS_R_Is_Logical(PdGDSObj Obj);
 	/// return true, if Obj is a factor variable
 	extern C_BOOL GDS_R_Is_Factor(PdGDSObj Obj);
+	/// return 1 for logical, 2 for factor, 0 otherwise (requiring >= v1.27.5)
+	extern int GDS_R_Is_ExtType(PdGDSObj Obj);
 	/// return 1 used in UNPROTECT and set levels in 'Val' if Obj is a factor in R; otherwise return 0
 	extern int GDS_R_Set_IfFactor(PdGDSObj Obj, SEXP Val);
 	/// return an R data object from a GDS object, allowing raw-type data
@@ -177,27 +184,31 @@ extern "C" {
 	extern void GDS_R_Is_Element(PdAbstractArray Obj, SEXP SetEL, C_BOOL Out[]);
 
 
-
 	// ==================================================================
 	// File structure
 
 	/// create a GDS file
 	extern PdGDSFile GDS_File_Create(const char *FileName);
-	/// open an existing GDS file
+	/// open an existing GDS file (the argument 'AllowError' requires >= 1.23.4)
 	extern PdGDSFile GDS_File_Open(const char *FileName, C_BOOL ReadOnly,
-		C_BOOL ForkSupport);
+		C_BOOL ForkSupport, C_BOOL AllowError);
 	/// close the GDS file
 	extern void GDS_File_Close(PdGDSFile File);
 	/// synchronize the GDS file
 	extern void GDS_File_Sync(PdGDSFile File);
+	/// reopen the GDS file based on R object if needed (requiring >= 1.23.9)
+	extern C_BOOL GDS_File_Reopen(SEXP GDSObj);
 	/// get the root folder of a GDS file
 	extern PdGDSFolder GDS_File_Root(PdGDSFile File);
 	/// get the GDS file from a GDS node
 	extern PdGDSFile GDS_Node_File(PdGDSObj Node);
+	/// load a GDS node and get the internal ID from Path (requiring >= 1.23.5), return true if update node and id
+	extern C_BOOL GDS_Node_Load(PdGDSObj Node, int NodeID, const char *Path,
+		PdGDSFile File, PdGDSObj *OutNode, int *OutNodeID);
+	/// unload the GDS node (requiring >= 1.23.5)
+	extern void GDS_Node_Unload(PdGDSObj Node);
 	/// delete the GDS variable (requiring >= 1.5.9)
 	extern void GDS_Node_Delete(PdGDSObj Node, C_BOOL Force);
-	/// unload the GDS node (requiring >= 1.21.1)
-	extern void GDS_Node_Unload(PdGDSObj Node);
 	/// get the class name of a GDS node
 	extern void GDS_Node_GetClassName(PdGDSObj Node, char *OutStr, size_t OutSize);
 	/// get the number of nodes in the folder
@@ -373,7 +384,7 @@ extern "C" {
 
 
 	// ==================================================================
-	// functions for reading block by block
+	// Functions for reading block by block
 
 	/// initialize the array object
 	extern PdArrayRead GDS_ArrayRead_Init(PdAbstractArray Obj,
@@ -388,6 +399,16 @@ extern "C" {
 	/// balance the buffers of multiple array objects according to the total buffer size
 	extern void GDS_ArrayRead_BalanceBuffer(PdArrayRead array[], int n,
 		C_Int64 buffer_size);
+
+
+	// ==================================================================
+	// External packages (requiring >= v1.23.6)
+
+	/// load the Matrix package
+	extern C_BOOL GDS_Load_Matrix();
+	/// create a dgCMatrix R object, length(x)=length(i)=n_x, length(p)=ncol+1
+	extern SEXP GDS_New_SpCMatrix(const double *x, const int *i, const int *p,
+		int n_x, int nrow, int ncol);
 
 
 

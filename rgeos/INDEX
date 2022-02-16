@@ -33,6 +33,10 @@ gIsSimple               Is Geometry Simple?
 gIsValid                Is Geometry Valid?
 gLength                 Length of Geometry
 gMakeValid              Make invalid geometries valid
+gMaximumInscribedCircle
+                        Centroid of Geometry
+gMinumumRotatedRectangle
+                        Centroid of Geometry
 gNearestPoints          Closest Points of two Geometries
 gNode                   Linestring Noder
 gPointOnSurface         Point on Surface of Geometry

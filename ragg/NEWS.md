@@ -1,10 +1,62 @@
+# ragg 1.2.1
+
+* Fix bug that caused R to crash when writing tiff files with transparent 
+  background (#97)
+
+# ragg 1.2.0
+
+* Add support for new graphic engine features:
+  - Arbitrary clipping paths
+  - Alpha masks
+  - Linear and radial gradients
+  - Tiling patterns
+* Use white as background when passing in a fully transparent background colour
+  to devices that doesn't support alpha (notably jpeg) (#91)
+* ragg now defers symbol font resolving to systemfonts which makes it possible 
+  to register alternative symbol fonts using `register_font()` (#90)
+* Filenames in UTF-8 are now treated correctly on Windows (#87)
+* Fix size selection of non-scalable fonts when the requested size is bigger 
+  than the available
+
+# ragg 1.1.3
+
+* Use int32_t instead of int32 in old code
+* Prepare for UCRT
+* Better error message when failing to allocate memory for the buffer (#82)
+* Increase storage size limits for paths (#80)
+
+# ragg 1.1.2
+
+* Fix bug in `agg_capture()` that resulted in premultiplied colour values being
+  returned
+
+# ragg 1.1.1
+
+* Fix a bug in glyph dimension lookup that could cause system crashes
+* Fix bug in font caching when multiple ragg devices are used simultaneously
+
+# ragg 1.1.0
+
+* Major version release to signify the much improved text support that includes
+  full support for right-to-left scripts and bidirectional text (mix of RtL and
+  LtR scripts). It further adds full support for OpenType features and 
+  non-scalable fonts.
+* Re-exporting `register_font()`, `register_variant()`, and `font_feature()` 
+  from systemfonts
+* Re-exporting `get_font_features()` from textshaping
+* Use new textshaping API and handle font fallback correctly
+* Add support for rendering colour fonts (#1)
+
 # ragg 0.4.1
 
-* Fixed an vector overflow bug during text rendering
 * Skip text tests on CRAN as no text is plottet on the CRAN solaris machine
-
+* Fixed a bug resulting in system crash on certain systems, as well as 
+  clang-ASAN error. (#59)
+  
 # ragg 0.4.0
 
+* ragg now requires the Harfbuzz and Fribidi libraries to be available when 
+  installing from source due to their dependency in the textshaping package.
 * Move text shaping to the new textshaping package.
 * Fix `agg_capture()` on big endian systems (#49, @QuLogic)
 * Fix use of symbol font on Windows by moving to Segoe UI Symbol which has a 

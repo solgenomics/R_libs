@@ -1,13 +1,9 @@
-encoding                Guess and repair faulty character encoding.
-google_form             Make link to google form given id
-html_form               Parse forms in a page.
-html_nodes              Select nodes from an HTML document
-html_session            Simulate a session in an html browser.
-html_table              Parse an html table into a data frame.
-html_text               Extract attributes, text and tag name from
-                        html.
-jump_to                 Navigate to a new url.
-pluck                   Extract elements of a list by position.
-session_history         History navigation tools
-set_values              Set values in a form.
-submit_form             Submit a form back to the server.
+html_attr               Get element attributes
+html_children           Get element children
+html_element            Select elements from an HTML document
+html_encoding_guess     Guess faulty character encoding
+html_form               Parse forms and set values
+html_name               Get element name
+html_table              Parse an html table into a data frame
+html_text               Get element text
+session                 Simulate a session in web browser

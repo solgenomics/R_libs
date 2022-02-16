@@ -27,6 +27,7 @@ joint_tests             Compute joint tests of the terms in a model
 lsmeans                 Wrappers for alternative naming of EMMs
 make.tran               Response-transformation extensions
 models                  Models supported in 'emmeans'
+mvcontrast              Multivariate contrasts
 neuralgia               Neuralgia data
 nutrition               Nutrition data
 oranges                 Sales of oranges
@@ -39,7 +40,7 @@ qdrg                    Quick and dirty reference grid
 rbind.emmGrid           Combine or subset 'emmGrid' objects
 ref_grid                Create a reference grid from a fitted model
 regrid                  Reconstruct a reference grid with a new
-                        transformation or posterior sample
+                        transformation or simulations
 str.emmGrid             Miscellaneous methods for 'emmGrid' objects
 summary.emmGrid         Summaries, predictions, intervals, and tests
                         for 'emmGrid' objects

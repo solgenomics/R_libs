@@ -1,4 +1,12 @@
 
+# parsedate 1.3.0
+
+* parsedate does not import the rematch2 package any more.
+
+# parsedate 1.2.1
+
+No changes.
+
 # parsedate 1.2.0
 
 * `parse_date()` and `parse_iso_8601()` now dupport a default time zone,

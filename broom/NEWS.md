@@ -1,9 +1,91 @@
+# broom 0.7.11
+
+* Addressed issue with the ordering of original observations in `augment.rqs`. Now function preserves the original `data.frame` names also when the input `data.frame` only has one column (`#1052` by `@ilapros`).
+* Addressed warning from `tidy.rma` when `x$ddf` has length greater than 1 (`#1064` by `@wviechtb`).
+* Fix errors in `glance.lavaan` in anticipation of upcoming `tidyr` release (`#1067` by `@DavisVaughan`).
+* Corrected the confidence interval in `tidy.crr()`. The `tidy.crr(conf.level=)` argument was previously ignored (`#1068` by `@ddsjoberg`).
+
+# broom 0.7.10
+
+* Clarifies error when `pysch::mediate` output is dispatched to `tidy.mediate` (`#1037` by `@LukasWallrich`).
+* Allows user to specify confidence level for `tidy.rma` (`#1041` by `@TarenSanders`)
+* Clarifies documentation related to usage of `augment_columns()`; most package users should use `augment()` in favor of `augment_columns()`. See `?augment_columns` for more details.
+* Extends support for `emmeans` by fixing non-standard column names in case of asymptotically derived inferential statistics. (`#1046` by `@crsh`)
+* Fixes use of index columns in `augment.mlogit` and adds `.resid` column to
+output. (`#1045`, `#1053`, `#1055`, and `#1056` by `@jamesrrae` and
+`@gregmacfarlane`)
+* Correct column naming of standard error measures in `glance.survfit()`.
+* Various bug fixes and improvements to documentation.
+
+# broom 0.7.9
+
+* Fixes confidence intervals in `tidy.crr()`, which were previously exponentiated when `exponentiate = FALSE` (`#1023` by `@leejasme`)
+* Deprecates `Rchoice` tidiers, as the newest 0.3-3 release requires R 4.0+ and does not re-export needed generics.
+* Updates to `ergm` tidiers in anticipation of changes in later releases. (`#1034` by `@krivit`)
+
+# broom 0.7.8
+
+* Fixed bug in `glance.ergm` related to handling of MCMC details.
+* Address breakages in unit tests for {fixest} tidiers.
+
+# broom 0.7.7
+
+* Fixed bug in `tidy.epi.2by2` that resulted in errors with new version of `epiR` (`#1028` by `@nt-williams`)
+* Added `exponentiate` argument to `tidy.gam()` tidier applicable for parametric terms (`#1013` by `@ddsjoberg`)
+* Added `exponentiate` argument to `tidy.negbin()` tidier (`#1011` by `@ddsjoberg`)
+* Fixed failures in `spdep` tidiers following breaking changes in the most recent release
+* Various bug fixes and improvements to documentation
+
+# broom 0.7.6
+
+* Fixed bug in `augment` tidiers resulting in `.fitted` and `.se.fit` array columns.
+* Fixed bug that made column `y` non-numeric after `tidy_xyz` (`#973` by `@jiho`)
+* Added tidiers for `MASS:glm.nb` (`#998` by `@joshyam-k`)
+* Fixed bug in `tidy.fixest` that sometimes prevented arguments like `se` from being used (`#1001` by `@karldw`)
+* Fixed bug in `tidy.fixest` that resulted in errors when columns with name
+`x` are present (`#1007` by `@grantmcdermott`)
+* Moved forward with planned deprecation of `gamlss` tidiers in favor of
+those provided in `broom.mixed`
+* Various bug fixes and improvements to documentation
+
+# broom 0.7.5
+
+* Fixed bug in the `nnet::multinom` tidier in the case that the response
+variable has only two levels (`#993` by `@vincentarelbundock` and `@hughjonesd`)
+* Various bug fixes and improvements to documentation
+
+# broom 0.7.4
+
+broom 0.7.4 introduces tidier support for a number of new model objects and 
+improves functionality of many existing tidiers!
+
+#### New Tidiers
+
+* Add tidiers for `Rchoice` objects (`#961` by `@vincentarelbundock` and `@Nateme16`)
+* Add tidiers for objects produced by `car::leveneTest` (`#968` by `@vincentarelbundock` and `@mkirzon`)
+* Add tidiers for objects produced by `cmprsk::crr` (`#971` and `#552` by `@vincentarelbundock` and `@margarethannum`)
+* Add an `augment()` method for `gam` objects (`#975` and `#645` by `@vincentarelbundock`)
+* Add tidiers for `vars` objects (`#979` and `#161` by `@vincentarelbundock` and `@Diego-MX`)
+
+This release also restores tidiers for `felm` objects from the `lfe` package, which was recently unarchived from CRAN.
+
+#### Improvements to existing tidiers
+
+* `tidy.emmGrid` can now return `std.error` and `conf.*` columns at the same time. (`#962` by `@vincentarelbundock` and `@jmbarbone`)
+* `tidy.garch` can now produce confidence intervals (`#964` by `@vincentarelbundock` and `@IndrajeetPatil`)
+* `tidy.coxph` can now report confidence intervals on models utilizing penalized/clustering terms (`#966` by `@vincentarelbundock` and `@matthieu-faron`)
+* `augment.lm` now works when some regression weights are equal to zero (`#965` by `@vincentarelbundock` and `@vnijs`)
+* `tidy.coxph` can now handle models utilizing penalized/clustering terms (`#966` and `#969` by `@vincentarelbundock`, `@matthieu-faron`, and `@KZARCA`)
+* Fix bug in `tidy.speedglm` on R 4.0.0+ (`#974` by `@uqzwang`)
+* tidy.multinom works with matrix response (`#977` and `#666` by `@vincentarelbundock` and `@atyre2`)
+* Various bug fixes and improvements to documentation and errors.
+
 # broom 0.7.3
 
 In broom `0.7.0`, we introduced an error for model objects that subclassed
 `lm` and relied on `tidy.lm()`, or similarly for `tidy.glm()`. Tidiers for
 these objects were supported unintentionally, and we worried that tidiers for
-these objects would silently report innaccurate results.
+these objects would silently report inaccurate results.
 
 In hindsight, this change was unnecessarily abrupt. We've decided to roll back 
 this change, instead providing the following warning before allowing such 

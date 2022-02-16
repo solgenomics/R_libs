@@ -41,9 +41,11 @@ at                      at covariance structure
 atcg1234                Letter to number converter
 bathy.colors            Generate a sequence of colors for plotting
                         bathymetric data.
+bbasis                  Function for creating B-spline basis functions
+                        (Eilers & Marx, 2010)
 bivariateRun            bivariateRun functionality
 build.HMM               Build a hybrid marker matrix using parental
-                        genotypes
+                        genotypes from inbred individuals
 coef.mmer               coef form a GLMM fitted with mmer
 cs                      customized covariance structure
 dfToMatrix              data frame to matrix
@@ -71,9 +73,15 @@ residuals.mmer          Residuals form a GLMM fitted with mmer
 simGECorMat             Create a GE correlation matrix for simulation
                         purposes.
 sommer                  *So*lving *M*ixed *M*odel *E*quations in *R*
-spl2D                   Two-dimensional penalised tensor-product of
+spl2Da                  Two-dimensional penalised tensor-product of
                         marginal B-Spline basis.
+spl2Db                  Two-dimensional penalised tensor-product of
+                        marginal B-Spline basis.
+spl2Dmats               Get Tensor Product Spline Mixed Model Incidence
+                        Matrices
 summary.mmer            summary form a GLMM fitted with mmer
+tpsmmbwrapper           Get Tensor Product Spline Mixed Model Incidence
+                        Matrices
 transformConstraints    transformConstraints
 transp                  Creating color with transparency
 uncm                    unconstrained indication matrix

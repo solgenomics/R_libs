@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -102,7 +104,7 @@ namespace superlu
   void
   gstrf(superlu_options_t* options,
         SuperMatrix* A,
-        typename get_pod_type<eT>::result drop_tol, int relax,
+        int relax,
         int panel_size, int *etree,
         void  *work,  int  lwork,
         int* perm_c, int* perm_r,
@@ -114,26 +116,22 @@ namespace superlu
 
     if(is_float<eT>::value)
       {
-      typedef float T;
-      arma_wrapper(sgstrf)(options, A, (T)drop_tol, relax, panel_size, etree, work, lwork, perm_c, perm_r, L, U, Glu, stat, info);
+      arma_wrapper(sgstrf)(options, A, relax, panel_size, etree, work, lwork, perm_c, perm_r, L, U, Glu, stat, info);
       }
     else
     if(is_double<eT>::value)
       {
-      typedef double T;
-      arma_wrapper(dgstrf)(options, A, (T)drop_tol, relax, panel_size, etree, work, lwork, perm_c, perm_r, L, U, Glu, stat, info);
+      arma_wrapper(dgstrf)(options, A, relax, panel_size, etree, work, lwork, perm_c, perm_r, L, U, Glu, stat, info);
       }
     else
     if(is_cx_float<eT>::value)
       {
-      typedef float T;
-      arma_wrapper(cgstrf)(options, A, (T)drop_tol, relax, panel_size, etree, work, lwork, perm_c, perm_r, L, U, Glu, stat, info);
+      arma_wrapper(cgstrf)(options, A, relax, panel_size, etree, work, lwork, perm_c, perm_r, L, U, Glu, stat, info);
       }
     else
     if(is_cx_double<eT>::value)
       {
-      typedef double T;
-      arma_wrapper(zgstrf)(options, A, (T)drop_tol, relax, panel_size, etree, work, lwork, perm_c, perm_r, L, U, Glu, stat, info);
+      arma_wrapper(zgstrf)(options, A, relax, panel_size, etree, work, lwork, perm_c, perm_r, L, U, Glu, stat, info);
       }
     }
 
@@ -170,9 +168,77 @@ namespace superlu
       arma_wrapper(zgstrs)(trans, L, U, perm_c, perm_r, B, stat, info);
       }
     }
+  
+  
+  
+  template<typename eT>
+  inline
+  typename get_pod_type<eT>::result
+  langs(char* norm, superlu::SuperMatrix* A)
+    {
+    arma_type_check(( is_supported_blas_type<eT>::value == false ));
+    
+    typedef typename get_pod_type<eT>::result T;
+    
+    if(is_float<eT>::value)
+      {
+      return arma_wrapper(slangs)(norm, A);
+      }
+    else
+    if(is_double<eT>::value)
+      {
+      return arma_wrapper(dlangs)(norm, A);
+      }
+    else
+    if(is_cx_float<eT>::value)
+      {
+      return arma_wrapper(clangs)(norm, A);
+      }
+    else
+    if(is_cx_double<eT>::value)
+      {
+      return arma_wrapper(zlangs)(norm, A);
+      }
+    
+    return T(0);  // to avoid false warnigns from the compiler
+    }
+  
+  
+  
+  template<typename eT>
+  inline
+  void
+  gscon(char* norm, superlu::SuperMatrix* L, superlu::SuperMatrix* U, typename get_pod_type<eT>::result anorm, typename get_pod_type<eT>::result* rcond, superlu::SuperLUStat_t* stat, int* info)
+    {
+    arma_type_check(( is_supported_blas_type<eT>::value == false ));
 
-
-
+    if(is_float<eT>::value)
+      {
+      typedef float T;
+      arma_wrapper(sgscon)(norm, L, U, (T)anorm, (T*)rcond, stat, info);
+      }
+    else
+    if(is_double<eT>::value)
+      {
+      typedef double T;
+      arma_wrapper(dgscon)(norm, L, U, (T)anorm, (T*)rcond, stat, info);
+      }
+    else
+    if(is_cx_float<eT>::value)
+      {
+      typedef float T;
+      arma_wrapper(cgscon)(norm, L, U, (T)anorm, (T*)rcond, stat, info);
+      }
+    else
+    if(is_cx_double<eT>::value)
+      {
+      typedef double T;
+      arma_wrapper(zgscon)(norm, L, U, (T)anorm, (T*)rcond, stat, info);
+      }
+    }
+  
+  
+  
   inline
   void
   init_stat(SuperLUStat_t* stat)

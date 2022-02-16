@@ -1,0 +1,3 @@
+WDQSR-deprecated        Deprecated functions
+get_example             Get an example SPARQL query from Wikidata
+query_wikidata          Send one or more SPARQL queries to WDQS

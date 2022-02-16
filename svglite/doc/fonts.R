@@ -64,10 +64,7 @@ library("svglite")
 #  plot(1:10)
 #  dev.off()
 
-## ---- eval=FALSE--------------------------------------------------------------
-#  gdtools::match_family("Helvetica")
-#  gdtools::match_font("Helvetica", bold = TRUE)
-
-## ---- eval=FALSE--------------------------------------------------------------
-#  gdtools::match_family("Helvetica", debug = "config")
+## -----------------------------------------------------------------------------
+systemfonts::match_font("Helvetica")
+systemfonts::font_info("Helvetica", bold = TRUE)
 

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -77,7 +79,7 @@ spop_mean::apply_noalias_fast
   
   if(dim == 0) // find the mean in each column
     {
-    Row<eT> acc(p_n_cols, fill::zeros);
+    Row<eT> acc(p_n_cols, arma_zeros_indicator());
     
     eT* acc_mem = acc.memptr();
     
@@ -108,7 +110,7 @@ spop_mean::apply_noalias_fast
   else
   if(dim == 1)  // find the mean in each row
     {
-    Col<eT> acc(p_n_rows, fill::zeros);
+    Col<eT> acc(p_n_rows, arma_zeros_indicator());
     
     eT* acc_mem = acc.memptr();
     

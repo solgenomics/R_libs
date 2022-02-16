@@ -1,6 +1,6 @@
 Package: xmlparsedata
 Title: Parse Data of 'R' Code as an 'XML' Tree
-Version: 1.0.4
+Version: 1.0.5
 Author: Gábor Csárdi
 Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
 Description: Convert the output of 'utils::getParseData()' to an 'XML'
@@ -15,7 +15,7 @@ Suggests: covr, testthat, xml2
 Depends: R (>= 3.0.0)
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2020-08-31 07:25:11 UTC; gaborcsardi
+Packaged: 2021-03-06 10:52:40 UTC; gaborcsardi
 Repository: CRAN
-Date/Publication: 2020-08-31 08:10:02 UTC
-Built: R 3.6.3; ; 2021-01-11 23:17:01 UTC; unix
+Date/Publication: 2021-03-06 11:10:02 UTC
+Built: R 4.1.2; ; 2022-02-15 22:49:42 UTC; unix

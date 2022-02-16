@@ -1,5 +1,6 @@
 testthat-package	testthat-package
 %>%	reexports
+announce_snapshot_file	expect_snapshot_file
 auto_test	auto_test
 auto_test_package	auto_test_package
 capture_condition	capture_condition
@@ -19,6 +20,8 @@ compare.character	compare
 compare.default	compare
 compare.numeric	compare
 compare.POSIXt	compare
+compare_file_binary	expect_snapshot_file
+compare_file_text	expect_snapshot_file
 compare_state	compare_state
 comparison-expectations	comparison-expectations
 context	context
@@ -61,6 +64,7 @@ expect_match	expect_match
 expect_message	expect_error
 expect_more_than	expect_less_than
 expect_named	expect_named
+expect_no_match	expect_match
 expect_null	expect_null
 expect_output	expect_output
 expect_output_file	expect_output_file
@@ -74,6 +78,7 @@ expect_snapshot_error	expect_snapshot
 expect_snapshot_file	expect_snapshot_file
 expect_snapshot_output	expect_snapshot
 expect_snapshot_value	expect_snapshot
+expect_snapshot_warning	expect_snapshot
 expect_success	expect_success
 expect_that	expect_that
 expect_true	logical-expectations

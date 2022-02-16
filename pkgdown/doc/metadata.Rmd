@@ -16,12 +16,20 @@ knitr::opts_chunk$set(
 )
 ```
 
-Package authors can customize the metadata used by Twitter and the [Open Graph protocol][ogp] for rich social media cards. In addition to specifying an alternate description for the package and any individual articles, you may also choose the preview image shown and the style of card used on Twitter.
+Package authors can customize the metadata used by Twitter and the [Open Graph protocol][ogp] for rich social media cards. In addition to specifying an alternate description for the package and any individual articles, you may also choose the preview image shown and the style of the card used on Twitter.
 
 You can preview and validate the appearance of the social media cards with online tools:
 
 * [Twitter Card Validator][twitter-validator]
-* [Google Structured Data Testing Tool][ogp-validator]
+* [Google Rich Results Test][ogp-validator]
+
+## Necessary configuration
+
+Metadata can only be produced correctly if your pkgdown website URL is indicated in its configuration file.
+
+```yaml
+url: https://example.com
+```
 
 ## Site-wide customization
 
@@ -51,9 +59,10 @@ The `template: opengraph` section allows you to further customize the social med
     (if one exists). Use `image` to specify an alternative image for the social 
     media cards of pages in your pkgdown site.
 
-    * `src`: A fully qualified URL to a media card image, or a relative path to 
-      an image stored in the package. The `src` field is required if
-      `image` is specified.
+    * `src`: A fully qualified URL to a media card image e.g. `src: https://avatars.githubusercontent.com/u/22618716?v=4`; 
+      or a relative path to an image in the rendered website e.g. `src: articles/test/image.jpg`;
+      or a relative path to an image stored in `man/figures` in the package e.g. `src: man/figures/cards.png`.
+      The `src` field is required if `image` is specified.
     
     * `alt`: Alternative text describing the image for screen readers and 
       other situations where your social media card image cannot be displayed.
@@ -68,7 +77,7 @@ The `template: opengraph` section allows you to further customize the social med
     * `site`: The Twitter handle of the organization affiliated with the
       package author or sponsoring the package development. 
       
-    * If only one of `creator` or `site` are included, the provided value will 
+    * If only one of `creator` or `site` is included, the provided value will 
       be used for both fields.
     
     * `card`: The [style of social media card][twitter-card] that Twitter will 
@@ -115,5 +124,5 @@ In articles, the `opengraph` section works in the same way as the site-wide `tem
 
 [ogp]: https://ogp.me/
 [twitter-validator]: https://cards-dev.twitter.com/validator
-[ogp-validator]: https://search.google.com/structured-data/testing-tool
+[ogp-validator]: https://search.google.com/test/rich-results
 [twitter-card]: https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/abouts-cards

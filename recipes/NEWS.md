@@ -1,3 +1,90 @@
+# recipes 0.1.17
+
+## New Steps
+
+* Added new `step_harmonic()` (#702).
+
+* Added a new step called `step_dummy_multi_choice()`, which will take multiple nominal variables and produces shared dummy variables. (#716)
+
+## Deprecation News
+
+* The deprecation for `step_upsample()` and `step_downsample()` has been escalated from a deprecation warning to a deprecation error; these functions are available in the themis package.
+
+* Escalate deprecation for old versions of imputation steps (such as `step_bagimpute()`) from a soft deprecation to a regular deprecation; these imputation steps have new names like `step_impute_bag()` (#753).
+
+* `step_kpca()` was un-deprecated and gained the `keep_original_cols` argument.
+
+* The deprecation of the `preserve` argument to `step_pls()` and `step_dummy()` was escalated from a soft deprecation to regular deprecation. 
+
+* The deprecation of the `options` argument to `step_nzv()` was escalated to a deprecation error.
+
+## Bug Fixes
+
+* Fix imputation steps for new data that is all `NA`, and generate a warning for recipes created under previous versions that cannot be imputed with this fix (#719).
+
+* A bug was fixed where imputed values via bagged trees would have the wrong levels.
+
+## Improvements and Other Changes
+
+* The computations for the Yeo-Johnson transformation were made more efficient (#782).
+
+* New `recipes_eval_select()` which is a developer tool that is useful for creating new recipes steps. It powers the tidyselect semantics that are specific to recipes and supports the modern tidyselect API introduced in tidyselect 1.0.0. Additionally, the older `terms_select()` has been deprecated in favor of this new helper (#739).
+
+* Speed-up/simplification to `step_spatialsign()`
+
+* When only the terms attributes are desired from `model.frame` use the first row of data to improve speed and memory use (#726).
+
+* Use Haversine formula for latitude-longitude pairs in `step_geodist()` (#725).
+
+* Reorganize documentation for all recipe step `tidy` methods (#701).
+
+* Generate warning when user attempts a Box-Cox transformation of non-positive data (@LiamBlake, #713).
+
+* `step_logit()` gained an offset argument for cases where the input is either zero or one (#784)
+
+* The `tidy()` methods for objects from `check_new_values()`, `check_class()` and `step_nnmf()` are now exported.
+
+
+# recipes 0.1.16
+
+## New Steps
+
+* Added a new step called `step_indicate_na()`, which will create and append additional binary columns to the data set to indicate which observations are missing (#623).
+
+* Added new `step_select()` (#199).
+
+## Bug Fixes
+
+* The `threshold` argument of `step_pca()` is now `tunable()` (#534).
+
+* Integer variables used in `step_profile()` are now kept as integers (and not doubles). 
+
+* Preserve multiple roles in `last_term_info` so `bake()` can correctly respond to `has_roles`. (#632)
+
+* Fixed behavior of the retain flag in `prep()` (#652).
+
+* The `tidy()` methods for `step_nnmf()` was rewritten since it was not great (#665), and `step_nnmf()` now no longer fully loads underlying packages (#685). 
+
+## Improvements and Other Changes
+
+* Two new selectors that combine role and data type were added: `all_numeric_predictors()` and `all_nominal_predictors()`. (#620)
+
+* Changed the names of all imputation steps, for example, from `step_knnimpute()` or `step_medianimpute()` (old) to `step_impute_knn()` or `step_impute_median()` (new) (#614).
+
+* Added `keep_original_cols` argument to several steps: 
+  * `step_pca()`, `step_ica()`, `step_nnmf()`, `step_kpca_rbf()`, `step_kpca_poly()`, `step_pls()`, `step_isomap()` which all default to `FALSE` (#635).
+  * `step_ratio()`, `step_holiday()`, `step_date()` which all default to `TRUE` to maintain original behavior, as well as `step_dummy()` which defaults to `FALSE` (#645).
+
+* Added `allow_rename` argument to `recipes_eval_select()` (#646).
+
+* Performance improvements for `step_bs()` and `step_ns()`. The `prep()` step no longer evaluates the basis functions on the training set and the `bake()` steps only evaluates the basis functions once for each unique input value (#574)
+
+* The `neighbors` parameter's default range for `step_isomap()` was changed to be 20-80.
+
+* The deprecation for `step_upsample()` and `step_downsample()` has been escalated from a soft deprecation to a regular deprecation; these functions are available in the themis package.  
+
+* Re-licensed package from GPL-2 to MIT. See [consent from copyright holders here](https://github.com/tidymodels/recipes/issues/670).
+
 # recipes 0.1.15
 
 * The full tidyselect DSL is now allowed inside recipes `step_*()` functions. This includes the operators `&`, `|`, `-` and `!` and the new `where()` function. Additionally, the restriction preventing user defined selectors from being used has been lifted (#572).

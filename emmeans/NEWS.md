@@ -1,4 +1,192 @@
-## NEWS for the emmeans package
+---
+title: "NEWS for the emmeans package"
+---
+## emmeans 1.7.2
+  * Improvements to `averaging` support (#319)
+  * Fixed bug in comparison arrows when `by = NULL` (#321)
+    (this bug was a subtle byproduct of the name-checking in #305)
+    Note this fixes visible errors in the vignettes for ver 1.7.1-1
+  * Patch for `gamlss` support (#323)
+  * Added `withAutoprint()` to documentation examples with `require()`
+    clauses, so we see interactive-style results
+  * Correction to a logic error in adjustment corrections in 
+    `summary.emmGrid` (#31)
+  * Revised `summary.emmGrid()` so that if we have both a response
+    transformation and a link function, then both transformations
+    are followed through with `type = "response"`. Previously, I took
+    the lazy way out and used 
+    `summary(regrid(object, transform = "unlink"), type = "response")`
+    (see #325)
+  * Fix to `force_regular()` which caused an unintended warning (#326)
+  * Fixes to issues in `emtrends()` (#327)
+    
+
+## emmeans 1.7.1
+  * Support from multinomial models in mgcv::gam (#303) thanks to Hannes Riebl
+  * Bug fix for spaces in `by` variable names (#305). Related to this are:
+      - `plot.emmGrid()` now forces all names to be syntactically valid
+      - In `as.data.frame.emmGrid()`, we changed the `optional` argument
+        to `check.names` (defaulting to `TRUE`), and it actually has an effect.
+        So by default, the result will have syntactically valid names; this is
+        a change, but only because `optional` did not work right (because
+        it is an argument for `as.data.frame.list()).
+  * Fix for missing column names in `linfct` from `emmeans()` (#308)
+  * Added `gnls` support (#313, #314, thanks to Fernando Miguez)
+  * Modified `glm` support so that `df.residual` is used when the
+    family is gaussian or gamma. Thus, e.g., we match `lm` results 
+    when the model is fitted with a Gaussian family. Previously we ignored
+    the d.f. for all `glm` objects.
+  * New vignette example with percentage differences
+  * More graceful handling of comparisons when there is only one mean;
+    and a related FAQ
+
+
+
+## emmeans 1.7.0
+#### Notable changes
+  * New `rg.limit` option (and argument for `ref_grid()`) to limit the number
+    of rows in the reference grid (#282, #292). **This change could affect
+    existing code that used to work** -- but only in fairly extreme situations.
+    Some users report extreme performance issues that can be traced to the size
+    of the reference grid being in the billions, causing memory to be paged,
+    etc. So providing this limit really is necessary. The default is 10,000
+    rows. I hope that most existing users don't bump up against that too often.
+    The `nuisance` (or `non.nuisance`) argument in `ref_grid()` (see below) can
+    help work around this limit.
+  * New `nuisance` option in `ref_grid()`, by which we can specify names of
+    factors to exclude from the reference grid (accommodating them by averaging)
+    (#282, #292). These must be factors that don't interact with anything, even
+    other nuisance factors. This provides a remedy for excessive grid sizes.
+  * Improvements to and broadening of `qdrg()`:
+    - Changed the order of arguments in to something a bit more natural
+    - Default for `contrasts` now `object$contrasts` when `object` is specified
+    - Detection of multivariate situations
+    - Added `ordinal.dim` argument to support ordinal models
+  * New `force_regular()` function adds invisible rows to an irregular `emmGrid`
+    to make it regular (i.e., covers all factor combinations)
+      
+#### Bug fixes and tweaks     
+  * Removed dependency on **plyr** package (#298)
+  * Fix to bug in `regrid()` with nested structures (#287)
+  * Fix bug in `rbind()` which mishandled `@grid$.offset.`
+  * Major repairs to `clm` and `clmm` support to fix issues related to
+    rank deficiency and nested models, particularly with `mode = "prob"` (#300)
+  * Allow `type` to be passed in `emmeans()` when `object` is already an `emmGrid`
+    (incidentally noticed in #287)
+  * Code to prevent a warning when an existing factor is coerced to a factor
+    in the model formula -- see [SO question](https://stackoverflow.com/questions/68969384)
+  * Add documentation note for `add_grouping` with multiple reference factors (#291)
+
+## emmeans 1.6.3
+  * Clarification of documentation of `ref_grid(object, vcov. = ...)` (#283)
+  * Fix to `emmtrends()` with covariate formulas (#284)
+  * Improved parts of "Basics" vignette - removed "back story",
+    revised guidance on $P$ values and models
+  * Allow for > 1 reference factor in `add_grouping()` (#286)
+  * Repairs to `contrast()` to avoid all-`nonEst` results in irregular
+    nested structures
+
+
+## emmeans 1.6.2
+  * Fixed navigation error in vignette index
+  * Discouraging message added to `cld()` results. 
+    Also am providing an `emm_list` method for `emm_list` objects.
+  * Added `mvcontrast()` function (#281) and assoc vignette material
+  * Added `update.summary_emm()`
+    
+
+## emmeans 1.6.1
+  * Fixed a bug in parsing a response transformation (#274)
+  * Changed handling of `contrast()` so that `log2` and `log10` transformations 
+    are handled just like `log`. (#273) Also disabled making ratios with
+    `genlog` as it seems ill-advised.
+  * Added support for `log1p` transformation
+  * Improved detection of cases where Tukey adjustment is [in]appropriate (#275)
+  * Added `type = "scale"` argument to `plot.emmGrid()` and `emmip()`. This
+    is the same as `type = "response"` except the scale itself is transformed
+    (i.e., a log scale if the log transformation was used). Since the same
+    transformation is used, the appearance of the plot will be the same as with
+    `type = "lp"`, but with an altered axis scale. Currently this is implemented
+    only with `engine = "ggplot"`.
+  * Fixed bug whereby Scheffe is ignored when there is only one contrast, even
+    though `scheffe.rank` > 1 was specified. (#171)
+  * Added a `subset()` method for `emmGrid` objects
+  * Bug fixes for `mcmc` and `mcmc.list` objects (#278, #279)
+  * `test()` shows `null` whenever it is nonzero on the chosen scale (#280)
+
+
+emmeans 1.6.0
+-------------
+This version has some changes that affect all users, e.g., not saving
+`.Last.ref_grid`, so we incremented the sub-version number.
+
+  * Changed handling of logit transformations in `contrast()`, so that the 
+    odds-ratio transformation persists into subsequent `contrast()` calls
+    e.g., interaction contrasts.
+  * We also made `contrast(..., type = ...)` work correctly
+  * Bug fix so that all `p.adjust.methods` work (#267)
+  * Support for `mblogit` extended to work with `mmblogit` models (#268)
+    (However, since, **mclogit** pkg incorporates its own interface)
+  * Added `export` option in `print.emmGrid()` and `print.emm_summary()`
+  * Changed default for `emm_options(save.ref_grid = FALSE)`. Years ago, it
+    seemed potentially useful to save the last reference grid, but this is
+    extra overhead, and writes in the user's global environment. 
+    The option remains if you want it.
+  * Added a note advising against using `as.data.frame` (because we lose
+    potentially important annotations), and information/example on how to
+    see more digits (which I guess is why I'm seeing users do this).
+  * Further refinement to nesting detection. A model like `y ~ A:B` detected
+    `A %in% B` and `B %in% A`, and hence `A %in% A*B` and `B %in% A*B` 
+    due to a change in 1.4.6. Now we omit cases where factors are nested in themselves!
+  * Expansion of `cov.reduce` formulas to allow use of custom models for
+    predicting mediating covariates
+  
+
+emmeans 1.5.5
+-------------
+
+  * The `multinom` "correction" in version 1.5.4 was actually an
+    "incorrection." It was right before, and I made it wrong!
+    **If analyzing `multinom` models, use a version *other* than 1.5.4**
+  * Repairs to support for `mblogit` models
+  * Bug fix for `survreg` support (#258) -- `survreg()` doesn't handle missing 
+    factor levels the same way as `lm()`. This also affects results from
+    `coxph()`, `AER::tobit()`, ...
+  * Addition of a note in help `auto.noise` dataset, and changing that
+    example and vignette example to have `noise/10` as the response variable.
+    (Thanks to speech and hearing professor Stuart Rosen for pointing
+    out this issue in an e-mail comment.)
+  * Bug fix for `appx-satterthwaite` mode in `gls`/`lme` models (#263)
+  * Added `mode = "asymptotic"` for `gls`/`lme` models.
+  * Added `facetlab` argument to `emmip_ggplot()` so user can control how
+    facets are labeled (#261)
+  * Efficiency improvements in `joint_tests()` (#265)
+  * Bug fixes in `joint_tests()` and interaction contrasts for nested models (#266)
+  * Improvement to `multinom` support suggested by this [SO question](https://stackoverflow.com/questions/66675697)
+  
+    
+
+emmeans 1.5.4
+-------------
+
+  * Fix to bug in `rbind.emm_list()` to default for `which`
+  * Fix for a glitch in recovering data for `gee` models (#249)
+  * Support for `svyglm` objects (#248)
+  * Better support for `lqm`, `lqmm`, and added support for `rq` & `rqs`
+    objects (**quantreg** package). User may pass `summary` or
+    `boot` arguments such as `method`, `se`, `R`, ... (#250)
+  * Correction to `multinom` objects (SEs were previously incorrect)
+    and addition of support for related `mclogit::mblogit` objects.
+    If at all possible, users should re-run any pre-1.5.4 analyses of
+    multinomial models<br>
+    **Note: This correction was wrong!** If using multinomial models,
+    you should use some version *other than* 1.5.4!
+  * Change to less misleading messages and documentation related to the
+    `N.sim` argument of `regrid()`. We are no longer calling this a posterior 
+    sample because this is not really a Bayesian method, it is just a simulated
+    set of regression coefficients.
+
+
 
 emmeans 1.5.3
 -------------
@@ -11,7 +199,7 @@ emmeans 1.5.3
     This makes it possible for `pwpp()` to work (#239)
   * Fixed a coding error in `plot()` that occurs if we use `type = "response"
     but there is in fact no transformation 
-    ([reported on StackOverflow](https://stackoverflow.com/questions/64962094/in-r-plot-emmeans-of-glmmtmb-linear-model-error-in-linkinvsummthe-emmean/64995896#64995896))
+    ([reported on StackOverflow](https://stackoverflow.com/questions/64962094))
   * Added `"log10"` and `"log2"` as legal transformations in `regrid()`
   * Revised vignette example for MCMC models, added example with **bayestestR**
   * Expanded support for ordinal models to all link functions available in
@@ -38,7 +226,7 @@ emmeans 1.5.2
 
   * Change to `plot.emmGrid(... comparisons = TRUE)` where we determine arrow 
     bounds and unnecessary-arrow deletions *separately* in each `by` group. 
-    See also [Stack Overflow posting](https://stackoverflow.com/questions/63713439/interpreting-results-from-emmeans-comparison/63734042#63734042)
+    See also [Stack Overflow posting](https://stackoverflow.com/questions/63713439)
   * `emmeans()` with contrasts specified ignores `adjust` and passes to 
     `contrast()` instead. Associated documentation improved (I hope)
   * Bug-fix for missing cases in `plot(..., comparisons = TRUE)` (#228)
@@ -63,7 +251,7 @@ emmeans 1.5.1
     so that an external package's methods are always found and given priority
     whether or not they are registered (#220)
   * Patches to `gamlss` support. Smoothers are not supported but other aspects
-   are more reliable. See [CV posting](https://stats.stackexchange.com/questions/484886/post-hoc-analysis-for-gamlss-model-in-r)
+   are more reliable. See [CV posting](https://stats.stackexchange.com/questions/484886)
   * Improvement to auto-detection of transformations (#223)
   * Added `aes` argument in `pwpp()` for more control over rendering (#178)
   * Fix to a situation in `plot.emmGrid()` where ordering of factor levels

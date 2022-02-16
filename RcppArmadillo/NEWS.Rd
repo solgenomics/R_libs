@@ -3,12 +3,231 @@
 \newcommand{\ghpr}{\href{https://github.com/RcppCore/RcppArmadillo/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/RcppCore/RcppArmadillo/issues/#1}{##1}}
 
+\section{Changes in RcppArmadillo version 0.10.8.1.0 (2022-01-23)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.8.1 (Realm Raider)
+    \itemize{
+      \item fix interaction between OpenBLAS and LAPACK
+      \item emit warning if \code{find()} is incorrectly used to locate
+      NaN elements
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.8.0.0 (2022-01-02)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.8 (Realm Raider)
+    \itemize{
+      \item faster handling of symmetric matrices by \code{pinv()} and
+      \code{rank()}
+      \item faster handling of diagonal matrices by \code{inv_sympd()},
+      \code{pinv()}, \code{rank()}
+      \item expanded \code{norm()} to handle integer vectors and
+      matrices
+      \item added \code{datum::tau} to replace \code{2π}
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.7.5.0 (2021-12-16)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.7.5
+    \itemize{
+      \item fix aliasing bug in \code{diagmat()}
+      \item fix detection of 2x2 triangular matrices
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.7.4.0 (2021-11-23)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.7.4
+    \itemize{
+      \item faster handling of diagonal matrices by \code{inv_sympd()},
+      \code{pinv()}, \code{rank()}
+      \item more robust detection of incorrect data format by
+      \code{.load()}
+    }
+    \item Correct dimensions setting in import/export of
+    \code{arma::field} types, protected by \code{#define} (Jonathan
+    Berrisch in \ghpr{352} fixing \ghit{351})
+    \item Add unit tests for \code{fields} both with and without new
+    \code{#define} (Dirk)
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.7.3.0 (2021-11-04)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.7.3
+    \itemize{
+      \item fix regression in alias handling by \code{fliplr()},
+      \code{flipud()}, \code{reverse()}
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.7.2.0 (2021-11-02)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.7.2
+    \itemize{
+      \item more robust handling of diagonal matrices by \code{pinv()}
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.7.1.0 (2021-10-08)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.7.1
+    \itemize{
+      \item fix regression in interactions between dense matrix subviews
+      and sparse matrices
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.7.0.0 (2021-09-30)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.7.0 (Entropy Maximizer)
+    \itemize{
+      \item faster handling of submatrix views accessed by
+      \code{X.cols(first_col,last_col)}
+      \item faster handling of element-wise \code{min()} and \code{max()}
+      in compound expressions
+      \item expanded \code{solve()} with \code{solve_opts::force_approx}
+      option to force use of the approximate solver
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.6.2.0 (2021-08-05)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.6.2 (Keep Calm)
+    \itemize{
+      \item fix incorrect use of \code{constexpr} for handling fixed-size
+      matrices and vectors
+      \item improved documentation
+    }
+    \item GitHub- and drat-only release
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.6.0.0 (2021-07-16)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.6.0 (Keep Calm)
+    \itemize{
+    \item expanded \code{chol()} to optionally use pivoted decomposition
+    \item expanded vector, matrix and cube constructors to allow element
+    initialisation via \code{fill::value(scalar)}, eg. \code{mat X(4,5,fill::value(123))}
+    \item faster loading of CSV files when using OpenMP
+    \item added \code{csv_opts::semicolon} option to allow saving/loading of
+      CSV files with semicolon (;) instead of comma (,) as the separator
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.5.3.0 (2021-07-01)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.5.3 (Antipodean Fortress)
+    \item GitHub-only release
+    \item Extended test coverage with several new tests, added a coverage badge.
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.5.0 (2021-05-21)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.5 (Antipodean Fortress)
+    \itemize{
+      \item added \code{.clamp()} member function
+      \item expanded the standalone \code{clamp()} function to handle complex values
+      \item more efficient use of OpenMP
+      \item vector, matrix and cube constructors now initialise elements
+      to zero by default; use the \code{fill::none} specifier,
+      eg. \code{mat X(4,5,fill::none)}, to disable element initialisation
+    }
+    \item Added \code{codecov.yml} to exclude Armadillo from coverage analysis
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.4.1.0 (2021-04-23)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.4.1 (Pressure Cooker)
+    \item GitHub-only release
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.4.0.0 (2021-04-12)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.4.0 (Pressure Cooker)
+    \itemize{
+      \item faster handling of triangular matrices by \code{log_det()}
+      \item added \code{log_det_sympd()} for log determinant of
+      symmetric positive matrices
+      \item added ARMA_WARN_LEVEL configuration option, to control the
+      degree of emitted warning messages
+      \item reduced the default degree of warning messages, so that
+      failed decompositions, failed saving/loading, etc, no longer emit
+      warnings
+    }
+    \item Apply one upstream corrections for \code{arma::randn} draws
+    when using alternative (here R) generator, and \code{arma::randg}.
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.3.0.0 (2021-03-10)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.3 (Sunrise Chaos)
+    \itemize{
+      \item faster handling of symmetric positive definite matrices by
+      \code{pinv()}
+      \item expanded \code{.save()} / \code{.load()} for dense matrices
+      to handle coord_ascii format
+      \item for out of bounds access, element accessors now throw the
+      more nuanced \code{std::out_of_range} exception, instead of only
+      \code{std::logic_error}
+      \item improved quality of random numbers
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.2.2.0 (2021-03-09)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.2.2 (Cicada Swarm)
+    \itemize{
+      \item faster handling of subcubes
+      \item added \code{tgamma()}
+      \item added \code{.brief_print()} for abridged printing of matrices & cubes
+      \item expanded forms of \code{trimatu()} and \code{trimatl()} with
+      diagonal specification to handle sparse matrices
+      \item expanded \code{eigs_sym()} and \code{eigs_gen()} with optional shift-invert mode
+    }
+    \item Removed \code{debian/} directory from repository as packaging
+    is on salsa.debian.org.
+    \item Relaxed tolerance on two \code{cube} tests on Windows to
+    accomodate new 'gcc10-UCRT' builder.
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.2.1.0 (2021-02-09)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.2.1 (Cicada Swarm)
+    \itemize{
+      \item faster handling of subcubes
+      \item added \code{tgamma()}
+      \item added \code{.brief_print()} for abridged printing of matrices & cubes
+      \item expanded forms of \code{trimatu()} and \code{trimatl()} with
+      diagonal specification to handle sparse matrices
+      \item expanded \code{eigs_sym()} and \code{eigs_gen()} with optional shift-invert mode
+    }
+  }
+}
+
 \section{Changes in RcppArmadillo version 0.10.1.2.2 (2021-01-08)}{
   \itemize{
     \item Correct one unit test for \pkg{Matrix} 1.3.0-caused changed
     (Binxiang in \ghpr{319} and Dirk in \ghpr{322}).
     \item Suppress one further warning from \pkg{Matrix} (Dirk)
     \item Apply an upstream \code{NaN} correction (Conrad in \ghpr{321})
+    \item Added GitHub Actions CI using \code{run.sh} from r-ci (Dirk)
   }
 }
 

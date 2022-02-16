@@ -3,13 +3,13 @@ browse-this             Visit important project-related web pages
 create_from_github      Create a project from a GitHub repo
 create_package          Create a package or project
 edit                    Open configuration files
-git_branch_default      Determine default Git branch
+git-default-branch      Get or set the default Git branch
 git_credentials         Produce or register credentials for git2r
 git_protocol            See or set the default Git protocol
 git_sitrep              Git/GitHub sitrep
 git_vaccinate           Vaccinate your global gitignore file
 github-token            Get help with GitHub personal access tokens
-github_actions          GitHub Actions setup and badges
+github_actions          GitHub Actions setup
 issue-this              Helpers for GitHub issues
 proj_activate           Activate a project
 proj_sitrep             Report working directory and usethis/RStudio
@@ -36,11 +36,13 @@ use_git_hook            Add a git hook
 use_git_ignore          Tell Git to ignore files
 use_git_remote          Configure and report Git remotes
 use_github              Connect a local repo with GitHub
-use_github_action       Use a specific GitHub Actions workflow
+use_github_file         Copy a file from any GitHub repo into the
+                        current project
 use_github_labels       Manage GitHub issue labels
 use_github_links        Use GitHub links in URL and BugReports
 use_github_pages        Configure a GitHub Pages site
 use_github_release      Draft a GitHub release
+use_import_from         Import a function from another package
 use_jenkins             Create Jenkinsfile for Jenkins CI Pipelines
 use_lifecycle           Use lifecycle badges
 use_logo                Use a package logo

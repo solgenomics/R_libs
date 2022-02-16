@@ -20,6 +20,35 @@ test_that("I want to use the 2nd edition", {
   expect_true(TRUE)
 })
 
+## -----------------------------------------------------------------------------
+f <- function() {
+  warning("First warning")
+  warning("Second warning")
+  warning("Third warning")
+}
+
+local_edition(2)
+expect_warning(f(), "First")
+
+## -----------------------------------------------------------------------------
+local_edition(3)
+expect_warning(f(), "First")
+
+## -----------------------------------------------------------------------------
+f() %>% 
+  expect_warning("First") %>% 
+  expect_warning("Second") %>% 
+  expect_warning("Third")
+
+f() %>% 
+  expect_warning("First") %>% 
+  suppressWarnings()
+
+## -----------------------------------------------------------------------------
+test_that("f() produces expected outputs/messages/warnings", {
+  expect_snapshot(f())  
+})
+
 ## ---- error = TRUE------------------------------------------------------------
 f1 <- factor(letters[1:3])
 f2 <- ordered(letters[1:3], levels = letters[1:4])

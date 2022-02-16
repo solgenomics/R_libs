@@ -2,8 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><title>R: Classes for Relational Data</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> Classes for Relational Data
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;network&rsquo; version 1.16.1</h2>
+</div><h2>Documentation for package &lsquo;network&rsquo; version 1.17.1</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -62,6 +63,8 @@
 <td>Add Vertices to an Existing Network</td></tr>
 <tr><td style="width: 25%;"><a href="as.color.html">as.color</a></td>
 <td>Transform vector of values into color specification</td></tr>
+<tr><td style="width: 25%;"><a href="as.data.frame.network.html">as.data.frame.network</a></td>
+<td>Coerce a Network Object to a 'data.frame'</td></tr>
 <tr><td style="width: 25%;"><a href="as.edgelist.html">as.edgelist</a></td>
 <td>Convert a network object into a numeric edgelist matrix</td></tr>
 <tr><td style="width: 25%;"><a href="as.edgelist.html">as.edgelist.matrix</a></td>
@@ -79,6 +82,8 @@
 <tr><td style="width: 25%;"><a href="as.matrix.network.html">as.matrix.network.incidence</a></td>
 <td>Coerce a Network Object to Matrix or Table Form</td></tr>
 <tr><td style="width: 25%;"><a href="network.html">as.network</a></td>
+<td>Network Objects</td></tr>
+<tr><td style="width: 25%;"><a href="network.html">as.network.data.frame</a></td>
 <td>Network Objects</td></tr>
 <tr><td style="width: 25%;"><a href="as.network.matrix.html">as.network.default</a></td>
 <td>Coercion from Matrices to Network Objects</td></tr>
@@ -101,11 +106,17 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="attribute.methods.html">delete.edge.attribute</a></td>
 <td>Attribute Interface Methods for the Network Class</td></tr>
+<tr><td style="width: 25%;"><a href="attribute.methods.html">delete.edge.attribute.network</a></td>
+<td>Attribute Interface Methods for the Network Class</td></tr>
 <tr><td style="width: 25%;"><a href="deletion.methods.html">delete.edges</a></td>
 <td>Remove Elements from a Network Object</td></tr>
 <tr><td style="width: 25%;"><a href="attribute.methods.html">delete.network.attribute</a></td>
 <td>Attribute Interface Methods for the Network Class</td></tr>
+<tr><td style="width: 25%;"><a href="attribute.methods.html">delete.network.attribute.network</a></td>
+<td>Attribute Interface Methods for the Network Class</td></tr>
 <tr><td style="width: 25%;"><a href="attribute.methods.html">delete.vertex.attribute</a></td>
+<td>Attribute Interface Methods for the Network Class</td></tr>
+<tr><td style="width: 25%;"><a href="attribute.methods.html">delete.vertex.attribute.network</a></td>
 <td>Attribute Interface Methods for the Network Class</td></tr>
 <tr><td style="width: 25%;"><a href="deletion.methods.html">delete.vertices</a></td>
 <td>Remove Elements from a Network Object</td></tr>
@@ -138,7 +149,15 @@
 <td>Retrieve Edges or Edge IDs Associated with a Given Vertex</td></tr>
 <tr><td style="width: 25%;"><a href="attribute.methods.html">get.edge.attribute</a></td>
 <td>Attribute Interface Methods for the Network Class</td></tr>
+<tr><td style="width: 25%;"><a href="attribute.methods.html">get.edge.attribute.list</a></td>
+<td>Attribute Interface Methods for the Network Class</td></tr>
+<tr><td style="width: 25%;"><a href="attribute.methods.html">get.edge.attribute.network</a></td>
+<td>Attribute Interface Methods for the Network Class</td></tr>
 <tr><td style="width: 25%;"><a href="attribute.methods.html">get.edge.value</a></td>
+<td>Attribute Interface Methods for the Network Class</td></tr>
+<tr><td style="width: 25%;"><a href="attribute.methods.html">get.edge.value.list</a></td>
+<td>Attribute Interface Methods for the Network Class</td></tr>
+<tr><td style="width: 25%;"><a href="attribute.methods.html">get.edge.value.network</a></td>
 <td>Attribute Interface Methods for the Network Class</td></tr>
 <tr><td style="width: 25%;"><a href="get.edges.html">get.edgeIDs</a></td>
 <td>Retrieve Edges or Edge IDs Associated with a Given Vertex</td></tr>
@@ -149,6 +168,8 @@
 <tr><td style="width: 25%;"><a href="get.neighborhood.html">get.neighborhood</a></td>
 <td>Obtain the Neighborhood of a Given Vertex</td></tr>
 <tr><td style="width: 25%;"><a href="attribute.methods.html">get.network.attribute</a></td>
+<td>Attribute Interface Methods for the Network Class</td></tr>
+<tr><td style="width: 25%;"><a href="attribute.methods.html">get.network.attribute.network</a></td>
 <td>Attribute Interface Methods for the Network Class</td></tr>
 <tr><td style="width: 25%;"><a href="attribute.methods.html">get.vertex.attribute</a></td>
 <td>Attribute Interface Methods for the Network Class</td></tr>
@@ -172,9 +193,17 @@
 <td>Determine Whether Two Vertices Are Adjacent</td></tr>
 <tr><td style="width: 25%;"><a href="network.indicators.html">is.bipartite</a></td>
 <td>Indicator Functions for Network Properties</td></tr>
+<tr><td style="width: 25%;"><a href="mixingmatrix.html">is.bipartite.mixingmatrix</a></td>
+<td>Mixing matrix</td></tr>
+<tr><td style="width: 25%;"><a href="network.indicators.html">is.bipartite.network</a></td>
+<td>Indicator Functions for Network Properties</td></tr>
 <tr><td style="width: 25%;"><a href="as.color.html">is.color</a></td>
 <td>Transform vector of values into color specification</td></tr>
 <tr><td style="width: 25%;"><a href="network.indicators.html">is.directed</a></td>
+<td>Indicator Functions for Network Properties</td></tr>
+<tr><td style="width: 25%;"><a href="mixingmatrix.html">is.directed.mixingmatrix</a></td>
+<td>Mixing matrix</td></tr>
+<tr><td style="width: 25%;"><a href="network.indicators.html">is.directed.network</a></td>
 <td>Indicator Functions for Network Properties</td></tr>
 <tr><td style="width: 25%;"><a href="as.edgelist.html">is.edgelist</a></td>
 <td>Convert a network object into a numeric edgelist matrix</td></tr>
@@ -195,7 +224,11 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="attribute.methods.html">list.edge.attributes</a></td>
 <td>Attribute Interface Methods for the Network Class</td></tr>
+<tr><td style="width: 25%;"><a href="attribute.methods.html">list.edge.attributes.network</a></td>
+<td>Attribute Interface Methods for the Network Class</td></tr>
 <tr><td style="width: 25%;"><a href="attribute.methods.html">list.network.attributes</a></td>
+<td>Attribute Interface Methods for the Network Class</td></tr>
+<tr><td style="width: 25%;"><a href="attribute.methods.html">list.network.attributes.network</a></td>
 <td>Attribute Interface Methods for the Network Class</td></tr>
 <tr><td style="width: 25%;"><a href="attribute.methods.html">list.vertex.attributes</a></td>
 <td>Attribute Interface Methods for the Network Class</td></tr>
@@ -210,6 +243,10 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="network.naedgecount.html">missing.edges</a></td>
 <td>Identifying and Counting Missing Edges in a Network Object</td></tr>
+<tr><td style="width: 25%;"><a href="mixingmatrix.html">mixingmatrix</a></td>
+<td>Mixing matrix</td></tr>
+<tr><td style="width: 25%;"><a href="mixingmatrix.html">mixingmatrix.network</a></td>
+<td>Mixing matrix</td></tr>
 </table>
 
 <h2><a name="N">-- N --</a></h2>
@@ -282,6 +319,8 @@
 <td>Two-Dimensional Visualization for Network Objects</td></tr>
 <tr><td style="width: 25%;"><a href="preparePlotArgs.html">plotArgs.network</a></td>
 <td>Expand and transform attributes of networks to values appropriate for aguments to plot.network</td></tr>
+<tr><td style="width: 25%;"><a href="mixingmatrix.html">print.mixingmatrix</a></td>
+<td>Mixing matrix</td></tr>
 <tr><td style="width: 25%;"><a href="network.html">print.network</a></td>
 <td>Network Objects</td></tr>
 <tr><td style="width: 25%;"><a href="network.html">print.summary.network</a></td>
@@ -306,11 +345,19 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="attribute.methods.html">set.edge.attribute</a></td>
 <td>Attribute Interface Methods for the Network Class</td></tr>
+<tr><td style="width: 25%;"><a href="attribute.methods.html">set.edge.attribute.network</a></td>
+<td>Attribute Interface Methods for the Network Class</td></tr>
 <tr><td style="width: 25%;"><a href="attribute.methods.html">set.edge.value</a></td>
+<td>Attribute Interface Methods for the Network Class</td></tr>
+<tr><td style="width: 25%;"><a href="attribute.methods.html">set.edge.value.network</a></td>
 <td>Attribute Interface Methods for the Network Class</td></tr>
 <tr><td style="width: 25%;"><a href="attribute.methods.html">set.network.attribute</a></td>
 <td>Attribute Interface Methods for the Network Class</td></tr>
+<tr><td style="width: 25%;"><a href="attribute.methods.html">set.network.attribute.network</a></td>
+<td>Attribute Interface Methods for the Network Class</td></tr>
 <tr><td style="width: 25%;"><a href="attribute.methods.html">set.vertex.attribute</a></td>
+<td>Attribute Interface Methods for the Network Class</td></tr>
+<tr><td style="width: 25%;"><a href="attribute.methods.html">set.vertex.attribute.network</a></td>
 <td>Attribute Interface Methods for the Network Class</td></tr>
 <tr><td style="width: 25%;"><a href="sum.network.html">sum.network</a></td>
 <td>Combine Networks by Edge Value Addition</td></tr>
@@ -339,6 +386,8 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="network-operators.html">!.network</a></td>
 <td>Network Operators</td></tr>
+<tr><td style="width: 25%;"><a href="mixingmatrix.html">$.mixingmatrix</a></td>
+<td>Mixing matrix</td></tr>
 <tr><td style="width: 25%;"><a href="network.html">$&lt;-.network</a></td>
 <td>Network Objects</td></tr>
 <tr><td style="width: 25%;"><a href="network-operators.html">%c%</a></td>
@@ -385,7 +434,9 @@
 <td>Extraction and Replacement Operators for Network Objects</td></tr>
 <tr><td style="width: 25%;"><a href="network.extraction.html">[&lt;-.network</a></td>
 <td>Extraction and Replacement Operators for Network Objects</td></tr>
+<tr><td style="width: 25%;"><a href="mixingmatrix.html">[[.mixingmatrix</a></td>
+<td>Mixing matrix</td></tr>
 <tr><td style="width: 25%;"><a href="network-operators.html">|.network</a></td>
 <td>Network Operators</td></tr>
 </table>
-</body></html>
+</div></body></html>

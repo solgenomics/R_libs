@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -151,7 +153,7 @@ mat_injector<T1>::~mat_injector()
     
     const uword max_n_rows = ((*(A[n_rows-1])).n_cols == 0) ? n_rows-1 : n_rows;
     
-    if(is_Mat_only<T1>::value == true)
+    if(is_Mat_only<T1>::value)
       {
       X.set_size(max_n_rows, max_n_cols);
       
@@ -171,7 +173,7 @@ mat_injector<T1>::~mat_injector()
         }
       }
     else
-    if(is_Row<T1>::value == true)
+    if(is_Row<T1>::value)
       {
       arma_debug_check( (max_n_rows > 1), "matrix initialisation: incompatible dimensions" );
       
@@ -182,7 +184,7 @@ mat_injector<T1>::~mat_injector()
       arrayops::copy( X.memptr(), (*(A[0])).A.memptr(), n_cols );
       }
     else
-    if(is_Col<T1>::value == true)
+    if(is_Col<T1>::value)
       {
       const bool is_vec = ( (max_n_rows == 1) || (max_n_cols == 1) );
       
@@ -300,7 +302,7 @@ operator<<(const mat_injector<T1>& ref, const injector_end_of_row<>& x)
 
 
 //// using a mixture of operator << and , doesn't work yet
-//// e.g. A << 1, 2, 3 << endr
+//// eg. A << 1, 2, 3 << endr
 //// in the above "3 << endr" requires special handling.
 //// similarly, special handling is necessary for "endr << 3"
 //// 

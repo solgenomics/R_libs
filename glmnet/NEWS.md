@@ -1,11 +1,43 @@
+# glmnet 4.1-3
+
+Some of the Fortran in glmnet has been replaced by C++, written by the
+newest member of our team, James Yang.
+* the `wls` routines (dense and sparse), that are the engines under the `glmnet.path`
+  function when we use programmable families, are now written in C++, and lead
+  to speedups of around 8x.
+* the family of elnet routines (sparse/dense, covariance/naive) for
+  `glmnet(...,family="gaussian")` are all in C++, and lead to speedups
+  around 4x.
+  
+# glmnet 4.1-2
+
+A new feature added, as well as some minor fixes to documentation.
+* The exclude argument has come to life. Users can now pass a function
+  that can take arguments x, y and weights, or a subset of these, for
+  filtering variables. Details in documentation and vignette.
+* Prediction with single `newx` observation failed before. This is
+  fixed.
+* Labeling of predictions from `cv.glmnet` improved.
+* Fixed a bug in mortran/fortran that caused program to loop ad infinitum
+
+# glmnet 4.1-1
+
+Fixed some bugs in the coxpath function to do with sparse X.
+* when some penalty factors are zero, and X is sparse, we should not
+  call GLM to get the start
+* apply does not work as intended with sparse X, so we now use matrix
+  multiplies instead in computing lambda_max
+* added documentation for `cv.glmnet` to explain implications of
+  supplying `lambda`  
+
 # glmnet 4.1
 
 Expanded scope for the Cox model.
 * We now allow (start, stop) data in
   addition to the original right-censored all start at zero option.
-* Allow for strata as in `survival:coxph`
+* Allow for strata as in `survival::coxph`
 * Allow for sparse X matrix with Cox models (was not available before)
-* Provide method for `survival:survfit`
+* Provide method for `survival::survfit`
 
 Vignettes are revised and reorganized.
 Additional index information stored on `cv.glmnet` objects, and

@@ -3,6 +3,34 @@
 \newcommand{\ghpr}{\href{https://github.com/eddelbuettel/nanotime/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/eddelbuettel/nanotime/issues/#1}{##1}}
 
+\section{Changes in version 0.3.5 (2021-12-14)}{
+  \itemize{
+    \item Applied patch by Tomas Kalibera for Windows UCRT under the
+    upcoming R 4.2.0 expected for April.
+  }
+}
+
+\section{Changes in version 0.3.4 (2021-11-24)}{
+  \itemize{
+    \item Added a few more \code{as.character} conversion function (Dirk)
+    \item Expose \code{nanoperiod} functionality via header file for use
+    by other packages (Leonardo in \ghpr{95} fixing \ghit{94}).
+  }
+}
+
+\section{Changes in version 0.3.3 (2021-08-09)}{
+  \itemize{
+    \item New demo \code{ggplot2Example.R} (Leonardo and Dirk). 
+    \item New documentation website using mkdocs-material (Dirk).
+    \item Updated unit test to account for r-devel POSIXct changes,
+    and re-enable full testing under r-devel (Dirk).
+    \item Additional \code{nanoduration} and \code{character} ops plus
+    tests (Colin Umansky in \ghpr{88} addressing \ghit{87}).
+    \item New \code{plus} and \code{minus} functions for periods
+    (Leonardo in \ghpr{91}). 
+  }
+}
+
 \section{Changes in version 0.3.2 (2020-09-03)}{
   \itemize{
     \item Correct for big endian (Elliott Sales de Andrade in \ghpr{81}). 

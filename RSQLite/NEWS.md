@@ -1,3 +1,69 @@
+<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+
+# RSQLite 2.2.9 (2021-12-06)
+
+## Features
+
+- Upgrade bundled SQLite to version 3.37.0 (#392).
+- `dbConnect()` now supports URIs that start with `file://` for the `dbname` argument. The SQLite code is now built with the `SQLITE_USE_URI` (#390, @tschoonj).
+
+## Bug fixes
+
+- `dbBegin()`, `dbCommit()` and `dbRollback()` support keywords in savepoint names (#386).
+
+## Internal
+
+- Adapt to DBItest 1.7.2 (#385).
+- Enable all DBItest tests, passing now.
+
+
+# RSQLite 2.2.8 (2021-08-21)
+
+- Upgrade bundled SQLite to version 3.36.0 (#374).
+- Fix build on CentOS 7 (#367).
+- Busy callback emits message instead of warning (#355).
+- Avoid using memoise at build time (#371).
+
+
+# RSQLite 2.2.7 (2021-04-22)
+
+- Remove RStudio Connection pane support due to problems reported by users (#352).
+- Upgrade bundled SQLite to version 3.35.5 (#368).
+
+
+# RSQLite 2.2.6 (2021-04-11)
+
+- Upgrade bundled SQLite to 3.35.4 (#361).
+- Implement RStudio Connection Contract (#352, @edwindj).
+- `dbDataType()` supports extended types for connections created with `extended_types = TRUE` (#360, @ablack3).
+- `dbWriteTable()` creates tables with extended types for connections created with `extended_types = TRUE` (#360, @ablack3).
+- Remove BH dependency by inlining the header files (#362).
+
+
+# RSQLite 2.2.5 (2021-03-25)
+
+- Upgrade bundled SQLite to version 3.35.2 (#357).
+- If the busy handler fails, the transaction is aborted explicitly (#348, @gaborcsardi).
+
+
+# RSQLite 2.2.4 (2021-03-12)
+
+## Features
+
+- Improve concurrency behavior with multiple writers (#280, @gaborcsardi).
+- New `sqliteSetBusyHandler()` helps configure what SQLite should do when the database is locked (#280, @gaborcsardi).
+- `dbConnect()` gains an `extended_types` argument that adds support for date, time and timestamp columns. If a column has a declared type `DATE`, `TIME` or `TIMESTAMP`, it is returned as `Date`, `hms` or `POSIXct` value, respectively (#333, @anderic1).
+- Upgrade bundled SQLite to version 3.34.1 (#342).
+
+
+# RSQLite 2.2.3 (2021-01-24)
+
+## Features
+
+- Upgrade bundled SQLite to version 3.34.1 (#342).
+- `dbConnect()` gains an `extended_types` argument that adds support for date, time and timestamp columns. If a column has a declared type `DATE`, `TIME` or `TIMESTAMP`, it is returned as `Date`, `hms` or `POSIXct` value, respectively (#333, @anderic1).
+
+
 # RSQLite 2.2.2 (2021-01-04)
 
 ## Features
@@ -23,12 +89,12 @@
 - Multipart queries now give a warning (#313).
 
 
-# RSQLite 2.2.0
+# RSQLite 2.2.0 (2020-01-07)
 
 - Avoid mangling column names (#259).
 
 
-# RSQLite 2.1.5
+# RSQLite 2.1.5 (2019-12-18)
 
 - Upgrade bundled sqlite version to 3.30.1.
 - Implement `dbGetInfo()` for driver and connection objects (#117).
@@ -37,17 +103,17 @@
 - Fulfill requirements for CII badge (#300, @TSchiefer).
 
 
-# RSQLite 2.1.4
+# RSQLite 2.1.4 (2019-12-04)
 
 - Replace `std::mem_fn()` by `boost::mem_fn()` which works for older compilers.
 
 
-# RSQLite 2.1.3
+# RSQLite 2.1.3 (2019-12-03)
 
 - Replace `std::mem_fun_ref()` by `std::mem_fn()`.
 
 
-# RSQLite 2.1.2
+# RSQLite 2.1.2 (2019-07-24)
 
 ## Bundled library
 
@@ -350,13 +416,13 @@ Internal
 - Added upgrade script for sqlite3 sources and creation script for the datasets database to the `data-raw` directory.
 
 
-# Version 1.0.0
+# RSQLite 1.0.0 (2014-10-25)
 
 ## New features
 
 - Updated to SQLite 3.8.6
 
-- Added `datasetsDb()`, a bundled SQLite database containing all data frames 
+- Added `datasetsDb()`, a bundled SQLite database containing all data frames
   in the datasets package (#15).
 
 - Inlined `RSQLite.extfuns` - use `initExtension()` to load the many
@@ -368,7 +434,7 @@ Internal
   close it for you, with a warning. It's still good practice to clean up
   after yourself, but you don't have to.
 
-- `dbBegin()`, `dbCommit()`, `dbRollback()` throw errors on failure, rather than 
+- `dbBegin()`, `dbCommit()`, `dbRollback()` throw errors on failure, rather than
   return `FALSE`.  They all gain a `name` argument to specify named savepoints.
 
 - `dbFetch()` method added (`fetch()` will be deprecated in the future)
@@ -380,24 +446,24 @@ Internal
     * It quotes field names using `dbQuoteIdentifier()`, rather
       than use a flawed black-list based approach with name munging.
 
-    * It now throws errors on failure, rather than returning FALSE. 
-    
+    * It now throws errors on failure, rather than returning FALSE.
+
     * It will automatically add row names only if they are character, not integer.
-    
+
     * When loading a file from disk, `dbWriteTable()` will no longer
       attempt to guess the correct values for `row.names` and `header` - instead
-      supply them explicitly if the defaults are incorrect. 
-    
-    * It uses named save points so it can be nested inside other 
-      transactions (#41). 
-    
-    * When given a zero-row data frame it will just creates the table 
-      definition (#35). 
+      supply them explicitly if the defaults are incorrect.
+
+    * It uses named save points so it can be nested inside other
+      transactions (#41).
+
+    * When given a zero-row data frame it will just creates the table
+      definition (#35).
 
 ## Changes to objects
 
 - The `dbname`, `loadable.extensions`, `flags` and `vfs` properties of
-  a SqliteConnection are now slots. Access them directly instead of using 
+  a SqliteConnection are now slots. Access them directly instead of using
   `dbGetInfo()`.
 
 ## Deprecated and removed functions
@@ -410,18 +476,18 @@ Internal
 
 - `dbCallProc()` method removed, since generic is now deprecated.
 
-- Renamed `dbBuildTableDefinition()` to `sqliteBuildTableDefinition()` 
+- Renamed `dbBuildTableDefinition()` to `sqliteBuildTableDefinition()`
   to avoid implying it's a DBI generic. Old function is aliased to new with
   a warning.
 
 - `dbFetch()` no longer numbers row names sequentially between fetches.
 
-- `safe.write()` is no longer exported as it shouldn't be part of the 
+- `safe.write()` is no longer exported as it shouldn't be part of the
   public RSQLite interface (#26).
 
 - Internal `sqlite*()` functions are no longer exported (#20).
 
-- Removed `SqliteObject` and `dbObject` classes, modifying `SqliteDriver`, 
+- Removed `SqliteObject` and `dbObject` classes, modifying `SqliteDriver`,
   `SqliteConnection`, and `SqliteResult` to use composition instead of multiple
   inheritance.
 
@@ -757,7 +823,7 @@ Internal
   If you are having a lot of string parameters, use stringsAsFactors=FALSE
   when creating the bind.data data.frame instance.  You can also use I().
 
-* Added experimental sqliteQuickColumn function that retrieves an entire 
+* Added experimental sqliteQuickColumn function that retrieves an entire
   column from a specified table as quickly as possible.
 
 * The SQLite driver has a new logical parameter "shared.cache" to
@@ -893,4 +959,3 @@ Internal
   with no support for connections, result set (cursors), data types,
   meta-data -- nothing.  So I had to simulate all this. (Actually it
   wasn't too bad).
-

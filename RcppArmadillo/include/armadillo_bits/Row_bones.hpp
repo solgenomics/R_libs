@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -31,15 +33,24 @@ class Row : public Mat<eT>
   static constexpr bool is_row  = true;
   static constexpr bool is_xvec = false;
   
-  inline          Row();
-  inline          Row(const Row<eT>& X);
+  inline Row();
+  inline Row(const Row<eT>& X);
+  
   inline explicit Row(const uword N);
   inline explicit Row(const uword in_rows, const uword in_cols);
   inline explicit Row(const SizeMat& s);
   
+  template<bool do_zeros> inline explicit Row(const uword N,                            const arma_initmode_indicator<do_zeros>&);
+  template<bool do_zeros> inline explicit Row(const uword in_rows, const uword in_cols, const arma_initmode_indicator<do_zeros>&);
+  template<bool do_zeros> inline explicit Row(const SizeMat& s,                         const arma_initmode_indicator<do_zeros>&);
+  
   template<typename fill_type> inline Row(const uword n_elem,                       const fill::fill_class<fill_type>& f);
   template<typename fill_type> inline Row(const uword in_rows, const uword in_cols, const fill::fill_class<fill_type>& f);
   template<typename fill_type> inline Row(const SizeMat& s,                         const fill::fill_class<fill_type>& f);
+  
+  inline Row(const uword N,                            const fill::scalar_holder<eT> f);
+  inline Row(const uword in_rows, const uword in_cols, const fill::scalar_holder<eT> f);
+  inline Row(const SizeMat& s,                         const fill::scalar_holder<eT> f);
   
   inline            Row(const char*        text);
   inline Row& operator=(const char*        text);
@@ -79,11 +90,11 @@ class Row : public Mat<eT>
   
   arma_cold inline mat_injector<Row> operator<<(const eT val);
   
-  arma_inline const Op<Row<eT>,op_htrans>  t() const;
-  arma_inline const Op<Row<eT>,op_htrans> ht() const;
-  arma_inline const Op<Row<eT>,op_strans> st() const;
+  arma_inline arma_warn_unused const Op<Row<eT>,op_htrans>  t() const;
+  arma_inline arma_warn_unused const Op<Row<eT>,op_htrans> ht() const;
+  arma_inline arma_warn_unused const Op<Row<eT>,op_strans> st() const;
   
-  arma_inline const Op<Row<eT>,op_strans> as_col() const;
+  arma_inline arma_warn_unused const Op<Row<eT>,op_strans> as_col() const;
   
   arma_inline       subview_row<eT> col(const uword col_num);
   arma_inline const subview_row<eT> col(const uword col_num) const;
@@ -195,6 +206,7 @@ class Row<eT>::fixed : public Row<eT>
   arma_inline fixed(const fixed<fixed_n_elem>& X);
        inline fixed(const subview_cube<eT>& X);
   
+                                     inline fixed(const fill::scalar_holder<eT> f);
   template<typename fill_type>       inline fixed(const fill::fill_class<fill_type>& f);
   template<typename T1>              inline fixed(const Base<eT,T1>& A);
   template<typename T1, typename T2> inline fixed(const Base<pod_type,T1>& A, const Base<pod_type,T2>& B);
@@ -223,9 +235,9 @@ class Row<eT>::fixed : public Row<eT>
     template<typename T1, typename T2, typename eglue_type> inline Row& operator=(const eGlue<T1, T2, eglue_type>& X);
   #endif
   
-  arma_inline const Op< Row_fixed_type, op_htrans >  t() const;
-  arma_inline const Op< Row_fixed_type, op_htrans > ht() const;
-  arma_inline const Op< Row_fixed_type, op_strans > st() const;
+  arma_inline arma_warn_unused const Op< Row_fixed_type, op_htrans >  t() const;
+  arma_inline arma_warn_unused const Op< Row_fixed_type, op_htrans > ht() const;
+  arma_inline arma_warn_unused const Op< Row_fixed_type, op_strans > st() const;
   
   arma_inline arma_warn_unused const eT& at_alt     (const uword i) const;
   

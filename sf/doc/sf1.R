@@ -173,27 +173,6 @@ st_layers(system.file("osm/overpass.osm", package="sf"), do_count = TRUE)
 #  download.file(u_kml, "bikeraces.kml")
 #  bikraces <- st_read("bikeraces.kml")
 
-## ---- echo=TRUE, eval=FALSE---------------------------------------------------
-#  shp_read_sp <- function() rgdal::readOGR(dsn = ".", layer = "biketrails")
-#  shp_read_sf <- function() st_read("biketrails.shp")
-#  if(Sys.info()[1] == "Linux") {
-#    kmz_read_sp <- function() rgdal::readOGR(dsn = "BikePaths.kmz")
-#    kmz_read_sf <- function() st_read("BikePaths.kmz")
-#  } else {
-#      kmz_read_sp <- function() message("NA")
-#      kmz_read_sf <- function() message("NA")
-#  }
-#  kml_read_sp <- function() rgdal::readOGR("bikeraces.kml")
-#  kml_read_sf <- function() st_read("bikeraces.kml")
-#  microbenchmark::microbenchmark(shp_read_sp(), shp_read_sf(),
-#                                 kmz_read_sp(), kmz_read_sf(),
-#                                 kml_read_sp(), kml_read_sf(), times = 10)
-
-## ---- echo=FALSE--------------------------------------------------------------
-# Tidy up
-files_to_remove <- list.files(pattern = "[B-b]ike")
-if(length(files_to_remove) > 0) file.remove(files_to_remove)
-
 ## -----------------------------------------------------------------------------
 nc.web_mercator <- st_transform(nc, 3857)
 st_geometry(nc.web_mercator)[[4]][[2]][[1]][1:3,]

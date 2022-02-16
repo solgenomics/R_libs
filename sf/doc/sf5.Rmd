@@ -10,14 +10,9 @@ vignette: >
 
 **For a better version of the sf vignettes see** https://r-spatial.github.io/sf/articles/
 
-```{r echo=FALSE, include=FALSE}
+This vignette describes the functions in `sf` that can help to plot 
 knitr::opts_chunk$set(fig.height = 4.5)
 knitr::opts_chunk$set(fig.width = 6)
-tmap_fixed = TRUE
-#user_edzer_or_travis = Sys.getenv("USER") %in% c("travis", "edzer")
-user_edzer_or_travis = FALSE
-```
-This vignette describes the functions in `sf` that can help to plot 
 simple features. It tries to be complete about the plot methods 
 `sf` provides, and give examples and pointers to options to plot
 simple feature objects with other packages (mapview, tmap, ggplot2).
@@ -89,13 +84,13 @@ plot(nc["f"], axes = TRUE, key.pos = 4, pal = sf.colors(10), key.width = lcm(4.5
 
 # Class intervals
 
-color breaks (class intervals) can be controlled by plot arguments `breaks` and `nbreaks`. `nbreaks` specifies the number of breaks; `breaks` is either a vector with break values:
+Color breaks (class intervals) can be controlled by plot arguments `breaks` and `nbreaks`. `nbreaks` specifies the number of breaks; `breaks` is either a vector with break values:
 
 ```{r}
 plot(nc["AREA"], breaks = c(0,.05,.1,.15,.2,.25))
 ```
 
-or `breaks` is used to indicate a breaks finding method that is passed as the `style` argument to `classInt::classIntervals`. Its default value, `pretty`, results in rounded class breaks, and has as a side effect that `nbreaks` may be honoured only approximately. Other methods include `"equal"` to define the data range into `"nbreaks"` equal classes, `"quantile"` to use quantiles as class breaks, and `"jenks"`, used in other software.
+or `breaks` is used to indicate a breaks-finding method that is passed as the `style` argument to `classInt::classIntervals`. Its default value, `pretty`, results in rounded class breaks, and has as a side effect that `nbreaks` may be honoured only approximately. Other methods include `"equal"` to break the data range into `"nbreaks"` equal classes, `"quantile"` to use quantiles as class breaks, and `"jenks"`, used in other software.
 
 ```{r}
 plot(nc["AREA"], breaks = "jenks")
@@ -162,14 +157,14 @@ which convert simple simple feature objects into `grob` ("graphics objects") obj
 
 ## ggplot2
 
-contains a geom specially for simple feature objects, with support for graticule white lines in the background using `sf::st_graticule`. Support is currently good for polygons; for lines or points your milage may vary.
+contains a geom specially for simple feature objects, with support for graticule white lines in the background using `sf::st_graticule`. Support is currently good for polygons; for lines or points, your mileage may vary.
 
 ```{r}
 library(ggplot2)
 ggplot() + geom_sf(data = usa)
 ```
 
-polygons can be colored using `aes`:
+Polygons can be colored using `aes`:
 ```{r}
 ggplot() + 
   geom_sf(data = nc, aes(fill = BIR74)) + 
@@ -189,11 +184,12 @@ ggplot() +
 
 ## mapview
 
-Package `mapview` creates interactive maps in html pages, using package `leaflet` as a work horse. Extensive examples are found [here](https://r-spatial.github.io/mapview/).
+Package `mapview` creates interactive maps in html pages, using package `leaflet` as a workhorse. Extensive examples are found [here](https://r-spatial.github.io/mapview/).
 
-```{r,eval=user_edzer_or_travis}
+An example is obtained by
+```{r, eval = FALSE}
 library(mapview)
-mapviewOptions(fgb = FALSE)
+mapviewOptions(fgb = FALSE) # needed when creating web pages
 mapview(nc["BIR74"], col.regions = sf.colors(10), fgb = FALSE)
 ```
 
@@ -209,13 +205,17 @@ qtm(nc)
 ```
 
 `tmap` also has interactive leaflet maps:
-```{r,eval=tmap_fixed}
+```{r,eval=FALSE}
 tmap_mode("view")
 tm_shape(nc) + tm_fill("BIR74", palette = sf.colors(5))
 ```
 
-replotting the last map in non-interactive mode is as simple as:
-```{r,eval=tmap_fixed}
+Replotting the last map in non-interactive mode is as simple as:
+```{r,eval=FALSE}
 ttm()
 tmap_last()
 ```
+
+A draft version of the book _Elegant and informative maps
+with tmap_ by Martijn Tennekes and Jakub Nowosad is found at
+https://r-tmap.github.io/

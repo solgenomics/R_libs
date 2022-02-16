@@ -1,3 +1,144 @@
+# dplyr 1.0.8
+
+* Better display of error messages thanks to rlang 1.0.0.
+
+* `mutate(.keep = "none")` is no longer identical to `transmute()`.
+  `transmute()` has not been changed, and completely ignores the column ordering
+  of the existing data, instead relying on the ordering of expressions
+  supplied through `...`. `mutate(.keep = "none")` has been changed to ensure
+  that pre-existing columns are never moved, which aligns more closely with the
+  other `.keep` options (#6086).
+
+* `filter()` forbids matrix results (#5973) and warns about data frame 
+  results, especially data frames created from `across()` with a hint 
+  to use `if_any()` or `if_all()`. 
+
+* `slice()` helpers (`slice_head()`, `slice_tail()`, `slice_min()`, `slice_max()`) 
+  now accept negative values for `n` and `prop` (#5961).
+
+* `slice()` now indicates which group produces an error (#5931).
+
+* `cur_data()` and `cur_data_all()` don't simplify list columns in rowwise data frames (#5901).
+
+* dplyr now uses `rlang::check_installed()` to prompt you whether to install
+  required packages that are missing.
+
+* `storms` data updated to 2020 (@steveharoz, #5899).
+
+* `coalesce()` accepts 1-D arrays (#5557).
+
+* The deprecated `trunc_mat()` is no longer reexported from dplyr (#6141).
+
+# dplyr 1.0.7
+
+* `across()` uses the formula environment when inlining them (#5886).
+
+* `summarise.rowwise_df()` is quiet when the result is ungrouped (#5875).
+
+* `c_across()` and `across()` key deparsing not confused by long calls (#5883).
+
+* `across()` handles named selections (#5207).
+
+# dplyr 1.0.6
+
+* `add_count()` is now generic (#5837).
+
+* `if_any()` and `if_all()` abort when a predicate is mistakingly used as `.cols=` (#5732).
+
+* Multiple calls to `if_any()` and/or `if_all()` in the same expression are now
+  properly disambiguated (#5782). 
+
+* `filter()` now inlines `if_any()` and `if_all()` expressions. This greatly
+  improves performance with grouped data frames.
+
+* Fixed behaviour of `...` in top-level `across()` calls (#5813, #5832).
+
+* `across()` now inlines lambda-formulas. This is slightly more performant and
+  will allow more optimisations in the future.
+
+* Fixed issue in `bind_rows()` causing lists to be incorrectly transformed as
+  data frames (#5417, #5749).
+
+* `select()` no longer creates duplicate variables when renaming a variable 
+  to the same name as a grouping variable (#5841).
+
+* `dplyr_col_select()` keeps attributes for bare data frames (#5294, #5831).
+
+* Fixed quosure handling in `dplyr::group_by()` that caused issues with extra
+  arguments (tidyverse/lubridate#959).
+
+* Removed the `name` argument from the `compute()` generic (@ianmcook, #5783).
+
+* row-wise data frames of 0 rows and list columns are supported again (#5804).
+
+# dplyr 1.0.5
+
+* Fixed edge case of `slice_sample()` when `weight_by=` is used and there 
+  0 rows (#5729). 
+  
+* `across()` can again use columns in functions defined inline (#5734). 
+
+* Using testthat 3rd edition. 
+
+* Fixed bugs introduced in `across()` in previous version (#5765).
+
+* `group_by()` keeps attributes unrelated to the grouping (#5760).
+
+* The `.cols=` argument of `if_any()` and `if_all()` defaults to `everything()`. 
+
+# dplyr 1.0.4
+
+* Improved performance for `across()`. This makes `summarise(across())` and 
+  `mutate(across())` perform as well as the superseded colwise equivalents (#5697). 
+
+* New functions `if_any()` and `if_all()` (#4770, #5713).
+
+* `summarise()` silently ignores NULL results (#5708).
+
+* Fixed a performance regression in `mutate()` when warnings occur once per
+  group (#5675). We no longer instrument warnings with debugging information
+  when `mutate()` is called within `suppressWarnings()`.
+
+# dplyr 1.0.3
+
+* `summarise()` no longer informs when the result is ungrouped (#5633).
+
+* `group_by(.drop = FALSE)` preserves ordered factors (@brianrice2, #5545).
+
+* `count()` and `tally()` are now generic. 
+
+* Removed default fallbacks to lazyeval methods; this will yield better error messages when 
+  you call a dplyr function with the wrong input, and is part of our long term 
+  plan to remove the deprecated lazyeval interface. 
+
+* `inner_join()` gains a `keep` parameter for consistency with the other
+  mutating joins (@patrickbarks, #5581).
+
+* Improved performance with many columns, with a dynamic data mask using active
+  bindings and lazy chops (#5017). 
+
+* `mutate()` and friends preserves row names in data frames once more (#5418).
+
+* `group_by()` uses the ungrouped data for the implicit mutate step (#5598). 
+  You might have to define an `ungroup()` method for custom classes.
+  For example, see https://github.com/hadley/cubelyr/pull/3. 
+  
+* `relocate()` can rename columns it relocates (#5569).
+
+* `distinct()` and `group_by()` have better error messages when the mutate step fails (#5060).
+
+* Clarify that `between()` is not vectorised (#5493).
+
+* Fixed `across()` issue where data frame columns would could not be referred to
+  with `all_of()` in the nested case (`mutate()` within `mutate()`) (#5498).
+  
+* `across()` handles data frames with 0 columns (#5523). 
+
+* `mutate()` always keeps grouping variables, unconditional to `.keep=` (#5582).
+
+* dplyr now depends on R 3.3.0
+
+
 # dplyr 1.0.2
 
 * Fixed `across()` issue where data frame columns would mask objects referred to
@@ -1058,7 +1199,7 @@ mtcars2
 
 This is particularly useful if you want to perform non-SELECT queries as you can do whatever you want with `DBI::dbGetQuery()` and `DBI::dbExecute()`.
 
-If you've implemented a database backend for dplyr, please read the [backend news](https://github.com/tidyverse/dbplyr/blob/master/NEWS.md#backends) to see what's changed from your perspective (not much). If you want to ensure your package works with both the current and previous version of dplyr, see `wrap_dbplyr_obj()` for helpers.
+If you've implemented a database backend for dplyr, please read the [backend news](https://github.com/tidyverse/dbplyr/blob/main/NEWS.md#backends) to see what's changed from your perspective (not much). If you want to ensure your package works with both the current and previous version of dplyr, see `wrap_dbplyr_obj()` for helpers.
 
 ## UTF-8
 
@@ -1444,7 +1585,7 @@ All data table related code has been separated out in to a new dtplyr package. T
 
 ### Tibble
 
-Functions related to the creation and coercion of `tbl_df`s, now live in their own package: [tibble](http://blog.rstudio.org/2016/03/24/tibble-1-0-0/). See `vignette("tibble")` for more details.
+Functions related to the creation and coercion of `tbl_df`s, now live in their own package: [tibble](https://www.rstudio.com/blog/tibble-1-0-0/). See `vignette("tibble")` for more details.
 
 * `$` and `[[` methods that never do partial matching (#1504), and throw
   an error if the variable does not exist.

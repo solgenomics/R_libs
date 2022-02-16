@@ -1,0 +1,43 @@
+WD.globalvar            Global variables for Wikidata properties
+WikidataR               API client library for Wikidata
+as_pid                  Convert an input to a property PID
+as_qid                  Convert an input to a item QID
+as_quot                 Add quotations marks
+as_sid                  Convert an input to a source property SID
+check_input             Generic input checker
+createrows              "CREATE" rows
+createrows.tidy         "CREATE" rows from tidy format
+disambiguate_QIDs       Disambiguate QIDs
+extract_claims          Extract Claims from Returned Item Data
+extract_para            Extract a paragraph of text
+filter_qids             Filter QIDs
+find_item               Search for Wikidata items or properties that
+                        match a search term
+get_example             Get an example SPARQL query from Wikidata
+get_geo_box             Get geographic entities based on a bounding box
+get_geo_entity          Retrieve geographic information from Wikidata
+get_item                Retrieve specific Wikidata items or properties
+get_names_from_properties
+                        Get names of properties
+get_random_item         Retrieve randomly-selected Wikidata items or
+                        properties
+identifier_from_identifier
+                        identifier from identifier
+initials                Format short form person names
+list_properties         List properties of a Wikidata item
+print.find_item         Print method for find_item
+print.find_property     Print method for find_property
+print.wikidata          Print method for Wikidata objects
+qid_from_DOI            QID from DOI
+qid_from_ORCID          QID from ORCID
+qid_from_identifier     QID from identifier
+qid_from_name           QID from label name
+query_wikidata          Send one or more SPARQL queries to WDQS
+searcher                Convert an input to a item QID
+sparql_query            Download full Wikidata items matching a sparql
+                        query
+unspecial               Remove special characters
+url_to_id               Extract an identifier from a wikidata URL
+wd_query                Download a Wikidata item
+wd_rand_query           Download random Wikidata items
+write_wikidata          Write statements to Wikidata

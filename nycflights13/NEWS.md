@@ -1,3 +1,7 @@
+# nycflights13 1.0.2
+
+* Fixes for R CMD check changes.
+
 # nycflights13 1.0.1
 
 * `airports$tz` with values `\N` replaced with `NA` (#36).

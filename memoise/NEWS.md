@@ -1,3 +1,35 @@
+# memoise 2.0.1
+
+# Version 2.0.0.9000
+
+* Winston Chang is now the maintainer.
+
+* The default value for the `hash` argument of `memoise()` is now
+  taken with an indirection in case `memoise()` is called at the
+  top-level of a namespace (r-lib/rlang#1177).
+
+* Fixed a bug in `has_cache()` that caused it to get the value unnecessarily. (#123)
+
+# Version 2.0.0
+
+* Memoise now uses caching objects from the cachem package by default. These caches support automatic pruning, so that they won't grow indefinitely. The older-style cache objects in the memoise package are still supported, but we suggest using new-style caches from cachem. (#115)
+
+* Name clashes between function arguments and variables defined when memoising
+  no longer occur (@egnha, #43).
+
+* Add Google Cloud Storage support via `cache_gcs()` (@MarkEdmondson1234, #59)
+
+* Add `compress` option for non-memory caches (@coolbutuseless, #71).
+
+* Use absolute path in cache file system backend, so user can change working
+  directory after using relative path (@xhdong-umd, #51, #65)
+
+* Add `drop_cache()` to drop the cached result for particular arguments
+  (@richardkunze, #78)
+
+* Suppress messages of `aws.s3::head_object` within `cache_s3`'s `cache_has_key`
+  to avoid printing of 404 messages for new keys (@stelsemeyer, #96).
+
 # Version 1.1.0
 * Caches now hash the function body along with the arguments, to ensure
   functions with identical arguments use a separate file-system cache. (#38)

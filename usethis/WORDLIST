@@ -7,6 +7,7 @@ CCBY
 CLA
 CMD
 CNAME
+CRAN's
 CircleCI
 CoC
 Codecov
@@ -15,6 +16,7 @@ Depsy
 DockerHub
 DropBox
 GHA
+GHE
 Gert
 Gert's
 Git's
@@ -33,7 +35,6 @@ Lifecycle
 LinkingTo
 Makefile
 ORCID
-PAT's
 PATs
 PRs
 README
@@ -57,7 +58,6 @@ Templated
 Tidyverse
 UI
 Ushey's
-VM
 Xcode
 YAML
 addin
@@ -90,7 +90,6 @@ discoverable
 else's
 emacs
 eval
-favicons
 favour
 fiascos
 filenaming
@@ -122,8 +121,8 @@ labelling
 learnr
 libgit
 lifecycle
-linux
 macOS
+macbook
 magrittr
 magrittr's
 md
@@ -135,6 +134,7 @@ noninteractive
 organisation
 organisations
 ort
+pak
 pandoc
 pkgdown
 pre
@@ -168,6 +168,7 @@ sitrep
 src
 styler
 symlink
+symlinks
 templated
 templating
 testthat
@@ -183,6 +184,9 @@ unpushed
 useR
 usethis's
 ver
+vm
 withr
+www
+xyz
 xz
 yaml

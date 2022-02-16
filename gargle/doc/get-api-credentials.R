@@ -5,12 +5,15 @@ knitr::opts_chunk$set(
 )
 
 ## ----eval = FALSE-------------------------------------------------------------
-#  library(googledrive)
+#  library(googlesheets4)
 #  
-#  drive_auth_configure(api_key = "YOUR_API_KEY_GOES_HERE")
-#  drive_deauth()
+#  gs4_auth_configure(api_key = "YOUR_API_KEY_GOES_HERE")
+#  gs4_deauth()
 #  
-#  # now you can read public resources without any need for auth
+#  # now you can read public resources, such as official example Sheets,
+#  # without any need for auth
+#  gs4_example("gapminder") %>%
+#    read_sheet()
 
 ## ----eval = FALSE-------------------------------------------------------------
 #  library(googledrive)

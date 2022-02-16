@@ -114,6 +114,7 @@ $<-,Period-method	hidden_aliases
 -,Date,Interval	hidden_aliases
 -,Date,Interval-method	hidden_aliases
 -,Duration,ANY-method	hidden_aliases
+-,Duration,Duration-method	hidden_aliases
 -,Duration,Interval	hidden_aliases
 -,Duration,Interval-method	hidden_aliases
 -,Duration,missing-method	hidden_aliases
@@ -135,6 +136,7 @@ $<-,Period-method	hidden_aliases
 -,Period,Interval-method	hidden_aliases
 -,Period,missing	hidden_aliases
 -,Period,missing-method	hidden_aliases
+-,Period,Period-method	hidden_aliases
 -,POSIXct,Interval	hidden_aliases
 -,POSIXct,Interval-method	hidden_aliases
 -,POSIXlt,Interval	hidden_aliases
@@ -260,6 +262,7 @@ as_date,POSIXt-method	as_date
 as_datetime	as_date
 as_datetime,ANY-method	as_date
 as_datetime,character-method	as_date
+as_datetime,Date-method	as_date
 as_datetime,numeric-method	as_date
 as_datetime,POSIXt-method	as_date
 c,Duration-method	hidden_aliases

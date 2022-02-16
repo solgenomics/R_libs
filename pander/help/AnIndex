@@ -144,6 +144,7 @@ pandoc.title	pandoc.title.return
 pandoc.title.return	pandoc.title.return
 pandoc.verbatim	pandoc.verbatim.return
 pandoc.verbatim.return	pandoc.verbatim.return
+path_to_pandoc	path_to_pandoc
 redraw.recordedplot	redraw.recordedplot
 redrawPlot	redrawPlot
 remove.extra.newlines	remove.extra.newlines

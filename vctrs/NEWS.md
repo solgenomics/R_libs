@@ -1,3 +1,34 @@
+# vctrs 0.3.8
+
+* Compatibility with next version of rlang.
+
+
+# vctrs 0.3.7
+
+* `vec_ptype_abbr()` gains arguments to control whether to indicate
+  named vectors with a prefix (`prefix_named`) and indicate shaped
+  vectors with a suffix (`suffix_shape`) (#781, @krlmlr).
+
+* `vec_ptype()` is now an optional _performance_ generic. It is not necessary
+  to implement, but if your class has a static prototype, you might consider
+  implementing a custom `vec_ptype()` method that returns a constant to
+  improve performance in some cases (such as common type imputation).
+  
+* New `vec_detect_complete()`, inspired by `stats::complete.cases()`. For most
+  vectors, this is identical to `!vec_equal_na()`. For data frames and
+  matrices, this detects rows that only contain non-missing values.
+  
+* `vec_order()` can now order complex vectors (#1330).
+
+* Removed dependency on digest in favor of `rlang::hash()`.
+
+* Fixed an issue where `vctrs_rcrd` objects were not being proxied correctly
+  when used as a data frame column (#1318).
+
+* `register_s3()` is now licensed with the "unlicense" which makes it very
+  clear that it's fine to copy and paste into your own package 
+  (@maxheld83, #1254).
+
 # vctrs 0.3.6
 
 * Fixed an issue with tibble 3.0.0 where removing column names with
@@ -677,7 +708,7 @@ primitives.
 
 The API in 0.2.0 has been updated, please see a list of breaking
 changes below. vctrs has now graduated from experimental to a maturing
-package (see the [lifecycle of tidyverse packages](https://www.tidyverse.org/lifecycle/)).
+package.
 Please note that API changes are still planned for future releases,
 for instance `vec_ptype2()` and `vec_cast()` might need to return a
 sentinel instead of failing with an error when there is no common type

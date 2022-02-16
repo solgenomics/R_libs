@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -102,7 +104,7 @@ enable_if2
   >::result
 normalise(const T& val)
   {
-  Col<T> out(1);
+  Col<T> out(1, arma_nozeros_indicator());
   
   out[0] = (val != T(0)) ? T(val / (std::abs)(val)) : T(val);
   

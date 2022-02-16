@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -48,7 +50,7 @@ hess
   if(status == false)
     {
     H.soft_reset();
-    arma_debug_warn("hess(): decomposition failed");
+    arma_debug_warn_level(3, "hess(): decomposition failed");
     }
   
   return status;
@@ -161,7 +163,7 @@ hess
     {
     U.soft_reset();
     H.soft_reset();
-    arma_debug_warn("hess(): decomposition failed");
+    arma_debug_warn_level(3, "hess(): decomposition failed");
     }
   
   return status;

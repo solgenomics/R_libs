@@ -1,3 +1,113 @@
+# CHANGES IN xfun VERSION 0.29
+
+- `github_releases()` can fetch all releases (tags) of a Github repo now.
+
+- Added an argument `.error` to `download_file()` so that users can customize the error message when the download fails.
+
+- Added functions `rest_api_raw()` and `rest_api()` to get data from a REST API; also added the function `github_api()` to get data from the Github API based on `rest_api_raw()`.
+
+- Added a wrapper function `system3()` based on `system2()` to mark the character output of `system2()` as UTF-8 if appropriate.
+
+- Added a function `existing_files()` to return file paths that exist (a shorthand of `x[file.exists(x)]`).
+
+- Added a function `read_all()` to read multiple files and concatenate the content into a character vector.
+
+- `url_accessible()` uses `curlGetHeaders()` by default (instead of `download_file()`) to test if a URL is accessible when the **curl** package is not available.
+
+- When `options(xfun.rev_check.compare = FALSE)`, `rev_check()` will run `R CMD check` on reverse dependencies against a source package but not the CRAN version of this package. By default, this option is `TRUE`, meaning that `R CMD check` will run against both versions of the package.
+
+# CHANGES IN xfun VERSION 0.28
+
+- Added a new function `url_accessible()` to test if a URL can be downloaded.
+
+- Added a new function `try_error()` to try an expression and see if it throws an error.
+
+# CHANGES IN xfun VERSION 0.27
+
+- Exported and documented the function `xfun::base_pkgs()` (to return base R package names).
+
+- Changed the default value of the `status_only` argument of `compare_Rcheck()` from `FALSE` to `TRUE`.
+
+- Added new functions `crandalf_check()` and `crandalf_results()` for checking (especially large numbers of) reverse dependencies of packages via [**crandalf**](https://github.com/yihui/crandalf).
+
+- Added new functions `append_utf8()` and `append_unique()` based on `read_utf8()` and `write_utf8()` to append content to files or connections.
+
+# CHANGES IN xfun VERSION 0.26
+
+- The `windows_only` argument of `native_encode()` has been removed. Now `native_encode()` only tries the conversion to native encoding on platforms where `l10n_info()[['UTF-8']]` does not return `TRUE`.
+
+- Added a `solaris` argument to `upload_win_builder()`.
+
+# CHANGES IN xfun VERSION 0.25
+
+- Fixed a bug in `broken_packages()` (thanks, @PythonCoderUnicorn, rstudio/rmarkdown#1990).
+
+- Added a `files` argument to `optipng()` so that users can specify the list of PNG files instead of running `optipng` on a whole directory.
+
+# CHANGES IN xfun VERSION 0.24
+
+- Exported the internal function `broken_packages()` to reinstall broken R packages.
+
+- Fixed the bug in `proj_root()` #54 (thanks, @clarkliming).
+
+# CHANGES IN xfun VERSION 0.23
+
+## NEW FEATURES
+
+- Added a `tinify()` function to compress PNG/JPEG images via [the Tinify API](https://tinypng.com/developers).
+
+- Added a `news2md()` function to convert package news to the Markdown format. This is mainly for converting the plain-text `NEWS` file and the `NEWS.Rd` file to `NEWS.md`.
+
+- Added a `format_bytes()` function to format numbers of bytes using a specified unit, e.g., `1024` can be formatted as `1 Kb`.
+
+- When using `pkg_load2()` in an **renv** project, it will use `renv::install()` to install missing packages by default to take advantage of **renv**'s caching feature (thanks, @chunyunma @cderv, #52).
+
+- `upload_win_builder()` no longer requires the system command `curl` to be available; if `curl` is not available, the R package **curl** will be used instead, which means this R package must be installed. In addition to uploading to the `ftp` server of win-builder, it's also possible to upload to <https://win-builder.r-project.org/upload.aspx>: call `upload_win_builder(..., server = 'https')`. This change was made so that it would be possible to continue to upload to win-builder in case it should stop supporting `ftp` (CRAN has discouraged package authors from using `ftp://`).
+
+## BUG FIXES
+
+- Backticks are added to math environments by mistake when `\begin{}` and `\end{}` do not match (thanks, @oliviergimenez, #51).
+
+## MINOR CHANGES
+
+- The argument `src` was renamed to `pkg` in `install_dir()`.
+
+- The argument `file` of `upload_win_builder()` defaults to `pkg_build()` now, i.e., by default, it will build a source package and upload it, so you do not need to build the package separately.
+
+# CHANGES IN xfun VERSION 0.22
+
+## NEW FEATURES
+
+- `relative_path()` is vectorized now.
+
+- Added a new function `retry()` to retry calling a function for a number of times in case of errors.
+
+- Added a new function `sort_file()`, which is a shorthand for `process_file(fun = sort)` to sort the lines in a text file.
+
+## MAJOR CHANGES
+
+- The argument `FUN` was renamed to `fun` in `process_file()`.
+
+## MINOR CHANGES
+
+- Inside `download_file()`, the `timeout` option in `options()` is set to 3600 seconds when it takes the default value of 60 seconds, which may not be enough for downloading large files (thanks, @matthewgson, yihui/tinytex#286).
+
+# CHANGES IN xfun VERSION 0.21
+
+## NEW FEATURES
+
+- Added a new function `pkg_available()` to test if a package with a minimal version is available (thanks, @cderv, #45).
+
+- Added a new function `set_envvar()` to set environment variables and return their old values, so they could be restored later.
+
+- Added a new function `exit_call()` to call a function when a parent function exits.
+
+- Exported the internal function `read_bin()`.
+
+- Added an argument `verbose` to `bg_process()`.
+
+- `Rscript_call()` gains an `options` argument to pass command-line options to `Rscript` (thanks, @cderv, #48).
+
 # CHANGES IN xfun VERSION 0.20
 
 ## NEW FEATURES

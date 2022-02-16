@@ -2,8 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><title>R: Manipulating Labelled Data</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> Manipulating Labelled Data
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;labelled&rsquo; version 2.7.0</h2>
+</div><h2>Documentation for package &lsquo;labelled&rsquo; version 2.9.0</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -31,23 +32,31 @@
 <td>Copy variable and value labels and SPSS-style missing value</td></tr>
 <tr><td style="width: 25%;"><a href="drop_unused_value_labels.html">drop_unused_value_labels</a></td>
 <td>Drop unused value labels</td></tr>
+<tr><td style="width: 25%;"><a href="test_datasets.html">dta_file</a></td>
+<td>Datasets for testing</td></tr>
+<tr><td style="width: 25%;"><a href="unique_tagged_na.html">duplicated_tagged_na</a></td>
+<td>Unique elements, duplicated, ordering and sorting with tagged NAs</td></tr>
 <tr><td style="width: 25%;"><a href="to_labelled.html">foreign_to_labelled</a></td>
 <td>Convert to labelled data</td></tr>
 <tr><td style="width: 25%;"><a href="look_for.html">generate_dictionary</a></td>
 <td>Look for keywords variable names and descriptions / Create a data dictionary</td></tr>
+<tr><td style="width: 25%;"><a href="is_prefixed.html">is_prefixed</a></td>
+<td>Check if a factor is prefixed</td></tr>
+<tr><td style="width: 25%;"><a href="na_values.html">is_regular_na</a></td>
+<td>Get / Set SPSS missing values</td></tr>
+<tr><td style="width: 25%;"><a href="na_values.html">is_user_na</a></td>
+<td>Get / Set SPSS missing values</td></tr>
 <tr><td style="width: 25%;"><a href="look_for.html">lookfor</a></td>
 <td>Look for keywords variable names and descriptions / Create a data dictionary</td></tr>
 <tr><td style="width: 25%;"><a href="look_for.html">lookfor_to_long_format</a></td>
 <td>Look for keywords variable names and descriptions / Create a data dictionary</td></tr>
 <tr><td style="width: 25%;"><a href="look_for.html">look_for</a></td>
 <td>Look for keywords variable names and descriptions / Create a data dictionary</td></tr>
+<tr><td style="width: 25%;"><a href="look_for.html">look_for_and_select</a></td>
+<td>Look for keywords variable names and descriptions / Create a data dictionary</td></tr>
 <tr><td style="width: 25%;"><a href="to_labelled.html">memisc_to_labelled</a></td>
 <td>Convert to labelled data</td></tr>
 <tr><td style="width: 25%;"><a href="names_prefixed_by_values.html">names_prefixed_by_values</a></td>
-<td>Turn a named vector into a vector of names prefixed by values</td></tr>
-<tr><td style="width: 25%;"><a href="names_prefixed_by_values.html">names_prefixed_by_values.default</a></td>
-<td>Turn a named vector into a vector of names prefixed by values</td></tr>
-<tr><td style="width: 25%;"><a href="names_prefixed_by_values.html">names_prefixed_by_values.list</a></td>
 <td>Turn a named vector into a vector of names prefixed by values</td></tr>
 <tr><td style="width: 25%;"><a href="na_values.html">na_range</a></td>
 <td>Get / Set SPSS missing values</td></tr>
@@ -59,10 +68,14 @@
 <td>Get / Set SPSS missing values</td></tr>
 <tr><td style="width: 25%;"><a href="nolabel_to_na.html">nolabel_to_na</a></td>
 <td>Recode values with no label to NA</td></tr>
+<tr><td style="width: 25%;"><a href="unique_tagged_na.html">order_tagged_na</a></td>
+<td>Unique elements, duplicated, ordering and sorting with tagged NAs</td></tr>
 <tr><td style="width: 25%;"><a href="look_for.html">print.look_for</a></td>
 <td>Look for keywords variable names and descriptions / Create a data dictionary</td></tr>
 <tr><td style="width: 25%;"><a href="recode.haven_labelled.html">recode.haven_labelled</a></td>
 <td>Recode values</td></tr>
+<tr><td style="width: 25%;"><a href="recode_if.html">recode_if</a></td>
+<td>Recode some values based on condition</td></tr>
 <tr><td style="width: 25%;"><a href="remove_attributes.html">remove_attributes</a></td>
 <td>Remove attributes</td></tr>
 <tr><td style="width: 25%;"><a href="remove_labels.html">remove_labels</a></td>
@@ -83,13 +96,19 @@
 <td>Get / Set value labels</td></tr>
 <tr><td style="width: 25%;"><a href="var_label.html">set_variable_labels</a></td>
 <td>Get / Set a variable label</td></tr>
+<tr><td style="width: 25%;"><a href="unique_tagged_na.html">sort_tagged_na</a></td>
+<td>Unique elements, duplicated, ordering and sorting with tagged NAs</td></tr>
 <tr><td style="width: 25%;"><a href="sort_val_labels.html">sort_val_labels</a></td>
 <td>Sort value labels</td></tr>
-<tr><td style="width: 25%;"><a href="sort_val_labels.html">sort_val_labels.data.frame</a></td>
-<td>Sort value labels</td></tr>
-<tr><td style="width: 25%;"><a href="sort_val_labels.html">sort_val_labels.haven_labelled</a></td>
-<td>Sort value labels</td></tr>
+<tr><td style="width: 25%;"><a href="test_datasets.html">spss_file</a></td>
+<td>Datasets for testing</td></tr>
+<tr><td style="width: 25%;"><a href="tagged_na_to_user_na.html">tagged_na_to_regular_na</a></td>
+<td>Convert tagged NAs into user NAs</td></tr>
+<tr><td style="width: 25%;"><a href="tagged_na_to_user_na.html">tagged_na_to_user_na</a></td>
+<td>Convert tagged NAs into user NAs</td></tr>
 <tr><td style="width: 25%;"><a href="to_character.html">to_character</a></td>
+<td>Convert input to a character vector</td></tr>
+<tr><td style="width: 25%;"><a href="to_character.html">to_character.double</a></td>
 <td>Convert input to a character vector</td></tr>
 <tr><td style="width: 25%;"><a href="to_character.html">to_character.haven_labelled</a></td>
 <td>Convert input to a character vector</td></tr>
@@ -111,6 +130,8 @@
 <td>Convert to labelled data</td></tr>
 <tr><td style="width: 25%;"><a href="to_labelled.html">to_labelled.list</a></td>
 <td>Convert to labelled data</td></tr>
+<tr><td style="width: 25%;"><a href="unique_tagged_na.html">unique_tagged_na</a></td>
+<td>Unique elements, duplicated, ordering and sorting with tagged NAs</td></tr>
 <tr><td style="width: 25%;"><a href="to_factor.html">unlabelled</a></td>
 <td>Convert input to a factor.</td></tr>
 <tr><td style="width: 25%;"><a href="update_labelled.html">update_labelled</a></td>
@@ -125,41 +146,17 @@
 <td>Update labelled data to last version</td></tr>
 <tr><td style="width: 25%;"><a href="na_values.html">user_na_to_na</a></td>
 <td>Get / Set SPSS missing values</td></tr>
+<tr><td style="width: 25%;"><a href="na_values.html">user_na_to_regular_na</a></td>
+<td>Get / Set SPSS missing values</td></tr>
+<tr><td style="width: 25%;"><a href="na_values.html">user_na_to_tagged_na</a></td>
+<td>Get / Set SPSS missing values</td></tr>
 <tr><td style="width: 25%;"><a href="val_labels.html">val_label</a></td>
-<td>Get / Set value labels</td></tr>
-<tr><td style="width: 25%;"><a href="val_labels.html">val_label.data.frame</a></td>
-<td>Get / Set value labels</td></tr>
-<tr><td style="width: 25%;"><a href="val_labels.html">val_label.haven_labelled</a></td>
 <td>Get / Set value labels</td></tr>
 <tr><td style="width: 25%;"><a href="val_labels.html">val_label&lt;-</a></td>
 <td>Get / Set value labels</td></tr>
-<tr><td style="width: 25%;"><a href="val_labels.html">val_label&lt;-.character</a></td>
-<td>Get / Set value labels</td></tr>
-<tr><td style="width: 25%;"><a href="val_labels.html">val_label&lt;-.data.frame</a></td>
-<td>Get / Set value labels</td></tr>
-<tr><td style="width: 25%;"><a href="val_labels.html">val_label&lt;-.haven_labelled</a></td>
-<td>Get / Set value labels</td></tr>
-<tr><td style="width: 25%;"><a href="val_labels.html">val_label&lt;-.numeric</a></td>
-<td>Get / Set value labels</td></tr>
 <tr><td style="width: 25%;"><a href="val_labels.html">val_labels</a></td>
 <td>Get / Set value labels</td></tr>
-<tr><td style="width: 25%;"><a href="val_labels.html">val_labels.data.frame</a></td>
-<td>Get / Set value labels</td></tr>
-<tr><td style="width: 25%;"><a href="val_labels.html">val_labels.default</a></td>
-<td>Get / Set value labels</td></tr>
-<tr><td style="width: 25%;"><a href="val_labels.html">val_labels.haven_labelled</a></td>
-<td>Get / Set value labels</td></tr>
 <tr><td style="width: 25%;"><a href="val_labels.html">val_labels&lt;-</a></td>
-<td>Get / Set value labels</td></tr>
-<tr><td style="width: 25%;"><a href="val_labels.html">val_labels&lt;-.character</a></td>
-<td>Get / Set value labels</td></tr>
-<tr><td style="width: 25%;"><a href="val_labels.html">val_labels&lt;-.data.frame</a></td>
-<td>Get / Set value labels</td></tr>
-<tr><td style="width: 25%;"><a href="val_labels.html">val_labels&lt;-.haven_labelled</a></td>
-<td>Get / Set value labels</td></tr>
-<tr><td style="width: 25%;"><a href="val_labels.html">val_labels&lt;-.haven_labelled_spss</a></td>
-<td>Get / Set value labels</td></tr>
-<tr><td style="width: 25%;"><a href="val_labels.html">val_labels&lt;-.numeric</a></td>
 <td>Get / Set value labels</td></tr>
 <tr><td style="width: 25%;"><a href="val_labels_to_na.html">val_labels_to_na</a></td>
 <td>Recode value labels to NA</td></tr>
@@ -167,5 +164,9 @@
 <td>Get / Set a variable label</td></tr>
 <tr><td style="width: 25%;"><a href="var_label.html">var_label&lt;-</a></td>
 <td>Get / Set a variable label</td></tr>
+<tr><td style="width: 25%;"><a href="test_datasets.html">x_haven_2.0</a></td>
+<td>Datasets for testing</td></tr>
+<tr><td style="width: 25%;"><a href="test_datasets.html">x_spss_haven_2.0</a></td>
+<td>Datasets for testing</td></tr>
 </table>
-</body></html>
+</div></body></html>

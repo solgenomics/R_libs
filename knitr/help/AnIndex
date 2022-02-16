@@ -47,6 +47,7 @@ include_url	include_url
 inline_expr	inline_expr
 is_html_output	output_type
 is_latex_output	output_type
+is_low_change	is_low_change
 kable	kable
 kables	kable
 knit	knit
@@ -81,6 +82,8 @@ opts_hooks	opts_hooks
 opts_knit	opts_knit
 opts_template	opts_template
 pandoc	pandoc
+pandoc_from	output_type
+pandoc_to	output_type
 pat_asciidoc	pat_fun
 pat_brew	pat_fun
 pat_html	pat_fun
@@ -114,6 +117,7 @@ rst2pdf	rst2pdf
 set_alias	set_alias
 set_header	set_header
 set_parent	set_parent
+sew	sew
 spin	spin
 spin_child	spin_child
 stitch	stitch

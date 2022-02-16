@@ -4,7 +4,81 @@
 \title{lme4 News}
 \encoding{UTF-8}
 
-\section{CHANGES IN VERSION 1.1-26}{
+\section{CHANGES IN VERSION 1.1-28 (2022-02-02)}{
+  \subsection{USER-VISIBLE CHANGES}{
+    \itemize{
+      \item construction of interacting factors (e.g. when \code{f1:f2} or
+      \code{f1/f2} occur in random effects terms) is now more efficient
+      for partially crossed designs
+      (doesn't try to create all combinations of \code{f1} and
+      \code{f2}) (GH #635 and #636)
+      \item \code{mkNewReTrms} is exported
+      \item singular-fit message now refers to \code{help("isSingular")}
+  rather than \code{?isSingular}
+    }
+  } %% user-visible changes
+  \subsection{TESTS}{
+    \itemize{
+      \item fix \code{all.equal(p1,p2,p3)} and similar \code{expect_equal()} thinkos
+      \item fix some tests only run when \code{lme4:::testLevel() > 1};
+      adapt tests for upcoming Matrix 1.4-1 which has \code{names(diag(<sparse>))}
+    }
+  }
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item \code{reOnly} preserves environment (GH #654, Mikael Jagan)
+      \item backward-compatibility hooks changed to evaluate at run-time
+      (i.e., in \code{.onLoad()}) rather than at build time (GH #649)
+      \item \code{lmList} no longer warns when \code{data} is a tibble
+  (GH #645)
+    }
+  } %% bug fixes
+} %% version 1.1-28
+
+\section{CHANGES IN VERSION 1.1-27.1 (2021-06-22)}{
+ \subsection{USER-VISIBLE CHANGES}{
+    \itemize{
+      \item \code{influence.merMod} allows user-specified starting parameters
+      \item cleaned up performance vignette
+    }
+ }
+ \subsection{BUG FIXES}{
+    \itemize{
+      \item \code{cooks.distance} now works with objects computed
+      by \code{influence} method
+      \item \code{influence.merMod} now works with \code{glmer} models
+      using \code{nAGQ=0}
+      \item \code{predict} (with new data) and \code{simulate} methods
+      now work for models with >100 levels in a random effect grouping
+      variable (GH #631)
+    }
+  }
+}
+
+\section{CHANGES IN VERSION 1.1-27 (2021-05-15)}{
+  \subsection{USER-VISIBLE CHANGES}{
+    \itemize{
+      \item improvements from Lionel Henry (via
+      https://github.com/lme4/lme4/pull/587) to fix corner cases in
+      data checking; also resolves GH #601 (allFit scoping)
+      \item \code{getME(., "lower")} now has names (request of GH #609)
+      \item improved detection of \code{NaN} in internal calculations
+      (typically due to underflow/overflow or out-of-bounds linear
+      predictors from non-constraining link functions such as identity-link
+      Gamma models)
+      \item \code{influence.merMod} allows parallel computation
+      \item the \code{statmod} package is no longer required unless attempting
+      to simulate results from a model with an inverse Gaussian response
+    }
+  }
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item long formulas work better in \code{anova} headings (GH #611)
+    }
+  }
+}
+
+\section{CHANGES IN VERSION 1.1-26 (2020-11-30)}{
   \subsection{BUG FIXES}{
     \itemize{
       \item \code{predict}, \code{model.frame(.,fixed.only=TRUE)} work
@@ -17,7 +91,7 @@
   \subsection{NEW FEATURES}{
     \itemize{
       \item \code{thpr} method for \code{densityplot()} (for plotting
-  profiles scaled as densities) gets new arguments 
+  profiles scaled as densities) gets new arguments
     }
   }
 }
@@ -76,7 +150,7 @@
 
     \item prediction now works better for factors with many levels
     (GH#467, solution by @sihoward)
-    
+
     \item minor changes to argument order in \code{[g]lmerControl};
     default tolerance for convergence checks increased from 0.001 to 0.002
     for \code{glmerControl} (now consistent with \code{lmerControl})
@@ -115,7 +189,7 @@
     \itemize{
 
       \item improved checking for missing data (@lionel-)
-      
+
       \item internal \code{checkZrank()} should be able to deal with
       (\code{Matrix} package) \code{rankMatrix()} returning \code{NA}.
 

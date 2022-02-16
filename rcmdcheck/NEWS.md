@@ -1,4 +1,58 @@
 
+# 1.4.0
+
+* `cran_check_results()` now downloads results in parallel, so it is
+  much faster.
+
+* `rcmdcheck_process` now redirects the standard error to the standard
+  output, to make sure that they are correctly interleaved (#148).
+
+* rcmdcheck now puts Rtools on the PATH, via pkgbuild (#111).
+
+* rcmdcheck now builds the manual when building the package, if it is
+  needed for `\Sexpr{}` expressions (#137).
+
+* This version fixes a rare race condition that made rcmdcheck fail (#139).
+
+* rcmdcheck now safeguards against R deleting the user's home directory
+  via an `R CMD build` bug (#120).
+
+* rcmdcheck can now ignore files in `inst/doc` when building a package.
+  See the `Config/build/clean-inst-doc` package option in
+  `?"rcmdcheck-config"` (#130).
+
+* It is now possible to turn on/off ANSI colors for rcmdcheck only,
+  without affecting the checked package. See `?"rcmdcheck-config" and the
+  `RCMDCHECK_NUM_COLORS` environment variable and the `rcmdcheck.num_colors`
+  option (#119, @jimhester).
+
+* `print.rcmdcheck()` now has a `test_output` argument and
+  `rcmdcheck.test_output` global option, to control whether to print the full
+  test output or not. (#121)
+
+* RStudio's Pandoc is now on the path during `rcmdcheck()` 
+  and `rcmdcheck_process` (#109, #132, @dpprdan).
+
+* `rcmdcheck()` now errors if the check process crashes (#110, #163).
+
+* `rcmdcheck()` prints the check ouptut better interactively, especially
+  when the package has multiple test files (#145, #161).
+
+* rcmdcheck can now ignore `NOTE`s, if requested, see `?rcmdcheck` for
+  details (#12, #160).
+
+* rcmdcheck now always converts its output to UTF-8 from the native
+  encoding. It also handles parsing check output in a non-native encoding
+  better (#152).
+
+* rcmdcheck now ignored time stamps when comparing two check results (#128).
+
+* rcmdcheck now does not print extra empty lines in the interactive output
+  on GitHub Actions.
+
+* rcmdcheck now uses a more robust implementation to extract the session
+  info from the check process (#164).
+
 # 1.3.3
 
 * `cran_check_results()` has now a `quiet` argument, and the download

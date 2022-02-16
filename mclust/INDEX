@@ -43,6 +43,7 @@ coordProj               Coordinate projections of multidimensional data
                         modeled by an MVN mixture.
 covw                    Weighted means, covariance and scattering
                         matrices conditioning on a weighted matrix
+crimcoords              Discriminant coordinates data projection
 cross                   Simulated Cross Data
 cv.MclustDA             Deprecated Functions in mclust package
 cvMclustDA              MclustDA cross-validation
@@ -55,6 +56,8 @@ densityMclust.diagnostic
                         Diagnostic plots for 'mclustDensity' estimation
 diabetes                Diabetes data
 dmvnorm                 Density of multivariate Gaussian distribution
+dupPartition            Partition the data by grouping together
+                        duplicated data
 em                      EM algorithm starting with E-step for
                         parameterized Gaussian mixture models
 emControl               Set control values for use with the EM

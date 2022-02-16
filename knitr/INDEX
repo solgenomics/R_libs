@@ -24,8 +24,8 @@ include_graphics        Embed external images in 'knitr' documents
 include_url             Embed a URL as an HTML iframe or a screenshot
                         in 'knitr' documents
 inline_expr             Wrap code using the inline R expression syntax
-is_latex_output         Check if the current output type is LaTeX or
-                        HTML
+is_latex_output         Check the current input and output type
+is_low_change           Compare two recorded plots
 kable                   Create tables in LaTeX, HTML, Markdown and
                         reStructuredText
 knit                    Knit a document
@@ -82,6 +82,7 @@ rst2pdf                 A wrapper for rst2pdf
 set_alias               Set aliases for chunk options
 set_header              Set the header information
 set_parent              Specify the parent document of child documents
+sew                     Wrap evaluated results for output
 spin                    Spin goat's hair into wool
 spin_child              Spin a child R script
 stitch                  Automatically create a report based on an R

@@ -31,7 +31,7 @@ gm_modify_thread        Modify the labels on a thread
 gm_profile              Get info on current gmail profile
 gm_save_attachment      Save the attachment to a file
 gm_save_attachments     Save attachments to a message
-gm_scopes               Authorize bigrquery
+gm_scopes               Authorize gmailr
 gm_send_draft           Send a draft
 gm_send_message         Send a message from a mime message
 gm_thread               Get a single thread

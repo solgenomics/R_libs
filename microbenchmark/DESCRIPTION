@@ -18,11 +18,10 @@ SystemRequirements: On a Unix-alike, one of the C functions
         of these is found, the obsolescent POSIX function gettimeofday
         will be tried.
 ByteCompile: yes
-LazyData: yes
-Version: 1.4-7
-RoxygenNote: 6.1.0
+Version: 1.4.9
+RoxygenNote: 7.1.2
 NeedsCompilation: yes
-Packaged: 2019-09-24 10:39:33 UTC; josh
+Packaged: 2021-11-07 16:16:08 UTC; josh
 Author: Olaf Mersmann [aut],
   Claudia Beleites [ctb],
   Rainer Hurling [ctb],
@@ -30,5 +29,5 @@ Author: Olaf Mersmann [aut],
   Joshua M. Ulrich [cre]
 Maintainer: Joshua M. Ulrich <josh.m.ulrich@gmail.com>
 Repository: CRAN
-Date/Publication: 2019-09-24 11:00:02 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2021-01-12 00:34:04 UTC; unix
+Date/Publication: 2021-11-09 17:00:02 UTC
+Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 23:25:26 UTC; unix

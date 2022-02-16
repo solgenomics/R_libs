@@ -1,9 +1,269 @@
+# styler 1.2
+
+* clean up cache files older than one week (#842).
+
+# styler 1.6.1
+
+* Files with `.Rmarkdown` extension are now recognized as an R markdown files in
+  `style_file()` and friends (#824).
+
+* Don't break line before comments in pipes (#822).
+
+* Ordinary comments (starting with `#`) that break a roxygen code example block 
+  (starting with `#'`) are now recognized and preserved (#830).
+
+* `@examplesIf` conditions longer than one line after styling throw an error for
+  compatibility with {roxygen2} (#833).
+  
+* R Markdown chunk headers are no longer required to be parsable R code (#832).
+
+* Break the line between `%>%` and `{` inside and outside function calls (#825).
+
+* Add language server to third-party integration vignette (#835).
+
+* improved test setup with fixtures and similar (#798).
+
+We'd like to thank all people who helped making this release possible:
+
+[&#x0040;bersbersbers](https://github.com/bersbersbers), [&#x0040;eutwt](https://github.com/eutwt), [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;j-mammen](https://github.com/j-mammen), [&#x0040;jennybc](https://github.com/jennybc), [&#x0040;JohannesNE](https://github.com/JohannesNE), [&#x0040;jonkeane](https://github.com/jonkeane), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), and [&#x0040;MichaelChirico](https://github.com/MichaelChirico).
+
+
+# styler 1.5.1
+
+## Alignment detection
+
+* Code with left alignment after `=` in function calls is now recognized as 
+  aligned and won't be reformatted (#774, #777).
+  ```
+  # already detected previously
+  call(
+    x  = 12345,
+    y2 =    17
+  )
+  
+  # newly detected
+  call(
+    x  = 12345,
+    y2 = 17
+  )
+  ```
+
+* Similarly, left aligned after comma is now detected (#785, #786).
+  ```
+  # previously detected
+  call(
+    x  = 12345, "It's old",
+    y2 = 17,      "before"
+  )
+  
+  tribble(
+    ~x,             ~y,
+    "another",     1:3,
+    "b",       1211234
+  )
+  
+  # newly detected
+  call(
+    x = 2,           p = "another",
+    y = "hhjkjkbew", x = 3
+  )
+
+  
+  tribble(
+    ~x,        ~y,
+    "another", 1:3,
+    "b",       1211234
+  )
+  ```
+  Also see `vignette("detect-alignment")`.
+
+## Other new features
+
+* The base R pipe as introduced in R 4.1.0 is now styled the same way the 
+  magrittr pipe is (#803).
+* code chunks with explicit `tidy = FALSE` in an Rmd or Rnw code header are not 
+  styled anymore. This can be handy when the code can't be parsed, e.g.
+  within a learnr tutorial (#790).
+* `#>` is recognized as an output marker and no space is added after `#` (#771).
+
+## Minor changes and fixes
+
+* No curly braces are added to else statements if they are within a pipe, as 
+  this can change evaluation logic of code involving the magrittr dot in rare 
+  cases (#816).
+* Line breaks between `}` and `else` are removed (#793).
+* In function calls, code after `= #\n` is indented correctly (#814).
+* Multi-expressions containing multiple assignments no longer remove line breaks
+  if they are not causing blank lines (#809).
+* `exclude_dirs` in `style_pkg()` is now properly respected if it is a 
+  sub-directory of a directory that is scheduled for styling (e.g. 
+  `test/testthat/some/dir`) (#811).
+* The user is not prompted anymore to confirm the creation of a permanent cache 
+  as R.cache >= 0.15.0 uses a standard location in line with CRAN policies 
+  (#819).
+* R code chunks in nested non-R chunks in R markdown don't yield an error 
+  anymore when document is styled, chunks are still not styled (#788, #794).
+* `cache_activate()` and `cache_deactivate()` now respect the R 
+  option `styler.quiet` (#797).
+* `multi_line` attribute in parse table is now integer, not boolean (#782).
+* The style guide used in Addin is verified when set via R option (#789).
+* Improve pkgdown author URLs (#775).
+* Upgrade touchstone infra (#799, #805).
+* Don't test on R 3.3 anymore as tidyverse [supports only four previous
+  releases](https://www.tidyverse.org/blog/2019/04/r-version-support/) (#804).
+* Update Github Actions workflow (#810).
+
+We’d like to thank everyone who has furthered the development of the latest 
+release of styler through their contributions in issues and pull requests:
+
+[&#x0040;ardydavari](https://github.com/ardydavari), 
+[&#x0040;gadenbuie](https://github.com/gadenbuie), [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), &#x0040;jasonhan-vassar, [&#x0040;laresbernardo](https://github.com/laresbernardo), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;MichaelChirico](https://github.com/MichaelChirico), 
+[&#x0040;Moohan](https://github.com/Moohan), 
+[&#x0040;njtierney](https://github.com/njtierney), 
+[&#x0040;pat-s](https://github.com/pat-s),
+[&#x0040;psychelzh](https://github.com/psychelzh),
+[&#x0040;pvalders](https://github.com/pvalders), 
+[&#x0040;RoyalTS](https://github.com/RoyalTS), and 
+[&#x0040;russHyde](https://github.com/russHyde).
+
+# styler 1.4.1
+
+* fix interaction between cache and `base_indention`. This also fixes
+  the Addin for styling a selection with base indention repeatedly (#764).
+* add more examples to `styler_*` helpfiles (#762).
+* hexadecimal integers now preserve the trailing `L` when styled (#761).
+* add a pre-push hook to make sure news bullets are added to each PR (#765).
+
+Thanks to everyone who contributed to this release:
+
+[&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), and [&#x0040;renkun-ken](https://github.com/renkun-ken).
+
+# styler 1.4.0
+
+## API Changes
+
+**new**
+
+- `style_file()` and friends gain argument `dry` to control if changes should be
+  applied to files or not (#634).
+
+- `style_file()` and friends gain argument `base_indention` (defaulting to 0) to
+  control by how much the output code is indented (#649, #692). The Addin for
+  styling a selection picks that up, e.g. you can style a function body and
+  indention is preserved (#725).
+
+- added an option for disabling all communication when using the package
+  (`styler.quiet`) (#640).
+
+- `scope` in `tidyverse_style()` can now be specified with higher granularity
+  through `I()`, e.g. `I(c('spaces', 'tokens'))` allows us to style spaces and
+  tokens without styling line breaks and indention. Previously, only a string
+  was allowed and all less invasive scopes were included, e.g. if you wanted to
+  style tokens, you had to always also style spaces, indention, line breaks as
+  well (#705, #707).
+
+- added an option (`styler.test_dir_writeable`) that changes test behavior to
+  not directly modify test files in the current directory (#548).
+
+- New argument `transformers_drop` in `create_style_guide()` to be populated
+  with new helper function `specify_transformers_drop()` for specifying
+  conditions under which transformers are not going to be used and can therefore
+  be omitted without effecting the result of styling (#711).
+
+**deprecated**
+
+- The environment variable `save_after_styling` is deprecated in favor of the R
+  option `styler.save_after_styling` to control if a file is saved after styling
+  with the RStudio Addin. Note than in RStudio >= 1.3.0, you can auto-save edits
+  in general (Code -> Saving -> Auto-Save), e.g. on idle editor or focus loss,
+  so this feature becomes less relevant (#631, #726).
+
+
+## Major changes
+
+- styler is now distributed under the MIT license (#751).
+
+- Documentation overhaul: New README, new "Get started" pkgdown page, new
+  vignettes on `strict = FALSE`, `Adoption` renamed to `Third-party
+  integrations` (#741), adding search to pkgdown (#623), group functions in
+  pkgdown reference page (#625), minor other doc improvements (#643, #618, #614,
+  #677, #651, #667, #672, #687, #752, #754).
+
+- `@exampleIsf` roxygen tag for conditional examples is now supported (#743).
+
+- blank lines in function calls and headers are now removed, for the former only
+  when there are no comments before or after the blank line (#629, #630, #635,
+  #723).
+
+- speed improvements: 15% faster on new code, 70% on repeated styling of 
+  compliant code (The latter is not so relevant because it was almost 
+  instantaneous already). Most relevant contributions were #679, #691, #681, 
+  #711, #739.
+
+- `#<<` is now recognized as the xaringan marker and no space is added after`#`
+  (#700).
+
+## Minor changes and fixes
+
+- `style_dir()` and `style_pkg()` now apply directory exclusion recursively with
+  `exclude_dirs` (#676).
+
+- `switch()` now has line breaks after every argument to match the tidyverse
+  style guide (#722, #727).
+
+- unary `+` before a function call does not give an error anymore, as before
+  version 1.3.0 (#697).
+
+- certain combinations of `stylerignore` markers and cached expressions now
+  don't give an error anymore (#738).
+
+- cache is now correctly invalidated when style guide arguments change (#647).
+
+- empty lines are now removed between pipes and assignments (#645, #710).
+
+- multiple `@examples` roxygen tags in a code block of `#'` are no longer
+  squashed (#748).
+
+- roxygen code examples starting on the same line as the `@examples` tag are no
+  longer moved to the next line (#748).
+
+- always strip trailing spaces and make cache insensitive to it (#626).
+
+- `style_text()` can now style all input that `is.character()`, not just if it
+  inherits from classes `character`, `utf8` or `vertical` (#693).
+
+- logical operators within square braces are now moved from the start of a line
+  to the end of the previous line (#709).
+
+- spaces are now removed before `[` and `[[` (#713).
+
+- The internal `create_tree()` only used in testing of styler now works when the
+  cache is activated (#688).
+
+- simplification of internals (#692).
+
+## Infrastructure changes
+
+- switched from travis and AppVeyor to GitHub Actions (#653, #660).
+
+- Added basic continuous benchmarking with
+  [lorenzwalthert/touchstone](https://github.com/lorenzwalthert/touchstone)
+  (#674, #684, #698).
+
+- include `test-*` files in styling pre-commit hook (#724).
+
+
+Thanks to all the people who made this release possible:
+
+[&#x0040;assignUser](https://github.com/assignUser), [&#x0040;ColmanHumphrey](https://github.com/ColmanHumphrey), [&#x0040;davidchall](https://github.com/davidchall), [&#x0040;espinielli](https://github.com/espinielli), [&#x0040;giko45](https://github.com/giko45), [&#x0040;hadley](https://github.com/hadley), [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;intiben](https://github.com/intiben), [&#x0040;jamespeapen](https://github.com/jamespeapen), [&#x0040;jthomasmock](https://github.com/jthomasmock), [&#x0040;Kalaschnik](https://github.com/Kalaschnik), [&#x0040;kevinushey](https://github.com/kevinushey), [&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;lcolladotor](https://github.com/lcolladotor), [&#x0040;MichaelChirico](https://github.com/MichaelChirico), [&#x0040;michaelquinn32](https://github.com/michaelquinn32), [&#x0040;mine-cetinkaya-rundel](https://github.com/mine-cetinkaya-rundel), [&#x0040;pat-s](https://github.com/pat-s), [&#x0040;PMassicotte](https://github.com/PMassicotte), [&#x0040;QuLogic](https://github.com/QuLogic), [&#x0040;renkun-ken](https://github.com/renkun-ken), [&#x0040;RichardJActon](https://github.com/RichardJActon), [&#x0040;seed-of-apricot](https://github.com/seed-of-apricot), [&#x0040;select-id-from-users](https://github.com/select-id-from-users), [&#x0040;SimonDedman](https://github.com/SimonDedman), [&#x0040;stefanoborini](https://github.com/stefanoborini), [&#x0040;swsoyee](https://github.com/swsoyee), and [&#x0040;Winterstorm-j](https://github.com/Winterstorm-j).
+
 # styler 1.3.2
 
 Release upon request by the CRAN team.
 
 ## Minor changes and fixes
 
+- Add search and reference sections to pkgdown webpage (#623, #625).
 - various fixes to handle special cases for caching and stylerignore and their
   interaction (#611, #610, #609, #607, #602, #600).
 - also test on macOS (#604).
@@ -89,7 +349,7 @@ Thanks to all contributors involved, in particular
 [&#x0040;davidski](https://github.com/davidski), 
 [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), 
 [&#x0040;pat-s](https://github.com/pat-s), and 
-[&#x0040;programming-wizard](https://github.com/programming-wizard).
+[&#x0040;programming-wizard](https://github.com).
 
 # styler 1.2.0
 
@@ -118,6 +378,10 @@ Thanks to all contributors involved, in particular
 
 ## Minor improvements and fixes
 
+* Roxygen code examples: leverage `roxygen2` for correct
+  escaping of expressions that contain `\`, in particular in `dontrun{}` and 
+  friends, allow quoted braces that are not matched (#729).
+  
 * Brace expressions in function calls are formatted in a less compact way to
   improve readability. Typical use case: `tryCatch()` (#543).
 
@@ -146,7 +410,7 @@ Thanks to all contributors involved, in particular
 
 Thanks to all contributors involved, in particular
 
-[&#x0040;Banana1530](https://github.com/Banana1530), [&#x0040;batpigandme](https://github.com/batpigandme), [&#x0040;cpsievert](https://github.com/cpsievert), [&#x0040;ellessenne](https://github.com/ellessenne), [&#x0040;Emiller88](https://github.com/Emiller88), [&#x0040;hadley](https://github.com/hadley), [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;lwjohnst86](https://github.com/lwjohnst86), [&#x0040;michaelquinn32](https://github.com/michaelquinn32), [&#x0040;mine-cetinkaya-rundel](https://github.com/mine-cetinkaya-rundel), [&#x0040;Moohan](https://github.com/Moohan), [&#x0040;nxskok](https://github.com/nxskok), [&#x0040;oliverbeagley](https://github.com/oliverbeagley), [&#x0040;pat-s](https://github.com/pat-s), [&#x0040;reddy-ia](https://github.com/reddy-ia), and [&#x0040;russHyde](https://github.com/russHyde)
+[&#x0040;Banana1530](https://github.com/Banana1530), [&#x0040;batpigandme](https://github.com/batpigandme), [&#x0040;cpsievert](https://github.com/cpsievert), [&#x0040;ellessenne](https://github.com/ellessenne), [&#x0040;Emiller88](https://github.com/Emiller88), [&#x0040;hadley](https://github.com/hadley), [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;lwjohnst86](https://github.com/lwjohnst86), [&#x0040;michaelquinn32](https://github.com/michaelquinn32), [&#x0040;mine-cetinkaya-rundel](https://github.com/mine-cetinkaya-rundel), [&#x0040;Moohan](https://github.com/Moohan), [&#x0040;nxskok](https://github.com/nxskok), [&#x0040;oliverbeagley](https://github.com/oliverbeagley), [&#x0040;pat-s](https://github.com/pat-s), &#x0040;reddy-ia, and [&#x0040;russHyde](https://github.com/russHyde)
 
 # styler 1.1.1
 
@@ -210,7 +474,7 @@ else you can use styler functionality:
   frames with `drake::drake_plan_source()`.
 
 * Adding styler as a fixer to the [ale
-  Plug-in](https://github.com/w0rp/ale/pull/2401#issuecomment-485942966) for
+  Plug-in](https://github.com/dense-analysis/ale/pull/2401) for
   VIM.
 
 Thanks to all contributors involved, in particular
@@ -421,4 +685,3 @@ specify_reindention(
 )
 initialize_default_attributes(pd_flat)
 ```
-

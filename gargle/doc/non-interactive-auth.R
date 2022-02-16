@@ -8,14 +8,14 @@ knitr::opts_chunk$set(
 ## -----------------------------------------------------------------------------
 #  # Approach #1: use an option.
 #  # Either specify the user:
-#  options(gargle_oauth_email = "jenny@example.org")
+#  options(gargle_oauth_email = "jenny@example.com")
 #  # Or, if you don't use multiple Google identities, you can be more vague:
 #  options(gargle_oauth_email = TRUE)
 #  
 #  # Approach #2: call PACKAGE_auth() proactively.
 #  library(googledrive)
 #  # Either specify the user:
-#  drive_auth(email = "jenny@example.org")
+#  drive_auth(email = "jenny@example.com")
 #  # Or, if you don't use multiple Google identities, you can be more vague:
 #  drive_auth(email = TRUE)
 
@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 #  drive_auth(path = "/path/to/your/service-account-token.json")
 
 ## -----------------------------------------------------------------------------
-#  options(gargle_quiet = FALSE)
+#  options(gargle_verbosity = "debug")
 
 ## -----------------------------------------------------------------------------
 #  library(googledrive)
@@ -47,13 +47,19 @@ knitr::opts_chunk$set(
 #  options(gargle_oauth_email = TRUE)
 
 ## -----------------------------------------------------------------------------
-#  options(gargle_oauth_email = "jenny@example.org")
+#  options(gargle_oauth_email = "jenny@example.com")
+
+## -----------------------------------------------------------------------------
+#  options(gargle_oauth_email = "*@example.com")
 
 ## -----------------------------------------------------------------------------
 #  drive_auth(email = TRUE)
 
 ## -----------------------------------------------------------------------------
-#  drive_auth(email = "jenny@example.org")
+#  drive_auth(email = "jenny@example.com")
+
+## -----------------------------------------------------------------------------
+#  drive_auth(email = "*@example.com")
 
 ## -----------------------------------------------------------------------------
 #  library(googledrive)
@@ -92,7 +98,7 @@ knitr::opts_chunk$set(
 #  
 #  options(
 #    gargle_oauth_cache = ".secrets",
-#    gargle_oauth_email = "jenny@example.org"
+#    gargle_oauth_email = "jenny@example.com"
 #  )
 #  
 #  # now use googledrive with no need for explicit auth
@@ -104,16 +110,16 @@ knitr::opts_chunk$set(
 #  drive_auth(cache = ".secrets", email = TRUE)
 #  
 #  # now use googledrive with no need for explicit auth
-#  drive_fine(n_max = 5)
+#  drive_find(n_max = 5)
 
 ## -----------------------------------------------------------------------------
 #  library(googledrive)
 #  
-#  drive_auth(cache = ".secrets", email = "jenny@example.org")
+#  drive_auth(cache = ".secrets", email = "jenny@example.com")
 #  
 #  # now use googledrive with no need for explicit auth
 #  drive_auth(n_max = 5)
 
 ## -----------------------------------------------------------------------------
-#  options(gargle_quiet = FALSE)
+#  options(gargle_verbosity = "debug")
 

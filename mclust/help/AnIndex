@@ -7,7 +7,7 @@ as.densityMclust.Mclust	mclust-internal
 as.Mclust	mclust-internal
 as.Mclust.default	mclust-internal
 as.Mclust.densityMclust	mclust-internal
-balanced.folds	mclust-internal
+balancedFolds	mclust-internal
 banknote	banknote
 Baudry_etal_2010_JCGS_examples	Baudry_etal_2010_JCGS_examples
 bic	bic
@@ -51,6 +51,7 @@ combiTree	combiTree
 combMat	combMat
 coordProj	coordProj
 covw	covw
+crimcoords	crimcoords
 cross	cross
 cv.MclustDA	mclust-deprecated
 cv1EMtrain	mclust-deprecated
@@ -62,6 +63,7 @@ densityMclust	densityMclust
 densityMclust.diagnostic	densityMclust.diagnostic
 diabetes	diabetes
 dmvnorm	dmvnorm
+dupPartition	dupPartition
 eigen.decomp	mclust-internal
 ellipse	mclust-internal
 em	em
@@ -202,7 +204,6 @@ mstepVII	mstepE
 mstepVVE	mstepE
 mstepVVI	mstepE
 mstepVVV	mstepE
-mvdnorm	mclust-internal
 mvn	mvn
 mvn2plot	mclust-internal
 mvnX	mvnX
@@ -216,9 +217,10 @@ partconv	partconv
 partuniq	partuniq
 pcws2_reg	clustCombi-internals
 pcws3_reg	clustCombi-internals
-permute.rows	mclust-internal
+permuteRows	mclust-internal
 pickBIC	mclust-internal
 plot.clustCombi	plot.clustCombi
+plot.crimcoords	crimcoords
 plot.densityMclust	plot.densityMclust
 plot.gmmhd	gmmhd
 plot.hc	plot.hc
@@ -241,6 +243,7 @@ predict.MclustDR	predict.MclustDR
 predict.MclustSSC	predict.MclustSSC
 predict2D.MclustDR	predict.MclustDR
 print.clustCombi	clustCombi
+print.crimcoords	crimcoords
 print.gmmhd	gmmhd
 print.hc	hc
 print.Mclust	Mclust

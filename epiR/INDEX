@@ -6,6 +6,9 @@ epi.about               The library epiR: summary information
 epi.asc                 Write matrix to an ASCII raster file
 epi.betabuster          An R version of Wes Johnson and Chun-Lung Su's
                         Betabuster
+epi.blcm.paras          Number of parameters to be inferred and number
+                        of informative priors required for a Bayesian
+                        latent class model
 epi.bohning             Bohning's test for overdispersion of Poisson
                         data
 epi.ccc                 Concordance correlation coefficient
@@ -53,7 +56,8 @@ epi.occc                Overall concordance correlation coefficient
 epi.offset              Create offset vector
 epi.pooled              Estimate herd test characteristics when pooled
                         sampling is used
-epi.popsize             Estimate population size
+epi.popsize             Estimate population size on the basis of
+                        capture-recapture sampling
 epi.prcc                Partial rank correlation coefficients
 epi.prev                Estimate true prevalence
 epi.psi                 Proportional similarity index
@@ -87,6 +91,8 @@ epi.sscompc             Sample size, power and minimum detectable
 epi.sscomps             Sample size, power and minimum detectable
                         hazard when comparing time to event
 epi.ssdetect            Sample size to detect an event
+epi.ssdxsesp            Sample size to estimate the sensitivity or
+                        specificity of a diagnostic test
 epi.ssdxtest            Sample size to validate a diagnostic test in
                         the absence of a gold standard
 epi.ssequb              Sample size for a parallel equivalence trial,
@@ -120,7 +126,7 @@ rsu.dxtest              Sensitivity and specificity of diagnostic tests
 rsu.epinf               Effective probability of disease
 rsu.pfree.equ           Equilibrium probability of disease freedom
                         assuming representative or risk based sampling
-rsu.pfree.rs            Calculate Probability of freedom for given
+rsu.pfree.rs            Calculate the probability of freedom for given
                         population sensitivity and probability of
                         introduction
 rsu.pstar               Design prevalence back calculation

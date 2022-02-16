@@ -11,7 +11,6 @@ License: GPL-3
 Encoding: UTF-8
 Imports: dplyr, data.table, lmerTest (>= 3.0.1), lsmeans, stargazer,
         tibble
-LazyData: true
 RoxygenNote: 7.1.0
 RemoteType: github
 RemoteHost: api.github.com
@@ -26,5 +25,5 @@ GithubRef: HEAD
 GithubSHA1: a6416b49d1686a023d3c3726127a9498ed9af29e
 GithubSubdir: phenoAnalysis
 NeedsCompilation: no
-Packaged: 2021-01-12 01:05:39 UTC; root
-Built: R 3.6.3; ; 2021-01-12 01:05:40 UTC; unix
+Packaged: 2022-02-15 23:43:00 UTC; root
+Built: R 4.1.2; ; 2022-02-15 23:43:00 UTC; unix

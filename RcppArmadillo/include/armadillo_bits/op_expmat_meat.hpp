@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -72,6 +74,8 @@ op_expmat::apply_direct(Mat<typename T1::elem_type>& out, const Base<typename T1
     
     if(A.is_diagmat())
       {
+      arma_extra_debug_print("op_expmat: detected diagonal matrix");
+      
       const uword N = (std::min)(A.n_rows, A.n_cols);
       
       out.zeros(N,N);
@@ -82,13 +86,15 @@ op_expmat::apply_direct(Mat<typename T1::elem_type>& out, const Base<typename T1
       }
     
     #if defined(ARMA_OPTIMISE_SYMPD)
-      const bool try_sympd = sympd_helper::guess_sympd_anysize(A);
+      const bool try_sympd = sympd_helper::guess_sympd(A);
     #else
       const bool try_sympd = false;
     #endif
     
     if(try_sympd)
       {
+      arma_extra_debug_print("op_expmat: attempting sympd optimisation");
+      
       // if matrix A is sympd, all its eigenvalues are positive
       
       Col< T> eigval;
@@ -105,7 +111,7 @@ op_expmat::apply_direct(Mat<typename T1::elem_type>& out, const Base<typename T1
         return true;
         }
       
-      arma_extra_debug_print("warning: sympd optimisation failed");
+      arma_extra_debug_print("op_expmat: sympd optimisation failed");
       
       // fallthrough if eigen decomposition failed
       }

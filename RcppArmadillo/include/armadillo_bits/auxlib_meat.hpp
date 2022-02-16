@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -22,49 +24,48 @@
 template<typename eT>
 inline
 bool
-auxlib::inv(Mat<eT>& out, const Mat<eT>& A)
+auxlib::inv(Mat<eT>& A)
   {
   arma_extra_debug_sigprint();
   
-  out = A;
-  
-  if(out.is_empty())  { return true; }
+  if(A.is_empty())  { return true; }
   
   #if defined(ARMA_USE_ATLAS)
     {
-    arma_debug_assert_atlas_size(out);
+    arma_debug_assert_atlas_size(A);
     
-    podarray<int> ipiv(out.n_rows);
+    podarray<int> ipiv(A.n_rows);
     
     int info = 0;
     
     arma_extra_debug_print("atlas::clapack_getrf()");
-    info = atlas::clapack_getrf(atlas::CblasColMajor, out.n_rows, out.n_cols, out.memptr(), out.n_rows, ipiv.memptr());
+    info = atlas::clapack_getrf(atlas::CblasColMajor, A.n_rows, A.n_cols, A.memptr(), A.n_rows, ipiv.memptr());
     
     if(info != 0)  { return false; }
     
     arma_extra_debug_print("atlas::clapack_getri()");
-    info = atlas::clapack_getri(atlas::CblasColMajor, out.n_rows, out.memptr(), out.n_rows, ipiv.memptr());
+    info = atlas::clapack_getri(atlas::CblasColMajor, A.n_rows, A.memptr(), A.n_rows, ipiv.memptr());
     
     return (info == 0);
     }
   #elif defined(ARMA_USE_LAPACK)
     {
-    arma_debug_assert_blas_size(out);
+    arma_debug_assert_blas_size(A);
     
-    blas_int n_rows = blas_int(out.n_rows);
-    blas_int lwork  = (std::max)(blas_int(podarray_prealloc_n_elem::val), n_rows);
-    blas_int info   = 0;
+    blas_int n     = blas_int(A.n_rows);
+    blas_int lda   = blas_int(A.n_rows);
+    blas_int lwork = (std::max)(blas_int(podarray_prealloc_n_elem::val), n);
+    blas_int info  = 0;
     
-    podarray<blas_int> ipiv(out.n_rows);
+    podarray<blas_int> ipiv(A.n_rows);
     
-    if(n_rows > 16)
+    if(n > 16)
       {
       eT        work_query[2];
       blas_int lwork_query = -1;
       
       arma_extra_debug_print("lapack::getri()");
-      lapack::getri(&n_rows, out.memptr(), &n_rows, ipiv.memptr(), &work_query[0], &lwork_query, &info);
+      lapack::getri(&n, A.memptr(), &lda, ipiv.memptr(), &work_query[0], &lwork_query, &info);
       
       if(info != 0)  { return false; }
       
@@ -76,18 +77,18 @@ auxlib::inv(Mat<eT>& out, const Mat<eT>& A)
     podarray<eT> work( static_cast<uword>(lwork) );
     
     arma_extra_debug_print("lapack::getrf()");
-    lapack::getrf(&n_rows, &n_rows, out.memptr(), &n_rows, ipiv.memptr(), &info);
+    lapack::getrf(&n, &n, A.memptr(), &lda, ipiv.memptr(), &info);
     
     if(info != 0)  { return false; }
     
     arma_extra_debug_print("lapack::getri()");
-    lapack::getri(&n_rows, out.memptr(), &n_rows, ipiv.memptr(), work.memptr(), &lwork, &info);
+    lapack::getri(&n, A.memptr(), &lda, ipiv.memptr(), work.memptr(), &lwork, &info);
     
     return (info == 0);
     }
   #else
     {
-    out.soft_reset();
+    arma_ignore(A);
     arma_stop_logic_error("inv(): use of ATLAS or LAPACK must be enabled");
     return false;
     }
@@ -97,174 +98,56 @@ auxlib::inv(Mat<eT>& out, const Mat<eT>& A)
 
 
 template<typename eT>
-arma_cold
 inline
 bool
-auxlib::inv_tiny(Mat<eT>& out, const Mat<eT>& X)
+auxlib::inv(Mat<eT>& out, const Mat<eT>& X)
   {
   arma_extra_debug_sigprint();
   
-  const uword N = X.n_rows;
+  out = X;
   
-  out.set_size(N,N);
-  
-  typedef typename get_pod_type<eT>::result T;
-  
-  const T det_min = std::numeric_limits<T>::epsilon();
-  
-  bool calc_ok = false;
-  
-  const eT* Xm   =   X.memptr();
-        eT* outm = out.memptr();
-        
-  switch(N)
-    {
-    case 0:
-      calc_ok = true;
-      break;
-    
-    case 1:
-      {
-      outm[0] = eT(1) / Xm[0];
-      
-      calc_ok = true;
-      };
-      break;
-      
-    case 2:
-      {
-      const eT a = Xm[pos<0,0>::n2];
-      const eT b = Xm[pos<0,1>::n2];
-      const eT c = Xm[pos<1,0>::n2];
-      const eT d = Xm[pos<1,1>::n2];
-      
-      const eT det_val = (a*d - b*c);
-      
-      if(std::abs(det_val) >= det_min)
-        {
-        outm[pos<0,0>::n2] =  d / det_val;
-        outm[pos<0,1>::n2] = -b / det_val;
-        outm[pos<1,0>::n2] = -c / det_val;
-        outm[pos<1,1>::n2] =  a / det_val;
-        
-        calc_ok = true;
-        }
-      };
-      break;
-    
-    case 3:
-      {
-      const eT det_val = auxlib::det_tinymat(X,3);
-      
-      if(std::abs(det_val) >= det_min)
-        {
-        outm[pos<0,0>::n3] =  (Xm[pos<2,2>::n3]*Xm[pos<1,1>::n3] - Xm[pos<2,1>::n3]*Xm[pos<1,2>::n3]) / det_val;
-        outm[pos<1,0>::n3] = -(Xm[pos<2,2>::n3]*Xm[pos<1,0>::n3] - Xm[pos<2,0>::n3]*Xm[pos<1,2>::n3]) / det_val;
-        outm[pos<2,0>::n3] =  (Xm[pos<2,1>::n3]*Xm[pos<1,0>::n3] - Xm[pos<2,0>::n3]*Xm[pos<1,1>::n3]) / det_val;
-        
-        outm[pos<0,1>::n3] = -(Xm[pos<2,2>::n3]*Xm[pos<0,1>::n3] - Xm[pos<2,1>::n3]*Xm[pos<0,2>::n3]) / det_val;
-        outm[pos<1,1>::n3] =  (Xm[pos<2,2>::n3]*Xm[pos<0,0>::n3] - Xm[pos<2,0>::n3]*Xm[pos<0,2>::n3]) / det_val;
-        outm[pos<2,1>::n3] = -(Xm[pos<2,1>::n3]*Xm[pos<0,0>::n3] - Xm[pos<2,0>::n3]*Xm[pos<0,1>::n3]) / det_val;
-        
-        outm[pos<0,2>::n3] =  (Xm[pos<1,2>::n3]*Xm[pos<0,1>::n3] - Xm[pos<1,1>::n3]*Xm[pos<0,2>::n3]) / det_val;
-        outm[pos<1,2>::n3] = -(Xm[pos<1,2>::n3]*Xm[pos<0,0>::n3] - Xm[pos<1,0>::n3]*Xm[pos<0,2>::n3]) / det_val;
-        outm[pos<2,2>::n3] =  (Xm[pos<1,1>::n3]*Xm[pos<0,0>::n3] - Xm[pos<1,0>::n3]*Xm[pos<0,1>::n3]) / det_val;
-        
-        const eT check_val = Xm[pos<0,0>::n3]*outm[pos<0,0>::n3] + Xm[pos<0,1>::n3]*outm[pos<1,0>::n3] + Xm[pos<0,2>::n3]*outm[pos<2,0>::n3];
-        
-        const  T max_diff  = (is_float<T>::value) ? T(1e-4) : T(1e-10);  // empirically determined; may need tuning
-        
-        if(std::abs(T(1) - check_val) < max_diff)  { calc_ok = true; }
-        }
-      };
-      break;
-    
-    case 4:
-      {
-      const eT det_val = auxlib::det_tinymat(X,4);
-      
-      if(std::abs(det_val) >= det_min)
-        {
-        outm[pos<0,0>::n4] = ( Xm[pos<1,2>::n4]*Xm[pos<2,3>::n4]*Xm[pos<3,1>::n4] - Xm[pos<1,3>::n4]*Xm[pos<2,2>::n4]*Xm[pos<3,1>::n4] + Xm[pos<1,3>::n4]*Xm[pos<2,1>::n4]*Xm[pos<3,2>::n4] - Xm[pos<1,1>::n4]*Xm[pos<2,3>::n4]*Xm[pos<3,2>::n4] - Xm[pos<1,2>::n4]*Xm[pos<2,1>::n4]*Xm[pos<3,3>::n4] + Xm[pos<1,1>::n4]*Xm[pos<2,2>::n4]*Xm[pos<3,3>::n4] ) / det_val;
-        outm[pos<1,0>::n4] = ( Xm[pos<1,3>::n4]*Xm[pos<2,2>::n4]*Xm[pos<3,0>::n4] - Xm[pos<1,2>::n4]*Xm[pos<2,3>::n4]*Xm[pos<3,0>::n4] - Xm[pos<1,3>::n4]*Xm[pos<2,0>::n4]*Xm[pos<3,2>::n4] + Xm[pos<1,0>::n4]*Xm[pos<2,3>::n4]*Xm[pos<3,2>::n4] + Xm[pos<1,2>::n4]*Xm[pos<2,0>::n4]*Xm[pos<3,3>::n4] - Xm[pos<1,0>::n4]*Xm[pos<2,2>::n4]*Xm[pos<3,3>::n4] ) / det_val;
-        outm[pos<2,0>::n4] = ( Xm[pos<1,1>::n4]*Xm[pos<2,3>::n4]*Xm[pos<3,0>::n4] - Xm[pos<1,3>::n4]*Xm[pos<2,1>::n4]*Xm[pos<3,0>::n4] + Xm[pos<1,3>::n4]*Xm[pos<2,0>::n4]*Xm[pos<3,1>::n4] - Xm[pos<1,0>::n4]*Xm[pos<2,3>::n4]*Xm[pos<3,1>::n4] - Xm[pos<1,1>::n4]*Xm[pos<2,0>::n4]*Xm[pos<3,3>::n4] + Xm[pos<1,0>::n4]*Xm[pos<2,1>::n4]*Xm[pos<3,3>::n4] ) / det_val;
-        outm[pos<3,0>::n4] = ( Xm[pos<1,2>::n4]*Xm[pos<2,1>::n4]*Xm[pos<3,0>::n4] - Xm[pos<1,1>::n4]*Xm[pos<2,2>::n4]*Xm[pos<3,0>::n4] - Xm[pos<1,2>::n4]*Xm[pos<2,0>::n4]*Xm[pos<3,1>::n4] + Xm[pos<1,0>::n4]*Xm[pos<2,2>::n4]*Xm[pos<3,1>::n4] + Xm[pos<1,1>::n4]*Xm[pos<2,0>::n4]*Xm[pos<3,2>::n4] - Xm[pos<1,0>::n4]*Xm[pos<2,1>::n4]*Xm[pos<3,2>::n4] ) / det_val;
-        
-        outm[pos<0,1>::n4] = ( Xm[pos<0,3>::n4]*Xm[pos<2,2>::n4]*Xm[pos<3,1>::n4] - Xm[pos<0,2>::n4]*Xm[pos<2,3>::n4]*Xm[pos<3,1>::n4] - Xm[pos<0,3>::n4]*Xm[pos<2,1>::n4]*Xm[pos<3,2>::n4] + Xm[pos<0,1>::n4]*Xm[pos<2,3>::n4]*Xm[pos<3,2>::n4] + Xm[pos<0,2>::n4]*Xm[pos<2,1>::n4]*Xm[pos<3,3>::n4] - Xm[pos<0,1>::n4]*Xm[pos<2,2>::n4]*Xm[pos<3,3>::n4] ) / det_val;
-        outm[pos<1,1>::n4] = ( Xm[pos<0,2>::n4]*Xm[pos<2,3>::n4]*Xm[pos<3,0>::n4] - Xm[pos<0,3>::n4]*Xm[pos<2,2>::n4]*Xm[pos<3,0>::n4] + Xm[pos<0,3>::n4]*Xm[pos<2,0>::n4]*Xm[pos<3,2>::n4] - Xm[pos<0,0>::n4]*Xm[pos<2,3>::n4]*Xm[pos<3,2>::n4] - Xm[pos<0,2>::n4]*Xm[pos<2,0>::n4]*Xm[pos<3,3>::n4] + Xm[pos<0,0>::n4]*Xm[pos<2,2>::n4]*Xm[pos<3,3>::n4] ) / det_val;
-        outm[pos<2,1>::n4] = ( Xm[pos<0,3>::n4]*Xm[pos<2,1>::n4]*Xm[pos<3,0>::n4] - Xm[pos<0,1>::n4]*Xm[pos<2,3>::n4]*Xm[pos<3,0>::n4] - Xm[pos<0,3>::n4]*Xm[pos<2,0>::n4]*Xm[pos<3,1>::n4] + Xm[pos<0,0>::n4]*Xm[pos<2,3>::n4]*Xm[pos<3,1>::n4] + Xm[pos<0,1>::n4]*Xm[pos<2,0>::n4]*Xm[pos<3,3>::n4] - Xm[pos<0,0>::n4]*Xm[pos<2,1>::n4]*Xm[pos<3,3>::n4] ) / det_val;
-        outm[pos<3,1>::n4] = ( Xm[pos<0,1>::n4]*Xm[pos<2,2>::n4]*Xm[pos<3,0>::n4] - Xm[pos<0,2>::n4]*Xm[pos<2,1>::n4]*Xm[pos<3,0>::n4] + Xm[pos<0,2>::n4]*Xm[pos<2,0>::n4]*Xm[pos<3,1>::n4] - Xm[pos<0,0>::n4]*Xm[pos<2,2>::n4]*Xm[pos<3,1>::n4] - Xm[pos<0,1>::n4]*Xm[pos<2,0>::n4]*Xm[pos<3,2>::n4] + Xm[pos<0,0>::n4]*Xm[pos<2,1>::n4]*Xm[pos<3,2>::n4] ) / det_val;
-        
-        outm[pos<0,2>::n4] = ( Xm[pos<0,2>::n4]*Xm[pos<1,3>::n4]*Xm[pos<3,1>::n4] - Xm[pos<0,3>::n4]*Xm[pos<1,2>::n4]*Xm[pos<3,1>::n4] + Xm[pos<0,3>::n4]*Xm[pos<1,1>::n4]*Xm[pos<3,2>::n4] - Xm[pos<0,1>::n4]*Xm[pos<1,3>::n4]*Xm[pos<3,2>::n4] - Xm[pos<0,2>::n4]*Xm[pos<1,1>::n4]*Xm[pos<3,3>::n4] + Xm[pos<0,1>::n4]*Xm[pos<1,2>::n4]*Xm[pos<3,3>::n4] ) / det_val;
-        outm[pos<1,2>::n4] = ( Xm[pos<0,3>::n4]*Xm[pos<1,2>::n4]*Xm[pos<3,0>::n4] - Xm[pos<0,2>::n4]*Xm[pos<1,3>::n4]*Xm[pos<3,0>::n4] - Xm[pos<0,3>::n4]*Xm[pos<1,0>::n4]*Xm[pos<3,2>::n4] + Xm[pos<0,0>::n4]*Xm[pos<1,3>::n4]*Xm[pos<3,2>::n4] + Xm[pos<0,2>::n4]*Xm[pos<1,0>::n4]*Xm[pos<3,3>::n4] - Xm[pos<0,0>::n4]*Xm[pos<1,2>::n4]*Xm[pos<3,3>::n4] ) / det_val;
-        outm[pos<2,2>::n4] = ( Xm[pos<0,1>::n4]*Xm[pos<1,3>::n4]*Xm[pos<3,0>::n4] - Xm[pos<0,3>::n4]*Xm[pos<1,1>::n4]*Xm[pos<3,0>::n4] + Xm[pos<0,3>::n4]*Xm[pos<1,0>::n4]*Xm[pos<3,1>::n4] - Xm[pos<0,0>::n4]*Xm[pos<1,3>::n4]*Xm[pos<3,1>::n4] - Xm[pos<0,1>::n4]*Xm[pos<1,0>::n4]*Xm[pos<3,3>::n4] + Xm[pos<0,0>::n4]*Xm[pos<1,1>::n4]*Xm[pos<3,3>::n4] ) / det_val;
-        outm[pos<3,2>::n4] = ( Xm[pos<0,2>::n4]*Xm[pos<1,1>::n4]*Xm[pos<3,0>::n4] - Xm[pos<0,1>::n4]*Xm[pos<1,2>::n4]*Xm[pos<3,0>::n4] - Xm[pos<0,2>::n4]*Xm[pos<1,0>::n4]*Xm[pos<3,1>::n4] + Xm[pos<0,0>::n4]*Xm[pos<1,2>::n4]*Xm[pos<3,1>::n4] + Xm[pos<0,1>::n4]*Xm[pos<1,0>::n4]*Xm[pos<3,2>::n4] - Xm[pos<0,0>::n4]*Xm[pos<1,1>::n4]*Xm[pos<3,2>::n4] ) / det_val;
-        
-        outm[pos<0,3>::n4] = ( Xm[pos<0,3>::n4]*Xm[pos<1,2>::n4]*Xm[pos<2,1>::n4] - Xm[pos<0,2>::n4]*Xm[pos<1,3>::n4]*Xm[pos<2,1>::n4] - Xm[pos<0,3>::n4]*Xm[pos<1,1>::n4]*Xm[pos<2,2>::n4] + Xm[pos<0,1>::n4]*Xm[pos<1,3>::n4]*Xm[pos<2,2>::n4] + Xm[pos<0,2>::n4]*Xm[pos<1,1>::n4]*Xm[pos<2,3>::n4] - Xm[pos<0,1>::n4]*Xm[pos<1,2>::n4]*Xm[pos<2,3>::n4] ) / det_val;
-        outm[pos<1,3>::n4] = ( Xm[pos<0,2>::n4]*Xm[pos<1,3>::n4]*Xm[pos<2,0>::n4] - Xm[pos<0,3>::n4]*Xm[pos<1,2>::n4]*Xm[pos<2,0>::n4] + Xm[pos<0,3>::n4]*Xm[pos<1,0>::n4]*Xm[pos<2,2>::n4] - Xm[pos<0,0>::n4]*Xm[pos<1,3>::n4]*Xm[pos<2,2>::n4] - Xm[pos<0,2>::n4]*Xm[pos<1,0>::n4]*Xm[pos<2,3>::n4] + Xm[pos<0,0>::n4]*Xm[pos<1,2>::n4]*Xm[pos<2,3>::n4] ) / det_val;
-        outm[pos<2,3>::n4] = ( Xm[pos<0,3>::n4]*Xm[pos<1,1>::n4]*Xm[pos<2,0>::n4] - Xm[pos<0,1>::n4]*Xm[pos<1,3>::n4]*Xm[pos<2,0>::n4] - Xm[pos<0,3>::n4]*Xm[pos<1,0>::n4]*Xm[pos<2,1>::n4] + Xm[pos<0,0>::n4]*Xm[pos<1,3>::n4]*Xm[pos<2,1>::n4] + Xm[pos<0,1>::n4]*Xm[pos<1,0>::n4]*Xm[pos<2,3>::n4] - Xm[pos<0,0>::n4]*Xm[pos<1,1>::n4]*Xm[pos<2,3>::n4] ) / det_val;
-        outm[pos<3,3>::n4] = ( Xm[pos<0,1>::n4]*Xm[pos<1,2>::n4]*Xm[pos<2,0>::n4] - Xm[pos<0,2>::n4]*Xm[pos<1,1>::n4]*Xm[pos<2,0>::n4] + Xm[pos<0,2>::n4]*Xm[pos<1,0>::n4]*Xm[pos<2,1>::n4] - Xm[pos<0,0>::n4]*Xm[pos<1,2>::n4]*Xm[pos<2,1>::n4] - Xm[pos<0,1>::n4]*Xm[pos<1,0>::n4]*Xm[pos<2,2>::n4] + Xm[pos<0,0>::n4]*Xm[pos<1,1>::n4]*Xm[pos<2,2>::n4] ) / det_val;
-        
-        const eT check_val = Xm[pos<0,0>::n4]*outm[pos<0,0>::n4] + Xm[pos<0,1>::n4]*outm[pos<1,0>::n4] + Xm[pos<0,2>::n4]*outm[pos<2,0>::n4] + Xm[pos<0,3>::n4]*outm[pos<3,0>::n4];
-        
-        const  T max_diff  = (is_float<T>::value) ? T(1e-4) : T(1e-10);  // empirically determined; may need tuning
-        
-        if(std::abs(T(1) - check_val) < max_diff)  { calc_ok = true; }
-        }
-      };
-      break;
-    
-    default:
-      ;
-    }
-  
-  return calc_ok;
+  return auxlib::inv(out);
   }
 
 
 
-template<typename eT, typename T1>
+template<typename eT>
 inline
 bool
-auxlib::inv_tr(Mat<eT>& out, const Base<eT,T1>& X, const uword layout)
+auxlib::inv_tr(Mat<eT>& A, const uword layout)
   {
   arma_extra_debug_sigprint();
   
   #if defined(ARMA_USE_LAPACK)
     {
-    out = X.get_ref();
-    
-    arma_debug_check( (out.is_square() == false), "inv(): given matrix must be square sized" );
-    
-    if(out.is_empty())  { return true; }
+    if(A.is_empty())  { return true; }
   
-    arma_debug_assert_blas_size(out);
+    arma_debug_assert_blas_size(A);
     
     char     uplo = (layout == 0) ? 'U' : 'L';
     char     diag = 'N';
-    blas_int n    = blas_int(out.n_rows);
+    blas_int n    = blas_int(A.n_rows);
     blas_int info = 0;
     
     arma_extra_debug_print("lapack::trtri()");
-    lapack::trtri(&uplo, &diag, &n, out.memptr(), &n, &info);
+    lapack::trtri(&uplo, &diag, &n, A.memptr(), &n, &info);
     
     if(info != 0)  { return false; }
     
     if(layout == 0)
       {
-      out = trimatu(out);  // upper triangular
+      A = trimatu(A);  // upper triangular
       }
     else
       {
-      out = trimatl(out);  // lower triangular
+      A = trimatl(A);  // lower triangular
       }
     
     return true;
     }
   #else
     {
-    arma_ignore(out);
-    arma_ignore(X);
+    arma_ignore(A);
     arma_ignore(layout);
     arma_stop_logic_error("inv(): use of LAPACK must be enabled");
     return false;
@@ -274,89 +157,62 @@ auxlib::inv_tr(Mat<eT>& out, const Base<eT,T1>& X, const uword layout)
 
 
 
-template<typename eT, typename T1>
+template<typename eT>
 inline
 bool
-auxlib::inv_sympd(Mat<eT>& out, const Base<eT,T1>& X)
+auxlib::inv_sympd(Mat<eT>& A)
   {
   arma_extra_debug_sigprint();
   
-  out = X.get_ref();
-  
-  arma_debug_check( (out.is_square() == false), "inv_sympd(): given matrix must be square sized" );
-  
-  if(out.is_empty())  { return true; }
-  
-  // if(auxlib::rudimentary_sym_check(out) == false)
-  //   {
-  //   if(is_cx<eT>::no )  { arma_debug_warn("inv_sympd(): given matrix is not symmetric"); }
-  //   if(is_cx<eT>::yes)  { arma_debug_warn("inv_sympd(): given matrix is not hermitian"); }
-  //   return false;
-  //   }
-  
-  if((arma_config::debug) && (auxlib::rudimentary_sym_check(out) == false))
-    {
-    if(is_cx<eT>::no )  { arma_debug_warn("inv_sympd(): given matrix is not symmetric"); }
-    if(is_cx<eT>::yes)  { arma_debug_warn("inv_sympd(): given matrix is not hermitian"); }
-    }
-  
-  if(out.n_rows <= 4)
-    {
-    Mat<eT> tmp;
-    
-    const bool status = auxlib::inv_sympd_tiny(tmp, out);
-    
-    if(status == true)  { out = tmp; return true; }
-    }
+  if(A.is_empty())  { return true; }
   
   #if defined(ARMA_USE_ATLAS)
     {
-    arma_debug_assert_atlas_size(out);
+    arma_debug_assert_atlas_size(A);
     
     int info = 0;
     
     arma_extra_debug_print("atlas::clapack_potrf()");
-    info = atlas::clapack_potrf(atlas::CblasColMajor, atlas::CblasLower, out.n_rows, out.memptr(), out.n_rows);
+    info = atlas::clapack_potrf(atlas::CblasColMajor, atlas::CblasLower, A.n_rows, A.memptr(), A.n_rows);
     
     if(info != 0)  { return false; }
     
     arma_extra_debug_print("atlas::clapack_potri()");
-    info = atlas::clapack_potri(atlas::CblasColMajor, atlas::CblasLower, out.n_rows, out.memptr(), out.n_rows);
+    info = atlas::clapack_potri(atlas::CblasColMajor, atlas::CblasLower, A.n_rows, A.memptr(), A.n_rows);
     
     if(info != 0)  { return false; }
     
-    out = symmatl(out);
+    A = symmatl(A);
     
     return true;
     }
   #elif defined(ARMA_USE_LAPACK)
     {
-    arma_debug_assert_blas_size(out);
+    arma_debug_assert_blas_size(A);
     
     char     uplo = 'L';
-    blas_int n    = blas_int(out.n_rows);
+    blas_int n    = blas_int(A.n_rows);
     blas_int info = 0;
     
     // NOTE: for complex matrices, zpotrf() assumes the matrix is hermitian (not simply symmetric)
     
     arma_extra_debug_print("lapack::potrf()");
-    lapack::potrf(&uplo, &n, out.memptr(), &n, &info);
+    lapack::potrf(&uplo, &n, A.memptr(), &n, &info);
     
     if(info != 0)  { return false; }
     
     arma_extra_debug_print("lapack::potri()");
-    lapack::potri(&uplo, &n, out.memptr(), &n, &info);
+    lapack::potri(&uplo, &n, A.memptr(), &n, &info);
     
     if(info != 0)  { return false; }
     
-    out = symmatl(out);
+    A = symmatl(A);
     
     return true;
     }
   #else
     {
-    arma_ignore(out);
-    arma_ignore(X);
+    arma_ignore(A);
     arma_stop_logic_error("inv_sympd(): use of ATLAS or LAPACK must be enabled");
     return false;
     }
@@ -366,128 +222,131 @@ auxlib::inv_sympd(Mat<eT>& out, const Base<eT,T1>& X)
 
 
 template<typename eT>
-arma_cold
 inline
 bool
-auxlib::inv_sympd_tiny(Mat<eT>& out, const Mat<eT>& X)
+auxlib::inv_sympd(Mat<eT>& out, const Mat<eT>& X)
   {
   arma_extra_debug_sigprint();
   
-  // if(sympd_helper::guess_sympd(X) == false)  { return false; }
+  out = X;
   
-  return auxlib::inv_tiny(out, X);
+  return auxlib::inv_sympd(out);
   }
 
 
 
 template<typename eT>
 inline
-eT
-auxlib::det(const Mat<eT>& A)
+bool
+auxlib::inv_sympd_rcond(Mat<eT>& A, const eT rcond_threshold)
   {
   arma_extra_debug_sigprint();
   
-  typedef typename get_pod_type<eT>::result T;
+  if(A.is_empty())  { return true; }
   
-  const uword N = A.n_rows;
-  
-  if(N <= 4)
+  #if defined(ARMA_USE_LAPACK)
     {
-    const eT det_val = auxlib::det_tinymat(A, N);
+    typedef typename get_pod_type<eT>::result T;
     
-    const  T det_min = std::numeric_limits<T>::epsilon();
+    arma_debug_assert_blas_size(A);
     
-    if(std::abs(det_val) >= det_min)  { return det_val; }
+    char     norm_id  = '1';
+    char     uplo     = 'L';
+    blas_int n        = blas_int(A.n_rows);
+    blas_int info     = 0;
+    T        norm_val = T(0);
     
-    // fallthrough if obtained determinant is suspect
+    podarray<T> work(A.n_rows);
+    
+    arma_extra_debug_print("lapack::lansy()");
+    norm_val = lapack::lansy(&norm_id, &uplo, &n, A.memptr(), &n, work.memptr());
+    
+    arma_extra_debug_print("lapack::potrf()");
+    lapack::potrf(&uplo, &n, A.memptr(), &n, &info);
+    
+    if(info != 0)  { return false; }
+    
+    const T rcond = auxlib::lu_rcond_sympd<T>(A, norm_val);
+    
+    if(rcond < rcond_threshold)  { return false; }
+    
+    arma_extra_debug_print("lapack::potri()");
+    lapack::potri(&uplo, &n, A.memptr(), &n, &info);
+    
+    if(info != 0)  { return false; }
+    
+    A = symmatl(A);
+    
+    return true;
     }
-  
-  return auxlib::det_lapack(A);
+  #else
+    {
+    arma_ignore(A);
+    arma_ignore(rcond_threshold);
+    arma_stop_logic_error("inv_sympd_rcond(): use LAPACK must be enabled");
+    return false;
+    }
+  #endif
   }
 
 
 
-template<typename eT>
-arma_cold
+template<typename T>
 inline
-eT
-auxlib::det_tinymat(const Mat<eT>& X, const uword N)
+bool
+auxlib::inv_sympd_rcond(Mat< std::complex<T> >& A, const T rcond_threshold)
   {
   arma_extra_debug_sigprint();
   
-  const eT* Xm = X.memptr();
+  if(A.is_empty())  { return true; }
   
-  switch(N)
+  #if defined(ARMA_CRIPPLED_LAPACK)
     {
-    case 0:
-      return eT(1);
-      break;
-    
-    case 1:
-      return Xm[0];
-      break;
-    
-    case 2:
-      {
-      return ( Xm[pos<0,0>::n2]*Xm[pos<1,1>::n2] - Xm[pos<0,1>::n2]*Xm[pos<1,0>::n2] );
-      }
-      break;
-    
-    case 3:
-      {
-      // const double tmp1 = X.at(0,0) * X.at(1,1) * X.at(2,2);
-      // const double tmp2 = X.at(0,1) * X.at(1,2) * X.at(2,0);
-      // const double tmp3 = X.at(0,2) * X.at(1,0) * X.at(2,1);
-      // const double tmp4 = X.at(2,0) * X.at(1,1) * X.at(0,2);
-      // const double tmp5 = X.at(2,1) * X.at(1,2) * X.at(0,0);
-      // const double tmp6 = X.at(2,2) * X.at(1,0) * X.at(0,1);
-      // return (tmp1+tmp2+tmp3) - (tmp4+tmp5+tmp6);
-      
-      const eT val1 = Xm[pos<0,0>::n3]*(Xm[pos<2,2>::n3]*Xm[pos<1,1>::n3] - Xm[pos<2,1>::n3]*Xm[pos<1,2>::n3]);
-      const eT val2 = Xm[pos<1,0>::n3]*(Xm[pos<2,2>::n3]*Xm[pos<0,1>::n3] - Xm[pos<2,1>::n3]*Xm[pos<0,2>::n3]);
-      const eT val3 = Xm[pos<2,0>::n3]*(Xm[pos<1,2>::n3]*Xm[pos<0,1>::n3] - Xm[pos<1,1>::n3]*Xm[pos<0,2>::n3]);
-      
-      return ( val1 - val2 + val3 );
-      }
-      break;
-    
-    case 4:
-      {
-      const eT val = \
-          Xm[pos<0,3>::n4] * Xm[pos<1,2>::n4] * Xm[pos<2,1>::n4] * Xm[pos<3,0>::n4] \
-        - Xm[pos<0,2>::n4] * Xm[pos<1,3>::n4] * Xm[pos<2,1>::n4] * Xm[pos<3,0>::n4] \
-        - Xm[pos<0,3>::n4] * Xm[pos<1,1>::n4] * Xm[pos<2,2>::n4] * Xm[pos<3,0>::n4] \
-        + Xm[pos<0,1>::n4] * Xm[pos<1,3>::n4] * Xm[pos<2,2>::n4] * Xm[pos<3,0>::n4] \
-        + Xm[pos<0,2>::n4] * Xm[pos<1,1>::n4] * Xm[pos<2,3>::n4] * Xm[pos<3,0>::n4] \
-        - Xm[pos<0,1>::n4] * Xm[pos<1,2>::n4] * Xm[pos<2,3>::n4] * Xm[pos<3,0>::n4] \
-        - Xm[pos<0,3>::n4] * Xm[pos<1,2>::n4] * Xm[pos<2,0>::n4] * Xm[pos<3,1>::n4] \
-        + Xm[pos<0,2>::n4] * Xm[pos<1,3>::n4] * Xm[pos<2,0>::n4] * Xm[pos<3,1>::n4] \
-        + Xm[pos<0,3>::n4] * Xm[pos<1,0>::n4] * Xm[pos<2,2>::n4] * Xm[pos<3,1>::n4] \
-        - Xm[pos<0,0>::n4] * Xm[pos<1,3>::n4] * Xm[pos<2,2>::n4] * Xm[pos<3,1>::n4] \
-        - Xm[pos<0,2>::n4] * Xm[pos<1,0>::n4] * Xm[pos<2,3>::n4] * Xm[pos<3,1>::n4] \
-        + Xm[pos<0,0>::n4] * Xm[pos<1,2>::n4] * Xm[pos<2,3>::n4] * Xm[pos<3,1>::n4] \
-        + Xm[pos<0,3>::n4] * Xm[pos<1,1>::n4] * Xm[pos<2,0>::n4] * Xm[pos<3,2>::n4] \
-        - Xm[pos<0,1>::n4] * Xm[pos<1,3>::n4] * Xm[pos<2,0>::n4] * Xm[pos<3,2>::n4] \
-        - Xm[pos<0,3>::n4] * Xm[pos<1,0>::n4] * Xm[pos<2,1>::n4] * Xm[pos<3,2>::n4] \
-        + Xm[pos<0,0>::n4] * Xm[pos<1,3>::n4] * Xm[pos<2,1>::n4] * Xm[pos<3,2>::n4] \
-        + Xm[pos<0,1>::n4] * Xm[pos<1,0>::n4] * Xm[pos<2,3>::n4] * Xm[pos<3,2>::n4] \
-        - Xm[pos<0,0>::n4] * Xm[pos<1,1>::n4] * Xm[pos<2,3>::n4] * Xm[pos<3,2>::n4] \
-        - Xm[pos<0,2>::n4] * Xm[pos<1,1>::n4] * Xm[pos<2,0>::n4] * Xm[pos<3,3>::n4] \
-        + Xm[pos<0,1>::n4] * Xm[pos<1,2>::n4] * Xm[pos<2,0>::n4] * Xm[pos<3,3>::n4] \
-        + Xm[pos<0,2>::n4] * Xm[pos<1,0>::n4] * Xm[pos<2,1>::n4] * Xm[pos<3,3>::n4] \
-        - Xm[pos<0,0>::n4] * Xm[pos<1,2>::n4] * Xm[pos<2,1>::n4] * Xm[pos<3,3>::n4] \
-        - Xm[pos<0,1>::n4] * Xm[pos<1,0>::n4] * Xm[pos<2,2>::n4] * Xm[pos<3,3>::n4] \
-        + Xm[pos<0,0>::n4] * Xm[pos<1,1>::n4] * Xm[pos<2,2>::n4] * Xm[pos<3,3>::n4] \
-        ;
-      
-      return val;
-      }
-      break;
-    
-    default:
-      return eT(0);
-      ;
+    arma_ignore(A);
+    arma_ignore(rcond_threshold);
+    return false;
     }
+  #elif defined(ARMA_USE_LAPACK)
+    {
+    arma_debug_assert_blas_size(A);
+    
+    char     norm_id  = '1';
+    char     uplo     = 'L';
+    blas_int n        = blas_int(A.n_rows);
+    blas_int info     = 0;
+    T        norm_val = T(0);
+    
+    podarray<T> work(A.n_rows);
+    
+    arma_extra_debug_print("lapack::lanhe()");
+    norm_val = lapack::lanhe(&norm_id, &uplo, &n, A.memptr(), &n, work.memptr());
+    
+    arma_extra_debug_print("lapack::potrf()");
+    lapack::potrf(&uplo, &n, A.memptr(), &n, &info);
+    
+    if(info != 0)  { return false; }
+    
+    const T rcond = auxlib::lu_rcond_sympd<T>(A, norm_val);
+    
+    if(rcond < rcond_threshold)  { return false; }
+    
+    arma_extra_debug_print("lapack::potri()");
+    lapack::potri(&uplo, &n, A.memptr(), &n, &info);
+    
+    if(info != 0)  { return false; }
+    
+    A = symmatl(A);
+    
+    return true;
+    }
+  #else
+    {
+    arma_ignore(A);
+    arma_ignore(rcond_threshold);
+    arma_stop_logic_error("inv_sympd_rcond(): use LAPACK must be enabled");
+    return false;
+    }
+  #endif
   }
 
 
@@ -495,78 +354,75 @@ auxlib::det_tinymat(const Mat<eT>& X, const uword N)
 //! determinant of a matrix
 template<typename eT>
 inline
-eT
-auxlib::det_lapack(const Mat<eT>& X)
+bool
+auxlib::det(eT& out_val, Mat<eT>& A)
   {
   arma_extra_debug_sigprint();
   
-  Mat<eT> tmp = X;
-  
-  if(tmp.is_empty())  { return eT(1); }
+  if(A.is_empty())  { out_val = eT(1); return true; }
   
   #if defined(ARMA_USE_ATLAS)
     {
-    arma_debug_assert_atlas_size(tmp);
+    arma_debug_assert_atlas_size(A);
     
-    podarray<int> ipiv(tmp.n_rows);
+    podarray<int> ipiv(A.n_rows);
     
     arma_extra_debug_print("atlas::clapack_getrf()");
-    //const int info =
-    atlas::clapack_getrf(atlas::CblasColMajor, tmp.n_rows, tmp.n_cols, tmp.memptr(), tmp.n_rows, ipiv.memptr());
+    const int info = atlas::clapack_getrf(atlas::CblasColMajor, A.n_rows, A.n_cols, A.memptr(), A.n_rows, ipiv.memptr());
     
-    // on output tmp appears to be L+U_alt, where U_alt is U with the main diagonal set to zero
-    eT val = tmp.at(0,0);
-    for(uword i=1; i < tmp.n_rows; ++i)
-      {
-      val *= tmp.at(i,i);
-      }
+    if(info < 0)  { return false; }
+    
+    // on output A appears to be L+U_alt, where U_alt is U with the main diagonal set to zero
+    eT val = A.at(0,0);
+    for(uword i=1; i < A.n_rows; ++i)  { val *= A.at(i,i); }
     
     int sign = +1;
-    for(uword i=0; i < tmp.n_rows; ++i)
+    for(uword i=0; i < A.n_rows; ++i)
       {
-      if( int(i) != ipiv.mem[i] )  // NOTE: no adjustment required, as the clapack version of getrf() assumes counting from 0
-        {
-        sign *= -1;
-        }
+      // NOTE: no adjustment required, as the clapack version of getrf() assumes counting from 0
+      if( int(i) != ipiv.mem[i] )  { sign *= -1; }
       }
     
-    return ( (sign < 0) ? -val : val );
+    out_val = (sign < 0) ? eT(-val) : eT(val);
+    
+    return true;
     }
   #elif defined(ARMA_USE_LAPACK)
     {
-    arma_debug_assert_blas_size(tmp);
+    arma_debug_assert_blas_size(A);
     
-    podarray<blas_int> ipiv(tmp.n_rows);
+    podarray<blas_int> ipiv(A.n_rows);
     
     blas_int info   = 0;
-    blas_int n_rows = blas_int(tmp.n_rows);
-    blas_int n_cols = blas_int(tmp.n_cols);
+    blas_int n_rows = blas_int(A.n_rows);
+    blas_int n_cols = blas_int(A.n_cols);
     
     arma_extra_debug_print("lapack::getrf()");
-    lapack::getrf(&n_rows, &n_cols, tmp.memptr(), &n_rows, ipiv.memptr(), &info);
+    lapack::getrf(&n_rows, &n_cols, A.memptr(), &n_rows, ipiv.memptr(), &info);
     
-    // on output tmp appears to be L+U_alt, where U_alt is U with the main diagonal set to zero
-    eT val = tmp.at(0,0);
-    for(uword i=1; i < tmp.n_rows; ++i)
-      {
-      val *= tmp.at(i,i);
-      }
+    if(info < 0)  { return false; }
+    
+    // on output A appears to be L+U_alt, where U_alt is U with the main diagonal set to zero
+    eT val = A.at(0,0);
+    for(uword i=1; i < A.n_rows; ++i)  { val *= A.at(i,i); }
     
     blas_int sign = +1;
-    for(uword i=0; i < tmp.n_rows; ++i)
+    for(uword i=0; i < A.n_rows; ++i)
       {
-      if( blas_int(i) != (ipiv.mem[i] - 1) )  // NOTE: adjustment of -1 is required as Fortran counts from 1
-        {
-        sign *= -1;
-        }
+      // NOTE: adjustment of -1 is required as Fortran counts from 1
+      if( blas_int(i) != (ipiv.mem[i] - 1) )  { sign *= -1; }
       }
     
-    return ( (sign < 0) ? -val : val );
+    out_val = (sign < 0) ? eT(-val) : eT(val);
+    
+    return true;
     }
   #else
     {
+    arma_ignore(out_val);
+    arma_ignore(A);
     arma_stop_logic_error("det(): use of ATLAS or LAPACK must be enabled");
-    return eT(0);
+    return false;
     }
   #endif
   }
@@ -574,50 +430,47 @@ auxlib::det_lapack(const Mat<eT>& X)
 
 
 //! log determinant of a matrix
-template<typename eT, typename T1>
+template<typename eT>
 inline
 bool
-auxlib::log_det(eT& out_val, typename get_pod_type<eT>::result& out_sign, const Base<eT,T1>& X)
+auxlib::log_det(eT& out_val, typename get_pod_type<eT>::result& out_sign, Mat<eT>& A)
   {
   arma_extra_debug_sigprint();
   
   typedef typename get_pod_type<eT>::result T;
   
+  if(A.is_empty())
+    {
+    out_val  = eT(0);
+    out_sign =  T(1);
+    return true;
+    }
+    
   #if defined(ARMA_USE_ATLAS)
     {
-    Mat<eT> tmp(X.get_ref());
-    arma_debug_check( (tmp.is_square() == false), "log_det(): given matrix must be square sized" );
+    arma_debug_assert_atlas_size(A);
     
-    if(tmp.is_empty())
-      {
-      out_val  = eT(0);
-      out_sign =  T(1);
-      return true;
-      }
-    
-    arma_debug_assert_atlas_size(tmp);
-    
-    podarray<int> ipiv(tmp.n_rows);
+    podarray<int> ipiv(A.n_rows);
     
     arma_extra_debug_print("atlas::clapack_getrf()");
-    const int info = atlas::clapack_getrf(atlas::CblasColMajor, tmp.n_rows, tmp.n_cols, tmp.memptr(), tmp.n_rows, ipiv.memptr());
+    const int info = atlas::clapack_getrf(atlas::CblasColMajor, A.n_rows, A.n_cols, A.memptr(), A.n_rows, ipiv.memptr());
     
     if(info < 0)  { return false; }
     
-    // on output tmp appears to be L+U_alt, where U_alt is U with the main diagonal set to zero
+    // on output A appears to be L+U_alt, where U_alt is U with the main diagonal set to zero
     
-    sword sign = (is_cx<eT>::no) ? ( (access::tmp_real( tmp.at(0,0) ) < T(0)) ? -1 : +1 ) : +1;
-    eT    val  = (is_cx<eT>::no) ? std::log( (access::tmp_real( tmp.at(0,0) ) < T(0)) ? tmp.at(0,0)*T(-1) : tmp.at(0,0) ) : std::log( tmp.at(0,0) );
+    sword sign = (is_cx<eT>::no) ? ( (access::tmp_real( A.at(0,0) ) < T(0)) ? -1 : +1 ) : +1;
+    eT    val  = (is_cx<eT>::no) ? std::log( (access::tmp_real( A.at(0,0) ) < T(0)) ? A.at(0,0)*T(-1) : A.at(0,0) ) : std::log( A.at(0,0) );
     
-    for(uword i=1; i < tmp.n_rows; ++i)
+    for(uword i=1; i < A.n_rows; ++i)
       {
-      const eT x = tmp.at(i,i);
+      const eT x = A.at(i,i);
       
       sign *= (is_cx<eT>::no) ? ( (access::tmp_real(x) < T(0)) ? -1 : +1 ) : +1;
       val  += (is_cx<eT>::no) ? std::log( (access::tmp_real(x) < T(0)) ? x*T(-1) : x ) : std::log(x);
       }
     
-    for(uword i=0; i < tmp.n_rows; ++i)
+    for(uword i=0; i < A.n_rows; ++i)
       {
       if( int(i) != ipiv.mem[i] )  // NOTE: no adjustment required, as the clapack version of getrf() assumes counting from 0
         {
@@ -632,43 +485,33 @@ auxlib::log_det(eT& out_val, typename get_pod_type<eT>::result& out_sign, const 
     }
   #elif defined(ARMA_USE_LAPACK)
     {
-    Mat<eT> tmp(X.get_ref());
-    arma_debug_check( (tmp.is_square() == false), "log_det(): given matrix must be square sized" );
+    arma_debug_assert_blas_size(A);
     
-    if(tmp.is_empty())
-      {
-      out_val  = eT(0);
-      out_sign =  T(1);
-      return true;
-      }
-    
-    arma_debug_assert_blas_size(tmp);
-    
-    podarray<blas_int> ipiv(tmp.n_rows);
+    podarray<blas_int> ipiv(A.n_rows);
     
     blas_int info   = 0;
-    blas_int n_rows = blas_int(tmp.n_rows);
-    blas_int n_cols = blas_int(tmp.n_cols);
+    blas_int n_rows = blas_int(A.n_rows);
+    blas_int n_cols = blas_int(A.n_cols);
     
     arma_extra_debug_print("lapack::getrf()");
-    lapack::getrf(&n_rows, &n_cols, tmp.memptr(), &n_rows, ipiv.memptr(), &info);
+    lapack::getrf(&n_rows, &n_cols, A.memptr(), &n_rows, ipiv.memptr(), &info);
     
     if(info < 0)  { return false; }
     
-    // on output tmp appears to be L+U_alt, where U_alt is U with the main diagonal set to zero
+    // on output A appears to be L+U_alt, where U_alt is U with the main diagonal set to zero
     
-    sword sign = (is_cx<eT>::no) ? ( (access::tmp_real( tmp.at(0,0) ) < T(0)) ? -1 : +1 ) : +1;
-    eT    val  = (is_cx<eT>::no) ? std::log( (access::tmp_real( tmp.at(0,0) ) < T(0)) ? tmp.at(0,0)*T(-1) : tmp.at(0,0) ) : std::log( tmp.at(0,0) );
+    sword sign = (is_cx<eT>::no) ? ( (access::tmp_real( A.at(0,0) ) < T(0)) ? -1 : +1 ) : +1;
+    eT    val  = (is_cx<eT>::no) ? std::log( (access::tmp_real( A.at(0,0) ) < T(0)) ? A.at(0,0)*T(-1) : A.at(0,0) ) : std::log( A.at(0,0) );
     
-    for(uword i=1; i < tmp.n_rows; ++i)
+    for(uword i=1; i < A.n_rows; ++i)
       {
-      const eT x = tmp.at(i,i);
+      const eT x = A.at(i,i);
       
       sign *= (is_cx<eT>::no) ? ( (access::tmp_real(x) < T(0)) ? -1 : +1 ) : +1;
       val  += (is_cx<eT>::no) ? std::log( (access::tmp_real(x) < T(0)) ? x*T(-1) : x ) : std::log(x);
       }
     
-    for(uword i=0; i < tmp.n_rows; ++i)
+    for(uword i=0; i < A.n_rows; ++i)
       {
       if( blas_int(i) != (ipiv.mem[i] - 1) )  // NOTE: adjustment of -1 is required as Fortran counts from 1
         {
@@ -683,13 +526,73 @@ auxlib::log_det(eT& out_val, typename get_pod_type<eT>::result& out_sign, const 
     }
   #else
     {
-    arma_ignore(X);
-    
-    out_val  = eT(0);
-    out_sign =  T(0);
-    
+    arma_ignore(A);
+    arma_ignore(out_val);
+    arma_ignore(out_sign);
     arma_stop_logic_error("log_det(): use of ATLAS or LAPACK must be enabled");
+    return false;
+    }
+  #endif
+  }
+
+
+
+template<typename eT>
+inline
+bool
+auxlib::log_det_sympd(typename get_pod_type<eT>::result& out_val, Mat<eT>& A)
+  {
+  arma_extra_debug_sigprint();
+  
+  typedef typename get_pod_type<eT>::result T;
+  
+  if(A.is_empty())  { out_val = T(0); return true; }
+  
+  #if defined(ARMA_USE_ATLAS)
+    {
+    arma_debug_assert_atlas_size(A);
     
+    int info = 0;
+    
+    arma_extra_debug_print("atlas::clapack_potrf()");
+    info = atlas::clapack_potrf(atlas::CblasColMajor, atlas::CblasLower, A.n_rows, A.memptr(), A.n_rows);
+    
+    if(info != 0)  { return false; }
+    
+    T val = std::log( access::tmp_real(A.at(0,0)) );
+    
+    for(uword i=1; i < A.n_rows; ++i)  { val += std::log( access::tmp_real(A.at(i,i)) ); }
+    
+    out_val = T(2) * val;
+    
+    return true;
+    }
+  #elif defined(ARMA_USE_LAPACK)
+    {
+    arma_debug_assert_blas_size(A);
+    
+    char     uplo = 'L';
+    blas_int n    = blas_int(A.n_rows);
+    blas_int info = 0;
+    
+    arma_extra_debug_print("lapack::potrf()");
+    lapack::potrf(&uplo, &n, A.memptr(), &n, &info);
+    
+    if(info != 0)  { return false; }
+    
+    T val = std::log( access::tmp_real(A.at(0,0)) );
+    
+    for(uword i=1; i < A.n_rows; ++i)  { val += std::log( access::tmp_real(A.at(i,i)) ); }
+    
+    out_val = T(2) * val;
+    
+    return true;
+    }
+  #else
+    {
+    arma_ignore(out_val);
+    arma_ignore(A);
+    arma_stop_logic_error("det(): use of ATLAS or LAPACK must be enabled");
     return false;
     }
   #endif
@@ -761,7 +664,7 @@ auxlib::lu(Mat<eT>& L, Mat<eT>& U, podarray<blas_int>& ipiv, const Base<eT,T1>& 
         L.at(row,col) = eT(0);
         }
       
-      if( L.in_range(col,col) == true )
+      if( L.in_range(col,col) )
         {
         L.at(col,col) = eT(1);
         }
@@ -941,7 +844,7 @@ auxlib::eig_gen
     
     vals.set_size(X.n_rows, 1);
     
-    Mat<T> tmp(1,1);
+    Mat<T> tmp(1, 1, arma_nozeros_indicator());
     
     if(vecs_on)
       {
@@ -1126,7 +1029,7 @@ auxlib::eig_gen_balance
     
     vals.set_size(X.n_rows, 1);
     
-    Mat<T> tmp(1,1);
+    Mat<T> tmp(1, 1, arma_nozeros_indicator());
     
     if(vecs_on)
       {
@@ -1340,8 +1243,8 @@ auxlib::eig_gen_twosided
     lvecs.set_size(X.n_rows, X.n_rows);
     rvecs.set_size(X.n_rows, X.n_rows);
     
-    Mat<T> ltmp(X.n_rows, X.n_rows);
-    Mat<T> rtmp(X.n_rows, X.n_rows);
+    Mat<T> ltmp(X.n_rows, X.n_rows, arma_nozeros_indicator());
+    Mat<T> rtmp(X.n_rows, X.n_rows, arma_nozeros_indicator());
     
     char     jobvl = 'V';
     char     jobvr = 'V';
@@ -1517,8 +1420,8 @@ auxlib::eig_gen_twosided_balance
     lvecs.set_size(X.n_rows, X.n_rows);
     rvecs.set_size(X.n_rows, X.n_rows);
     
-    Mat<T> ltmp(X.n_rows, X.n_rows);
-    Mat<T> rtmp(X.n_rows, X.n_rows);
+    Mat<T> ltmp(X.n_rows, X.n_rows, arma_nozeros_indicator());
+    Mat<T> rtmp(X.n_rows, X.n_rows, arma_nozeros_indicator());
     
     char     bal   = 'B';
     char     jobvl = 'V';
@@ -1721,7 +1624,7 @@ auxlib::eig_pair
     
     vals.set_size(A.n_rows, 1);
     
-    Mat<T> tmp(1,1);
+    Mat<T> tmp(1, 1, arma_nozeros_indicator());
     
     if(vecs_on)
       {
@@ -1780,7 +1683,7 @@ auxlib::eig_pair
         }
       }
     
-    if(beta_has_zero)  { arma_debug_warn("eig_pair(): given matrices appear ill-conditioned"); }
+    if(beta_has_zero)  { arma_debug_warn_level(1, "eig_pair(): given matrices appear ill-conditioned"); }
     
     if(vecs_on)
       {
@@ -1906,7 +1809,7 @@ auxlib::eig_pair
       beta_has_zero = (beta_has_zero || (beta_val == zero));
       }
     
-    if(beta_has_zero)  { arma_debug_warn("eig_pair(): given matrices appear ill-conditioned"); }
+    if(beta_has_zero)  { arma_debug_warn_level(1, "eig_pair(): given matrices appear ill-conditioned"); }
     
     return true;
     }
@@ -1970,8 +1873,8 @@ auxlib::eig_pair_twosided
     lvecs.set_size(A.n_rows, A.n_rows);
     rvecs.set_size(A.n_rows, A.n_rows);
     
-    Mat<T> ltmp(A.n_rows, A.n_rows);
-    Mat<T> rtmp(A.n_rows, A.n_rows);
+    Mat<T> ltmp(A.n_rows, A.n_rows, arma_nozeros_indicator());
+    Mat<T> rtmp(A.n_rows, A.n_rows, arma_nozeros_indicator());
     
     char     jobvl = 'V';
     char     jobvr = 'V';
@@ -2020,7 +1923,7 @@ auxlib::eig_pair_twosided
         }
       }
     
-    if(beta_has_zero)  { arma_debug_warn("eig_pair(): given matrices appear ill-conditioned"); }
+    if(beta_has_zero)  { arma_debug_warn_level(1, "eig_pair(): given matrices appear ill-conditioned"); }
     
     for(uword j=0; j < A.n_rows; ++j)
       {
@@ -2143,7 +2046,7 @@ auxlib::eig_pair_twosided
       beta_has_zero = (beta_has_zero || (beta_val == zero));
       }
     
-    if(beta_has_zero)  { arma_debug_warn("eig_pair(): given matrices appear ill-conditioned"); }
+    if(beta_has_zero)  { arma_debug_warn_level(1, "eig_pair(): given matrices appear ill-conditioned"); }
     
     return true;
     }
@@ -2163,34 +2066,28 @@ auxlib::eig_pair_twosided
 
 
 //! eigenvalues of a symmetric real matrix
-template<typename eT, typename T1>
+template<typename eT>
 inline
 bool
-auxlib::eig_sym(Col<eT>& eigval, const Base<eT,T1>& X)
+auxlib::eig_sym(Col<eT>& eigval, Mat<eT>& A)
   {
   arma_extra_debug_sigprint();
   
   #if defined(ARMA_USE_LAPACK)
     {
-    Mat<eT> A(X.get_ref());
-    
     arma_debug_check( (A.is_square() == false), "eig_sym(): given matrix must be square sized" );
     
-    if(A.is_empty())
-      {
-      eigval.reset();
-      return true;
-      }
+    if(A.is_empty())  { eigval.reset(); return true; }
     
     // if(auxlib::rudimentary_sym_check(A) == false)
     //   {
-    //   arma_debug_warn("eig_sym(): given matrix is not symmetric");
+    //   arma_debug_warn_level(1, "eig_sym(): given matrix is not symmetric");
     //   return false;
     //   }
     
     if((arma_config::debug) && (auxlib::rudimentary_sym_check(A) == false))
       {
-      arma_debug_warn("eig_sym(): given matrix is not symmetric");
+      arma_debug_warn_level(1, "eig_sym(): given matrix is not symmetric");
       }
     
     arma_debug_assert_blas_size(A);
@@ -2214,7 +2111,7 @@ auxlib::eig_sym(Col<eT>& eigval, const Base<eT,T1>& X)
   #else
     {
     arma_ignore(eigval);
-    arma_ignore(X);
+    arma_ignore(A);
     arma_stop_logic_error("eig_sym(): use of LAPACK must be enabled");
     return false;
     }
@@ -2224,10 +2121,10 @@ auxlib::eig_sym(Col<eT>& eigval, const Base<eT,T1>& X)
 
 
 //! eigenvalues of a hermitian complex matrix
-template<typename T, typename T1>
+template<typename T>
 inline
 bool
-auxlib::eig_sym(Col<T>& eigval, const Base<std::complex<T>,T1>& X)
+auxlib::eig_sym(Col<T>& eigval, Mat< std::complex<T> >& A)
   {
   arma_extra_debug_sigprint();
   
@@ -2235,25 +2132,19 @@ auxlib::eig_sym(Col<T>& eigval, const Base<std::complex<T>,T1>& X)
     {
     typedef typename std::complex<T> eT;
     
-    Mat<eT> A(X.get_ref());
-    
     arma_debug_check( (A.is_square() == false), "eig_sym(): given matrix must be square sized" );
     
-    if(A.is_empty())
-      {
-      eigval.reset();
-      return true;
-      }
+    if(A.is_empty())  { eigval.reset(); return true; }
     
     // if(auxlib::rudimentary_sym_check(A) == false)
     //   {
-    //   arma_debug_warn("eig_sym(): given matrix is not hermitian");
+    //   arma_debug_warn_level(1, "eig_sym(): given matrix is not hermitian");
     //   return false;
     //   }
     
     if((arma_config::debug) && (auxlib::rudimentary_sym_check(A) == false))
       {
-      arma_debug_warn("eig_sym(): given matrix is not hermitian");
+      arma_debug_warn_level(1, "eig_sym(): given matrix is not hermitian");
       }
     
     arma_debug_assert_blas_size(A);
@@ -2278,7 +2169,7 @@ auxlib::eig_sym(Col<T>& eigval, const Base<std::complex<T>,T1>& X)
   #else
     {
     arma_ignore(eigval);
-    arma_ignore(X);
+    arma_ignore(A);
     arma_stop_logic_error("eig_sym(): use of LAPACK must be enabled");
     return false;
     }
@@ -2297,9 +2188,9 @@ auxlib::eig_sym(Col<eT>& eigval, Mat<eT>& eigvec, const Mat<eT>& X)
   
   #if defined(ARMA_USE_LAPACK)
     {
-    eigvec = X;
+    arma_debug_check( (X.is_square() == false), "eig_sym(): given matrix must be square sized" );
     
-    arma_debug_check( (eigvec.is_square() == false), "eig_sym(): given matrix must be square sized" );
+    eigvec = X;
     
     if(eigvec.is_empty())
       {
@@ -2351,9 +2242,9 @@ auxlib::eig_sym(Col<T>& eigval, Mat< std::complex<T> >& eigvec, const Mat< std::
     {
     typedef typename std::complex<T> eT;
     
-    eigvec = X;
+    arma_debug_check( (X.is_square() == false), "eig_sym(): given matrix must be square sized" );
     
-    arma_debug_check( (eigvec.is_square() == false), "eig_sym(): given matrix must be square sized" );
+    eigvec = X;
     
     if(eigvec.is_empty())
       {
@@ -2404,9 +2295,9 @@ auxlib::eig_sym_dc(Col<eT>& eigval, Mat<eT>& eigvec, const Mat<eT>& X)
   
   #if defined(ARMA_USE_LAPACK)
     {
-    eigvec = X;
+    arma_debug_check( (X.is_square() == false), "eig_sym(): given matrix must be square sized" );
     
-    arma_debug_check( (eigvec.is_square() == false), "eig_sym(): given matrix must be square sized" );
+    eigvec = X;
     
     if(eigvec.is_empty())
       {
@@ -2483,9 +2374,9 @@ auxlib::eig_sym_dc(Col<T>& eigval, Mat< std::complex<T> >& eigvec, const Mat< st
     {
     typedef typename std::complex<T> eT;
     
-    eigvec = X;
+    arma_debug_check( (X.is_square() == false), "eig_sym(): given matrix must be square sized" );
     
-    arma_debug_check( (eigvec.is_square() == false), "eig_sym(): given matrix must be square sized" );
+    eigvec = X;
     
     if(eigvec.is_empty())
       {
@@ -2733,6 +2624,61 @@ auxlib::chol_band_common(Mat<eT>& X, const uword KD, const uword layout)
     }
   #endif
   }
+
+
+
+template<typename eT>
+inline
+bool
+auxlib::chol_pivot(Mat<eT>& X, Mat<uword>& P, const uword layout)
+  {
+  arma_extra_debug_sigprint();
+  
+  #if defined(ARMA_USE_LAPACK)
+    {
+    typedef typename get_pod_type<eT>::result T;
+    
+    arma_debug_assert_blas_size(X);
+    
+    char     uplo = (layout == 0) ? 'U' : 'L';
+    blas_int n    = blas_int(X.n_rows);
+    blas_int rank = 0;
+    T        tol  = T(-1);
+    blas_int info = 0;
+    
+    podarray<blas_int> ipiv(  X.n_rows);
+    podarray<T>        work(2*X.n_rows);
+    
+    ipiv.zeros();
+    
+    arma_extra_debug_print("lapack::pstrf()");
+    lapack::pstrf(&uplo, &n, X.memptr(), &n, ipiv.memptr(), &rank, &tol, work.memptr(), &info);
+    
+    if(info != 0)  { return false; }
+    
+    X = (layout == 0) ? trimatu(X) : trimatl(X);  // trimatu() and trimatl() return the same type
+    
+    P.set_size(X.n_rows, 1);
+    
+    for(uword i=0; i < X.n_rows; ++i)
+      {
+      P[i] = uword(ipiv[i] - 1);  // take into account that Fortran counts from 1
+      }
+    
+    return true;
+    }
+  #else
+    {
+    arma_ignore(X);
+    arma_ignore(P);
+    arma_ignore(layout);
+    
+    arma_stop_logic_error("chol(): use of LAPACK must be enabled");
+    return false;
+    }
+  #endif
+  }
+
 
 
 //
@@ -3172,42 +3118,33 @@ auxlib::qr_pivot(Mat< std::complex<T> >& Q, Mat< std::complex<T> >& R, Mat<uword
 
 
 
-template<typename eT, typename T1>
+template<typename eT>
 inline
 bool
-auxlib::svd(Col<eT>& S, const Base<eT,T1>& X, uword& X_n_rows, uword& X_n_cols)
+auxlib::svd(Col<eT>& S, Mat<eT>& A)
   {
   arma_extra_debug_sigprint();
   
   #if defined(ARMA_USE_LAPACK)
     {
-    Mat<eT> A(X.get_ref());
-    
-    X_n_rows = A.n_rows;
-    X_n_cols = A.n_cols;
-    
-    if(A.is_empty())
-      {
-      S.reset();
-      return true;
-      }
+    if(A.is_empty())  { S.reset(); return true; }
     
     arma_debug_assert_blas_size(A);
     
-    Mat<eT> U(1, 1);
-    Mat<eT> V(1, A.n_cols);
+    Mat<eT> U(1, 1,        arma_nozeros_indicator());
+    Mat<eT> V(1, A.n_cols, arma_nozeros_indicator());
     
     char jobu  = 'N';
     char jobvt = 'N';
     
-    blas_int m          = A.n_rows;
-    blas_int n          = A.n_cols;
-    blas_int min_mn     = (std::min)(m,n);
-    blas_int lda        = A.n_rows;
-    blas_int ldu        = U.n_rows;
-    blas_int ldvt       = V.n_rows;
-    blas_int lwork_min  = (std::max)( blas_int(1), (std::max)( (3*min_mn + (std::max)(m,n)), 5*min_mn ) );
-    blas_int info   = 0;
+    blas_int m         = blas_int(A.n_rows);
+    blas_int n         = blas_int(A.n_cols);
+    blas_int min_mn    = (std::min)(m,n);
+    blas_int lda       = blas_int(A.n_rows);
+    blas_int ldu       = blas_int(U.n_rows);
+    blas_int ldvt      = blas_int(V.n_rows);
+    blas_int lwork_min = (std::max)( blas_int(1), (std::max)( (3*min_mn + (std::max)(m,n)), 5*min_mn ) );
+    blas_int info      = 0;
     
     S.set_size( static_cast<uword>(min_mn) );
     
@@ -3238,9 +3175,7 @@ auxlib::svd(Col<eT>& S, const Base<eT,T1>& X, uword& X_n_rows, uword& X_n_cols)
   #else
     {
     arma_ignore(S);
-    arma_ignore(X);
-    arma_ignore(X_n_rows);
-    arma_ignore(X_n_cols);
+    arma_ignore(A);
     arma_stop_logic_error("svd(): use of LAPACK must be enabled");
     return false;
     }
@@ -3249,10 +3184,10 @@ auxlib::svd(Col<eT>& S, const Base<eT,T1>& X, uword& X_n_rows, uword& X_n_cols)
 
 
 
-template<typename T, typename T1>
+template<typename T>
 inline
 bool
-auxlib::svd(Col<T>& S, const Base<std::complex<T>, T1>& X, uword& X_n_rows, uword& X_n_cols)
+auxlib::svd(Col<T>& S, Mat< std::complex<T> >& A)
   {
   arma_extra_debug_sigprint();
   
@@ -3260,31 +3195,22 @@ auxlib::svd(Col<T>& S, const Base<std::complex<T>, T1>& X, uword& X_n_rows, uwor
     {
     typedef std::complex<T> eT;
     
-    Mat<eT> A(X.get_ref());
-    
-    X_n_rows = A.n_rows;
-    X_n_cols = A.n_cols;
-    
-    if(A.is_empty())
-      {
-      S.reset();
-      return true;
-      }
+    if(A.is_empty())  { S.reset(); return true; }
     
     arma_debug_assert_blas_size(A);
     
-    Mat<eT> U(1, 1);
-    Mat<eT> V(1, A.n_cols);
+    Mat<eT> U(1, 1,        arma_nozeros_indicator());
+    Mat<eT> V(1, A.n_cols, arma_nozeros_indicator());
     
     char jobu  = 'N';
     char jobvt = 'N';
     
-    blas_int  m         = A.n_rows;
-    blas_int  n         = A.n_cols;
+    blas_int  m         = blas_int(A.n_rows);
+    blas_int  n         = blas_int(A.n_cols);
     blas_int  min_mn    = (std::min)(m,n);
-    blas_int  lda       = A.n_rows;
-    blas_int  ldu       = U.n_rows;
-    blas_int  ldvt      = V.n_rows;
+    blas_int  lda       = blas_int(A.n_rows);
+    blas_int  ldu       = blas_int(U.n_rows);
+    blas_int  ldvt      = blas_int(V.n_rows);
     blas_int  lwork_min = (std::max)( blas_int(1), 2*min_mn+(std::max)(m,n) );
     blas_int  info      = 0;
     
@@ -3319,10 +3245,7 @@ auxlib::svd(Col<T>& S, const Base<std::complex<T>, T1>& X, uword& X_n_rows, uwor
   #else
     {
     arma_ignore(S);
-    arma_ignore(X);
-    arma_ignore(X_n_rows);
-    arma_ignore(X_n_cols);
-
+    arma_ignore(A);
     arma_stop_logic_error("svd(): use of LAPACK must be enabled");
     return false;
     }
@@ -3331,43 +3254,15 @@ auxlib::svd(Col<T>& S, const Base<std::complex<T>, T1>& X, uword& X_n_rows, uwor
 
 
 
-template<typename eT, typename T1>
+template<typename eT>
 inline
 bool
-auxlib::svd(Col<eT>& S, const Base<eT,T1>& X)
-  {
-  arma_extra_debug_sigprint();
-  
-  uword junk;
-  return auxlib::svd(S, X, junk, junk);
-  }
-
-
-
-template<typename T, typename T1>
-inline
-bool
-auxlib::svd(Col<T>& S, const Base<std::complex<T>, T1>& X)
-  {
-  arma_extra_debug_sigprint();
-  
-  uword junk;
-  return auxlib::svd(S, X, junk, junk);
-  }
-
-
-
-template<typename eT, typename T1>
-inline
-bool
-auxlib::svd(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, const Base<eT,T1>& X)
+auxlib::svd(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, Mat<eT>& A)
   {
   arma_extra_debug_sigprint();
   
   #if defined(ARMA_USE_LAPACK)
     {
-    Mat<eT> A(X.get_ref());
-    
     if(A.is_empty())
       {
       U.eye(A.n_rows, A.n_rows);
@@ -3384,14 +3279,14 @@ auxlib::svd(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, const Base<eT,T1>& X)
     char jobu  = 'A';
     char jobvt = 'A';
     
-    blas_int  m          = blas_int(A.n_rows);
-    blas_int  n          = blas_int(A.n_cols);
-    blas_int  min_mn     = (std::min)(m,n);
-    blas_int  lda        = blas_int(A.n_rows);
-    blas_int  ldu        = blas_int(U.n_rows);
-    blas_int  ldvt       = blas_int(V.n_rows);
-    blas_int  lwork_min  = (std::max)( blas_int(1), (std::max)( (3*min_mn + (std::max)(m,n)), 5*min_mn ) );
-    blas_int  info       = 0;
+    blas_int  m         = blas_int(A.n_rows);
+    blas_int  n         = blas_int(A.n_cols);
+    blas_int  min_mn    = (std::min)(m,n);
+    blas_int  lda       = blas_int(A.n_rows);
+    blas_int  ldu       = blas_int(U.n_rows);
+    blas_int  ldvt      = blas_int(V.n_rows);
+    blas_int  lwork_min = (std::max)( blas_int(1), (std::max)( (3*min_mn + (std::max)(m,n)), 5*min_mn ) );
+    blas_int  info      = 0;
     
     S.set_size( static_cast<uword>(min_mn) );
     
@@ -3429,7 +3324,7 @@ auxlib::svd(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, const Base<eT,T1>& X)
     arma_ignore(U);
     arma_ignore(S);
     arma_ignore(V);
-    arma_ignore(X);
+    arma_ignore(A);
     arma_stop_logic_error("svd(): use of LAPACK must be enabled");
     return false;
     }
@@ -3438,18 +3333,16 @@ auxlib::svd(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, const Base<eT,T1>& X)
 
 
 
-template<typename T, typename T1>
+template<typename T>
 inline
 bool
-auxlib::svd(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >& V, const Base< std::complex<T>, T1>& X)
+auxlib::svd(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >& V, Mat< std::complex<T> >& A)
   {
   arma_extra_debug_sigprint();
   
   #if defined(ARMA_USE_LAPACK)
     {
     typedef std::complex<T> eT;
-    
-    Mat<eT> A(X.get_ref());
     
     if(A.is_empty())
       {
@@ -3513,7 +3406,7 @@ auxlib::svd(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >& V, con
     arma_ignore(U);
     arma_ignore(S);
     arma_ignore(V);
-    arma_ignore(X);
+    arma_ignore(A);
     arma_stop_logic_error("svd(): use of LAPACK must be enabled");
     return false;
     }
@@ -3522,17 +3415,15 @@ auxlib::svd(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >& V, con
 
 
 
-template<typename eT, typename T1>
+template<typename eT>
 inline
 bool
-auxlib::svd_econ(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, const Base<eT,T1>& X, const char mode)
+auxlib::svd_econ(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, Mat<eT>& A, const char mode)
   {
   arma_extra_debug_sigprint();
   
   #if defined(ARMA_USE_LAPACK)
     {
-    Mat<eT> A(X.get_ref());
-    
     if(A.is_empty())
       {
       U.eye();
@@ -3629,7 +3520,7 @@ auxlib::svd_econ(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, const Base<eT,T1>& X, const
     arma_ignore(U);
     arma_ignore(S);
     arma_ignore(V);
-    arma_ignore(X);
+    arma_ignore(A);
     arma_ignore(mode);
     arma_stop_logic_error("svd(): use of LAPACK must be enabled");
     return false;
@@ -3639,18 +3530,16 @@ auxlib::svd_econ(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, const Base<eT,T1>& X, const
 
 
 
-template<typename T, typename T1>
+template<typename T>
 inline
 bool
-auxlib::svd_econ(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >& V, const Base< std::complex<T>, T1>& X, const char mode)
+auxlib::svd_econ(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >& V, Mat< std::complex<T> >& A, const char mode)
   {
   arma_extra_debug_sigprint();
   
   #if defined(ARMA_USE_LAPACK)
     {
     typedef std::complex<T> eT;
-    
-    Mat<eT> A(X.get_ref());
     
     if(A.is_empty())
       {
@@ -3749,7 +3638,7 @@ auxlib::svd_econ(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >& V
     arma_ignore(U);
     arma_ignore(S);
     arma_ignore(V);
-    arma_ignore(X);
+    arma_ignore(A);
     arma_ignore(mode);
     arma_stop_logic_error("svd(): use of LAPACK must be enabled");
     return false;
@@ -3759,30 +3648,21 @@ auxlib::svd_econ(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >& V
 
 
 
-template<typename eT, typename T1>
+template<typename eT>
 inline
 bool
-auxlib::svd_dc(Col<eT>& S, const Base<eT,T1>& X, uword& X_n_rows, uword& X_n_cols)
+auxlib::svd_dc(Col<eT>& S, Mat<eT>& A)
   {
   arma_extra_debug_sigprint();
   
   #if defined(ARMA_USE_LAPACK)
     {
-    Mat<eT> A(X.get_ref());
-    
-    X_n_rows = A.n_rows;
-    X_n_cols = A.n_cols;
-    
-    if(A.is_empty())
-      {
-      S.reset();
-      return true;
-      }
+    if(A.is_empty())  { S.reset(); return true; }
     
     arma_debug_assert_blas_size(A);
     
-    Mat<eT> U(1, 1);
-    Mat<eT> V(1, 1);
+    Mat<eT> U(1, 1, arma_nozeros_indicator());
+    Mat<eT> V(1, 1, arma_nozeros_indicator());
     
     char jobz = 'N';
     
@@ -3827,9 +3707,7 @@ auxlib::svd_dc(Col<eT>& S, const Base<eT,T1>& X, uword& X_n_rows, uword& X_n_col
   #else
     {
     arma_ignore(S);
-    arma_ignore(X);
-    arma_ignore(X_n_rows);
-    arma_ignore(X_n_cols);
+    arma_ignore(A);
     arma_stop_logic_error("svd(): use of LAPACK must be enabled");
     return false;
     }
@@ -3838,10 +3716,10 @@ auxlib::svd_dc(Col<eT>& S, const Base<eT,T1>& X, uword& X_n_rows, uword& X_n_col
 
 
 
-template<typename T, typename T1>
+template<typename T>
 inline
 bool
-auxlib::svd_dc(Col<T>& S, const Base<std::complex<T>, T1>& X, uword& X_n_rows, uword& X_n_cols)
+auxlib::svd_dc(Col<T>& S, Mat< std::complex<T> >& A)
   {
   arma_extra_debug_sigprint();
   
@@ -3849,21 +3727,12 @@ auxlib::svd_dc(Col<T>& S, const Base<std::complex<T>, T1>& X, uword& X_n_rows, u
     {
     typedef std::complex<T> eT;
     
-    Mat<eT> A(X.get_ref());
-    
-    X_n_rows = A.n_rows;
-    X_n_cols = A.n_cols;
-    
-    if(A.is_empty())
-      {
-      S.reset();
-      return true;
-      }
+    if(A.is_empty())  { S.reset(); return true; }
     
     arma_debug_assert_blas_size(A);
     
-    Mat<eT> U(1, 1);
-    Mat<eT> V(1, 1);
+    Mat<eT> U(1, 1, arma_nozeros_indicator());
+    Mat<eT> V(1, 1, arma_nozeros_indicator());
     
     char jobz = 'N';
     
@@ -3909,9 +3778,7 @@ auxlib::svd_dc(Col<T>& S, const Base<std::complex<T>, T1>& X, uword& X_n_rows, u
   #else
     {
     arma_ignore(S);
-    arma_ignore(X);
-    arma_ignore(X_n_rows);
-    arma_ignore(X_n_cols);
+    arma_ignore(A);
     arma_stop_logic_error("svd(): use of LAPACK must be enabled");
     return false;
     }
@@ -3920,43 +3787,15 @@ auxlib::svd_dc(Col<T>& S, const Base<std::complex<T>, T1>& X, uword& X_n_rows, u
 
 
 
-template<typename eT, typename T1>
+template<typename eT>
 inline
 bool
-auxlib::svd_dc(Col<eT>& S, const Base<eT,T1>& X)
-  {
-  arma_extra_debug_sigprint();
-  
-  uword junk;
-  return auxlib::svd_dc(S, X, junk, junk);
-  }
-
-
-
-template<typename T, typename T1>
-inline
-bool
-auxlib::svd_dc(Col<T>& S, const Base<std::complex<T>, T1>& X)
-  {
-  arma_extra_debug_sigprint();
-  
-  uword junk;
-  return auxlib::svd_dc(S, X, junk, junk);
-  }
-
-
-
-template<typename eT, typename T1>
-inline
-bool
-auxlib::svd_dc(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, const Base<eT,T1>& X)
+auxlib::svd_dc(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, Mat<eT>& A)
   {
   arma_extra_debug_sigprint();
   
   #if defined(ARMA_USE_LAPACK)
     {
-    Mat<eT> A(X.get_ref());
-    
     if(A.is_empty())
       {
       U.eye(A.n_rows, A.n_rows);
@@ -4021,7 +3860,7 @@ auxlib::svd_dc(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, const Base<eT,T1>& X)
     arma_ignore(U);
     arma_ignore(S);
     arma_ignore(V);
-    arma_ignore(X);
+    arma_ignore(A);
     arma_stop_logic_error("svd(): use of LAPACK must be enabled");
     return false;
     }
@@ -4030,18 +3869,16 @@ auxlib::svd_dc(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, const Base<eT,T1>& X)
 
 
 
-template<typename T, typename T1>
+template<typename T>
 inline
 bool
-auxlib::svd_dc(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >& V, const Base< std::complex<T>, T1>& X)
+auxlib::svd_dc(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >& V, Mat< std::complex<T> >& A)
   {
   arma_extra_debug_sigprint();
   
   #if defined(ARMA_USE_LAPACK)
     {
     typedef std::complex<T> eT;
-    
-    Mat<eT> A(X.get_ref());
     
     if(A.is_empty())
       {
@@ -4107,7 +3944,7 @@ auxlib::svd_dc(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >& V, 
     arma_ignore(U);
     arma_ignore(S);
     arma_ignore(V);
-    arma_ignore(X);
+    arma_ignore(A);
     arma_stop_logic_error("svd(): use of LAPACK must be enabled");
     return false;
     }
@@ -4116,17 +3953,15 @@ auxlib::svd_dc(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >& V, 
 
 
 
-template<typename eT, typename T1>
+template<typename eT>
 inline
 bool
-auxlib::svd_dc_econ(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, const Base<eT,T1>& X)
+auxlib::svd_dc_econ(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, Mat<eT>& A)
   {
   arma_extra_debug_sigprint();
   
   #if defined(ARMA_USE_LAPACK)
     {
-    Mat<eT> A(X.get_ref());
-    
     arma_debug_assert_blas_size(A);
     
     char jobz = 'S';
@@ -4192,7 +4027,7 @@ auxlib::svd_dc_econ(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, const Base<eT,T1>& X)
     arma_ignore(U);
     arma_ignore(S);
     arma_ignore(V);
-    arma_ignore(X);
+    arma_ignore(A);
     arma_stop_logic_error("svd(): use of LAPACK must be enabled");
     return false;
     }
@@ -4201,18 +4036,16 @@ auxlib::svd_dc_econ(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, const Base<eT,T1>& X)
 
 
 
-template<typename T, typename T1>
+template<typename T>
 inline
 bool
-auxlib::svd_dc_econ(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >& V, const Base< std::complex<T>, T1>& X)
+auxlib::svd_dc_econ(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >& V, Mat< std::complex<T> >& A)
   {
   arma_extra_debug_sigprint();
   
   #if defined(ARMA_USE_LAPACK)
     {
     typedef std::complex<T> eT;
-    
-    Mat<eT> A(X.get_ref());
     
     arma_debug_assert_blas_size(A);
     
@@ -4279,7 +4112,7 @@ auxlib::svd_dc_econ(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >
     arma_ignore(U);
     arma_ignore(S);
     arma_ignore(V);
-    arma_ignore(X);
+    arma_ignore(A);
     arma_stop_logic_error("svd(): use of LAPACK must be enabled");
     return false;
     }
@@ -4297,15 +4130,15 @@ auxlib::solve_square_tiny(Mat<typename T1::elem_type>& out, const Mat<typename T
   {
   arma_extra_debug_sigprint();
   
-  // NOTE: assuming A has a size <= 4x4
+  // NOTE: assuming A has size <= 4x4
   
   typedef typename T1::elem_type eT;
   
   const uword A_n_rows = A.n_rows;
   
-  Mat<eT> A_inv(A_n_rows, A_n_rows);
+  Mat<eT> A_inv(A_n_rows, A_n_rows, arma_nozeros_indicator());
   
-  const bool status = auxlib::inv_tiny(A_inv, A);
+  const bool status = op_inv::apply_tiny_noalias(A_inv, A);
   
   if(status == false)  { return false; }
   
@@ -4325,7 +4158,7 @@ auxlib::solve_square_tiny(Mat<typename T1::elem_type>& out, const Mat<typename T
   
   if(UB.is_alias(out))
     {
-    Mat<eT> tmp(A_n_rows, B_n_cols);
+    Mat<eT> tmp(A_n_rows, B_n_cols, arma_nozeros_indicator());
     
     gemm_emul<false,false,false,false>::apply(tmp, A_inv, B);
     
@@ -4355,11 +4188,11 @@ auxlib::solve_square_fast(Mat<typename T1::elem_type>& out, Mat<typename T1::ele
   
   const uword A_n_rows = A.n_rows;
   
-  if(A_n_rows <= 4)
+  if((A_n_rows <= 4) && is_cx<eT>::no)
     {
     const bool status = auxlib::solve_square_tiny(out, A, B_expr.get_ref());
     
-    if(status == true)  { return true; }
+    if(status)  { return true; }
     }
   
   out = B_expr.get_ref();
@@ -4537,7 +4370,7 @@ auxlib::solve_square_refine(Mat<typename T1::pod_type>& out, typename T1::pod_ty
     blas_int info  = blas_int(0);
     eT       rcond = eT(0);
     
-    Mat<eT> AF(A.n_rows, A.n_rows);
+    Mat<eT> AF(A.n_rows, A.n_rows, arma_nozeros_indicator());
     
     podarray<blas_int>  IPIV(  A.n_rows);
     podarray<eT>           R(  A.n_rows);
@@ -4639,7 +4472,7 @@ auxlib::solve_square_refine(Mat< std::complex<typename T1::pod_type> >& out, typ
     blas_int info  = blas_int(0);
     T        rcond = T(0);
     
-    Mat<eT> AF(A.n_rows, A.n_rows);
+    Mat<eT> AF(A.n_rows, A.n_rows, arma_nozeros_indicator());
     
     podarray<blas_int>  IPIV(  A.n_rows);
     podarray< T>           R(  A.n_rows);
@@ -4721,13 +4554,15 @@ auxlib::solve_sympd_fast_common(Mat<typename T1::elem_type>& out, Mat<typename T
   {
   arma_extra_debug_sigprint();
   
+  typedef typename T1::elem_type eT;
+  
   const uword A_n_rows = A.n_rows;
   
-  if(A_n_rows <= 4)
+  if((A_n_rows <= 4) && is_cx<eT>::no)
     {
     const bool status = auxlib::solve_square_tiny(out, A, B_expr.get_ref());
     
-    if(status == true)  { return true; }
+    if(status)  { return true; }
     }
   
   out = B_expr.get_ref();
@@ -4745,8 +4580,6 @@ auxlib::solve_sympd_fast_common(Mat<typename T1::elem_type>& out, Mat<typename T
   
   #if defined(ARMA_USE_ATLAS)
     {
-    typedef typename T1::elem_type eT;
-    
     arma_debug_assert_atlas_size(A, out);
     
     int info = 0;
@@ -4758,8 +4591,6 @@ auxlib::solve_sympd_fast_common(Mat<typename T1::elem_type>& out, Mat<typename T
     }
   #elif defined(ARMA_USE_LAPACK)
     {
-    typedef typename T1::elem_type eT;
-    
     arma_debug_assert_blas_size(A, out);
     
     char     uplo = 'L';
@@ -4987,7 +4818,7 @@ auxlib::solve_sympd_refine(Mat<typename T1::pod_type>& out, typename T1::pod_typ
     blas_int info  = blas_int(0);
     eT       rcond = eT(0);
     
-    Mat<eT> AF(A.n_rows, A.n_rows);
+    Mat<eT> AF(A.n_rows, A.n_rows, arma_nozeros_indicator());
     
     podarray<eT>           S(  A.n_rows);
     podarray<eT>        FERR(  B.n_cols);
@@ -5076,7 +4907,7 @@ auxlib::solve_sympd_refine(Mat< std::complex<typename T1::pod_type> >& out, type
     blas_int info  = blas_int(0);
     T        rcond = T(0);
     
-    Mat<eT> AF(A.n_rows, A.n_rows);
+    Mat<eT> AF(A.n_rows, A.n_rows, arma_nozeros_indicator());
     
     podarray< T>           S(  A.n_rows);
     podarray< T>        FERR(  B.n_cols);
@@ -5135,7 +4966,7 @@ auxlib::solve_rect_fast(Mat<typename T1::elem_type>& out, Mat<typename T1::elem_
     
     arma_debug_assert_blas_size(A,B);
     
-    Mat<eT> tmp( (std::max)(A.n_rows, A.n_cols), B.n_cols );
+    Mat<eT> tmp( (std::max)(A.n_rows, A.n_cols), B.n_cols, arma_nozeros_indicator() );
     
     if(arma::size(tmp) == arma::size(B))
       {
@@ -5233,7 +5064,7 @@ auxlib::solve_rect_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_type
     
     arma_debug_assert_blas_size(A,B);
     
-    Mat<eT> tmp( (std::max)(A.n_rows, A.n_cols), B.n_cols );
+    Mat<eT> tmp( (std::max)(A.n_rows, A.n_cols), B.n_cols, arma_nozeros_indicator() );
     
     if(arma::size(tmp) == arma::size(B))
       {
@@ -5286,8 +5117,7 @@ auxlib::solve_rect_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_type
       // xGELS  docs: for M >= N, A contains details of its QR decomposition as returned by xGEQRF
       // xGEQRF docs: elements on and above the diagonal contain the min(M,N)-by-N upper trapezoidal matrix R
       
-      Mat<eT> R(A.n_cols, A.n_cols);
-      R.zeros();
+      Mat<eT> R(A.n_cols, A.n_cols, arma_zeros_indicator());
       
       for(uword col=0; col < A.n_cols; ++col)
         {
@@ -5310,8 +5140,7 @@ auxlib::solve_rect_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_type
       // xGELS  docs: for M < N, A contains details of its LQ decomposition as returned by xGELQF
       // xGELQF docs: elements on and below the diagonal contain the M-by-min(M,N) lower trapezoidal matrix L
       
-      Mat<eT> L(A.n_rows, A.n_rows);
-      L.zeros();
+      Mat<eT> L(A.n_rows, A.n_rows, arma_zeros_indicator());
       
       for(uword col=0; col < A.n_rows; ++col)
         {
@@ -5377,7 +5206,7 @@ auxlib::solve_approx_svd(Mat<typename T1::pod_type>& out, Mat<typename T1::pod_t
     
     arma_debug_assert_blas_size(A,B);
     
-    Mat<eT> tmp( (std::max)(A.n_rows, A.n_cols), B.n_cols );
+    Mat<eT> tmp( (std::max)(A.n_rows, A.n_cols), B.n_cols, arma_nozeros_indicator() );
     
     if(arma::size(tmp) == arma::size(B))
       {
@@ -5498,7 +5327,7 @@ auxlib::solve_approx_svd(Mat< std::complex<typename T1::pod_type> >& out, Mat< s
     
     arma_debug_assert_blas_size(A,B);
     
-    Mat<eT> tmp( (std::max)(A.n_rows, A.n_cols), B.n_cols );
+    Mat<eT> tmp( (std::max)(A.n_rows, A.n_cols), B.n_cols, arma_nozeros_indicator() );
     
     if(arma::size(tmp) == arma::size(B))
       {
@@ -5972,7 +5801,7 @@ auxlib::solve_band_refine(Mat<typename T1::pod_type>& out, typename T1::pod_type
     
     out.set_size(N, B.n_cols);
     
-    Mat<eT> AFB(2*KL+KU+1, N);
+    Mat<eT> AFB(2*KL+KU+1, N, arma_nozeros_indicator());
     
     char     fact  = (equilibrate) ? 'E' : 'N'; 
     char     trans = 'N';
@@ -6081,7 +5910,7 @@ auxlib::solve_band_refine(Mat< std::complex<typename T1::pod_type> >& out, typen
     
     out.set_size(N, B.n_cols);
     
-    Mat<eT> AFB(2*KL+KU+1, N);
+    Mat<eT> AFB(2*KL+KU+1, N, arma_nozeros_indicator());
     
     char     fact  = (equilibrate) ? 'E' : 'N'; 
     char     trans = 'N';
@@ -6372,7 +6201,7 @@ auxlib::schur(Mat< std::complex<T> >& U, Mat< std::complex<T> >& S, const bool c
 
 
 //
-// syl (solution of the Sylvester equation AX + XB = C)
+// solve the Sylvester equation AX + XB = C
 
 template<typename eT>
 inline
@@ -6387,21 +6216,14 @@ auxlib::syl(Mat<eT>& X, const Mat<eT>& A, const Mat<eT>& B, const Mat<eT>& C)
       
     arma_debug_check( (C.n_rows != A.n_rows) || (C.n_cols != B.n_cols), "syl(): matrices are not conformant" );
     
-    if(A.is_empty() || B.is_empty() || C.is_empty())
-      {
-      X.reset();
-      return true;
-      }
-  
+    if(A.is_empty() || B.is_empty() || C.is_empty())  { X.reset(); return true; }
+    
     Mat<eT> Z1, Z2, T1, T2;
     
     const bool status_sd1 = auxlib::schur(Z1, T1, A);
     const bool status_sd2 = auxlib::schur(Z2, T2, B);
     
-    if( (status_sd1 == false) || (status_sd2 == false) )
-      {
-      return false;
-      }
+    if( (status_sd1 == false) || (status_sd2 == false) )  { return false; }
     
     char     trana = 'N';
     char     tranb = 'N';
@@ -7277,7 +7099,8 @@ auxlib::rudimentary_sym_check(const Mat< std::complex<T> >& X)
   
   const T tol = T(10000)*std::numeric_limits<T>::epsilon();  // allow some leeway
   
-  if(std::abs(X_mem[0].imag()) > tol)  { return false; }
+  if(std::abs(X_mem[0         ].imag()) > tol)  { return false; }  // check top-left
+  if(std::abs(X_mem[X.n_elem-1].imag()) > tol)  { return false; }  // check bottom-right
   
   const eT& A = X_mem[Nm1  ];  // bottom-left corner (ie. last value in first column)
   const eT& B = X_mem[Nm1*N];  // top-right   corner (ie. first value in last column)

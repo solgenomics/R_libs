@@ -17,4 +17,4 @@ ByteCompile: yes
 RoxygenNote: 7.1.0
 NeedsCompilation: no
 Packaged: 2020-03-27 12:36:02 UTC; ci
-Built: R 3.6.3; ; 2021-01-16 18:12:56 UTC; unix
+Built: R 4.1.2; ; 2022-02-15 23:55:18 UTC; unix

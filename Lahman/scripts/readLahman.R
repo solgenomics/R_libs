@@ -9,11 +9,11 @@ outdir <- "D:/Dev/R/Lahman/data"
 setwd(indir)
 
 # local data location
-dataFile <- "../source-data/baseballdatabank-master.zip"
+dataFile <- "../source-data/baseballdatabank-2021.2.zip"
 
 # no need to download if we already have the file
 if (!file.exists(dataFile)) {
-  zipfile <- "https://github.com/chadwickbureau/baseballdatabank/archive/v2020.1.zip"
+  zipfile <- "https://github.com/chadwickbureau/baseballdatabank/archive/refs/tags/v2021.2.zip"
   download.file(zipfile, dataFile)
 }
 
@@ -24,7 +24,7 @@ unzip(dataFile, exdir=indir)
 #Master <- read.csv(file="Master.csv", header=TRUE, stringsAsFactors=FALSE)
 
 # set indir to the directories the csv are extracted to
-indir <- paste0(indir, "/baseballdatabank-master/core")
+indir <- paste0(indir, "/baseballdatabank-2021.2/core")
 setwd(indir)
 
 (files <- list.files(path=getwd(), pattern="*.csv$"))
@@ -96,40 +96,41 @@ setwd(outdir)
 # compress mightily on save
 #options(save.defaults=list(compress="xz", compression_level=9))
 
-save(AllstarFull,         file="AllstarFull.RData")        
-save(Appearances,         file="Appearances.RData")        
-save(AwardsManagers,      file="AwardsManagers.RData")     
-save(AwardsPlayers,       file="AwardsPlayers.RData")      
-save(AwardsShareManagers, file="AwardsShareManagers.RData")
-save(AwardsSharePlayers,  file="AwardsSharePlayers.RData") 
-save(Batting,             file="Batting.RData")            
-save(BattingPost,         file="BattingPost.RData")
-save(CollegePlaying,      file="CollegePlaying.RData")
-save(Fielding,            file="Fielding.RData")           
-save(FieldingOF,          file="FieldingOF.RData")
-save(FieldingOFsplit,     file="FieldingOFsplit.RData")
-save(FieldingPost,        file="FieldingPost.RData")       
-save(HallOfFame,          file="HallOfFame.RData")         
-save(HomeGames,           file="HomeGames.RData")             
-save(Managers,            file="Managers.RData")           
-save(ManagersHalf,        file="ManagersHalf.RData")
-save(Parks,               file="Parks.RData")
-save(People,              file="People.RData")
-save(Pitching,            file="Pitching.RData")           
-save(PitchingPost,        file="PitchingPost.RData")       
-save(Salaries,            file="Salaries.RData")           
-save(Schools,             file="Schools.RData")
-save(SeriesPost,          file="SeriesPost.RData")         
-save(Teams,               file="Teams.RData")              
-save(TeamsFranchises,     file="TeamsFranchises.RData")    
-save(TeamsHalf,           file="TeamsHalf.RData")
+save(AllstarFull,         file="AllstarFull.RData", version = 2)        
+save(Appearances,         file="Appearances.RData", version = 2)        
+save(AwardsManagers,      file="AwardsManagers.RData", version = 2)     
+save(AwardsPlayers,       file="AwardsPlayers.RData", version = 2)      
+save(AwardsShareManagers, file="AwardsShareManagers.RData", version = 2)
+save(AwardsSharePlayers,  file="AwardsSharePlayers.RData", version = 2) 
+save(Batting,             file="Batting.RData", version = 2)            
+save(BattingPost,         file="BattingPost.RData", version = 2)
+save(CollegePlaying,      file="CollegePlaying.RData", version = 2)
+save(Fielding,            file="Fielding.RData", version = 2)           
+save(FieldingOF,          file="FieldingOF.RData", version = 2)
+save(FieldingOFsplit,     file="FieldingOFsplit.RData", version = 2)
+save(FieldingPost,        file="FieldingPost.RData", version = 2)       
+save(HallOfFame,          file="HallOfFame.RData", version = 2)         
+save(HomeGames,           file="HomeGames.RData", version = 2)             
+save(Managers,            file="Managers.RData", version = 2)           
+save(ManagersHalf,        file="ManagersHalf.RData", version = 2)
+save(Parks,               file="Parks.RData", version = 2)
+save(People,              file="People.RData", version = 2)
+save(Pitching,            file="Pitching.RData", version = 2)           
+save(PitchingPost,        file="PitchingPost.RData", version = 2)       
+save(Salaries,            file="Salaries.RData", version = 2)           
+save(Schools,             file="Schools.RData", version = 2)
+save(SeriesPost,          file="SeriesPost.RData", version = 2)         
+save(Teams,               file="Teams.RData", version = 2)              
+save(TeamsFranchises,     file="TeamsFranchises.RData", version = 2)    
+save(TeamsHalf,           file="TeamsHalf.RData", version = 2)
 
 # Master table was changed to People in the 2017 data
 # We will maintain Master as part of the package for now as it's likely to be a breaking change
 Master <- People
-save(Master,              file="Master.RData")
+save(Master,              file="Master.RData", version = 2)
 
-tools::resaveRdaFiles(outdir, compress="xz", compression_level=9)
+# version currently still defaults to 2 here, but setting for backwards compatibility
+tools::resaveRdaFiles(outdir, compress="xz", compression_level=9, version = 2)
 
 # only ran this once, since all .Rd files were extensively edited
 # TODO: come up with a better way to automatically update Rd files with count/year/etc updates
@@ -162,4 +163,3 @@ if (FALSE) {
   promptData(TeamsHalf,           filename="TeamsHalf.Rd")          
   promptData(Xref_Stats,          filename="Xref_Stats.Rd")         
 }
-

@@ -129,6 +129,8 @@ pandoc.table.return     Create a table
 pandoc.title.return     Create title block
 pandoc.verbatim.return
                         Add verbatim
+path_to_pandoc          Find path to the pandoc binary by checking the
+                        'PATH' and the 'RSTUDIO_PANDOC' env vars
 redraw.recordedplot     Redraws plot saved in file
 redrawPlot              Redraw a recordedplot, grid, trellis, or
                         ggplot2 plot.

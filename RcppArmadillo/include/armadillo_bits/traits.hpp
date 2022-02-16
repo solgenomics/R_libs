@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -197,6 +199,19 @@ struct is_subview_col< subview_col<eT> >
 
 template<typename eT>
 struct is_subview_col< const subview_col<eT> >
+  { static constexpr bool value = true; };
+
+
+template<typename T>
+struct is_subview_cols
+  { static constexpr bool value = false; };
+
+template<typename eT>
+struct is_subview_cols< subview_cols<eT> >
+  { static constexpr bool value = true; };
+
+template<typename eT>
+struct is_subview_cols< const subview_cols<eT> >
   { static constexpr bool value = true; };
 
 
@@ -542,6 +557,7 @@ struct is_arma_type2
   || is_subview<T1>::value
   || is_subview_row<T1>::value
   || is_subview_col<T1>::value
+  || is_subview_cols<T1>::value
   || is_subview_elem1<T1>::value
   || is_subview_elem2<T1>::value
   ;
@@ -934,15 +950,27 @@ struct is_double<double>
 
 template<typename T1>
 struct is_real
-  { static constexpr bool value = false; };
+  {
+  static constexpr bool value = false;
+  static constexpr bool yes   = false;
+  static constexpr bool no    = true;
+  };
 
 template<>
 struct is_real<float>
-  { static constexpr bool value = true; };
+  {
+  static constexpr bool value = true;
+  static constexpr bool yes   = true;
+  static constexpr bool no    = false;
+  };
   
 template<>
 struct is_real<double>
-  { static constexpr bool value = true; };
+  {
+  static constexpr bool value = true;
+  static constexpr bool yes   = true;
+  static constexpr bool no    = false;
+  };
 
 
 

@@ -1,3 +1,73 @@
+CHANGES IN VERSION 1.28.0
+-------------------------
+
+NEW FEATURES
+
+    o new function `exist.gdsn()`
+
+    o new function `is.sparse.gdsn()`
+
+UTILITIES
+
+    o LZ4 updated to v1.9.3 from v1.9.2
+
+    o XZ is updated to v5.2.5 from v5.2.4
+
+    o `apply.gdsn()`: work around with factor variables if less-than-32-bit
+      integers are stored
+
+    o a new component 'is.sparse' in `objdesp.gdsn()`
+
+    o `options(gds.verbose=TRUE)` to show additional information
+
+
+CHANGES IN VERSION 1.26.1
+-------------------------
+
+UTILITIES
+
+    o comply with the R devel (> v4.0.3) to work with factor variables in
+      `apply.gdsn()`
+
+
+CHANGES IN VERSION 1.24.1
+-------------------------
+
+UTILITIES
+
+    o 'show' option in `print.gds.class()` for array preview
+
+
+CHANGES IN VERSION 1.24.0
+-------------------------
+
+NEW FEATURES
+
+    o new option 'allow.error' in `openfn.gds()` for data recovery
+
+    o new option 'log.only' in `diagnosis.gds()`
+
+    o new C functions `GDS_Node_Unload()` and `GDS_Node_Load()` in R_GDS.h
+
+    o new sparse array data types in GDS (SparseReal32, SparseReal64,
+      SparseInt8, SparseInt16, SparseInt32, SparseInt64, SparseUInt8,
+      SparseUInt16, SparseUInt32, SparseUInt64)
+
+    o the opened gds file will be closed when the object is garbage collected
+
+UTILITIES
+
+    o zlib updated to v1.2.11 from v1.2.8
+
+    o xz updated to v5.2.4 from v5.2.3
+
+    o LZ4 updated to v1.9.2 from v1.7.5
+
+    o `showfile.gds()` does not return the object of 'gds.class'
+
+    o new 'nmax' and 'depth' in `print.gdsn.class()` and `print.gds.class()`
+
+
 CHANGES IN VERSION 1.22.0
 -------------------------
 

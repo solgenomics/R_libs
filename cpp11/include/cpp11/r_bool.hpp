@@ -1,13 +1,15 @@
 #pragma once
 
-#include <limits>       // for numeric_limits
+#include <limits>  // for numeric_limits
+#include <ostream>
 #include <type_traits>  // for is_convertible, enable_if
 
 #include "R_ext/Boolean.h"    // for Rboolean
 #include "cpp11/R.hpp"        // for SEXP, SEXPREC, ...
 #include "cpp11/as.hpp"       // for as_sexp
 #include "cpp11/protect.hpp"  // for unwind_protect, preserved
-#include "cpp11/sexp.hpp"     // for sexp
+#include "cpp11/r_vector.hpp"
+#include "cpp11/sexp.hpp"  // for sexp
 
 namespace cpp11 {
 
@@ -21,7 +23,7 @@ class r_bool {
         value_ = static_cast<Rboolean>(LOGICAL_ELT(data, 0));
       }
     }
-    stop("Invalid r_bool value: %x", data);
+    throw std::invalid_argument("Invalid r_bool value");
   }
 
   r_bool(bool value) : value_(value ? TRUE : FALSE) {}
@@ -30,7 +32,7 @@ class r_bool {
 
   operator bool() const { return value_ == TRUE; }
   operator int() const { return value_; }
-  operator Rboolean() const { return value_; }
+  operator Rboolean() const { return value_ ? TRUE : FALSE; }
 
   bool operator==(r_bool rhs) const { return value_ == rhs.value_; }
   bool operator==(bool rhs) const { return operator==(r_bool(rhs)); }
@@ -38,18 +40,21 @@ class r_bool {
   bool operator==(int rhs) const { return operator==(r_bool(rhs)); }
 
  private:
-  static constexpr Rboolean na = static_cast<Rboolean>(std::numeric_limits<int>::min());
+  static constexpr int na = std::numeric_limits<int>::min();
 
-  static Rboolean from_int(int value) {
+  static int from_int(int value) {
     if (value == static_cast<int>(FALSE)) return FALSE;
     if (value == static_cast<int>(na)) return na;
     return TRUE;
   }
 
-  Rboolean value_ = na;
+  int value_ = na;
 };
 
-inline bool is_na(r_bool x) { return x == r_bool(); }
+inline std::ostream& operator<<(std::ostream& os, r_bool const& value) {
+  os << ((value == TRUE) ? "TRUE" : "FALSE");
+  return os;
+}
 
 template <typename T, typename R = void>
 using enable_if_r_bool = enable_if_t<std::is_same<T, r_bool>::value, R>;
@@ -57,8 +62,13 @@ using enable_if_r_bool = enable_if_t<std::is_same<T, r_bool>::value, R>;
 template <typename T>
 enable_if_r_bool<T, SEXP> as_sexp(T from) {
   sexp res = Rf_allocVector(LGLSXP, 1);
-  unwind_protect([&] { SET_LOGICAL_ELT(res.data(), 0, static_cast<Rboolean>(from)); });
+  unwind_protect([&] { SET_LOGICAL_ELT(res.data(), 0, from); });
   return res;
+}
+
+template <>
+inline r_bool na() {
+  return NA_LOGICAL;
 }
 
 }  // namespace cpp11

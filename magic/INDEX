@@ -31,8 +31,7 @@ is.square.palindromic   Is a square matrix square palindromic?
 latin                   Random latin squares
 lozenge                 Conway's lozenge algorithm for magic squares
 magic                   Creates magic squares
-magic-package           Magic squares and hypercubes; arbitrary
-                        dimensioned array manipulation
+magic-package           Create and Investigate Magic Squares
 magic.2np1              Magic squares of odd order
 magic.4n                Magic squares of order 4n
 magic.4np2              Magic squares of order 4n+2

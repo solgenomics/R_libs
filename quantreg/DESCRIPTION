@@ -4,8 +4,9 @@ Description: Estimation and inference methods for models of conditional quantile
   Linear and nonlinear parametric and non-parametric (total variation penalized) models 
   for conditional quantiles of a univariate response and several methods for handling
   censored survival data.  Portfolio selection methods based on expected shortfall
-  risk are also now included.
-Version: 5.82
+  risk are also now included. See Koenker (2006) <doi:10.1017/CBO9780511754098> and
+  Koenker et al. (2017) <doi:10.1201/9781315120256>. 
+Version: 5.88
 Authors@R: c(
     person("Roger", "Koenker",  role = c("cre","aut"), email =  "rkoenker@illinois.edu"),
     person("Stephen", "Portnoy",  role = c("ctb"), 
@@ -21,6 +22,8 @@ Authors@R: c(
 	comment = "Contributions to nlrq code", email =  "phgrosjean@sciviews.org"),
     person("Cleve", "Moler",  role = c("ctb"), 
 	comment = "author of several linpack routines"),
+    person("Yousef", "Saad",  role = c("ctb"), 
+	comment = "author of sparskit2"),
     person("Victor", "Chernozhukov",  role = c("ctb"), 
 	comment = "contributions to extreme value inference code"),
     person("Ivan", "Fernandez-Val",  role = c("ctb"), 
@@ -32,14 +35,14 @@ Authors@R: c(
 Maintainer: Roger Koenker <rkoenker@illinois.edu>
 Repository: CRAN
 Depends: R (>= 2.6), stats, SparseM
-Imports: methods, graphics, Matrix, MatrixModels, conquer
+Imports: methods, graphics, Matrix, MatrixModels
 Suggests: tripack, akima, MASS, survival, rgl, logspline, nor1mix,
-        Formula, zoo, R.rsp
+        Formula, zoo, R.rsp, conquer
 License: GPL (>= 2)
 URL: https://www.r-project.org
 NeedsCompilation: yes
 VignetteBuilder: R.rsp
-Packaged: 2021-01-10 15:46:16 UTC; roger
+Packaged: 2022-02-05 11:26:37 UTC; roger
 Author: Roger Koenker [cre, aut],
   Stephen Portnoy [ctb] (Contributions to Censored QR code),
   Pin Tian Ng [ctb] (Contributions to Sparse QR code),
@@ -48,6 +51,7 @@ Author: Roger Koenker [cre, aut],
     to his dynlm code),
   Philip Grosjean [ctb] (Contributions to nlrq code),
   Cleve Moler [ctb] (author of several linpack routines),
+  Yousef Saad [ctb] (author of sparskit2),
   Victor Chernozhukov [ctb] (contributions to extreme value inference
     code),
   Ivan Fernandez-Val [ctb] (contributions to extreme value inference
@@ -55,5 +59,5 @@ Author: Roger Koenker [cre, aut],
   Brian D Ripley [trl, ctb] (Initial (2001) R port from S (to my
     everlasting shame -- how could I have been so slow to adopt R!) and
     for numerous other suggestions and useful advice)
-Date/Publication: 2021-01-10 23:30:06 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2021-01-11 23:53:22 UTC; unix
+Date/Publication: 2022-02-05 12:10:02 UTC
+Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 22:58:35 UTC; unix

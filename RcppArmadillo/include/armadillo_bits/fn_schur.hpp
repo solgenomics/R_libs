@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -40,7 +42,7 @@ schur
   if(status == false)
     {
     S.soft_reset();
-    arma_debug_warn("schur(): decomposition failed");
+    arma_debug_warn_level(3, "schur(): decomposition failed");
     }
   
   return status;
@@ -101,7 +103,7 @@ schur
     {
     U.soft_reset();
     S.soft_reset();
-    arma_debug_warn("schur(): decomposition failed");
+    arma_debug_warn_level(3, "schur(): decomposition failed");
     }
   
   return status;

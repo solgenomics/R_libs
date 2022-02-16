@@ -28,11 +28,6 @@ happy                   Data related to happiness from the General
 hdv2003                 Histoire de vie 2003
 households              A fertility survey - "households" table
 icut                    Interactive conversion from numeric to factor
-ifunc_get_css           Returns custom CSS content
-ifunc_run_as_addin      Check if we are currently running as an rstudio
-                        addin
-ifunc_show_alert        Display an alert, only on first launch for the
-                        current session
 iorder                  Interactive reordering of factor levels
 irec                    Interactive recoding
 ltabs                   Cross tabulation with labelled variables
@@ -58,8 +53,8 @@ rename.variable         Rename a data frame column
 rm.unused.levels        Remove unused levels
 rp2012                  2012 French Census - French cities of more than
                         2000 inhabitants
-rp99                    1999 French Census - Cities from the
-                        Rh<c3><b4>ne state
+rp2018                  2018 French Census - French cities of more than
+                        2000 inhabitants
 rprop                   Row percentages of a two-way frequency table.
 tabs                    Weighted Crossresult
 women                   A fertility survey - "women" table

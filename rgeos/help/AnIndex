@@ -77,6 +77,8 @@ gIsValid	pred-unary-gIsValid
 gLength	misc-gLength
 gLineMerge	topo-bin-gUnion
 gMakeValid	topo-unary-gMakeValid
+gMaximumInscribedCircle	topo-unary-gMaximumInscribedCircle
+gMinumumRotatedRectangle	topo-unary-gMinumumRotatedRectangle
 gNearestPoints	misc-gNearestPoints
 gNode	topo-unary-gNode
 gOverlaps	pred-binary-gCrosses

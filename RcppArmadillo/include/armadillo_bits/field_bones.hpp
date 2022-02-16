@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -86,26 +88,33 @@ class field
   template<typename oT2>
   inline void copy_size(const field<oT2>& x);
   
-  arma_inline       oT& operator[](const uword i);
-  arma_inline const oT& operator[](const uword i) const;
+  arma_inline arma_warn_unused       oT& operator[](const uword i);
+  arma_inline arma_warn_unused const oT& operator[](const uword i) const;
   
-  arma_inline       oT&         at(const uword i);
-  arma_inline const oT&         at(const uword i) const;
+  arma_inline arma_warn_unused       oT&         at(const uword i);
+  arma_inline arma_warn_unused const oT&         at(const uword i) const;
   
-  arma_inline       oT& operator()(const uword i);
-  arma_inline const oT& operator()(const uword i) const;
+  arma_inline arma_warn_unused       oT& operator()(const uword i);
+  arma_inline arma_warn_unused const oT& operator()(const uword i) const;
   
-  arma_inline       oT&         at(const uword row, const uword col);
-  arma_inline const oT&         at(const uword row, const uword col) const;
+  arma_inline arma_warn_unused       oT&         at(const uword row, const uword col);
+  arma_inline arma_warn_unused const oT&         at(const uword row, const uword col) const;
 
-  arma_inline       oT&         at(const uword row, const uword col, const uword slice);
-  arma_inline const oT&         at(const uword row, const uword col, const uword slice) const;
+  arma_inline arma_warn_unused       oT&         at(const uword row, const uword col, const uword slice);
+  arma_inline arma_warn_unused const oT&         at(const uword row, const uword col, const uword slice) const;
   
-  arma_inline       oT& operator()(const uword row, const uword col);
-  arma_inline const oT& operator()(const uword row, const uword col) const;
+  arma_inline arma_warn_unused       oT& operator()(const uword row, const uword col);
+  arma_inline arma_warn_unused const oT& operator()(const uword row, const uword col) const;
 
-  arma_inline       oT& operator()(const uword row, const uword col, const uword slice);
-  arma_inline const oT& operator()(const uword row, const uword col, const uword slice) const;
+  arma_inline arma_warn_unused       oT& operator()(const uword row, const uword col, const uword slice);
+  arma_inline arma_warn_unused const oT& operator()(const uword row, const uword col, const uword slice) const;
+  
+  
+  arma_inline arma_warn_unused       oT& front();
+  arma_inline arma_warn_unused const oT& front() const;
+  
+  arma_inline arma_warn_unused       oT& back();
+  arma_inline arma_warn_unused const oT& back() const;
   
   
   arma_cold inline field_injector<field> operator<<(const oT& val);
@@ -191,11 +200,11 @@ class field
   arma_inline arma_warn_unused bool in_range(const uword   in_row, const uword in_col, const uword in_slice, const SizeCube& s) const;
   
   
-  inline arma_cold bool save(const std::string   name, const file_type type = arma_binary, const bool print_status = true) const;
-  inline arma_cold bool save(      std::ostream& os,   const file_type type = arma_binary, const bool print_status = true) const;
+  inline arma_cold bool save(const std::string   name, const file_type type = arma_binary) const;
+  inline arma_cold bool save(      std::ostream& os,   const file_type type = arma_binary) const;
   
-  inline arma_cold bool load(const std::string   name, const file_type type = auto_detect, const bool print_status = true);
-  inline arma_cold bool load(      std::istream& is,   const file_type type = auto_detect, const bool print_status = true);
+  inline arma_cold bool load(const std::string   name, const file_type type = auto_detect);
+  inline arma_cold bool load(      std::istream& is,   const file_type type = auto_detect);
   
   
   inline arma_cold bool quiet_save(const std::string   name, const file_type type = arma_binary) const;

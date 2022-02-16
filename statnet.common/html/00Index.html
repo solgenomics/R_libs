@@ -3,8 +3,9 @@
 <head><title>R: Common R Scripts and Utilities Used by the Statnet Project
 Software</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> Common R Scripts and Utilities Used by the Statnet Project
 Software
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
@@ -13,7 +14,7 @@ Software
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;statnet.common&rsquo; version 4.4.1</h2>
+</div><h2>Documentation for package &lsquo;statnet.common&rsquo; version 4.5.0</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../NEWS">Package NEWS</a>.</li>
@@ -24,10 +25,12 @@ Software
 
 <p style="text-align: center;">
 <a href="#A">A</a>
+<a href="#B">B</a>
 <a href="#C">C</a>
 <a href="#D">D</a>
 <a href="#E">E</a>
 <a href="#F">F</a>
+<a href="#H">H</a>
 <a href="#I">I</a>
 <a href="#L">L</a>
 <a href="#M">M</a>
@@ -53,6 +56,12 @@ Software
 <td>Functions for Querying, Validating and Extracting from Formulas A suite of utilities for handling model formulas of the style used in Statnet packages.</td></tr>
 <tr><td style="width: 25%;"><a href="formula.utilities.html">append_rhs.formula</a></td>
 <td>Functions for Querying, Validating and Extracting from Formulas A suite of utilities for handling model formulas of the style used in Statnet packages.</td></tr>
+<tr><td style="width: 25%;"><a href="as.control.list.html">as.control.list</a></td>
+<td>Convert to a control list.</td></tr>
+<tr><td style="width: 25%;"><a href="as.control.list.html">as.control.list.control.list</a></td>
+<td>Convert to a control list.</td></tr>
+<tr><td style="width: 25%;"><a href="as.control.list.html">as.control.list.list</a></td>
+<td>Convert to a control list.</td></tr>
 <tr><td style="width: 25%;"><a href="wmatrix.html">as.linwmatrix</a></td>
 <td>A data matrix with row weights</td></tr>
 <tr><td style="width: 25%;"><a href="wmatrix.html">as.linwmatrix.linwmatrix</a></td>
@@ -69,29 +78,28 @@ Software
 <td>A data matrix with row weights</td></tr>
 <tr><td style="width: 25%;"><a href="wmatrix.html">as.logwmatrix.matrix</a></td>
 <td>A data matrix with row weights</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">as.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">as.rle.default</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">as.rle.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
+<tr><td style="width: 25%;"><a href="attr.html">attr</a></td>
+<td>A wrapper for base::attr which defaults to exact matching.</td></tr>
+</table>
+
+<h2><a name="B">-- B --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="empty_env.html">base_env</a></td>
+<td>Replace an object's environment with a simple, static environment.</td></tr>
 </table>
 
 <h2><a name="C">-- C --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="rle-reexport.html">c.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
 <tr><td style="width: 25%;"><a href="check.control.class.html">check.control.class</a></td>
-<td>Check if the class of the control list is one of those that can be used by the calling function</td></tr>
+<td>Ensure that the class of the control list is one of those that can be used by the calling function</td></tr>
+<tr><td style="width: 25%;"><a href="snctrl-API.html">COLLATE_ALL_MY_CONTROLS_EXPR</a></td>
+<td>Helper functions used by packages to facilitate 'snctrl' updating.</td></tr>
+<tr><td style="width: 25%;"><a href="snctrl-API.html">collate_controls</a></td>
+<td>Helper functions used by packages to facilitate 'snctrl' updating.</td></tr>
 <tr><td style="width: 25%;"><a href="mcmc-utilities.html">colMeans.mcmc.list</a></td>
 <td>Utility operations for 'mcmc.list' objects</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">compact.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">compress</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">compress.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
 <tr><td style="width: 25%;"><a href="compress_rows.html">compress_rows</a></td>
 <td>A generic function to compress a row-weighted table</td></tr>
 <tr><td style="width: 25%;"><a href="compress_rows.data.frame.html">compress_rows.data.frame</a></td>
@@ -115,6 +123,8 @@ Software
 <td>"Compress" a data frame.</td></tr>
 <tr><td style="width: 25%;"><a href="wmatrix.html">decompress_rows.wmatrix</a></td>
 <td>A data matrix with row weights</td></tr>
+<tr><td style="width: 25%;"><a href="default_options.html">default_options</a></td>
+<td>Set 'options()' according to a named list, skipping those already set.</td></tr>
 <tr><td style="width: 25%;"><a href="deInf.html">deInf</a></td>
 <td>Truncate values of high magnitude in a vector.</td></tr>
 <tr><td style="width: 25%;"><a href="deprecation-utilities.html">deprecation-utilities</a></td>
@@ -128,6 +138,8 @@ Software
 <h2><a name="E">-- E --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="empty_env.html">empty_env</a></td>
+<td>Replace an object's environment with a simple, static environment.</td></tr>
 <tr><td style="width: 25%;"><a href="ERRVL.html">ERRVL</a></td>
 <td>Return the first argument passed (out of any number) that is not a 'try-error' (result of 'try' encountering an error.</td></tr>
 <tr><td style="width: 25%;"><a href="formula.utilities.html">eval_lhs.formula</a></td>
@@ -147,10 +159,19 @@ Software
 <table width="100%">
 <tr><td style="width: 25%;"><a href="formula.utilities.html">filter_rhs.formula</a></td>
 <td>Functions for Querying, Validating and Extracting from Formulas A suite of utilities for handling model formulas of the style used in Statnet packages.</td></tr>
+<tr><td style="width: 25%;"><a href="fixed.pval.html">fixed.pval</a></td>
+<td>Format a p-value in fixed notation.</td></tr>
 <tr><td style="width: 25%;"><a href="forkTimeout.html">forkTimeout</a></td>
 <td>Evaluate an R expression with a hard time limit by forking a process</td></tr>
 <tr><td style="width: 25%;"><a href="formula.utilities.html">formula.utilities</a></td>
 <td>Functions for Querying, Validating and Extracting from Formulas A suite of utilities for handling model formulas of the style used in Statnet packages.</td></tr>
+</table>
+
+<h2><a name="H">-- H --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="handle.controls.html">handle.controls</a></td>
+<td>Handle standard control.*() function semantics.</td></tr>
 </table>
 
 <h2><a name="I">-- I --</a></h2>
@@ -160,8 +181,6 @@ Software
 <td>A data matrix with row weights</td></tr>
 <tr><td style="width: 25%;"><a href="wmatrix.html">is.logwmatrix</a></td>
 <td>A data matrix with row weights</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">is.na.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
 <tr><td style="width: 25%;"><a href="wmatrix.html">is.wmatrix</a></td>
 <td>A data matrix with row weights</td></tr>
 </table>
@@ -171,14 +190,16 @@ Software
 <table width="100%">
 <tr><td style="width: 25%;"><a href="mcmc-utilities.html">lapply.mcmc.list</a></td>
 <td>Utility operations for 'mcmc.list' objects</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">length.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
 <tr><td style="width: 25%;"><a href="wmatrix.html">linwmatrix</a></td>
 <td>A data matrix with row weights</td></tr>
 <tr><td style="width: 25%;"><a href="formula.utilities.html">list_rhs.formula</a></td>
 <td>Functions for Querying, Validating and Extracting from Formulas A suite of utilities for handling model formulas of the style used in Statnet packages.</td></tr>
 <tr><td style="width: 25%;"><a href="formula.utilities.html">list_summands.call</a></td>
 <td>Functions for Querying, Validating and Extracting from Formulas A suite of utilities for handling model formulas of the style used in Statnet packages.</td></tr>
+<tr><td style="width: 25%;"><a href="locate_function.html">locate_function</a></td>
+<td>Locate a function with a given name and return it and its environment.</td></tr>
+<tr><td style="width: 25%;"><a href="locate_function.html">locate_prefixed_function</a></td>
+<td>Locate a function with a given name and return it and its environment.</td></tr>
 <tr><td style="width: 25%;"><a href="logspace.utils.html">logspace.utils</a></td>
 <td>Utilities for performing calculations on logarithmic scale.</td></tr>
 <tr><td style="width: 25%;"><a href="wmatrix.html">logwmatrix</a></td>
@@ -210,12 +231,8 @@ Software
 <h2><a name="M">-- M --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="rle-reexport.html">Math.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
 <tr><td style="width: 25%;"><a href="mcmc-utilities.html">mcmc-utilities</a></td>
 <td>Utility operations for 'mcmc.list' objects</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">mean.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
 <tr><td style="width: 25%;"><a href="message_print.html">message_print</a></td>
 <td>'print' objects to the 'message' output.</td></tr>
 </table>
@@ -242,8 +259,6 @@ Software
 <table width="100%">
 <tr><td style="width: 25%;"><a href="once.html">once</a></td>
 <td>Evaluate a function once for a given input.</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">Ops.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
 <tr><td style="width: 25%;"><a href="opttest.html">opttest</a></td>
 <td>Optionally test code depending on environment variable.</td></tr>
 <tr><td style="width: 25%;"><a href="sort.data.frame.html">order</a></td>
@@ -280,10 +295,6 @@ Software
 <h2><a name="R">-- R --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="rle-reexport.html">rep.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">rle-reexport</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
 <tr><td style="width: 25%;"><a href="wmatrix_weights.html">rowweights</a></td>
 <td>Set or extract weighted matrix row weights</td></tr>
 <tr><td style="width: 25%;"><a href="wmatrix_weights.html">rowweights.linwmatrix</a></td>
@@ -305,6 +316,14 @@ Software
 <table width="100%">
 <tr><td style="width: 25%;"><a href="set.control.class.html">set.control.class</a></td>
 <td>Set the class of the control list</td></tr>
+<tr><td style="width: 25%;"><a href="simplify_simple.html">simplify_simple</a></td>
+<td>Convert a list to an atomic vector if it consists solely of atomic elements of length 1.</td></tr>
+<tr><td style="width: 25%;"><a href="snctrl.html">snctrl</a></td>
+<td>Statnet Control</td></tr>
+<tr><td style="width: 25%;"><a href="snctrl-API.html">snctrl-API</a></td>
+<td>Helper functions used by packages to facilitate 'snctrl' updating.</td></tr>
+<tr><td style="width: 25%;"><a href="snctrl-API.html">snctrl_names</a></td>
+<td>Helper functions used by packages to facilitate 'snctrl' updating.</td></tr>
 <tr><td style="width: 25%;"><a href="sort.data.frame.html">sort.data.frame</a></td>
 <td>Implement the 'sort' and 'order' methods for 'data.frame' and 'matrix', sorting it in lexicographic order.</td></tr>
 <tr><td style="width: 25%;"><a href="split.array.html">split.array</a></td>
@@ -321,10 +340,6 @@ Software
 <td>'CITATION' file utilities for Statnet packages (DEPRECATED)</td></tr>
 <tr><td style="width: 25%;"><a href="statnetStartupMessage.html">statnetStartupMessage</a></td>
 <td>Construct a "standard" startup message to be printed when the package is loaded.</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">str.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">Summary.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
 <tr><td style="width: 25%;"><a href="mcmc-utilities.html">sweep.mcmc.list</a></td>
 <td>Utility operations for 'mcmc.list' objects</td></tr>
 <tr><td style="width: 25%;"><a href="sweep_cols.matrix.html">sweep_cols.matrix</a></td>
@@ -353,6 +368,10 @@ Software
 <td>Extract or replace the _ult_imate (last) element of a vector or a list, or an element counting from the end.</td></tr>
 <tr><td style="width: 25%;"><a href="unwhich.html">unwhich</a></td>
 <td>Construct a logical vector with 'TRUE' in specified positions.</td></tr>
+<tr><td style="width: 25%;"><a href="snctrl-API.html">UPDATE_MY_SCTRL_EXPR</a></td>
+<td>Helper functions used by packages to facilitate 'snctrl' updating.</td></tr>
+<tr><td style="width: 25%;"><a href="snctrl-API.html">update_snctrl</a></td>
+<td>Helper functions used by packages to facilitate 'snctrl' updating.</td></tr>
 </table>
 
 <h2><a name="V">-- V --</a></h2>
@@ -374,33 +393,15 @@ Software
 <h2><a name="misc">-- misc --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="rle-reexport.html">!.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">!=.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
 <tr><td style="width: 25%;"><a href="control.list.accessor.html">$.control.list</a></td>
 <td>Named element accessor for ergm control lists</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">&amp;.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
 <tr><td style="width: 25%;"><a href="deprecation-utilities.html">.Deprecate_method</a></td>
 <td>Utilities to help with deprecating functions.</td></tr>
 <tr><td style="width: 25%;"><a href="deprecation-utilities.html">.Deprecate_once</a></td>
 <td>Utilities to help with deprecating functions.</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">&lt;.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">&lt;=.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">==.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">&gt;.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">&gt;=.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
 <tr><td style="width: 25%;"><a href="wmatrix.html">[.wmatrix</a></td>
 <td>A data matrix with row weights</td></tr>
 <tr><td style="width: 25%;"><a href="wmatrix.html">[&lt;-.wmatrix</a></td>
 <td>A data matrix with row weights</td></tr>
-<tr><td style="width: 25%;"><a href="rle-reexport.html">|.rle</a></td>
-<td>Functions reexported from 'rle' They will no longer be reexported after the next release. Some Ops group methods are exported as well, since as of version 4.0.2, R's 'NextMethod()' does not appear to be able to dispatch from a group member method to a group method.</td></tr>
 </table>
-</body></html>
+</div></body></html>

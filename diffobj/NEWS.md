@@ -1,5 +1,25 @@
 # diffobj
 
+## v0.3.5
+
+* Options automatically fallback to factory defaults if they are unset (h/t
+  @gadenbui).
+* [#158](https://github.com/brodieG/diffobj/issues/158): Calling `diff*` with
+  `do.call` now works without warnings.
+* [#117](https://github.com/brodieG/diffobj/issues/117): Fix guide detection
+  with very wide wrapped data.frames (h/t @bastician, @overvolting).
+
+## v0.3.4
+
+* Add a print method for `ses_dat` return values that makes it easier to
+  interpret the diff.
+* [#152](https://github.com/brodieG/diffobj/issues/152): Rewrite the
+  fall-back "O(n)" algorithm that kicks in when there are `max.diffs`
+  differences to be more robust (h/t @hadley, @DanChaltiel, @gadenbui).
+* Related to #152: `max.diffs=0` used to mean the same as `max.diffs=-1` (i.e.
+  unlimited), but this was undocumented and an error.  `max.diffs=0` will now
+  immediately fall back to the "O(n)" algorithm.
+
 ## v0.3.3
 
 * Implement experimental .Rout / .Rout.save testing.

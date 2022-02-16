@@ -2,8 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><title>R: Geographic Data Analysis and Modeling</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> Geographic Data Analysis and Modeling
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;raster&rsquo; version 3.4-5</h2>
+</div><h2>Documentation for package &lsquo;raster&rsquo; version 3.5-15</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../NEWS">Package NEWS</a>.</li>
@@ -496,6 +497,8 @@
 <td>Initialize a Raster object with values</td></tr>
 <tr><td style="width: 25%;"><a href="datasource.html">inMemory</a></td>
 <td>Are values in memory and/or on disk?</td></tr>
+<tr><td style="width: 25%;"><a href="datasource.html">inMemory-method</a></td>
+<td>Are values in memory and/or on disk?</td></tr>
 <tr><td style="width: 25%;"><a href="interpolate.html">interpolate</a></td>
 <td>Interpolate</td></tr>
 <tr><td style="width: 25%;"><a href="interpolate.html">interpolate-method</a></td>
@@ -600,6 +603,8 @@
 <tr><td style="width: 25%;"><a href="merge.html">merge-method</a></td>
 <td>Merge Raster* objects</td></tr>
 <tr><td style="width: 25%;"><a href="metadata.html">metadata</a></td>
+<td>Metadata</td></tr>
+<tr><td style="width: 25%;"><a href="metadata.html">metadata-method</a></td>
 <td>Metadata</td></tr>
 <tr><td style="width: 25%;"><a href="metadata.html">metadata&lt;-</a></td>
 <td>Metadata</td></tr>
@@ -721,6 +726,8 @@
 <tr><td style="width: 25%;"><a href="Raster-classes.html">print-method</a></td>
 <td>Raster* classes</td></tr>
 <tr><td style="width: 25%;"><a href="projection.html">proj4string</a></td>
+<td>Get or set a coordinate reference system (projection)</td></tr>
+<tr><td style="width: 25%;"><a href="projection.html">proj4string-method</a></td>
 <td>Get or set a coordinate reference system (projection)</td></tr>
 <tr><td style="width: 25%;"><a href="projection.html">proj4string&lt;-</a></td>
 <td>Get or set a coordinate reference system (projection)</td></tr>
@@ -1112,21 +1119,21 @@
 <td>Coordinates from a row, column or cell number</td></tr>
 <tr><td style="width: 25%;"><a href="xyFromCell.html">xFromCol-method</a></td>
 <td>Coordinates from a row, column or cell number</td></tr>
-<tr><td style="width: 25%;"><a href="coordinates.html">xmax</a></td>
+<tr><td style="width: 25%;"><a href="coords.html">xmax</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
-<tr><td style="width: 25%;"><a href="coordinates.html">xmax-method</a></td>
+<tr><td style="width: 25%;"><a href="coords.html">xmax-method</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
-<tr><td style="width: 25%;"><a href="coordinates.html">xmax&lt;-</a></td>
+<tr><td style="width: 25%;"><a href="coords.html">xmax&lt;-</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
-<tr><td style="width: 25%;"><a href="coordinates.html">xmax&lt;--method</a></td>
+<tr><td style="width: 25%;"><a href="coords.html">xmax&lt;--method</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
-<tr><td style="width: 25%;"><a href="coordinates.html">xmin</a></td>
+<tr><td style="width: 25%;"><a href="coords.html">xmin</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
-<tr><td style="width: 25%;"><a href="coordinates.html">xmin-method</a></td>
+<tr><td style="width: 25%;"><a href="coords.html">xmin-method</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
-<tr><td style="width: 25%;"><a href="coordinates.html">xmin&lt;-</a></td>
+<tr><td style="width: 25%;"><a href="coords.html">xmin&lt;-</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
-<tr><td style="width: 25%;"><a href="coordinates.html">xmin&lt;--method</a></td>
+<tr><td style="width: 25%;"><a href="coords.html">xmin&lt;--method</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
 <tr><td style="width: 25%;"><a href="resolution.html">xres</a></td>
 <td>Resolution</td></tr>
@@ -1149,21 +1156,21 @@
 <td>Coordinates from a row, column or cell number</td></tr>
 <tr><td style="width: 25%;"><a href="xyFromCell.html">yFromRow-method</a></td>
 <td>Coordinates from a row, column or cell number</td></tr>
-<tr><td style="width: 25%;"><a href="coordinates.html">ymax</a></td>
+<tr><td style="width: 25%;"><a href="coords.html">ymax</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
-<tr><td style="width: 25%;"><a href="coordinates.html">ymax-method</a></td>
+<tr><td style="width: 25%;"><a href="coords.html">ymax-method</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
-<tr><td style="width: 25%;"><a href="coordinates.html">ymax&lt;-</a></td>
+<tr><td style="width: 25%;"><a href="coords.html">ymax&lt;-</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
-<tr><td style="width: 25%;"><a href="coordinates.html">ymax&lt;--method</a></td>
+<tr><td style="width: 25%;"><a href="coords.html">ymax&lt;--method</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
-<tr><td style="width: 25%;"><a href="coordinates.html">ymin</a></td>
+<tr><td style="width: 25%;"><a href="coords.html">ymin</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
-<tr><td style="width: 25%;"><a href="coordinates.html">ymin-method</a></td>
+<tr><td style="width: 25%;"><a href="coords.html">ymin-method</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
-<tr><td style="width: 25%;"><a href="coordinates.html">ymin&lt;-</a></td>
+<tr><td style="width: 25%;"><a href="coords.html">ymin&lt;-</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
-<tr><td style="width: 25%;"><a href="coordinates.html">ymin&lt;--method</a></td>
+<tr><td style="width: 25%;"><a href="coords.html">ymin&lt;--method</a></td>
 <td>Coordinates of the Extent of a Raster object</td></tr>
 <tr><td style="width: 25%;"><a href="resolution.html">yres</a></td>
 <td>Resolution</td></tr>
@@ -1218,4 +1225,4 @@
 <tr><td style="width: 25%;"><a href="replacement.html">[[&lt;--method</a></td>
 <td>Replace cell values or layers of a Raster* object</td></tr>
 </table>
-</body></html>
+</div></body></html>

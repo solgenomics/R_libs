@@ -1,5 +1,9 @@
 
-library(nanotime)
+suppressMessages({
+    library(nanotime)
+    library(bit64)
+})
+options(digits=7)                       # needed for error message of 0.3333333 below
 
 expect_equal_numeric <- function(x,y,...) expect_equal(as.numeric(x), as.numeric(y), ...)
 
@@ -12,8 +16,6 @@ expect_identical(nanotime(1), new("nanotime", as.integer64(1)))
 expect_identical(nanotime(as.integer64(1)), new("nanotime", as.integer64(1)))
 expect_identical(as.nanotime(1), new("nanotime", as.integer64(1)))
 expect_identical(as.nanotime(as.integer64(1)), new("nanotime", as.integer64(1)))
-
-if (getRversion() >= as.package_version("4.1.0")) exit_file("skip remainder")
 
 ##test_nanotime_character_first_pass <- function() {
 ## we do a first pass parsing, which is faster than the parsing
@@ -166,7 +168,7 @@ n <- nanotime(c(a=l, b=l))
 expect_identical(names(n), c("a","b"))
 
 
-## format
+## format, and as.character
 ##test_format_default <- function() {
 oldFormat <- getOption("nanotimeFormat")
 oldTz <- getOption("nanotimeTz")
@@ -179,6 +181,13 @@ expect_identical(format(nanotime("1680-07-17T00:00:01.000000000+00:00")),
 expect_identical(format(nanotime("2120-01-01T00:00:59.987654321+00:00")),
                  "2120-01-01T00:00:59.987654321+00:00")
 expect_identical(format(nanotime(NULL)), "nanotime(0)")
+expect_identical(as.character(nanotime("1970-01-01T00:00:00.000000000+00:00")),
+                 "1970-01-01T00:00:00+00:00")
+expect_identical(as.character(nanotime("1680-07-17T00:00:01.000000000+00:00")),
+                 "1680-07-17T00:00:01+00:00")
+expect_identical(as.character(nanotime("2120-01-01T00:00:59.987654321+00:00")),
+                 "2120-01-01T00:00:59.987654321+00:00")
+expect_identical(as.character(format(nanotime(NULL))), "nanotime(0)")
 options(nanotimeFormat=oldFormat)
 options(nanotimeTz=oldTz)
 
@@ -311,12 +320,12 @@ options(nanotimeTz="America/New_York")
 b <- nanotime(0)
 p <- as.POSIXct(b)
 ## LLL: not fully satisfactory here; nanotime will not have 'tz' set from the environment:
-expect_equal(p, as.POSIXct("1969-12-31 19:00:00", tz="America/New_York"))
+expect_equal(p, as.POSIXct("1969-12-31 19:00:00", tz="America/New_York"), check.tzone=FALSE)
 
 options(nanotimeTz=NULL)
 c <- nanotime(0)
 p <- as.POSIXct(c)
-expect_equal(p, as.POSIXct("1970-01-01 00:00:00", tz="UTC"))
+expect_equal(p, as.POSIXct("1970-01-01 00:00:00", tz="UTC"), check.tzone=FALSE)
 
 options(nanotimeTz=oldTz)
 

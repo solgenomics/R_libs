@@ -1,4 +1,4 @@
-magic-package	magic.package
+magic-package	magic-package
 %eq%	eq
 %ge%	eq
 %gt%	eq

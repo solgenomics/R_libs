@@ -1,3 +1,12 @@
+
+# rversions 2.1.1
+
+No user visible changes.
+
+# rversions 2.1.0
+
+* `r_release_macos()` is now correct again for R 4.1.0.
+
 # rversions 2.0.2
 
 * `r_release_tarball()` now has the correct URL for R 4.x.x.

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -28,6 +30,8 @@ randg(const uword n_rows, const uword n_cols, const distr_param& param = distr_p
   arma_extra_debug_sigprint();
   arma_ignore(junk);
   
+  typedef typename obj_type::elem_type eT;
+  
   if(is_Col<obj_type>::value)
     {
     arma_debug_check( (n_cols != 1), "randg(): incompatible size" );
@@ -38,7 +42,7 @@ randg(const uword n_rows, const uword n_cols, const distr_param& param = distr_p
     arma_debug_check( (n_rows != 1), "randg(): incompatible size" );
     }
   
-  obj_type out(n_rows, n_cols);
+  obj_type out(n_rows, n_cols, arma_nozeros_indicator());
   
   double a;
   double b;
@@ -62,21 +66,7 @@ randg(const uword n_rows, const uword n_cols, const distr_param& param = distr_p
   
   arma_debug_check( ((a <= double(0)) || (b <= double(0))), "randg(): a and b must be greater than zero" );
   
-  #if defined(ARMA_USE_EXTERN_RNG)
-    {
-    arma_rng_cxx11_instance.randg_fill(out.memptr(), out.n_elem, a, b);
-    }
-  #else
-    {
-    arma_rng_cxx11 local_arma_rng_cxx11_instance;
-    
-    typedef typename arma_rng_cxx11::seed_type seed_type;
-    
-    local_arma_rng_cxx11_instance.set_seed( seed_type(arma_rng::randi<seed_type>()) );
-    
-    local_arma_rng_cxx11_instance.randg_fill(out.memptr(), out.n_elem, a, b);
-    }
-  #endif
+  arma_rng::randg<eT>::fill(out.memptr(), out.n_elem, a, b);
   
   return out;
   }
@@ -107,14 +97,10 @@ randg(const uword n_elem, const distr_param& param = distr_param(), const arma_e
   arma_ignore(junk1);
   arma_ignore(junk2);
   
-  if(is_Row<obj_type>::value)
-    {
-    return randg<obj_type>(1, n_elem, param);
-    }
-  else
-    {
-    return randg<obj_type>(n_elem, 1, param);
-    }
+  const uword n_rows = (is_Row<obj_type>::value) ? uword(1) : n_elem;
+  const uword n_cols = (is_Row<obj_type>::value) ? n_elem   : uword(1);
+  
+  return randg<obj_type>(n_rows, n_cols, param);
   }
 
 
@@ -187,7 +173,9 @@ randg(const uword n_rows, const uword n_cols, const uword n_slices, const distr_
   arma_extra_debug_sigprint();
   arma_ignore(junk);
   
-  cube_type out(n_rows, n_cols, n_slices);
+  typedef typename cube_type::elem_type eT;
+  
+  cube_type out(n_rows, n_cols, n_slices, arma_nozeros_indicator());
   
   double a;
   double b;
@@ -211,21 +199,7 @@ randg(const uword n_rows, const uword n_cols, const uword n_slices, const distr_
   
   arma_debug_check( ((a <= double(0)) || (b <= double(0))), "randg(): a and b must be greater than zero" );
   
-  #if defined(ARMA_USE_EXTERN_RNG)
-    {
-    arma_rng_cxx11_instance.randg_fill(out.memptr(), out.n_elem, a, b);
-    }
-  #else
-    {
-    arma_rng_cxx11 local_arma_rng_cxx11_instance;
-    
-    typedef typename arma_rng_cxx11::seed_type seed_type;
-    
-    local_arma_rng_cxx11_instance.set_seed( seed_type(arma_rng::randi<seed_type>()) );
-    
-    local_arma_rng_cxx11_instance.randg_fill(out.memptr(), out.n_elem, a, b);
-    }
-  #endif
+  arma_rng::randg<eT>::fill(out.memptr(), out.n_elem, a, b);
   
   return out;
   }

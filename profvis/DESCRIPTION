@@ -36,4 +36,4 @@ Author: Winston Chang [aut, cre],
 Maintainer: Winston Chang <winston@rstudio.com>
 Repository: CRAN
 Date/Publication: 2020-11-02 18:30:02 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2021-01-12 00:16:33 UTC; unix
+Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 23:16:00 UTC; unix

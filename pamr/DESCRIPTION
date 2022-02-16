@@ -10,4 +10,4 @@ Packaged: 2019-04-21 11:21:24 UTC; ripley
 Repository: CRAN
 NeedsCompilation: yes
 Date/Publication: 2019-04-22 06:58:41 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2021-01-12 00:28:36 UTC; unix
+Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 23:22:59 UTC; unix

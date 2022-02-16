@@ -1,5 +1,9 @@
 importFrom("grDevices", boxplot.stats, cairo_pdf,
-	   dev.cur, dev.off, n2mfrow, pdf, postscript, xy.coords)
+	   dev.cur, dev.off
+         , grSoftVersion
+         , n2mfrow, pdf, postscript
+         , xy.coords)
+
 
 importFrom("graphics", abline, arrows, axTicks, axis, axis.POSIXct,
 	   boxplot, curve, frame, hist, lines, locator, matplot, mtext,
@@ -22,6 +26,7 @@ importFrom("stats",
 	   terms, time, update.formula, var, window)
 
 importFrom("utils", head, tail, toLatex, #<- S3 generics !
+           help,
 	   capture.output, data, packageDescription, read.table,
 	   sessionInfo, str)
 
@@ -72,6 +77,7 @@ export (
     funEnv,
 	"hatMat",
         "histBxp", # defunct: "hist.bxp"
+    helppdf,
 	"ichar",
 	"integrate.xy",
 	"inv.seq",
@@ -138,12 +144,14 @@ export (
 	"QUnif",
 
         read.org.table,
+    relErrV, relErr,
 	"rot2", "rotn",
 	"roundfixS",
 	"rrange",
 	"sHalton",
 	"seqXtend",
     sessionInfoX,
+    shortRversion,
 	"signi",
         "sourceAttach",
 	"strcodes",

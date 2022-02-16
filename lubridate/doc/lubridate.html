@@ -15,8 +15,24 @@
 <title>Do more with dates and times in R</title>
 
 
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
-<style type="text/css">code{white-space: pre;}</style>
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -76,6 +92,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   }
 })();
 </script>
+
 
 
 
@@ -186,7 +203,6 @@ jsm
 <span class="co">#&gt; [1] &quot;2012-01-01 06:00:00 UTC&quot;</span>
 <span class="kw">ymd</span>(<span class="dv">20110101</span>) <span class="op">+</span><span class="st"> </span><span class="kw">years</span>(<span class="dv">1</span>)
 <span class="co">#&gt; [1] &quot;2012-01-01&quot;</span>
-
 <span class="kw">leap_year</span>(<span class="dv">2012</span>) ## leap year
 <span class="co">#&gt; [1] TRUE</span>
 <span class="kw">ymd</span>(<span class="dv">20120101</span>) <span class="op">+</span><span class="st"> </span><span class="kw">dyears</span>(<span class="dv">1</span>)

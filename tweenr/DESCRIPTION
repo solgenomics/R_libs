@@ -1,11 +1,13 @@
 Package: tweenr
 Type: Package
 Title: Interpolate Data for Smooth Animations
-Version: 1.0.1
-Date: 2018-12-14
-Authors@R: c(
-    person('Thomas Lin', 'Pedersen', , 'thomasp85@gmail.com', c('aut', 'cre'))
-    )
+Version: 1.0.2
+Authors@R: 
+    c(person(given = "Thomas Lin",
+             family = "Pedersen",
+             role = c("aut", "cre"),
+             email = "thomasp85@gmail.com",
+             comment = c(ORCID = "0000-0002-5147-4711")))
 Maintainer: Thomas Lin Pedersen <thomasp85@gmail.com>
 Description: In order to create smooth animation between states of data,
     tweening is necessary. This package provides a range of functions for
@@ -20,11 +22,12 @@ LazyData: TRUE
 Depends: R (>= 3.2.0)
 Imports: Rcpp (>= 0.12.3), grDevices, farver, magrittr, rlang
 LinkingTo: Rcpp
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1.9001
 Suggests: testthat, covr
 NeedsCompilation: yes
-Packaged: 2018-12-14 13:16:06 UTC; thomas
+Packaged: 2021-03-23 13:21:28 UTC; thomas
 Author: Thomas Lin Pedersen [aut, cre]
+    (<https://orcid.org/0000-0002-5147-4711>)
 Repository: CRAN
-Date/Publication: 2018-12-14 13:40:03 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2021-01-12 17:40:08 UTC; unix
+Date/Publication: 2021-03-23 15:40:02 UTC
+Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 23:37:52 UTC; unix

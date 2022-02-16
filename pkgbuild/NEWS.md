@@ -1,3 +1,34 @@
+# pkgbuild 1.3.1
+
+* Accept Rtools40 for R 4.2, it works well, as long as the PATH includes
+  both `${RTOOLS40_HOME}/usr/bin` and `${RTOOLS40_HOME}/ucrt64/bin`.
+  E.g. `~/.Renviron` should contain now
+  ```
+  PATH="${RTOOLS40_HOME}\usr\bin;${RTOOLS40_HOME}\ucrt64\bin;${PATH}"
+  ```
+  to make Rtools40 work with both R 4.2.x (devel currently) and R 4.1.x and
+  R 4.0.x.
+
+# pkgbuild 1.3.0
+
+* pkgbuild now supports Rtools 4.2.
+
+* pkgbuild now returns the correct path for R 3.x (#96).
+
+* `build()` now always returns the path of the built package (#108).
+
+* pkgbuild output now looks better in `.Rmd` documents and in general in non-dynamic terminals. You can also force dynamic and non-dynamic output now (#64).
+
+* pkgbuild does not build the PDF manual now if `pdflatex` is not installed, even if `manual = TRUE` (#123).
+
+# pkgbuild 1.2.1
+
+* Gábor Csárdi is now the maintainer.
+
+* `build_setup_source` now considerers both command-line build arguments, as
+  well as parameters `vignettes` or `manual` when conditionally executing
+  flag-dependent behaviors (@dgkf, #120)
+
 # pkgbuild 1.2.0
 
 * pkgbuild is now licensed as MIT (#106)

@@ -12,50 +12,50 @@ print_cpp <- function(filename) {
 library(cpp11)
 
 should_run_benchmarks <- function(x) {
-  get("requireNamespace")("cpp11test") && asNamespace("cpp11test")$should_run_benchmarks()
+  get("requireNamespace")("cpp11test", quietly = TRUE) && asNamespace("cpp11test")$should_run_benchmarks()
 }
 
 ## -----------------------------------------------------------------------------
-#  x <- c(1, 2, 3)
-#  y <- x
+x <- c(1, 2, 3)
+y <- x
 
 ## -----------------------------------------------------------------------------
-#  y[[3]] <- 4
-#  y
-#  
-#  x
+y[[3]] <- 4
+y
+
+x
 
 ## -----------------------------------------------------------------------------
-#  x <- c(1, 2, 3)
-#  y <- x * 2
-#  y
-#  
-#  x
+x <- c(1, 2, 3)
+y <- x * 2
+y
+
+x
 
 ## -----------------------------------------------------------------------------
-#  z <- times_two_rcpp(x)
-#  z
-#  
-#  x
+z <- times_two_rcpp(x)
+z
+
+x
 
 ## -----------------------------------------------------------------------------
-#  x <- c(1, 2, 3)
-#  
-#  z <- times_two_cpp11(x)
-#  z
-#  
-#  x
+x <- c(1, 2, 3)
+
+z <- times_two_cpp11(x)
+z
+
+x
 
 ## ---- R.options = list(max.print = 20)----------------------------------------
-#  1:1e9
+1:1e9
 
 ## -----------------------------------------------------------------------------
-#  x <- identity_rcpp(1:100000)
-#  lobstr::obj_size(x)
+x <- identity_rcpp(1:100000)
+lobstr::obj_size(x)
 
 ## -----------------------------------------------------------------------------
-#  y <- identity_cpp11(1:100000)
-#  lobstr::obj_size(y)
+y <- identity_cpp11(1:100000)
+lobstr::obj_size(y)
 
 ## ---- message = FALSE, results = 'asis', eval = should_run_benchmarks()-------
 #  library(cpp11test)
@@ -87,7 +87,7 @@ should_run_benchmarks <- function(x) {
 #  saveRDS(b_sum, "sum.Rds", version = 2)
 
 ## -----------------------------------------------------------------------------
-#  knitr::kable(readRDS("sum.Rds"))
+knitr::kable(readRDS("sum.Rds"))
 
 ## ---- eval = FALSE, include = FALSE-------------------------------------------
 #  # count lines for Rcpp headers (excluding comments)
@@ -127,22 +127,22 @@ should_run_benchmarks <- function(x) {
 #  )[c("len", "pkg", "min")]
 #  saveRDS(b_release, "release.Rds", version = 2)
 
-## ---- echo = FALSE, dev = "svg", fig.ext = "svg"------------------------------
-#  b_release <- readRDS("release.Rds")
-#  library(ggplot2)
-#  ggplot(b_release, aes(x = len, y = min / len, color = pkg)) +
-#    geom_point() +
-#    geom_line() +
-#    bench::scale_y_bench_time(base = NULL) +
-#    scale_x_continuous(labels = scales::comma)+
-#    labs(
-#      tite = "cpp11 uses constant time protection",
-#      x = "Number of protected objects",
-#      y = "Average time to release protection on one object"
-#    )
+## ---- echo = FALSE, dev = "svg", fig.ext = "svg", eval = capabilities("cairo")----
+b_release <- readRDS("release.Rds")
+library(ggplot2)
+ggplot(b_release, aes(x = len, y = min / len, color = pkg)) +
+  geom_point() +
+  geom_line() +
+  bench::scale_y_bench_time(base = NULL) +
+  scale_x_continuous(labels = scales::comma)+
+  labs(
+    tite = "cpp11 uses constant time protection",
+    x = "Number of protected objects",
+    y = "Average time to release protection on one object"
+  )
 
 ## ---- echo = FALSE------------------------------------------------------------
-#  knitr::kable(b_release)
+knitr::kable(b_release)
 
 ## ---- message = FALSE, eval = should_run_benchmarks()-------------------------
 #  grid <- expand.grid(len = 10 ^ (0:7), pkg = "cpp11", stringsAsFactors = FALSE)
@@ -160,21 +160,21 @@ should_run_benchmarks <- function(x) {
 #  )[c("len", "pkg", "min", "mem_alloc", "n_itr", "n_gc")]
 #  saveRDS(b_grow, "growth.Rds", version = 2)
 
-## ---- echo = FALSE, dev = "svg", fig.ext = "svg"------------------------------
-#  b_grow <- readRDS("growth.Rds")
-#  library(ggplot2)
-#  ggplot(b_grow, aes(x = len, y = min, color = pkg)) +
-#    geom_point() +
-#    geom_line() +
-#    bench::scale_y_bench_time() +
-#    scale_x_log10(
-#      breaks = scales::trans_breaks("log10", function(x) 10^x),
-#      labels = scales::trans_format("log10", scales::math_format(10^.x))
-#    ) +
-#    coord_fixed() +
-#    theme(panel.grid.minor = element_blank()) +
-#    labs(title = "log-log plot of vector size vs construction time", x = NULL, y = NULL)
+## ---- echo = FALSE, dev = "svg", fig.ext = "svg", eval = capabilities("cairo")----
+b_grow <- readRDS("growth.Rds")
+library(ggplot2)
+ggplot(b_grow, aes(x = len, y = min, color = pkg)) +
+  geom_point() +
+  geom_line() +
+  bench::scale_y_bench_time() +
+  scale_x_log10(
+    breaks = scales::trans_breaks("log10", function(x) 10^x),
+    labels = scales::trans_format("log10", scales::math_format(10^.x))
+  ) +
+  coord_fixed() +
+  theme(panel.grid.minor = element_blank()) +
+  labs(title = "log-log plot of vector size vs construction time", x = NULL, y = NULL)
 
 ## ---- echo = FALSE------------------------------------------------------------
-#  knitr::kable(b_grow)
+knitr::kable(b_grow)
 

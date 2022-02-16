@@ -1,7 +1,8 @@
-BiocManager-pkg-package	BiocManager-pkg
 available	available
 BiocManager	BiocManager-pkg
 BiocManager-pkg	BiocManager-pkg
+BiocManager.check_repositories	repositories
+BiocManager.snapshot	repositories
 BIOCONDUCTOR_ONLINE_VERSION_DIAGNOSIS	install
 install	install
 print.biocValid	valid

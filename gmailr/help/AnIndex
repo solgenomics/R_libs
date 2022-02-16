@@ -1,4 +1,3 @@
-gmailr-package	gmailr
 %>%	pipe
 as.character.mime	as.character.mime
 attachment	gmailr-deprecated

@@ -18,6 +18,9 @@ namespace cpp11 {
 
 template <>
 inline SEXP r_vector<r_string>::valid_type(SEXP data) {
+  if (data == nullptr) {
+    throw type_error(STRSXP, NILSXP);
+  }
   if (TYPEOF(data) != STRSXP) {
     throw type_error(STRSXP, TYPEOF(data));
   }
@@ -110,14 +113,6 @@ inline r_vector<r_string>::r_vector(SEXP&& data)
 
 template <>
 inline r_vector<r_string>::r_vector(std::initializer_list<r_string> il)
-    : cpp11::r_vector<r_string>(as_sexp(il)), capacity_(il.size()) {}
-
-template <>
-inline r_vector<r_string>::r_vector(std::initializer_list<const char*> il)
-    : cpp11::r_vector<r_string>(as_sexp(il)), capacity_(il.size()) {}
-
-template <>
-inline r_vector<r_string>::r_vector(std::initializer_list<std::string> il)
     : cpp11::r_vector<r_string>(as_sexp(il)), capacity_(il.size()) {}
 
 template <>

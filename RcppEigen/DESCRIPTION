@@ -32,4 +32,4 @@ NeedsCompilation: yes
 Packaged: 2020-12-17 13:25:48 UTC; edd
 Repository: CRAN
 Date/Publication: 2020-12-17 16:20:07 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2021-01-11 23:45:34 UTC; unix
+Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 22:57:54 UTC; unix

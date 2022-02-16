@@ -1,6 +1,12 @@
 Changes to the plotmo package
 -----------------------------
 
+--- 3.6.1 Jun 2, 2021
+
+  Minor updates for R version 4.1.0.
+  These updates quieten some warnings from sprintf when plotmo's trace flag is set.
+  Alsp updated some of the test scripts.
+
 --- 3.6.0 Sep 12, 2020
 
 We now have better support for models with unusual variable names.

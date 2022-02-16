@@ -15,45 +15,6 @@
 
 <title>2. Reading, Writing and Converting Simple Features</title>
 
-<style type="text/css">
-a.anchor-section {margin-left: 10px; visibility: hidden; color: inherit;}
-a.anchor-section::before {content: '#';}
-.hasAnchor:hover a.anchor-section {visibility: visible;}
-</style>
-<script>// Anchor sections v1.0 written by Atsushi Yasumoto on Oct 3rd, 2020.
-document.addEventListener('DOMContentLoaded', function() {
-  // Do nothing if AnchorJS is used
-  if (typeof window.anchors === 'object' && anchors.hasOwnProperty('hasAnchorJSLink')) {
-    return;
-  }
-
-  const h = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
-
-  // Do nothing if sections are already anchored
-  if (Array.from(h).some(x => x.classList.contains('hasAnchor'))) {
-    return null;
-  }
-
-  // Use section id when pandoc runs with --section-divs
-  const section_id = function(x) {
-    return ((x.classList.contains('section') || (x.tagName === 'SECTION'))
-            ? x.id : '');
-  };
-
-  // Add anchors
-  h.forEach(function(x) {
-    const id = x.id || section_id(x.parentElement);
-    if (id === '') {
-      return null;
-    }
-    let anchor = document.createElement('a');
-    anchor.href = '#' + id;
-    anchor.classList = ['anchor-section'];
-    x.classList.add('hasAnchor');
-    x.appendChild(anchor);
-  });
-});
-</script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -65,7 +26,14 @@ document.addEventListener('DOMContentLoaded', function() {
     </style>
 
 
-<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
@@ -151,6 +119,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 })();
 </script>
+
 
 
 
@@ -352,7 +321,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 <p><strong>For a better version of the sf vignettes see</strong> <a href="https://r-spatial.github.io/sf/articles/" class="uri">https://r-spatial.github.io/sf/articles/</a></p>
-<p>This vignetted describes how simple features can be read in R from files or databases, and how they can be converted to other formats (text, <a href="https://cran.r-project.org/package=sp">sp</a>)</p>
+<p>This vignette describes how simple features can be read in R from files or databases, and how they can be converted to other formats (text, <a href="https://cran.r-project.org/package=sp">sp</a>)</p>
 <div id="reading-and-writing-through-gdal" class="section level2">
 <h2>Reading and writing through GDAL</h2>
 <p>The Geospatial Data Abstraction Library (<a href="https://gdal.org/">GDAL</a>) is the swiss army knife for spatial data: it reads and writes vector and raster data from and to practically every file format, or database, of significance. Package <code>sf</code> reads and writes using GDAL by the functions <code>st_read</code> and <code>st_write</code>.</p>
@@ -370,14 +339,15 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(sf)</a>
 <a class="sourceLine" id="cb1-2" title="2">fname &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;shape/nc.shp&quot;</span>, <span class="dt">package=</span><span class="st">&quot;sf&quot;</span>)</a>
 <a class="sourceLine" id="cb1-3" title="3">fname</a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="co">## [1] &quot;/tmp/RtmptpFtGS/Rinst253762c85271e/sf/shape/nc.shp&quot;</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="co">## [1] &quot;/tmp/RtmpGT5cfI/Rinst7ee743a19d0a5/sf/shape/nc.shp&quot;</span></a>
 <a class="sourceLine" id="cb1-5" title="5">nc &lt;-<span class="st"> </span><span class="kw">st_read</span>(fname)</a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="co">## Reading layer `nc&#39; from data source `/tmp/RtmptpFtGS/Rinst253762c85271e/sf/shape/nc.shp&#39; using driver `ESRI Shapefile&#39;</span></a>
-<a class="sourceLine" id="cb1-7" title="7"><span class="co">## Simple feature collection with 100 features and 14 fields</span></a>
-<a class="sourceLine" id="cb1-8" title="8"><span class="co">## geometry type:  MULTIPOLYGON</span></a>
-<a class="sourceLine" id="cb1-9" title="9"><span class="co">## dimension:      XY</span></a>
-<a class="sourceLine" id="cb1-10" title="10"><span class="co">## bbox:           xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965</span></a>
-<a class="sourceLine" id="cb1-11" title="11"><span class="co">## geographic CRS: NAD27</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-6" title="6"><span class="co">## Reading layer `nc&#39; from data source </span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="co">##   `/tmp/RtmpGT5cfI/Rinst7ee743a19d0a5/sf/shape/nc.shp&#39; using driver `ESRI Shapefile&#39;</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="co">## Simple feature collection with 100 features and 14 fields</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="co">## Geometry type: MULTIPOLYGON</span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="co">## Dimension:     XY</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="co">## Bounding box:  xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965</span></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="co">## Geodetic CRS:  NAD27</span></a></code></pre></div>
 <p>Typical users will use a file name with path for <code>fname</code>, or first set R’s working directory with <code>setwd()</code> and use file name without path.</p>
 <p>We see here that a single argument is used to find both the datasource and the layer. This works when the datasource contains a single layer. In case the number of layers is zero (e.g. a database with no tables), an error message is given. In case there are more layers than one, the first layer is returned, but a message and a warning are given:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;PG:dbname=postgis&quot;</span>)</a>
@@ -415,12 +385,13 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>Alternatively, a user can set the global option <code>stringsAsFactors</code>, and this will have the same effect:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">options</span>(<span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb6-2" title="2"><span class="kw">st_read</span>(fname)</a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="co">## Reading layer `nc&#39; from data source `/tmp/RtmptpFtGS/Rinst253762c85271e/sf/shape/nc.shp&#39; using driver `ESRI Shapefile&#39;</span></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="co">## Simple feature collection with 100 features and 14 fields</span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="co">## geometry type:  MULTIPOLYGON</span></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="co">## dimension:      XY</span></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="co">## bbox:           xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965</span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co">## geographic CRS: NAD27</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co">## Reading layer `nc&#39; from data source </span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co">##   `/tmp/RtmpGT5cfI/Rinst7ee743a19d0a5/sf/shape/nc.shp&#39; using driver `ESRI Shapefile&#39;</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="co">## Simple feature collection with 100 features and 14 fields</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="co">## Geometry type: MULTIPOLYGON</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="co">## Dimension:     XY</span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="co">## Bounding box:  xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965</span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="co">## Geodetic CRS:  NAD27</span></a></code></pre></div>
 </div>
 <div id="using-st_write" class="section level3">
 <h3>Using st_write</h3>
@@ -594,7 +565,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>Various GDAL drivers have options that influences the reading or writing process, for example what the driver should do when a table already exists in a database: append records to the table or overwrite it:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">st_write</span>(<span class="kw">st_as_sf</span>(meuse), <span class="st">&quot;PG:dbname=postgis&quot;</span>, <span class="st">&quot;meuse&quot;</span>, </a>
 <a class="sourceLine" id="cb9-2" title="2">    <span class="dt">layer_options =</span> <span class="st">&quot;OVERWRITE=true&quot;</span>)</a></code></pre></div>
-<p>In case the table exists and the option is not specified, the driver will give an error. Driver-specific options are documented in the driver manual of <a href="https://gdal.org/ogr_formats.html">gdal</a>. Multiple options can be given by multiple strings in <code>options</code>.</p>
+<p>In case the table exists and the option is not specified, the driver will give an error. Driver-specific options are documented in the driver manual of <a href="https://gdal.org/drivers/vector/index.html">gdal</a>. Multiple options can be given by multiple strings in <code>options</code>.</p>
 <p>For <code>st_read</code>, there is only <code>options</code>; for <code>st_write</code>, one needs to distinguish between <code>dataset_options</code> and <code>layer_options</code>, the first related to opening a dataset, the second to creating layers in the dataset.</p>
 </div>
 </div>
@@ -630,10 +601,10 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>We can convert back from WKT by using <code>st_as_sfc</code>:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">st_as_sfc</span>(str)</a>
 <a class="sourceLine" id="cb14-2" title="2"><span class="co">## Geometry set for 1 feature </span></a>
-<a class="sourceLine" id="cb14-3" title="3"><span class="co">## geometry type:  LINESTRING</span></a>
-<a class="sourceLine" id="cb14-4" title="4"><span class="co">## dimension:      XY</span></a>
-<a class="sourceLine" id="cb14-5" title="5"><span class="co">## bbox:           xmin: 0 ymin: 1 xmax: 8 ymax: 9</span></a>
-<a class="sourceLine" id="cb14-6" title="6"><span class="co">## CRS:            NA</span></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="co">## Geometry type: LINESTRING</span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="co">## Dimension:     XY</span></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="co">## Bounding box:  xmin: 0 ymin: 1 xmax: 8 ymax: 9</span></a>
+<a class="sourceLine" id="cb14-6" title="6"><span class="co">## CRS:           NA</span></a>
 <a class="sourceLine" id="cb14-7" title="7"><span class="co">## LINESTRING (0 1, 2 3, 4 5, 6 7, 8 9)</span></a></code></pre></div>
 </div>
 <div id="conversion-to-and-from-well-known-binary" class="section level3">
@@ -654,10 +625,10 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">x =<span class="st"> </span><span class="kw">st_as_binary</span>(<span class="kw">st_sfc</span>(<span class="kw">st_point</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">1</span>), <span class="kw">st_point</span>(<span class="dv">5</span><span class="op">:</span><span class="dv">6</span>)))</a>
 <a class="sourceLine" id="cb17-2" title="2"><span class="kw">st_as_sfc</span>(x)</a>
 <a class="sourceLine" id="cb17-3" title="3"><span class="co">## Geometry set for 2 features </span></a>
-<a class="sourceLine" id="cb17-4" title="4"><span class="co">## geometry type:  POINT</span></a>
-<a class="sourceLine" id="cb17-5" title="5"><span class="co">## dimension:      XY</span></a>
-<a class="sourceLine" id="cb17-6" title="6"><span class="co">## bbox:           xmin: 0 ymin: 1 xmax: 5 ymax: 6</span></a>
-<a class="sourceLine" id="cb17-7" title="7"><span class="co">## CRS:            NA</span></a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="co">## Geometry type: POINT</span></a>
+<a class="sourceLine" id="cb17-5" title="5"><span class="co">## Dimension:     XY</span></a>
+<a class="sourceLine" id="cb17-6" title="6"><span class="co">## Bounding box:  xmin: 0 ymin: 1 xmax: 5 ymax: 6</span></a>
+<a class="sourceLine" id="cb17-7" title="7"><span class="co">## CRS:           NA</span></a>
 <a class="sourceLine" id="cb17-8" title="8"><span class="co">## POINT (0 1)</span></a>
 <a class="sourceLine" id="cb17-9" title="9"><span class="co">## POINT (5 6)</span></a></code></pre></div>
 </div>
@@ -665,24 +636,28 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h3>Conversion to and from sp</h3>
 <p>Spatial objects as maintained by package <code>sp</code> can be converted into simple feature objects or geometries by <code>st_as_sf</code> and <code>st_as_sfc</code>, respectively:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">methods</span>(st_as_sf)</a>
-<a class="sourceLine" id="cb18-2" title="2"><span class="co">##  [1] st_as_sf.Spatial*      st_as_sf.data.frame*   st_as_sf.lpp*         </span></a>
-<a class="sourceLine" id="cb18-3" title="3"><span class="co">##  [4] st_as_sf.map*          st_as_sf.owin*         st_as_sf.ppp*         </span></a>
-<a class="sourceLine" id="cb18-4" title="4"><span class="co">##  [7] st_as_sf.psp*          st_as_sf.s2_geography* st_as_sf.sf*          </span></a>
-<a class="sourceLine" id="cb18-5" title="5"><span class="co">## [10] st_as_sf.sfc*         </span></a>
-<a class="sourceLine" id="cb18-6" title="6"><span class="co">## see &#39;?methods&#39; for accessing help and source code</span></a>
-<a class="sourceLine" id="cb18-7" title="7"><span class="kw">methods</span>(st_as_sfc)</a>
-<a class="sourceLine" id="cb18-8" title="8"><span class="co">##  [1] st_as_sfc.SpatialLines*       st_as_sfc.SpatialMultiPoints*</span></a>
-<a class="sourceLine" id="cb18-9" title="9"><span class="co">##  [3] st_as_sfc.SpatialPixels*      st_as_sfc.SpatialPoints*     </span></a>
-<a class="sourceLine" id="cb18-10" title="10"><span class="co">##  [5] st_as_sfc.SpatialPolygons*    st_as_sfc.TWKB*              </span></a>
-<a class="sourceLine" id="cb18-11" title="11"><span class="co">##  [7] st_as_sfc.WKB*                st_as_sfc.bbox*              </span></a>
-<a class="sourceLine" id="cb18-12" title="12"><span class="co">##  [9] st_as_sfc.blob*               st_as_sfc.character*         </span></a>
-<a class="sourceLine" id="cb18-13" title="13"><span class="co">## [11] st_as_sfc.dimensions*         st_as_sfc.factor*            </span></a>
-<a class="sourceLine" id="cb18-14" title="14"><span class="co">## [13] st_as_sfc.list*               st_as_sfc.map*               </span></a>
-<a class="sourceLine" id="cb18-15" title="15"><span class="co">## [15] st_as_sfc.owin*               st_as_sfc.pq_geometry*       </span></a>
-<a class="sourceLine" id="cb18-16" title="16"><span class="co">## [17] st_as_sfc.psp*                st_as_sfc.raw*               </span></a>
-<a class="sourceLine" id="cb18-17" title="17"><span class="co">## [19] st_as_sfc.s2_geography*       st_as_sfc.tess*              </span></a>
-<a class="sourceLine" id="cb18-18" title="18"><span class="co">## [21] st_as_sfc.wk_wkb*            </span></a>
-<a class="sourceLine" id="cb18-19" title="19"><span class="co">## see &#39;?methods&#39; for accessing help and source code</span></a></code></pre></div>
+<a class="sourceLine" id="cb18-2" title="2"><span class="co">##  [1] st_as_sf.SpatVector*   st_as_sf.Spatial*      st_as_sf.data.frame*  </span></a>
+<a class="sourceLine" id="cb18-3" title="3"><span class="co">##  [4] st_as_sf.lpp*          st_as_sf.map*          st_as_sf.owin*        </span></a>
+<a class="sourceLine" id="cb18-4" title="4"><span class="co">##  [7] st_as_sf.ppp*          st_as_sf.ppplist*      st_as_sf.psp*         </span></a>
+<a class="sourceLine" id="cb18-5" title="5"><span class="co">## [10] st_as_sf.s2_geography* st_as_sf.sf*           st_as_sf.sfc*         </span></a>
+<a class="sourceLine" id="cb18-6" title="6"><span class="co">## [13] st_as_sf.wk_crc*       st_as_sf.wk_rct*       st_as_sf.wk_wkb*      </span></a>
+<a class="sourceLine" id="cb18-7" title="7"><span class="co">## [16] st_as_sf.wk_wkt*       st_as_sf.wk_xy*       </span></a>
+<a class="sourceLine" id="cb18-8" title="8"><span class="co">## see &#39;?methods&#39; for accessing help and source code</span></a>
+<a class="sourceLine" id="cb18-9" title="9"><span class="kw">methods</span>(st_as_sfc)</a>
+<a class="sourceLine" id="cb18-10" title="10"><span class="co">##  [1] st_as_sfc.SpatialLines*       st_as_sfc.SpatialMultiPoints*</span></a>
+<a class="sourceLine" id="cb18-11" title="11"><span class="co">##  [3] st_as_sfc.SpatialPixels*      st_as_sfc.SpatialPoints*     </span></a>
+<a class="sourceLine" id="cb18-12" title="12"><span class="co">##  [5] st_as_sfc.SpatialPolygons*    st_as_sfc.WKB*               </span></a>
+<a class="sourceLine" id="cb18-13" title="13"><span class="co">##  [7] st_as_sfc.bbox*               st_as_sfc.blob*              </span></a>
+<a class="sourceLine" id="cb18-14" title="14"><span class="co">##  [9] st_as_sfc.character*          st_as_sfc.dimensions*        </span></a>
+<a class="sourceLine" id="cb18-15" title="15"><span class="co">## [11] st_as_sfc.factor*             st_as_sfc.list*              </span></a>
+<a class="sourceLine" id="cb18-16" title="16"><span class="co">## [13] st_as_sfc.map*                st_as_sfc.owin*              </span></a>
+<a class="sourceLine" id="cb18-17" title="17"><span class="co">## [15] st_as_sfc.pq_geometry*        st_as_sfc.psp*               </span></a>
+<a class="sourceLine" id="cb18-18" title="18"><span class="co">## [17] st_as_sfc.raw*                st_as_sfc.s2_geography*      </span></a>
+<a class="sourceLine" id="cb18-19" title="19"><span class="co">## [19] st_as_sfc.sf*                 st_as_sfc.tess*              </span></a>
+<a class="sourceLine" id="cb18-20" title="20"><span class="co">## [21] st_as_sfc.wk_crc*             st_as_sfc.wk_rct*            </span></a>
+<a class="sourceLine" id="cb18-21" title="21"><span class="co">## [23] st_as_sfc.wk_wkb*             st_as_sfc.wk_wkt*            </span></a>
+<a class="sourceLine" id="cb18-22" title="22"><span class="co">## [25] st_as_sfc.wk_xy*             </span></a>
+<a class="sourceLine" id="cb18-23" title="23"><span class="co">## see &#39;?methods&#39; for accessing help and source code</span></a></code></pre></div>
 <p>An example would be:</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">library</span>(sp)</a>
 <a class="sourceLine" id="cb19-2" title="2"><span class="kw">data</span>(meuse)</a>

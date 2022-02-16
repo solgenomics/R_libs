@@ -21,13 +21,18 @@ events	events
 expand.covs	expand.covs
 expand.covs.default	expand.covs
 expand.covs.msdata	expand.covs.msdata
+haz_function	haz_function
 is.circular	transhelp
 Liver cirrhosis data	Liver-cirrhosis-data
 LMAJ	LMAJ
 MarkovTest	MarkovTest
+modify_transMat	modify_transMat
 msboot	msboot
+msboot.relsurv	msboot.relsurv
+msboot.relsurv.boot	msboot.relsurv.boot
 msdata2etm	msdata2etm
 msfit	msfit
+msfit.relsurv	msfit.relsurv
 msprep	msprep
 mssample	mssample
 mstate	mstate-package
@@ -57,6 +62,7 @@ trans2Q	transhelp
 trans2tra	trans2tra
 transhelp	transhelp
 transMat	transMat
+varHaz.fixed	varHaz.fixed
 vis.mirror.pt	vis.mirror.pt
 vis.multiple.pt	vis.multiple.pt
 xsect	xsect

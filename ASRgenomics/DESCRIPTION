@@ -1,0 +1,25 @@
+Package: ASRgenomics
+Title: ASReml-R Genomics Tools
+Version: 1.0.0
+Author: c(person('Salvador', 'Gezan', email='salvador.gezan@vsni.co.uk', role=c('aut', 'cre')),
+          person('Darren', 'Murray', email='darren.murray@vsni.co.uk', role=c('aut', 'cre')),
+          person('Amanda', 'Avelar de Oliveira', email='amanda.aoliveira@vsni.co.uk', role='aut')
+Maintainer: Salvador A. Gezan <salvador.gezan@vsni.co.uk>
+Description: This package presents a series of molecular and genetic routines in the R
+             environment with the aim to assist in analytical pipelines before and after use of ASReml-R
+             or another library to perform tasks such as Genomic Selection (GS) or Genome-Wide
+             Associaton Analyses (GWAS). 
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+SystemRequirements: GNU make
+RoxygenNote: 7.1.1
+Suggests: knitr, rmarkdown,
+VignetteBuilder: knitr
+Depends: R (>= 4.0.0)
+Imports: Matrix, stats, ggplot2, AGHmatrix, factoextra, ggpubr,
+        reshape2, methods, superheat, scattermore
+URL: www.vsni.co.uk/software/asreml
+NeedsCompilation: no
+Packaged: 2021-04-17 06:56:40 UTC; jenkins
+Built: R 4.0.5; ; 2021-04-17 06:58:49 UTC; unix

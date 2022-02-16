@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -20,11 +22,12 @@
 
 
 template<typename eT>
-arma_hot
 arma_inline
 void
 arrayops::copy(eT* dest, const eT* src, const uword n_elem)
   {
+  if( (dest == src) || (n_elem == 0) )  { return; }
+  
   if(is_cx<eT>::no)
     {
     if(n_elem <= 9)
@@ -38,7 +41,7 @@ arrayops::copy(eT* dest, const eT* src, const uword n_elem)
     }
   else
     {
-    if(n_elem > 0)  { std::memcpy(dest, src, n_elem*sizeof(eT)); }
+    std::memcpy(dest, src, n_elem*sizeof(eT));
     }
   }
 
@@ -83,9 +86,11 @@ arrayops::fill_zeros(eT* dest, const uword n_elem)
   {
   typedef typename get_pod_type<eT>::result pod_type;
   
+  if(n_elem == 0)  { return; }
+  
   if(std::numeric_limits<eT>::is_integer || std::numeric_limits<pod_type>::is_iec559)
     {
-    if(n_elem > 0)  { std::memset((void*)dest, 0, sizeof(eT)*n_elem); }
+    std::memset((void*)dest, 0, sizeof(eT)*n_elem);
     }
   else
     {
@@ -135,7 +140,7 @@ arrayops::clean(eT* mem, const uword n_elem, const eT abs_limit, const typename 
     {
     eT& val = mem[i];
     
-    val = (std::abs(val) <= abs_limit) ? eT(0) : val;
+    val = (eop_aux::arma_abs(val) <= abs_limit) ? eT(0) : val;
     }
   }
 
@@ -172,8 +177,53 @@ arrayops::clean(std::complex<T>* mem, const uword n_elem, const T abs_limit)
 
 
 
+template<typename eT>
+inline
+void
+arrayops::clamp(eT* mem, const uword n_elem, const eT min_val, const eT max_val, const typename arma_not_cx<eT>::result* junk)
+  {
+  arma_ignore(junk);
+  
+  for(uword i=0; i<n_elem; ++i)
+    {
+    eT& val = mem[i];
+    
+    val = (val < min_val) ? min_val : ((val > max_val) ? max_val : val);
+    }
+  }
+
+
+
+template<typename T>
+inline
+void
+arrayops::clamp(std::complex<T>* mem, const uword n_elem, const std::complex<T>& min_val, const std::complex<T>& max_val)
+  {
+  typedef typename std::complex<T> eT;
+  
+  const T min_val_real = std::real(min_val);
+  const T min_val_imag = std::imag(min_val);
+  
+  const T max_val_real = std::real(max_val);
+  const T max_val_imag = std::imag(max_val);
+  
+  for(uword i=0; i<n_elem; ++i)
+    {
+    eT& val = mem[i];
+    
+    T val_real = std::real(val);
+    T val_imag = std::imag(val);
+    
+    val_real = (val_real < min_val_real) ? min_val_real : ((val_real > max_val_real) ? max_val_real : val_real);
+    val_imag = (val_imag < min_val_imag) ? min_val_imag : ((val_imag > max_val_imag) ? max_val_imag : val_imag);
+    
+    val = std::complex<T>(val_real,val_imag);
+    }
+  }
+
+
+
 template<typename out_eT, typename in_eT>
-arma_hot
 arma_inline
 void
 arrayops::convert_cx_scalar
@@ -193,7 +243,6 @@ arrayops::convert_cx_scalar
 
 
 template<typename out_eT, typename in_T>
-arma_hot
 arma_inline
 void
 arrayops::convert_cx_scalar
@@ -205,13 +254,16 @@ arrayops::convert_cx_scalar
   {
   arma_ignore(junk);
   
-  out = out_eT( in.real() );
+  const in_T val = in.real();
+  
+  const bool conversion_ok = (std::is_integral<out_eT>::value && std::is_floating_point<in_T>::value) ? arma_isfinite(val) : true;
+  
+  out = conversion_ok ? out_eT(val) : out_eT(0);
   }
 
 
 
 template<typename out_T, typename in_T>
-arma_hot
 arma_inline
 void
 arrayops::convert_cx_scalar
@@ -242,6 +294,7 @@ arrayops::convert(out_eT* dest, const in_eT* src, const uword n_elem)
     return;
     }
   
+  const bool check_finite = (std::is_integral<out_eT>::value && std::is_floating_point<in_eT>::value);
   
   uword j;
   
@@ -253,15 +306,26 @@ arrayops::convert(out_eT* dest, const in_eT* src, const uword n_elem)
     // dest[i] = out_eT( tmp_i );
     // dest[j] = out_eT( tmp_j );
     
-    (*dest) = (is_signed<out_eT>::value)
-              ? out_eT( tmp_i )
-              : ( cond_rel< is_signed<in_eT>::value >::lt(tmp_i, in_eT(0)) ? out_eT(0) : out_eT(tmp_i) );
+    const bool ok_i = check_finite ? arma_isfinite(tmp_i) : true;
+    const bool ok_j = check_finite ? arma_isfinite(tmp_j) : true;
+    
+    (*dest) = ok_i
+              ? (
+                (is_signed<out_eT>::value)
+                ? out_eT( tmp_i )
+                : ( cond_rel< is_signed<in_eT>::value >::lt(tmp_i, in_eT(0)) ? out_eT(0) : out_eT(tmp_i) )
+                )
+              : out_eT(0);
     
     dest++;
     
-    (*dest) = (is_signed<out_eT>::value)
-              ? out_eT( tmp_j )
-              : ( cond_rel< is_signed<in_eT>::value >::lt(tmp_j, in_eT(0)) ? out_eT(0) : out_eT(tmp_j) );
+    (*dest) = ok_j
+              ? (
+                (is_signed<out_eT>::value)
+                ? out_eT( tmp_j )
+                : ( cond_rel< is_signed<in_eT>::value >::lt(tmp_j, in_eT(0)) ? out_eT(0) : out_eT(tmp_j) )
+                )
+              : out_eT(0);
     dest++;
     }
   
@@ -271,9 +335,15 @@ arrayops::convert(out_eT* dest, const in_eT* src, const uword n_elem)
     
     // dest[i] = out_eT( tmp_i );
     
-    (*dest) = (is_signed<out_eT>::value)
-              ? out_eT( tmp_i )
-              : ( cond_rel< is_signed<in_eT>::value >::lt(tmp_i, in_eT(0)) ? out_eT(0) : out_eT(tmp_i) );
+    const bool ok_i = check_finite ? arma_isfinite(tmp_i) : true;
+    
+    (*dest) = ok_i
+              ? (
+                (is_signed<out_eT>::value)
+                ? out_eT( tmp_i )
+                : ( cond_rel< is_signed<in_eT>::value >::lt(tmp_i, in_eT(0)) ? out_eT(0) : out_eT(tmp_i) )
+                )
+              : out_eT(0);
     }
   }
 
@@ -1028,7 +1098,7 @@ arrayops::is_zero(const eT* mem, const uword n_elem, const eT abs_limit, const t
     {
     for(uword i=0; i<n_elem; ++i)
       {
-      if(std::abs(mem[i]) > abs_limit)  { return false; }
+      if(eop_aux::arma_abs(mem[i]) > abs_limit)  { return false; }
       }
     }
   

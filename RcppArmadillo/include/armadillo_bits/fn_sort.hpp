@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -80,7 +82,7 @@ sort
   
   const char sig = (sort_direction != nullptr) ? sort_direction[0] : char(0);
   
-  arma_debug_check( (sig != 'a') && (sig != 'd'), "sort(): unknown sort direction");
+  arma_debug_check( (sig != 'a') && (sig != 'd'), "sort(): unknown sort direction" );
   
   const uword sort_type = (sig == 'a') ? 0 : 1;
   
@@ -108,7 +110,7 @@ sort
   
   const char sig = (sort_direction != nullptr) ? sort_direction[0] : char(0);
   
-  arma_debug_check( (sig != 'a') && (sig != 'd'), "sort(): unknown sort direction");
+  arma_debug_check( (sig != 'a') && (sig != 'd'), "sort(): unknown sort direction" );
   
   const uword sort_type = (sig == 'a') ? 0 : 1;
   
@@ -137,7 +139,7 @@ sort
   
   const char sig = (sort_direction != nullptr) ? sort_direction[0] : char(0);
   
-  arma_debug_check( (sig != 'a') && (sig != 'd'), "sort(): unknown sort direction");
+  arma_debug_check( (sig != 'a') && (sig != 'd'), "sort(): unknown sort direction" );
   
   const uword sort_type = (sig == 'a') ? 0 : 1;
   

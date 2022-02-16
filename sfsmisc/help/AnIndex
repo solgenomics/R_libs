@@ -35,6 +35,7 @@ f.robftest	f.robftest
 factorize	factorize
 funEnv	funEnv
 hatMat	hatMat
+helppdf	helppdf
 histBxp	histBxp
 ichar	AsciiToInt
 integrate.xy	integrate.xy
@@ -103,6 +104,8 @@ ps.latex	ps.latex
 quadrant	quadrant
 QUnif	QUnif
 read.org.table	read.org.table
+relErr	relErr
+relErrV	relErr
 repChar	repChar
 rot2	rot2
 rotn	rot13
@@ -112,6 +115,7 @@ seqXtend	seqXtend
 sessionInfoX	sessionInfoX
 sfsmisc-defunct	sfsmisc-defunct
 sHalton	QUnif
+shortRversion	shortRversion
 signi	signi
 sourceAttach	sourceAttach
 strcodes	AsciiToInt

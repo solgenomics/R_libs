@@ -23,6 +23,15 @@ names(cred_funs_list())
 #  )
 
 ## ---- eval = FALSE------------------------------------------------------------
+#  token_fetch(scopes = <SCOPES>, path = "/path/to/your/external-account.json")
+#  
+#  # leads to this call:
+#  credentials_external_account(
+#    scopes = <SCOPES>,
+#    path = "/path/to/your/external-account.json"
+#  )
+
+## ---- eval = FALSE------------------------------------------------------------
 #  token_fetch(scopes = <SCOPES>)
 #  
 #  # credentials_service_account() fails because no `path`,

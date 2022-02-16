@@ -4,3 +4,6 @@
 #  # Run to build the website
 #  pkgdown::build_site()
 
+## ---- eval = FALSE------------------------------------------------------------
+#  usethis::use_pkgdown_github_pages()
+

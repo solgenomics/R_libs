@@ -1,3 +1,44 @@
+# withr 2.4.3
+
+* Lionel Henry is the new maintainer.
+
+* Handlers registered with the global environment (as happens when `local_()` 
+  is run at the top-level, outside a function) are now automatically run
+  when the R session ends (#173).
+
+* New `with_language()` and `local_language()` to temporarily control the
+  language used for translations (#180).
+
+* `with_seed()` now caches the check for R version, so is now faster (#170)
+
+* `with_makevars()` and `local_makevars()` now eagerly evaluate the `path` argument (#169)
+
+# withr 2.4.2
+
+- `local_options()` now lets you set an option to `NULL` as intended (#156)
+
+- `local_tempfile()` argument `envir` is deprecated, in favor of `.local_envir`.
+  All withr functions except `local_tempfile()` used `.local_envir` to specify environments, so this makes this function consistent with the rest. (#157)
+
+- `with_environment()` now passing `pos` and `warn.conflicts` to `attach()`, as intended (#161).
+
+- `with_seed()` now also sets the RNG via new arguments `.rng_kind`, `.rng_normal_kind` and `.rng_sample_kind`
+  (#162, @AshesITR).
+
+- `with_timezone()` now works after recent changes to `Sys.timezone()` in R-devel (#165)
+
+# withr 2.4.1
+
+- Tests which require `capabilities("cairo")` are now skipped.
+
+# withr 2.4.0
+
+- withr is now licensed as MIT (#154).
+
+- Tests for `with_cairo_pdf()` and `with_cairo_ps()` have been removed, as they fail if Cairo is not available, such as with M1 macOS systems (#158)
+
+- `local_seed()` is now exported (#153)
+
 # withr 2.3.0
 
 ## Deprecations

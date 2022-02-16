@@ -37,9 +37,6 @@ happy	happy
 hdv2003	hdv2003
 households	households
 icut	icut
-ifunc_get_css	ifunc_get_css
-ifunc_run_as_addin	ifunc_run_as_addin
-ifunc_show_alert	ifunc_show_alert
 iorder	iorder
 irec	irec
 lookfor	reexports
@@ -75,7 +72,7 @@ renomme.variable	rename.variable
 residus	chisq.residuals
 rm.unused.levels	rm.unused.levels
 rp2012	rp2012
-rp99	rp99
+rp2018	rp2018
 rprop	rprop
 rprop.data.frame	rprop
 rprop.matrix	rprop

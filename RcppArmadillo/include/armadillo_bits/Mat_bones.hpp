@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -58,11 +60,17 @@ class Mat : public Base< eT, Mat<eT> >
   inline ~Mat();
   inline  Mat();
   
-  inline explicit Mat(const uword in_rows, const uword in_cols);
+  inline explicit Mat(const uword in_n_rows, const uword in_n_cols);
   inline explicit Mat(const SizeMat& s);
   
-  template<typename fill_type> inline Mat(const uword in_rows, const uword in_cols, const fill::fill_class<fill_type>& f);
-  template<typename fill_type> inline Mat(const SizeMat& s,                         const fill::fill_class<fill_type>& f);
+  template<bool do_zeros> inline explicit Mat(const uword in_n_rows, const uword in_n_cols, const arma_initmode_indicator<do_zeros>&);
+  template<bool do_zeros> inline explicit Mat(const SizeMat& s,                             const arma_initmode_indicator<do_zeros>&);
+  
+  template<typename fill_type> inline Mat(const uword in_n_rows, const uword in_n_cols, const fill::fill_class<fill_type>& f);
+  template<typename fill_type> inline Mat(const SizeMat& s,                             const fill::fill_class<fill_type>& f);
+  
+  inline Mat(const uword in_n_rows, const uword in_n_cols, const fill::scalar_holder<eT> f);
+  inline Mat(const SizeMat& s,                             const fill::scalar_holder<eT> f);
   
   inline arma_cold            Mat(const char*        text);
   inline arma_cold Mat& operator=(const char*        text);
@@ -201,17 +209,17 @@ class Mat : public Base< eT, Mat<eT> >
   inline      const Col<eT>  unsafe_col(const uword col_num) const;
   
   
-  arma_inline       subview<eT> rows(const uword in_row1, const uword in_row2);
-  arma_inline const subview<eT> rows(const uword in_row1, const uword in_row2) const;
+  arma_inline       subview<eT>      rows(const uword in_row1, const uword in_row2);
+  arma_inline const subview<eT>      rows(const uword in_row1, const uword in_row2) const;
   
-  arma_inline       subview<eT> cols(const uword in_col1, const uword in_col2);
-  arma_inline const subview<eT> cols(const uword in_col1, const uword in_col2) const;
+  arma_inline       subview_cols<eT> cols(const uword in_col1, const uword in_col2);
+  arma_inline const subview_cols<eT> cols(const uword in_col1, const uword in_col2) const;
   
-  inline            subview<eT> rows(const span& row_span);
-  inline      const subview<eT> rows(const span& row_span) const;
+  inline            subview<eT>      rows(const span& row_span);
+  inline      const subview<eT>      rows(const span& row_span) const;
   
-  arma_inline       subview<eT> cols(const span& col_span);
-  arma_inline const subview<eT> cols(const span& col_span) const;
+  arma_inline       subview_cols<eT> cols(const span& col_span);
+  arma_inline const subview_cols<eT> cols(const span& col_span) const;
   
   
   arma_inline       subview<eT> submat(const uword in_row1, const uword in_col1, const uword in_row2, const uword in_col2);
@@ -235,11 +243,11 @@ class Mat : public Base< eT, Mat<eT> >
   inline       subview<eT> tail_rows(const uword N);
   inline const subview<eT> tail_rows(const uword N) const;
   
-  inline       subview<eT> head_cols(const uword N);
-  inline const subview<eT> head_cols(const uword N) const;
+  inline       subview_cols<eT> head_cols(const uword N);
+  inline const subview_cols<eT> head_cols(const uword N) const;
   
-  inline       subview<eT> tail_cols(const uword N);
-  inline const subview<eT> tail_cols(const uword N) const;
+  inline       subview_cols<eT> tail_cols(const uword N);
+  inline const subview_cols<eT> tail_cols(const uword N) const;
   
   template<typename T1> arma_inline       subview_elem1<eT,T1> elem(const Base<uword,T1>& a);
   template<typename T1> arma_inline const subview_elem1<eT,T1> elem(const Base<uword,T1>& a) const;
@@ -436,28 +444,21 @@ class Mat : public Base< eT, Mat<eT> >
   arma_inline arma_warn_unused const eT* memptr() const;
   
   
-  arma_cold inline void impl_print(                           const std::string& extra_text) const;
-  arma_cold inline void impl_print(std::ostream& user_stream, const std::string& extra_text) const;
-  
-  arma_cold inline void impl_raw_print(                           const std::string& extra_text) const;
-  arma_cold inline void impl_raw_print(std::ostream& user_stream, const std::string& extra_text) const;
-  
-  
   template<typename eT2, typename expr>
   inline void copy_size(const Base<eT2,expr>& X);
   
-  inline void set_size(const uword in_elem);
-  inline void set_size(const uword in_rows, const uword in_cols);
+  inline void set_size(const uword new_n_elem);
+  inline void set_size(const uword new_n_rows, const uword new_n_cols);
   inline void set_size(const SizeMat& s);
   
-  inline void   resize(const uword in_elem);
-  inline void   resize(const uword in_rows, const uword in_cols);
+  inline void   resize(const uword new_n_elem);
+  inline void   resize(const uword new_n_rows, const uword new_n_cols);
   inline void   resize(const SizeMat& s);
   
-  inline void  reshape(const uword in_rows, const uword in_cols);
+  inline void  reshape(const uword new_n_rows, const uword new_n_cols);
   inline void  reshape(const SizeMat& s);
   
-  arma_deprecated inline void reshape(const uword in_rows, const uword in_cols, const uword dim);  //!< NOTE: don't use this form: it will be removed
+  arma_deprecated inline void reshape(const uword new_n_rows, const uword new_n_cols, const uword dim);  //!< NOTE: don't use this form: it will be removed
   
   
   template<typename functor> inline const Mat&  for_each(functor F);
@@ -471,33 +472,35 @@ class Mat : public Base< eT, Mat<eT> >
   
   inline const Mat& clean(const pod_type threshold);
   
+  inline const Mat& clamp(const eT min_val, const eT max_val);
+  
   inline const Mat& fill(const eT val);
   
   template<typename fill_type>
   inline const Mat& fill(const fill::fill_class<fill_type>& f);
   
   inline const Mat& zeros();
-  inline const Mat& zeros(const uword in_elem);
-  inline const Mat& zeros(const uword in_rows, const uword in_cols);
+  inline const Mat& zeros(const uword new_n_elem);
+  inline const Mat& zeros(const uword new_n_rows, const uword new_n_cols);
   inline const Mat& zeros(const SizeMat& s);
   
   inline const Mat& ones();
-  inline const Mat& ones(const uword in_elem);
-  inline const Mat& ones(const uword in_rows, const uword in_cols);
+  inline const Mat& ones(const uword new_n_elem);
+  inline const Mat& ones(const uword new_n_rows, const uword new_n_cols);
   inline const Mat& ones(const SizeMat& s);
   
   inline const Mat& randu();
-  inline const Mat& randu(const uword in_elem);
-  inline const Mat& randu(const uword in_rows, const uword in_cols);
+  inline const Mat& randu(const uword new_n_elem);
+  inline const Mat& randu(const uword new_n_rows, const uword new_n_cols);
   inline const Mat& randu(const SizeMat& s);
   
   inline const Mat& randn();
-  inline const Mat& randn(const uword in_elem);
-  inline const Mat& randn(const uword in_rows, const uword in_cols);
+  inline const Mat& randn(const uword new_n_elem);
+  inline const Mat& randn(const uword new_n_rows, const uword new_n_cols);
   inline const Mat& randn(const SizeMat& s);
   
   inline const Mat& eye();
-  inline const Mat& eye(const uword in_rows, const uword in_cols);
+  inline const Mat& eye(const uword new_n_rows, const uword new_n_cols);
   inline const Mat& eye(const SizeMat& s);
   
   inline arma_cold void      reset();
@@ -518,15 +521,15 @@ class Mat : public Base< eT, Mat<eT> >
   inline eT max(uword& row_of_max_val, uword& col_of_max_val) const;
   
   
-  inline arma_cold bool save(const std::string   name, const file_type type = arma_binary, const bool print_status = true) const;
-  inline arma_cold bool save(const hdf5_name&    spec, const file_type type = hdf5_binary, const bool print_status = true) const;
-  inline arma_cold bool save(const  csv_name&    spec, const file_type type =   csv_ascii, const bool print_status = true) const;
-  inline arma_cold bool save(      std::ostream& os,   const file_type type = arma_binary, const bool print_status = true) const;
+  inline arma_cold bool save(const std::string   name, const file_type type = arma_binary) const;
+  inline arma_cold bool save(const hdf5_name&    spec, const file_type type = hdf5_binary) const;
+  inline arma_cold bool save(const  csv_name&    spec, const file_type type =   csv_ascii) const;
+  inline arma_cold bool save(      std::ostream& os,   const file_type type = arma_binary) const;
   
-  inline arma_cold bool load(const std::string   name, const file_type type = auto_detect, const bool print_status = true);
-  inline arma_cold bool load(const hdf5_name&    spec, const file_type type = hdf5_binary, const bool print_status = true);
-  inline arma_cold bool load(const  csv_name&    spec, const file_type type =   csv_ascii, const bool print_status = true);
-  inline arma_cold bool load(      std::istream& is,   const file_type type = auto_detect, const bool print_status = true);
+  inline arma_cold bool load(const std::string   name, const file_type type = auto_detect);
+  inline arma_cold bool load(const hdf5_name&    spec, const file_type type = hdf5_binary);
+  inline arma_cold bool load(const  csv_name&    spec, const file_type type =   csv_ascii);
+  inline arma_cold bool load(      std::istream& is,   const file_type type = auto_detect);
   
   inline arma_cold bool quiet_save(const std::string   name, const file_type type = arma_binary) const;
   inline arma_cold bool quiet_save(const hdf5_name&    spec, const file_type type = hdf5_binary) const;
@@ -728,11 +731,11 @@ class Mat : public Base< eT, Mat<eT> >
   inline bool  empty() const;
   inline uword size()  const;
   
-  inline       eT& front();
-  inline const eT& front() const;
+  inline arma_warn_unused       eT& front();
+  inline arma_warn_unused const eT& front() const;
   
-  inline       eT& back();
-  inline const eT& back() const;
+  inline arma_warn_unused       eT& back();
+  inline arma_warn_unused const eT& back() const;
   
   inline void swap(Mat& B);
   
@@ -747,7 +750,7 @@ class Mat : public Base< eT, Mat<eT> >
   protected:
   
   inline void init_cold();
-  inline void init_warm(uword in_rows, uword in_cols);
+  inline void init_warm(uword in_n_rows, uword in_n_cols);
   
   inline arma_cold void init(const std::string& text);
   
@@ -815,6 +818,7 @@ class Mat<eT>::fixed : public Mat<eT>
   arma_inline fixed();
   arma_inline fixed(const fixed<fixed_n_rows, fixed_n_cols>& X);
   
+                                     inline fixed(const fill::scalar_holder<eT> f);
   template<typename fill_type>       inline fixed(const fill::fill_class<fill_type>& f);
   template<typename T1>              inline fixed(const Base<eT,T1>& A);
   template<typename T1, typename T2> inline fixed(const Base<pod_type,T1>& A, const Base<pod_type,T2>& B);
@@ -840,9 +844,9 @@ class Mat<eT>::fixed : public Mat<eT>
     template<typename T1, typename T2, typename eglue_type> inline Mat& operator=(const eGlue<T1, T2, eglue_type>& X);
   #endif
   
-  arma_inline const Op< Mat_fixed_type, op_htrans >  t() const;
-  arma_inline const Op< Mat_fixed_type, op_htrans > ht() const;
-  arma_inline const Op< Mat_fixed_type, op_strans > st() const;
+  arma_inline arma_warn_unused const Op< Mat_fixed_type, op_htrans >  t() const;
+  arma_inline arma_warn_unused const Op< Mat_fixed_type, op_htrans > ht() const;
+  arma_inline arma_warn_unused const Op< Mat_fixed_type, op_strans > st() const;
   
   arma_inline arma_warn_unused const eT& at_alt     (const uword i) const;
   

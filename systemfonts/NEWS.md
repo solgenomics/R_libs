@@ -1,3 +1,36 @@
+# systemfonts 1.0.4
+
+* Provide a fallback solution to the setup of the CRAN windows builder so that
+  fonts can be discovered (#87)
+
+# systemfonts 1.0.3
+
+* Avoid warning when including the systemfonts header (#77)
+* Fix size selection of non-scalable fonts when the requested size is bigger 
+  than the available
+* Fix compilation bug when systemfont is used in C packages (#76)
+
+# systemfonts 1.0.2
+
+* Ensure compitability with freetype <= 2.4.11 (#70, @jan-glx)
+* Prepare for UCRT compilation
+
+# systemfonts 1.0.1
+
+* Fix a bug in font matching on Windows when matching monospace fonts
+* Fix a bug in `reset_font_cache()` on mac that would cause a system crash if 
+  the cache was not filled in advance (#67)
+
+# systemfonts 1.0.0
+
+* Tweak size determination for non-scalable fonts
+* Fix bug when switching between scalable and non-scalable fonts in the cache
+* Add utility for querying font fallbacks at both the R and C level
+* Add C-level API for finding emoji embeddings in strings
+* Add utility for getting weight of font from C code
+* Add utility for getting family name of font from C code
+* Add font weight and width to the output of `font_info()`
+
 # systemfonts 0.3.2
 
 * Fix compiled code for old R versions
@@ -12,7 +45,7 @@
 * Added `get_cached_face()` so that other packages might retrieve FT_Face 
   objects from the cache.
 * Adapted cpp11
-* Add infrastructe for setting OpenType font features on a registered font with
+* Add infrastructure for setting OpenType font features on a registered font with
   either `register_font()` or the new `register_variant()`, along with the 
   `font_feature()` function.
 

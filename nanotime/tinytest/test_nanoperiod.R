@@ -1,5 +1,8 @@
 
-library(nanotime)
+suppressMessages({
+    library(nanotime)
+    library(bit64)
+})
 
 isSolaris <- Sys.info()[["sysname"]] == "SunOS"
 
@@ -96,13 +99,14 @@ expect_identical(nanoperiod.nanoduration(p1), as.nanoduration(expected))
 
 ## show/print/as.character/format
 ##test_show <- function() {
-p1 <- show(as.nanoperiod("1m1d/1:00:00.1"))
+p1 <- format(as.nanoperiod("1m1d/1:00:00.1"))
 expect_identical(p1, "1m1d/01:00:00.100")
+expect_stdout(show(as.nanoperiod("1m1d/1:00:00.1")))
 
 ##test_print <- function() {
-p1 <- print(as.nanoperiod("2m2d/2:02:02.2"))
+p1 <- format(as.nanoperiod("2m2d/2:02:02.2"))
 expect_identical(p1, "2m2d/02:02:02.200")
-expect_identical(print(nanoperiod()), "nanoperiod(0)")
+expect_stdout(print(nanoperiod()))
 
 ##test_as.character <- function() {
 p1 <- as.character(as.nanoperiod("2m2d/2:02:02.20001"))
@@ -117,6 +121,7 @@ expect_identical(p1, c(a="2m2d/02:02:02.200_010", b="2m2d/02:02:02.200_020"))
 ##test_format <- function() {
 p1 <- as.nanoperiod("2m2d/2:02:02.20001")
 expect_identical(format(p1), "2m2d/02:02:02.200_010")
+expect_identical(as.character(p1), "2m2d/02:02:02.200_010")
 
 
 ## subset:
@@ -265,7 +270,6 @@ expect_error(as.nanoperiod(1) - "a", "invalid operand types")
 expect_error("a" - as.nanoperiod(1), "invalid operand types")
 expect_error(as.nanoperiod(1) - nanotime(1), "invalid operand types")
 
-if (getRversion() >= as.package_version("4.1.0")) exit_file("skip_remainder")
 ## +
 ##test_nanoperiod_plus_nanoperiod <- function() {
 expect_identical(+as.nanoperiod("2m"), as.nanoperiod("2m"))
@@ -520,7 +524,94 @@ if (!isSolaris) {
     tz <- "America/New_York"
     expect_error(minus(p, nt, tz), "operation not defined for 'nanoperiod' objects")
 
+    ## test the crossing of daylight saving time in both directions:
 
+    ## adding/subtracting a nanoperiod should not realign if doing so
+    ## crosses again a DST boundary:
+
+    ## look at cases over the Spring boundary in America:
+    nt <- as.nanotime("2020-03-08 01:45:30 America/New_York")
+    p <- as.nanoperiod("00:30:00")
+    tz <- "America/New_York"
+    expected <- as.nanotime("2020-03-08 03:15:30 America/New_York")
+    expect_identical(plus(nt, p, tz), expected)
+
+    nt <- as.nanotime("2020-03-08 01:00:00 America/New_York")
+    p <- as.nanoperiod("01:00:00")
+    tz <- "America/New_York"
+    expected <- as.nanotime("2020-03-08 03:00:00 America/New_York")
+    expect_identical(plus(nt, p, tz), expected)
+
+    nt <- as.nanotime("2020-03-08 03:15:30 America/New_York")
+    p <- as.nanoperiod("00:30:00")
+    tz <- "America/New_York"
+    expected <- as.nanotime("2020-03-08 01:45:30 America/New_York")
+    expect_identical(minus(nt, p, tz), expected)
+
+    nt <- as.nanotime("2020-03-08 03:00:00 America/New_York")
+    p <- as.nanoperiod("01:00:00")
+    tz <- "America/New_York"
+    expected <- as.nanotime("2020-03-08 01:00:00 America/New_York")
+    expect_identical(minus(nt, p, tz), expected)
+
+    ## look at the cases over the Autumn boundary in America:
+    nt <- as.nanotime("2020-11-01 01:45:30 America/New_York")
+    p <- as.nanoperiod("00:30:00")
+    tz <- "America/New_York"
+    expected <- as.nanotime("2020-11-01 02:15:30 America/New_York")
+    expect_identical(plus(nt, p, tz), expected)
+
+    nt <- as.nanotime("2020-11-01 01:00:00 America/New_York")
+    p <- as.nanoperiod("01:00:00")
+    tz <- "America/New_York"
+    expected <- as.nanotime("2020-11-01 02:00:00 America/New_York")
+    expect_identical(plus(nt, p, tz), expected)
+
+    nt <- as.nanotime("2020-11-01 02:15:30 America/New_York")
+    p <- as.nanoperiod("00:30:00")
+    tz <- "America/New_York"
+    ##expected <- as.nanotime("2020-11-01 01:45:30 America/New_York")  # ambiguous
+    expected <- as.nanotime("2020-11-01 06:45:30+00:00")
+    expect_identical(minus(nt, p, tz), expected)
+
+    nt <- as.nanotime("2020-11-01 02:00:00 America/New_York")
+    p <- as.nanoperiod("01:00:00")
+    tz <- "America/New_York"
+    ## expected <- as.nanotime("2020-11-01 01:00:00 America/New_York")    # ambiguous
+    expected <- as.nanotime("2020-11-01 06:00:00+00:00")
+    expect_identical(minus(nt, p, tz), expected)
+    
+    
+    ## adding/subtracting a nanoperiod should realign if doing so does
+    ## not cross again a DST boundary:    
+
+    ## look at cases over the Spring boundary in America:
+    nt <- as.nanotime("2020-03-08 01:00:00 America/New_York")
+    p <- as.nanoperiod("02:00:01")
+    tz <- "America/New_York"
+    expected <- as.nanotime("2020-03-08 03:00:01 America/New_York")
+    expect_identical(plus(nt, p, tz), expected)
+
+    nt <- as.nanotime("2020-03-08 03:00:00 America/New_York")
+    p <- as.nanoperiod("02:00:01")
+    tz <- "America/New_York"
+    expected <- as.nanotime("2020-03-08 00:59:59 America/New_York")
+    expect_identical(minus(nt, p, tz), expected)
+
+    ## look at the cases over the Autumn boundary in America:
+    nt <- as.nanotime("2020-11-01 01:00:00 America/New_York")
+    p <- as.nanoperiod("02:00:01")
+    tz <- "America/New_York"
+    expected <- as.nanotime("2020-11-01 03:00:01 America/New_York")
+    expect_identical(plus(nt, p, tz), expected)
+
+    nt <- as.nanotime("2020-11-01 03:00:00 America/New_York")
+    p <- as.nanoperiod("02:00:01")
+    tz <- "America/New_York"
+    expected <- as.nanotime("2020-11-01 00:59:59 America/New_York")
+    expect_identical(minus(nt, p, tz), expected)
+    
+    
     ## plus/minus with 'nanoival':
 
     ##test_plus_nanoival_nanoperiod <- function() {

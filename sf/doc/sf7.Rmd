@@ -20,21 +20,19 @@ knitr::opts_chunk$set(collapse = TRUE)
 
 This vignette describes what spherical geometry implies, and how
 package `sf` uses the s2geometry library (https://s2geometry.io)
-for geometrical measures, predicates and transformations.
-The code in this vignette only run if `s2` has been installed, e.g. with
+for geometrical measures, predicates and transformations.  The code
+in this vignette only runs if `s2` has been installed, e.g. with
 
 ```{r, eval=FALSE}
 install.packages("s2")
 ```
 
-and is available.
-After `sf` has been attached, you can check if `s2` is available
-as follows:
+and is available. After `sf` has been loaded, you can check if `s2`
+is being used:
 
 ```{r}
 library(sf)
-s2_available = !inherits(try(sf_use_s2(TRUE), silent=TRUE), "try-error")
-s2_available
+sf_use_s2()
 ```
 
 Attach the `s2` package as follows:
@@ -43,9 +41,19 @@ Attach the `s2` package as follows:
 library(s2)
 ```
 
+Most of the package's functions start with `s2_` in the same way
+that most `sf` function names start with `st_`. Most `sf` functions
+automatically use `s2` functions when working with ellipsoidal
+coordinates; if this is not the case, e.g. for `st_voronoi()`,
+a warning like
 
-Most of the package's functions start with `s2_` in the same way that most `sf`
-function names start with `st_`.
+```
+Warning message:
+In st_voronoi.sfc(st_geometry(x), st_sfc(envelope), dTolerance,  :
+  st_voronoi does not correctly triangulate longitude/latitude data
+```
+
+is emitted.
 
 # Projected and geographic coordinates
 
@@ -82,10 +90,12 @@ problems. Doing this however leaves ambiguities, e.g. whether
 * passes through `POINT(180 0)`
 
 and whether it is
+
 * a straight line, cutting through the Earth's surface, or
 * a curved line following the Earth's surface
 
-Starting with `sf` version 1.0, `sf` uses the new package `s2`
+Starting with `sf` version 1.0, if you provide a spatial object in a
+geographical coordinate reference system, `sf` uses the new package `s2`
 (Dunnington, Pebesma, Rubak 2020) for spherical geometry, which
 has functions for computing pretty much all measures, predicates
 and transformations _on the sphere_. This means:
@@ -98,7 +108,9 @@ The `s2` package is really a wrapper around the C++
 [s2geometry](https://s2geometry.io) library which was written by
 Google, and which is used in many of its products (e.g. Google
 Maps, Google Earth Engine, Bigquery GIS) and has been translated
-in several programming other languages.
+in several other programming languages.
+
+With projected coordinates `sf` continues to work in $R^2$ as before.
 
 # Fundamental differences
 
@@ -127,7 +139,7 @@ For $S^2$, ring direction is essential. For that reason, `st_as_s2`
 has an argument `oriented = FALSE`, which will check and correct
 ring directions, assuming that all exterior rings occupy an area
 smaller than half the globe:
-```{r eval=s2_available}
+```{r}
 nc = read_sf(system.file("gpkg/nc.gpkg", package="sf")) # wrong ring directions
 s2_area(st_as_s2(nc, oriented = FALSE)[1:3]) # corrects ring direction, correct area:
 s2_area(st_as_s2(nc, oriented = TRUE)[1:3]) # wrong direction: Earth's surface minus area
@@ -137,13 +149,13 @@ s2_area(st_as_s2(nc, oriented = TRUE)[1:3]) # no second correction needed here:
 
 Here is an example where the oceans are computed as the difference
 from the full polygon representing the entire globe,
-```{r eval=s2_available}
+```{r}
 g = as_s2_geography(TRUE)
 g
 ```
 
 and the countries, and shown in an orthographic projection:
-```{r eval=s2_available}
+```{r}
 co = s2_data_countries()
 oc = s2_difference(g, s2_union_agg(co)) # oceans
 b = s2_buffer_cells(as_s2_geography("POINT(-30 52)"), 9800000) # visible half
@@ -187,7 +199,7 @@ to e.g. how this would be handled in a grid (raster) coverage,
 where every grid cell (typically) only contains its upper-left
 corner and its upper and left sides.
 
-```{r eval=s2_available}
+```{r}
 a = as_s2_geography("POINT(0 0)")
 b = as_s2_geography("POLYGON((0 0,1 0,1 1,0 1,0 0))")
 s2_intersects(a, b, s2_options(model = "open")) 
@@ -208,7 +220,7 @@ is not necessarily covered by the coordinate range. Two examples:
 
 S2 has two alternatives: the bounding cap and the bounding rectangle:
 
-```{r eval=s2_available}
+```{r}
 fiji = s2_data_countries("Fiji")
 aa = s2_data_countries("Antarctica")
 s2_bounds_cap(fiji)
@@ -224,17 +236,17 @@ region covers (crosses) the antimeridian.
 # Switching between S2 and GEOS
 
 The two-dimensional $R^2$ library that was formerly used by `sf` is
-[GEOS](https://trac.osgeo.org/geos/), and `sf` can be instrumented to
-use GEOS or `sf`. First we will ask if `s2` is being used by default:
-```{r eval=s2_available}
+[GEOS](https://libgeos.org), and `sf` can be instrumented to
+use GEOS or `s2`. First we will ask if `s2` is being used by default:
+```{r}
 sf_use_s2()
 ```
-then we can switch it of (and use GEOS) by
-```{r eval=s2_available}
+then we can switch it off (and use GEOS) by
+```{r}
 sf_use_s2(FALSE)
 ```
 and switch it on (and use s2) by
-```{r eval=s2_available}
+```{r}
 sf_use_s2(TRUE)
 ```
 
@@ -242,7 +254,7 @@ sf_use_s2(TRUE)
 # Measures
 
 ## Area
-```{r eval=s2_available}
+```{r}
 library(sf)
 library(units)
 nc = read_sf(system.file("gpkg/nc.gpkg", package="sf"))
@@ -256,7 +268,7 @@ summary((a1 - a2)/a1)
 ```
 
 ## Length
-```{r eval=s2_available}
+```{r}
 nc_ls = st_cast(nc, "MULTILINESTRING")
 sf_use_s2(TRUE)
 l1 = st_length(nc_ls)
@@ -269,7 +281,7 @@ summary((l1-l2)/l1)
 
 
 ## Distances
-```{r eval=s2_available}
+```{r}
 sf_use_s2(TRUE)
 d1 = st_distance(nc, nc[1:10,])
 sf_use_s2(FALSE)
@@ -282,18 +294,22 @@ summary(as.vector(d1)-as.vector(d2))
 # Predicates
 
 All unary and binary predicates are available in `s2`, except for
-`st_relate` with a pattern. In addition, when using the `s2` predicates
+`st_relate` with a pattern. In addition, when using the `s2` predicates,
+depending on the `model`, intersections with neighbours are only reported
+when `model` is `closed` (the default):
 ```{r}
-sf_use_s2(FALSE)
+sf_use_s2(TRUE)
 st_intersects(nc[1:3,], nc[1:3,]) # self-intersections + neighbours
-st_intersects(nc[1:3,], nc[1:3,], s2_model = "semi-open") # only self-intersections
+sf_use_s2(TRUE)
+st_intersects(nc[1:3,], nc[1:3,], model = "semi-open") # only self-intersections
 ```
+
 
 # Transformations
 
 `st_intersection`, `st_union`, `st_difference` and
 `st_sym_difference` are available as `s2` equivalents. N-ary
-instersection and difference are not (yet) present; cascaded union
+intersection and difference are not (yet) present; cascaded union
 is present; unioning by feature does not work with `s2`.
 
 ## Buffers
@@ -301,7 +317,7 @@ is present; unioning by feature does not work with `s2`.
 Buffers can be calculated for features with geographic coordinates as follows,
 using an unprojected object representing the UK as an example:
 
-```{r eval=s2_available, fig.show='hold', out.width="50%"}
+```{r, fig.show='hold', out.width="50%"}
 uk = s2_data_countries("United Kingdom")
 class(uk)
 uk_sfc = st_as_sfc(uk) 

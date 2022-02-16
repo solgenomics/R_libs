@@ -1,6 +1,9 @@
 
-library(nanotime)
-library(bit64)
+suppressMessages({
+    library(nanotime)
+    library(bit64)
+})
+options(digits=7)                       # needed for error message below
 
 milli <- 1e6
 sec <- 1e9
@@ -59,19 +62,26 @@ expect_identical(as.integer64(as.nanoduration(1:1000)), as.integer64(1:1000))
 ## show/print/format
 ##test_show <- function() {
 d <- nanoduration(1,1,1,1)
-expect_identical(show(d), "01:01:01.000_000_001")
-expect_identical(show(-d), "-01:01:01.000_000_001")
-expect_true(is.na(show(as.nanoduration(as.integer64("-9223372036854775808")))))
+expect_identical(format(d), "01:01:01.000_000_001")
+expect_identical(format(-d), "-01:01:01.000_000_001")
+expect_true(is.na(format(as.nanoduration(as.integer64("-9223372036854775808")))))
+expect_identical(as.character(d), "01:01:01.000_000_001")
+expect_identical(as.character(-d), "-01:01:01.000_000_001")
+expect_true(is.na(as.character(as.nanoduration(as.integer64("-9223372036854775808")))))
+expect_stdout(show(d))
+expect_stdout(show(-d))
+expect_stdout(show(as.nanoduration(as.integer64("-9223372036854775808"))))
 
 ##test_print <- function() {
 d <- nanoduration(1,1,1,1)
-expect_identical(print(d), "01:01:01.000_000_001")
-expect_identical(print(nanoduration()), "nanoduration(0)")
+expect_stdout(print(d))
+expect_stdout(print(nanoduration()))
 
 ##test_print_name <- function() {
 d <- nanoduration(1,1,1,1)
 names(d) <- "a"
-expect_identical(print(d), c(a="01:01:01.000_000_001"))
+expect_identical(format(d), c(a="01:01:01.000_000_001"))
+expect_stdout(print(d))
 
 ##test_format <- function() {
 d <- nanoduration(1,1,1,1)
@@ -372,8 +382,8 @@ expect_error(round(as.nanoduration(1)), "non-numeric argument to mathematical fu
 
 ## Compare
 ##test_Compare_nanoduration_ANY <- function() {
-expect_true(is.na(as.nanoduration(1) < "a")) # this is what "integer64" gives back, but do we want to change that to an error? LLL
-## not quite clear in R either:
+expect_error(as.nanoduration(1) < "a", "cannot parse nanoduration")
+## not quite clear in R:
 ## > 1 < list(1)
 ## [1] FALSE
 ## > 1 > list(1)
@@ -382,8 +392,35 @@ expect_true(is.na(as.nanoduration(1) < "a")) # this is what "integer64" gives ba
 ## [1] TRUE  
 
 ##test_Compare_ANY_nanoduration <- function() {
-expect_true(is.na("a" < as.nanoduration(1))) # this is what "integer64" gives back, but do we want to change that to an error? LLL
+expect_error("a" < as.nanoduration(1), "cannot parse nanoduration")
 
+##test_Compare_character_nanoduration <- function() {
+expect_true("12:13:14.151617" == as.nanoduration("12:13:14.151617"))
+expect_false("12:13:14.151617" == as.nanoduration("12:13:14.151617001"))
+expect_true("12:13:14.151617" != as.nanoduration("12:13:14.151617001"))
+expect_false("12:13:14.151617" != as.nanoduration("12:13:14.151617"))
+expect_true("12:13:14.151617" < as.nanoduration("12:13:14.151617001"))
+expect_false("12:13:14.151617001" < as.nanoduration("12:13:14.151617"))
+expect_true("12:13:14.151617" <= as.nanoduration("12:13:14.151617"))
+expect_false("12:13:14.151617001" <= as.nanoduration("12:13:14.151617"))
+expect_true("12:13:14.151617001" > as.nanoduration("12:13:14.151617"))
+expect_false("12:13:14.151617" > as.nanoduration("12:13:14.151617001"))
+expect_true("12:13:14.151617" >= as.nanoduration("12:13:14.151617"))
+expect_false("12:13:14.151617" >= as.nanoduration("12:13:14.151617001"))
+ 
+##test_Compare_nanoduration_character <- function() {
+expect_true(as.nanoduration("12:13:14.151617") == "12:13:14.151617")
+expect_false(as.nanoduration("12:13:14.151617") == "12:13:14.151617001")
+expect_true(as.nanoduration("12:13:14.151617") != "12:13:14.151617001")
+expect_false(as.nanoduration("12:13:14.151617") != "12:13:14.151617")
+expect_true(as.nanoduration("12:13:14.151617") < "12:13:14.151617001")
+expect_false(as.nanoduration("12:13:14.151617001") < "12:13:14.151617")
+expect_true(as.nanoduration("12:13:14.151617") <= "12:13:14.151617")
+expect_false(as.nanoduration("12:13:14.151617001") <= "12:13:14.151617")
+expect_true(as.nanoduration("12:13:14.151617001") > "12:13:14.151617")
+expect_false(as.nanoduration("12:13:14.151617") > "12:13:14.151617001")
+expect_true(as.nanoduration("12:13:14.151617") >= "12:13:14.151617")
+expect_false(as.nanoduration("12:13:14.151617") >= "12:13:14.151617001")
 
 ## Arith
 ##test_Arith <- function() {
@@ -442,7 +479,6 @@ expect_identical(all.equal(as.nanoduration(1), as.nanoduration(2e9), scale=1), "
 ## test rounding functions:
 
 ## nano_ceiling:
-if (getRversion() >= as.package_version("4.1.0")) exit_file("skip remainder")
 ## hours:
 expect_identical(nano_ceiling(as.nanotime("2010-10-10 12:00:00 UTC"), as.nanoduration("06:00:00")),
                  as.nanotime("2010-10-10T12:00:00+00:00"))

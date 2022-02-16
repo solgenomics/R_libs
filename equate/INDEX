@@ -1,0 +1,15 @@
+ACTmath                 ACT Mathematics Test Scores
+KBneat                  Test Scores under a NEAT design
+PISA                    Programme for International Student Assessment
+                        2009 USA Data
+bootstrap               Bootstrap Equating Error
+composite               Composite Linking and Equating
+equate                  Observed Score Linking and Equating
+equate-package          Observed-Score Linking and Equating
+freqtab                 Frequency Distribution Tables
+plot.bootstrap          Plotting Bootstrap Equating Results
+plot.equate             Plotting Equating Results
+plot.freqtab            Plotting Frequency Distributions
+presmoothing            Frequency Distribution Presmoothing
+px                      Percentile Ranks and Cumulative Frequencies
+summary.freqtab         Descriptive Statistics for Frequency Tables

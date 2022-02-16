@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -146,8 +148,9 @@ struct strip_trimat< Op<T1, op_trimat> >
   const T1& M;
   
   static constexpr bool do_trimat = true;
-         const bool do_triu;
-         const bool do_tril;
+  
+  const bool do_triu;
+  const bool do_tril;
   
   inline
   strip_trimat(const Op<T1, op_trimat>& X)

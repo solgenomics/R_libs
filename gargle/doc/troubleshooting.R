@@ -8,23 +8,40 @@ knitr::opts_chunk$set(
 library(gargle)
 
 ## -----------------------------------------------------------------------------
-gargle_quiet()
+gargle_verbosity()
 
 ## -----------------------------------------------------------------------------
 # save current value
-op <- options(gargle_quiet = FALSE)
+op <- options(gargle_verbosity = "debug")
 
-gargle_quiet()
+gargle_verbosity()
 
 # restore original value
 options(op)
 
+## -----------------------------------------------------------------------------
+gargle_verbosity()
+
+with_gargle_verbosity(
+  "debug",
+  gargle_verbosity()
+)
+
+gargle_verbosity()
+
+f <- function() {
+  local_gargle_verbosity("debug")
+  gargle_verbosity()
+}
+
+f()
+
+gargle_verbosity()
+
 ## ---- eval = FALSE------------------------------------------------------------
 #  gargle_oauth_sitrep()
-#  #' gargle OAuth cache path:
-#  #' /Users/janedoe/.R/gargle/gargle-oauth
-#  #'
-#  #' 14 tokens found
+#  #' > 14 tokens found in this gargle OAuth cache:
+#  #' '~/Library/Caches/gargle'
 #  #'
 #  #' email                         app         scope                          hash...
 #  #' ----------------------------- ----------- ------------------------------ ----------
@@ -42,4 +59,10 @@ options(op)
 #  #' abcdefghijklm@gmail.com       tidyverse   ...drive.readonly              ecd11fa...
 #  #' abcdefghijklm@gmail.com       tidyverse   ...bigquery, ...cloud-platform ece63f4...
 #  #' nopqr@ABCDEFG.com             tidyverse   ...spreadsheets                f178dd8...
+
+## ----eval = FALSE-------------------------------------------------------------
+#  install.packages("googlesheets4")
+
+## ---- echo = FALSE, out.width = "400px"---------------------------------------
+knitr::include_graphics("deleted_client.png")
 

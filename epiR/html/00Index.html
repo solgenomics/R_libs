@@ -2,8 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><title>R: Tools for the Analysis of Epidemiological Data</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> Tools for the Analysis of Epidemiological Data
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;epiR&rsquo; version 2.0.17</h2>
+</div><h2>Documentation for package &lsquo;epiR&rsquo; version 2.0.41</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -20,6 +21,16 @@
 
 <h2>Help Pages</h2>
 
+
+<p style="text-align: center;">
+<a href="#E">E</a>
+<a href="#P">P</a>
+<a href="#R">R</a>
+<a href="#S">S</a>
+</p>
+
+
+<h2><a name="E">-- E --</a></h2>
 
 <table width="100%">
 <tr><td style="width: 25%;"><a href="epi.2by2.html">epi.2by2</a></td>
@@ -30,6 +41,8 @@
 <td>Write matrix to an ASCII raster file</td></tr>
 <tr><td style="width: 25%;"><a href="epi.betabuster.html">epi.betabuster</a></td>
 <td>An R version of Wes Johnson and Chun-Lung Su's Betabuster</td></tr>
+<tr><td style="width: 25%;"><a href="epi.blcm.paras.html">epi.blcm.paras</a></td>
+<td>Number of parameters to be inferred and number of informative priors required for a Bayesian latent class model</td></tr>
 <tr><td style="width: 25%;"><a href="epi.bohning.html">epi.bohning</a></td>
 <td>Bohning's test for overdispersion of Poisson data</td></tr>
 <tr><td style="width: 25%;"><a href="epi.ccc.html">epi.ccc</a></td>
@@ -85,7 +98,7 @@
 <tr><td style="width: 25%;"><a href="epi.pooled.html">epi.pooled</a></td>
 <td>Estimate herd test characteristics when pooled sampling is used</td></tr>
 <tr><td style="width: 25%;"><a href="epi.popsize.html">epi.popsize</a></td>
-<td>Estimate population size</td></tr>
+<td>Estimate population size on the basis of capture-recapture sampling</td></tr>
 <tr><td style="width: 25%;"><a href="epi.prcc.html">epi.prcc</a></td>
 <td>Partial rank correlation coefficients</td></tr>
 <tr><td style="width: 25%;"><a href="epi.prev.html">epi.prev</a></td>
@@ -122,6 +135,8 @@
 <td>Sample size, power and minimum detectable hazard when comparing time to event</td></tr>
 <tr><td style="width: 25%;"><a href="epi.ssdetect.html">epi.ssdetect</a></td>
 <td>Sample size to detect an event</td></tr>
+<tr><td style="width: 25%;"><a href="epi.ssdxsesp.html">epi.ssdxsesp</a></td>
+<td>Sample size to estimate the sensitivity or specificity of a diagnostic test</td></tr>
 <tr><td style="width: 25%;"><a href="epi.ssdxtest.html">epi.ssdxtest</a></td>
 <td>Sample size to validate a diagnostic test in the absence of a gold standard</td></tr>
 <tr><td style="width: 25%;"><a href="epi.ssequb.html">epi.ssequb</a></td>
@@ -148,12 +163,22 @@
 <td>Sample size, power or minimum detectable prevalence ratio or odds ratio for a cross-sectional study</td></tr>
 <tr><td style="width: 25%;"><a href="epi.tests.html">epi.tests</a></td>
 <td>Sensitivity, specificity and predictive value of a diagnostic test</td></tr>
+</table>
+
+<h2><a name="P">-- P --</a></h2>
+
+<table width="100%">
 <tr><td style="width: 25%;"><a href="epi.2by2.html">print.epi.2by2</a></td>
 <td>Summary measures for count data presented in a 2 by 2 table</td></tr>
 <tr><td style="width: 25%;"><a href="epi.occc.html">print.epi.occc</a></td>
 <td>Overall concordance correlation coefficient (OCCC)</td></tr>
 <tr><td style="width: 25%;"><a href="epi.tests.html">print.epi.tests</a></td>
 <td>Sensitivity, specificity and predictive value of a diagnostic test</td></tr>
+</table>
+
+<h2><a name="R">-- R --</a></h2>
+
+<table width="100%">
 <tr><td style="width: 25%;"><a href="rsu.adjrisk.html">rsu.adjrisk</a></td>
 <td>Adjusted risk values</td></tr>
 <tr><td style="width: 25%;"><a href="rsu.dxtest.html">rsu.dxtest</a></td>
@@ -163,7 +188,7 @@
 <tr><td style="width: 25%;"><a href="rsu.pfree.equ.html">rsu.pfree.equ</a></td>
 <td>Equilibrium probability of disease freedom assuming representative or risk based sampling</td></tr>
 <tr><td style="width: 25%;"><a href="rsu.pfree.rs.html">rsu.pfree.rs</a></td>
-<td>Calculate Probability of freedom for given population sensitivity and probability of introduction</td></tr>
+<td>Calculate the probability of freedom for given population sensitivity and probability of introduction</td></tr>
 <tr><td style="width: 25%;"><a href="rsu.pstar.html">rsu.pstar</a></td>
 <td>Design prevalence back calculation</td></tr>
 <tr><td style="width: 25%;"><a href="rsu.sep.html">rsu.sep</a></td>
@@ -214,6 +239,11 @@
 <td>Sample size to achieve a desired surveillance system sensitivity to detect disease at a specified design prevalence assuming representative sampling, imperfect unit sensitivity and specificity</td></tr>
 <tr><td style="width: 25%;"><a href="rsu.sssep.rspool.html">rsu.sssep.rspool</a></td>
 <td>Sample size to achieve a desired surveillance system sensitivity using pooled samples assuming representative sampling</td></tr>
+</table>
+
+<h2><a name="S">-- S --</a></h2>
+
+<table width="100%">
 <tr><td style="width: 25%;"><a href="epi.2by2.html">summary.epi.2by2</a></td>
 <td>Summary measures for count data presented in a 2 by 2 table</td></tr>
 <tr><td style="width: 25%;"><a href="epi.occc.html">summary.epi.occc</a></td>
@@ -221,4 +251,4 @@
 <tr><td style="width: 25%;"><a href="epi.tests.html">summary.epi.tests</a></td>
 <td>Sensitivity, specificity and predictive value of a diagnostic test</td></tr>
 </table>
-</body></html>
+</div></body></html>

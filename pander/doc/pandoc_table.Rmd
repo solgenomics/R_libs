@@ -18,7 +18,7 @@ Core functionality of `pander` is centered around `pandoc.table`, which is aimed
 
 ## Table styles
 
-Since `pander` aims at rendering R objects into [Pandoc](http://pandoc.org/)'s markdown all four (`multiline`, `simple`, `grid`, `rmarkdown`) of  [Pandoc](http://johnmacfarlane.net/pandoc/README.html#tables)'s formats are supported. Users are advised to stick with the default `multiline` style, but if there is a need to change it either specify `style` argument when calling `pander/pandoc.table` or change the default `style` using `panderOptions`.
+Since `pander` aims at rendering R objects into [Pandoc](https://pandoc.org/)'s markdown all four (`multiline`, `simple`, `grid`, `rmarkdown`) of  [Pandoc](https://johnmacfarlane.net/pandoc/README.html#tables)'s formats are supported. Users are advised to stick with the default `multiline` style, but if there is a need to change it either specify `style` argument when calling `pander/pandoc.table` or change the default `style` using `panderOptions`.
 
 ### multiline tables
 
@@ -172,7 +172,7 @@ r <- matrix(c(283764.97430, 29.12345678901, -7.1234, -100.1), ncol = 2)
 pandoc.table(r, round = 2)
 pandoc.table(r, round = c(4,2)) # vector for each column
 pandoc.table(r, digits = 2)
-pandoc.table(r, digits = c(0, 5)) # vector for each column
+pandoc.table(r, digits = c(1, 5)) # vector for each column
 pandoc.table(r, big.mark = ',')
 pandoc.table(r, decimal.mark = ',')
 ```

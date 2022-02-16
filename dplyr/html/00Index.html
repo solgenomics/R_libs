@@ -2,8 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><title>R: A Grammar of Data Manipulation</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> A Grammar of Data Manipulation
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;dplyr&rsquo; version 1.0.2</h2>
+</div><h2>Documentation for package &lsquo;dplyr&rsquo; version 1.0.8</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -48,7 +49,7 @@
 
 <table width="100%">
 <tr><td style="width: 25%;"><a href="across.html">across</a></td>
-<td>Apply a function (or a set of functions) to a set of columns</td></tr>
+<td>Apply a function (or functions) across multiple columns</td></tr>
 <tr><td style="width: 25%;"><a href="count.html">add_count</a></td>
 <td>Count observations by group</td></tr>
 <tr><td style="width: 25%;"><a href="count.html">add_tally</a></td>
@@ -63,14 +64,6 @@
 <td>Apply predicate to all variables</td></tr>
 <tr><td style="width: 25%;"><a href="arrange.html">arrange</a></td>
 <td>Arrange rows by column values</td></tr>
-<tr><td style="width: 25%;"><a href="arrange.html">arrange.data.frame</a></td>
-<td>Arrange rows by column values</td></tr>
-<tr><td style="width: 25%;"><a href="arrange_all.html">arrange_all</a></td>
-<td>Arrange rows by a selection of variables</td></tr>
-<tr><td style="width: 25%;"><a href="arrange_all.html">arrange_at</a></td>
-<td>Arrange rows by a selection of variables</td></tr>
-<tr><td style="width: 25%;"><a href="arrange_all.html">arrange_if</a></td>
-<td>Arrange rows by a selection of variables</td></tr>
 <tr><td style="width: 25%;"><a href="auto_copy.html">auto_copy</a></td>
 <td>Copy tables to same source, if necessary</td></tr>
 </table>
@@ -133,8 +126,8 @@
 <td>Context dependent expressions</td></tr>
 <tr><td style="width: 25%;"><a href="context.html">cur_group_rows</a></td>
 <td>Context dependent expressions</td></tr>
-<tr><td style="width: 25%;"><a href="across.html">c_across</a></td>
-<td>Apply a function (or a set of functions) to a set of columns</td></tr>
+<tr><td style="width: 25%;"><a href="c_across.html">c_across</a></td>
+<td>Combine values from multiple columns</td></tr>
 </table>
 
 <h2><a name="D">-- D --</a></h2>
@@ -146,12 +139,6 @@
 <td>Descending order</td></tr>
 <tr><td style="width: 25%;"><a href="distinct.html">distinct</a></td>
 <td>Subset distinct/unique rows</td></tr>
-<tr><td style="width: 25%;"><a href="distinct_all.html">distinct_all</a></td>
-<td>Select distinct rows by a selection of variables</td></tr>
-<tr><td style="width: 25%;"><a href="distinct_all.html">distinct_at</a></td>
-<td>Select distinct rows by a selection of variables</td></tr>
-<tr><td style="width: 25%;"><a href="distinct_all.html">distinct_if</a></td>
-<td>Select distinct rows by a selection of variables</td></tr>
 </table>
 
 <h2><a name="E">-- E --</a></h2>
@@ -168,12 +155,6 @@
 <td>Subset rows using column values</td></tr>
 <tr><td style="width: 25%;"><a href="filter-joins.html">filter-joins</a></td>
 <td>Filtering joins</td></tr>
-<tr><td style="width: 25%;"><a href="filter_all.html">filter_all</a></td>
-<td>Filter within a selection of variables</td></tr>
-<tr><td style="width: 25%;"><a href="filter_all.html">filter_at</a></td>
-<td>Filter within a selection of variables</td></tr>
-<tr><td style="width: 25%;"><a href="filter_all.html">filter_if</a></td>
-<td>Filter within a selection of variables</td></tr>
 <tr><td style="width: 25%;"><a href="nth.html">first</a></td>
 <td>Extract the first, last or nth value from a vector</td></tr>
 <tr><td style="width: 25%;"><a href="mutate-joins.html">full_join</a></td>
@@ -185,14 +166,10 @@
 <h2><a name="G">-- G --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="glimpse.html">glimpse</a></td>
+<td>Get a glimpse of your data</td></tr>
 <tr><td style="width: 25%;"><a href="group_by.html">group_by</a></td>
 <td>Group by one or more variables</td></tr>
-<tr><td style="width: 25%;"><a href="group_by_all.html">group_by_all</a></td>
-<td>Group by a selection of variables</td></tr>
-<tr><td style="width: 25%;"><a href="group_by_all.html">group_by_at</a></td>
-<td>Group by a selection of variables</td></tr>
-<tr><td style="width: 25%;"><a href="group_by_all.html">group_by_if</a></td>
-<td>Group by a selection of variables</td></tr>
 <tr><td style="width: 25%;"><a href="group_cols.html">group_cols</a></td>
 <td>Select grouping variables</td></tr>
 <tr><td style="width: 25%;"><a href="group_map.html">group_map</a></td>
@@ -212,6 +189,10 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="ident.html">ident</a></td>
 <td>Flag a character vector as SQL identifiers</td></tr>
+<tr><td style="width: 25%;"><a href="across.html">if_all</a></td>
+<td>Apply a function (or functions) across multiple columns</td></tr>
+<tr><td style="width: 25%;"><a href="across.html">if_any</a></td>
+<td>Apply a function (or functions) across multiple columns</td></tr>
 <tr><td style="width: 25%;"><a href="if_else.html">if_else</a></td>
 <td>Vectorised if</td></tr>
 <tr><td style="width: 25%;"><a href="mutate-joins.html">inner_join</a></td>
@@ -259,12 +240,6 @@
 <td>Mutating joins</td></tr>
 <tr><td style="width: 25%;"><a href="mutate.html">mutate.data.frame</a></td>
 <td>Create, modify, and delete columns</td></tr>
-<tr><td style="width: 25%;"><a href="mutate_all.html">mutate_all</a></td>
-<td>Mutate multiple columns</td></tr>
-<tr><td style="width: 25%;"><a href="mutate_all.html">mutate_at</a></td>
-<td>Mutate multiple columns</td></tr>
-<tr><td style="width: 25%;"><a href="mutate_all.html">mutate_if</a></td>
-<td>Mutate multiple columns</td></tr>
 </table>
 
 <h2><a name="N">-- N --</a></h2>
@@ -285,7 +260,7 @@
 <tr><td style="width: 25%;"><a href="ranking.html">ntile</a></td>
 <td>Windowed rank functions.</td></tr>
 <tr><td style="width: 25%;"><a href="n_distinct.html">n_distinct</a></td>
-<td>Efficiently count the number of unique values in a set of vector</td></tr>
+<td>Efficiently count the number of unique values in a set of vectors</td></tr>
 </table>
 
 <h2><a name="O">-- O --</a></h2>
@@ -376,20 +351,8 @@
 <td>Storm tracks data</td></tr>
 <tr><td style="width: 25%;"><a href="summarise.html">summarise</a></td>
 <td>Summarise each group to fewer rows</td></tr>
-<tr><td style="width: 25%;"><a href="summarise_all.html">summarise_all</a></td>
-<td>Summarise multiple columns</td></tr>
-<tr><td style="width: 25%;"><a href="summarise_all.html">summarise_at</a></td>
-<td>Summarise multiple columns</td></tr>
-<tr><td style="width: 25%;"><a href="summarise_all.html">summarise_if</a></td>
-<td>Summarise multiple columns</td></tr>
 <tr><td style="width: 25%;"><a href="summarise.html">summarize</a></td>
 <td>Summarise each group to fewer rows</td></tr>
-<tr><td style="width: 25%;"><a href="summarise_all.html">summarize_all</a></td>
-<td>Summarise multiple columns</td></tr>
-<tr><td style="width: 25%;"><a href="summarise_all.html">summarize_at</a></td>
-<td>Summarise multiple columns</td></tr>
-<tr><td style="width: 25%;"><a href="summarise_all.html">summarize_if</a></td>
-<td>Summarise multiple columns</td></tr>
 </table>
 
 <h2><a name="T">-- T --</a></h2>
@@ -401,12 +364,6 @@
 <td>Create a table from a data source</td></tr>
 <tr><td style="width: 25%;"><a href="mutate.html">transmute</a></td>
 <td>Create, modify, and delete columns</td></tr>
-<tr><td style="width: 25%;"><a href="mutate_all.html">transmute_all</a></td>
-<td>Mutate multiple columns</td></tr>
-<tr><td style="width: 25%;"><a href="mutate_all.html">transmute_at</a></td>
-<td>Mutate multiple columns</td></tr>
-<tr><td style="width: 25%;"><a href="mutate_all.html">transmute_if</a></td>
-<td>Mutate multiple columns</td></tr>
 </table>
 
 <h2><a name="U">-- U --</a></h2>
@@ -431,4 +388,4 @@
 <tr><td style="width: 25%;"><a href="with_groups.html">with_groups</a></td>
 <td>Perform an operation with temporary groups</td></tr>
 </table>
-</body></html>
+</div></body></html>

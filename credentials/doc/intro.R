@@ -1,5 +1,5 @@
 ## ---- echo=FALSE--------------------------------------------------------------
-has_git <- credentials:::has_git_cmd()
+has_git <- credentials:::has_git_cmd() && .Platform$OS.type != 'windows'
 delete_git_config_on_exit <- !file.exists('~/.gitconfig')
 credentials:::set_default_cred_helper()
 

@@ -4,3 +4,4 @@ downlit_md_path         Syntax highlight and link a md document
 evaluate_and_highlight
                         Evaluate code and syntax highlight the results
 highlight               Highlight and link a code block
+is_low_change           Compare two recorded plots

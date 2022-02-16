@@ -3,6 +3,7 @@ CobarOre                Cobar Ore data
 FAQ                     FAQ and ChangeLog of a package
 KhmaladzeTest           Tests of Location and Location Scale Shift
                         Hypotheses for Linear Models
+LassoLambdaHat          Lambda selection for QR lasso problems
 Mammals                 Garland(1983) Data on Running Speed of Mammals
 Munge                   Munge rqss formula
 ParetoTest              Estimation and Inference on the Pareto Tail

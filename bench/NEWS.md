@@ -1,3 +1,15 @@
+# bench 1.1.2
+
+* Davis Vaughan is now the maintainer.
+
+* `autoplot.bench_mark()` again supports factor levels for `expression`, as intended (#82)
+
+* `bench::mark()` and `bench::workout()` no longer support unquote
+  and splice operators. This fixes inconsistencies in performance
+  results with functions like `rlang::list2()` (#61).
+
+* bench has been re-licensed as MIT (#101).
+
 # bench 1.1.1
 
 * `mark()` columns memory, result and mem_alloc columns are now always

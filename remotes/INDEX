@@ -16,7 +16,7 @@ install_url             Install a package from a url
 install_version         Install specific version of a package.
 package_deps            Find all dependencies of a CRAN or dev package.
 parse-git-repo          Parse a remote git repo specification
-system_requirements     Query the system requirements for a dev package
+system_requirements     Query the system requirements for a package
                         (and its dependencies)
 update_packages         Update packages that are missing or
                         out-of-date.

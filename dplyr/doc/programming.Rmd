@@ -139,7 +139,7 @@ Underneath all functions that use tidy selection is the [tidyselect](https://tid
 * `select(df, starts_with("a"))` selects all columns whose name starts with "a";
   `select(df, ends_with("z"))` selects all columns whose name ends with "z".
   
-* `select(df, is.numeric)` selects all numeric columns.
+* `select(df, where(is.numeric))` selects all numeric columns.
 
 You can see more details in `?dplyr_tidy_select`.
 
@@ -177,7 +177,7 @@ As with data masking, tidy selection makes a common task easier at the cost of m
     mtcars %>% select(!all_of(vars))
     ```
 
-## How tos
+## How-tos
 
 The following examples solve a grab bag of common problems. We show you the minimum amount of code so that you can get the basic idea; most real problems will require more code or combining multiple techniques.
 
@@ -254,7 +254,7 @@ If you want the user to provide multiple expressions, embrace each of them:
 ```{r}
 my_summarise3 <- function(data, mean_var, sd_var) {
   data %>% 
-    summarise(mean = mean({{ mean_var }}), sd = mean({{ sd_var }}))
+    summarise(mean = mean({{ mean_var }}), sd = sd({{ sd_var }}))
 }
 ```
 
@@ -272,7 +272,7 @@ my_summarise5 <- function(data, mean_var, sd_var) {
   data %>% 
     summarise(
       "mean_{{mean_var}}" := mean({{ mean_var }}), 
-      "sd_{{sd_var}}" := mean({{ sd_var }})
+      "sd_{{sd_var}}" := sd({{ sd_var }})
     )
 }
 ```

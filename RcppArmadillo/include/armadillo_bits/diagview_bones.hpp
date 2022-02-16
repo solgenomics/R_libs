@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -52,6 +54,9 @@ class diagview : public Base< eT, diagview<eT> >
   inline ~diagview();
   inline  diagview() = delete;
   
+  inline  diagview(const diagview&  in);
+  inline  diagview(      diagview&& in);
+  
   inline void operator=(const diagview& x);
   
   inline void operator+=(const eT val);
@@ -84,11 +89,11 @@ class diagview : public Base< eT, diagview<eT> >
   arma_inline eT  operator()(const uword in_n_row, const uword in_n_col) const;
   
   
-  arma_inline const Op<diagview<eT>,op_htrans>  t() const;
-  arma_inline const Op<diagview<eT>,op_htrans> ht() const;
-  arma_inline const Op<diagview<eT>,op_strans> st() const;
-  
   inline void replace(const eT old_val, const eT new_val);
+  
+  inline void clean(const pod_type threshold);
+  
+  inline void clamp(const eT min_val, const eT max_val);
   
   inline void fill(const eT val);
   inline void zeros();

@@ -3,6 +3,7 @@ as_bench_mark           Coerce to a bench mark object Bench mark
 as_bench_time           Human readable times
 autoplot.bench_mark     Autoplot method for bench_mark objects
 bench_bytes             Human readable memory sizes
+bench_load_average      Get system load averages
 bench_memory            Measure memory that an expression used.
 bench_process_memory    Retrieve the current and maximum memory from
                         the R process
@@ -14,5 +15,5 @@ knit_print.bench_mark   Custom printing function for bench_mark objects
 mark                    Benchmark a series of functions
 press                   Run setup code and benchmarks across a grid of
                         parameters
-summary.bench_mark      Summarize bench::mark results.
+summary.bench_mark      Summarize mark results.
 workout                 Workout a group of expressions individually

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -20,9 +22,9 @@
 
 
 #define ARMA_VERSION_MAJOR 10
-#define ARMA_VERSION_MINOR 1
-#define ARMA_VERSION_PATCH 2
-#define ARMA_VERSION_NAME  "Orchid Ambush"
+#define ARMA_VERSION_MINOR 8
+#define ARMA_VERSION_PATCH 1
+#define ARMA_VERSION_NAME  "Realm Raider"
 
 
 

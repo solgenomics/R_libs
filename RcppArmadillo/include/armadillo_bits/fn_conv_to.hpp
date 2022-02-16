@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -172,7 +174,7 @@ conv_to< Mat<out_eT> >::from(const Base<in_eT, T1>& in, const typename arma_not_
   const quasi_unwrap<T1> tmp(in.get_ref());
   const Mat<in_eT>& X  = tmp.M;
   
-  Mat<out_eT> out(X.n_rows, X.n_cols);
+  Mat<out_eT> out(X.n_rows, X.n_cols, arma_nozeros_indicator());
   
   arrayops::convert( out.memptr(), X.memptr(), X.n_elem );
   
@@ -194,7 +196,7 @@ conv_to< Mat<out_eT> >::from(const Base<in_eT, T1>& in, const typename arma_cx_o
   const quasi_unwrap<T1> tmp(in.get_ref());
   const Mat<in_eT>& X  = tmp.M;
   
-  Mat<out_eT> out(X.n_rows, X.n_cols);
+  Mat<out_eT> out(X.n_rows, X.n_cols, arma_nozeros_indicator());
   
   arrayops::convert_cx( out.memptr(), X.memptr(), X.n_elem );
   
@@ -229,7 +231,7 @@ conv_to< Mat<out_eT> >::from(const std::vector<in_eT>& in, const typename arma_n
   
   const uword N = uword( in.size() );
   
-  Mat<out_eT> out(N, 1);
+  Mat<out_eT> out(N, 1, arma_nozeros_indicator());
   
   if(N > 0)
     {
@@ -253,7 +255,7 @@ conv_to< Mat<out_eT> >::from(const std::vector<in_eT>& in, const typename arma_c
   
   const uword N = uword( in.size() );
   
-  Mat<out_eT> out(N, 1);
+  Mat<out_eT> out(N, 1, arma_nozeros_indicator());
   
   if(N > 0)
     {
@@ -303,7 +305,7 @@ conv_to< Row<out_eT> >::from(const Base<in_eT, T1>& in, const typename arma_not_
   
   arma_debug_check( ( (X.is_vec() == false) && (X.is_empty() == false) ), "conv_to(): given object can't be interpreted as a vector" );
   
-  Row<out_eT> out(X.n_elem);
+  Row<out_eT> out(X.n_elem, arma_nozeros_indicator());
   
   arrayops::convert( out.memptr(), X.memptr(), X.n_elem );
   
@@ -327,7 +329,7 @@ conv_to< Row<out_eT> >::from(const Base<in_eT, T1>& in, const typename arma_cx_o
   
   arma_debug_check( ( (X.is_vec() == false) && (X.is_empty() == false) ), "conv_to(): given object can't be interpreted as a vector" );
   
-  Row<out_eT> out(X.n_rows, X.n_cols);
+  Row<out_eT> out(X.n_rows, X.n_cols, arma_nozeros_indicator());
   
   arrayops::convert_cx( out.memptr(), X.memptr(), X.n_elem );
   
@@ -348,7 +350,7 @@ conv_to< Row<out_eT> >::from(const std::vector<in_eT>& in, const typename arma_n
   
   const uword N = uword( in.size() );
   
-  Row<out_eT> out(N);
+  Row<out_eT> out(N, arma_nozeros_indicator());
   
   if(N > 0)
     {
@@ -372,7 +374,7 @@ conv_to< Row<out_eT> >::from(const std::vector<in_eT>& in, const typename arma_c
   
   const uword N = uword( in.size() );
   
-  Row<out_eT> out(N);
+  Row<out_eT> out(N, arma_nozeros_indicator());
   
   if(N > 0)
     {
@@ -422,7 +424,7 @@ conv_to< Col<out_eT> >::from(const Base<in_eT, T1>& in, const typename arma_not_
   
   arma_debug_check( ( (X.is_vec() == false) && (X.is_empty() == false) ), "conv_to(): given object can't be interpreted as a vector" );
   
-  Col<out_eT> out(X.n_elem);
+  Col<out_eT> out(X.n_elem, arma_nozeros_indicator());
   
   arrayops::convert( out.memptr(), X.memptr(), X.n_elem );
   
@@ -446,7 +448,7 @@ conv_to< Col<out_eT> >::from(const Base<in_eT, T1>& in, const typename arma_cx_o
   
   arma_debug_check( ( (X.is_vec() == false) && (X.is_empty() == false) ), "conv_to(): given object can't be interpreted as a vector" );
   
-  Col<out_eT> out(X.n_rows, X.n_cols);
+  Col<out_eT> out(X.n_rows, X.n_cols, arma_nozeros_indicator());
   
   arrayops::convert_cx( out.memptr(), X.memptr(), X.n_elem );
   
@@ -467,7 +469,7 @@ conv_to< Col<out_eT> >::from(const std::vector<in_eT>& in, const typename arma_n
   
   const uword N = uword( in.size() );
   
-  Col<out_eT> out(N);
+  Col<out_eT> out(N, arma_nozeros_indicator());
   
   if(N > 0)
     {
@@ -491,7 +493,7 @@ conv_to< Col<out_eT> >::from(const std::vector<in_eT>& in, const typename arma_c
   
   const uword N = uword( in.size() );
   
-  Col<out_eT> out(N);
+  Col<out_eT> out(N, arma_nozeros_indicator());
   
   if(N > 0)
     {
@@ -611,7 +613,7 @@ conv_to< Cube<out_eT> >::from(const BaseCube<in_eT, T1>& in, const typename arma
   const unwrap_cube<T1>  tmp( in.get_ref() );
   const Cube<in_eT>& X = tmp.M;
   
-  Cube<out_eT> out(X.n_rows, X.n_cols, X.n_slices);
+  Cube<out_eT> out(X.n_rows, X.n_cols, X.n_slices, arma_nozeros_indicator());
   
   arrayops::convert( out.memptr(), X.memptr(), X.n_elem );
   
@@ -633,7 +635,7 @@ conv_to< Cube<out_eT> >::from(const BaseCube<in_eT, T1>& in, const typename arma
   const unwrap_cube<T1>  tmp( in.get_ref() );
   const Cube<in_eT>& X = tmp.M;
   
-  Cube<out_eT> out(X.n_rows, X.n_cols, X.n_slices);
+  Cube<out_eT> out(X.n_rows, X.n_cols, X.n_slices, arma_nozeros_indicator());
   
   arrayops::convert_cx( out.memptr(), X.memptr(), X.n_elem );
   

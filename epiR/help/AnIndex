@@ -2,6 +2,7 @@ epi.2by2	epi.2by2
 epi.about	epi.about
 epi.asc	epi.asc
 epi.betabuster	epi.betabuster
+epi.blcm.paras	epi.blcm.paras
 epi.bohning	epi.bohning
 epi.ccc	epi.ccc
 epi.conf	epi.conf
@@ -48,6 +49,7 @@ epi.sscompb	epi.sscompb
 epi.sscompc	epi.sscompc
 epi.sscomps	epi.sscomps
 epi.ssdetect	epi.ssdetect
+epi.ssdxsesp	epi.ssdxsesp
 epi.ssdxtest	epi.ssdxtest
 epi.ssequb	epi.ssequb
 epi.ssequc	epi.ssequc

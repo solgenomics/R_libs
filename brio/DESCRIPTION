@@ -1,29 +1,27 @@
 Package: brio
 Title: Basic R Input Output
-Version: 1.1.0
-Authors@R: 
-    c(person(given = "Jim",
-             family = "Hester",
-             role = c("aut", "cre"),
-             email = "jim.hester@rstudio.com",
-             comment = c(ORCID = "0000-0002-2739-7082")),
-      person(given = "RStudio",
-             role = c("cph", "fnd")))
-Description: Functions to handle basic input output, these functions always
-  read and write UTF-8 (8-bit Unicode Transformation Format) files and provide
-  more explicit control over line endings.
+Version: 1.1.3
+Authors@R: c(
+    person("Jim", "Hester", role = "aut",
+           comment = c(ORCID = "0000-0002-2739-7082")),
+    person("Gábor", "Csárdi", , "csardi.gabor@gmail.com", role = c("aut", "cre")),
+    person("RStudio", role = c("cph", "fnd"))
+  )
+Description: Functions to handle basic input output, these functions
+    always read and write UTF-8 (8-bit Unicode Transformation Format)
+    files and provide more explicit control over line endings.
 License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: true
-RoxygenNote: 7.1.1
-Suggests: testthat (>= 2.1.0), covr
-URL: https://github.com/r-lib/brio
+URL: https://brio.r-lib.org, https://github.com/r-lib/brio
 BugReports: https://github.com/r-lib/brio/issues
+Suggests: covr, testthat (>= 2.1.0)
+Encoding: UTF-8
+RoxygenNote: 7.1.2
 NeedsCompilation: yes
-Packaged: 2020-08-28 18:14:14 UTC; jhester
-Author: Jim Hester [aut, cre] (<https://orcid.org/0000-0002-2739-7082>),
+Packaged: 2021-11-29 23:19:46 UTC; jhester
+Author: Jim Hester [aut] (<https://orcid.org/0000-0002-2739-7082>),
+  Gábor Csárdi [aut, cre],
   RStudio [cph, fnd]
-Maintainer: Jim Hester <jim.hester@rstudio.com>
+Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
 Repository: CRAN
-Date/Publication: 2020-08-31 07:20:02 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2021-01-11 23:16:37 UTC; unix
+Date/Publication: 2021-11-30 13:10:02 UTC
+Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 22:49:30 UTC; unix

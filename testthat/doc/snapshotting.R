@@ -9,9 +9,8 @@ set.seed(1014)
 library(testthat)
 
 ## ----include = FALSE----------------------------------------------------------
-snapper <- testthat:::SnapshotReporter$new()
-options(testthat.snapshotter = snapper)
-snapper$start_file("pizza", "test")
+snapper <- local_snapshotter()
+snapper$start_file("snapshotting.Rmd", "test")
 
 ## -----------------------------------------------------------------------------
 bullets <- function(text, id = NULL) {
@@ -31,27 +30,27 @@ test_that("bullets", {
 
 ## -----------------------------------------------------------------------------
 test_that("bullets", {
-  expect_snapshot_output(cat(bullets("a")))
-  expect_snapshot_output(cat(bullets("a", "b")))
+  expect_snapshot(cat(bullets("a")))
+  expect_snapshot(cat(bullets("a", "b")))
 })
 
 ## ---- include = FALSE---------------------------------------------------------
 # Reset snapshot test
 snapper$end_file()
-snapper$start_file("pizza", "test")
+snapper$start_file("snapshotting.Rmd", "test")
 
 ## -----------------------------------------------------------------------------
 test_that("bullets", {
-  expect_snapshot_output(cat(bullets("a")))
-  expect_snapshot_output(cat(bullets("a", "b")))
+  expect_snapshot(cat(bullets("a")))
+  expect_snapshot(cat(bullets("a", "b")))
 })
 
 ## ---- include = FALSE---------------------------------------------------------
 # Reset snapshot test
 snapper$end_file()
-snapper$start_file("pizza", "test")
+snapper$start_file("snapshotting.Rmd", "test")
 
-## -----------------------------------------------------------------------------
+## ---- error = TRUE------------------------------------------------------------
 bullets <- function(text, id = NULL) {
   paste0(
     "<ul", if (!is.null(id)) paste0(" id=\"", id, "\""), ">\n", 
@@ -60,10 +59,38 @@ bullets <- function(text, id = NULL) {
   )
 }
 test_that("bullets", {
-  expect_snapshot_output(cat(bullets("a")))
-  expect_snapshot_output(cat(bullets("a", "b")))
+  expect_snapshot(cat(bullets("a")))
+  expect_snapshot(cat(bullets("a", "b")))
 })
 
-## ---- include = FALSE---------------------------------------------------------
-snapper$snaps_cleanup()
+## -----------------------------------------------------------------------------
+f <- function() {
+  print("Hello")
+  message("Hi!")
+  warning("How are you?")
+}
+
+## -----------------------------------------------------------------------------
+test_that("f() makes lots of noice", {
+  expect_snapshot(f())
+})
+
+## ---- error = TRUE------------------------------------------------------------
+test_that("you can't add a number and a letter", {
+  expect_snapshot(1 + "a")
+})
+
+## -----------------------------------------------------------------------------
+test_that("you can't add a number and a letter", {
+  expect_snapshot(1 + "a", error = TRUE)
+})
+
+## -----------------------------------------------------------------------------
+test_that("you can't add weird thngs", {
+  expect_snapshot(error = TRUE, {
+    1 + "a"
+    mtcars + iris
+    mean + sum
+  })
+})
 

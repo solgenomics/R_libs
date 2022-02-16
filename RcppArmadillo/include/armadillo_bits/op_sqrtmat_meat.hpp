@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -38,7 +40,7 @@ op_sqrtmat::apply(Mat< std::complex<typename T1::elem_type> >& out, const mtOp<s
   
   if(status == false)
     {
-    arma_debug_warn("sqrtmat(): given matrix seems singular; may not have a square root");
+    arma_debug_warn_level(3, "sqrtmat(): given matrix is singular; may not have a square root");
     }
   }
 
@@ -114,6 +116,8 @@ op_sqrtmat::apply_direct(Mat< std::complex<typename T1::elem_type> >& out, const
   
   if(A.is_diagmat())
     {
+    arma_extra_debug_print("op_sqrtmat: detected diagonal matrix");
+    
     const uword N = A.n_rows;
     
     out.zeros(N,N);  // aliasing can't happen as op_sqrtmat is defined as cx_mat = op(mat)
@@ -136,13 +140,15 @@ op_sqrtmat::apply_direct(Mat< std::complex<typename T1::elem_type> >& out, const
     }
   
   #if defined(ARMA_OPTIMISE_SYMPD)
-    const bool try_sympd = sympd_helper::guess_sympd_anysize(A);
+    const bool try_sympd = sympd_helper::guess_sympd(A);
   #else
     const bool try_sympd = false;
   #endif
   
   if(try_sympd)
     {
+    arma_extra_debug_print("op_sqrtmat: attempting sympd optimisation");
+    
     // if matrix A is sympd, all its eigenvalues are positive
     
     Col<in_T> eigval;
@@ -171,14 +177,14 @@ op_sqrtmat::apply_direct(Mat< std::complex<typename T1::elem_type> >& out, const
         }
       }
     
-    arma_extra_debug_print("warning: sympd optimisation failed");
+    arma_extra_debug_print("op_sqrtmat: sympd optimisation failed");
     
     // fallthrough if eigen decomposition failed or an eigenvalue is zero
     }
   
   
   Mat<out_T> U;
-  Mat<out_T> S(A.n_rows, A.n_cols);
+  Mat<out_T> S(A.n_rows, A.n_cols, arma_nozeros_indicator());
   
   const  in_T* Amem = A.memptr();
         out_T* Smem = S.memptr();
@@ -223,7 +229,7 @@ op_sqrtmat_cx::apply(Mat<typename T1::elem_type>& out, const Op<T1,op_sqrtmat_cx
   
   if(status == false)
     {
-    arma_debug_warn("sqrtmat(): given matrix seems singular; may not have a square root");
+    arma_debug_warn_level(3, "sqrtmat(): given matrix is singular; may not have a square root");
     }
   }
 
@@ -323,6 +329,8 @@ op_sqrtmat_cx::apply_direct(Mat<typename T1::elem_type>& out, const Base<typenam
   
   if(S.is_diagmat())
     {
+    arma_extra_debug_print("op_sqrtmat_cx: detected diagonal matrix");
+    
     const uword N = S.n_rows;
     
     out.zeros(N,N);  // aliasing can't happen as S is generated
@@ -333,13 +341,15 @@ op_sqrtmat_cx::apply_direct(Mat<typename T1::elem_type>& out, const Base<typenam
     }
   
   #if defined(ARMA_OPTIMISE_SYMPD)
-    const bool try_sympd = sympd_helper::guess_sympd_anysize(S);
+    const bool try_sympd = sympd_helper::guess_sympd(S);
   #else
     const bool try_sympd = false;
   #endif
   
   if(try_sympd)
     {
+    arma_extra_debug_print("op_sqrtmat_cx: attempting sympd optimisation");
+    
     // if matrix S is sympd, all its eigenvalues are positive
     
     Col< T> eigval;
@@ -368,7 +378,7 @@ op_sqrtmat_cx::apply_direct(Mat<typename T1::elem_type>& out, const Base<typenam
         }
       }
     
-    arma_extra_debug_print("warning: sympd optimisation failed");
+    arma_extra_debug_print("op_sqrtmat_cx: sympd optimisation failed");
     
     // fallthrough if eigen decomposition failed or an eigenvalue is zero
     }

@@ -116,6 +116,7 @@ mkDataTemplate	mkSimulationTemplate
 mkGlmerDevfun	modular
 mkLmerDevfun	modular
 mkMerMod	mkMerMod
+mkNewReTrms	mkReTrms
 mkParsTemplate	mkSimulationTemplate
 mkRespMod	mkRespMod
 mkReTrms	mkReTrms

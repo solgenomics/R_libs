@@ -1,0 +1,10 @@
+ROSE                    Generation of synthetic data by Randomly Over
+                        Sampling Examples (ROSE)
+ROSE-package            ROSE: Random Over-Sampling Examples
+ROSE.eval               Evaluation of learner accuracy by ROSE
+accuracy.meas           Metrics to evaluate a classifier accuracy in
+                        imbalanced learning
+hacide.train            Half circle filled data
+ovun.sample             Over-sampling, under-sampling, combination of
+                        over- and under-sampling.
+roc.curve               ROC curve

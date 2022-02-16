@@ -1,7 +1,7 @@
 Package: Cubist
 Type: Package
 Title: Rule- And Instance-Based Regression Modeling
-Version: 0.2.3
+Version: 0.4.0
 Authors@R: c(
     person("Max", "Kuhn", , "mxkuhn@gmail.com", c("aut", "cre")),
     person("Steve", "Weston", role = "ctb"),
@@ -13,17 +13,20 @@ Maintainer: Max Kuhn <mxkuhn@gmail.com>
 Description: Regression modeling using rules with added instance-based corrections.
 Depends: lattice
 Imports: reshape2, utils
-Suggests: mlbench, caret, knitr, modeldata, dplyr (>= 0.7.4), rlang,
-        tidyrules
-URL: https://topepo.github.io/Cubist
+Config/Needs/website: pkgdown, caret, tidymodels, rules
+Suggests: mlbench, knitr, modeldata, dplyr (>= 0.7.4), rlang,
+        tidyrules, rmarkdown
+URL: https://topepo.github.io/Cubist//,
+        https://topepo.github.io/Cubist/
 BugReports: https://github.com/topepo/Cubist/issues
 License: GPL-3
 LazyLoad: yes
-RoxygenNote: 7.0.2.9000
+RoxygenNote: 7.1.2
 VignetteBuilder: knitr
 Encoding: UTF-8
+Biarch: true
 NeedsCompilation: yes
-Packaged: 2020-01-09 19:49:52 UTC; max
+Packaged: 2022-02-05 13:18:19 UTC; maxkuhn
 Author: Max Kuhn [aut, cre],
   Steve Weston [ctb],
   Chris Keefer [ctb],
@@ -31,5 +34,5 @@ Author: Max Kuhn [aut, cre],
   Ross Quinlan [aut] (Author of imported C code),
   Rulequest Research Pty Ltd. [cph] (Copyright holder of imported C code)
 Repository: CRAN
-Date/Publication: 2020-01-10 17:50:23 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2021-01-12 00:30:24 UTC; unix
+Date/Publication: 2022-02-05 13:40:02 UTC
+Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 23:23:37 UTC; unix

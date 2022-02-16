@@ -10,3 +10,5 @@ initRegExp              Add regular expression operator
 rsqliteVersion          RSQLite version
 sqlite-transaction      SQLite transaction management
 sqliteCopyDatabase      Copy a SQLite database
+sqliteSetBusyHandler    Configure what SQLite should do when the
+                        database is locked

@@ -1,0 +1,165 @@
+apg                     Get APG names
+apg_families            MOBOT family names
+apg_lookup              Lookup in the APGIII taxonomy and replace
+                        family names
+apg_orders              MOBOT order names
+bold_downstream         Retrieve all taxa names downstream in hierarchy
+                        for BOLD
+bold_search             Search Barcode of Life for taxonomic IDs
+children                Retrieve immediate children taxa for a given
+                        taxon name or ID.
+class2tree              Convert a list of classifications to a tree.
+classification          Retrieve the taxonomic hierarchy for a given
+                        taxon ID.
+comm2sci                Get scientific names from common names.
+downstream              Retrieve the downstream taxa for a given taxon
+                        name or ID.
+eol_dataobjects         Given the identifier for a data object, return
+                        all metadata about the object
+eol_pages               Search for pages in EOL database using a
+                        taxonconceptID.
+eol_search              Search for terms in EOL database.
+eubon_capabilities      EUBON capabilities
+eubon_children          EUBON children
+eubon_hierarchy         EUBON hierarchy
+eubon_search            EUBON taxonomy search
+fungorum                Index Fungorum
+gbif_downstream         Retrieve all taxa names downstream in hierarchy
+                        for GBIF
+gbif_name_usage         Lookup details for specific names in all
+                        taxonomies in GBIF.
+gbif_parse              Parse taxon names using the GBIF name parser.
+genbank2uid             Get NCBI taxonomy UID from GenBankID
+get_boldid              Get the BOLD (Barcode of Life) code for a
+                        search term.
+get_eolid               Get the EOL ID from Encyclopedia of Life from
+                        taxonomic names.
+get_gbifid              Get the GBIF backbone taxon ID from taxonomic
+                        names.
+get_id_details          Details on get_*() functions
+get_ids                 Retrieve taxonomic identifiers for a given
+                        taxon name.
+get_iucn                Get a IUCN Redlist taxon
+get_natservid           Get NatureServe taxonomic ID for a taxon name
+get_nbnid               Get the UK National Biodiversity Network ID
+                        from taxonomic names.
+get_pow                 Get Kew's Plants of the World code for a taxon
+get_tolid               Get the OTT id for a search term
+get_tpsid               Get the NameID codes from Tropicos for
+                        taxonomic names.
+get_tsn                 Get the TSN code for a search term.
+get_uid                 Get the UID codes from NCBI for taxonomic
+                        names.
+get_wiki                Get the page name for a Wiki taxon
+get_wormsid             Get Worms ID for a taxon name
+getkey                  Function to get API key.
+gn_parse                Parse scientific names using Global Names
+                        Parser
+gni_details             Search for taxonomic name details using the
+                        Global Names Index
+gni_parse               Parse scientific names using EOL's name parser.
+gni_search              Search for taxonomic names using the Global
+                        Names Index
+gnr_datasources         Global Names Resolver Data Sources
+gnr_resolve             Resolve names using Global Names Resolver
+id2name                 Taxonomic IDs to taxonomic names
+ion                     ION - Index to Organism Names
+iplant_resolve          iPlant name resolution
+ipni_search             Search for names in the International Plant
+                        Names Index (IPNI).
+itis_acceptname         Retrieve accepted TSN and name
+itis_downstream         Retrieve all taxa names or TSNs downstream in
+                        hierarchy from given TSN.
+itis_getrecord          Get full ITIS record for one or more ITIS TSN's
+                        or lsid's.
+itis_hierarchy          ITIS hierarchy
+itis_kingdomnames       Get kingdom names
+itis_lsid               Get TSN from LSID
+itis_name               Get taxonomic names for a given taxonomic name
+                        query.
+itis_native             Get jurisdiction data, i.e., native or not
+                        native in a region.
+itis_refs               Get references related to a ITIS TSN.
+itis_taxrank            Retrieve taxonomic rank name from given TSN.
+itis_terms              Get ITIS terms, i.e., tsn's, authors, common
+                        names, and scientific names.
+iucn_getname            Get any matching IUCN species names
+iucn_id                 Get an ID for a IUCN listed taxon
+iucn_status             Extractor functions for 'iucn'-class.
+iucn_summary            Get a summary from the IUCN Red List
+key_helpers             Helpers to set up authentication for the
+                        different providers.
+lowest_common           Retrieve the lowest common taxon and rank for a
+                        given taxon name or ID
+names_list              Get a random vector of species names.
+nbn_classification      Search UK National Biodiversity Network
+                        database for taxonomic classification
+nbn_search              Search UK National Biodiversity Network
+nbn_synonyms            Return all synonyms for a taxon name with a
+                        given id from NBN
+ncbi_children           Search NCBI for children of a taxon
+ncbi_downstream         Retrieve all taxa names downstream in hierarchy
+                        for NCBI
+ncbi_get_taxon_summary
+                        NCBI taxon information from uids
+ping                    Ping an API used in taxize to see if it's
+                        working.
+plantGenusNames         Vector of plant genus names from ThePlantList
+plantNames              Vector of plant species (genus - specific
+                        epithet) names from ThePlantList
+plantminer              Search for taxonomy data from Plantminer.com
+pow_lookup              Lookup taxa in Kew's Plants of the World
+pow_search              Search Kew's Plants of the World
+pow_synonyms            Lookup synonyms in Kew's Plants of the World
+rank_ref                Lookup-table for IDs of taxonomic ranks
+rank_ref_zoo            Lookup-table for IDs of taxonomic ranks (WoRMS)
+rankagg                 Aggregate data by given taxonomic rank
+resolve                 Resolve names from different data sources
+sci2comm                Get common names from scientific names.
+scrapenames             Resolve names using Global Names Recognition
+                        and Discovery.
+species_plantarum_binomials
+                        Species names from Species Plantarum
+status_codes            Get HTTP status codes
+synonyms                Retrieve synonyms from various sources given
+                        input taxonomic names or identifiers
+tax_agg                 Aggregate species data to given taxonomic rank
+tax_name                Get taxonomic names for a given rank
+tax_rank                Get rank for a given taxonomic name.
+taxize-authentication   taxize authentication
+taxize-defunct          Defunct functions in taxize
+taxize-package          Taxonomic Information from Around the Web
+taxize-params           taxize parameters
+taxize_capwords         Capitalize the first letter of a character
+                        string.
+taxize_cite             Get citations and licenses for data sources
+                        used in taxize
+taxon-state             Last taxon state object from a get_* function
+                        call
+theplantlist            Lookup-table for family, genus, and species
+                        names for ThePlantList
+tol_resolve             Resolve names using Open Tree of Life (OTL)
+                        resolver
+tp_accnames             Return all accepted names for a taxon name with
+                        a given id.
+tp_dist                 Return all distribution records for for a taxon
+                        name with a given id.
+tp_refs                 Return all reference records for for a taxon
+                        name with a given id.
+tp_search               Search Tropicos by scientific name, common
+                        name, or Tropicos ID.
+tp_summary              Return summary data a taxon name with a given
+                        id.
+tp_synonyms             Return all synonyms for a taxon name with a
+                        given id.
+tpl_families            Get The Plant List families.
+tpl_get                 Get The Plant List csv files.
+tpl_search              A light wrapper around the taxonstand fxn to
+                        call Theplantlist.org database.
+ubio_ping               uBio ping
+upstream                Retrieve the upstream taxa for a given taxon
+                        name or ID.
+vascan_search           Search the CANADENSYS Vascan API.
+worms_downstream        Retrieve all taxa names downstream in hierarchy
+                        for WORMS
+worrms_ranks            WORMS ranks

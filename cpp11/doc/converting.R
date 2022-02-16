@@ -5,7 +5,7 @@ knitr::opts_chunk$set(
 )
 
 should_run_benchmarks <- function(x) {
-  get("requireNamespace")("cpp11test") && asNamespace("cpp11test")$should_run_benchmarks()
+  get("requireNamespace")("cpp11test", quietly = TRUE) && asNamespace("cpp11test")$should_run_benchmarks()
 }
 
 ## ---- message = FALSE, eval = should_run_benchmarks()-------------------------
@@ -25,7 +25,7 @@ should_run_benchmarks <- function(x) {
 #  )[c("len", "pkg", "min", "mem_alloc", "n_itr", "n_gc")]
 #  saveRDS(b_grow, "growth.Rds", version = 2)
 
-## ---- echo = FALSE, dev = "svg", fig.ext = "svg"------------------------------
+## ---- echo = FALSE, dev = "svg", fig.ext = "svg", eval = capabilities("cairo")----
 b_grow <- readRDS("growth.Rds")
 library(ggplot2)
 ggplot(b_grow, aes(x = len, y = min, color = pkg)) +

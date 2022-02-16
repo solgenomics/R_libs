@@ -3,9 +3,6 @@ knitr::opts_chunk$set(fig.height = 4.5)
 knitr::opts_chunk$set(fig.width = 6)
 knitr::opts_chunk$set(collapse = TRUE)
 
-## ---- eval=FALSE--------------------------------------------------------------
-#  rgdal::make_EPSG()
-
 ## -----------------------------------------------------------------------------
 library(sf)
 demo(nc, ask = FALSE, echo = FALSE)

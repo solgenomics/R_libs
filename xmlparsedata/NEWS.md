@@ -1,4 +1,10 @@
 
+# 1.0.5
+
+* Translate `\` in lambda expression to `OP-LAMBDA` (#18 @renkun-ken).
+
+* Drop all control characters, except horizontal tab and newline (#19).
+
 # 1.0.4
 
 * Translate ] tokens to `OP-RIGHT-BRACKET` instead of

@@ -50,6 +50,7 @@ KhmaladzeTest	KhmaladzeTest
 kselect	kuantile
 kuantile	kuantile
 kunique	kuantile
+LassoLambdaHat	LassoLambdaHat
 latex	latex
 latex.summary.rqs	latex.summary.rqs
 latex.table	latex.table
@@ -72,6 +73,7 @@ Pickands.fit	ParetoTest
 plot.KhmaladzeTest	plot.KhmaladzeTest
 plot.qss1	plot.rqss
 plot.qss2	plot.rqss
+plot.qts1	plot.rqss
 plot.rq.process	plot.rq.process
 plot.rqs	plot.rqs
 plot.rqss	plot.rqss

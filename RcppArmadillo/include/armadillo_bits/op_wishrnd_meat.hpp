@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -40,6 +42,7 @@ op_wishrnd::apply(Mat<typename T1::elem_type>& out, const Op<T1,op_wishrnd>& exp
   
   if(status == false)
     {
+    out.soft_reset();
     arma_stop_runtime_error("wishrnd(): given matrix is not symmetric positive definite");
     }
   }
@@ -73,8 +76,6 @@ op_wishrnd::apply_direct(Mat<typename T1::elem_type>& out, const Base<typename T
     if(mode == 1)  { status = op_wishrnd::apply_noalias_mode1(out, U.M, df); }
     if(mode == 2)  { status = op_wishrnd::apply_noalias_mode2(out, U.M, df); }
     }
-  
-  if(status == false)  { out.soft_reset(); }
   
   return status;
   }
@@ -135,7 +136,7 @@ op_wishrnd::apply_noalias_mode2(Mat<eT>& out, const Mat<eT>& D, const eT df)
     
     op_chi2rnd_varying_df<eT> chi2rnd_generator;
     
-    Mat<eT> A(N, N, fill::zeros);
+    Mat<eT> A(N, N, arma_zeros_indicator());
     
     for(uword i=0; i<N; ++i)
       {
@@ -179,6 +180,7 @@ op_iwishrnd::apply(Mat<typename T1::elem_type>& out, const Op<T1,op_iwishrnd>& e
   
   if(status == false)
     {
+    out.soft_reset();
     arma_stop_runtime_error("iwishrnd(): given matrix is not symmetric positive definite and/or df is too low");
     }
   }
@@ -212,8 +214,6 @@ op_iwishrnd::apply_direct(Mat<typename T1::elem_type>& out, const Base<typename 
     if(mode == 1)  { status = op_iwishrnd::apply_noalias_mode1(out, U.M, df); }
     if(mode == 2)  { status = op_iwishrnd::apply_noalias_mode2(out, U.M, df); }
     }
-  
-  if(status == false)  { out.soft_reset(); }
   
   return status;
   }

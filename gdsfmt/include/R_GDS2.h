@@ -8,7 +8,7 @@
 //
 // R_GDS2.h: C interface to gdsfmt dynamic library
 //
-// Copyright (C) 2014-2018    Xiuwen Zheng
+// Copyright (C) 2014-2021    Xiuwen Zheng
 //
 // This file is part of CoreArray.
 //
@@ -29,7 +29,7 @@
  *	\file     R_GDS2.h
  *	\author   Xiuwen Zheng [zhengxwen@gmail.com]
  *	\version  1.0
- *	\date     2014 - 2018
+ *	\date     2014 - 2020
  *	\brief    C interface to gdsfmt dynamic library
  *	\details
 **/
@@ -96,6 +96,13 @@ static Type_R_Is_Factor func_R_Is_Factor = NULL;
 COREARRAY_DLL_LOCAL C_BOOL GDS_R_Is_Factor(PdGDSObj Obj)
 {
 	return (*func_R_Is_Factor)(Obj);
+}
+
+typedef int (*Type_R_Is_ExtType)(PdGDSObj);
+static Type_R_Is_ExtType func_R_Is_ExtType = NULL;
+COREARRAY_DLL_EXPORT int GDS_R_Is_ExtType(PdGDSObj Obj)
+{
+	return (*func_R_Is_ExtType)(Obj);
 }
 
 typedef int (*Type_R_Set_IfFactor)(PdGDSObj, SEXP);
@@ -166,12 +173,12 @@ COREARRAY_DLL_LOCAL PdGDSFile GDS_File_Create(const char *FileName)
 	return (*func_File_Create)(FileName);
 }
 
-typedef PdGDSFile (*Type_File_Open)(const char *, C_BOOL, C_BOOL);
+typedef PdGDSFile (*Type_File_Open)(const char *, C_BOOL, C_BOOL, C_BOOL);
 static Type_File_Open func_File_Open = NULL;
-COREARRAY_DLL_LOCAL PdGDSFile GDS_File_Open(const char *FileName,
-	C_BOOL ReadOnly, C_BOOL ForkSupport)
+COREARRAY_DLL_LOCAL PdGDSFile GDS_File_Open(const char *FileName, C_BOOL ReadOnly,
+	C_BOOL ForkSupport, C_BOOL AllowError)
 {
-	return (*func_File_Open)(FileName, ReadOnly, ForkSupport);
+	return (*func_File_Open)(FileName, ReadOnly, ForkSupport, AllowError);
 }
 
 typedef void (*Type_File_Close)(PdGDSFile);
@@ -186,6 +193,13 @@ static Type_File_Sync func_File_Sync = NULL;
 COREARRAY_DLL_LOCAL void GDS_File_Sync(PdGDSFile File)
 {
 	(*func_File_Sync)(File);
+}
+
+typedef C_BOOL (*Type_File_Reopen)(SEXP);
+static Type_File_Reopen func_File_Reopen = NULL;
+COREARRAY_DLL_LOCAL C_BOOL GDS_File_Reopen(SEXP GDSObj)
+{
+	return (*func_File_Reopen)(GDSObj);
 }
 
 typedef PdGDSFolder (*Type_File_Root)(PdGDSFile);
@@ -207,6 +221,21 @@ static Type_Node_Delete func_Node_Delete = NULL;
 COREARRAY_DLL_LOCAL void GDS_Node_Delete(PdGDSObj Node, C_BOOL Force)
 {
 	(*func_Node_Delete)(Node, Force);
+}
+
+typedef C_BOOL (*Type_Node_Load)(PdGDSObj, int, const char*, PdGDSFile, PdGDSObj*, int*);
+static Type_Node_Load func_Node_Load = NULL;
+COREARRAY_DLL_LOCAL C_BOOL GDS_Node_Load(PdGDSObj Node, int NodeID,
+	const char *Path, PdGDSFile File, PdGDSObj *OutNode, int *OutNodeID)
+{
+	return (*func_Node_Load)(Node, NodeID, Path, File, OutNode, OutNodeID);
+}
+
+typedef void (*Type_Node_Unload)(PdGDSObj);
+static Type_Node_Unload func_Node_Unload = NULL;
+COREARRAY_DLL_LOCAL void GDS_Node_Unload(PdGDSObj Node)
+{
+	(*func_Node_Unload)(Node);
 }
 
 typedef void (*Type_Node_GetClassName)(PdGDSObj, char *, size_t);
@@ -641,6 +670,22 @@ COREARRAY_DLL_LOCAL void GDS_ArrayRead_BalanceBuffer(PdArrayRead array[],
 	(*func_ArrayRead_BalanceBuffer)(array, n, buffer_size);
 }
 
+typedef C_BOOL (*Type_Load_Matrix)();
+static Type_Load_Matrix func_Load_Matrix = NULL;
+COREARRAY_DLL_LOCAL C_BOOL GDS_Load_Matrix()
+{
+	return (*func_Load_Matrix)();
+}
+
+typedef SEXP (*Type_New_SpCMatrix)(const double *x, const int *i, const int *p,
+	int n_x, int nrow, int ncol);
+static Type_New_SpCMatrix func_New_SpCMatrix = NULL;
+COREARRAY_DLL_LOCAL SEXP GDS_New_SpCMatrix(const double *x, const int *i,
+	const int *p, int n_x, int nrow, int ncol)
+{
+	return (*func_New_SpCMatrix)(x, i, p, n_x, nrow, ncol);
+}
+
 
 
 // ===========================================================================
@@ -663,6 +708,7 @@ void Init_GDS_Routines()
 	LOAD(func_R_Obj_SEXP2SEXP, "GDS_R_Obj_SEXP2SEXP");
 	LOAD(func_R_Is_Logical, "GDS_R_Is_Logical");
 	LOAD(func_R_Is_Factor, "GDS_R_Is_Factor");
+	LOAD(func_R_Is_ExtType, "GDS_R_Is_ExtType");
 	LOAD(func_R_Set_IfFactor, "GDS_R_Set_IfFactor");
 	LOAD(func_R_Array_Read, "GDS_R_Array_Read");
 	LOAD(func_R_Apply, "GDS_R_Apply");
@@ -675,9 +721,12 @@ void Init_GDS_Routines()
 	LOAD(func_File_Open, "GDS_File_Open");
 	LOAD(func_File_Close, "GDS_File_Close");
 	LOAD(func_File_Sync, "GDS_File_Sync");
+	LOAD(func_File_Reopen, "GDS_File_Reopen");
 	LOAD(func_File_Root, "GDS_File_Root");
 
 	LOAD(func_Node_File, "GDS_Node_File");
+	LOAD(func_Node_Load, "GDS_Node_Load");
+	LOAD(func_Node_Unload, "GDS_Node_Unload");
 	LOAD(func_Node_Delete, "GDS_Node_Delete");
 	LOAD(func_Node_GetClassName, "GDS_Node_GetClassName");
 	LOAD(func_Node_ChildCount, "GDS_Node_ChildCount");
@@ -742,6 +791,9 @@ void Init_GDS_Routines()
 	LOAD(func_ArrayRead_Read, "GDS_ArrayRead_Read");
 	LOAD(func_ArrayRead_Eof, "GDS_ArrayRead_Eof");
 	LOAD(func_ArrayRead_BalanceBuffer, "GDS_ArrayRead_BalanceBuffer");
+
+	LOAD(func_Load_Matrix, "GDS_Load_Matrix");
+	LOAD(func_New_SpCMatrix, "GDS_New_SpCMatrix");
 }
 
 

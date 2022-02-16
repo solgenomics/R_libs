@@ -1,6 +1,6 @@
 Package: msm
-Version: 1.6.8
-Date: 2019-12-16
+Version: 1.6.9
+Date: 2021-09-26
 Title: Multi-State Markov and Hidden Markov Models in Continuous Time
 Author: Christopher Jackson <chris.jackson@mrc-bsu.cam.ac.uk>
 Maintainer: Christopher Jackson <chris.jackson@mrc-bsu.cam.ac.uk>
@@ -18,7 +18,7 @@ URL: https://github.com/chjackson/msm
 BugReports: https://github.com/chjackson/msm/issues
 LazyData: yes
 NeedsCompilation: yes
-Packaged: 2019-12-16 10:40:33 UTC; chris
+Packaged: 2021-09-27 08:24:28 UTC; Chris
 Repository: CRAN
-Date/Publication: 2019-12-16 15:30:02 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2021-01-12 00:01:13 UTC; unix
+Date/Publication: 2021-09-27 09:50:02 UTC
+Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 23:02:27 UTC; unix

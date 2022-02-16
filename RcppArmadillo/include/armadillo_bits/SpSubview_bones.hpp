@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -48,6 +50,9 @@ class SpSubview : public SpBase< eT, SpSubview<eT> >
   inline ~SpSubview();
   inline  SpSubview() = delete;
   
+  inline  SpSubview(const SpSubview&  in);
+  inline  SpSubview(      SpSubview&& in);
+  
   inline const SpSubview& operator+= (const eT val);
   inline const SpSubview& operator-= (const eT val);
   inline const SpSubview& operator*= (const eT val);
@@ -89,10 +94,15 @@ class SpSubview : public SpBase< eT, SpSubview<eT> >
   
   inline void clean(const pod_type threshold);
   
+  inline void clamp(const eT min_val, const eT max_val);
+  
   inline void fill(const eT val);
   inline void zeros();
   inline void ones();
   inline void eye();
+  inline void randu();
+  inline void randn();
+  
   
   arma_hot inline SpSubview_MapMat_val<eT> operator[](const uword i);
   arma_hot inline eT                       operator[](const uword i) const;
@@ -347,9 +357,9 @@ class SpSubview_col : public SpSubview<eT>
   template<typename T1> inline void operator= (const SpBase<eT,T1>& x);
   template<typename T1> inline void operator= (const   Base<eT,T1>& x);
   
-  inline const SpOp<SpSubview_col<eT>,spop_htrans>  t() const;
-  inline const SpOp<SpSubview_col<eT>,spop_htrans> ht() const;
-  inline const SpOp<SpSubview_col<eT>,spop_strans> st() const;
+  inline arma_warn_unused const SpOp<SpSubview_col<eT>,spop_htrans>  t() const;
+  inline arma_warn_unused const SpOp<SpSubview_col<eT>,spop_htrans> ht() const;
+  inline arma_warn_unused const SpOp<SpSubview_col<eT>,spop_strans> st() const;
   
   
   protected:
@@ -385,9 +395,9 @@ class SpSubview_row : public SpSubview<eT>
   template<typename T1> inline void operator= (const SpBase<eT,T1>& x);
   template<typename T1> inline void operator= (const   Base<eT,T1>& x);
   
-  inline const SpOp<SpSubview_row<eT>,spop_htrans>  t() const;
-  inline const SpOp<SpSubview_row<eT>,spop_htrans> ht() const;
-  inline const SpOp<SpSubview_row<eT>,spop_strans> st() const;
+  inline arma_warn_unused const SpOp<SpSubview_row<eT>,spop_htrans>  t() const;
+  inline arma_warn_unused const SpOp<SpSubview_row<eT>,spop_htrans> ht() const;
+  inline arma_warn_unused const SpOp<SpSubview_row<eT>,spop_strans> st() const;
   
   
   protected:

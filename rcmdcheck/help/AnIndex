@@ -1,4 +1,3 @@
-rcmdcheck-package	rcmdcheck
 check_details	check_details
 compare_checks	compare_checks
 compare_to_cran	compare_to_cran
@@ -11,5 +10,6 @@ parse_check_url	parse_check_url
 print.rcmdcheck	print.rcmdcheck
 print.rcmdcheck_comparison	print.rcmdcheck_comparison
 rcmdcheck	rcmdcheck
+rcmdcheck-config	rcmdcheck-config
 rcmdcheck_process	rcmdcheck_process
 xopen.rcmdcheck	xopen.rcmdcheck

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -51,7 +53,7 @@ op_diagmat::apply(Mat<typename T1::elem_type>& out, const Op<T1, op_diagmat>& X)
         const eT*   out_mem = out.memptr();
         const uword N       = out.n_elem;
         
-        Mat<eT> tmp(N,N);  tmp.zeros();
+        Mat<eT> tmp(N,N, arma_zeros_indicator());
         
         for(uword i=0; i<N; ++i)  { tmp.at(i,i) = out_mem[i]; }
         
@@ -740,7 +742,7 @@ op_diagmat2::apply(Mat<typename T1::elem_type>& out, const Proxy<T1>& P, const u
     }
   else  // P represents a matrix 
     {
-    arma_debug_check
+    arma_debug_check_bounds
       (
       ((row_offset > 0) && (row_offset >= n_rows)) || ((col_offset > 0) && (col_offset >= n_cols)),
       "diagmat(): requested diagonal out of bounds"

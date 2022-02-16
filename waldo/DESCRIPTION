@@ -1,6 +1,6 @@
 Package: waldo
 Title: Find Differences Between R Objects
-Version: 0.2.3
+Version: 0.3.1
 Authors@R: 
     c(person(given = "Hadley",
              family = "Wickham",
@@ -13,19 +13,19 @@ Description: Compare complex R objects and reveal the key
     being able to quickly isolate key differences makes understanding test
     failures much easier.
 License: MIT + file LICENSE
-URL: https://github.com/r-lib/waldo
+URL: https://waldo.r-lib.org, https://github.com/r-lib/waldo
 BugReports: https://github.com/r-lib/waldo/issues
-Imports: cli, diffobj, fansi, glue, methods, rematch2, rlang, tibble
-Suggests: testthat, covr, R6
+Imports: cli, diffobj (>= 0.3.4), fansi, glue, methods, rematch2, rlang
+        (>= 0.4.10), tibble
+Suggests: testthat (>= 3.0.0), covr, R6, withr, xml2
 Encoding: UTF-8
-LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2020-11-09 14:55:30 UTC; hadley
+Packaged: 2021-09-14 17:58:24 UTC; hadley
 Author: Hadley Wickham [aut, cre],
   RStudio [cph]
 Maintainer: Hadley Wickham <hadley@rstudio.com>
 Repository: CRAN
-Date/Publication: 2020-11-09 16:30:02 UTC
-Built: R 3.6.3; ; 2021-01-11 23:25:20 UTC; unix
+Date/Publication: 2021-09-14 18:20:02 UTC
+Built: R 4.1.2; ; 2022-02-15 22:55:12 UTC; unix

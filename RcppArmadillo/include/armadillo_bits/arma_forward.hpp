@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -35,6 +37,7 @@ template<typename eT, bool do_conj> class xtrans_mat;
 
 template<typename eT> class subview;
 template<typename eT> class subview_col;
+template<typename eT> class subview_cols;
 template<typename eT> class subview_row;
 template<typename eT> class subview_row_strans;
 template<typename eT> class subview_row_htrans;
@@ -255,8 +258,8 @@ template<                 typename T1, typename T2, typename eglue_type> class  
 template<typename out_eT, typename T1, typename T2, typename  glue_type> class mtGlueCube;
 
 
-template<typename T1> class Proxy;
-template<typename T1> class ProxyCube;
+template<typename T1> struct Proxy;
+template<typename T1> struct ProxyCube;
 
 template<typename T1> class diagmat_proxy;
 
@@ -323,7 +326,7 @@ template<                 typename T1, typename T2, typename spglue_type> class 
 template<typename out_eT, typename T1, typename T2, typename spglue_type> class mtSpGlue;
 
 
-template<typename T1> class SpProxy;
+template<typename T1> struct SpProxy;
 
 
 
@@ -331,6 +334,11 @@ struct arma_vec_indicator     {};
 struct arma_fixed_indicator   {};
 struct arma_reserve_indicator {};
 struct arma_layout_indicator  {};
+
+template<bool do_zeros> struct arma_initmode_indicator {};
+
+struct arma_zeros_indicator   : public arma_initmode_indicator<true > {};
+struct arma_nozeros_indicator : public arma_initmode_indicator<false> {};
 
 
 //! \addtogroup injector
@@ -362,8 +370,9 @@ enum struct file_type : unsigned int
   pgm_binary,         //!< Portable Grey Map (greyscale image)
   ppm_binary,         //!< Portable Pixel Map (colour image), used by the field and cube classes
   hdf5_binary,        //!< HDF5: open binary format, not specific to Armadillo, which can store arbitrary data
-  hdf5_binary_trans,  //!< [DO NOT USE - deprecated] as per hdf5_binary, but save/load the data with columns transposed to rows
-  coord_ascii         //!< simple co-ordinate format for sparse matrices (indices start at zero)
+  hdf5_binary_trans,  //!< [NOTE: DO NOT USE - deprecated] as per hdf5_binary, but save/load the data with columns transposed to rows
+  coord_ascii,        //!< simple co-ordinate format for sparse matrices (indices start at zero)
+  ssv_ascii,          //!< similar to csv_ascii; uses semicolon (;) instead of comma (,) as the separator
   };
 
 
@@ -379,38 +388,12 @@ static constexpr file_type ppm_binary         = file_type::ppm_binary;
 static constexpr file_type hdf5_binary        = file_type::hdf5_binary;
 static constexpr file_type hdf5_binary_trans  = file_type::hdf5_binary_trans;
 static constexpr file_type coord_ascii        = file_type::coord_ascii;
+static constexpr file_type ssv_ascii          = file_type::ssv_ascii;
 
 
 struct hdf5_name;
 struct  csv_name;
 
-
-//! @}
-
-
-
-//! \addtogroup fill
-//! @{
-
-namespace fill
-  {
-  struct fill_none  {};
-  struct fill_zeros {};
-  struct fill_ones  {};
-  struct fill_eye   {};
-  struct fill_randu {};
-  struct fill_randn {};
-  
-  template<typename fill_type> 
-  struct fill_class { inline fill_class() {} };
-  
-  static const fill_class<fill_none > none;
-  static const fill_class<fill_zeros> zeros;
-  static const fill_class<fill_ones > ones;
-  static const fill_class<fill_eye  > eye;
-  static const fill_class<fill_randu> randu;
-  static const fill_class<fill_randn> randn;
-  }
 
 //! @}
 

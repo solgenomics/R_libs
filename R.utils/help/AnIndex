@@ -42,7 +42,7 @@ as.character,GString-method	as.character.GString
 as.character,Options-method	as.character.Options
 as.character,ProgressBar-method	as.character.ProgressBar
 as.character,Verbose-method	as.character.Verbose
-as.character.binmode	as.character.binmode
+as.character.binmode	format.binmode
 as.character.GString	as.character.GString
 as.character.Options	as.character.Options
 as.character.ProgressBar	as.character.ProgressBar
@@ -228,6 +228,7 @@ findSourceTraceback	findSourceTraceback
 findSourceTraceback.default	findSourceTraceback
 flush,TextStatusBar-method	flush.TextStatusBar
 flush.TextStatusBar	flush.TextStatusBar
+format.binmode	format.binmode
 gcat	gcat
 gcat.default	gcat
 gcat.GString	gcat

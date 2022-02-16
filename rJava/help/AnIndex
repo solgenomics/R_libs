@@ -21,6 +21,7 @@ $<-.Throwable	Exceptions
 .jcastToArray	jcastToArray
 .jchar	jfloat
 .jcheck	jcheck
+.jclassLoader	loader
 .jclassPath	loader
 .jclear	jcheck
 .jcompare	jequals

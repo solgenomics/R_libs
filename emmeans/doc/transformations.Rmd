@@ -19,6 +19,7 @@ This vignette covers the intricacies of transformations and link functions in **
   1. [Overview](#overview)
   2. [Re-gridding](#regrid)
   3. [Link functions](#links)
+  3. [Graphing transformations and links](#trangraph)
   4. [Both a response transformation and a link](#tranlink)
   5. [Special transformations](#special)
   6. [Specifying a transformation after the fact](#after)
@@ -26,6 +27,7 @@ This vignette covers the intricacies of transformations and link functions in **
   6. [Standardized response](#stdize)
   7. [Faking a log transformation](#logs)
      a. [Faking other transformations](#faking)
+     b. [Alternative scale](#altscale)
   8. [Bias adjustment](#bias-adj)
   
 [Index of all vignette topics](vignette-topics.html) 
@@ -199,7 +201,55 @@ There is no practical difference between females and males in the patterns of
 response to `Treatment`; so I think most people would be quite comfortable with
 the marginal results that are reported earlier.
 
+[Back to Contents](#contents)
 
+
+## Graphing transformations and links {#trangraph}
+<!-- @index Transformations!Graphical display; Examples!`neuralgia`;
+    `type = "scale"`; `"scale"` type@scale; -->
+There are a few options for displaying transformed results graphically. First, the `type` 
+argument works just as it does in displaying a tabular summary. Following through with
+the `neuralgia` example, let us display the marginal `Treatment` EMMs on both the
+link scale and the response scale (we are opting to do the averaging on the link scale):
+```{r, fig.height = 1.5}
+neur.Trt.emm <- suppressMessages(emmeans(neuralgia.glm, "Treatment"))
+plot(neur.Trt.emm)   # Link scale by default
+plot(neur.Trt.emm, type = "response")
+```
+
+Besides whether or not we see response values, there is a dramatic difference
+in the symmetry of the intervals.
+
+For `emmip()` and `plot()` *only* (and currently only with the "ggplot" engine), 
+there is also the option of specifying `type = "scale"`,
+which causes the response values to be calculated but plotted on a nonlinear scale
+corresponding to the transformation or link:
+```{r, fig.height = 1.5}
+plot(neur.Trt.emm, type = "scale")
+```
+
+Notice that the interior part of this plot is identical to the plot on the link scale.
+Only the horizontal axis is different. That is because the response values are transformed using the link function to determine the plotting positions of the graphical elements -- putting them back where they started.
+
+As is the case here, nonlinear scales can be confusing to read, and it is very often
+true that you will want to display more scale divisions, and even add minor ones.
+This is done via adding arguments for the function `ggplot2::scale_x_continuous()`
+(see its documentation):
+```{r, fig.height = 1.5}
+plot(neur.Trt.emm, type = "scale", breaks = seq(0.10, 0.90, by = 0.10),
+     minor_breaks = seq(0.05, 0.95, by = 0.05))
+```
+
+When using the `"ggplot"` engine, you always have the option of using **ggplot2** to incorporate a transformed scale -- and it doesn't even have to be the same as the transformation used in the model. For example, here we display the same results on an arcsin-square-root scale.
+```{r, fig.height = 1.5}
+plot(neur.Trt.emm, type = "response") +
+  ggplot2::scale_x_continuous(trans = scales::asn_trans(),
+                              breaks = seq(0.10, 0.90, by = 0.10))
+```
+
+This comes across as a compromise: not as severe as the logit scaling, and not as distorted as the linear scaling of response values.
+
+Again, the same techniques can be used with `emmip()`, except it is the vertical scale that is affected.
 
 [Back to Contents](#contents)
 
@@ -331,9 +381,28 @@ regrid(emm, transform = "probit")
 would re-grid the existing `emm` to the probit scale. Note that any estimates in `emm`
 outside of the interval $(0,1)$ will be flagged as non-estimable.
 
-The section on standardized responses gives an example of reverse-engineering 
+The [section on standardized responses](#stdize) gives an example of reverse-engineering 
 a standardized response transformation in this way.
 
+
+### Alternative scale {#altscale}
+<!-- @index Transformations!Percent difference; Percentage differences; Examples!`pigs` -->
+It is possible to create a report on an alternative scale by updating the `tran` component.
+For example, suppose we want percent differences instead of ratios in the preceding example
+with the `pigs` dataset. This is possible by modifying the inverse transformation:
+since the uusual inverse transformation is a ratio of the form $r = a/b$, we have that
+the percentage difference between $a$ and $b$ is $100(a-b)/b = 100(r-1)$. Thus,
+```{r}
+pct.diff.tran <- list(
+    linkfun = function(mu) log(mu/100 + 1),
+    linkinv = function(eta) 100 * (exp(eta) - 1),
+    mu.eta = function(eta) 100 * exp(eta),
+    name = "log(pct.diff)"
+)
+
+update(pairs(piglog.emm.s, type = "response"), 
+       tran = pct.diff.tran, inv.lbl = "pct.diff")
+```
 
 ## Standardized response {#stdize}
 <!-- @index Transformations!Standardizing; Transformations!`scale()`;
@@ -399,7 +468,7 @@ emmeans(mod, "group", type = "response")
 
 ### Reverse-engineering a standardized response
 An interesting twist on all this is the reverse situation: Suppose we fitted the model 
-*without* the standardized response, but we want to kniow what the results would be if
+*without* the standardized response, but we want to know what the results would be if
 we had standardized. Here we reverse-engineer the `fiber.lm` example above:
 ```{r, message = FALSE}
 fib.lm <- lm(strength ~ machine * diameter, data = fiber)
@@ -463,7 +532,7 @@ This estimate is used by default. The bias-adjusted EMMs for the sources are:
 summary(pigs.emm.s, type = "response", bias.adj = TRUE)
 ```
 These estimates (and also their SEs) are slightly larger than we had without
-bias adjustment. They are estimates of the *aritmetic* mean responses, rather
+bias adjustment. They are estimates of the *arithmetic* mean responses, rather
 than the *geometric* means shown in the overview. Had the value of `sigma` been
 larger, the adjustment would have been greater. You can experiment with this by
 adding a `sigma =` argument to the above call.

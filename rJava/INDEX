@@ -1,5 +1,5 @@
 $,jobjRef-method        Field/method operator for Java objects
-.jaddClassPath          Java class loader
+.jaddClassPath          Java Class Loader
 .jarray                 Java array handling functions
 .jcall                  Call a Java method
 .jcast                  Cast a Java object to another class

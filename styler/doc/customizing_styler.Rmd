@@ -1,7 +1,5 @@
 ---
 title: "Customizing styler"
-author: "Lorenz Walthert"
-date: "8/10/2017"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Customizing styler}
@@ -42,7 +40,7 @@ The `transformers` argument is, apart from the code to style, the key argument
 of functions such as `style_text()` and friends. By default, it is created via
 the `style` argument. The transformers are a named list of transformer functions
 and other arguments passed to styler. To use the default style guide of styler
-([the tidyverse style guide](http://style.tidyverse.org/)), call
+([the tidyverse style guide](https://style.tidyverse.org/)), call
 `tidyverse_style()` to get the list of the transformer functions. Let's quickly
 look at what those are.
 
@@ -246,14 +244,26 @@ code <- c("add_one <- function(x) { x + 1 }")
 styler:::create_tree(code)
 ```
 
-## levelName ## 1 ROOT (token: short_text [lag_newlines/spaces] {id}) ## 2
-°--expr: [0/0] {23} ## 3 ¦--expr: [0/1] {3} ## 4 ¦ °--SYMBOL: add_o [0/0] {1} ##
-5 ¦--LEFT_ASSIGN: <- [0/1] {2} ## 6 °--expr: [0/0] {22} ## 7 ¦--FUNCTION: funct
-[0/0] {4} ## 8 ¦--'(': ( [0/0] {5} ## 9 ¦--SYMBOL_FORMALS: x [0/0] {6} ## 10
-¦--')': ) [0/1] {7} ## 11 °--expr: [0/0] {19} ## 12 ¦--'{': { [0/1] {9} ## 13
-¦--expr: [0/1] {16} ## 14 ¦ ¦--expr: [0/1] {12} ## 15 ¦ ¦ °--SYMBOL: x [0/0]
-{10} ## 16 ¦ ¦--'+': + [0/1] {11} ## 17 ¦ °--expr: [0/0] {14} ## 18 ¦
-°--NUM_CONST: 1 [0/0] {13} ## 19 °--'}': } [0/0] {15}
+     ##                                              levelName
+     ## 1  ROOT (token: short_text [lag_newlines/spaces] {id})
+     ## 2   °--expr:  [0/0] {23}                              
+     ## 3       ¦--expr:  [0/1] {3}                           
+     ## 4       ¦   °--SYMBOL: add_o [0/0] {1}                
+     ## 5       ¦--LEFT_ASSIGN: <- [0/1] {2}                  
+     ## 6       °--expr:  [0/0] {22}                          
+     ## 7           ¦--FUNCTION: funct [0/0] {4}              
+     ## 8           ¦--'(': ( [0/0] {5}                       
+     ## 9           ¦--SYMBOL_FORMALS: x [0/0] {6}            
+     ## 10          ¦--')': ) [0/1] {7}                       
+     ## 11          °--expr:  [0/0] {19}                      
+     ## 12              ¦--'{': { [0/1] {9}                   
+     ## 13              ¦--expr:  [0/1] {16}                  
+     ## 14              ¦   ¦--expr:  [0/1] {12}              
+     ## 15              ¦   ¦   °--SYMBOL: x [0/0] {10}       
+     ## 16              ¦   ¦--'+': + [0/1] {11}              
+     ## 17              ¦   °--expr:  [0/0] {14}              
+     ## 18              ¦       °--NUM_CONST: 1 [0/0] {13}    
+     ## 19              °--'}': } [0/0] {15}
 
 ```{r}
 pd <- styler:::compute_parse_data_nested(code)

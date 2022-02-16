@@ -19,7 +19,7 @@ var_label(iris$Sepal.Length) <- NULL
 ## -----------------------------------------------------------------------------
 look_for(iris)
 look_for(iris, "pet")
-look_for(iris, details = TRUE)
+look_for(iris, details = FALSE)
 
 ## -----------------------------------------------------------------------------
 v <- labelled(c(1,2,2,2,3,9,1,3,2,NA), c(yes = 1, no = 3, "don't know" = 8, refused = 9))
@@ -48,11 +48,10 @@ v
 val_label(v, 1) <- "yes"
 v
 
-## -----------------------------------------------------------------------------
+## ---- error = TRUE------------------------------------------------------------
 f <- factor(1:3)
 f
 val_labels(f) <- c(yes = 1, no = 3)
-f
 
 ## -----------------------------------------------------------------------------
 df <- data.frame(v1 = 1:3, v2 = c(2, 3, 1), v3 = 3:1)
@@ -203,10 +202,10 @@ df <- data.frame(
     na_values = 9
     )
 )
-dplyr::glimpse(df)
-dplyr::glimpse(unlabelled(df))
-dplyr::glimpse(unlabelled(df, user_na_to_na = TRUE))
-dplyr::glimpse(unlabelled(df, drop_unused_labels = TRUE))
+df %>% look_for()
+unlabelled(df)%>% look_for()
+unlabelled(df, user_na_to_na = TRUE) %>% look_for()
+unlabelled(df, drop_unused_labels = TRUE) %>% look_for()
 
 ## ---- eval=FALSE--------------------------------------------------------------
 #    # from foreign

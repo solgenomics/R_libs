@@ -63,6 +63,7 @@ sqliteCopyDatabase	sqliteCopyDatabase
 SQLiteDriver-class	SQLiteDriver-class
 sqliteQuickColumn	sqliteQuickColumn
 SQLiteResult-class	SQLiteResult-class
+sqliteSetBusyHandler	sqliteSetBusyHandler
 SQLITE_RO	SQLite
 SQLITE_RW	SQLite
 SQLITE_RWC	SQLite

@@ -2,8 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><title>R: Lasso and Elastic-Net Regularized Generalized Linear Models</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> Lasso and Elastic-Net Regularized Generalized Linear Models
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;glmnet&rsquo; version 4.1</h2>
+</div><h2>Documentation for package &lsquo;glmnet&rsquo; version 4.1-3</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -29,6 +30,8 @@
 <td>Simulated data for the glmnet vignette</td></tr>
 <tr><td style="width: 25%;"><a href="bigGlm.html">bigGlm</a></td>
 <td>fit a glm with all the options in 'glmnet'</td></tr>
+<tr><td style="width: 25%;"><a href="BinomialExample.html">BinomialExample</a></td>
+<td>Synthetic dataset with binary response</td></tr>
 <tr><td style="width: 25%;"><a href="Cindex.html">Cindex</a></td>
 <td>compute C index for a Cox model</td></tr>
 <tr><td style="width: 25%;"><a href="predict.cv.glmnet.html">coef.cv.glmnet</a></td>
@@ -45,19 +48,11 @@
 <td>Fit a Cox regression model with elastic net regularization for a single value of lambda</td></tr>
 <tr><td style="width: 25%;"><a href="cox.path.html">cox.path</a></td>
 <td>Fit a Cox regression model with elastic net regularization for a path of lambda values</td></tr>
+<tr><td style="width: 25%;"><a href="CoxExample.html">CoxExample</a></td>
+<td>Synthetic dataset with right-censored survival response</td></tr>
 <tr><td style="width: 25%;"><a href="coxgrad.html">coxgrad</a></td>
 <td>Compute gradient for Cox model</td></tr>
-<tr><td style="width: 25%;"><a href="coxgrad.html">coxgrad2</a></td>
-<td>Compute gradient for Cox model</td></tr>
-<tr><td style="width: 25%;"><a href="coxgrad.html">coxgrad3</a></td>
-<td>Compute gradient for Cox model</td></tr>
 <tr><td style="width: 25%;"><a href="coxnet.deviance.html">coxnet.deviance</a></td>
-<td>Compute deviance for Cox model</td></tr>
-<tr><td style="width: 25%;"><a href="coxnet.deviance.html">coxnet.deviance0</a></td>
-<td>Compute deviance for Cox model</td></tr>
-<tr><td style="width: 25%;"><a href="coxnet.deviance.html">coxnet.deviance2</a></td>
-<td>Compute deviance for Cox model</td></tr>
-<tr><td style="width: 25%;"><a href="coxnet.deviance.html">coxnet.deviance3</a></td>
 <td>Compute deviance for Cox model</td></tr>
 <tr><td style="width: 25%;"><a href="cox_obj_function.html">cox_obj_function</a></td>
 <td>Elastic net objective function value for Cox regression model</td></tr>
@@ -89,6 +84,10 @@
 <td>Fit a GLM with elastic net regularization for a path of lambda values</td></tr>
 <tr><td style="width: 25%;"><a href="makeX.html">makeX</a></td>
 <td>convert a data frame to a data matrix with one-hot encoding</td></tr>
+<tr><td style="width: 25%;"><a href="MultiGaussianExample.html">MultiGaussianExample</a></td>
+<td>Synthetic dataset with multiple Gaussian responses</td></tr>
+<tr><td style="width: 25%;"><a href="MultinomialExample.html">MultinomialExample</a></td>
+<td>Synthetic dataset with multinomial response</td></tr>
 <tr><td style="width: 25%;"><a href="mycoxph.html">mycoxph</a></td>
 <td>Helper function to fit coxph model for survfit.coxnet</td></tr>
 <tr><td style="width: 25%;"><a href="mycoxpred.html">mycoxpred</a></td>
@@ -111,6 +110,8 @@
 <td>plot coefficients from a "glmnet" object</td></tr>
 <tr><td style="width: 25%;"><a href="plot.glmnet.html">plot.relaxed</a></td>
 <td>plot coefficients from a "glmnet" object</td></tr>
+<tr><td style="width: 25%;"><a href="PoissonExample.html">PoissonExample</a></td>
+<td>Synthetic dataset with count response</td></tr>
 <tr><td style="width: 25%;"><a href="predict.glmnet.html">predict.coxnet</a></td>
 <td>Extract coefficients from a glmnet object</td></tr>
 <tr><td style="width: 25%;"><a href="predict.cv.glmnet.html">predict.cv.glmnet</a></td>
@@ -143,6 +144,8 @@
 <td>print a glmnet object</td></tr>
 <tr><td style="width: 25%;"><a href="print.glmnet.html">print.relaxed</a></td>
 <td>print a glmnet object</td></tr>
+<tr><td style="width: 25%;"><a href="QuickStartExample.html">QuickStartExample</a></td>
+<td>Synthetic dataset with Gaussian response</td></tr>
 <tr><td style="width: 25%;"><a href="glmnet.html">relax.glmnet</a></td>
 <td>fit a GLM with lasso or elasticnet regularization</td></tr>
 <tr><td style="width: 25%;"><a href="response.coxnet.html">response.coxnet</a></td>
@@ -151,6 +154,8 @@
 <td>Generate multinomial samples from a probability matrix</td></tr>
 <tr><td style="width: 25%;"><a href="assess.glmnet.html">roc.glmnet</a></td>
 <td>assess performance of a 'glmnet' object using test data.</td></tr>
+<tr><td style="width: 25%;"><a href="SparseExample.html">SparseExample</a></td>
+<td>Synthetic dataset with sparse design matrix</td></tr>
 <tr><td style="width: 25%;"><a href="stratifySurv.html">stratifySurv</a></td>
 <td>Add strata to a Surv object</td></tr>
 <tr><td style="width: 25%;"><a href="survfit.coxnet.html">survfit.coxnet</a></td>
@@ -159,9 +164,11 @@
 <td>Compute a survival curve from a cv.glmnet object</td></tr>
 <tr><td style="width: 25%;"><a href="use.cox.path.html">use.cox.path</a></td>
 <td>Check if glmnet should call cox.path</td></tr>
+<tr><td style="width: 25%;"><a href="weighted_mean_sd.html">weighted_mean_sd</a></td>
+<td>Helper function to compute weighted mean and standard deviation</td></tr>
 <tr><td style="width: 25%;"><a href="beta_CVX.html">x</a></td>
 <td>Simulated data for the glmnet vignette</td></tr>
 <tr><td style="width: 25%;"><a href="beta_CVX.html">y</a></td>
 <td>Simulated data for the glmnet vignette</td></tr>
 </table>
-</body></html>
+</div></body></html>

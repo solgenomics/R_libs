@@ -20,4 +20,4 @@ VignetteBuilder: knitr
 Packaged: 2020-02-04 11:58:09 UTC; bill
 Repository: CRAN
 Date/Publication: 2020-02-04 12:30:06 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2022-01-20 18:31:50 UTC; unix
+Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 23:40:20 UTC; unix

@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Scott Chamberlain" />
+
+<meta name="date" content="2020-05-15" />
+
+<title>natserv introduction</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">natserv introduction</h1>
+<h4 class="author">Scott Chamberlain</h4>
+<h4 class="date">2020-05-15</h4>
+
+
+
+<p><code>natserv</code> is an R package that interacts with the API services of the non-profit organization NatureServe (<a href="https://services.natureserve.org/" class="uri">https://services.natureserve.org/</a>). If you want to read the full API documentation, you can find it at <a href="https://explorer.natureserve.org/api-docs/" class="uri">https://explorer.natureserve.org/api-docs/</a></p>
+<p>See also the taxize book (<a href="https://taxize.dev/" class="uri">https://taxize.dev/</a>) for a manual on working with taxonomic data in R, including with NatureServe data.</p>
+<p>This tutorial will walk you through installing <code>natserv</code> and using its functions.</p>
+<div id="a-quick-introduction-to-natureserve" class="section level2">
+<h2>A quick introduction to NatureServe</h2>
+<p>NatureServe is a non-profit organization that provides biodiversity data freely online. They maintain a database comprised of data from natural heritage programs and conservation data centers - this database includes information about the conservation status, taxonomy, geographic distribution, and life history information for over 70,000 species of plants, animals, and fungi in Canada and the United States. You can find information about their data coverage (<a href="https://explorer.natureserve.org/AboutTheData/DataCoverage" class="uri">https://explorer.natureserve.org/AboutTheData/DataCoverage</a>), and data sources (<a href="https://explorer.natureserve.org/AboutTheData/Sources" class="uri">https://explorer.natureserve.org/AboutTheData/Sources</a>) on their website. NatureServe also hosts data on ecological communities/systems and their conservation status.</p>
+<p>While small amounts of data can be easily collected using their online NatureServe explorer site (<a href="http://explorer.natureserve.org/" class="uri">http://explorer.natureserve.org/</a>), downloading species data this way would be incredibly slow. Thus <code>natserv</code> was born. This R package can access NatureServe’s online API for rapid downloading of conservation data, allows for easy access to multiple species’ data sets, and loads the data directly into your R session.</p>
+</div>
+<div id="installing-natserv-from-cran-or-github" class="section level2">
+<h2>Installing <code>natserv</code> from CRAN or GitHub</h2>
+<p>Stable version:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;natserv&quot;</span>)</span></code></pre></div>
+<p>Development version:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;ropensci/natserv&quot;</span>)</span></code></pre></div>
+<p>After successful installation, load the package into the environment:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">library</span>(natserv)</span></code></pre></div>
+</div>
+<div id="natserv-functions" class="section level2">
+<h2><code>natserv</code> functions</h2>
+<p>All of <code>natserv</code>’s functions are prefixed with <code>ns_</code> to avoid confusion with other packages - here are the functions provided by <code>natserv</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">cat</span>(<span class="kw">paste</span>(<span class="st">&quot; -&quot;</span>, <span class="kw">paste</span>(<span class="kw">sprintf</span>(<span class="st">&quot;`%s`&quot;</span>, <span class="kw">sort</span>(<span class="kw">getNamespaceExports</span>(<span class="st">&quot;natserv&quot;</span>))), <span class="dt">collapse =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st"> - &quot;</span>)))</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt;  - `ns_altid`</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt;  - `ns_ecohier`</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt;  - `ns_export`</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt;  - `ns_export_status`</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt;  - `ns_id`</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt;  - `ns_search_comb`</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt;  - `ns_search_eco`</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt;  - `ns_search_spp`</span></span></code></pre></div>
+</div>
+<div id="search" class="section level2">
+<h2>Search</h2>
+<p>There’s three functions for search:</p>
+<ul>
+<li>combined: supports searching for both species and ecosystems using search criteria which are applicable to both types of records</li>
+<li>species: supports searching for only species; extends the search criteria available through the Combined Search to include support for additional criteria which are only applicable to species records</li>
+<li>ecosystem: supports searching for only ecosystems; extends the search criteria available through the Combined Search to include support for additional criteria which are only applicable to ecosystems records</li>
+</ul>
+<p>Combined search</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">ns_search_comb</span>(<span class="dt">text =</span> <span class="st">&quot;robin&quot;</span>, <span class="dt">page =</span> <span class="dv">0</span>, <span class="dt">per_page =</span> <span class="dv">5</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; $results</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt; # A tibble: 5 x 14</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt;   recordType elementGlobalId uniqueId nsxUrl elcode scientificName</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt;   &lt;chr&gt;                &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;         </span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt; 1 SPECIES             100637 ELEMENT… /Taxo… ABPBJ… Copsychus sau…</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt; 2 SPECIES             102323 ELEMENT… /Taxo… ABPBJ… Turdus grayi  </span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt; 3 SPECIES             102179 ELEMENT… /Taxo… ABPBJ… Turdus migrat…</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt; 4 SPECIES             105536 ELEMENT… /Taxo… ABPBJ… Turdus migrat…</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt; 5 SPECIES             105850 ELEMENT… /Taxo… ABPBJ… Turdus rufopa…</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt; # … with 22 more variables: formattedScientificName &lt;chr&gt;,</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt; #   primaryCommonName &lt;chr&gt;, primaryCommonNameLanguage &lt;chr&gt;,</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt; #   roundedGRank &lt;chr&gt;, nations &lt;list&gt;, lastModified &lt;chr&gt;,</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="co">#&gt; #   speciesGlobal$usesaCode &lt;lgl&gt;, $cosewicCode &lt;lgl&gt;, $saraCode &lt;lgl&gt;,</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="co">#&gt; #   $synonyms &lt;list&gt;, $otherCommonNames &lt;list&gt;, $kingdom &lt;chr&gt;, $phylum &lt;chr&gt;,</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="co">#&gt; #   $taxclass &lt;chr&gt;, $taxorder &lt;chr&gt;, $family &lt;chr&gt;, $genus &lt;chr&gt;,</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="co">#&gt; #   $taxonomicComments &lt;chr&gt;, $informalTaxonomy &lt;chr&gt;, $infraspecies &lt;lgl&gt;,</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="co">#&gt; #   $completeDistribution &lt;lgl&gt;, gRank &lt;chr&gt;</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="co">#&gt; </span></span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="co">#&gt; $resultsSummary</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a><span class="co">#&gt;                            name value</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a><span class="co">#&gt; 1                          page     0</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a><span class="co">#&gt; 2                recordsPerPage     5</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a><span class="co">#&gt; 3                    totalPages    26</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a><span class="co">#&gt; 4                  totalResults   126</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a><span class="co">#&gt; 5                 species_total   103</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a><span class="co">#&gt; 6                         total    23</span></span>
+<span id="cb5-28"><a href="#cb5-28"></a><span class="co">#&gt; 7                       classes     0</span></span>
+<span id="cb5-29"><a href="#cb5-29"></a><span class="co">#&gt; 8                    subclasses     0</span></span>
+<span id="cb5-30"><a href="#cb5-30"></a><span class="co">#&gt; 9                    formations     0</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a><span class="co">#&gt; 10                    divisions     0</span></span>
+<span id="cb5-32"><a href="#cb5-32"></a><span class="co">#&gt; 11                  macrogroups     1</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a><span class="co">#&gt; 12                       groups     1</span></span>
+<span id="cb5-34"><a href="#cb5-34"></a><span class="co">#&gt; 13                    alliances     3</span></span>
+<span id="cb5-35"><a href="#cb5-35"></a><span class="co">#&gt; 14                 associations    18</span></span>
+<span id="cb5-36"><a href="#cb5-36"></a><span class="co">#&gt; 15 terrestrialEcologicalSystems     0</span></span></code></pre></div>
+<p>Species search</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">ns_search_spp</span>(<span class="dt">species_taxonomy =</span> <span class="kw">list</span>(<span class="dt">scientificTaxonomy =</span> <span class="st">&quot;Animalia&quot;</span>, <span class="dt">level =</span> <span class="st">&quot;kingdom&quot;</span>))</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; $results</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt; # A tibble: 20 x 14</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt;    recordType elementGlobalId uniqueId nsxUrl elcode scientificName</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt;    &lt;chr&gt;                &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;         </span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt;  1 SPECIES             828458 ELEMENT… /Taxo… AAABC… Acris blancha…</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt;  2 SPECIES             828419 ELEMENT… /Taxo… AAABC… Acris crepita…</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt;  3 SPECIES             103292 ELEMENT… /Taxo… AAABC… Acris gryllus </span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt;  4 SPECIES             104324 ELEMENT… /Taxo… AAAAA… Ambystoma ann…</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt;  5 SPECIES             100100 ELEMENT… /Taxo… AAAAA… Ambystoma bar…</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt;  6 SPECIES             802300 ELEMENT… /Taxo… AAAAA… Ambystoma bis…</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt;  7 SPECIES             104488 ELEMENT… /Taxo… AAAAA… Ambystoma cal…</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt;  8 SPECIES             802301 ELEMENT… /Taxo… AAAAA… Ambystoma cin…</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt;  9 SPECIES             103251 ELEMENT… /Taxo… AAAAA… Ambystoma gra…</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt; 10 SPECIES             100401 ELEMENT… /Taxo… AAAAA… Ambystoma jef…</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt; 11 SPECIES             102149 ELEMENT… /Taxo… AAAAA… Ambystoma lat…</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; 12 SPECIES            1143335 ELEMENT… /Taxo… AAAAA… Ambystoma lat…</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="co">#&gt; 13 SPECIES            1143337 ELEMENT… /Taxo… AAAAA… Ambystoma lat…</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="co">#&gt; 14 SPECIES             101261 ELEMENT… /Taxo… AAAAA… Ambystoma mab…</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="co">#&gt; 15 SPECIES             106403 ELEMENT… /Taxo… AAAAA… Ambystoma mac…</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="co">#&gt; 16 SPECIES             101632 ELEMENT… /Taxo… AAAAA… Ambystoma mac…</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="co">#&gt; 17 SPECIES             103392 ELEMENT… /Taxo… AAAAA… Ambystoma mac…</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="co">#&gt; 18 SPECIES             104239 ELEMENT… /Taxo… AAAAA… Ambystoma mac…</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a><span class="co">#&gt; 19 SPECIES             100115 ELEMENT… /Taxo… AAAAA… Ambystoma mac…</span></span>
+<span id="cb6-25"><a href="#cb6-25"></a><span class="co">#&gt; 20 SPECIES             103039 ELEMENT… /Taxo… AAAAA… Ambystoma mac…</span></span>
+<span id="cb6-26"><a href="#cb6-26"></a><span class="co">#&gt; # … with 22 more variables: formattedScientificName &lt;chr&gt;,</span></span>
+<span id="cb6-27"><a href="#cb6-27"></a><span class="co">#&gt; #   primaryCommonName &lt;chr&gt;, primaryCommonNameLanguage &lt;chr&gt;,</span></span>
+<span id="cb6-28"><a href="#cb6-28"></a><span class="co">#&gt; #   roundedGRank &lt;chr&gt;, nations &lt;list&gt;, lastModified &lt;chr&gt;,</span></span>
+<span id="cb6-29"><a href="#cb6-29"></a><span class="co">#&gt; #   speciesGlobal$usesaCode &lt;chr&gt;, $cosewicCode &lt;chr&gt;, $saraCode &lt;chr&gt;,</span></span>
+<span id="cb6-30"><a href="#cb6-30"></a><span class="co">#&gt; #   $synonyms &lt;list&gt;, $otherCommonNames &lt;list&gt;, $kingdom &lt;chr&gt;, $phylum &lt;chr&gt;,</span></span>
+<span id="cb6-31"><a href="#cb6-31"></a><span class="co">#&gt; #   $taxclass &lt;chr&gt;, $taxorder &lt;chr&gt;, $family &lt;chr&gt;, $genus &lt;chr&gt;,</span></span>
+<span id="cb6-32"><a href="#cb6-32"></a><span class="co">#&gt; #   $taxonomicComments &lt;chr&gt;, $informalTaxonomy &lt;chr&gt;, $infraspecies &lt;lgl&gt;,</span></span>
+<span id="cb6-33"><a href="#cb6-33"></a><span class="co">#&gt; #   $completeDistribution &lt;lgl&gt;, gRank &lt;chr&gt;</span></span>
+<span id="cb6-34"><a href="#cb6-34"></a><span class="co">#&gt; </span></span>
+<span id="cb6-35"><a href="#cb6-35"></a><span class="co">#&gt; $resultsSummary</span></span>
+<span id="cb6-36"><a href="#cb6-36"></a><span class="co">#&gt;             name value</span></span>
+<span id="cb6-37"><a href="#cb6-37"></a><span class="co">#&gt; 1           page     0</span></span>
+<span id="cb6-38"><a href="#cb6-38"></a><span class="co">#&gt; 2 recordsPerPage    20</span></span>
+<span id="cb6-39"><a href="#cb6-39"></a><span class="co">#&gt; 3     totalPages  2586</span></span>
+<span id="cb6-40"><a href="#cb6-40"></a><span class="co">#&gt; 4   totalResults 51705</span></span>
+<span id="cb6-41"><a href="#cb6-41"></a><span class="co">#&gt; 5  species_total 51705</span></span></code></pre></div>
+<p>Ecosystem search</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">ns_search_eco</span>(<span class="dt">ecosystem_taxonomy =</span> <span class="st">&quot;M067&quot;</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt; $results</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt; # A tibble: 20 x 14</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt;    recordType elementGlobalId uniqueId nsxUrl elcode scientificName</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt;    &lt;chr&gt;                &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;         </span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt;  1 ECOSYSTEM           899525 ELEMENT… /Taxo… A3401  Eleocharis el…</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt;  2 ECOSYSTEM           899121 ELEMENT… /Taxo… A1372  Fimbristylis …</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt;  3 ECOSYSTEM           899126 ELEMENT… /Taxo… A1389  Spartina bake…</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt;  4 ECOSYSTEM           899744 ELEMENT… /Taxo… A3692  Spartina pate…</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt;  5 ECOSYSTEM           899523 ELEMENT… /Taxo… A3399  Typha dominge…</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt;  6 ECOSYSTEM           899526 ELEMENT… /Taxo… A3402  Andropogon ca…</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt;  7 ECOSYSTEM           899517 ELEMENT… /Taxo… A3393  Aristida palu…</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt;  8 ECOSYSTEM           899132 ELEMENT… /Taxo… A1429  Eleocharis sp…</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt;  9 ECOSYSTEM           899512 ELEMENT… /Taxo… A3388  Hypericum cha…</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt; 10 ECOSYSTEM           899133 ELEMENT… /Taxo… A1430  Juncus milita…</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="co">#&gt; 11 ECOSYSTEM           899122 ELEMENT… /Taxo… A1379  Panicum hemit…</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="co">#&gt; 12 ECOSYSTEM           899124 ELEMENT… /Taxo… A1383  Rhynchospora …</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="co">#&gt; 13 ECOSYSTEM           899518 ELEMENT… /Taxo… A3394  Rhynchospora …</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="co">#&gt; 14 ECOSYSTEM          1146914 ELEMENT… /Taxo… A4404  Rhynchospora …</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="co">#&gt; 15 ECOSYSTEM           899521 ELEMENT… /Taxo… A3397  Rhynchospora …</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="co">#&gt; 16 ECOSYSTEM           899125 ELEMENT… /Taxo… A1384  Rhynchospora …</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a><span class="co">#&gt; 17 ECOSYSTEM           899530 ELEMENT… /Taxo… A3406  Cladium maris…</span></span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="co">#&gt; 18 ECOSYSTEM           899120 ELEMENT… /Taxo… A1369  Cladium maris…</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="co">#&gt; 19 ECOSYSTEM           899720 ELEMENT… /Taxo… A3668  Hottonia infl…</span></span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="co">#&gt; 20 ECOSYSTEM           900115 ELEMENT… /Taxo… A4065  Orontium aqua…</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a><span class="co">#&gt; # … with 18 more variables: formattedScientificName &lt;chr&gt;,</span></span>
+<span id="cb7-27"><a href="#cb7-27"></a><span class="co">#&gt; #   primaryCommonName &lt;chr&gt;, primaryCommonNameLanguage &lt;chr&gt;,</span></span>
+<span id="cb7-28"><a href="#cb7-28"></a><span class="co">#&gt; #   roundedGRank &lt;chr&gt;, nations &lt;list&gt;, lastModified &lt;chr&gt;,</span></span>
+<span id="cb7-29"><a href="#cb7-29"></a><span class="co">#&gt; #   ecosystemGlobal$translatedScientificName &lt;chr&gt;, $taxclassCode &lt;chr&gt;,</span></span>
+<span id="cb7-30"><a href="#cb7-30"></a><span class="co">#&gt; #   $taxsubclassCode &lt;chr&gt;, $formationCode &lt;chr&gt;, $divisionCode &lt;chr&gt;,</span></span>
+<span id="cb7-31"><a href="#cb7-31"></a><span class="co">#&gt; #   $macrogroupKey &lt;chr&gt;, $taxgroupKey &lt;chr&gt;, $allianceKey &lt;lgl&gt;,</span></span>
+<span id="cb7-32"><a href="#cb7-32"></a><span class="co">#&gt; #   $ecosystemType &lt;chr&gt;, $classificationCode &lt;chr&gt;, $parentName &lt;chr&gt;,</span></span>
+<span id="cb7-33"><a href="#cb7-33"></a><span class="co">#&gt; #   gRank &lt;chr&gt;</span></span>
+<span id="cb7-34"><a href="#cb7-34"></a><span class="co">#&gt; </span></span>
+<span id="cb7-35"><a href="#cb7-35"></a><span class="co">#&gt; $resultsSummary</span></span>
+<span id="cb7-36"><a href="#cb7-36"></a><span class="co">#&gt;                            name value</span></span>
+<span id="cb7-37"><a href="#cb7-37"></a><span class="co">#&gt; 1                          page     0</span></span>
+<span id="cb7-38"><a href="#cb7-38"></a><span class="co">#&gt; 2                recordsPerPage    20</span></span>
+<span id="cb7-39"><a href="#cb7-39"></a><span class="co">#&gt; 3                    totalPages    11</span></span>
+<span id="cb7-40"><a href="#cb7-40"></a><span class="co">#&gt; 4                  totalResults   210</span></span>
+<span id="cb7-41"><a href="#cb7-41"></a><span class="co">#&gt; 5                         total   210</span></span>
+<span id="cb7-42"><a href="#cb7-42"></a><span class="co">#&gt; 6                       classes     0</span></span>
+<span id="cb7-43"><a href="#cb7-43"></a><span class="co">#&gt; 7                    subclasses     0</span></span>
+<span id="cb7-44"><a href="#cb7-44"></a><span class="co">#&gt; 8                    formations     0</span></span>
+<span id="cb7-45"><a href="#cb7-45"></a><span class="co">#&gt; 9                     divisions     0</span></span>
+<span id="cb7-46"><a href="#cb7-46"></a><span class="co">#&gt; 10                  macrogroups     1</span></span>
+<span id="cb7-47"><a href="#cb7-47"></a><span class="co">#&gt; 11                       groups     6</span></span>
+<span id="cb7-48"><a href="#cb7-48"></a><span class="co">#&gt; 12                    alliances    33</span></span>
+<span id="cb7-49"><a href="#cb7-49"></a><span class="co">#&gt; 13                 associations   154</span></span>
+<span id="cb7-50"><a href="#cb7-50"></a><span class="co">#&gt; 14 terrestrialEcologicalSystems    16</span></span></code></pre></div>
+</div>
+<div id="get-taxon-by-id" class="section level2">
+<h2>Get taxon by id</h2>
+<p>By UID</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>w &lt;-<span class="st"> </span><span class="kw">ns_id</span>(<span class="st">&quot;ELEMENT_GLOBAL.2.154701&quot;</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">str</span>(w, <span class="dt">max.level =</span> <span class="dv">1</span>)</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; List of 40</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt;  $ elementGlobalId                        : int 154701</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt;  $ circumscripConfidence                  : NULL</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt;  $ classificationLevel                    :List of 4</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt;  $ classificationStatus                   :List of 4</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt;  $ iucn                                   :List of 5</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt;  $ nameCategory                           :List of 6</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt;  $ rankMethodUsed                         :List of 4</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt;  $ formattedScientificName                : chr &quot;&lt;i&gt;Hydrastis canadensis&lt;/i&gt;&quot;</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt;  $ scientificName                         : chr &quot;Hydrastis canadensis&quot;</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt;  $ scientificNameAuthor                   : chr &quot;L.&quot;</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="co">#&gt;  $ primaryCommonName                      : chr &quot;Goldenseal&quot;</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="co">#&gt;  $ relatedItisNames                       : chr &quot;&lt;i&gt;Hydrastis canadensis&lt;/i&gt; L. (TSN 18781)&quot;</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a><span class="co">#&gt;  $ uniqueId                               : chr &quot;ELEMENT_GLOBAL.2.154701&quot;</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a><span class="co">#&gt;  $ elcode                                 : chr &quot;PDRAN0F010&quot;</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a><span class="co">#&gt;  $ conceptRefFullCitation                 : chr &quot;Kartesz, J.T. 1994. A synonymized checklist of the vascular flora of the United States, Canada, and Greenland. &quot;| __truncated__</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a><span class="co">#&gt;  $ conceptName                            : chr &quot;&lt;i&gt;Hydrastis canadensis&lt;/i&gt;&quot;</span></span>
+<span id="cb8-20"><a href="#cb8-20"></a><span class="co">#&gt;  $ taxonomicComments                      : chr &quot;&lt;i&gt;Hydrastis canadensis&lt;/i&gt; occurs in eastern North America and is a monotypic genus. In the most current taxon&quot;| __truncated__</span></span>
+<span id="cb8-21"><a href="#cb8-21"></a><span class="co">#&gt;  $ roundedGRank                           : chr &quot;G3&quot;</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a><span class="co">#&gt;  $ conservationStatusFactorsEditionDate   : chr &quot;2013-04-29&quot;</span></span>
+<span id="cb8-23"><a href="#cb8-23"></a><span class="co">#&gt;  $ conservationStatusFactorsEditionAuthors: chr &quot;Oliver, L.&quot;</span></span>
+<span id="cb8-24"><a href="#cb8-24"></a><span class="co">#&gt;  $ primaryCommonNameLanguage              : chr &quot;EN&quot;</span></span>
+<span id="cb8-25"><a href="#cb8-25"></a><span class="co">#&gt;  $ recordType                             : chr &quot;SPECIES&quot;</span></span>
+<span id="cb8-26"><a href="#cb8-26"></a><span class="co">#&gt;  $ elementNationals                       :&#39;data.frame&#39;: 2 obs. of  7 variables:</span></span>
+<span id="cb8-27"><a href="#cb8-27"></a><span class="co">#&gt;  $ lastModified                           : chr &quot;2020-05-14T04:31:58.480462Z&quot;</span></span>
+<span id="cb8-28"><a href="#cb8-28"></a><span class="co">#&gt;  $ lastPublished                          : chr &quot;2020-05-14T02:14:14.569584Z&quot;</span></span>
+<span id="cb8-29"><a href="#cb8-29"></a><span class="co">#&gt;  $ nsxUrl                                 : chr &quot;/Taxon/ELEMENT_GLOBAL.2.154701/Hydrastis_canadensis&quot;</span></span>
+<span id="cb8-30"><a href="#cb8-30"></a><span class="co">#&gt;  $ grank                                  : chr &quot;G3G4&quot;</span></span>
+<span id="cb8-31"><a href="#cb8-31"></a><span class="co">#&gt;  $ grankReviewDate                        : chr &quot;2012-11-30&quot;</span></span>
+<span id="cb8-32"><a href="#cb8-32"></a><span class="co">#&gt;  $ grankChangeDate                        : chr &quot;2012-11-30&quot;</span></span>
+<span id="cb8-33"><a href="#cb8-33"></a><span class="co">#&gt;  $ grankReasons                           : chr &quot;Goldenseal, &lt;i&gt;Hydrastis canadensis, &lt;/i&gt;an herbaceous understory species of the eastern deciduous forest, with&quot;| __truncated__</span></span>
+<span id="cb8-34"><a href="#cb8-34"></a><span class="co">#&gt;  $ rankInfo                               :List of 27</span></span>
+<span id="cb8-35"><a href="#cb8-35"></a><span class="co">#&gt;  $ animalCharacteristics                  : NULL</span></span>
+<span id="cb8-36"><a href="#cb8-36"></a><span class="co">#&gt;  $ occurrenceDelineations                 :&#39;data.frame&#39;: 1 obs. of  17 variables:</span></span>
+<span id="cb8-37"><a href="#cb8-37"></a><span class="co">#&gt;  $ plantCharacteristics                   :List of 7</span></span>
+<span id="cb8-38"><a href="#cb8-38"></a><span class="co">#&gt;  $ elementManagement                      :List of 14</span></span>
+<span id="cb8-39"><a href="#cb8-39"></a><span class="co">#&gt;  $ occurrenceViabilities                  :&#39;data.frame&#39;: 1 obs. of  12 variables:</span></span>
+<span id="cb8-40"><a href="#cb8-40"></a><span class="co">#&gt;  $ references                             :&#39;data.frame&#39;: 97 obs. of  6 variables:</span></span>
+<span id="cb8-41"><a href="#cb8-41"></a><span class="co">#&gt;  $ otherCommonNames                       :&#39;data.frame&#39;: 6 obs. of  3 variables:</span></span>
+<span id="cb8-42"><a href="#cb8-42"></a><span class="co">#&gt;  $ speciesGlobal                          :List of 29</span></span>
+<span id="cb8-43"><a href="#cb8-43"></a><span class="co">#&gt;  $ speciesCharacteristics                 :List of 13</span></span></code></pre></div>
+<p>By alternate id</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>x &lt;-<span class="st"> </span><span class="kw">ns_altid</span>(<span class="dt">uid =</span> <span class="st">&quot;ELEMENT_GLOBAL.2.154701&quot;</span>)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">str</span>(x, <span class="dt">max.level =</span> <span class="dv">1</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt; List of 40</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt;  $ elementGlobalId                        : int 154701</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt;  $ circumscripConfidence                  : NULL</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt;  $ classificationLevel                    :List of 4</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt;  $ classificationStatus                   :List of 4</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt;  $ iucn                                   :List of 5</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt;  $ nameCategory                           :List of 6</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt;  $ rankMethodUsed                         :List of 4</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt;  $ formattedScientificName                : chr &quot;&lt;i&gt;Hydrastis canadensis&lt;/i&gt;&quot;</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt;  $ scientificName                         : chr &quot;Hydrastis canadensis&quot;</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt;  $ scientificNameAuthor                   : chr &quot;L.&quot;</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt;  $ primaryCommonName                      : chr &quot;Goldenseal&quot;</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="co">#&gt;  $ relatedItisNames                       : chr &quot;&lt;i&gt;Hydrastis canadensis&lt;/i&gt; L. (TSN 18781)&quot;</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="co">#&gt;  $ uniqueId                               : chr &quot;ELEMENT_GLOBAL.2.154701&quot;</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="co">#&gt;  $ elcode                                 : chr &quot;PDRAN0F010&quot;</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="co">#&gt;  $ conceptRefFullCitation                 : chr &quot;Kartesz, J.T. 1994. A synonymized checklist of the vascular flora of the United States, Canada, and Greenland. &quot;| __truncated__</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a><span class="co">#&gt;  $ conceptName                            : chr &quot;&lt;i&gt;Hydrastis canadensis&lt;/i&gt;&quot;</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a><span class="co">#&gt;  $ taxonomicComments                      : chr &quot;&lt;i&gt;Hydrastis canadensis&lt;/i&gt; occurs in eastern North America and is a monotypic genus. In the most current taxon&quot;| __truncated__</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="co">#&gt;  $ roundedGRank                           : chr &quot;G3&quot;</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a><span class="co">#&gt;  $ conservationStatusFactorsEditionDate   : chr &quot;2013-04-29&quot;</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a><span class="co">#&gt;  $ conservationStatusFactorsEditionAuthors: chr &quot;Oliver, L.&quot;</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a><span class="co">#&gt;  $ primaryCommonNameLanguage              : chr &quot;EN&quot;</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a><span class="co">#&gt;  $ recordType                             : chr &quot;SPECIES&quot;</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a><span class="co">#&gt;  $ elementNationals                       :&#39;data.frame&#39;: 2 obs. of  7 variables:</span></span>
+<span id="cb9-27"><a href="#cb9-27"></a><span class="co">#&gt;  $ lastModified                           : chr &quot;2020-05-14T04:31:58.480462Z&quot;</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a><span class="co">#&gt;  $ lastPublished                          : chr &quot;2020-05-14T02:14:14.569584Z&quot;</span></span>
+<span id="cb9-29"><a href="#cb9-29"></a><span class="co">#&gt;  $ nsxUrl                                 : chr &quot;/Taxon/ELEMENT_GLOBAL.2.154701/Hydrastis_canadensis&quot;</span></span>
+<span id="cb9-30"><a href="#cb9-30"></a><span class="co">#&gt;  $ grank                                  : chr &quot;G3G4&quot;</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a><span class="co">#&gt;  $ grankReviewDate                        : chr &quot;2012-11-30&quot;</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a><span class="co">#&gt;  $ grankChangeDate                        : chr &quot;2012-11-30&quot;</span></span>
+<span id="cb9-33"><a href="#cb9-33"></a><span class="co">#&gt;  $ grankReasons                           : chr &quot;Goldenseal, &lt;i&gt;Hydrastis canadensis, &lt;/i&gt;an herbaceous understory species of the eastern deciduous forest, with&quot;| __truncated__</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a><span class="co">#&gt;  $ rankInfo                               :List of 27</span></span>
+<span id="cb9-35"><a href="#cb9-35"></a><span class="co">#&gt;  $ animalCharacteristics                  : NULL</span></span>
+<span id="cb9-36"><a href="#cb9-36"></a><span class="co">#&gt;  $ occurrenceDelineations                 :&#39;data.frame&#39;: 1 obs. of  17 variables:</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a><span class="co">#&gt;  $ plantCharacteristics                   :List of 7</span></span>
+<span id="cb9-38"><a href="#cb9-38"></a><span class="co">#&gt;  $ elementManagement                      :List of 14</span></span>
+<span id="cb9-39"><a href="#cb9-39"></a><span class="co">#&gt;  $ occurrenceViabilities                  :&#39;data.frame&#39;: 1 obs. of  12 variables:</span></span>
+<span id="cb9-40"><a href="#cb9-40"></a><span class="co">#&gt;  $ references                             :&#39;data.frame&#39;: 97 obs. of  6 variables:</span></span>
+<span id="cb9-41"><a href="#cb9-41"></a><span class="co">#&gt;  $ otherCommonNames                       :&#39;data.frame&#39;: 6 obs. of  3 variables:</span></span>
+<span id="cb9-42"><a href="#cb9-42"></a><span class="co">#&gt;  $ speciesGlobal                          :List of 29</span></span>
+<span id="cb9-43"><a href="#cb9-43"></a><span class="co">#&gt;  $ speciesCharacteristics                 :List of 13</span></span></code></pre></div>
+</div>
+<div id="get-a-summary-of-the-upper-level-hierarchy-for-an-ecosystem-record" class="section level2">
+<h2>Get a summary of the upper level hierarchy for an Ecosystem record</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">ns_ecohier</span>(<span class="st">&quot;ELEMENT_GLOBAL.2.683060&quot;</span>)</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#&gt;                  uniqueId</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; 1 ELEMENT_GLOBAL.2.860217</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt; 2 ELEMENT_GLOBAL.2.860227</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt; 3 ELEMENT_GLOBAL.2.860241</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt; 4 ELEMENT_GLOBAL.2.860284</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt; 5 ELEMENT_GLOBAL.2.838501</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt; 6 ELEMENT_GLOBAL.2.833279</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt; 7 ELEMENT_GLOBAL.2.899395</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#&gt;                                                            name</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt; 1                                             Forest &amp; Woodland</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt; 2                          Temperate &amp; Boreal Forest &amp; Woodland</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="co">#&gt; 3                              Cool Temperate Forest &amp; Woodland</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="co">#&gt; 4                      Eastern North American Forest &amp; Woodland</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="co">#&gt; 5         Southern &amp; South-Central Oak - Pine Forest &amp; Woodland</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="co">#&gt; 6 South-Central Interior Shortleaf Pine - Oak Forest &amp; Woodland</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="co">#&gt; 7                  Ozark-Ouachita Shortleaf Pine - Oak Woodland</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a><span class="co">#&gt;                                                                                                                 nsxUrl</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a><span class="co">#&gt; 1                                                     /Taxon/ELEMENT_GLOBAL.2.860217/Mesomorphic_Tree_Vegetation_Class</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a><span class="co">#&gt; 2                                             /Taxon/ELEMENT_GLOBAL.2.860227/Temperate_Boreal_Forest_Woodland_Subclass</span></span>
+<span id="cb10-21"><a href="#cb10-21"></a><span class="co">#&gt; 3                                              /Taxon/ELEMENT_GLOBAL.2.860241/Cool_Temperate_Forest_Woodland_Formation</span></span>
+<span id="cb10-22"><a href="#cb10-22"></a><span class="co">#&gt; 4           /Taxon/ELEMENT_GLOBAL.2.860284/Acer_saccharum_-_Fagus_grandifolia_-_Quercus_rubra_Forest_Woodland_Division</span></span>
+<span id="cb10-23"><a href="#cb10-23"></a><span class="co">#&gt; 5            /Taxon/ELEMENT_GLOBAL.2.838501/Quercus_alba_-_Quercus_falcata_-_Pinus_echinata_Forest_Woodland_Macrogroup</span></span>
+<span id="cb10-24"><a href="#cb10-24"></a><span class="co">#&gt; 6             /Taxon/ELEMENT_GLOBAL.2.833279/Pinus_echinata_-_Quercus_falcata_-_Quercus_stellata_Forest_Woodland_Group</span></span>
+<span id="cb10-25"><a href="#cb10-25"></a><span class="co">#&gt; 7 /Taxon/ELEMENT_GLOBAL.2.899395/Pinus_echinata_-_Quercus_stellata_-_Quercus_velutina_Ozark-Ouachita_Woodland_Alliance</span></span>
+<span id="cb10-26"><a href="#cb10-26"></a><span class="co">#&gt;   ecosystemType classificationCode</span></span>
+<span id="cb10-27"><a href="#cb10-27"></a><span class="co">#&gt; 1         CLASS                  1</span></span>
+<span id="cb10-28"><a href="#cb10-28"></a><span class="co">#&gt; 2      SUBCLASS                1.B</span></span>
+<span id="cb10-29"><a href="#cb10-29"></a><span class="co">#&gt; 3     FORMATION              1.B.2</span></span>
+<span id="cb10-30"><a href="#cb10-30"></a><span class="co">#&gt; 4      DIVISION           1.B.2.Na</span></span>
+<span id="cb10-31"><a href="#cb10-31"></a><span class="co">#&gt; 5    MACROGROUP               M016</span></span>
+<span id="cb10-32"><a href="#cb10-32"></a><span class="co">#&gt; 6         GROUP               G012</span></span>
+<span id="cb10-33"><a href="#cb10-33"></a><span class="co">#&gt; 7      ALLIANCE              A3271</span></span></code></pre></div>
+</div>
+<div id="search-exports" class="section level2">
+<h2>Search exports</h2>
+<p><code>ns_export()</code> uses the same search interface as the <code>ns_search*</code> functions, but instead of downloading data immediately, <code>ns_export()</code> creates a “download job”, which eventually provides a compressed JSON file that you can download.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>x &lt;-<span class="st"> </span><span class="kw">ns_export</span>(<span class="dt">text =</span> <span class="st">&quot;robin&quot;</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a>x</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt; [1] &quot;7a107bea-b98d-4b5a-87b3-456ea2194f07&quot;</span></span></code></pre></div>
+<p>You can pass the output of <code>ns_export()</code> to <code>ns_export_status()</code> to get the status of the job</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>res &lt;-<span class="st"> </span><span class="kw">ns_export_status</span>(x)</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co">#&gt; $state</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">#&gt; [1] &quot;Finished&quot;</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co">#&gt; </span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co">#&gt; $data</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="co">#&gt; $data$success</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co">#&gt; [1] TRUE</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="co">#&gt; $percentComplete</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="co">#&gt; [1] 100</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="co">#&gt; $successful</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="co">#&gt; [1] TRUE</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="co">#&gt; $error</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="co">#&gt; ...</span></span></code></pre></div>
+<p>When state equals “Finished”, you can read the data into R, e.g, with <code>jsonlite</code>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>res<span class="op">$</span>data<span class="op">$</span>url</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt; [1] &quot;https://explorer-downloads.natureserve.org/shortTerm/explorer/taxaSearchExports/2020-05-15/7a107bea-b98d-4b5a-87b3-456ea2194f07.json&quot;</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>tibble<span class="op">::</span><span class="kw">as_tibble</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(res<span class="op">$</span>data<span class="op">$</span>url))</span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt; # A tibble: 126 x 14</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#&gt;    elementGlobalId uniqueId nsxUrl elcode scientificName formattedScient… primaryCommonNa… primaryCommonNa… roundedGRank</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#&gt;              &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;          &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="co">#&gt;  1          100637 ELEMENT… /Taxo… ABPBJ… Copsychus sau… &lt;i&gt;Copsychus sa… Oriental Magpie… EN               G5</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="co">#&gt;  2          102323 ELEMENT… /Taxo… ABPBJ… Turdus grayi   &lt;i&gt;Turdus grayi… Clay-colored Th… EN               G5</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co">#&gt;  3          102179 ELEMENT… /Taxo… ABPBJ… Turdus migrat… &lt;i&gt;Turdus migra… American Robin   EN               G5</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt;  4          105536 ELEMENT… /Taxo… ABPBJ… Turdus migrat… &lt;i&gt;Turdus migra… Western America… EN               TU</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="co">#&gt;  5          105850 ELEMENT… /Taxo… ABPBJ… Turdus rufopa… &lt;i&gt;Turdus rufop… Rufous-backed R… EN               G5</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="co">#&gt;  6          100589 ELEMENT… /Taxo… AFC4B… Peristedion g… &lt;i&gt;Peristedion … Slender Searobin EN               GNR</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="co">#&gt;  7          105826 ELEMENT… /Taxo… AFC4B… Prionotus ala… &lt;i&gt;Prionotus al… Spiny Searobin   EN               GNR</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="co">#&gt;  8          101394 ELEMENT… /Taxo… AFC4B… Prionotus car… &lt;i&gt;Prionotus ca… Northern Searob… EN               G5</span></span>
+<span id="cb13-15"><a href="#cb13-15"></a><span class="co">#&gt;  9          100276 ELEMENT… /Taxo… AFC4B… Prionotus evo… &lt;i&gt;Prionotus ev… Striped Searobin EN               G5</span></span>
+<span id="cb13-16"><a href="#cb13-16"></a><span class="co">#&gt; 10          103595 ELEMENT… /Taxo… AFC4B… Prionotus lon… &lt;i&gt;Prionotus lo… Bigeye Searobin  EN               G5</span></span>
+<span id="cb13-17"><a href="#cb13-17"></a><span class="co">#&gt; # … with 116 more rows, and 29 more variables: nations &lt;list&gt;, lastModified &lt;chr&gt;, speciesGlobal$usesaCode &lt;chr&gt;,</span></span>
+<span id="cb13-18"><a href="#cb13-18"></a><span class="co">#&gt; #   $cosewicCode &lt;chr&gt;, $saraCode &lt;chr&gt;, $synonyms &lt;list&gt;, $otherCommonNames &lt;list&gt;, $kingdom &lt;chr&gt;, $phylum &lt;chr&gt;,</span></span>
+<span id="cb13-19"><a href="#cb13-19"></a><span class="co">#&gt; #   $taxclass &lt;chr&gt;, $taxorder &lt;chr&gt;, $family &lt;chr&gt;, $genus &lt;chr&gt;, $taxonomicComments &lt;chr&gt;, $informalTaxonomy &lt;chr&gt;,</span></span>
+<span id="cb13-20"><a href="#cb13-20"></a><span class="co">#&gt; #   $infraspecies &lt;lgl&gt;, $completeDistribution &lt;lgl&gt;, gRank &lt;chr&gt;, ecosystemGlobal$translatedScientificName &lt;chr&gt;,</span></span>
+<span id="cb13-21"><a href="#cb13-21"></a><span class="co">#&gt; #   $taxclassCode &lt;chr&gt;, $taxsubclassCode &lt;chr&gt;, $formationCode &lt;chr&gt;, $divisionCode &lt;chr&gt;, $macrogroupKey &lt;chr&gt;,</span></span>
+<span id="cb13-22"><a href="#cb13-22"></a><span class="co">#&gt; #   $taxgroupKey &lt;chr&gt;, $allianceKey &lt;chr&gt;, $ecosystemType &lt;chr&gt;, $classificationCode &lt;chr&gt;, $parentName &lt;chr&gt;</span></span></code></pre></div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

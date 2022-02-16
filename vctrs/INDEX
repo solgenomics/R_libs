@@ -34,6 +34,7 @@ vec_cast                Cast a vector to a specified type
 vec_chop                Chopping
 vec_compare             Compare two vectors
 vec_count               Count unique values in a vector
+vec_detect_complete     Complete
 vec_duplicate           Find duplicated values
 vec_equal               Test if two vectors are equal
 vec_fill_missing        Fill in missing values with the previous or

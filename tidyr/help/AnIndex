@@ -1,9 +1,12 @@
 tidyr-package	tidyr-package
 %>%	pipe
+all_of	reexports
+any_of	reexports
 as_tibble	reexports
 billboard	billboard
 build_longer_spec	pivot_longer_spec
 build_wider_spec	pivot_wider_spec
+check_pivot_spec	check_pivot_spec
 chop	chop
 complete	complete
 complete_	deprecated-se

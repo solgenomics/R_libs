@@ -19,12 +19,58 @@
 #define HAS_UNWIND_PROTECT
 #endif
 
+#ifdef CPP11_USE_FMT
+#define FMT_HEADER_ONLY
+#include "fmt/core.h"
+#endif
+
 namespace cpp11 {
 class unwind_exception : public std::exception {
  public:
   SEXP token;
   unwind_exception(SEXP token_) : token(token_) {}
 };
+
+namespace detail {
+// We deliberately avoid using safe[] in the below code, as this code runs
+// when the shared library is loaded and will not be wrapped by
+// `CPP11_UNWIND`, so if an error occurs we will not catch the C++ exception
+// that safe emits.
+inline void set_option(SEXP name, SEXP value) {
+  static SEXP opt = SYMVALUE(Rf_install(".Options"));
+  SEXP t = opt;
+  while (CDR(t) != R_NilValue) {
+    if (TAG(CDR(t)) == name) {
+      opt = CDR(t);
+      SET_TAG(opt, name);
+      SETCAR(opt, value);
+      return;
+    }
+    t = CDR(t);
+  }
+  SETCDR(t, Rf_allocList(1));
+  opt = CDR(t);
+  SET_TAG(opt, name);
+  SETCAR(opt, value);
+}
+
+inline Rboolean& get_should_unwind_protect() {
+  SEXP should_unwind_protect_sym = Rf_install("cpp11_should_unwind_protect");
+  SEXP should_unwind_protect_sexp = Rf_GetOption1(should_unwind_protect_sym);
+  if (should_unwind_protect_sexp == R_NilValue) {
+    should_unwind_protect_sexp = PROTECT(Rf_allocVector(LGLSXP, 1));
+    detail::set_option(should_unwind_protect_sym, should_unwind_protect_sexp);
+    UNPROTECT(1);
+  }
+
+  Rboolean* should_unwind_protect =
+      reinterpret_cast<Rboolean*>(LOGICAL(should_unwind_protect_sexp));
+  should_unwind_protect[0] = TRUE;
+
+  return should_unwind_protect[0];
+}
+
+}  // namespace detail
 
 #ifdef HAS_UNWIND_PROTECT
 
@@ -34,6 +80,13 @@ class unwind_exception : public std::exception {
 template <typename Fun, typename = typename std::enable_if<std::is_same<
                             decltype(std::declval<Fun&&>()()), SEXP>::value>::type>
 SEXP unwind_protect(Fun&& code) {
+  static auto should_unwind_protect = detail::get_should_unwind_protect();
+  if (should_unwind_protect == FALSE) {
+    return std::forward<Fun>(code)();
+  }
+
+  should_unwind_protect = FALSE;
+
   static SEXP token = [] {
     SEXP res = R_MakeUnwindCont();
     R_PreserveObject(res);
@@ -42,10 +95,11 @@ SEXP unwind_protect(Fun&& code) {
 
   std::jmp_buf jmpbuf;
   if (setjmp(jmpbuf)) {
+    should_unwind_protect = TRUE;
     throw unwind_exception(token);
   }
 
-  return R_UnwindProtect(
+  SEXP res = R_UnwindProtect(
       [](void* data) -> SEXP {
         auto callback = static_cast<decltype(&code)>(data);
         return static_cast<Fun&&>(*callback)();
@@ -53,12 +107,22 @@ SEXP unwind_protect(Fun&& code) {
       &code,
       [](void* jmpbuf, Rboolean jump) {
         if (jump == TRUE) {
-          // We need to first jump back into the C++ stacks because you can't safely throw
-          // exceptions from C stack frames.
+          // We need to first jump back into the C++ stacks because you can't safely
+          // throw exceptions from C stack frames.
           longjmp(*static_cast<std::jmp_buf*>(jmpbuf), 1);
         }
       },
       &jmpbuf, token);
+
+  // R_UnwindProtect adds the result to the CAR of the continuation token,
+  // which implicitly protects the result. However if there is no error and
+  // R_UwindProtect does a normal exit the memory shouldn't be protected, so we
+  // unset it here before returning the value ourselves.
+  SETCAR(token, R_NilValue);
+
+  should_unwind_protect = TRUE;
+
+  return res;
 }
 
 template <typename Fun, typename = typename std::enable_if<std::is_same<
@@ -186,25 +250,51 @@ constexpr struct protect safe = {};
 
 inline void check_user_interrupt() { safe[R_CheckUserInterrupt](); }
 
+#ifdef CPP11_USE_FMT
+template <typename... Args>
+void stop [[noreturn]] (const char* fmt_arg, Args&&... args) {
+  std::string msg = fmt::format(fmt_arg, std::forward<Args>(args)...);
+  safe.noreturn(Rf_errorcall)(R_NilValue, "%s", msg.c_str());
+}
+
+template <typename... Args>
+void stop [[noreturn]] (const std::string& fmt_arg, Args&&... args) {
+  std::string msg = fmt::format(fmt_arg, std::forward<Args>(args)...);
+  safe.noreturn(Rf_errorcall)(R_NilValue, "%s", msg.c_str());
+}
+
+template <typename... Args>
+void warning(const char* fmt_arg, Args&&... args) {
+  std::string msg = fmt::format(fmt_arg, std::forward<Args>(args)...);
+  safe[Rf_warningcall](R_NilValue, "%s", msg.c_str());
+}
+
+template <typename... Args>
+void warning(const std::string& fmt_arg, Args&&... args) {
+  std::string msg = fmt::format(fmt_arg, std::forward<Args>(args)...);
+  safe[Rf_warningcall](R_NilValue, "%s", msg.c_str());
+}
+#else
 template <typename... Args>
 void stop [[noreturn]] (const char* fmt, Args... args) {
-  safe.noreturn(Rf_error)(fmt, args...);
+  safe.noreturn(Rf_errorcall)(R_NilValue, fmt, args...);
 }
 
 template <typename... Args>
 void stop [[noreturn]] (const std::string& fmt, Args... args) {
-  safe.noreturn(Rf_error)(fmt.c_str(), args...);
+  safe.noreturn(Rf_errorcall)(R_NilValue, fmt.c_str(), args...);
 }
 
 template <typename... Args>
 void warning(const char* fmt, Args... args) {
-  safe[Rf_warning](fmt, args...);
+  safe[Rf_warningcall](R_NilValue, fmt, args...);
 }
 
 template <typename... Args>
 void warning(const std::string& fmt, Args... args) {
-  safe[Rf_warning](fmt.c_str(), args...);
+  safe[Rf_warningcall](R_NilValue, fmt.c_str(), args...);
 }
+#endif
 
 /// A doubly-linked list of preserved objects, allowing O(1) insertion/release of
 /// objects compared to O(N preserved) with R_PreserveObject.
@@ -223,9 +313,7 @@ static struct {
 
     PROTECT(obj);
 
-    if (TYPEOF(list_) != LISTSXP) {
-      list_ = get_preserve_list();
-    }
+    static SEXP list_ = get_preserve_list();
 
     // Add a new cell that points to the previous end.
     SEXP cell = PROTECT(Rf_cons(list_, CDR(list_)));
@@ -244,6 +332,7 @@ static struct {
   }
 
   void print() {
+    static SEXP list_ = get_preserve_list();
     for (SEXP head = list_; head != R_NilValue; head = CDR(head)) {
       REprintf("%x CAR: %x CDR: %x TAG: %x\n", head, CAR(head), CDR(head), TAG(head));
     }
@@ -254,6 +343,7 @@ static struct {
   // in older R versions if needed
   void release_all() {
 #if !defined(CPP11_USE_PRESERVE_OBJECT)
+    static SEXP list_ = get_preserve_list();
     SEXP first = CDR(list_);
     if (first != R_NilValue) {
       SETCAR(first, R_NilValue);
@@ -288,29 +378,7 @@ static struct {
   }
 
  private:
-  // We deliberately avoid using safe[] in the below code, as this code runs
-  // when the shared library is loaded and will not be wrapped by
-  // `CPP11_UNWIND`, so if an error occurs we will not catch the C++ exception
-  // that safe emits.
-  static void set_option(SEXP name, SEXP value) {
-    static SEXP opt = SYMVALUE(Rf_install(".Options"));
-    SEXP t = opt;
-    while (CDR(t) != R_NilValue) {
-      if (TAG(CDR(t)) == name) {
-        opt = CDR(t);
-        SET_TAG(opt, name);
-        SETCAR(opt, value);
-        return;
-      }
-      t = CDR(t);
-    }
-    SETCDR(t, Rf_allocList(1));
-    opt = CDR(t);
-    SET_TAG(opt, name);
-    SETCAR(opt, value);
-  }
-
-  // The list_ singleton is stored in a XPtr within an R global option.
+  // The preserved list singleton is stored in a XPtr within an R global option.
   //
   // It is not constructed as a static variable directly since many
   // translation units may be compiled, resulting in unrelated instances of each
@@ -340,7 +408,7 @@ static struct {
     static SEXP preserve_xptr_sym = Rf_install("cpp11_preserve_xptr");
 
     SEXP xptr = PROTECT(R_MakeExternalPtr(value, R_NilValue, R_NilValue));
-    set_option(preserve_xptr_sym, xptr);
+    detail::set_option(preserve_xptr_sym, xptr);
     UNPROTECT(1);
   }
 
@@ -358,8 +426,6 @@ static struct {
 
     return preserve_list;
   }
-
-  SEXP list_ = get_preserve_list();
 }  // namespace cpp11
 preserved;
 }  // namespace cpp11

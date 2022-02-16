@@ -8,6 +8,7 @@ Id-class                Refer to a table nested in a hierarchy (e.g.
                         within a schema)
 SQL                     SQL quoting
 dbAppendTable           Insert rows into a table
+dbBegin                 Begin/commit/rollback SQL transactions
 dbBind                  Bind values to a parameterized/prepared
                         statement
 dbCanConnect            Check if a connection to a DBMS can be
@@ -53,4 +54,3 @@ sqlCreateTable          Compose query to create a simple table
 sqlData                 Convert a data frame into form suitable for
                         upload to an SQL database
 sqlInterpolate          Safely interpolate values into an SQL string
-transactions            Begin/commit/rollback SQL transactions

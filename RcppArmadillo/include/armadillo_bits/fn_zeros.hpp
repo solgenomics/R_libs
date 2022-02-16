@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -176,12 +178,12 @@ zeros(const uword n_rows, const uword n_cols, const typename arma_SpMat_SpCol_Sp
   arma_extra_debug_sigprint();
   arma_ignore(junk);
   
-  if(is_SpCol<sp_obj_type>::value == true)
+  if(is_SpCol<sp_obj_type>::value)
     {
     arma_debug_check( (n_cols != 1), "zeros(): incompatible size" );
     }
   else
-  if(is_SpRow<sp_obj_type>::value == true)
+  if(is_SpRow<sp_obj_type>::value)
     {
     arma_debug_check( (n_rows != 1), "zeros(): incompatible size" );
     }

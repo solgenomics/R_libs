@@ -112,6 +112,7 @@ vec_count	vec_count
 vec_data	vec_data
 vec_default_cast	vec_default_ptype2
 vec_default_ptype2	vec_default_ptype2
+vec_detect_complete	vec_detect_complete
 vec_duplicate	vec_duplicate
 vec_duplicate_any	vec_duplicate
 vec_duplicate_detect	vec_duplicate

@@ -2,8 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><title>R: Simple Features for R</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> Simple Features for R
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;sf&rsquo; version 0.9-7</h2>
+</div><h2>Documentation for package &lsquo;sf&rsquo; version 1.0-6</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -90,8 +91,8 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="dbDataType.html">dbDataType-method</a></td>
 <td>Determine database type for R vector</td></tr>
-<tr><td style="width: 25%;"><a href="st_write.html">dbWriteTable-method</a></td>
-<td>Write simple features object to file or database</td></tr>
+<tr><td style="width: 25%;"><a href="dbWriteTable.html">dbWriteTable-method</a></td>
+<td>Write 'sf' object to Database</td></tr>
 <tr><td style="width: 25%;"><a href="db_drivers.html">db_drivers</a></td>
 <td>Drivers for which update should be 'TRUE' by default</td></tr>
 <tr><td style="width: 25%;"><a href="sgbp.html">dim.sgbp</a></td>
@@ -129,6 +130,8 @@
 <td>Tidyverse methods for sf objects (remove .sf suffix!)</td></tr>
 <tr><td style="width: 25%;"><a href="gdal.html">gdal</a></td>
 <td>functions to interact with gdal not meant to be called directly by users (but e.g. by stars::read_stars)</td></tr>
+<tr><td style="width: 25%;"><a href="gdal.html">gdal_create</a></td>
+<td>functions to interact with gdal not meant to be called directly by users (but e.g. by stars::read_stars)</td></tr>
 <tr><td style="width: 25%;"><a href="gdal.html">gdal_crs</a></td>
 <td>functions to interact with gdal not meant to be called directly by users (but e.g. by stars::read_stars)</td></tr>
 <tr><td style="width: 25%;"><a href="gdal.html">gdal_extract</a></td>
@@ -143,11 +146,15 @@
 <td>functions to interact with gdal not meant to be called directly by users (but e.g. by stars::read_stars)</td></tr>
 <tr><td style="width: 25%;"><a href="gdal.html">gdal_read</a></td>
 <td>functions to interact with gdal not meant to be called directly by users (but e.g. by stars::read_stars)</td></tr>
+<tr><td style="width: 25%;"><a href="gdal.html">gdal_read_mdim</a></td>
+<td>functions to interact with gdal not meant to be called directly by users (but e.g. by stars::read_stars)</td></tr>
 <tr><td style="width: 25%;"><a href="gdal.html">gdal_subdatasets</a></td>
 <td>functions to interact with gdal not meant to be called directly by users (but e.g. by stars::read_stars)</td></tr>
 <tr><td style="width: 25%;"><a href="gdal_utils.html">gdal_utils</a></td>
 <td>Native interface to gdal utils</td></tr>
 <tr><td style="width: 25%;"><a href="gdal.html">gdal_write</a></td>
+<td>functions to interact with gdal not meant to be called directly by users (but e.g. by stars::read_stars)</td></tr>
+<tr><td style="width: 25%;"><a href="gdal.html">gdal_write_mdim</a></td>
 <td>functions to interact with gdal not meant to be called directly by users (but e.g. by stars::read_stars)</td></tr>
 <tr><td style="width: 25%;"><a href="geos_binary_ops.html">geos_binary_ops</a></td>
 <td>Geometric operations on pairs of simple feature geometry sets</td></tr>
@@ -181,6 +188,8 @@
 <td>Tidyverse methods for sf objects (remove .sf suffix!)</td></tr>
 <tr><td style="width: 25%;"><a href="internal.html">internal</a></td>
 <td>Internal functions</td></tr>
+<tr><td style="width: 25%;"><a href="interpolate_aw.html">interpolate_aw</a></td>
+<td>Areal-weighted interpolation of polygon data</td></tr>
 <tr><td style="width: 25%;"><a href="st_bbox.html">is.na.bbox</a></td>
 <td>Return bounding of a simple feature or simple feature set</td></tr>
 <tr><td style="width: 25%;"><a href="st_crs.html">is.na.crs</a></td>
@@ -284,6 +293,8 @@
 <td>Create simple feature from a numeric vector, matrix or list</td></tr>
 <tr><td style="width: 25%;"><a href="sgbp.html">print.sgbp</a></td>
 <td>Methods for dealing with sparse geometry binary predicate lists</td></tr>
+<tr><td style="width: 25%;"><a href="proj_tools.html">proj_tools</a></td>
+<td>Manage PROJ settings</td></tr>
 </table>
 
 <h2><a name="R">-- R --</a></h2>
@@ -350,8 +361,12 @@
 <td>directly transform a set of coordinates</td></tr>
 <tr><td style="width: 25%;"><a href="st_transform.html">sf_proj_info</a></td>
 <td>Transform or convert coordinates of simple feature</td></tr>
-<tr><td style="width: 25%;"><a href="sf_proj_search_paths.html">sf_proj_search_paths</a></td>
-<td>Get or set the PROJ search paths</td></tr>
+<tr><td style="width: 25%;"><a href="proj_tools.html">sf_proj_network</a></td>
+<td>Manage PROJ settings</td></tr>
+<tr><td style="width: 25%;"><a href="proj_tools.html">sf_proj_pipelines</a></td>
+<td>Manage PROJ settings</td></tr>
+<tr><td style="width: 25%;"><a href="proj_tools.html">sf_proj_search_paths</a></td>
+<td>Manage PROJ settings</td></tr>
 <tr><td style="width: 25%;"><a href="s2.html">sf_use_s2</a></td>
 <td>functions for spherical geometry, using s2 package</td></tr>
 <tr><td style="width: 25%;"><a href="sgbp.html">sgbp</a></td>
@@ -398,8 +413,8 @@
 <td>Convert foreign object to an sf object</td></tr>
 <tr><td style="width: 25%;"><a href="st_as_sf.html">st_as_sf.psp</a></td>
 <td>Convert foreign object to an sf object</td></tr>
-<tr><td style="width: 25%;"><a href="s2.html">st_as_sf.s2_geography</a></td>
-<td>functions for spherical geometry, using s2 package</td></tr>
+<tr><td style="width: 25%;"><a href="st_as_sf.html">st_as_sf.s2_geography</a></td>
+<td>Convert foreign object to an sf object</td></tr>
 <tr><td style="width: 25%;"><a href="st_as_sf.html">st_as_sf.sf</a></td>
 <td>Convert foreign object to an sf object</td></tr>
 <tr><td style="width: 25%;"><a href="st_as_sf.html">st_as_sf.sfc</a></td>
@@ -424,8 +439,8 @@
 <td>Convert foreign geometry object to an sfc object</td></tr>
 <tr><td style="width: 25%;"><a href="st_as_sfc.html">st_as_sfc.raw</a></td>
 <td>Convert foreign geometry object to an sfc object</td></tr>
-<tr><td style="width: 25%;"><a href="s2.html">st_as_sfc.s2_geography</a></td>
-<td>functions for spherical geometry, using s2 package</td></tr>
+<tr><td style="width: 25%;"><a href="st_as_sfc.html">st_as_sfc.s2_geography</a></td>
+<td>Convert foreign geometry object to an sfc object</td></tr>
 <tr><td style="width: 25%;"><a href="st_as_sfc.html">st_as_sfc.SpatialLines</a></td>
 <td>Convert foreign geometry object to an sfc object</td></tr>
 <tr><td style="width: 25%;"><a href="st_as_sfc.html">st_as_sfc.SpatialMultiPoints</a></td>
@@ -438,8 +453,6 @@
 <td>Convert foreign geometry object to an sfc object</td></tr>
 <tr><td style="width: 25%;"><a href="st_as_sfc.html">st_as_sfc.WKB</a></td>
 <td>Convert foreign geometry object to an sfc object</td></tr>
-<tr><td style="width: 25%;"><a href="s2.html">st_as_sfc.wk_wkb</a></td>
-<td>functions for spherical geometry, using s2 package</td></tr>
 <tr><td style="width: 25%;"><a href="st_as_text.html">st_as_text</a></td>
 <td>Return Well-known Text representation of simple feature geometry or coordinate reference system</td></tr>
 <tr><td style="width: 25%;"><a href="st_as_text.html">st_as_text.crs</a></td>
@@ -588,6 +601,8 @@
 <td>Retrieve coordinate reference system from object</td></tr>
 <tr><td style="width: 25%;"><a href="st_crs.html">st_crs&lt;-.sfc</a></td>
 <td>Retrieve coordinate reference system from object</td></tr>
+<tr><td style="width: 25%;"><a href="st_write.html">st_delete</a></td>
+<td>Write simple features object to file or database</td></tr>
 <tr><td style="width: 25%;"><a href="geos_binary_ops.html">st_difference</a></td>
 <td>Geometric operations on pairs of simple feature geometry sets</td></tr>
 <tr><td style="width: 25%;"><a href="geos_binary_ops.html">st_difference.sfc</a></td>
@@ -601,7 +616,7 @@
 <tr><td style="width: 25%;"><a href="st_drivers.html">st_drivers</a></td>
 <td>Get GDAL drivers</td></tr>
 <tr><td style="width: 25%;"><a href="st_geometry.html">st_drop_geometry</a></td>
-<td>Get, set, or replace geometry from an sf object</td></tr>
+<td>Get, set, replace or rename geometry from an sf object</td></tr>
 <tr><td style="width: 25%;"><a href="geos_binary_pred.html">st_equals</a></td>
 <td>Geometric binary predicates on pairs of simple feature geometry sets</td></tr>
 <tr><td style="width: 25%;"><a href="geos_binary_pred.html">st_equals_exact</a></td>
@@ -611,22 +626,26 @@
 <tr><td style="width: 25%;"><a href="st_join.html">st_filter.sf</a></td>
 <td>spatial join, spatial filter</td></tr>
 <tr><td style="width: 25%;"><a href="st_geometry.html">st_geometry</a></td>
-<td>Get, set, or replace geometry from an sf object</td></tr>
+<td>Get, set, replace or rename geometry from an sf object</td></tr>
 <tr><td style="width: 25%;"><a href="st_geometry.html">st_geometry.sf</a></td>
-<td>Get, set, or replace geometry from an sf object</td></tr>
+<td>Get, set, replace or rename geometry from an sf object</td></tr>
 <tr><td style="width: 25%;"><a href="st_geometry.html">st_geometry.sfc</a></td>
-<td>Get, set, or replace geometry from an sf object</td></tr>
+<td>Get, set, replace or rename geometry from an sf object</td></tr>
 <tr><td style="width: 25%;"><a href="st_geometry.html">st_geometry.sfg</a></td>
-<td>Get, set, or replace geometry from an sf object</td></tr>
+<td>Get, set, replace or rename geometry from an sf object</td></tr>
 <tr><td style="width: 25%;"><a href="st_geometry.html">st_geometry&lt;-</a></td>
-<td>Get, set, or replace geometry from an sf object</td></tr>
+<td>Get, set, replace or rename geometry from an sf object</td></tr>
 <tr><td style="width: 25%;"><a href="st.html">st_geometrycollection</a></td>
 <td>Create simple feature from a numeric vector, matrix or list</td></tr>
 <tr><td style="width: 25%;"><a href="st_geometry_type.html">st_geometry_type</a></td>
 <td>Return geometry type of an object</td></tr>
 <tr><td style="width: 25%;"><a href="st_graticule.html">st_graticule</a></td>
 <td>Compute graticules and their parameters</td></tr>
-<tr><td style="width: 25%;"><a href="st_interpolate_aw.html">st_interpolate_aw</a></td>
+<tr><td style="width: 25%;"><a href="geos_unary.html">st_inscribed_circle</a></td>
+<td>Geometric unary operations on simple feature geometry sets</td></tr>
+<tr><td style="width: 25%;"><a href="interpolate_aw.html">st_interpolate_aw</a></td>
+<td>Areal-weighted interpolation of polygon data</td></tr>
+<tr><td style="width: 25%;"><a href="interpolate_aw.html">st_interpolate_aw.sf</a></td>
 <td>Areal-weighted interpolation of polygon data</td></tr>
 <tr><td style="width: 25%;"><a href="geos_binary_ops.html">st_intersection</a></td>
 <td>Geometric operations on pairs of simple feature geometry sets</td></tr>
@@ -673,6 +692,8 @@
 <tr><td style="width: 25%;"><a href="st_make_grid.html">st_make_grid</a></td>
 <td>Create a regular tesselation over the bounding box of an sf or sfc object</td></tr>
 <tr><td style="width: 25%;"><a href="valid.html">st_make_valid</a></td>
+<td>Check validity or make an invalid geometry valid</td></tr>
+<tr><td style="width: 25%;"><a href="valid.html">st_make_valid.sfc</a></td>
 <td>Check validity or make an invalid geometry valid</td></tr>
 <tr><td style="width: 25%;"><a href="valid.html">st_make_valid.sfg</a></td>
 <td>Check validity or make an invalid geometry valid</td></tr>
@@ -777,7 +798,7 @@
 <tr><td style="width: 25%;"><a href="st_crs.html">st_set_crs</a></td>
 <td>Retrieve coordinate reference system from object</td></tr>
 <tr><td style="width: 25%;"><a href="st_geometry.html">st_set_geometry</a></td>
-<td>Get, set, or replace geometry from an sf object</td></tr>
+<td>Get, set, replace or rename geometry from an sf object</td></tr>
 <tr><td style="width: 25%;"><a href="st_precision.html">st_set_precision</a></td>
 <td>Get precision</td></tr>
 <tr><td style="width: 25%;"><a href="sf.html">st_sf</a></td>
@@ -956,4 +977,4 @@
 <tr><td style="width: 25%;"><a href="sf.html">[.sf</a></td>
 <td>Create sf object</td></tr>
 </table>
-</body></html>
+</div></body></html>

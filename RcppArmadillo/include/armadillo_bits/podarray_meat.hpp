@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -193,7 +195,7 @@ arma_inline
 eT
 podarray<eT>::operator() (const uword i) const
   {
-  arma_debug_check( (i >= n_elem), "podarray::operator(): index out of bounds");
+  arma_debug_check_bounds( (i >= n_elem), "podarray::operator(): index out of bounds" );
   
   return mem[i];
   }
@@ -205,7 +207,7 @@ arma_inline
 eT&
 podarray<eT>::operator() (const uword i)
   {
-  arma_debug_check( (i >= n_elem), "podarray::operator(): index out of bounds");
+  arma_debug_check_bounds( (i >= n_elem), "podarray::operator(): index out of bounds" );
   
   return access::rw(mem[i]);
   }
@@ -219,10 +221,7 @@ podarray<eT>::set_min_size(const uword min_n_elem)
   {
   arma_extra_debug_sigprint();
   
-  if(min_n_elem > n_elem)
-    {  
-    init_warm(min_n_elem);
-    }
+  if(min_n_elem > n_elem)  { init_warm(min_n_elem); }
   }
 
 
@@ -310,7 +309,6 @@ podarray<eT>::memptr() const
 
 
 template<typename eT>
-arma_hot
 inline
 void
 podarray<eT>::copy_row(const Mat<eT>& A, const uword row)

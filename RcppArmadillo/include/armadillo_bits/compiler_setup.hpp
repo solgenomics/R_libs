@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -134,6 +136,11 @@
 #else 
   #define ARMA_FNSIG  __func__
 #endif
+
+
+// #if defined(ARMA_HAVE_CXX17)
+//   #define arma_warn_unused  [[nodiscard]]
+// #endif
 
 
 #if !defined(ARMA_ALLOW_FAKE_GCC)
@@ -405,6 +412,17 @@
       #pragma message ("WARNING: use of OpenMP disabled due to compiler bug in gcc <= 5.3")
     #endif
   #endif
+#endif
+
+
+#if ( defined(_WIN32) || defined(_WIN64) || defined(_MSC_VER) || defined(__MINGW32__) || defined(__MINGW64__) )
+  #undef  ARMA_PRINT_EXCEPTIONS
+  #define ARMA_PRINT_EXCEPTIONS
+#endif
+
+
+#if (defined(ARMA_ALIEN_MEM_ALLOC_FUNCTION) && !defined(ARMA_ALIEN_MEM_FREE_FUNCTION)) || (!defined(ARMA_ALIEN_MEM_ALLOC_FUNCTION) && defined(ARMA_ALIEN_MEM_FREE_FUNCTION))
+  #error "*** both ARMA_ALIEN_MEM_ALLOC_FUNCTION and ARMA_ALIEN_MEM_FREE_FUNCTION must be defined ***"
 #endif
 
 

@@ -23,8 +23,8 @@ coerce,Spatial,sf-method	coerce-methods
 coerce,Spatial,sfc-method	coerce-methods
 dbDataType,DBIObject,sf-method	dbDataType
 dbDataType,PostgreSQLConnection,sf-method	dbDataType
-dbWriteTable,DBIObject,character,sf-method	st_write
-dbWriteTable,PostgreSQLConnection,character,sf-method	st_write
+dbWriteTable,DBIObject,character,sf-method	dbWriteTable
+dbWriteTable,PostgreSQLConnection,character,sf-method	dbWriteTable
 db_drivers	db_drivers
 dim.sgbp	sgbp
 distinct.sf	tidyverse
@@ -36,6 +36,7 @@ format.sfg	st
 full_join.sf	tidyverse
 gather.sf	tidyverse
 gdal	gdal
+gdal_create	gdal
 gdal_crs	gdal
 gdal_extract	gdal
 gdal_inv_geotransform	gdal
@@ -43,9 +44,11 @@ gdal_metadata	gdal
 gdal_polygonize	gdal
 gdal_rasterize	gdal
 gdal_read	gdal
+gdal_read_mdim	gdal
 gdal_subdatasets	gdal
 gdal_utils	gdal_utils
 gdal_write	gdal
+gdal_write_mdim	gdal
 geos_binary_ops	geos_binary_ops
 geos_binary_pred	geos_binary_pred
 geos_combine	geos_combine
@@ -57,6 +60,7 @@ group_by.sf	tidyverse
 head.sfg	st
 inner_join.sf	tidyverse
 internal	internal
+interpolate_aw	interpolate_aw
 is.na.bbox	st_bbox
 is.na.crs	st_crs
 is.na.m_range	st_m_range
@@ -96,6 +100,7 @@ prefix_map	prefix_map
 print.sf	sf
 print.sfg	st
 print.sgbp	sgbp
+proj_tools	proj_tools
 rawToHex	rawToHex
 rbind.sf	bind
 read_sf	st_read
@@ -125,7 +130,9 @@ sf_add_proj_units	sf_project
 sf_extSoftVersion	sf_extSoftVersion
 sf_project	sf_project
 sf_proj_info	st_transform
-sf_proj_search_paths	sf_proj_search_paths
+sf_proj_network	proj_tools
+sf_proj_pipelines	proj_tools
+sf_proj_search_paths	proj_tools
 sf_use_s2	s2
 sgbp	sgbp
 slice.sf	tidyverse
@@ -149,7 +156,7 @@ st_as_sf.lpp	st_as_sf
 st_as_sf.map	st_as_sf
 st_as_sf.ppp	st_as_sf
 st_as_sf.psp	st_as_sf
-st_as_sf.s2_geography	s2
+st_as_sf.s2_geography	st_as_sf
 st_as_sf.sf	st_as_sf
 st_as_sf.sfc	st_as_sf
 st_as_sf.Spatial	st_as_sf
@@ -162,14 +169,13 @@ st_as_sfc.list	st_as_sfc
 st_as_sfc.map	st_as_sfc
 st_as_sfc.pq_geometry	st_as_sfc
 st_as_sfc.raw	st_as_sfc
-st_as_sfc.s2_geography	s2
+st_as_sfc.s2_geography	st_as_sfc
 st_as_sfc.SpatialLines	st_as_sfc
 st_as_sfc.SpatialMultiPoints	st_as_sfc
 st_as_sfc.SpatialPixels	st_as_sfc
 st_as_sfc.SpatialPoints	st_as_sfc
 st_as_sfc.SpatialPolygons	st_as_sfc
 st_as_sfc.WKB	st_as_sfc
-st_as_sfc.wk_wkb	s2
 st_as_text	st_as_text
 st_as_text.crs	st_as_text
 st_as_text.sfc	st_as_text
@@ -244,6 +250,7 @@ st_crs.sfc	st_crs
 st_crs<-	st_crs
 st_crs<-.sf	st_crs
 st_crs<-.sfc	st_crs
+st_delete	st_write
 st_difference	geos_binary_ops
 st_difference.sfc	geos_binary_ops
 st_dimension	geos_query
@@ -263,7 +270,9 @@ st_geometry<-	st_geometry
 st_geometrycollection	st
 st_geometry_type	st_geometry_type
 st_graticule	st_graticule
-st_interpolate_aw	st_interpolate_aw
+st_inscribed_circle	geos_unary
+st_interpolate_aw	interpolate_aw
+st_interpolate_aw.sf	interpolate_aw
 st_intersection	geos_binary_ops
 st_intersection.sf	geos_binary_ops
 st_intersection.sfc	geos_binary_ops
@@ -287,6 +296,7 @@ st_line_merge	geos_unary
 st_line_sample	st_line_sample
 st_make_grid	st_make_grid
 st_make_valid	valid
+st_make_valid.sfc	valid
 st_make_valid.sfg	valid
 st_multilinestring	st
 st_multipoint	st

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -77,6 +79,15 @@ struct unwrap_cube_check
     arma_type_check(( is_arma_cube_type<T1>::value == false ));
     }
   
+  inline
+  unwrap_cube_check(const T1& A, const bool)
+    : M(A)
+    {
+    arma_extra_debug_sigprint();
+    
+    arma_type_check(( is_arma_cube_type<T1>::value == false ));
+    }
+  
   const Cube<eT> M;
   };
 
@@ -95,14 +106,20 @@ struct unwrap_cube_check< Cube<eT> >
   
   
   inline
+  unwrap_cube_check(const Cube<eT>& A, const bool is_alias)
+    : M_local( is_alias ? new Cube<eT>(A) : nullptr )
+    , M      ( is_alias ? (*M_local)      : A       )
+    {
+    arma_extra_debug_sigprint();
+    }
+  
+  
+  inline
   ~unwrap_cube_check()
     {
     arma_extra_debug_sigprint();
     
-    if(M_local)
-      {
-      delete M_local;
-      }
+    if(M_local)  { delete M_local; }
     }
   
   

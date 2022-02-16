@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -49,7 +51,7 @@ eps(const Base< std::complex<typename T1::pod_type>, T1>& X, const typename arma
   const unwrap<T1>   tmp(X.get_ref());
   const Mat<eT>& A = tmp.M;
   
-  Mat<T> out(A.n_rows, A.n_cols);
+  Mat<T> out(A.n_rows, A.n_cols, arma_nozeros_indicator());
   
          T* out_mem = out.memptr();
   const eT*   A_mem =   A.memptr();

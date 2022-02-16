@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -46,7 +48,7 @@ class eop_core
   
   // common
   
-  template<typename eT> arma_hot arma_inline static eT process(const eT val, const eT k);
+  template<typename eT> arma_inline static eT process(const eT val, const eT k);
   };
 
 
@@ -99,6 +101,7 @@ class eop_sign              : public eop_core<eop_sign>              , public eo
 class eop_erf               : public eop_core<eop_erf>               , public eop_use_mp_true  {};
 class eop_erfc              : public eop_core<eop_erfc>              , public eop_use_mp_true  {};
 class eop_lgamma            : public eop_core<eop_lgamma>            , public eop_use_mp_true  {};
+class eop_tgamma            : public eop_core<eop_tgamma>            , public eop_use_mp_true  {};
 
 
 

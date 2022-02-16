@@ -74,6 +74,7 @@ function(...) {
   #' * 2019-05-30 First version in remotes.
   #' * 2020-03-22 get_matching_bioc_version() is now correct if the current
   #'              R version is not in the builtin mapping.
+  #' * 2020-11-21 Update internal map for 3.12.
   #'
   #' @name bioconductor
   #' @keywords internal
@@ -110,7 +111,9 @@ function(...) {
       "3.3"  = package_version("3.4"),
       "3.4"  = package_version("3.6"),
       "3.5"  = package_version("3.8"),
-      "3.6"  = package_version("3.10")
+      "3.6"  = package_version("3.10"),
+      "4.0"  = package_version("3.12"),
+      "4.1"  = package_version("3.14")
     )
   
     # -------------------------------------------------------------------
@@ -261,7 +264,9 @@ function(...) {
         BioCworkflows =
           if (bioc_version >= "3.7") "{mirror}/packages/{bv}/workflows",
         BioCextra     =
-          if (bioc_version <= "3.5") "{mirror}/packages/{bv}/extra"
+          if (bioc_version <= "3.5") "{mirror}/packages/{bv}/extra",
+        BioCbooks =
+          if (bioc_version >= "3.12") "{mirror}/packages/{bv}/books"
       )
   
       ## It seems that if a repo is not available yet for bioc-devel,
@@ -539,7 +544,7 @@ function(...) {
   #' `update()` method installs outdated or missing packages from CRAN.
   #'
   #' @param packages A character vector of package names.
-  #' @param pkgdir path to a package directory, or to a package tarball.
+  #' @param pkgdir Path to a package directory, or to a package tarball.
   #' @param dependencies Which dependencies do you want to check?
   #'   Can be a character vector (selecting from "Depends", "Imports",
   #'    "LinkingTo", "Suggests", or "Enhances"), or a logical vector.
@@ -556,7 +561,7 @@ function(...) {
   #'   - Config/Needs/website - for dependencies used in building the pkgdown site.
   #'   - Config/Needs/coverage for dependencies used in calculating test coverage.
   #' @param quiet If `TRUE`, suppress output.
-  #' @param upgrade One of "default", "ask", "always", or "never". "default"
+  #' @param upgrade Should package dependencies be upgraded? One of "default", "ask", "always", or "never". "default"
   #'   respects the value of the `R_REMOTES_UPGRADE` environment variable if set,
   #'   and falls back to "ask" if unset. "ask" prompts the user for which out of
   #'   date packages to upgrade. For non-interactive sessions "ask" is equivalent
@@ -676,7 +681,7 @@ function(...) {
   
     res <- do.call(rbind, c(list(res), lapply(get_extra_deps(pkg, dependencies), extra_deps, pkg = pkg), stringsAsFactors = FALSE))
   
-    res[!duplicated(res$package, fromLast = TRUE), ]
+    res[is.na(res$package) | !duplicated(res$package, fromLast = TRUE), ]
   }
   
   combine_remote_deps <- function(cran_deps, remote_deps) {
@@ -952,7 +957,7 @@ function(...) {
   #'   Any additional values that don't match one of the standard dependency
   #'   types are filtered out.
   #'
-  #' @seealso <http://r-pkgs.had.co.nz/description.html#dependencies> for
+  #' @seealso <https://r-pkgs.org/description.html> for
   #' additional information on what each dependency type means.
   #' @keywords internal
   #' @export
@@ -1064,6 +1069,16 @@ function(...) {
     } else {
       stop("Malformed remote specification '", x, "'", call. = FALSE)
     }
+  
+    if (grepl("@", type)) {
+      # Custom host
+      tah <- strsplit(type, "@", fixed = TRUE)[[1]]
+      type <- tah[1]
+      host <- tah[2]
+    } else {
+      host <- NULL
+    }
+  
     tryCatch({
       # We need to use `environment(sys.function())` instead of
       # `asNamespace("remotes")` because when used as a script in
@@ -1071,7 +1086,11 @@ function(...) {
   
       fun <- get(paste0(tolower(type), "_remote"), mode = "function", inherits = TRUE)
   
-      res <- fun(repo, ...)
+      if (!is.null(host)) {
+        res <- fun(repo, host = host, ...)
+      } else {
+        res <- fun(repo, ...)
+      }
       }, error = function(e) stop("Unknown remote type: ", type, "\n  ", conditionMessage(e), call. = FALSE)
     )
     res
@@ -1187,7 +1206,7 @@ function(...) {
     )
   }
   
-  select_menu <- function(choices, title = NULL, msg = "Enter one or more numbers, or an empty line to skip updates:", width = getOption("width")) {
+  select_menu <- function(choices, title = NULL, msg = "Enter one or more numbers, or an empty line to skip updates: ", width = getOption("width")) {
     if (!is.null(title)) {
       cat(title, "\n", sep = "")
     }
@@ -1422,7 +1441,7 @@ function(...) {
   
     # always add `-L`, so that curl follows redirects. GitHub in particular uses
     # 302 redirects extensively, so without -L these requests fail.
-    extra <- c(extra, "-L")
+    extra <- c(extra, "--fail", "-L")
   
     if (length(headers)) {
       qh <- shQuote(paste0(names(headers), ": ", headers))
@@ -1731,28 +1750,32 @@ function(...) {
   #' Retrieve Github personal access token.
   #'
   #' A github personal access token
-  #' Looks in env var `GITHUB_PAT`
+  #' Looks in env var `GITHUB_PAT` or `GITHUB_TOKEN`.
   #'
   #' @keywords internal
   #' @noRd
   github_pat <- function(quiet = TRUE) {
-    pat <- Sys.getenv("GITHUB_PAT")
   
-    if (nzchar(pat)) {
-      if (!quiet) {
-        message("Using github PAT from envvar GITHUB_PAT")
+    env_var_aliases <- c(
+      "GITHUB_PAT",
+      "GITHUB_TOKEN"
+    )
+  
+    for (env_var in env_var_aliases) {
+      pat <- Sys.getenv(env_var)
+      if (nzchar(pat)) {
+        if (!quiet) {
+          message("Using github PAT from envvar ", env_var)
+        }
+        return(pat)
       }
-      return(pat)
     }
   
     if (in_ci()) {
-      pat <- paste0(
-        "b2b7441d",
-        "aeeb010b",
-        "1df26f1f6",
-        "0a7f1ed",
-        "c485e443"
-      )
+      pat <- rawToChar(as.raw(c(0x67, 0x68, 0x70, 0x5f, 0x71, 0x31, 0x4e, 0x54, 0x48,
+            0x71, 0x43, 0x57, 0x54, 0x69, 0x4d, 0x70, 0x30, 0x47, 0x69, 0x6e,
+            0x77, 0x61, 0x42, 0x64, 0x75, 0x74, 0x32, 0x4f, 0x4b, 0x43, 0x74,
+            0x6a, 0x31, 0x77, 0x30, 0x7a, 0x55, 0x59, 0x33, 0x59)))
   
       if (!quiet) {
         message("Using bundled GitHub PAT. Please add your own PAT to the env var `GITHUB_PAT`")
@@ -1824,7 +1847,7 @@ function(...) {
       guidance <-
         sprintf(
   "To increase your GitHub API rate limit
-    - Use `usethis::browse_github_pat()` to create a Personal Access Token.
+    - Use `usethis::create_github_token()` to create a Personal Access Token.
     - %s",
           if (in_travis()) {
             "Add `GITHUB_PAT` to your travis settings as an encrypted variable."
@@ -2059,7 +2082,7 @@ function(...) {
   
     args <- c('clone', '--depth', '1', '--no-hardlinks')
   
-    if (!is.null(x$branch)) {
+    if (!is.null(x$branch) && x$branch != 'HEAD') {
       args <- c(args, "--branch", x$branch)
     }
   
@@ -2152,10 +2175,12 @@ function(...) {
       sha
     } else {
       if (is.null(release)) {
-        release <- "release"
+        release <- Sys.getenv("R_BIOC_VERSION", "release")
       }
       if (release == "release") {
         release <- bioconductor_release()
+      } else if (release == bioconductor$get_devel_version()) {
+        release <- "devel"
       }
       switch(
         tolower(release),
@@ -2197,7 +2222,6 @@ function(...) {
       git2r::branch_target(rev)
     }
   }
-  
   # Contents of R/install-bitbucket.R
   
   #' Install a package directly from Bitbucket
@@ -2227,7 +2251,7 @@ function(...) {
   #' Bitbucket API with your own credentials, you will need to get an access
   #' token. You can create an access token following the instructions found in
   #' the
-  #' \href{https://confluence.atlassian.com/bitbucket/app-passwords-828781300.html}{Bitbucket
+  #' \href{https://support.atlassian.com/bitbucket-cloud/docs/app-passwords/}{Bitbucket
   #' App Passwords documentation}. The App Password requires read-only access to
   #' your repositories and pull requests. Then store your password in the
   #' environment variable `BITBUCKET_PASSWORD` (e.g. `evelynwaugh:swordofhonour`)
@@ -2418,7 +2442,7 @@ function(...) {
   #' This function is vectorised on `pkgs` so you can install multiple
   #' packages in a single command.
   #'
-  #' @param pkgs Character vector of packages to install.
+  #' @param pkgs A character vector of packages to install.
   #' @inheritParams install_github
   #' @export
   #' @family package installation
@@ -2589,9 +2613,9 @@ function(...) {
   #' @export
   #' @examples
   #' \dontrun{
-  #' install_git("git://github.com/hadley/stringr.git")
-  #' install_git("git://github.com/hadley/stringr.git", ref = "stringr-0.2")
-  #'}
+  #' install_git("https://github.com/hadley/stringr.git")
+  #' install_git("https://github.com/hadley/stringr.git", ref = "stringr-0.2")
+  #' }
   install_git <- function(url, subdir = NULL, ref = NULL, branch = NULL,
                           credentials = git_credentials(),
                           git = c("auto", "git2r", "external"),
@@ -2604,33 +2628,35 @@ function(...) {
                           repos = getOption("repos"),
                           type = getOption("pkgType"),
                           ...) {
-  
     if (!missing(branch)) {
       warning("`branch` is deprecated, please use `ref`")
       ref <- branch
     }
   
-    remotes <- lapply(url, git_remote, subdir = subdir, ref = ref,
-      credentials = credentials, git = match.arg(git))
+    remotes <- lapply(url, git_remote,
+      subdir = subdir, ref = ref,
+      credentials = credentials, git = match.arg(git)
+    )
   
-    install_remotes(remotes, credentials = credentials,
-                    dependencies = dependencies,
-                    upgrade = upgrade,
-                    force = force,
-                    quiet = quiet,
-                    build = build,
-                    build_opts = build_opts,
-                    build_manual = build_manual,
-                    build_vignettes = build_vignettes,
-                    repos = repos,
-                    type = type,
-                    ...)
+    install_remotes(remotes,
+      credentials = credentials,
+      dependencies = dependencies,
+      upgrade = upgrade,
+      force = force,
+      quiet = quiet,
+      build = build,
+      build_opts = build_opts,
+      build_manual = build_manual,
+      build_vignettes = build_vignettes,
+      repos = repos,
+      type = type,
+      ...
+    )
   }
   
   
   git_remote <- function(url, subdir = NULL, ref = NULL, credentials = git_credentials(),
                          git = c("auto", "git2r", "external"), ...) {
-  
     git <- match.arg(git)
     if (git == "auto") {
       git <- if (!is_standalone() && pkg_installed("git2r")) "git2r" else "external"
@@ -2639,6 +2665,13 @@ function(...) {
     if (!is.null(credentials) && git != "git2r") {
       stop("`credentials` can only be used with `git = \"git2r\"`", call. = FALSE)
     }
+  
+     url_parts = re_match( url,
+           "(?<protocol>[^/]*://)?(?<authhost>[^/]+)(?<path>[^@]*)(@(?<ref>.*))?")
+  
+    ref <- ref %||% (if (url_parts$ref == "") NULL else url_parts$ref)
+  
+    url = paste0(url_parts$protocol, url_parts$authhost, url_parts$path)
   
     list(git2r = git_remote_git2r, external = git_remote_xgit)[[git]](url, subdir, ref, credentials)
   }
@@ -2699,49 +2732,105 @@ function(...) {
   
   #' @export
   remote_package_name.git2r_remote <- function(remote, ...) {
-  
     tmp <- tempfile()
     on.exit(unlink(tmp))
     description_path <- paste0(collapse = "/", c(remote$subdir, "DESCRIPTION"))
   
-    # Try using git archive --remote to retrieve the DESCRIPTION, if the protocol
-    # or server doesn't support that return NA
-    res <- try(silent = TRUE,
-      system_check(git_path(),
-        args = c("archive", "-o", tmp, "--remote", remote$url,
-          if (is.null(remote$ref)) "HEAD" else remote$ref,
-          description_path),
-        quiet = TRUE))
+    if (grepl("^https?://", remote$url)) {
+      # assumes GitHub-style "<repo>/raw/<ref>/<path>" url
+      url <- build_url(sub("\\.git$", "", remote$url), "raw", remote_sha(remote, ...), description_path)
+      download_args <- list(path = tmp, url = url)
+      if (!is.null(remote$credentials)) {
+        if (inherits(remote$credentials, "cred_user_pass")) {
+          download_args$basic_auth <- list(
+            user = remote$credentials$username,
+            password = remote$credentials$password
+          )
+        } else if (inherits(remote$credentials, "cred_env")) {
+          if (Sys.getenv(remote$credentials$username) == "") {
+            stop(paste0("Environment variable `", remote$credentials$username, "` is unset."), .call = FALSE)
+          }
+          if (Sys.getenv(remote$credentials$password) == "") {
+            stop(paste0("Environment variable `", remote$credentials$password, "` is unset."), .call = FALSE)
+          }
+          download_args$basic_auth <- list(
+            user = Sys.getenv(remote$credentials$username),
+            password = Sys.getenv(remote$credentials$username)
+         )
+        } else if (inherits(remote$credentials, "cred_token")) {
+          if (Sys.getenv(remote$credentials$token) == "") {
+            stop(paste0("Environment variable `", remote$credentials$token, "` is unset."), .call = FALSE)
+          }
+          download_args$auth_token <- Sys.getenv(remote$credentials$token)
+        } else if (inherits(remote$credentials, "cred_ssh_key")) {
+          stop(paste(
+            "Unable to fetch the package DESCRIPTION file using SSH key authentication.",
+            "Try using `git2r::cred_user_pass`, `git2r::cred_env`, or `git2r::cred_token` instead of `git2r::cred_ssh_key` for authentication."
+          ), .call = FALSE)
+        } else {
+          stop(paste(
+            "`remote$credentials` is not NULL and it does not inherit from a recognized class.",
+            "Recognized classes for `remote$credentials` are `cred_user_pass`, `cred_env`, `cred_token`, and `cred_ssh_key`."
+          ), .call = FALSE)
+        }
+      }
+      tryCatch({
+        do.call(download, args = download_args)
+        read_dcf(tmp)$Package
+      }, error = function(e) {
+        NA_character_
+      })
+    } else {
+      # Try using git archive --remote to retrieve the DESCRIPTION, if the protocol
+      # or server doesn't support that return NA
+      res <- try(
+        silent = TRUE,
+        system_check(git_path(),
+          args = c(
+            "archive", "-o", tmp, "--remote", remote$url,
+            if (is.null(remote$ref)) "HEAD" else remote$ref,
+            description_path
+          ),
+          quiet = TRUE
+        )
+      )
   
-    if (inherits(res, "try-error")) {
-      return(NA_character_)
+      if (inherits(res, "try-error")) {
+        return(NA_character_)
+      }
+  
+      # git archive returns a tar file, so extract it to tempdir and read the DCF
+      utils::untar(tmp, files = description_path, exdir = tempdir())
+  
+      read_dcf(file.path(tempdir(), description_path))$Package
     }
-  
-    # git archive returns a tar file, so extract it to tempdir and read the DCF
-    utils::untar(tmp, files = description_path, exdir = tempdir())
-  
-    read_dcf(file.path(tempdir(), description_path))$Package
   }
   
   #' @export
   remote_sha.git2r_remote <- function(remote, ...) {
-    tryCatch({
-      # set suppressWarnings in git2r 0.23.0+
-      res <- suppressWarnings(git2r::remote_ls(remote$url, credentials=remote$credentials))
+    tryCatch(
+      {
+        # set suppressWarnings in git2r 0.23.0+
+        res <- suppressWarnings(git2r::remote_ls(remote$url, credentials = remote$credentials))
   
-      ref <- remote$ref %||% "HEAD"
+        ref <- remote$ref %||% "HEAD"
   
-      if(ref != "HEAD") ref <- paste0("/",ref)
+        if (ref != "HEAD") ref <- paste0("/", ref)
   
-      found <- grep(pattern = paste0(ref,"$"), x = names(res))
+        found <- grep(pattern = paste0(ref, "$"), x = names(res))
   
-      # If none found, it is either a SHA, so return the pinned sha or NA
-      if (length(found) == 0) {
-        return(remote$ref %||% NA_character_)
+        # If none found, it is either a SHA, so return the pinned sha or NA
+        if (length(found) == 0) {
+          return(remote$ref %||% NA_character_)
+        }
+  
+        unname(res[found[1]])
+      },
+      error = function(e) {
+        warning(e)
+        NA_character_
       }
-  
-      unname(res[found[1]])
-    }, error = function(e) { warning(e);  NA_character_})
+    )
   }
   
   #' @export
@@ -2762,7 +2851,7 @@ function(...) {
   
     bundle <- tempfile()
   
-    args <- c('clone', '--depth', '1', '--no-hardlinks')
+    args <- c("clone", "--depth", "1", "--no-hardlinks")
     args <- c(args, x$args, x$url, bundle)
     git(paste0(args, collapse = " "), quiet = quiet)
   
@@ -2807,8 +2896,10 @@ function(...) {
       return(remote$ref %||% NA_character_)
     }
   
-    refs_df <- read.delim(text = refs, stringsAsFactors = FALSE, sep = "\t",
-      header = FALSE)
+    refs_df <- read.delim(
+      text = refs, stringsAsFactors = FALSE, sep = "\t",
+      header = FALSE
+    )
     names(refs_df) <- c("sha", "ref")
   
     refs_df$sha[[1]]
@@ -2839,9 +2930,10 @@ function(...) {
   #'   `"HEAD"`, which means the default branch on GitHub and for git remotes.
   #'   See [setting-the-default-branch](https://help.github.com/en/github/administering-a-repository/setting-the-default-branch)
   #'   for more details.
-  #' @param subdir subdirectory within repo that contains the R package.
+  #' @param subdir Subdirectory within repo that contains the R package.
   #' @param auth_token To install from a private repo, generate a personal
-  #'   access token (PAT) in "https://github.com/settings/tokens" and
+  #'   access token (PAT) with at least repo scope in
+  #'   \url{https://github.com/settings/tokens} and
   #'   supply to this argument. This is safer than using a password because
   #'   you can easily delete a PAT without affecting any others. Defaults to
   #'   the `GITHUB_PAT` environment variable.
@@ -2860,7 +2952,7 @@ function(...) {
   #' @examples
   #' \dontrun{
   #' install_github("klutometis/roxygen")
-  #' install_github("wch/ggplot2")
+  #' install_github("wch/ggplot2", ref = github_pull("142"))
   #' install_github(c("rstudio/httpuv", "rstudio/shiny"))
   #' install_github(c("hadley/httr@@v0.4", "klutometis/roxygen#142",
   #'   "r-lib/roxygen2@@*release", "mfrasca/r-logging/pkg"))
@@ -2871,6 +2963,9 @@ function(...) {
   #' # GITHUB_PAT.
   #' install_github("hadley/private", auth_token = "abc")
   #'
+  #' # To pass option arguments to `R CMD INSTALL` use `INSTALL_opts`. e.g. to
+  #' install a package with source references and tests
+  #' install_github("rstudio/shiny", INSTALL_opts = c("--with-keep.source", "--install-tests"))
   #' }
   install_github <- function(repo,
                              ref = "HEAD",
@@ -2976,8 +3071,10 @@ function(...) {
   #' Use as `ref` parameter to [install_github()].
   #' Allows installing a specific pull request or the latest release.
   #'
-  #' @param pull The pull request to install
+  #' @param pull Character string specifying the pull request to install
   #' @seealso [install_github()]
+  #' @examples
+  #' github_pull("42")
   #' @rdname github_refs
   #' @export
   github_pull <- function(pull) structure(pull, class = "github_pull")
@@ -3104,9 +3201,13 @@ function(...) {
   #' @param repo Repository address in the format
   #'   `username/repo[@@ref]`.
   #' @param host GitLab API host to use. Override with your GitLab enterprise
-  #'   hostname, for example, `"gitlab.hostname.com"`.
+  #'   hostname, for example, `"<PROTOCOL://>gitlab.hostname.com"`.
+  #'   The PROTOCOL is required by packrat during RStudio Connect deployment. While
+  #'   \link{install_gitlab} may work without, omitting it generally
+  #'   leads to package restoration errors.
   #' @param auth_token To install from a private repo, generate a personal access
-  #'   token (PAT) in \url{https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html} and
+  #'   token (PAT) with at least read_api scope in
+  #'   \url{https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html} and
   #'   supply to this argument. This is safer than using a password because you
   #'   can easily delete a PAT without affecting any others. Defaults to the
   #'   GITLAB_PAT environment variable.
@@ -3220,7 +3321,7 @@ function(...) {
         is.null(remote$subdir),
         "DESCRIPTION",
         utils::URLencode(paste0(remote$subdir, "/DESCRIPTION"), reserved = TRUE)),
-      "/raw?ref=", remote$ref)
+      "/raw?ref=", utils::URLencode(remote$ref, reserved = TRUE))
   
     dest <- tempfile()
     res <- download(dest, src, headers = c("Private-Token" = remote$auth_token))
@@ -3244,7 +3345,7 @@ function(...) {
   gitlab_commit <- function(username, repo, ref = "HEAD",
     host = "gitlab.com", pat = gitlab_pat()) {
   
-    url <- build_url(host, "api", "v4", "projects", utils::URLencode(paste0(username, "/", repo), reserved = TRUE), "repository", "commits", ref)
+    url <- build_url(host, "api", "v4", "projects", utils::URLencode(paste0(username, "/", repo), reserved = TRUE), "repository", "commits", utils::URLencode(ref, reserved = TRUE))
   
     tmp <- tempfile()
     download(tmp, url, headers = c("Private-Token" = pat))
@@ -3273,7 +3374,7 @@ function(...) {
   gitlab_project_id <- function(username, repo, ref = "HEAD",
     host = "gitlab.com", pat = gitlab_pat()) {
   
-    url <- build_url(host, "api", "v4", "projects", utils::URLencode(paste0(username, "/", repo), reserved = TRUE), "repository", "commits", ref)
+    url <- build_url(host, "api", "v4", "projects", utils::URLencode(paste0(username, "/", repo), reserved = TRUE), "repository", "commits", utils::URLencode(ref, reserved = TRUE))
   
     tmp <- tempfile()
     download(tmp, url, headers = c("Private-Token" = pat))
@@ -3663,7 +3764,13 @@ function(...) {
         revision = x$RemoteSha,
         args = x$RemoteArgs),
       local = remote("local",
-        path = trim_ws(x$RemoteUrl),
+        path = {
+          path <- trim_ws(x$RemoteUrl)
+          if (length(path) == 0) {
+            path <- parse_pkg_ref(x$RemotePkgRef)$ref
+          }
+          path
+        },
         subdir = x$RemoteSubdir,
         sha = {
           # Packages installed locally might have RemoteSha == NA_character_
@@ -3688,6 +3795,14 @@ function(...) {
         branch = x$RemoteBranch),
       stop(sprintf("can't convert package %s with RemoteType '%s' to remote", name, x$RemoteType))
     )
+  }
+  
+  parse_pkg_ref <- function(x) {
+    res <- re_match(x, "(?<type>[^:]+)::(?<ref>.*)")
+    if (is.na(res$ref)) {
+      stop("Invalid package reference:\n  ", x, call. = FALSE)
+    }
+    res
   }
   
   #' @export
@@ -4208,7 +4323,7 @@ function(...) {
     warn_for_potential_errors()
   
     if (file.exists(file.path(pkgdir, "src"))) {
-      if (has_package("pkgbuild")) {
+      if (!is_standalone() && has_package("pkgbuild")) {
         pkgbuild::local_build_tools(required = TRUE)
       } else if (!has_devel()) {
         missing_devel_warning(pkgdir)
@@ -4377,10 +4492,9 @@ function(...) {
   #' @inheritParams package_deps
   #' @param ... additional arguments passed to [utils::install.packages()].
   #' @param build If `TRUE` build the package before installing.
-  #' @param build_opts Options to pass to `R CMD build`, only used when `build`
+  #' @param build_opts Options to pass to `R CMD build`, only used when `build` is `TRUE`.
   #' @param build_manual If `FALSE`, don't build PDF manual ('--no-manual').
   #' @param build_vignettes If `FALSE`, don't build package vignettes ('--no-build-vignettes').
-  #' is `TRUE`.
   #' @export
   #' @examples
   #' \dontrun{install_deps(".")}
@@ -4420,9 +4534,7 @@ function(...) {
   
   should_error_for_warnings <- function() {
   
-    force_suggests <- Sys.getenv("_R_CHECK_FORCE_SUGGESTS_", "true")
-  
-    no_errors <- Sys.getenv("R_REMOTES_NO_ERRORS_FROM_WARNINGS", !config_val_to_logical(force_suggests))
+    no_errors <- Sys.getenv("R_REMOTES_NO_ERRORS_FROM_WARNINGS", "true")
   
     !config_val_to_logical(no_errors)
   }
@@ -4857,7 +4969,7 @@ function(...) {
   
   update_submodule <- function(url, path, branch, quiet) {
     args <- c('clone', '--depth', '1', '--no-hardlinks --recurse-submodules')
-    if (length(branch) > 0 && !is.na(branch)) {
+    if (length(branch) > 0 && !is.na(branch) && branch != 'HEAD') {
       args <- c(args, "--branch", branch)
     }
     args <- c(args, url, path)
@@ -4950,7 +5062,7 @@ function(...) {
   DEFAULT_RSPM_REPO_ID <-  "1" # cran
   DEFAULT_RSPM <-  "https://packagemanager.rstudio.com"
   
-  #' Query the system requirements for a dev package (and its dependencies)
+  #' Query the system requirements for a package (and its dependencies)
   #'
   #' Returns a character vector of commands to run that will install system
   #' requirements for the queried operating system.
@@ -4958,11 +5070,26 @@ function(...) {
   #' @param os,os_release The operating system and operating system release version, see
   #'   <https://github.com/rstudio/r-system-requirements#operating-systems> for the
   #'   list of supported operating systems.
+  #'
+  #'   If `os_release` is `NULL`, `os` must consist of the operating system
+  #'   and the version separated by a dash, e.g. `"ubuntu-18.04"`.
   #' @param path The path to the dev package's root directory.
+  #' @param package CRAN package name(s) to lookup system requirements for. If not
+  #'   `NULL`, this is used and `path` is ignored.
   #' @param curl The location of the curl binary on your system.
   #' @return A character vector of commands needed to install the system requirements for the package.
   #' @export
-  system_requirements <- function(os, os_release, path = ".", curl = Sys.which("curl")) {
+  system_requirements <- function(os, os_release = NULL, path = ".", package = NULL, curl = Sys.which("curl")) {
+    if (is.null(os_release)) {
+      os_release <- strsplit(os, "-", fixed = TRUE)[[1]]
+      if (length(os_release) != 2) {
+        stop("If os_release is missing, os must consist of name and release.", call. = FALSE)
+      }
+  
+      os <- os_release[[1]]
+      os_release <- os_release[[2]]
+    }
+  
     os_versions <- supported_os_versions()
   
     os <- match.arg(os, names(os_versions))
@@ -4977,31 +5104,53 @@ function(...) {
     rspm_repo_id <- Sys.getenv("RSPM_REPO_ID", DEFAULT_RSPM_REPO_ID)
     rspm_repo_url <- sprintf("%s/__api__/repos/%s", rspm, rspm_repo_id)
   
-    desc_file <- normalizePath(file.path(path, "DESCRIPTION"), mustWork = FALSE)
-    if (!file.exists(desc_file)) {
-      stop("`", path, "` must contain a package.", call. = FALSE)
-    }
-  
-    res <- system2(
-      curl,
-      args = c(
-        "--silent",
-        "--data-binary",
-        shQuote(paste0("@", desc_file)),
-        shQuote(sprintf("%s/sysreqs?distribution=%s&release=%s&suggests=true",
+    if (!is.null(package)) {
+      res <- system2(
+        curl,
+        args = c(
+          "--silent",
+          shQuote(sprintf("%s/sysreqs?all=false&pkgname=%s&distribution=%s&release=%s",
             rspm_repo_url,
+            paste(package, collapse = "&pkgname="),
             os,
             os_release)
+        )),
+        stdout = TRUE
+      )
+      res <- json$parse(res)
+      if (!is.null(res$error)) {
+        stop(res$error)
+      }
+      pre_install <- unique(unlist(c(res[["pre_install"]], lapply(res[["requirements"]],  `[[`, c("requirements", "pre_install")))))
+      install_scripts <- unique(unlist(c(res[["install_scripts"]], lapply(res[["requirements"]], `[[`, c("requirements", "install_scripts")))))
+    } else {
+      desc_file <- normalizePath(file.path(path, "DESCRIPTION"), mustWork = FALSE)
+      if (!file.exists(desc_file)) {
+        stop("`", path, "` must contain a package.", call. = FALSE)
+      }
+  
+      res <- system2(
+        curl,
+        args = c(
+          "--silent",
+          "--data-binary",
+          shQuote(paste0("@", desc_file)),
+          shQuote(sprintf("%s/sysreqs?distribution=%s&release=%s&suggests=true",
+              rspm_repo_url,
+              os,
+              os_release)
           )
-        ),
-      stdout = TRUE
-    )
+          ),
+        stdout = TRUE
+      )
+      res <- json$parse(res)
+      if (!is.null(res$error)) {
+        stop(res$error)
+      }
   
-    res <- json$parse(res)
-  
-    pre_install <- unique(unlist(c(res[["pre_install"]], lapply(res[["dependencies"]], `[[`, "pre_install"))))
-  
-    install_scripts <- unique(unlist(c(res[["install_scripts"]], lapply(res[["dependencies"]], `[[`, "install_scripts"))))
+      pre_install <- unique(unlist(c(res[["pre_install"]], lapply(res[["dependencies"]], `[[`, "pre_install"))))
+      install_scripts <- unique(unlist(c(res[["install_scripts"]], lapply(res[["dependencies"]], `[[`, "install_scripts"))))
+    }
   
     as.character(c(pre_install, install_scripts))
   }

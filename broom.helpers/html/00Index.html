@@ -2,8 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><title>R: Helpers for Model Coefficients Tibbles</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> Helpers for Model Coefficients Tibbles
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;broom.helpers&rsquo; version 1.1.0</h2>
+</div><h2>Documentation for package &lsquo;broom.helpers&rsquo; version 1.6.0</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -20,17 +21,18 @@
 <h2>Help Pages</h2>
 
 
+<p style="text-align: center;">
+<a href="#A">A</a>
+<a href="#M">M</a>
+<a href="#S">S</a>
+<a href="#T">T</a>
+<a href="#misc">misc</a>
+</p>
+
+
+<h2><a name="A">-- A --</a></h2>
+
 <table width="100%">
-<tr><td style="width: 25%;"><a href="dot-clean_backticks.html">.clean_backticks</a></td>
-<td>Remove backticks around variable names</td></tr>
-<tr><td style="width: 25%;"><a href="dot-escape_regex.html">.escape_regex</a></td>
-<td>Escapes any characters that would have special meaning in a regular expression</td></tr>
-<tr><td style="width: 25%;"><a href="dot-formula_list_to_named_list.html">.formula_list_to_named_list</a></td>
-<td>Convert formula selector to a named list</td></tr>
-<tr><td style="width: 25%;"><a href="dot-generic_selector.html">.generic_selector</a></td>
-<td>Generate a custom selector function</td></tr>
-<tr><td style="width: 25%;"><a href="dot-select_to_varnames.html">.select_to_varnames</a></td>
-<td>Variable selector</td></tr>
 <tr><td style="width: 25%;"><a href="select_helpers.html">all_categorical</a></td>
 <td>Select helper functions</td></tr>
 <tr><td style="width: 25%;"><a href="select_helpers.html">all_continuous</a></td>
@@ -43,6 +45,27 @@
 <td>Select helper functions</td></tr>
 <tr><td style="width: 25%;"><a href="select_helpers.html">all_intercepts</a></td>
 <td>Select helper functions</td></tr>
+<tr><td style="width: 25%;"><a href="select_helpers.html">all_ran_pars</a></td>
+<td>Select helper functions</td></tr>
+<tr><td style="width: 25%;"><a href="select_helpers.html">all_ran_vals</a></td>
+<td>Select helper functions</td></tr>
+<tr><td style="width: 25%;"><a href="assert_package.html">assert_package</a></td>
+<td>Check a package installation status or minimum required version</td></tr>
+</table>
+
+<h2><a name="M">-- M --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="model_compute_terms_contributions.html">model_compute_terms_contributions</a></td>
+<td>Compute a matrix of terms contributions</td></tr>
+<tr><td style="width: 25%;"><a href="model_compute_terms_contributions.html">model_compute_terms_contributions.default</a></td>
+<td>Compute a matrix of terms contributions</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_assign.html">model_get_assign</a></td>
+<td>Get the assign attribute of model matrix of a model</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_assign.html">model_get_assign.default</a></td>
+<td>Get the assign attribute of model matrix of a model</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_assign.html">model_get_assign.vglm</a></td>
+<td>Get the assign attribute of model matrix of a model</td></tr>
 <tr><td style="width: 25%;"><a href="model_get_coefficients_type.html">model_get_coefficients_type</a></td>
 <td>Get coefficient type</td></tr>
 <tr><td style="width: 25%;"><a href="model_get_coefficients_type.html">model_get_coefficients_type.clm</a></td>
@@ -52,6 +75,8 @@
 <tr><td style="width: 25%;"><a href="model_get_coefficients_type.html">model_get_coefficients_type.clogit</a></td>
 <td>Get coefficient type</td></tr>
 <tr><td style="width: 25%;"><a href="model_get_coefficients_type.html">model_get_coefficients_type.coxph</a></td>
+<td>Get coefficient type</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_coefficients_type.html">model_get_coefficients_type.crr</a></td>
 <td>Get coefficient type</td></tr>
 <tr><td style="width: 25%;"><a href="model_get_coefficients_type.html">model_get_coefficients_type.default</a></td>
 <td>Get coefficient type</td></tr>
@@ -69,9 +94,9 @@
 <td>Get coefficient type</td></tr>
 <tr><td style="width: 25%;"><a href="model_get_coefficients_type.html">model_get_coefficients_type.svyolr</a></td>
 <td>Get coefficient type</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_coefficients_type.html">model_get_coefficients_type.tidycrr</a></td>
+<td>Get coefficient type</td></tr>
 <tr><td style="width: 25%;"><a href="model_get_contrasts.html">model_get_contrasts</a></td>
-<td>Get contrasts used in the model</td></tr>
-<tr><td style="width: 25%;"><a href="model_get_contrasts.html">model_get_contrasts.default</a></td>
 <td>Get contrasts used in the model</td></tr>
 <tr><td style="width: 25%;"><a href="model_get_model.html">model_get_model</a></td>
 <td>Get the model from model objects</td></tr>
@@ -89,23 +114,79 @@
 <td>Get the model frame of a model</td></tr>
 <tr><td style="width: 25%;"><a href="model_get_model_matrix.html">model_get_model_matrix</a></td>
 <td>Get the model matrix of a model</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_model_matrix.html">model_get_model_matrix.brmsfit</a></td>
+<td>Get the model matrix of a model</td></tr>
 <tr><td style="width: 25%;"><a href="model_get_model_matrix.html">model_get_model_matrix.clm</a></td>
 <td>Get the model matrix of a model</td></tr>
 <tr><td style="width: 25%;"><a href="model_get_model_matrix.html">model_get_model_matrix.default</a></td>
 <td>Get the model matrix of a model</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_model_matrix.html">model_get_model_matrix.glmmTMB</a></td>
+<td>Get the model matrix of a model</td></tr>
 <tr><td style="width: 25%;"><a href="model_get_model_matrix.html">model_get_model_matrix.multinom</a></td>
 <td>Get the model matrix of a model</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_model_matrix.html">model_get_model_matrix.plm</a></td>
+<td>Get the model matrix of a model</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_n.html">model_get_n</a></td>
+<td>Get the number of observations</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_n.html">model_get_n.coxph</a></td>
+<td>Get the number of observations</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_n.html">model_get_n.default</a></td>
+<td>Get the number of observations</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_n.html">model_get_n.gam</a></td>
+<td>Get the number of observations</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_n.html">model_get_n.glm</a></td>
+<td>Get the number of observations</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_n.html">model_get_n.glmerMod</a></td>
+<td>Get the number of observations</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_n.html">model_get_n.multinom</a></td>
+<td>Get the number of observations</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_n.html">model_get_n.survreg</a></td>
+<td>Get the number of observations</td></tr>
 <tr><td style="width: 25%;"><a href="model_get_nlevels.html">model_get_nlevels</a></td>
 <td>Get the number of levels for each factor used in 'xlevels'</td></tr>
 <tr><td style="width: 25%;"><a href="model_get_nlevels.html">model_get_nlevels.default</a></td>
 <td>Get the number of levels for each factor used in 'xlevels'</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_offset.html">model_get_offset</a></td>
+<td>Get model offset</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_offset.html">model_get_offset.default</a></td>
+<td>Get model offset</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_response.html">model_get_response</a></td>
+<td>Get model response</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_response.html">model_get_response.default</a></td>
+<td>Get model response</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_response.html">model_get_response.glm</a></td>
+<td>Get model response</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_response.html">model_get_response.glmerMod</a></td>
+<td>Get model response</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_terms.html">model_get_terms</a></td>
+<td>Get the terms of a model</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_terms.html">model_get_terms.brmsfit</a></td>
+<td>Get the terms of a model</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_terms.html">model_get_terms.default</a></td>
+<td>Get the terms of a model</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_terms.html">model_get_terms.glmmTMB</a></td>
+<td>Get the terms of a model</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_weights.html">model_get_weights</a></td>
+<td>Get sampling weights used by a model</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_weights.html">model_get_weights.default</a></td>
+<td>Get sampling weights used by a model</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_weights.html">model_get_weights.svyglm</a></td>
+<td>Get sampling weights used by a model</td></tr>
 <tr><td style="width: 25%;"><a href="model_get_xlevels.html">model_get_xlevels</a></td>
+<td>Get xlevels used in the model</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_xlevels.html">model_get_xlevels.brmsfit</a></td>
 <td>Get xlevels used in the model</td></tr>
 <tr><td style="width: 25%;"><a href="model_get_xlevels.html">model_get_xlevels.default</a></td>
 <td>Get xlevels used in the model</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_xlevels.html">model_get_xlevels.felm</a></td>
+<td>Get xlevels used in the model</td></tr>
 <tr><td style="width: 25%;"><a href="model_get_xlevels.html">model_get_xlevels.glmerMod</a></td>
 <td>Get xlevels used in the model</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_xlevels.html">model_get_xlevels.glmmTMB</a></td>
+<td>Get xlevels used in the model</td></tr>
 <tr><td style="width: 25%;"><a href="model_get_xlevels.html">model_get_xlevels.lmerMod</a></td>
+<td>Get xlevels used in the model</td></tr>
+<tr><td style="width: 25%;"><a href="model_get_xlevels.html">model_get_xlevels.plm</a></td>
 <td>Get xlevels used in the model</td></tr>
 <tr><td style="width: 25%;"><a href="model_identify_variables.html">model_identify_variables</a></td>
 <td>Identify for each coefficient of a model the corresponding variable</td></tr>
@@ -116,6 +197,8 @@
 <tr><td style="width: 25%;"><a href="model_identify_variables.html">model_identify_variables.clmm</a></td>
 <td>Identify for each coefficient of a model the corresponding variable</td></tr>
 <tr><td style="width: 25%;"><a href="model_identify_variables.html">model_identify_variables.default</a></td>
+<td>Identify for each coefficient of a model the corresponding variable</td></tr>
+<tr><td style="width: 25%;"><a href="model_identify_variables.html">model_identify_variables.gam</a></td>
 <td>Identify for each coefficient of a model the corresponding variable</td></tr>
 <tr><td style="width: 25%;"><a href="model_identify_variables.html">model_identify_variables.lavaan</a></td>
 <td>Identify for each coefficient of a model the corresponding variable</td></tr>
@@ -133,8 +216,18 @@
 <td>List all the variables used in a model</td></tr>
 <tr><td style="width: 25%;"><a href="model_list_variables.html">model_list_variables.lavaan</a></td>
 <td>List all the variables used in a model</td></tr>
+</table>
+
+<h2><a name="S">-- S --</a></h2>
+
+<table width="100%">
 <tr><td style="width: 25%;"><a href="select_helpers.html">select_helpers</a></td>
 <td>Select helper functions</td></tr>
+</table>
+
+<h2><a name="T">-- T --</a></h2>
+
+<table width="100%">
 <tr><td style="width: 25%;"><a href="tidy_add_coefficients_type.html">tidy_add_coefficients_type</a></td>
 <td>Add coefficients type and label as attributes</td></tr>
 <tr><td style="width: 25%;"><a href="tidy_add_contrasts.html">tidy_add_contrasts</a></td>
@@ -143,6 +236,8 @@
 <td>Add an estimate value to references rows for categorical variables</td></tr>
 <tr><td style="width: 25%;"><a href="tidy_add_header_rows.html">tidy_add_header_rows</a></td>
 <td>Add header rows variables with several terms</td></tr>
+<tr><td style="width: 25%;"><a href="tidy_add_n.html">tidy_add_n</a></td>
+<td>Add the (weighted) number of observations</td></tr>
 <tr><td style="width: 25%;"><a href="tidy_add_reference_rows.html">tidy_add_reference_rows</a></td>
 <td>Add references rows for categorical variables</td></tr>
 <tr><td style="width: 25%;"><a href="tidy_add_term_labels.html">tidy_add_term_labels</a></td>
@@ -155,15 +250,40 @@
 <td>Attach a full model to the tibble of model terms</td></tr>
 <tr><td style="width: 25%;"><a href="tidy_attach_model.html">tidy_detach_model</a></td>
 <td>Attach a full model to the tibble of model terms</td></tr>
+<tr><td style="width: 25%;"><a href="tidy_disambiguate_terms.html">tidy_disambiguate_terms</a></td>
+<td>Disambiguate terms</td></tr>
 <tr><td style="width: 25%;"><a href="tidy_attach_model.html">tidy_get_model</a></td>
 <td>Attach a full model to the tibble of model terms</td></tr>
 <tr><td style="width: 25%;"><a href="tidy_identify_variables.html">tidy_identify_variables</a></td>
 <td>Identify the variable corresponding to each model coefficient</td></tr>
+<tr><td style="width: 25%;"><a href="tidy_parameters.html">tidy_parameters</a></td>
+<td>Tidy a model with parameters package</td></tr>
 <tr><td style="width: 25%;"><a href="tidy_plus_plus.html">tidy_plus_plus</a></td>
 <td>Tidy a model and compute additional informations</td></tr>
 <tr><td style="width: 25%;"><a href="tidy_remove_intercept.html">tidy_remove_intercept</a></td>
 <td>Remove intercept(s)</td></tr>
 <tr><td style="width: 25%;"><a href="tidy_select_variables.html">tidy_select_variables</a></td>
 <td>Select variables to keep/drop</td></tr>
+<tr><td style="width: 25%;"><a href="tidy_with_broom_or_parameters.html">tidy_with_broom_or_parameters</a></td>
+<td>Tidy a model with broom or parameters</td></tr>
 </table>
-</body></html>
+
+<h2><a name="misc">-- misc --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="assert_package.html">.assert_package</a></td>
+<td>Check a package installation status or minimum required version</td></tr>
+<tr><td style="width: 25%;"><a href="dot-clean_backticks.html">.clean_backticks</a></td>
+<td>Remove backticks around variable names</td></tr>
+<tr><td style="width: 25%;"><a href="dot-escape_regex.html">.escape_regex</a></td>
+<td>Escapes any characters that would have special meaning in a regular expression</td></tr>
+<tr><td style="width: 25%;"><a href="dot-formula_list_to_named_list.html">.formula_list_to_named_list</a></td>
+<td>Convert formula selector to a named list</td></tr>
+<tr><td style="width: 25%;"><a href="dot-generic_selector.html">.generic_selector</a></td>
+<td>Generate a custom selector function</td></tr>
+<tr><td style="width: 25%;"><a href="assert_package.html">.get_min_version_required</a></td>
+<td>Check a package installation status or minimum required version</td></tr>
+<tr><td style="width: 25%;"><a href="dot-select_to_varnames.html">.select_to_varnames</a></td>
+<td>Variable selector</td></tr>
+</table>
+</div></body></html>

@@ -3,8 +3,9 @@
 <head><title>R: Data Preparation, Estimation and Prediction in Multi-State
 Models</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> Data Preparation, Estimation and Prediction in Multi-State
 Models
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
@@ -13,7 +14,7 @@ Models
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;mstate&rsquo; version 0.3.1</h2>
+</div><h2>Documentation for package &lsquo;mstate&rsquo; version 0.3.2</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -69,6 +70,8 @@ Models
 <td>Expand covariates in competing risks dataset in stacked format</td></tr>
 <tr><td style="width: 25%;"><a href="expand.covs.msdata.html">expand.covs.msdata</a></td>
 <td>Expand covariates in multi-state dataset in long format</td></tr>
+<tr><td style="width: 25%;"><a href="haz_function.html">haz_function</a></td>
+<td>Helper function that calculates excess and population hazards for a given transition</td></tr>
 <tr><td style="width: 25%;"><a href="transhelp.html">is.circular</a></td>
 <td>Help functions for transition matrix</td></tr>
 <tr><td style="width: 25%;"><a href="Liver-cirrhosis-data.html">Liver cirrhosis data</a></td>
@@ -77,12 +80,20 @@ Models
 <td>Landmark Aalen-Johansen method</td></tr>
 <tr><td style="width: 25%;"><a href="MarkovTest.html">MarkovTest</a></td>
 <td>Log-rank based test for the validity of the Markov assumption</td></tr>
+<tr><td style="width: 25%;"><a href="modify_transMat.html">modify_transMat</a></td>
+<td>Upgrade the transMat object for the multi-state/relsurv setting.</td></tr>
 <tr><td style="width: 25%;"><a href="msboot.html">msboot</a></td>
 <td>Bootstrap function in multi-state models</td></tr>
+<tr><td style="width: 25%;"><a href="msboot.relsurv.html">msboot.relsurv</a></td>
+<td>Bootstrap function for upgraded multi-state models using relsurv</td></tr>
+<tr><td style="width: 25%;"><a href="msboot.relsurv.boot.html">msboot.relsurv.boot</a></td>
+<td>Default theta function used for msboot.relsurv</td></tr>
 <tr><td style="width: 25%;"><a href="msdata2etm.html">msdata2etm</a></td>
 <td>msdata to etm format</td></tr>
 <tr><td style="width: 25%;"><a href="msfit.html">msfit</a></td>
 <td>Compute subject-specific transition hazards with (co-)variances</td></tr>
+<tr><td style="width: 25%;"><a href="msfit.relsurv.html">msfit.relsurv</a></td>
+<td>Extend a multi-state model using relative survival</td></tr>
 <tr><td style="width: 25%;"><a href="msprep.html">msprep</a></td>
 <td>Function to prepare dataset for multi-state modeling in long format from dataset in wide format</td></tr>
 <tr><td style="width: 25%;"><a href="mssample.html">mssample</a></td>
@@ -141,6 +152,8 @@ Models
 <td>Help functions for transition matrix</td></tr>
 <tr><td style="width: 25%;"><a href="transMat.html">transMat</a></td>
 <td>Define transition matrix for multi-state model</td></tr>
+<tr><td style="width: 25%;"><a href="varHaz.fixed.html">varHaz.fixed</a></td>
+<td>Upgrade the varHaz object</td></tr>
 <tr><td style="width: 25%;"><a href="vis.mirror.pt.html">vis.mirror.pt</a></td>
 <td>Mirror plot comparing two probtrans objects</td></tr>
 <tr><td style="width: 25%;"><a href="vis.multiple.pt.html">vis.multiple.pt</a></td>
@@ -148,4 +161,4 @@ Models
 <tr><td style="width: 25%;"><a href="xsect.html">xsect</a></td>
 <td>Make a cross-section of multi-state data at a given time point</td></tr>
 </table>
-</body></html>
+</div></body></html>

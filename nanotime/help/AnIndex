@@ -114,6 +114,8 @@ Arith,nanotime,ANY-method	nanotime
 Arith,nanotime,nanotime-method	nanotime
 as.character,nanoduration-method	nanoduration
 as.character,nanoperiod-method	nanoperiod
+as.character.nanoival	nanoival
+as.character.nanotime	nanotime
 as.data.frame.nanoduration	nanotime
 as.data.frame.nanotime	nanotime
 as.Date.nanotime	nanotime
@@ -150,8 +152,10 @@ c.nanoival	nanoival
 c.nanoperiod	nanoperiod
 c.nanotime	nanotime
 Compare,ANY,nanoperiod-method	nanoperiod
+Compare,character,nanoduration-method	nanoduration
 Compare,character,nanotime-method	nanotime
 Compare,nanoduration,ANY-method	nanoduration
+Compare,nanoduration,character-method	nanoduration
 Compare,nanoival,ANY-method	nanoival
 Compare,nanoperiod,ANY-method	nanoperiod
 Compare,nanotime,ANY-method	nanotime

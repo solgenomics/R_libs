@@ -1,6 +1,179 @@
-# usethis 2.0.0
+# usethis 2.1.5
 
-This version is anticipated to be released as usethis v2.0.0.
+pkgdown-related functions no longer automatically strip a trailing slash from the pkgdown site URL, in order to play more nicely with CRAN's URL checks (#1526).
+
+`edit_pkgdown_config()` is a new function that opens the pkgdown YAML configuration file for the current Project, if such a file exists.
+
+The error thrown when reporting an unsupported GitHub configuration has been fixed for forward compatibility with a future version of rlang, i.e. what is anticipated to be rlang v1.0.0.
+
+Version 2.1.4 was never released. Version was advanced from 2.1.4 to 2.1.5 strictly for CRAN (re-)submission purposes.
+
+# usethis 2.1.3
+
+Modified a test to ensure that intermittent GitHub rate limiting does not lead to ungraceful failure on CRAN. 
+
+# usethis 2.1.2
+
+`git_default_branch_rename()` no longer errors on repos where README exists, but has no badge block.
+
+`git_default_branch_rediscover()` prunes the defunct remote ref to the old default branch, e.g. `origin/master`.
+
+
+# usethis 2.1.0
+
+## Git default branch support
+
+usethis has a more sophisticated understanding of the default branch and gains several functions to support default branch renaming.
+
+* `git_branch_default()` has been renamed to `git_default_branch()`, to place
+  it logically in the new family of functions. The old name still works, but
+  that won't be true forever.
+* `git_default_branch()` is much more diligent about figuring out the default
+  branch. Instead of only consulting the local repo, now we integrate local info
+  with the default branch reported by the `upstream` or `origin` remote, if
+  applicable.
+  - This is intended to surface the case where a project has renamed its default
+    branch and the local repo needs sync up with that.
+* `git_default_branch_rediscover()` is a new function that helps contributors
+  update their local repo (and personal fork, if applicable) when a project/repo
+  renames its default branch.
+* `git_default_branch_rename()` is a new function that helps a repo owner
+  rename the default branch (both on GitHub and locally).
+* `git_default_branch_configure()` is a new function to set the new Git
+  configuration option `init.defaultBranch`, which controls the name of the
+  initial branch of new local repos.
+* `git_sitrep()` exposes `init.defaultBranch` and surfaces the more
+  sophisticated analysis of `git_default_branch()`.
+
+## Other GitHub-related changes
+
+* `git_sitrep()` and `gh_token_help()` try even harder to help people get on the
+  happy path with respect to their GitHub PAT (#1400, #1413, #1488, #1489,
+  #1497).
+
+* The minimum version of gh has been bumped to help / force more people to
+  upgrade to the gh version that supports current GitHub PAT formats
+  (@ijlyttle, #1454).
+
+* `use_github_file()` is a new function related to `use_template()`. Instead of
+  starting from a local file, `use_github_file()` grabs the contents of an
+  arbitrary file on GitHub that the user has permission to read. It supports
+  targeting a specific branch, tag, or commit and can follow a symlink (#1407).
+  `use_github_file()` now powers `use_github_action()` and friends.
+  
+* `use_github_release()` is much more diligent about using any information left
+  behind by `devtools::submit_cran()` or `devtools::release()`. Specifically,
+  this applies to determining which SHA is to be tagged in the release. And this
+  SHA, in turn, determines the consulted versions of DESCRIPTION (for package
+  version) and NEWS.md (for release notes) (#1380).
+
+* `use_release_issue()` also takes bullets from `release_questions()`, 
+  for compatibility with `devtools::release()`.
+
+* `git_vaccinate()`, `edit_git_ignore()`, and `git_sitrep()` are more careful to
+  consult, reveal, and set the `core.excludesFile` setting in user's Git
+  configuration (#1461).
+  
+* `use_github_action_check_full()` has been removed. It's overkill for the
+  majority of R packages, which are better off with `use_github_actions()` or
+  `use_github_action_check_standard()` (#1490).
+
+* `use_github_pages()` and `use_pkgdown_github_pages()` use a new method for
+  creating an empty, orphan `gh-pages` branch. This is necessary due to new
+  GitHub behaviour, where it has become essentially impossible to refer to the
+  empty tree (#1472).
+  
+* `use_github()` can create repositories with `"internal"` visibility, a feature
+  that exists within GitHub Enterprise products (#1505).
+
+## Package development
+
+* `use_readme_[r]?md()` no longer includes CRAN installation instructions in the
+  initial template; instead, we only include GitHub-based install instructions
+  or otherwise prompt the user to update instructions (#1507).
+
+* `use_import_from()` is a new function that puts `@importFrom pkg fun`
+  directives into a package in a consistent location (@malcolmbarrett, #1377).
+
+* `DESCRIPTION` files generated by usethis no longer include `LazyData` by 
+   default, as per new CRAN checks; instead, `LazyData` is now added the first
+   time you use `use_data()` (@malcolmbarrett, #1404).
+
+* `use_tidy_eval()` has been updated to reflect current recommendations for
+  using (and therefore exposing) tidy eval in other packages (@lionel-, #1445).
+
+* `use_pkgdown()` automatically uses Bootstrap 5 if the pkgdown version supports
+  it (anticipated for pkgdown 2.0.0).
+
+* `use_lifecycle()` now imports `lifecycle::deprecated()` (#1419).
+
+* `use_code_of_conduct()` now requires a `contact` argument to supply contact
+  details for reporting CoC violations (#1269).
+
+* `use_package()` no longer guides the user on how to use a dependency when no 
+  change was made (@malcolmbarrett, #1384).
+  
+### Aimed at the tidyverse team
+
+These functions are exported for anyone to use, but are aimed primarily at the maintainers of tidyverse, r-lib, and tidymodels packages.
+
+* `use_tidy_dependencies()` is a new function that sets up standard dependencies
+  used by all tidyverse packages, except those that are designed to be
+  dependency free (#1423).
+  
+* `use_tidy_upkeep_issue()` is a new function similar to `use_release_issue()`
+  that creates a checklist-style issue to prompt various updates (#1416).
+
+* `use_tidy_release_test_env()` has been deleted since we no longer recommend
+  including test environments in `cran-comments.md`. There's no evidence that
+  CRAN finds it useful, and it's annoying to keep up-to-date  (#1365).
+
+* `use_tidy_github_labels()` is the new name for `use_tidy_labels()` (#1430).
+
+* `use_tidy_github_actions()` takes over for `use_tidy_ci()`, which is now
+  deprecated.
+
+## User-level configuration
+
+* `"usethis.overwrite"` is a new option. When set to `TRUE`, usethis overwrites
+  an existing file without asking for user confirmation if the file is inside
+  a Git repo. The normal Git workflow makes it easy to see and selectively
+  accept/discard any proposed changes. This behaviour is strictly opt-in
+  (#1424).
+  
+* Functions that provide code to load packages in your `.Rprofile` now use
+  `rlang::check_installed()` to make sure the package is installed locally
+  (@malcolmbarrett, #1398).
+ 
+* `edit_rstudio_prefs()` and `edit_rstudio_snippets()` should work now on
+  case-sensitive OSes, due to a path fix re: the location of RStudio's config
+  files (@charliejhadley, #1420).
+
+# usethis 2.0.1
+
+* All functions that require a package now ask you if you'd like to install it.
+
+* Added `edit_template()` for opening and creating files in `inst/templates` 
+  (for use with `use_template()`) (@malcolmbarrett, #1319).
+
+* `use_article()` now creates the file in the `vignettes/articles/` (#548).
+
+* `use_lifecycle()` has been updated for changes in our lifecycle workflow 
+  (#1323).
+
+* `use_tidy_pkgdown()` has been renamed to `use_pkgdown_github_pages()` since
+  the function is useful for anyone who wants to automatically publish to GitHub
+  pages, not just the tidyverse team (#1308).
+
+* `use_release_issue()` includes a bunch of minor improvements. Most 
+  importantly, for initial CRAN release we now include a number of common
+  things that CRAN checks for that aren't in `R CMD check`.
+
+* `use_readme_rmd()`, `use_readme_md()`, `use_tidy_contributing()`, and 
+  `use_tidy_support()` use updated logic for determining the `OWNER/REPO` spec 
+  of the target repo (#1312).
+
+# usethis 2.0.0
 
 ## Adoption of gert and changes to Git/GitHub credential handling
 
@@ -121,7 +294,7 @@ The `name` argument to `use_mit_license()` has been changed to `copyright_holder
 
 ## RStudio preferences
 
-usethis is now fully cognizant of the [changes to RStudio preferences](https://blog.rstudio.com/2020/02/18/rstudio-1-3-preview-configuration/) in RStudio 1.3:
+usethis is now fully cognizant of the [changes to RStudio preferences](https://www.rstudio.com/blog/rstudio-1-3-preview-configuration/) in RStudio 1.3:
 
 `edit_rstudio_snippets()` looks in the new location, and if you have snippets in the old location, will automatically copy them to the new location (#1204)
 

@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 
 should_run_benchmarks <- function(x) {
-  get("requireNamespace")("cpp11test") && asNamespace("cpp11test")$should_run_benchmarks()
+  get("requireNamespace")("cpp11test", quietly = TRUE) && asNamespace("cpp11test")$should_run_benchmarks()
 }
 ```
 
@@ -26,21 +26,22 @@ It is also a place to highlight some of the largest differences between Rcpp and
 
 ## Class comparison table
 
-| Rcpp                    | cpp11 (read-only) | cpp11 (writable)   | cpp11 header                 |
-| ---                     | ---               | ---                | ---                          |
-| NumericVector           | doubles           | writable::doubles  | <cpp11/doubles.hpp>          |
-| IntegerVector           | integers          | writable::integers | <cpp11/integers.hpp>         |
-| CharacterVector         | strings           | writable::strings  | <cpp11/strings.hpp>          |
-| RawVector               | raws              | writable::raws     | <cpp11/raws.hpp>             |
-| List                    | list              | writable::list     | <cpp11/list.hpp>             |
-| RObject                 | sexp              |                    | <cpp11/sexp.hpp>             |
-| XPtr                    |                   | external_pointer   | <cpp11/external_pointer.hpp> |
-| Environment             |                   | environment        | <cpp11/environment.hpp>      |
-| Function                |                   | function           | <cpp11/function.hpp>         |
-| Environment (namespace) |                   | package            | <cpp11/function.hpp>         |
-| wrap                    |                   | as_sexp            | <cpp11/as.hpp>               |
-| as                      |                   | as_cpp             | <cpp11/as.hpp>               |
-| stop                    | stop              |                    | <cpp11/protect.hpp>          |
+| Rcpp                    | cpp11 (read-only)     | cpp11 (writable)   | cpp11 header                 |
+| ---                     | ---                   | ---                | ---                          |
+| NumericVector           | doubles               | writable::doubles  | <cpp11/doubles.hpp>          |
+| IntegerVector           | integers              | writable::integers | <cpp11/integers.hpp>         |
+| CharacterVector         | strings               | writable::strings  | <cpp11/strings.hpp>          |
+| RawVector               | raws                  | writable::raws     | <cpp11/raws.hpp>             |
+| List                    | list                  | writable::list     | <cpp11/list.hpp>             |
+| RObject                 | sexp                  |                    | <cpp11/sexp.hpp>             |
+| XPtr                    |                       | external_pointer   | <cpp11/external_pointer.hpp> |
+| Environment             |                       | environment        | <cpp11/environment.hpp>      |
+| Function                |                       | function           | <cpp11/function.hpp>         |
+| Environment (namespace) |                       | package            | <cpp11/function.hpp>         |
+| wrap                    |                       | as_sexp            | <cpp11/as.hpp>               |
+| as                      |                       | as_cpp             | <cpp11/as.hpp>               |
+| stop                    | stop                  |                    | <cpp11/protect.hpp>          |
+| checkUserInterrupt      | check_user_interrupt  |                    | <cpp11/protect.hpp>          |
 
 ## Incomplete list of Rcpp features not included in cpp11
 
@@ -112,7 +113,7 @@ b_grow <- bench::press(.grid = grid,
 saveRDS(b_grow, "growth.Rds", version = 2)
 ```
 
-```{r, echo = FALSE, dev = "svg", fig.ext = "svg"}
+```{r, echo = FALSE, dev = "svg", fig.ext = "svg", eval = capabilities("cairo")}
 b_grow <- readRDS("growth.Rds")
 library(ggplot2)
 ggplot(b_grow, aes(x = len, y = min, color = pkg)) +
@@ -154,7 +155,7 @@ public:
 };
 
 void foo() {
-  local_rng();
+  local_rng rng_state;
   /* my code using the RNG */
 }
 ```
@@ -184,7 +185,7 @@ You will need to include the appropriate STL header, in this case `<string>`.
 ### R API includes
 
 cpp11 conflicts with macros declared by some R headers unless the macros `R_NO_REMAP` and `STRICT_R_HEADERS` are defined.
-If you inlcude `cpp11/R.hpp` before any R headers these macros will be defined appropriately, otherwise you may see errors like
+If you include `cpp11/R.hpp` before any R headers these macros will be defined appropriately, otherwise you may see errors like
 
 > R headers were included before cpp11 headers and at least one of R_NO_REMAP or STRICT_R_HEADERS was not defined.
 
@@ -209,11 +210,11 @@ When constructing vectors with more than one element this is not an issue
 
 ```cpp
 // bad
-cpp11::writable::logcials({FALSE});
+cpp11::writable::logicals({FALSE});
 
 // good
-cpp11::writable::logcials({r_bool(FALSE)});
+cpp11::writable::logicals({r_bool(FALSE)});
 
 // good
-cpp11::writable::logcials({FALSE, NA_LOGICAL});
+cpp11::writable::logicals({FALSE, NA_LOGICAL});
 ```
