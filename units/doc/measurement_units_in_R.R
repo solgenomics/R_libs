@@ -35,32 +35,10 @@ conv_dim(x = 100, x_unit = "m", trans = 3, trans_unit = "ft_per_sec", y_unit = "
 library(NISTunits)
 NISTwattPerSqrMeterTOwattPerSqrInch(1:5)
 
-## ---- eval=requireNamespace("udunits2", quietly=TRUE)-------------------------
-library(udunits2)
-ls(2)
-
-## ---- eval=requireNamespace("udunits2", quietly=TRUE)-------------------------
-ud.is.parseable("m/s")
-ud.is.parseable("q")
-
-## ---- eval=requireNamespace("udunits2", quietly=TRUE)-------------------------
-ud.are.convertible("m/s", "km/h")
-ud.are.convertible("m/s", "s")
-
-## ---- eval=requireNamespace("udunits2", quietly=TRUE)-------------------------
-ud.convert(1:3, "m/s", "km/h")
-
-## ---- eval=requireNamespace("udunits2", quietly=TRUE)-------------------------
-ud.get.name("kg")
-ud.get.symbol("kilogram")
-ud.set.encoding("utf8")
-
-## ---- eval=requireNamespace("udunits2", quietly=TRUE)-------------------------
+## -----------------------------------------------------------------------------
 m100_a = paste(rep("m", 100), collapse = "*")
 dm100_b = "dm^100"
-ud.is.parseable(m100_a)
-ud.is.parseable(dm100_b)
-ud.are.convertible(m100_a, dm100_b)
+units::ud_are_convertible(m100_a, dm100_b)
 
 ## -----------------------------------------------------------------------------
 library(units)
@@ -124,10 +102,9 @@ mtcars$displacement = set_units(mtcars$displacement, cm^3)
 par(mar = par("mar") + c(0, .3, 0, 0))
 with(mtcars, plot(1/displacement, 1/consumption))
 
-## ----fig=TRUE, height=3.8, width=7, eval=requireNamespace("ggforce", quietly=TRUE)----
-library(ggforce)
-if (utils::packageVersion("ggplot2") > "2.2.1")
-  ggplot(mtcars) + geom_point(aes(x = 1/displacement, y = 1/consumption))
+## ----fig=TRUE, height=3.8, width=7, eval=requireNamespace("ggplot2", quietly=TRUE)----
+library(ggplot2)
+ggplot(mtcars) + geom_point(aes(x = 1/displacement, y = 1/consumption))
 
 ## -----------------------------------------------------------------------------
 (dt = diff(Sys.time() + c(0, 1, 1+60, 1+60+3600))) # class difftime

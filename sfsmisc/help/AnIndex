@@ -35,11 +35,13 @@ f.robftest	f.robftest
 factorize	factorize
 funEnv	funEnv
 hatMat	hatMat
+helppdf	helppdf
 histBxp	histBxp
 ichar	AsciiToInt
 integrate.xy	integrate.xy
 inv.seq	inv.seq
 is.whole	is.whole
+isRshared	sessionInfoX
 iterate.lin.recursion	iterate.lin.recursion
 KSd	KSd
 last	last
@@ -76,6 +78,8 @@ paste.vec	paste.vec
 pdf.do	ps.latex
 pdf.end	ps.end
 pdf.latex	ps.latex
+pkgBuilt	pkgDesc
+pkgDesc	pkgDesc
 pkgLibs	pkgLibs
 pl.ds	sfsmisc-defunct
 plotDS	plotDS
@@ -100,6 +104,8 @@ ps.latex	ps.latex
 quadrant	quadrant
 QUnif	QUnif
 read.org.table	read.org.table
+relErr	relErr
+relErrV	relErr
 repChar	repChar
 rot2	rot2
 rotn	rot13
@@ -109,6 +115,7 @@ seqXtend	seqXtend
 sessionInfoX	sessionInfoX
 sfsmisc-defunct	sfsmisc-defunct
 sHalton	QUnif
+shortRversion	shortRversion
 signi	signi
 sourceAttach	sourceAttach
 strcodes	AsciiToInt

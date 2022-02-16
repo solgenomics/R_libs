@@ -1,10 +1,18 @@
 importFrom("grDevices", boxplot.stats, cairo_pdf,
-	   dev.cur, dev.off, n2mfrow, pdf, postscript, xy.coords)
+	   dev.cur, dev.off
+         , grSoftVersion
+         , n2mfrow, pdf, postscript
+         , xy.coords)
+
 
 importFrom("graphics", abline, arrows, axTicks, axis, axis.POSIXct,
 	   boxplot, curve, frame, hist, lines, locator, matplot, mtext,
-	   par, plot, plot.new, points, polygon,
+	   par, plot.new, points, polygon,
 	   rug, segments, symbols, text, xyinch)
+
+if(getRversion() < "4.0.0")
+    importFrom("graphics", plot)
+
 
 importFrom("stats",
 	   IQR, approx, as.formula, as.ts, dchisq, dgamma, density.default,
@@ -18,8 +26,11 @@ importFrom("stats",
 	   terms, time, update.formula, var, window)
 
 importFrom("utils", head, tail, toLatex, #<- S3 generics !
+           help,
 	   capture.output, data, packageDescription, read.table,
 	   sessionInfo, str)
+
+importFrom("tools", Rcmd)
 
 ## Using "::" in code -> no need here:
 importFrom("methods", existsFunction)
@@ -66,9 +77,11 @@ export (
     funEnv,
 	"hatMat",
         "histBxp", # defunct: "hist.bxp"
+    helppdf,
 	"ichar",
 	"integrate.xy",
 	"inv.seq",
+    isRshared,
 	"is.whole",
 	"iterate.lin.recursion",
 	"KSd",
@@ -115,6 +128,8 @@ export (
 	## "predict.dDA",
         ## "print.basedInt", "print.dDA", "print.margin2table",
 
+    pkgDesc, pkgBuilt,
+
 	"printTable2",
 	"prt.DEBUG",
 
@@ -129,12 +144,14 @@ export (
 	"QUnif",
 
         read.org.table,
+    relErrV, relErr,
 	"rot2", "rotn",
 	"roundfixS",
 	"rrange",
 	"sHalton",
 	"seqXtend",
     sessionInfoX,
+    shortRversion,
 	"signi",
         "sourceAttach",
 	"strcodes",

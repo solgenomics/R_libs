@@ -74,6 +74,7 @@ as.zooreg.xts	zooreg
 as.zooreg.zoo	zooreg
 autoplot.zoo	ggplot2.zoo
 barplot.zoo	plot.zoo
+boxplot.zoo	plot.zoo
 c.yearmon	yearmon
 c.yearqtr	yearqtr
 c.zoo	merge.zoo

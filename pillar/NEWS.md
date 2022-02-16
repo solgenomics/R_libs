@@ -1,5 +1,62 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# pillar 1.7.0
+
+## Breaking changes
+
+- `colonnade()` is now soft-deprecated (#485).
+- `expect_known_display()` and `is_vector_s3()` are now deprecated (#460, #501).
+- `new_pillar()` deprecates `extra` argument (#497).
+
+## Features
+
+- Focus columns specified via the `focus` argument to `tbl_format_setup()` are kept in their original place and shown with the maximum width and with the "type" component underlined (#465).
+
+## Bug fixes
+
+- Update `s3_register()` to use new implementation from rlang, this fixes CRAN checks related to `scale_type()` (#462).
+
+## Internal
+
+- Single pillars constructed with `pillar()` use only as much width as required when printing (#484).
+
+
+# pillar 1.6.5
+
+## Breaking changes
+
+- New `ctl_new_pillar_list()`, supersedes `ctl_new_compound_pillar()` (#433).
+
+## Features
+
+- If some but not all sub-columns of a data frame or matrix column are shown, the names and types of the remaining columns are displayed in the footer (#365, #444).
+- `num(fixed_exponent = ...)` is now represented with the fixed exponent in the pillar header, and in the title in ggplot2 (#307).
+- `tbl_format_setup()` gains `focus` argument that expects a character vector of column names. Focus columns are moved to the front and separated from the main columns by a subtle vertical line (#384).
+- New `scale_x_num()` and `scale_y_num()`. If a column created with `num()` is used in a ggplot, the x and y scale will be formatted automatically according to to the specification (#400, #404).
+- List columns omit size information if horizontal space is insufficient (#392).
+- If the column title of a backticked column is abbreviated, the trailing backtick is still printed (#391).
+- `new_pillar_shaft_simple()` gains `short_formatted` argument that contains the data to be used if horizontal space is insufficient (#389).
+- Default `obj_sum()` method returns abbreviation in attribute of return value (#390).
+
+## Bug fixes
+
+- Extra columns in footer show backticks again if they are non-syntactic (#393).
+- Fixed some cases for combinations of printed width and `getOption("width")` (#432).
+- Fix support for `nanotime::nanotime()` classes (#378, #380).
+
+## Documentation
+
+- `?num` and `?char` now point to tibble (#382).
+
+## Internal
+
+- Use eager registration via `NAMESPACE` for own methods for classes from other packages.
+- Reworked formatting routine, now using a visitor-based approach with in-order iteration over all pillars. The only visible changes are that usage of free space (in the case of limited space) has slightly improved (#435).
+- Prepared removal of dependency on the crayon package (#233, #406).
+- Use snapshot variants, requires testthat >= 3.1.1 (#387).
+- Replace internal `"pillar_vertical"` class with `glue::as_glue()` (#279).
+
+
 # pillar 1.6.4
 
 ## Bug fixes
@@ -9,7 +66,6 @@
 
 ## Breaking changes
 
-- `colonnade()` no longer exists, `squeeze()` and `extra_cols()` now raise an error (#272).
 - `num()` requires an integerish `digits` argument (#362).
 
 ## Documentation

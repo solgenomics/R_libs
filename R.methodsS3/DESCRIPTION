@@ -1,5 +1,5 @@
 Package: R.methodsS3
-Version: 1.8.0
+Version: 1.8.1
 Depends: R (>= 2.13.0)
 Imports: utils
 Suggests: codetools
@@ -14,7 +14,7 @@ LazyLoad: TRUE
 URL: https://github.com/HenrikBengtsson/R.methodsS3
 BugReports: https://github.com/HenrikBengtsson/R.methodsS3/issues
 NeedsCompilation: no
-Packaged: 2020-02-14 03:35:57 UTC; hb
+Packaged: 2020-08-24 14:42:23 UTC; hb
 Repository: CRAN
-Date/Publication: 2020-02-14 07:10:20 UTC
-Built: R 3.6.3; ; 2020-03-24 19:48:09 UTC; unix
+Date/Publication: 2020-08-26 16:20:06 UTC
+Built: R 3.6.3; ; 2022-02-15 16:34:40 UTC; unix

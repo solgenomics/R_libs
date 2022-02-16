@@ -37,7 +37,7 @@ example_tbl("default_header_replace")
 
 ## -----------------------------------------------------------------------------
 tbl_format_header.custom_header_replace <- function(x, setup, ...) {
-  crayon::italic(paste0(names(setup$tbl_sum), " = ", setup$tbl_sum))
+  cli::style_italic(names(setup$tbl_sum), " = ", setup$tbl_sum)
 }
 
 example_tbl("custom_header_replace")
@@ -119,7 +119,7 @@ ctl_new_pillar.pillar_rule_adaptive <- function(controller, x, width, ..., title
 example_tbl("pillar_rule_adaptive")
 
 ## -----------------------------------------------------------------------------
-ctl_new_compound_pillar.hide_df <- function(controller, x, width, ..., title = NULL) {
+ctl_new_pillar_list.hide_df <- function(controller, x, width, ..., title = NULL) {
   if (!is.data.frame(x)) {
     return(NextMethod())
   }
@@ -128,14 +128,14 @@ ctl_new_compound_pillar.hide_df <- function(controller, x, width, ..., title = N
     return(NULL)
   }
 
-  new_pillar(
+  list(new_pillar(
     list(
       title = pillar_component(new_pillar_title(title)),
       type = new_pillar_component(list("<hidden>"), width = 8),
       data = new_pillar_component(list(""), width = 1)
     ),
     width = 8
-  )
+  ))
 }
 
 example_tbl("hide_df")

@@ -55,6 +55,7 @@ as.network.phylo	as.phylo
 as.networx.evonet	evonet
 as.phyDat.AAbin	AAbin
 as.phylo	as.phylo
+as.phylo.default	as.phylo
 as.phylo.evonet	evonet
 as.phylo.formula	as.phylo.formula
 as.phylo.hclust	as.phylo
@@ -146,6 +147,9 @@ data.nex	cynipids
 dbd	dbd
 dbdTime	dbd
 def	def
+degree	degree
+degree.evonet	degree
+degree.phylo	degree
 del.colgapsonly	del.gaps
 del.gaps	del.gaps
 del.rowgapsonly	del.gaps
@@ -386,6 +390,7 @@ skyline.phylo	skyline
 skylineplot	skylineplot
 skylineplot.deluxe	skylineplot
 slowinskiguyer.test	slowinskiguyer.test
+solveAmbiguousBases	solveAmbiguousBases
 sort.bitsplits	as.bitsplits
 speciesTree	speciesTree
 str.multiPhylo	print.phylo

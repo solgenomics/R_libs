@@ -7,3 +7,5 @@ is.ggbreak              is.ggbreak
 is.ggtree               is.ggtree
 keybox                  keybox
 set_font                set_font
+theme_nothing           theme_nothing
+theme_transparent       theme_transparent

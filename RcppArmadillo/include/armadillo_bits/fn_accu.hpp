@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -413,6 +415,118 @@ accu(const mtOp<uword,T1,op_rel_eq>& X)
 
 
 
+template<typename T1, typename T2>
+arma_warn_unused
+inline
+uword
+accu(const mtGlue<uword,T1,T2,glue_rel_noteq>& X)
+  {
+  arma_extra_debug_sigprint();
+  
+  const Proxy<T1> PA(X.A);
+  const Proxy<T2> PB(X.B);
+  
+  arma_debug_assert_same_size(PA, PB, "operator!=");
+  
+  uword n_nonzero = 0;
+  
+  if( (Proxy<T1>::use_at == false) && (Proxy<T2>::use_at == false) )
+    {
+    typedef typename Proxy<T1>::ea_type PA_ea_type;
+    typedef typename Proxy<T2>::ea_type PB_ea_type;
+    
+          PA_ea_type A      = PA.get_ea();
+          PB_ea_type B      = PB.get_ea();
+    const uword      n_elem = PA.get_n_elem();
+    
+    for(uword i=0; i < n_elem; ++i)
+      {
+      n_nonzero += (A[i] != B[i]) ? uword(1) : uword(0);
+      }
+    }
+  else
+    {
+    const uword PA_n_cols = PA.get_n_cols();
+    const uword PA_n_rows = PA.get_n_rows();
+    
+    if(PA_n_rows == 1)
+      {
+      for(uword col=0; col < PA_n_cols; ++col)
+        {
+        n_nonzero += (PA.at(0,col) != PB.at(0,col)) ? uword(1) : uword(0);
+        }
+      }
+    else
+      {
+      for(uword col=0; col < PA_n_cols; ++col)
+      for(uword row=0; row < PA_n_rows; ++row)
+        {
+        n_nonzero += (PA.at(row,col) != PB.at(row,col)) ? uword(1) : uword(0);
+        }
+      }
+    }
+  
+  return n_nonzero;
+  }
+
+
+
+template<typename T1, typename T2>
+arma_warn_unused
+inline
+uword
+accu(const mtGlue<uword,T1,T2,glue_rel_eq>& X)
+  {
+  arma_extra_debug_sigprint();
+  
+  const Proxy<T1> PA(X.A);
+  const Proxy<T2> PB(X.B);
+  
+  arma_debug_assert_same_size(PA, PB, "operator==");
+  
+  uword n_nonzero = 0;
+  
+  if( (Proxy<T1>::use_at == false) && (Proxy<T2>::use_at == false) )
+    {
+    typedef typename Proxy<T1>::ea_type PA_ea_type;
+    typedef typename Proxy<T2>::ea_type PB_ea_type;
+    
+          PA_ea_type A      = PA.get_ea();
+          PB_ea_type B      = PB.get_ea();
+    const uword      n_elem = PA.get_n_elem();
+    
+    for(uword i=0; i < n_elem; ++i)
+      {
+      n_nonzero += (A[i] == B[i]) ? uword(1) : uword(0);
+      }
+    }
+  else
+    {
+    const uword PA_n_cols = PA.get_n_cols();
+    const uword PA_n_rows = PA.get_n_rows();
+    
+    if(PA_n_rows == 1)
+      {
+      for(uword col=0; col < PA_n_cols; ++col)
+        {
+        n_nonzero += (PA.at(0,col) == PB.at(0,col)) ? uword(1) : uword(0);
+        }
+      }
+    else
+      {
+      for(uword col=0; col < PA_n_cols; ++col)
+      for(uword row=0; row < PA_n_rows; ++row)
+        {
+        n_nonzero += (PA.at(row,col) == PB.at(row,col)) ? uword(1) : uword(0);
+        }
+      }
+    }
+  
+  return n_nonzero;
+  }
+
+
+
 //! accumulate the elements of a subview (submatrix)
 template<typename eT>
 arma_warn_unused
@@ -426,29 +540,35 @@ accu(const subview<eT>& X)
   const uword X_n_rows = X.n_rows;
   const uword X_n_cols = X.n_cols;
   
-  eT val = eT(0);
-  
   if(X_n_rows == 1)
     {
-    typedef subview_row<eT> sv_type;
+    const Mat<eT>& m = X.m;
     
-    const sv_type& sv = reinterpret_cast<const sv_type&>(X);  // subview_row<eT> is a child class of subview<eT> and has no extra data
+    const uword col_offset = X.aux_col1;
+    const uword row_offset = X.aux_row1;
     
-    const Proxy<sv_type> P(sv);
+    eT val1 = eT(0);
+    eT val2 = eT(0);
     
-    val = accu_proxy_linear(P);
-    }
-  else
-  if(X_n_cols == 1)
-    {
-    val = arrayops::accumulate( X.colptr(0), X_n_rows );
-    }
-  else
-    {
-    for(uword col=0; col < X_n_cols; ++col)
+    uword i,j;
+    for(i=0, j=1; j < X_n_cols; i+=2, j+=2)
       {
-      val += arrayops::accumulate( X.colptr(col), X_n_rows );
+      val1 += m.at(row_offset, col_offset + i);
+      val2 += m.at(row_offset, col_offset + j);
       }
+    
+    if(i < X_n_cols)  { val1 += m.at(row_offset, col_offset + i); }
+    
+    return val1 + val2;
+    }
+  
+  if(X_n_cols == 1)  { return arrayops::accumulate( X.colptr(0), X_n_rows ); }
+  
+  eT val = eT(0);
+  
+  for(uword col=0; col < X_n_cols; ++col)
+    {
+    val += arrayops::accumulate( X.colptr(col), X_n_rows );
     }
   
   return val;
@@ -465,7 +585,7 @@ accu(const subview_col<eT>& X)
   {
   arma_extra_debug_sigprint();  
   
-  return arrayops::accumulate( X.colptr(0), X.n_rows );
+  return arrayops::accumulate( X.colmem, X.n_rows );
   }
 
 

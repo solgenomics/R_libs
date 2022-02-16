@@ -122,5 +122,6 @@ wl_units<-,Spectra-method	wl_units
 [[,Spectra-method	extraction-methods
 [[,SpectraDataFrame,ANY,missing-method	extraction-methods
 [[<-	extraction-methods
+[[<-,Spectra,ANY,missing,ANY-method	extraction-methods
 [[<-,Spectra,ANY,missing-method	extraction-methods
 [[<-,Spectra-method	extraction-methods

@@ -144,9 +144,11 @@ cluster.distribution	components
 clusters	components
 cluster_edge_betweenness	cluster_edge_betweenness
 cluster_fast_greedy	cluster_fast_greedy
+cluster_fluid_communities	cluster_fluid_communities
 cluster_infomap	cluster_infomap
 cluster_label_prop	cluster_label_prop
 cluster_leading_eigen	cluster_leading_eigen
+cluster_leiden	cluster_leiden
 cluster_louvain	cluster_louvain
 cluster_optimal	cluster_optimal
 cluster_spinglass	cluster_spinglass
@@ -396,6 +398,7 @@ groups.default	groups
 growing	sample_growing
 growing.random.game	sample_growing
 gsize	gsize
+handle_vertex_type_arg	handle_vertex_type_arg
 has.multiple	which_multiple
 head_of	head_of
 head_print	head_print
@@ -681,6 +684,7 @@ print.igraph_layout_spec	layout_
 print.nexusDatasetInfo	nexus
 print.nexusDatasetInfoList	nexus
 printer_callback	printer_callback
+printr	printr
 print_all	print.igraph
 quantile.sir	sir
 radius	radius

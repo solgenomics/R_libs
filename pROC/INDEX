@@ -25,6 +25,6 @@ power.roc.test          Sample size and power computation for ROC
                         curves
 print.roc               Print a ROC curve object
 roc                     Build a ROC curve
-roc.test                Compare the AUC of two ROC curves
+roc.test                Compare two ROC curves
 smooth                  Smooth a ROC curve
 var.roc                 Variance of a ROC curve

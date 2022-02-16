@@ -11,5 +11,4 @@ summary.DiscrFact       summary Method for DiscrFact Objects
 swissbank               SwissBankNotes Data
 tclust                  General Trimming Approach to Robust Cluster
                         Analysis
-tclust-package          General Trimmed Cluster Analysis
 tkmeans                 Trimmed k-means Cluster Analysis

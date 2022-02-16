@@ -1,3 +1,114 @@
+
+# cli 3.2.0
+
+## Breaking change
+
+* The `cli_theme_dark` option is know known as `cli.theme_dark`, to be
+  consistent with all other cli option names (#380).
+
+## Other changes
+
+* The preferred names of the S3 clases `ansi_string`, `ansi_style`, `boxx`,
+  `rule` and `tree` now have `cli_` prefix: `cli_ansi_string`, etc. This will
+  help avoiding name conflicts with other packages eventually, but for now
+  the old names are kept as well, for compatibility.
+
+* `cli_abort()` has been updated to work nicely with rlang 1.0. The
+  default `call` and backtrace soft-truncation are set to `.envir`
+  (which itself is set to the immediate caller of `cli_abort()` by
+  default).
+
+  Line formatting now happens lazily at display time via
+  `rlang::cnd_message()` (which is called by the `conditionMessage()`
+  method for rlang errors).
+
+* New `hash_sha256()` function to calculate SHA-256 hashes. New
+  `hash_raw_*()`, `hash_obj_*()` and `hash_file_*()` functions to calculate
+  various hashes of raw vectors, R objects and files.
+
+* You can use the new `cli.default_num_colors` option to set the default
+  number of ANSI colors, only if ANSI support is otherwise detected.
+  See the details in the manual of `num_ansi_colors()`.
+
+* You can set the new `ESS_BACKGROUND_MODE` environment variable to
+  `dark` to indicate dark mode.
+
+* cli now handles quotes and comment characters better in the semantion
+  `cli_*()` functions that perform glue string interpolation (#370).
+
+# cli 3.1.1
+
+* `style_hyperlink()` gains a `params=` argument (#384).
+
+# cli 3.1.0
+
+## Breaking changes
+
+* The C progress bar API now uses `double` instead of `int` as the data
+  type of the progress units (#335).
+
+## New features
+
+* Several improvements and changes in the `ansi_*()` functions:
+  - most `ansi_*()` functions are now implemented in C and they are
+    much faster (#316).
+  - they handle `NA` values better.
+  - many functions now use UTF-8 graphemes by default instead of code
+    points. E.g. `ansi_nchar()` counts graphemes, etc.
+  - they convert their input to UTF-8 and always return UTF-8
+    encoded strings.
+  - new function `ansi_simplify()` to remove superfluous ANSI tags.
+  - new function `ansi_html()` to convert ANSI-highlighted strings
+    to HTML.
+  - `ansi_has_any()` and `ansi_strip()` now have `sgr` and `csi`
+    arguments to look for SGR tags, CSI tags, or both.
+
+* New functions that handle UTF-8 encoded strings correctly:
+  `utf8_graphemes()`, `utf8_nchar()`, `utf8_substr()`.
+
+* Support for palettes, including a colorblind friendly palette.
+  See `?ansi_palettes` for details.
+
+* True color support: `num_ansi_colors()` now detects terminals with
+  24 bit color support, and `make_ansi_style()` uses the exact RGB colors
+  on these terminals (#208).
+
+* The new `col_br_*()` and `bg_br_()` functions create bright versions of
+  eight base ANSI colors (#327).
+
+* New function `code_highlight()` to syntax highlight R code. It supports
+  several themes out of the box, see `code_theme_list()` (#348).
+
+* New functions for hashing: `hash_animal()`, `hash_emoji()` and
+  `hash_md5()`.
+
+* New `diff_chr()` and `diff_str()` functions to calculate the difference
+  of character vectors and letters of strings.
+
+## Smaller improvements
+
+* Progress bars with `clear = FALSE` now print the last, completed, state
+  properly.
+
+* The progress bar for Shiny apps now handles output from
+  `cli_progress_output()`.
+
+* Progress variables in C `format_done` strings work correctly now (#337).
+
+* `cli_dl()` now works with an empty description, and gives a better
+  error for invalid input (#347).
+
+* `rule()` is now works better if the labels have ANSI markup.
+
+* `cli_spark` objects now have `format()` and `print()` methods.
+
+* `cli_process_done()` now does not error without a process (#351).
+
+* ANSI markup is now supported in RStudio jobs (#353).
+
+* The lack of ANSI support is now again correctly detected if there is an
+  active `sink()` (#366).
+
 # cli 3.0.1
 
 * `ansi_strtrim()` now correctly keeps `NA` values (#309).
@@ -52,7 +163,7 @@
 * Styling is fixed at several places. In particular, nested lists should
   be now formatted better (#221).
 
-* New `spark_bar()` and `spark_line()` funcions to draw small bar or
+* New `spark_bar()` and `spark_line()` functions to draw small bar or
   line charts.
 
 # cli 2.3.1
@@ -74,7 +185,7 @@
 * New `ansi_columns()` function to format ANSI strings in multiple columns.
 
 * `ansi_substr()`, `ansi_substring()`, `ansi_strsplit()`, `ansi_align()`
-  now always return `ansi_string` objects.
+  now always return `cli_ansi_string` objects.
 
 * `ansi_nchar()`, `ansi_align()`, `ansi_strtrim()` and the new
   `ansi_strwrap()` as well handle wide Unicode correctly, according to
@@ -111,7 +222,7 @@
 
 * Styling of verbatim text work properly now (#147, @tzakharko).
 
-* Messages (ie. `message` conditions) coming from cli now have the
+* Messages (i.e. `message` conditions) coming from cli now have the
   `cliMessage` class, so you can easily suppress them without suppressing
   other messages (#156).
 
@@ -119,14 +230,14 @@
   message sink. This is to make interactive and non-interactive sessions
   consistent (#153).
 
-* Pluralization works corrently now if the last alternative is the
+* Pluralization works correctly now if the last alternative is the
   empty string (#158).
 
 * cli now caches the result of the dark background detection in iTerm on
   macOS. Reload cli to delete the cache (#131).
 
 * The `is_dynamic_tty()`, `is_ansi_tty()` and `ansi_hide_cursor()` and
-  releted functions now default to the `"auto"` stream, which is
+  related functions now default to the `"auto"` stream, which is
   automatically selected to be either `stdout()` or `stderr()`.
   See the manual for details (#144).
 

@@ -71,6 +71,7 @@ par_frame	par_frame
 Rdiff_chr	Rdiff_chr
 Rdiff_obj	Rdiff_chr
 ses	ses
+ses_dat	ses
 show,DiffSummary-method	show-DiffSummary-method
 show,MyersMbaSes-method	diffobj_s4method_doc
 show,PaletteOfStyles-method	show-PaletteOfStyles-method

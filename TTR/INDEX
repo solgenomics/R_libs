@@ -5,6 +5,7 @@ CCI                     Commodity Channel Index
 CLV                     Close Location Value
 CMF                     Chaikin Money Flow
 CMO                     Chande Momentum Oscillator
+CTI                     Ehler's Correlation Trend Indicator
 DPO                     De-Trended Price Oscillator
 DVI                     DV Intermediate Oscillator
 DonchianChannel         Donchian Channel
@@ -32,6 +33,7 @@ adjRatios               Split and dividend adjustment ratios
 aroon                   Aroon
 chaikinAD               Chaikin Accumulation / Distribution
 chaikinVolatility       Chaikin Volatility
+keltnerChannels         Keltner Channels
 lags                    Miscellaneous Tools
 rollSFM                 Analysis of Running/Rolling/Moving Windows
 runPercentRank          Percent Rank over a Moving Window

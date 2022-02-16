@@ -8,7 +8,7 @@
 //
 // CoreDEF.h: CoreArray library global macro
 //
-// Copyright (C) 2007-2017    Xiuwen Zheng
+// Copyright (C) 2007-2019    Xiuwen Zheng
 //
 // This file is part of CoreArray.
 //
@@ -27,9 +27,9 @@
 
 /**
  *	\file     CoreDEF.h
- *	\author   Xiuwen Zheng [zhengx@u.washington.edu]
+ *	\author   Xiuwen Zheng [zhengxwen@gmail.com]
  *	\version  1.0
- *	\date     2007 - 2017
+ *	\date     2007-2019
  *	\brief    CoreArray library global macro
  *	\details
 **/
@@ -65,6 +65,12 @@
  *
  *  \subsection compression COREARRAY_USE_LZMA_EXT
  *  If defined, uses the liblzma head file in the default path (e.g., the include path in the operating system)
+ *
+ *  \subsection compression COREARRAY_NO_COMPILER_OPTIMIZE
+ *  If defined, does not include #pragma GCC optimize("O3") or similar
+ *
+ *  \subsection compression COREARRAY_NO_TARGET
+ *  If defined, does not use __attribute__((target())) or __attribute__((target_clones()))
  *
 **/
 
@@ -689,6 +695,38 @@
 
 
 
+// ===========================================================================
+// C++ Version
+// ===========================================================================
+
+#ifdef __cplusplus
+#   define COREARRAY_CPP
+#   if __cplusplus >= 201103L
+#       define COREARRAY_CPP_V11
+#   endif
+#   if __cplusplus >= 201402L
+#       define COREARRAY_CPP_V14
+#   endif
+#   if __cplusplus > 201402L
+#       define COREARRAY_CPP_V17
+#   endif
+#endif
+
+
+
+// ===========================================================================
+// Noexcept Specifier
+// ===========================================================================
+
+#ifdef COREARRAY_CPP_V11
+#   define COREARRAY_NOEXCEPT_TRUE     noexcept(true)
+#   define COREARRAY_NOEXCEPT_FALSE    noexcept(false)
+#else
+#   define COREARRAY_NOEXCEPT_TRUE
+#   define COREARRAY_NOEXCEPT_FALSE
+#endif
+
+
 
 // ===========================================================================
 // Platform MACRO
@@ -890,6 +928,41 @@
 #   endif
 #endif
 #
+#ifdef __AVX512F__
+#   define COREARRAY_SIMD_AVX512F
+#   ifndef COREARRAY_PREDEFINED_SIMD
+#       define COREARRAY_PREDEFINED_SIMD
+#   endif
+#endif
+#
+#ifdef __AVX512BW__
+#   define COREARRAY_SIMD_AVX512BW
+#   ifndef COREARRAY_PREDEFINED_SIMD
+#       define COREARRAY_PREDEFINED_SIMD
+#   endif
+#endif
+#
+#ifdef __AVX512CD__
+#   define COREARRAY_SIMD_AVX512CD
+#   ifndef COREARRAY_PREDEFINED_SIMD
+#       define COREARRAY_PREDEFINED_SIMD
+#   endif
+#endif
+#
+#ifdef __AVX512DQ__
+#   define COREARRAY_SIMD_AVX512DQ
+#   ifndef COREARRAY_PREDEFINED_SIMD
+#       define COREARRAY_PREDEFINED_SIMD
+#   endif
+#endif
+#
+#ifdef __AVX512VL__
+#   define COREARRAY_SIMD_AVX512VL
+#   ifndef COREARRAY_PREDEFINED_SIMD
+#       define COREARRAY_PREDEFINED_SIMD
+#   endif
+#endif
+
 #ifdef __FMA__
 #   define COREARRAY_SIMD_FMA
 #   ifndef COREARRAY_PREDEFINED_SIMD
@@ -907,7 +980,7 @@
 #ifdef __POPCNT__
 #   define COREARRAY_POPCNT
 #endif
-
+#
 #ifdef __LZCNT__
 #   define COREARRAY_LZCNT
 #endif
@@ -917,7 +990,9 @@
 #   undef COREARRAY_SIMD_ATTR_ALIGN
 #endif
 #
-#if defined(__AVX__)
+#if defined(__AVX512F__)
+#   define COREARRAY_SIMD_ATTR_ALIGN    __attribute__((aligned(64)))
+#elif defined(__AVX__)
 #   define COREARRAY_SIMD_ATTR_ALIGN    __attribute__((aligned(32)))
 #elif defined(__SSE__)
 #   define COREARRAY_SIMD_ATTR_ALIGN    __attribute__((aligned(16)))
@@ -937,6 +1012,11 @@
 #       undef COREARRAY_SIMD_SSE4_2
 #       undef COREARRAY_SIMD_AVX
 #       undef COREARRAY_SIMD_AVX2
+#       undef COREARRAY_SIMD_AVX512F
+#       undef COREARRAY_SIMD_AVX512BW
+#       undef COREARRAY_SIMD_AVX512CD
+#       undef COREARRAY_SIMD_AVX512DQ
+#       undef COREARRAY_SIMD_AVX512VL
 #       undef COREARRAY_SIMD_FMA
 #       undef COREARRAY_SIMD_FMA4
 #   endif
@@ -1063,7 +1143,6 @@
 #   undef COREARRAY_HAVE_FLATTEN
 #endif
 
-// if defined, set "COREARRAY_FORCEINLINE = COREARRAY_INLINE"
 #ifdef COREARRAY_NO_FLATTEN
 #   ifdef COREARRAY_HAVE_FLATTEN
 #       undef COREARRAY_HAVE_FLATTEN
@@ -1169,6 +1248,36 @@
 
 
 
+
+// ===========================================================================
+// Compiler optimization flags
+// ===========================================================================
+
+#if defined(COREARRAY_COMPILER_OPTIMIZE_FLAG) && !defined(COREARRAY_NO_COMPILER_OPTIMIZE)
+#   if defined(__clang__) && !defined(__APPLE__)
+#       pragma clang optimize on
+#   endif
+#   if defined(__GNUC__) && ((__GNUC__>4) || (__GNUC__==4 && __GNUC_MINOR__>=4))
+#       if (COREARRAY_COMPILER_OPTIMIZE_FLAG == 0)
+#           pragma GCC optimize("O0")
+#       elif (COREARRAY_COMPILER_OPTIMIZE_FLAG == 1)
+#           pragma GCC optimize("O1")
+#       elif (COREARRAY_COMPILER_OPTIMIZE_FLAG == 2)
+#           pragma GCC optimize("O2")
+#       elif (COREARRAY_COMPILER_OPTIMIZE_FLAG == 3)
+#           pragma GCC optimize("O3")
+#       elif (COREARRAY_COMPILER_OPTIMIZE_FLAG == 4)
+#           pragma GCC optimize("Ofast")
+#       else
+#           error "COREARRAY_COMPILER_OPTIMIZE_FLAG should be 0,1,2,3 or 4."
+#       endif
+#   endif
+#endif
+
+
+
+
+// ===========================================================================
 
 // CoreArray library code control
 #define COREARRAY_CODE_DEBUG

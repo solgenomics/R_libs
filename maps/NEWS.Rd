@@ -1,5 +1,13 @@
 \name{NEWS}
 \title{News for package 'maps'}
+\section{Changes in maps version 3.4.0 (2021-09-24)}{
+  \itemize{
+    \item \code{legacy_world} and \code{world.legacy()}, which were deprecated for some years, have been removed from the package. The old database is now available from the companion package 'mapdata' (as of version 2.3.0) where it is called "worldLores".
+    \item Minor code changes (removal of deprecated macro, small bugfixes)
+    \item Some corrections to country, island and city names.
+  }
+}
+
 \section{Changes in maps version 3.3.0 (2018-04-03)}{
   \itemize{
     \item \code{legacy_world} and \code{world.legacy()} have been deprecated. The old database is now available from the companion package 'mapdata' (as of version 2.3.0) where it is called "worldLores".

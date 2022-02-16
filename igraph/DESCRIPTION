@@ -1,22 +1,22 @@
 Package: igraph
-Version: 1.2.5
+Version: 1.2.11
 Title: Network Analysis and Visualization
 Author: See AUTHORS file.
-Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
+Maintainer: Tamás Nepusz <ntamas@gmail.com>
 Description: Routines for simple graphs and network analysis. It can
   handle large graphs very well and provides functions for generating random
   and regular graphs, graph visualization, centrality methods and much more.
 Depends: methods
 Imports: graphics, grDevices, magrittr, Matrix, pkgconfig (>= 2.0.0),
         stats, utils
-Suggests: ape, digest, graph, igraphdata, rgl, scales, stats4, tcltk,
-        testthat, withr
+Suggests: ape, graph, igraphdata, rgl, scales, stats4, tcltk, testthat,
+        withr, digest
 License: GPL (>= 2)
-URL: http://igraph.org
-SystemRequirements: gmp (optional), libxml2 (optional), glpk (optional)
-BugReports: https://github.com/igraph/igraph/issues
+URL: https://igraph.org
+SystemRequirements: gmp (>= 4.38, optional), libxml2 (optional), glpk
+        (optional)
+BugReports: https://github.com/igraph/rigraph/issues
 Encoding: UTF-8
-RoxygenNote: 7.1.0
 Collate: 'adjacency.R' 'auto.R' 'assortativity.R' 'attributes.R'
         'basic.R' 'bipartite.R' 'centrality.R' 'centralization.R'
         'cliques.R' 'cocitation.R' 'cohesive.blocks.R' 'community.R'
@@ -33,8 +33,9 @@ Collate: 'adjacency.R' 'auto.R' 'assortativity.R' 'attributes.R'
         'structural.properties.R' 'structure.info.R' 'test.R'
         'tkplot.R' 'topology.R' 'triangles.R' 'utils.R' 'uuid.R'
         'versions.R' 'weakref.R' 'zzz-deprecate.R'
+RoxygenNote: 7.1.2
 NeedsCompilation: yes
-Packaged: 2020-03-18 14:51:55 UTC; gaborcsardi
+Packaged: 2022-01-04 21:35:16 UTC; tamas
 Repository: CRAN
-Date/Publication: 2020-03-19 09:20:03 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-03-24 19:55:49 UTC; unix
+Date/Publication: 2022-01-04 23:40:07 UTC
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2022-02-15 16:46:03 UTC; unix

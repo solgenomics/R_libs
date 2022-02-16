@@ -1,8 +1,8 @@
 Package: e1071
-Version: 1.7-3
+Version: 1.7-9
 Title: Misc Functions of the Department of Statistics, Probability
         Theory Group (Formerly: E1071), TU Wien
-Imports: graphics, grDevices, class, stats, methods, utils
+Imports: graphics, grDevices, class, stats, methods, utils, proxy
 Suggests: cluster, mlbench, nnet, randomForest, rpart, SparseM, xtable,
         Matrix, MASS, slam
 Authors@R: c(person(given = "David", family = "Meyer", role = c("aut", "cre"), email = "David.Meyer@R-project.org"),
@@ -15,11 +15,11 @@ Authors@R: c(person(given = "David", family = "Meyer", role = c("aut", "cre"), e
 Description: Functions for latent class analysis, short time Fourier
 	     transform, fuzzy clustering, support vector machines,
 	     shortest path computation, bagged clustering, naive Bayes
-	     classifier, ...
+	     classifier, generalized k-nearest neighbour ...
 License: GPL-2 | GPL-3
 LazyLoad: yes
 NeedsCompilation: yes
-Packaged: 2019-11-25 17:01:14 UTC; meyer
+Packaged: 2021-09-16 06:33:26 UTC; meyer
 Author: David Meyer [aut, cre],
   Evgenia Dimitriadou [aut, cph],
   Kurt Hornik [aut],
@@ -29,5 +29,5 @@ Author: David Meyer [aut, cre],
   Chih-Chen Lin [ctb, cph] (libsvm C++-code)
 Maintainer: David Meyer <David.Meyer@R-project.org>
 Repository: CRAN
-Date/Publication: 2019-11-26 18:29:09 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-03-24 19:40:07 UTC; unix
+Date/Publication: 2021-09-16 16:42:50 UTC
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2022-02-15 16:45:23 UTC; unix

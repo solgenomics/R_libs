@@ -1,15 +1,11 @@
 Package: vdiffr
 Title: Visual Regression Testing and Graphical Diffing
-Version: 0.3.1
+Version: 1.0.2
 Authors@R: c(
     person("Lionel", "Henry", , "lionel@rstudio.com", c("cre", "aut")),
+    person("Thomas Lin", "Pedersen", , "thomas.pedersen@rstudio.com", 
+           role = "aut", comment = c(ORCID = "0000-0002-5147-4711")),
     person("RStudio", role = "cph"),
-    person("Carl", "Sutherland", role = "aut", comment = "jg-imagediff library"),
-    person("Humble Software", role = "cph", comment = "jg-imagediff library"),
-    person("David", "Hong", role = "aut", comment = "TwoFace library"),
-    person(family = "jQuery Foundation", role = "cph", comment = "jQuery library"),
-    person(family = "jQuery contributors", role = c("ctb", "cph"),
-           comment = "jQuery library; authors listed in inst/htmlwidgets/lib/jquery-authors.txt"),
     person("T Jake", "Luciani", , "jake@apache.org", "aut", comment = "svglite"),
     person("Matthieu", "Decorde", , "matthieu.decorde@ens-lyon.fr", "aut", comment = "svglite"),
     person("Vaudor", "Lise", , "lise.vaudor@ens-lyon.fr", "aut", comment = "svglite"),
@@ -22,29 +18,22 @@ Encoding: UTF-8
 Description: An extension to the 'testthat' package that makes it easy
     to add graphical unit tests. It provides a Shiny application to
     manage the test cases.
-License: GPL-3 | file LICENSE
-LazyData: true
+License: MIT + file LICENSE
 ByteCompile: true
 Depends: R (>= 3.2.0)
-Imports: devtools, diffobj, fontquiver (>= 0.2.0), freetypeharfbuzz (>=
-        0.2.5), gdtools, glue, grDevices, htmlwidgets (>= 0.6),
-        htmltools, purrr (>= 0.2.0), rlang, R6, Rcpp, shiny, testthat
-        (>= 1.0.0), usethis (>= 1.4.0), xml2 (>= 1.0.0)
-Suggests: crayon, ggplot2 (>= 3.2.0), roxygen2, rstudioapi, withr, yaml
-LinkingTo: freetypeharfbuzz, gdtools, Rcpp, BH
-RoxygenNote: 6.1.1
-URL: https://github.com/r-lib/vdiffr
+Imports: diffobj, glue, grDevices, htmltools, lifecycle, rlang,
+        testthat (>= 3.0.3), xml2 (>= 1.0.0)
+Suggests: covr, ggplot2 (>= 3.2.0), roxygen2, withr
+LinkingTo: cpp11
+RoxygenNote: 7.1.1.9001
+URL: https://vdiffr.r-lib.org/, https://github.com/r-lib/vdiffr
 BugReports: https://github.com/r-lib/vdiffr/issues
+SystemRequirements: C++11
 NeedsCompilation: yes
-Packaged: 2019-06-24 16:16:26 UTC; lionel
+Packaged: 2021-06-18 06:50:02 UTC; lionel
 Author: Lionel Henry [cre, aut],
+  Thomas Lin Pedersen [aut] (<https://orcid.org/0000-0002-5147-4711>),
   RStudio [cph],
-  Carl Sutherland [aut] (jg-imagediff library),
-  Humble Software [cph] (jg-imagediff library),
-  David Hong [aut] (TwoFace library),
-  jQuery Foundation [cph] (jQuery library),
-  jQuery contributors [ctb, cph] (jQuery library; authors listed in
-    inst/htmlwidgets/lib/jquery-authors.txt),
   T Jake Luciani [aut] (svglite),
   Matthieu Decorde [aut] (svglite),
   Vaudor Lise [aut] (svglite),
@@ -54,5 +43,5 @@ Author: Lionel Henry [cre, aut],
   Håkon Malmedal [ctb] (svglite: Opacity code)
 Maintainer: Lionel Henry <lionel@rstudio.com>
 Repository: CRAN
-Date/Publication: 2019-06-24 16:30:03 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-03-24 20:15:36 UTC; unix
+Date/Publication: 2021-06-18 12:10:02 UTC
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2022-02-15 17:10:05 UTC; unix

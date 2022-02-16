@@ -22,7 +22,9 @@ mwSelectize	mwSelectize
 mwSharedValue	mwSharedValue
 mwSlider	mwSlider
 mwText	mwText
+mwTranslations	mwTranslations
 renderCombineWidgets	combineWidgets-shiny
 staticImage	staticPlot
 staticPlot	staticPlot
 summary.MWController	summary.MWController
+worldEnergyUse	worldEnergyUse

@@ -2,8 +2,8 @@ Package: spectacles
 Type: Package
 Title: Storing, Manipulating and Analysis Spectroscopy and Associated
         Data
-Version: 0.5-2-2
-Date: 2020-02-20
+Version: 0.5-3
+Date: 2021-01-11
 Authors@R: c(person(given = "Pierre", family = "Roudier", email = "roudierp@landcareresearch.co.nz", role = c("aut", "cre")),
     person(given = "Max", family = "Kuhn", role = "ctb"),
     person(given = "Kristian Hovde", family = "Liland", role = "ctb"),
@@ -17,16 +17,17 @@ BugReports: https://github.com/pierreroudier/spectacles/issues
 Depends: R (>= 2.14)
 Imports: ggplot2, methods, plyr, reshape2, stringr, baseline, signal,
         epiR
-Suggests: caret, pls, RColorBrewer
+Suggests: caret, pls, RColorBrewer, knitr, rmarkdown, dplyr
 License: GPL-3
 LazyData: true
 Collate: 'spectacles-package.R' 'AAA-Classes.R' 'Spectra-methods.R'
         'SpectraDataFrame-methods.R' 'ZZZ.R' 'aggregate_spectra.R'
         'australia.R' 'big_head.R' 'kenstone.R' 'performance.R'
         'plot-methods.R' 'preprocessing.R' 'setters.R' 'splice.R'
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.1
+VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2020-02-20 03:24:11 UTC; pierre
+Packaged: 2021-01-10 22:48:20 UTC; pierre
 Author: Pierre Roudier [aut, cre],
   Max Kuhn [ctb],
   Kristian Hovde Liland [ctb],
@@ -35,5 +36,5 @@ Author: Pierre Roudier [aut, cre],
   Raphael Viscarra Rossel [dtc]
 Maintainer: Pierre Roudier <roudierp@landcareresearch.co.nz>
 Repository: CRAN
-Date/Publication: 2020-02-20 06:50:02 UTC
-Built: R 3.6.3; ; 2020-11-02 14:06:20 UTC; unix
+Date/Publication: 2021-01-11 08:00:02 UTC
+Built: R 3.6.3; ; 2022-02-15 17:06:24 UTC; unix

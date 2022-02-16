@@ -1,7 +1,7 @@
 Type: Package
 Package: clipr
 Title: Read and Write from the System Clipboard
-Version: 0.7.0
+Version: 0.7.1
 Authors@R: 
     c(person(given = "Matthew",
              family = "Lincoln",
@@ -29,17 +29,17 @@ VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-US
 LazyData: TRUE
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 SystemRequirements: xclip (https://github.com/astrand/xclip) or xsel
         (http://www.vergenet.net/~conrad/software/xsel/) for accessing
         the X11 clipboard
 NeedsCompilation: no
-Packaged: 2019-07-23 02:33:48 UTC; admin
+Packaged: 2020-10-08 13:13:31 UTC; mlincoln
 Author: Matthew Lincoln [aut, cre] (<https://orcid.org/0000-0002-4387-3384>),
   Louis Maddox [ctb],
   Steve Simpson [ctb],
   Jennifer Bryan [ctb]
 Maintainer: Matthew Lincoln <matthew.d.lincoln@gmail.com>
 Repository: CRAN
-Date/Publication: 2019-07-23 05:00:03 UTC
-Built: R 3.6.3; ; 2020-03-24 19:39:06 UTC; unix
+Date/Publication: 2020-10-08 14:00:05 UTC
+Built: R 3.6.3; ; 2022-02-15 16:25:35 UTC; unix

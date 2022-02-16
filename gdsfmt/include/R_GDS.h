@@ -8,7 +8,7 @@
 //
 // R_GDS.h: C interface to gdsfmt dynamic library
 //
-// Copyright (C) 2014-2017    Xiuwen Zheng
+// Copyright (C) 2014-2019    Xiuwen Zheng
 //
 // This file is part of CoreArray.
 //
@@ -27,9 +27,9 @@
 
 /**
  *	\file     R_GDS.h
- *	\author   Xiuwen Zheng
+ *	\author   Xiuwen Zheng [zhengxwen@gmail.com]
  *	\version  1.0
- *	\date     2014 - 2018
+ *	\date     2014 - 2019
  *	\brief    C interface to gdsfmt dynamic library
  *	\details
 **/
@@ -71,8 +71,8 @@ extern "C" {
 
 	// ==================================================================
 
-	/// Version of R package gdsfmt: v1.16.0
-	#define GDSFMT_R_VERSION       0x011000
+	/// Version of R package gdsfmt: v1.22.0
+	#define GDSFMT_R_VERSION       0x011600
 
 
 	// [[ ********
@@ -196,6 +196,8 @@ extern "C" {
 	extern PdGDSFile GDS_Node_File(PdGDSObj Node);
 	/// delete the GDS variable (requiring >= 1.5.9)
 	extern void GDS_Node_Delete(PdGDSObj Node, C_BOOL Force);
+	/// unload the GDS node (requiring >= 1.21.1)
+	extern void GDS_Node_Unload(PdGDSObj Node);
 	/// get the class name of a GDS node
 	extern void GDS_Node_GetClassName(PdGDSObj Node, char *OutStr, size_t OutSize);
 	/// get the number of nodes in the folder

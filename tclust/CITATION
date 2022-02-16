@@ -11,12 +11,12 @@ citEntry(entry = "Article",
   volume       = "47",
   number       = "12",
   pages        = "1--26",
-  url          = "http://www.jstatsoft.org/v47/i12/",
+  url          = "https://www.jstatsoft.org/v47/i12/",
 
   textVersion  =
   paste("Heinrich Fritz, Luis A. Garcia-Escudero, Agustin Mayo-Iscar (2012).",
         "tclust: An R Package for a Trimming Approach to Cluster Analysis.",
         "Journal of Statistical Software, 47(12), 1-26.",
-        "URL http://www.jstatsoft.org/v47/i12/.")
+        "URL https://www.jstatsoft.org/v47/i12/.")
 )
 

@@ -1,3 +1,35 @@
+# xml2 1.3.3
+
+* Hadley Wickham is now (again) the maintainer.
+
+* xml2 has been re-licensed as MIT (#317).
+
+* `xml_find_all.xml_node()` fails more informatively the `xpath` parameter is the wrong type (@michaelchirico)
+
+* `xml_find_all.xml_nodeset()` gains a `flatten` argument to control whether to return a single nodeset or a list of nodesets (#311, @jakejh)
+
+* `write_xml()` and `write_html()` now return NULL invisibly, as they did prior to version 1.3.0 (#307)
+
+* `XPtr` gets explicit copy constructor and assignment operator definitions, which were two missing components of the [Rule of three](https://en.wikipedia.org/wiki/Rule_of_three_(C%2B%2B_programming)) (@michaelchirico)
+
+* Windows: update to libxml2 2.9.10 and libxslt 1.1.34 and add ucrt libs
+
+# xml2 1.3.2
+
+* `read_html()` and `read_xml()` now error if passed strings of length greater than one (#121)
+
+* `read_xml.raw()` had an inadvertent regression in 1.3.0 and is now again fixed (#300)
+
+* Compilation fix on macOS 10.15.4 (@kevinushey, #296)
+
+# xml2 1.3.1
+
+* `read_html()` now again works with HTML files with non-ASCII encodings (#293).
+
+# xml2 1.3.0
+
+* Removes the Rcpp dependency
+
 # xml2 1.2.5
 
 * Fix compilation issue on macOS versions after High Sierra when not using homebrew supplied libxml2
@@ -21,7 +53,7 @@ without Warnings (@nuest, #267)
 
 ## New Features
 
-* xml2 now has a pkgdown site! <http://xml2.r-lib.org> (@jayhesselberth, #211).
+* xml2 now has a pkgdown site! <https://xml2.r-lib.org> (@jayhesselberth, #211).
 
 * Windows: upgrade to libxml2 2.9.8
 

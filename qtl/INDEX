@@ -82,6 +82,7 @@ find.pheno              Find column number for a particular phenotype
 find.pseudomarker       Find the pseudomarker closest to a specified
                         position
 findDupMarkers          Find markers with identical genotype data
+find_large_intervals    Find large intervals in a map
 fitqtl                  Fit a multiple-QTL model
 fitstahl                Fit Stahl interference model
 flip.order              Flip the orders of markers on a set of

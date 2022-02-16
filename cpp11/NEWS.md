@@ -1,3 +1,11 @@
+# cpp11 0.4.2
+
+* Romain François is now the maintainer.
+
+# cpp11 0.4.1
+
+* Fix crash related to unwind protect optimization (#244)
+
 # cpp11 0.4.0
 
 ## New Features

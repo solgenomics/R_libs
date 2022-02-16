@@ -4,6 +4,9 @@ Progress                Reporting progress (object-oriented API)
 absolutePanel           Panel with absolute positioning
 actionButton            Action button/link
 addResourcePath         Resource Publishing
+bindCache               Add caching with reactivity to an object
+bindEvent               Make an object respond only to specified
+                        reactive events
 bookmarkButton          Create a button for bookmarking/sharing
 bootstrapLib            Bootstrap libraries
 bootstrapPage           Create a Bootstrap page
@@ -13,24 +16,23 @@ brushedPoints           Find rows of data selected on an interactive
 callModule              Invoke a Shiny module
 checkboxGroupInput      Checkbox Group Input Control
 checkboxInput           Checkbox Input Control
-clickOpts               Create an object representing click options
+clickOpts               Control interactive plot point events
 column                  Create a column within a UI definition
 conditionalPanel        Conditional Panel
-createRenderFunction    Implement render functions
+createRenderFunction    Implement custom render functions
 createWebDependency     Create a web dependency
+dataTableOutput         Table output with the JavaScript DataTables
+                        library
 dateInput               Create date input
 dateRangeInput          Create date range input
-dblclickOpts            Create an object representing double-click
-                        options
 debounce                Slow down a reactive expression with
                         debounce/throttle
-diskCache               Create a disk cache object
+devmode                 Shiny Developer Mode
 domains                 Reactive domains
 downloadButton          Create a download button or link
 downloadHandler         File Downloads
 enableBookmarking       Enable bookmarking for a Shiny application
 exportTestValues        Register expressions for export in test mode
-exprToFunction          Convert an expression to a function
 fileInput               File Upload Control
 fillPage                Create a page that fills the window
 fillRow                 Flex Box-based row/column layouts
@@ -43,27 +45,22 @@ getQueryString          Get the query string / hash component from the
                         URL
 getShinyOption          Get or set Shiny options
 helpText                Create a help text element
-hoverOpts               Create an object representing hover options
 htmlOutput              Create an HTML output element
 icon                    Create an icon
 inputPanel              Input panel
 insertTab               Dynamically insert/remove a tabPanel
 insertUI                Insert and remove UI objects
-installExprFunction     Install an expression as a function
 invalidateLater         Scheduled Invalidation
 is.reactivevalues       Checks whether an object is a reactivevalues
                         object
 isRunning               Check whether a Shiny application is running
+isTruthy                Truthy and falsy values
 isolate                 Create a non-reactive scope for an expression
-knitr_methods           Knitr S3 methods
 loadSupport             Load an app's supporting R files
-makeReactiveBinding     Make a reactive variable
 markRenderFunction      Mark a function as a render function
 markdown                Insert inline Markdown
 maskReactiveContext     Evaluate an expression without a reactive
                         context
-memoryCache             Create a memory cache object
-modalButton             Create a button for a modal dialog
 modalDialog             Create a modal dialog UI
 moduleServer            Shiny modules
 navbarPage              Create a page with a top level navigation bar
@@ -93,13 +90,9 @@ reactlog                Reactive Log Visualizer
 registerInputHandler    Register an Input Handler
 removeInputHandler      Deregister an Input Handler
 renderCachedPlot        Plot output with cached images
-renderDataTable         Table output with the JavaScript library
-                        DataTables
 renderImage             Image file output
 renderPlot              Plot Output
-renderPrint             Printable Output
-renderTable             Table Output
-renderText              Text Output
+renderPrint             Text Output
 renderUI                UI Output
 repeatable              Make a random number generator repeatable
 req                     Check for required values
@@ -115,6 +108,8 @@ serverInfo              Collect information about the Shiny Server
                         environment
 session                 Session object
 setBookmarkExclude      Exclude inputs from bookmarking
+setSerializer           Add a function for serializing an input before
+                        bookmarking application state
 shiny-package           Web Application Framework for R
 shinyApp                Create a Shiny app object
 shinyAppTemplate        Generate a Shiny application from a template
@@ -138,7 +133,7 @@ splitLayout             Split layout
 stopApp                 Stop the currently running Shiny app
 submitButton            Create a submit button
 tabPanel                Create a tab panel
-tableOutput             Create a table output element
+tableOutput             Table Output
 tabsetPanel             Create a tabset panel
 testServer              Reactive testing for Shiny server functions and
                         modules

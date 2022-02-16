@@ -1,22 +1,22 @@
 Package: iterators
 Type: Package
 Title: Provides Iterator Construct
-Version: 1.0.12
-Authors@R: c(person("Hong", "Ooi", role="cre", email="hongooi@microsoft.com"),
+Version: 1.0.14
+Authors@R: c(person("Folashade", "Daniel", role="cre", email="fdaniel@microsoft.com"),
              person("Revolution", "Analytics", role=c("aut", "cph")),
-			 person("Steve", "Weston", role="aut"))
+             person("Steve", "Weston", role="aut"))
 Description: Support for iterators, which allow a programmer to traverse
-        through all the elements of a vector, list, or other collection
-        of data.
+    through all the elements of a vector, list, or other collection of data.
+URL: https://github.com/RevolutionAnalytics/iterators
 Depends: R (>= 2.5.0), utils
 Suggests: RUnit, foreach
 License: Apache License (== 2.0)
 NeedsCompilation: no
-Packaged: 2019-07-26 18:07:06 UTC; richcala
-Author: Hong Ooi [cre],
+Packaged: 2022-01-16 18:19:31 UTC; folashade
+Author: Folashade Daniel [cre],
   Revolution Analytics [aut, cph],
   Steve Weston [aut]
-Maintainer: Hong Ooi <hongooi@microsoft.com>
+Maintainer: Folashade Daniel <fdaniel@microsoft.com>
 Repository: CRAN
-Date/Publication: 2019-07-26 22:50:02 UTC
-Built: R 3.6.3; ; 2020-03-24 19:42:49 UTC; unix
+Date/Publication: 2022-02-05 00:50:08 UTC
+Built: R 3.6.3; ; 2022-02-15 16:31:02 UTC; unix

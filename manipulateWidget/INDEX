@@ -28,5 +28,7 @@ mwSelectize             Add a Select list input to a manipulateWidget
 mwSharedValue           Shared Value
 mwSlider                Add a Slider to a manipulateWidget gadget
 mwText                  Add a text input to a manipulateWidget gadget
+mwTranslations          Translate UI titles and labels
 staticPlot              Include a static image in a combinedWidgets
 summary.MWController    summary method for MWController object
+worldEnergyUse          Evolution of energy use per country

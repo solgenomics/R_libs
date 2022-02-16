@@ -14,6 +14,7 @@ MclustDR                Dimension reduction for model-based clustering
                         and classification
 MclustDRsubsel          Subset selection for GMMDR directions based on
                         BIC
+MclustSSC               MclustSSC semi-supervised classification
 acidity                 Acidity data
 adjustedRandIndex       Adjusted Rand Index
 banknote                Swiss banknotes data
@@ -42,6 +43,7 @@ coordProj               Coordinate projections of multidimensional data
                         modeled by an MVN mixture.
 covw                    Weighted means, covariance and scattering
                         matrices conditioning on a weighted matrix
+crimcoords              Discriminant coordinates data projection
 cross                   Simulated Cross Data
 cv.MclustDA             Deprecated Functions in mclust package
 cvMclustDA              MclustDA cross-validation
@@ -54,6 +56,8 @@ densityMclust.diagnostic
                         Diagnostic plots for 'mclustDensity' estimation
 diabetes                Diabetes data
 dmvnorm                 Density of multivariate Gaussian distribution
+dupPartition            Partition the data by grouping together
+                        duplicated data
 em                      EM algorithm starting with E-step for
                         parameterized Gaussian mixture models
 emControl               Set control values for use with the EM
@@ -71,6 +75,7 @@ gmmhd                   Identifying Connected Components in Gaussian
 hc                      Model-based Agglomerative Hierarchical
                         Clustering
 hcE                     Model-based Hierarchical Clustering
+hcRandomPairs           Random hierarchical structure
 hclass                  Classifications from Hierarchical Agglomeration
 hdrlevels               Highest Density Region (HDR) Levels
 hypvol                  Aproximate Hypervolume for Multivariate Data
@@ -130,8 +135,12 @@ plot.MclustDA           Plotting method for MclustDA discriminant
                         analysis
 plot.MclustDR           Plotting method for dimension reduction for
                         model-based clustering and classification
+plot.MclustSSC          Plotting method for MclustSSC semi-supervised
+                        classification
 plot.clustCombi         Plot Combined Clusterings Results
 plot.densityMclust      Plots for Mixture-Based Density Estimate
+plot.hc                 Dendrograms for Model-based Agglomerative
+                        Hierarchical Clustering
 plot.mclustBIC          BIC Plot for Model-Based Clustering
 plot.mclustICL          ICL Plot for Model-Based Clustering
 predict.Mclust          Cluster multivariate observations by Gaussian
@@ -141,6 +150,8 @@ predict.MclustDA        Classify multivariate observations by Gaussian
 predict.MclustDR        Classify multivariate observations on a
                         dimension reduced subspace by Gaussian finite
                         mixture modeling
+predict.MclustSSC       Classification of multivariate observations by
+                        semi-supervised Gaussian finite mixtures
 predict.densityMclust   Density estimate of multivariate observations
                         by Gaussian finite mixture modeling
 priorControl            Conjugate Prior for Gaussian Mixtures.
@@ -148,7 +159,6 @@ randProj                Random projections of multidimensional data
                         modeled by an MVN mixture
 randomOrthogonalMatrix
                         Random orthogonal matrix
-randomPairs             Random hierarchical structure
 sigma2decomp            Convert mixture component covariances to
                         decomposition form.
 sim                     Simulate from Parameterized MVN Mixture Models
@@ -161,6 +171,8 @@ summary.MclustDA        Summarizing discriminant analysis based on
                         Gaussian finite mixture modeling
 summary.MclustDR        Summarizing dimension reduction method for
                         model-based clustering and classification
+summary.MclustSSC       Summarizing semi-supervised classification
+                        model based on Gaussian finite mixtures
 summary.mclustBIC       Summary function for model-based clustering via
                         BIC
 surfacePlot             Density or uncertainty surface for bivariate

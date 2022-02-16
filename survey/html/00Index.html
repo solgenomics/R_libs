@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;survey&rsquo; version 4.0</h2>
+</div><h2>Documentation for package &lsquo;survey&rsquo; version 4.1-1</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -79,6 +79,10 @@
 <tr><td style="width: 25%;"><a href="compressWeights.html">as.matrix.repweights_compressed</a></td>
 <td>Compress replicate weight matrix</td></tr>
 <tr><td style="width: 25%;"><a href="as.svrepdesign.html">as.svrepdesign</a></td>
+<td>Convert a survey design to use replicate weights</td></tr>
+<tr><td style="width: 25%;"><a href="as.svrepdesign.html">as.svrepdesign.default</a></td>
+<td>Convert a survey design to use replicate weights</td></tr>
+<tr><td style="width: 25%;"><a href="as.svrepdesign.html">as.svrepdesign.svyimputationList</a></td>
 <td>Convert a survey design to use replicate weights</td></tr>
 <tr><td style="width: 25%;"><a href="as.svydesign2.html">as.svydesign2</a></td>
 <td>Update to the new survey design format</td></tr>
@@ -252,8 +256,12 @@
 <td>Estimated weights for missing data</td></tr>
 <tr><td style="width: 25%;"><a href="estweights.html">estWeights.twophase</a></td>
 <td>Estimated weights for missing data</td></tr>
+<tr><td style="width: 25%;"><a href="anova.svyglm.html">extractAIC.svrepglm</a></td>
+<td>Model comparison for glms.</td></tr>
 <tr><td style="width: 25%;"><a href="svycoxph.html">extractAIC.svycoxph</a></td>
 <td>Survey-weighted Cox models.</td></tr>
+<tr><td style="width: 25%;"><a href="anova.svyglm.html">extractAIC.svyglm</a></td>
+<td>Model comparison for glms.</td></tr>
 </table>
 
 <h2><a name="F">-- F --</a></h2>
@@ -373,6 +381,12 @@
 <h2><a name="O">-- O --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="oldsvyquantile.html">oldsvyquantile</a></td>
+<td>Deprecated implementation of quantiles</td></tr>
+<tr><td style="width: 25%;"><a href="oldsvyquantile.html">oldsvyquantile.survey.design</a></td>
+<td>Deprecated implementation of quantiles</td></tr>
+<tr><td style="width: 25%;"><a href="oldsvyquantile.html">oldsvyquantile.svyrep.design</a></td>
+<td>Deprecated implementation of quantiles</td></tr>
 <tr><td style="width: 25%;"><a href="svyCprod.html">onestage</a></td>
 <td>Computations for survey variances</td></tr>
 <tr><td style="width: 25%;"><a href="twophase.html">onestage.phase1</a></td>
@@ -402,6 +416,8 @@
 <td>Estimate survival function.</td></tr>
 <tr><td style="width: 25%;"><a href="svysmooth.html">plot.svysmooth</a></td>
 <td>Scatterplot smoothing and density estimation</td></tr>
+<tr><td style="width: 25%;"><a href="poisson_sampling.html">poisson_sampling</a></td>
+<td>Specify Poisson sampling design</td></tr>
 <tr><td style="width: 25%;"><a href="postStratify.html">postStratify</a></td>
 <td>Post-stratify a survey</td></tr>
 <tr><td style="width: 25%;"><a href="postStratify.html">postStratify.survey.design</a></td>
@@ -410,6 +426,8 @@
 <td>Post-stratify a survey</td></tr>
 <tr><td style="width: 25%;"><a href="postStratify.html">postStratify.twophase</a></td>
 <td>Post-stratify a survey</td></tr>
+<tr><td style="width: 25%;"><a href="HR.html">ppscov</a></td>
+<td>Wrappers for specifying PPS designs</td></tr>
 <tr><td style="width: 25%;"><a href="HR.html">ppsmat</a></td>
 <td>Wrappers for specifying PPS designs</td></tr>
 <tr><td style="width: 25%;"><a href="svyglm.html">predict.svrepglm</a></td>
@@ -440,8 +458,8 @@
 <td>Cumulative Distribution Function</td></tr>
 <tr><td style="width: 25%;"><a href="svymle.html">print.svymle</a></td>
 <td>Maximum pseudolikelihood estimation in complex surveys</td></tr>
-<tr><td style="width: 25%;"><a href="svyquantile.html">print.svyquantile</a></td>
-<td>Quantiles for sample surveys</td></tr>
+<tr><td style="width: 25%;"><a href="oldsvyquantile.html">print.svyquantile</a></td>
+<td>Deprecated implementation of quantiles</td></tr>
 <tr><td style="width: 25%;"><a href="svyratio.html">print.svyratio</a></td>
 <td>Ratio estimation</td></tr>
 <tr><td style="width: 25%;"><a href="svyratio.html">print.svyratio_separate</a></td>
@@ -489,8 +507,6 @@
 <td>Extract standard errors</td></tr>
 <tr><td style="width: 25%;"><a href="svyby.html">SE.svyby</a></td>
 <td>Survey statistics on subsets</td></tr>
-<tr><td style="width: 25%;"><a href="svyquantile.html">SE.svyquantile</a></td>
-<td>Quantiles for sample surveys</td></tr>
 <tr><td style="width: 25%;"><a href="svyratio.html">SE.svyratio</a></td>
 <td>Ratio estimation</td></tr>
 <tr><td style="width: 25%;"><a href="nonresponse.html">sparseCells</a></td>
@@ -559,6 +575,8 @@
 <td>Survey statistics on subsets</td></tr>
 <tr><td style="width: 25%;"><a href="svyby.html">svyby.survey.design2</a></td>
 <td>Survey statistics on subsets</td></tr>
+<tr><td style="width: 25%;"><a href="svyby.html">svybys</a></td>
+<td>Survey statistics on subsets</td></tr>
 <tr><td style="width: 25%;"><a href="svycdf.html">svycdf</a></td>
 <td>Cumulative Distribution Function</td></tr>
 <tr><td style="width: 25%;"><a href="svychisq.html">svychisq</a></td>
@@ -601,6 +619,8 @@
 <td>Survey-weighted generalised linear models.</td></tr>
 <tr><td style="width: 25%;"><a href="svyglm.html">svyglm.svyrep.design</a></td>
 <td>Survey-weighted generalised linear models.</td></tr>
+<tr><td style="width: 25%;"><a href="svygofchisq.html">svygofchisq</a></td>
+<td>Test of fit to known probabilities</td></tr>
 <tr><td style="width: 25%;"><a href="svyhist.html">svyhist</a></td>
 <td>Histograms and boxplots</td></tr>
 <tr><td style="width: 25%;"><a href="svyivreg.html">svyivreg</a></td>
@@ -641,12 +661,16 @@
 <td>Sampling-weighted principal component analysis</td></tr>
 <tr><td style="width: 25%;"><a href="svypredmeans.html">svypredmeans</a></td>
 <td>Predictive marginal means</td></tr>
+<tr><td style="width: 25%;"><a href="svyqqplot.html">svyqqmath</a></td>
+<td>Quantile-quantile plots for survey data</td></tr>
+<tr><td style="width: 25%;"><a href="svyqqplot.html">svyqqplot</a></td>
+<td>Quantile-quantile plots for survey data</td></tr>
 <tr><td style="width: 25%;"><a href="svyquantile.html">svyquantile</a></td>
-<td>Quantiles for sample surveys</td></tr>
+<td>Quantiles under complex sampling.</td></tr>
 <tr><td style="width: 25%;"><a href="svyquantile.html">svyquantile.survey.design</a></td>
-<td>Quantiles for sample surveys</td></tr>
+<td>Quantiles under complex sampling.</td></tr>
 <tr><td style="width: 25%;"><a href="svyquantile.html">svyquantile.svyrep.design</a></td>
-<td>Quantiles for sample surveys</td></tr>
+<td>Quantiles under complex sampling.</td></tr>
 <tr><td style="width: 25%;"><a href="svyranktest.html">svyranktest</a></td>
 <td>Design-based rank tests</td></tr>
 <tr><td style="width: 25%;"><a href="svyratio.html">svyratio</a></td>
@@ -768,6 +792,8 @@
 <tr><td style="width: 25%;"><a href="withReplicates.html">withReplicates.svrepstat</a></td>
 <td>Compute variances by replicate weighting</td></tr>
 <tr><td style="width: 25%;"><a href="withReplicates.html">withReplicates.svrepvar</a></td>
+<td>Compute variances by replicate weighting</td></tr>
+<tr><td style="width: 25%;"><a href="withReplicates.html">withReplicates.svyimputationList</a></td>
 <td>Compute variances by replicate weighting</td></tr>
 <tr><td style="width: 25%;"><a href="withReplicates.html">withReplicates.svyrep.design</a></td>
 <td>Compute variances by replicate weighting</td></tr>

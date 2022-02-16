@@ -6,7 +6,7 @@ ROCR.simple             Data set: Simple artificial prediction data for
 ROCR.xval               Data set: Artificial cross-validation data for
                         use with ROCR
 performance             Function to create performance objects
-performance-class       Class "performance"
+performance-class       Class 'performance'
 plot-methods            Plot method for performance objects
 prediction              Function to create prediction objects
-prediction-class        Class "prediction"
+prediction-class        Class 'prediction'

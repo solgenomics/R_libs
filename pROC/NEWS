@@ -1,3 +1,20 @@
+1.18.0 (2021-09-02):
+  * Add CI of the estimate for 'roc.test' (DeLong, paired only for now) (code contributed by Zane Billings) (pr #95) 
+  * Fix documentation and alternative hypothesis for Venkatraman test (issue #92)
+
+1.17.0.1 (2021-01-07):
+  * Fix CRAN incoming checks as requested by CRAN
+
+1.17.0 (2020-12-29)
+  * Accept more values in 'input' of coords (issue #67)
+  * Accept 'kappa' for the 'power.roc.test' of two ROC curves (issue #82)
+  * The 'input' argument to 'coords' for 'smooth.roc' curves no longer has a default
+  * The 'x' argument to 'coords' for 'smooth.roc' can now be set to 'all' (also the default)
+  * Fix bootstrap roc.test and cov with 'smooth.roc' curves
+  * The 'ggroc' function can now plot 'smooth.roc' curves (issue #86)
+  * Remove warnings with 'warnPartialMatchDollar' option (issue #87)
+  * Make tests depending on vdiffr conditional (issue #88)
+
 1.16.2 (2020-03-19)
   * Skip test depending on Rcpp version
 
@@ -44,7 +61,7 @@
   * The 'multiclass.roc' function now accepts multivariate decision values (code contributed by Matthias Döring)
   * 'ggroc' supports multiple aesthetics (issue #42)
   * Make 'ggplot2' dependency optional
-  * Suggested packages can be installed interactively when required
+  * CSuggested packages can be installed interactively when required
   * Passing both 'cases' and 'controls' or 'response' and 'predictor' arguments is now an error
   * Many small bug fixes
 

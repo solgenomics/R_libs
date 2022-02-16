@@ -1,6 +1,6 @@
 Revision history for the R/qtl package
 ----------------------------------------------------------------------
-copyright (c) 2001-2020, Karl W Broman
+copyright (c) 2001-2021, Karl W Broman
 <https://rqtl.org>
 
     The R/qtl package is free software; you can redistribute it and/or
@@ -15,6 +15,64 @@ copyright (c) 2001-2020, Karl W Broman
     A copy of the GNU General Public License, version 3, is available
     at https://www.r-project.org/Licenses/GPL-3
 ----------------------------------------------------------------------
+
+## Verison 1.50, 2021-10-06
+
+## New features
+
+- `cim()` now includes an `addcovar` argument for including additional
+  covariates in the model.
+
+### Minor changes
+
+- Revised qtlversion() to handle a case like "1.50".
+
+- Added `#define USE_FC_LEN_T` in C code that calls Fortran, because
+  of a change in R 3.6.5 that's going to be required in R 4.2.0.
+
+
+## Version 1.48, 2021-03-24
+
+### Bug fixes
+
+- Fixed bug in `addqtl()` and `addpair()` in which the argument
+  `forceXcovar` wasn't getting passed to `scanqtl()`.
+
+- Fixed bug in `stepwiseqtl()` regarding the way the null LOD score is
+  calculated.
+
+
+## Version 1.47, 2021-01-07
+
+### Minor changes
+
+- Added function `find_large_intervals()` for finding inter-marker
+  intervals in a map with length greater than some value.
+
+- Fixed potential problem in documentation, since `plot()` has moved
+  from the graphics package to base.
+
+- Acknowledge R Core Team among contributors, as zeroin function
+  (in C) had been taken from R version 2.15.1. Also add a Copyrights
+  field to the DESCRIPTION file.
+
+- Allow `rescalemap()`, `shiftmap()`, `summaryMap()`, and
+  `jittermap()` to work with plain lists.
+
+- Fixed Issue #91 where pull.rf() gives a cryptic error if marker
+  names are not all distinct.
+
+### Bug fixes
+
+- Fix a problem in `inferredpartitions()` that occurs in the devel
+  version of R.
+
+- Small change to `read.cross()` to avoid warning about length of
+  `alleles` argument for `crosstype="4way"`. (Fixes Issue #90.)
+
+- Small change to `read.cross()` to avoid messing with X chromosome
+  genotypes when `crosstype=4way"`. (Fixes Issue #88.)
+
 
 ## Version 1.46, 2020-02-28
 

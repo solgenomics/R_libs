@@ -16,23 +16,14 @@ d
 
 ## -----------------------------------------------------------------------------
 library(units)
-ud_units[1:3]
-
-## -----------------------------------------------------------------------------
 (a <- set_units(runif(10),  m/s))
 
 ## -----------------------------------------------------------------------------
 set_units(10, m/s)
 
 ## -----------------------------------------------------------------------------
-length(ud_units)
-
-## -----------------------------------------------------------------------------
-with(ud_units, km/h)
-
-## -----------------------------------------------------------------------------
 b = a
-units(b) <- with(ud_units, km/h)
+units(b) <- make_units(km/h)
 b
 
 ## -----------------------------------------------------------------------------
@@ -45,15 +36,15 @@ a ** -2
 a + b # m/s + km/h -> m/s
 
 ## -----------------------------------------------------------------------------
-t <- with(ud_units, s)
+t <- make_units(s)
 a * t
 
 ## -----------------------------------------------------------------------------
-t <- with(ud_units, min)
+t <- make_units(min)
 a * t
 
 ## -----------------------------------------------------------------------------
-m <- with(ud_units, m)
+m <- make_units(m)
 a * t / m
 
 ## -----------------------------------------------------------------------------
@@ -68,7 +59,7 @@ sum(a)
 min(a)
 max(a)
 range(a)
-with(ud_units, min(m/s, km/h)) # converts to first unit:
+make_units(min(m/s, km/h)) # converts to first unit:
 
 ## -----------------------------------------------------------------------------
 a
@@ -117,7 +108,7 @@ d[1, "yz"]
 (x = 1:10 * as_units("m2 s-1"))
 
 ## -----------------------------------------------------------------------------
-y = 1:10 * with(ud_units, m^2/s)
+y = 1:10 * make_units(m^2/s)
 x + y
 
 ## -----------------------------------------------------------------------------
@@ -125,10 +116,10 @@ deparse_unit(x)
 
 ## ----fig=TRUE-----------------------------------------------------------------
 mar = par("mar") + c(0, .3, 0, 0)
-displacement = mtcars$disp * ud_units[["in"]]^3
-units(displacement) = with(ud_units, cm^3)
-weight = mtcars$wt * 1000 * with(ud_units, lb)
-units(weight) = with(ud_units, kg)
+displacement = mtcars$disp * as_units("in")^3
+units(displacement) = make_units(cm^3)
+weight = mtcars$wt * 1000 * make_units(lb)
+units(weight) = make_units(kg)
 par(mar = mar)
 plot(weight, displacement)
 
@@ -144,8 +135,8 @@ plot(weight, displacement)
 
 ## -----------------------------------------------------------------------------
 gallon = as_units("gallon")
-consumption = mtcars$mpg * with(ud_units, mi/gallon)
-units(consumption) = with(ud_units, km/l)
+consumption = mtcars$mpg * make_units(mi/gallon)
+units(consumption) = make_units(km/l)
 par(mar = mar)
 plot(displacement, consumption) # division in consumption
 units_options(negative_power = TRUE) # division becomes ^-1

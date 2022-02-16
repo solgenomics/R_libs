@@ -1,3 +1,78 @@
+# version 0.8-0
+
+* enhance unit mapping for newly installed units; #290
+
+* remove deprecations: `install_symbolic_unit`, `remove_symbolic_unit`,
+  `install_conversion_constant`, `install_conversion_offset`; #290
+
+* fix multipliers for round trip log-exp operations; #292
+
+* integrate `ggplot2` scales (previously in the `ggforce` package) to
+  automatically print axes with units; #294 addressing #164
+
+* fix `all.equal.units` for non-units `current`
+
+* fix zero power; #285
+
+* fix `unique.units` to support arrays and matrices, implement methods for
+  `duplicated` and `anyDuplicated`
+
+* fix plot labels with spaces; #298 addressing #297
+
+* always add units to labels, including user-provided ones; as part of #298
+
+* new symbols/names with a percentage character are not allowed due to an
+  upstream bug; #289
+
+# version 0.7-2
+
+* enhance `pillar` integration; #273, #275, #280 @krlmlr
+
+* new `unique` method for `units` and `mixed_units` objects; #283 addressing
+  #277 @lewinfox
+
+# version 0.7-1
+
+* allow longer units grouping; #270 addressing #269 @bart1
+
+* fix regression in `set_units` method for `mixed_units` to ensure that
+  ordering is preserved; #272 addressing #271
+
+# version 0.7-0
+
+* add `load_units_xml` to enable database reloading as well as loading
+  user-provided unit systems; #254 addressing #243, #244
+
+* add `install_unit` and `remove_unit` for adding/removing custom user-defined
+  symbols or names, with optional mapping to existing units;
+  `install_symbolic_unit`, `remove_symbolic_unit`, `install_conversion_constant`,
+  `install_conversion_offset` are deprecated; #261 addressing #89
+
+* add `keep_units`, a helper to apply functions that do not preserve units;
+  #255 addressing #252
+
+* fix `as_units("")`, which is now equivalent to `unitless`; #199
+
+* fix plot axes for `plot.formula` and `plot.data.frame`; #213
+
+* fix arithmetic for powers above 1 and below -1; #264
+
+* improve arithmetic of logarithms; #249
+
+* export `ud_are_convertible`; #263 addressing #258 @cregouby
+
+* remove deprecations: `as.units`, `as_cf`, `make_unit`, `parse_unit`; #259
+
+* remove deprecated pre-computed `ud_units` database; #259
+
+# version 0.6-7
+
+* port `isFALSE` to fix regression in old R versions; #230 addressing #229
+
+* fix replacement operation for `units` objects; #233 addressing #232
+
+* fix compatibility with dplyr 1.0; #247 addressing #239
+
 # version 0.6-6
 
 * prettier `str` print for units and mixed units; #228 addressing #227

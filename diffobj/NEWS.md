@@ -1,5 +1,49 @@
 # diffobj
 
+## v0.3.5
+
+* Options automatically fallback to factory defaults if they are unset (h/t
+  @gadenbui).
+* [#158](https://github.com/brodieG/diffobj/issues/158): Calling `diff*` with
+  `do.call` now works without warnings.
+* [#117](https://github.com/brodieG/diffobj/issues/117): Fix guide detection
+  with very wide wrapped data.frames (h/t @bastician, @overvolting).
+
+## v0.3.4
+
+* Add a print method for `ses_dat` return values that makes it easier to
+  interpret the diff.
+* [#152](https://github.com/brodieG/diffobj/issues/152): Rewrite the
+  fall-back "O(n)" algorithm that kicks in when there are `max.diffs`
+  differences to be more robust (h/t @hadley, @DanChaltiel, @gadenbui).
+* Related to #152: `max.diffs=0` used to mean the same as `max.diffs=-1` (i.e.
+  unlimited), but this was undocumented and an error.  `max.diffs=0` will now
+  immediately fall back to the "O(n)" algorithm.
+
+## v0.3.3
+
+* Implement experimental .Rout / .Rout.save testing.
+* Fix `all.equal` test breakages from
+  [r79555](https://github.com/r-devel/r-svn/commit/66d016544fe9deb64aa74ae55fa3edfcb721b1c4).
+
+## v0.3.1-2
+
+* [#150](https://github.com/brodieG/diffobj/issues/150): Make tests compatible
+  with new `testthat` release (h/t @hadley).
+* Remove pre-built vignettes and note `testthat` change to `waldo` release.
+
+## v0.3.0
+
+* [#143](https://github.com/brodieG/diffobj/issues/143): Add `ses_dat` to
+  provide a more computable version of `ses` (h/t @hadley).
+* [#144](https://github.com/brodieG/diffobj/issues/144): Re-encode strings to
+  UTF-8 prior to comparison to avoid spurious encoding-only differences (h/t
+  @hadley).
+* [#142](https://github.com/brodieG/diffobj/issues/142): Typos in
+  `standardGeneric` in trim/guide generic definitions.
+* Drop attributes from inputs to `diffChr` (revealed as an issue by #142).
+* Banish ghosts of `stringsAsFactors`.
+
 ## v0.2.4
 
 * Tests explicitly set `stringsAsFactors=TRUE` so they don't fail with the
@@ -151,9 +195,7 @@ affect user facing behavior.
   HTML mode
 * [#63](https://github.com/brodieG/diffobj/issues/63): Show `all.equal` output
   when objects are not `all.equal` but there are no visible differences
-* Add [Mean Relative
-  Indifference](http://htmlpreview.github.io/?https://raw.githubusercontent.com/brodieG/diffobj/master/inst/doc/metacomp.html)
-  vignette and update vignette styling
+* Add Mean Relative Indifference vignette and update vignette styling
 
 ## v0.1.4
 
@@ -164,7 +206,7 @@ affect user facing behavior.
 ## v0.1.3
 
 * First version on CRAN
-* [#51](https://github.com/brodieG/diffobj/issues/51): use RStudio viewport to display HTML diffs when running in RStudio, as per [Noam Ross](https://twitter.com/noamross/status/760115813559009280)
+* [#51](https://github.com/brodieG/diffobj/issues/51): use RStudio viewport to display HTML diffs when running in RStudio (h/t Noam Ross)
 * [#54](https://github.com/brodieG/diffobj/issues/54): [#55](https://github.com/brodieG/diffobj/issues/55), scale HTML output to viewport width (see `?Style`)
 * [#53](https://github.com/brodieG/diffobj/issues/53): default term colors computed on run instead of on package load
 * [#56](https://github.com/brodieG/diffobj/issues/56): disable wrap for HTML output
@@ -173,7 +215,7 @@ affect user facing behavior.
 * Fix subtle rendering and formatting application flaws
 * Switch Travis shields to SVG per Gábor Csárdi
 * Improve in-hunk alignment of partially matching lines
-* Compile with `-pedantic`, fix related warnings [Arun](http://stackoverflow.com/users/559784/arun)
+* Compile with `-pedantic`, fix related warnings [Arun](https://stackoverflow.com/users/559784/arun)
 * Improved coverage and more robust testing
 * Several internal structure changes to accommodate improvements
 

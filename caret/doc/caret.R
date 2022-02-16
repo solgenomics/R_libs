@@ -4,6 +4,7 @@ library(caret)
 library(mlbench)
 data(Sonar)
 library(pls)
+library(klaR)
 library(knitr)
 opts_chunk$set(
   comment = "#>",
@@ -31,9 +32,6 @@ getInfo <- function(what = "Suggests") {
 
 ## ----install, eval = FALSE---------------------------
 #  install.packages("caret", dependencies = c("Depends", "Suggests"))
-
-## ----echo = FALSE, out.width = '80%'-----------------
-knitr::include_graphics("train_algo.png")
 
 ## ----SonarSplit--------------------------------------
 library(caret)

@@ -56,7 +56,6 @@ test.runMin <- function() {
 test.runMin.cumulative <- function() {
   ttr <- runMin(input$all$Close, 1, TRUE)
   base <- cummin(input$all$Close)
-  is.na(base) <- 1
   checkEqualsNumeric(base, ttr)
 }
 
@@ -75,7 +74,6 @@ test.runMax <- function() {
 test.runMax.cumulative <- function() {
   ttr <- runMax(input$all$Close, 1, TRUE)
   base <- cummax(input$all$Close)
-  is.na(base) <- 1
   checkEqualsNumeric(base, ttr)
 }
 
@@ -96,6 +94,11 @@ test.runMean.cumulative <- function() {
   base <- cumsum(input$all$Close) / seq_along(input$all$Close)
   is.na(base) <- 1:4
   checkEqualsNumeric(base, ttr)
+}
+test.runMean.cumulative.n.equals.1 <- function() {
+  n.1.cum <- runMean(1, n = 1, cumulative = TRUE)
+  n.1.noncum <- runMean(1, n = 1, cumulative = FALSE)
+  checkEqualsNumeric(n.1.cum, n.1.noncum)
 }
 
 
@@ -131,6 +134,19 @@ test.runMedian.cumulative <- function() {
   checkEqualsNumeric(base, ttr)
 }
 
+test.runMedian.cumulative.leading.NA <- function() {
+  na <- rep(NA, 10)
+  x <- input$all$Close
+  xmed <- runMedian(x, 1, "mean", TRUE)
+  y <- c(na, input$all$Close)
+  ymed <- runMedian(y, 1, "mean", TRUE)
+  checkEqualsNumeric(ymed, c(na, xmed))
+}
+test.runMedian.cumulative.n.equals.1 <- function() {
+  n.1.cum <- runMedian(1, n = 1, cumulative = TRUE)
+  n.1.noncum <- runMedian(1, n = 1, cumulative = FALSE)
+  checkEqualsNumeric(n.1.cum, n.1.noncum)
+}
 
 # Covariance
 test.runCov <- function() {
@@ -144,7 +160,18 @@ test.runCov <- function() {
   checkException( runCov(input$all$Close, n = -1) )
   checkException( runCov(input$all$Close, n = NROW(input$all) + 1) )
   checkEqualsNumeric( tail(runCov(input$all$High, input$all$Low, 250),1), cov(input$all$High, input$all$Low) )
+  # x argument as xts object
+  checkEqualsNumeric( runCov(xts::as.xts(input$all)$High, input$all$Low), output$allCov )
+  # x and y arguments as xts objects
+  checkEqualsNumeric( runCov(xts::as.xts(input$all)$High, xts::as.xts(input$all)$Low), output$allCov )
 }
+
+test.runCov.xts.nonleading.na <- function() {
+  top <- input$top$Close
+  mid <- input$mid$Close
+  checkException(runCov(top, mid))
+}
+
 test.runCov.cumulative <- function() {
   cumcov <- compiler::cmpfun(
     function(x) {
@@ -243,6 +270,16 @@ test.runMAD.cumulative <- function() {
   checkEqualsNumeric(base, ttr)
 }
 
+test.runMAD.cumulative.leading.NA <- function() {
+  na <- rep(NA, 10)
+  x <- input$all$Close
+  xmed <- runMAD(x, 1, cumulative = TRUE)
+  y <- c(na, input$all$Close)
+  ymed <- runMAD(y, 1, cumulative = TRUE)
+  checkEqualsNumeric(ymed, c(na, xmed))
+}
+
+
 # Percent Rank
 test.runPercentRank_exact.multiplier_bounds <- function() {
   x <- input$all$Close
@@ -277,19 +314,23 @@ test.runPercentRank_exact.multiplier_eq1 <- function() {
 test.runPercentRank_cumulTRUE_exact.multiplier_eq0 <- function() {
   xrank <- c(0, 0, 2, 0, 4, 1, 0, 2, 3, 3, 0, 8,
              4, 7, 10, 13, 11, 14, 4, 6) / 1:20
+  xrank[1:9] <- NA
+  xrank[10] <- 0
   checkIdentical(xrank, runPercentRank(xdata, 10, TRUE, 0))
 }
 
 test.runPercentRank_cumulTRUE_exact.multiplier_eq0.5 <- function() {
   xrank <- (c(0, 0, 2, 0, 4, 1, 0, 2, 3, 3, 0, 8,
              4, 7, 10, 13, 11, 14, 4, 6) + 0.5) / 1:20
-  #xrank[1] <- 0
+  xrank[1:9] <- NA
+  xrank[10] <- 0.5
   checkIdentical(xrank, runPercentRank(xdata, 10, TRUE, 0.5))
 }
 
 test.runPercentRank_cumulTRUE_exact.multiplier_eq1 <- function() {
   xrank <- (c(0, 0, 2, 0, 4, 1, 0, 2, 3, 3, 0, 8,
              4, 7, 10, 13, 11, 14, 4, 6) + 1) / 1:20
-  #xrank[1] <- 0
+  xrank[1:9] <- NA
+  xrank[10] <- 1
   checkIdentical(xrank, runPercentRank(xdata, 10, TRUE, 1))
 }

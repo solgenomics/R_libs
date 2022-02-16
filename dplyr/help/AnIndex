@@ -15,7 +15,6 @@ anti_join.data.frame	filter-joins
 any_of	reexports
 any_vars	all_vars
 arrange	arrange
-arrange.data.frame	arrange
 arrange_	se-deprecated
 arrange_all	arrange_all
 arrange_at	arrange_all
@@ -127,7 +126,7 @@ full_join	mutate-joins
 full_join.data.frame	mutate-joins
 funs	funs
 funs_	se-deprecated
-glimpse	reexports
+glimpse	glimpse
 grouped_df	grouped_df
 groups	group_data
 group_by	group_by
@@ -194,6 +193,7 @@ nest_by	nest_by
 nest_join	nest_join
 nest_join.data.frame	nest_join
 new_grouped_df	new_grouped_df
+new_rowwise_df	new_grouped_df
 nth	nth
 ntile	ranking
 num_range	reexports
@@ -311,12 +311,12 @@ transmute_all	mutate_all
 transmute_at	mutate_all
 transmute_if	mutate_all
 tribble	reexports
-trunc_mat	reexports
 type_sum	reexports
 ungroup	group_by
 union	reexports
 union_all	setops
 validate_grouped_df	new_grouped_df
+validate_rowwise_df	new_grouped_df
 vars	vars
 view	reexports
 with_groups	with_groups

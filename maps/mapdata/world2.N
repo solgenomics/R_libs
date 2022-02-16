@@ -856,7 +856,7 @@ Italy:Asinara	855
 Italy:Sardinia	856
 Italy:Isola d'Elba	857
 Italy	858
-San Marino	859
+San Marino:enclave	859
 Jamaica	860
 Jersey	861
 Jordan	862
@@ -988,7 +988,7 @@ Marshall Islands:2	987
 Marshall Islands:3	988
 Marshall Islands:Ailinglaplap	989
 Marshall Islands:Rongelap Atoll	990
-Macedonia	991
+North Macedonia	991
 Mali	992
 Malta	993
 Malta:Gozo	994
@@ -1089,11 +1089,11 @@ Norway:Jan Mayen	1088
 Norway:Svalbard:Byornoya	1089
 Norway:Svalbard:Edgeoya	1090
 Norway:Svalbard:Svenskoya	1091
-Norway:Svalbard:104	1092
+Norway:Svalbard:Prins Karls Forland	1092
 Norway:Svalbard:Kongsoya	1093
 Norway:Svalbard:Spitsbergen	1094
 Norway:Svalbard:Kvitoya	1095
-Norway:Svalbard:31	1096
+Norway:Svalbard:Lagoya	1096
 Norway:Svalbard:Nordaustlandet	1097
 Nepal	1098
 Nauru	1099
@@ -1199,8 +1199,8 @@ Papua New Guinea:Rambutyo	1198
 Papua New Guinea:Manus Island	1199
 Papua New Guinea:Mussau	1200
 Poland	1201
-Puerto Rico:Isla Mona	1202
-Puerto Rico:Viaques Island	1203
+Puerto Rico:Isla de Mona	1202
+Puerto Rico:Vieques Island	1203
 Puerto Rico	1204
 North Korea:8	1205
 North Korea	1206
@@ -1619,7 +1619,7 @@ Yemen:4	1618
 Yemen	1619
 South Africa:Marion Island	1620
 South Africa	1621
-South Africa:hole	1622
+South Africa:enclave:Lesoto	1622
 Zambia	1623
 Zimbabwe	1624
 Netherlands:IJsselmeer	1625

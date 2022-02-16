@@ -91,6 +91,13 @@ ref_grid(mtcars.2)
 ## -----------------------------------------------------------------------------
 emmeans(mtcars.2, "Cyl", at = list(dispsq = 230.72^2))
 
+## ---- eval = FALSE------------------------------------------------------------
+#  deg <- 2
+#  mod <- lm(y ~ treat * poly(x, degree = deg), data = mydata)
+
+## ---- eval = FALSE------------------------------------------------------------
+#  emmeans(mod, ~ treat | x, at = list(x = 1:3), params = "deg")
+
 ## -----------------------------------------------------------------------------
 emmip(pigs.lm1, source ~ percent)
 emmip(ref_grid(pigs.lm2, cov.reduce = FALSE), source ~ percent)
@@ -110,6 +117,22 @@ plot(mtcars.rg_d.c)
 require("ggplot2")
 emmip(pigs.lm1, ~ percent | source, CIs = TRUE) +
     geom_point(aes(x = percent, y = log(conc)), data = pigs, pch = 2, color = "blue")
+
+## ---- eval = FALSE------------------------------------------------------------
+#  ci <- confint(mtcars.rg_d.c, level = 0.90, adjust = "scheffe")
+#  xport <- print(ci, export = TRUE)
+#  cat("<font color = 'blue'>\n")
+#  knitr::kable(xport$summary, align = "r")
+#  for (a in xport$annotations) cat(paste(a, "<br>"))
+#  cat("</font>\n")
+
+## ---- results = "asis", echo = FALSE------------------------------------------
+ci <- confint(mtcars.rg_d.c, level = 0.90, adjust = "scheffe")
+xport <- print(ci, export = TRUE)
+cat("<font color = 'blue'>\n")
+knitr::kable(xport$summary, align = "r")
+for (a in xport$annotations) cat(paste(a, "<br>"))
+cat("</font>\n")
 
 ## -----------------------------------------------------------------------------
 emmeans(pigs.lm1, "percent", weights = "cells")

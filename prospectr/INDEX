@@ -1,4 +1,5 @@
 NIRsoil                 NIRSoil
+baseline                baseline
 binning                 Signal binning
 blockNorm               Sum of squares block weighting
 blockScale              Hard or soft block scaling

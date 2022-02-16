@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -31,7 +33,7 @@ struct strip_diagmat
     arma_extra_debug_sigprint();
     }
   
-  static const bool do_diagmat = false;
+  static constexpr bool do_diagmat = false;
   
   const T1& M;
   };
@@ -50,7 +52,7 @@ struct strip_diagmat< Op<T1, op_diagmat> >
     arma_extra_debug_sigprint();
     }
   
-  static const bool do_diagmat = true;
+  static constexpr bool do_diagmat = true;
   
   const T1& M;
   };
@@ -71,8 +73,8 @@ struct strip_inv
   
   const T1& M;
   
-  static const bool do_inv       = false;
-  static const bool do_inv_sympd = false;
+  static constexpr bool do_inv       = false;
+  static constexpr bool do_inv_sympd = false;
   };
 
 
@@ -91,8 +93,8 @@ struct strip_inv< Op<T1, op_inv> >
   
   const T1& M;
   
-  static const bool do_inv       = true;
-  static const bool do_inv_sympd = false;
+  static constexpr bool do_inv       = true;
+  static constexpr bool do_inv_sympd = false;
   };
 
 
@@ -111,8 +113,8 @@ struct strip_inv< Op<T1, op_inv_sympd> >
   
   const T1& M;
   
-  static const bool do_inv       = true;
-  static const bool do_inv_sympd = true;
+  static constexpr bool do_inv       = true;
+  static constexpr bool do_inv_sympd = true;
   };
 
 
@@ -124,9 +126,9 @@ struct strip_trimat
   
   const T1& M;
   
-  static const bool do_trimat = false;
-  static const bool do_triu   = false;
-  static const bool do_tril   = false;
+  static constexpr bool do_trimat = false;
+  static constexpr bool do_triu   = false;
+  static constexpr bool do_tril   = false;
   
   inline
   strip_trimat(const T1& X)
@@ -145,9 +147,10 @@ struct strip_trimat< Op<T1, op_trimat> >
   
   const T1& M;
   
-  static const bool do_trimat = true;
-         const bool do_triu;
-         const bool do_tril;
+  static constexpr bool do_trimat = true;
+  
+  const bool do_triu;
+  const bool do_tril;
   
   inline
   strip_trimat(const Op<T1, op_trimat>& X)

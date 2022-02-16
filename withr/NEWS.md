@@ -1,3 +1,18 @@
+# withr 2.4.3
+
+* Lionel Henry is the new maintainer.
+
+* Handlers registered with the global environment (as happens when `local_()` 
+  is run at the top-level, outside a function) are now automatically run
+  when the R session ends (#173).
+
+* New `with_language()` and `local_language()` to temporarily control the
+  language used for translations (#180).
+
+* `with_seed()` now caches the check for R version, so is now faster (#170)
+
+* `with_makevars()` and `local_makevars()` now eagerly evaluate the `path` argument (#169)
+
 # withr 2.4.2
 
 - `local_options()` now lets you set an option to `NULL` as intended (#156)

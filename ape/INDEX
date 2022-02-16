@@ -86,6 +86,7 @@ data.nex                NEXUS Data Example
 dbd                     Probability Density Under Birth-Death Models
 def                     Definition of Vectors for Plotting or
                         Annotating
+degree                  Vertex Degrees in Trees and Networks
 del.gaps                Delete Alignment Gaps in DNA Sequences
 delta.plot              Delta Plots
 dist.dna                Pairwise Distances from DNA Sequences
@@ -182,6 +183,7 @@ skyline                 Skyline Plot Estimate of Effective Population
 skylineplot             Drawing Skyline Plot Graphs
 slowinskiguyer.test     Slowinski-Guyer Test of Homogeneous
                         Diversification
+solveAmbiguousBases     Solve Ambiguous Bases in DNA Sequences
 speciesTree             Species Tree Estimation
 stree                   Generates Systematic Regular Trees
 subtreeplot             Zoom on a Portion of a Phylogeny by Successive

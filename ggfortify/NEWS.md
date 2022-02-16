@@ -1,3 +1,29 @@
+## ggfortify 0.4.14
+
+* Switched to use range of leverages to check for constant leverage to be consistent with `plot.lm()`.
+* Switched to use MIT license.
+
+## ggfortify 0.4.13
+
+* Added support for `survfit` objects with multiple stratification variables.
+* Fixed bug in rendering frames for clustering.
+
+## ggfortify 0.4.12
+
+* Used `QuickStartExample` to access `x` and `y` explicitly to fix CRAN error.
+* Fixed the warning related to the non-uniform sampler used in tests.
+* Added various missing visible bindings for global variables.
+
+## ggfortify 0.4.11
+
+* Added support of Silhouette plot for `cluster::silhouette` objects, thanks to @damirpolat.
+* Fixed issue with `autoplot.lm(which = 2)` when residuals have `AsIs` type, thanks to @richierocks.
+* Added `markdown` to `Suggests`. For context, please see [this issue](https://github.com/yihui/knitr/issues/1864).
+
+## ggfortify 0.4.10
+
+* This is a minor release of the package with fixes in tests to be compatible with `survival` (>=3.1-12).
+
 ## ggfortify 0.4.9
 
 * This is a minor release of the package with fixes for CRAN check results.

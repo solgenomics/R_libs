@@ -1,6 +1,6 @@
 Package: tibble
 Title: Simple Data Frames
-Version: 3.1.5
+Version: 3.1.6
 Authors@R: 
     c(person(given = "Kirill",
              family = "M\u00fcller",
@@ -41,7 +41,7 @@ Config/testthat/edition: 3
 Config/testthat/parallel: true
 Config/testthat/start-first: subsetting, as_tibble, add, invariants
 NeedsCompilation: yes
-Packaged: 2021-09-29 14:03:45 UTC; kirill
+Packaged: 2021-10-25 10:17:47 UTC; kirill
 Author: Kirill Müller [aut, cre],
   Hadley Wickham [aut],
   Romain Francois [ctb],
@@ -49,5 +49,5 @@ Author: Kirill Müller [aut, cre],
   RStudio [cph]
 Maintainer: Kirill Müller <krlmlr+r@mailbox.org>
 Repository: CRAN
-Date/Publication: 2021-09-30 12:10:02 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2021-10-20 13:25:07 UTC; unix
+Date/Publication: 2021-11-07 17:30:02 UTC
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2022-02-15 17:04:22 UTC; unix

@@ -3,16 +3,356 @@
 \newcommand{\ghpr}{\href{https://github.com/RcppCore/RcppArmadillo/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/RcppCore/RcppArmadillo/issues/#1}{##1}}
 
+\section{Changes in RcppArmadillo version 0.10.8.1.0 (2022-01-23)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.8.1 (Realm Raider)
+    \itemize{
+      \item fix interaction between OpenBLAS and LAPACK
+      \item emit warning if \code{find()} is incorrectly used to locate
+      NaN elements
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.8.0.0 (2022-01-02)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.8 (Realm Raider)
+    \itemize{
+      \item faster handling of symmetric matrices by \code{pinv()} and
+      \code{rank()}
+      \item faster handling of diagonal matrices by \code{inv_sympd()},
+      \code{pinv()}, \code{rank()}
+      \item expanded \code{norm()} to handle integer vectors and
+      matrices
+      \item added \code{datum::tau} to replace \code{2π}
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.7.5.0 (2021-12-16)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.7.5
+    \itemize{
+      \item fix aliasing bug in \code{diagmat()}
+      \item fix detection of 2x2 triangular matrices
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.7.4.0 (2021-11-23)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.7.4
+    \itemize{
+      \item faster handling of diagonal matrices by \code{inv_sympd()},
+      \code{pinv()}, \code{rank()}
+      \item more robust detection of incorrect data format by
+      \code{.load()}
+    }
+    \item Correct dimensions setting in import/export of
+    \code{arma::field} types, protected by \code{#define} (Jonathan
+    Berrisch in \ghpr{352} fixing \ghit{351})
+    \item Add unit tests for \code{fields} both with and without new
+    \code{#define} (Dirk)
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.7.3.0 (2021-11-04)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.7.3
+    \itemize{
+      \item fix regression in alias handling by \code{fliplr()},
+      \code{flipud()}, \code{reverse()}
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.7.2.0 (2021-11-02)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.7.2
+    \itemize{
+      \item more robust handling of diagonal matrices by \code{pinv()}
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.7.1.0 (2021-10-08)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.7.1
+    \itemize{
+      \item fix regression in interactions between dense matrix subviews
+      and sparse matrices
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.7.0.0 (2021-09-30)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.7.0 (Entropy Maximizer)
+    \itemize{
+      \item faster handling of submatrix views accessed by
+      \code{X.cols(first_col,last_col)}
+      \item faster handling of element-wise \code{min()} and \code{max()}
+      in compound expressions
+      \item expanded \code{solve()} with \code{solve_opts::force_approx}
+      option to force use of the approximate solver
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.6.2.0 (2021-08-05)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.6.2 (Keep Calm)
+    \itemize{
+      \item fix incorrect use of \code{constexpr} for handling fixed-size
+      matrices and vectors
+      \item improved documentation
+    }
+    \item GitHub- and drat-only release
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.6.0.0 (2021-07-16)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.6.0 (Keep Calm)
+    \itemize{
+    \item expanded \code{chol()} to optionally use pivoted decomposition
+    \item expanded vector, matrix and cube constructors to allow element
+    initialisation via \code{fill::value(scalar)}, eg. \code{mat X(4,5,fill::value(123))}
+    \item faster loading of CSV files when using OpenMP
+    \item added \code{csv_opts::semicolon} option to allow saving/loading of
+      CSV files with semicolon (;) instead of comma (,) as the separator
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.5.3.0 (2021-07-01)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.5.3 (Antipodean Fortress)
+    \item GitHub-only release
+    \item Extended test coverage with several new tests, added a coverage badge.
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.5.0 (2021-05-21)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.5 (Antipodean Fortress)
+    \itemize{
+      \item added \code{.clamp()} member function
+      \item expanded the standalone \code{clamp()} function to handle complex values
+      \item more efficient use of OpenMP
+      \item vector, matrix and cube constructors now initialise elements
+      to zero by default; use the \code{fill::none} specifier,
+      eg. \code{mat X(4,5,fill::none)}, to disable element initialisation
+    }
+    \item Added \code{codecov.yml} to exclude Armadillo from coverage analysis
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.4.1.0 (2021-04-23)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.4.1 (Pressure Cooker)
+    \item GitHub-only release
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.4.0.0 (2021-04-12)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.4.0 (Pressure Cooker)
+    \itemize{
+      \item faster handling of triangular matrices by \code{log_det()}
+      \item added \code{log_det_sympd()} for log determinant of
+      symmetric positive matrices
+      \item added ARMA_WARN_LEVEL configuration option, to control the
+      degree of emitted warning messages
+      \item reduced the default degree of warning messages, so that
+      failed decompositions, failed saving/loading, etc, no longer emit
+      warnings
+    }
+    \item Apply one upstream corrections for \code{arma::randn} draws
+    when using alternative (here R) generator, and \code{arma::randg}.
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.3.0.0 (2021-03-10)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.3 (Sunrise Chaos)
+    \itemize{
+      \item faster handling of symmetric positive definite matrices by
+      \code{pinv()}
+      \item expanded \code{.save()} / \code{.load()} for dense matrices
+      to handle coord_ascii format
+      \item for out of bounds access, element accessors now throw the
+      more nuanced \code{std::out_of_range} exception, instead of only
+      \code{std::logic_error}
+      \item improved quality of random numbers
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.2.2.0 (2021-03-09)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.2.2 (Cicada Swarm)
+    \itemize{
+      \item faster handling of subcubes
+      \item added \code{tgamma()}
+      \item added \code{.brief_print()} for abridged printing of matrices & cubes
+      \item expanded forms of \code{trimatu()} and \code{trimatl()} with
+      diagonal specification to handle sparse matrices
+      \item expanded \code{eigs_sym()} and \code{eigs_gen()} with optional shift-invert mode
+    }
+    \item Removed \code{debian/} directory from repository as packaging
+    is on salsa.debian.org.
+    \item Relaxed tolerance on two \code{cube} tests on Windows to
+    accomodate new 'gcc10-UCRT' builder.
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.2.1.0 (2021-02-09)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.2.1 (Cicada Swarm)
+    \itemize{
+      \item faster handling of subcubes
+      \item added \code{tgamma()}
+      \item added \code{.brief_print()} for abridged printing of matrices & cubes
+      \item expanded forms of \code{trimatu()} and \code{trimatl()} with
+      diagonal specification to handle sparse matrices
+      \item expanded \code{eigs_sym()} and \code{eigs_gen()} with optional shift-invert mode
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.1.2.2 (2021-01-08)}{
+  \itemize{
+    \item Correct one unit test for \pkg{Matrix} 1.3.0-caused changed
+    (Binxiang in \ghpr{319} and Dirk in \ghpr{322}).
+    \item Suppress one further warning from \pkg{Matrix} (Dirk)
+    \item Apply an upstream \code{NaN} correction (Conrad in \ghpr{321})
+    \item Added GitHub Actions CI using \code{run.sh} from r-ci (Dirk)
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.1.2.0 (2020-11-15)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.1.2 (Orchid Ambush)
+    \item Remove three unused int constants (\ghit{313})
+    \item Include main armadillo header using quotes instead of brackets
+    \item Rewrite version number use in old-school mode because gcc 4.8.5
+    \item Skipping parts of sparse conversion on Windows as win-builder fails
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.1.0.0 (2020-10-09)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.1.0 (Orchid Ambush)
+    \itemize{
+      \item C++11 is now the minimum required C++ standard
+      \item faster handling of compound expressions by \code{trimatu()}
+      and \code{trimatl()}
+      \item faster sparse matrix addition, subtraction and element-wise
+      multiplication
+      \item expanded sparse submatrix views to handle the non-contiguous
+      form of \code{X.cols(vector_of_column_indices)}
+      \item expanded \code{eigs_sym()} and \code{eigs_gen()} with optional
+      fine-grained parameters (subspace dimension, number of iterations,
+      eigenvalues closest to specified value)
+      \item deprecated form of \code{reshape()} removed from Cube and
+      SpMat classes
+      \item ignore and warn on use of the \code{ARMA_DONT_USE_CXX11} macro
+    }
+    \item Switch Travis CI testing to focal and BSPM
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.900.3.0 (2020-09-02)}{
+   \itemize{
+     \item Upgraded to Armadillo release 9.900.3 (Nocturnal Misbehaviour)
+     \itemize{
+       \item More efficient code for initialising matrices with \code{fill::zeros}
+       \item Fixes for various error messages
+     }
+   }
+ }
+
+\section{Changes in RcppArmadillo version 0.9.900.2.0 (2020-07-17)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.900.2 (Nocturnal Misbehaviour)
+    \itemize{
+      \item In \code{sort()}, fixes for inconsistencies between checks
+      applied to matrix and vector expressions
+      \item In \code{sort()}, remove unnecessary copying when applied in-place to vectors
+      function when applied in-place to vectors
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.900.1.0 (2020-06-08)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.900.1 (Nocturnal Misbehaviour)
+    \itemize{
+      \item faster \code{solve()} for under/over-determined systems
+      \item faster \code{eig_gen()} and \code{eig_pair()} for large matrices
+      \item expanded \code{eig_gen()} and \code{eig_pair()} to
+      optionally provide left and right eigenvectors
+    }
+    \item Switch Travis CI testing to R 4.0.0, use bionic as base distro
+    and test R 3.6.3 and 4.0.0 in a matrix (Dirk in \ghpr{298}).
+    \item Add two badges to README for indirect use and the CSDA paper.
+    \item Adapt \code{RcppArmadillo.package.skeleton()} to a change in R
+    4.0.0 affecting what it exports in \code{NAMESPACE}.
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.880.1.0 (2020-05-15)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.880.1 (Roasted Mocha Detox)
+    \itemize{
+      \item expanded \code{qr()} to optionally use pivoted decomposition
+      \item updated physical constants to NIST 2018 CODATA values
+      \item added \code{ARMA_DONT_USE_CXX11_MUTEX} confguration option
+      to disable use of \code{std::mutex}
+    }
+    \item OpenMP capability is tested explicitly (Kevin Ushey and Dirk
+    in \ghpr{294}, \ghpr{295}, and \ghpr{296} all fixing \ghit{290}).
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.870.2.0 (2020-04-24)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.870.2 (Roasted Mocha Retox)
+    \itemize{
+      \item faster handling of matrix multiplication expressions by
+      \code{diagvec()} and \code{diagmat()}
+      \item added \code{trimatu_ind()} and \code{trimatl_ind()}
+      \item more consistent detection of sparse vector expressions
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.860.2.0 (2020-04-13)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.860.2 (Roasted Mocha Fix)
+    \itemize{
+      \item added \code{powmat()}
+      \item faster access to columns in sparse submatrix views
+      \item faster handling of relational expressions by \code{accu()}
+      \item faster handling of sympd matrices by \code{expmat()}, \code{logmat()}, \code{sqrtmat()}
+      \item workaround for save/load issues with HDF5 v1.12
+    }
+    \item Vignettes are now pre-made and include (\ghpr{285})
+    \item Two test files are now skipped on 32-bit Windows
+  }
+}
+
 \section{Changes in RcppArmadillo version 0.9.850.1.0 (2020-02-09)}{
   \itemize{
     \item Upgraded to Armadillo release 9.850.1 (Pyrocumulus Wrath)
     \itemize{
-      \item{faster handling of compound expressions by \code{diagmat()}}
-      \item{expanded \code{.save()} and \code{.load()} to handle CSV files with headers via
-        csv_name(filename,header) specification}
-      \item{added \code{log_normpdf()}}
-      \item{added \code{.is_zero()}}
-      \item{added \code{quantile()}}
+      \item faster handling of compound expressions by \code{diagmat()}
+      \item expanded \code{.save()} and \code{.load()} to handle CSV files with headers via
+        csv_name(filename,header) specification
+      \item added \code{log_normpdf()}
+      \item added \code{.is_zero()}
+      \item added \code{quantile()}
     }
     \item The sparse matrix test using scipy, if available, is now
     simplified thanks to recently added \CRANpkg{reticulate} conversions.
@@ -35,7 +375,7 @@
       \item fixes for matrix row iterators
       \item better detection of non-hermitian matrices by
       \code{eig_sym()}, \code{inv_sympd()}, \code{chol()},
-      \code{expmat_sym()}  
+      \code{expmat_sym()}
     }
     \item The \code{sample} function passes the prob vector as const allowing
     subsequent calls (Christian Gunning in \ghpr{276} fixing \ghit{275})
@@ -48,7 +388,7 @@
     \itemize{
       \item faster \code{solve()} in default operation; iterative
       refinement is no longer applied by default; use
-      \code{solve_opts::refine} to explicitly enable refinement 
+      \code{solve_opts::refine} to explicitly enable refinement
       \item faster \code{expmat()}
       \item faster handling of triangular matrices by \code{rcond()}
       \item added \code{.front()} and \code{.back()}
@@ -72,7 +412,7 @@
       \item expanded \code{join_rows()} and \code{join_cols()} to handle joining up to 4 matrices
       \item expanded \code{.save()} and \code{.load()} to allow storing sparse matrices in CSV format
       \item added \code{randperm()} to generate a vector with random
-      permutation of a sequence of integers 
+      permutation of a sequence of integers
     }
     \item Expanded the list of known good \code{gcc} and \code{clang}
     versions in \code{configure.ac}
@@ -98,12 +438,12 @@
     \item Upgraded to Armadillo release 9.500.2 (Riot Compact)
     \itemize{
       \item Expanded \code{solve()} with \code{solve_opts::likely_sympd}
-      to indicate that the given matrix is likely positive definite 
+      to indicate that the given matrix is likely positive definite
       \item more robust automatic detection of positive definite
-      matrices by \code{solve()} and \code{inv()} 
+      matrices by \code{solve()} and \code{inv()}
       \item faster handling of sparse submatrices
       \item expanded \code{eigs_sym()} to print a warning if the given
-      matrix is not symmetric 
+      matrix is not symmetric
       \item extended LAPACK function prototypes to follow Fortran
       passing conventions for so-called "hidden arguments", in order
       to address GCC Bug 90329; to use previous LAPACK function
@@ -135,16 +475,16 @@
       \item added \code{.as_col()} and \code{.as_row()}
       \item expanded \code{.shed_rows()} / \code{.shed_cols()} /
       \code{.shed_slices()} to remove rows/columns/slices specified in a
-      vector 
+      vector
       \item expanded \code{vectorise()} to handle sparse matrices
       \item expanded element-wise versions of \code{max()} and
       \code{min()} to handle sparse matrices
       \item optimised handling of sparse matrix expressions:
-      \code{sparse \% (sparse +- scalar)} and \code{sparse / (sparse +- scalar)} 
+      \code{sparse \% (sparse +- scalar)} and \code{sparse / (sparse +- scalar)}
       \item expanded \code{eig_sym()}, \code{chol()},
       \code{expmat_sym()}, \code{logmat_sympd()}, \code{sqrtmat_sympd()},
       \code{inv_sympd()} to print a warning if the given matrix is not
-      symmetric 
+      symmetric
       \item more consistent detection of vector expressions
     }
   }
@@ -155,17 +495,17 @@
     \item Upgraded to Armadillo release 9.300.2 (Fomo Spiral)
     \itemize{
       \item Faster handling of compound complex matrix expressions by
-      \code{trace()} 
+      \code{trace()}
       \item More efficient handling of element access for inplace
-      modifications in sparse matrices 
+      modifications in sparse matrices
       \item Added \code{.is_sympd()} to check whether a matrix is
-      symmetric/hermitian positive definite 
+      symmetric/hermitian positive definite
       \item Added \code{interp2()} for 2D data interpolation
       \item Added \code{expm1()} and \code{log1p()}
       \item Expanded \code{.is_sorted()} with options "strictascend" and
-      "strictdescend" 
+      "strictdescend"
       \item Expanded \code{eig_gen()} to optionally perform balancing
-      prior to decomposition 
+      prior to decomposition
     }
   }
 }
@@ -186,7 +526,7 @@
     \itemize{
       \item handling complex compound expressions by \code{trace()}
       \item handling \code{.rows()} and \code{.cols()} by the
-      \code{Cube} class 
+      \code{Cube} class
     }
   }
 }
@@ -215,9 +555,9 @@
       \item expanded \code{sign()} to handle scalar arguments
       \item expanded operators (\code{*}, \code{\%}, \code{+}, \code{−})
       to handle sparse matrices with differing element types
-      (eg. multiplication of complex matrix by real matrix) 
+      (eg. multiplication of complex matrix by real matrix)
       \item expanded \code{conv_to()} to allow conversion between sparse
-      matrices with differing element types 
+      matrices with differing element types
       \item expanded \code{solve()} to optionally allow keeping
       solutions of systems singular to working precision
       \item workaround for \code{gcc} and \code{clang} bug in C++17 mode
@@ -233,12 +573,12 @@
     \item Upgraded to Armadillo release 9.100.4 (Armatus Ad Infinitum)
     \itemize{
       \item faster handling of symmetric/hermitian positive definite
-      matrices by \code{solve()} 
+      matrices by \code{solve()}
       \item faster handling of \code{inv_sympd()} in compound expressions
       \item added \code{.is_symmetric()}
       \item added \code{.is_hermitian()}
       \item expanded \code{spsolve()} to optionally allow keeping
-      solutions of systems singular to working precision 
+      solutions of systems singular to working precision
       \item new configuration options \code{ARMA_OPTIMISE_SOLVE_BAND}
       and \code{ARMA_OPTIMISE_SOLVE_SYMPD}
       smarter use of the element cache in sparse matrices
@@ -255,17 +595,17 @@
     \itemize{
       \item added \code{hess()} for Hessenberg decomposition
       \item added \code{.row()}, \code{.rows()}, \code{.col()},
-      \code{.cols()} to subcube views 
+      \code{.cols()} to subcube views
       \item expanded \code{.shed_rows()} and \code{.shed_cols()} to
-      handle cubes 
+      handle cubes
       \item expanded \code{.insert_rows()} and \code{.insert_cols()} to
-      handle cubes 
+      handle cubes
       \item expanded subcube views to allow non-contiguous access to
-      slices 
+      slices
       \item improved tuning of sparse matrix element access operators
       \item faster handling of tridiagonal matrices by \code{solve()}
       \item faster multiplication of matrices with differing element
-      types when using OpenMP 
+      types when using OpenMP
     }
   }
 }
@@ -321,12 +661,12 @@
       \item expanded \code{kron()} to handle sparse matrices
       \item expanded \code{index_min()} and \code{index_max()} to handle cubes
       \item expanded \code{randi()}, \code{randu()}, \code{randn()},
-      \code{randg()} to output single scalars 
+      \code{randg()} to output single scalars
       \item added submatrix & subcube iterators
       \item added \code{normcdf()}
       \item added \code{mvnrnd()}
-      \item added \code{chi2rnd()} 
-      \item added \code{wishrnd()} and \code{iwishrnd()} 
+      \item added \code{chi2rnd()}
+      \item added \code{wishrnd()} and \code{iwishrnd()}
     }
     \item The \code{configure} generated header settings for LAPACK and
     OpenMP can be overridden by the user.
@@ -348,7 +688,7 @@
     \item Includes changes made in several earlier GitHub-only releases
     (versions 0.8.300.0.0, 0.8.200.2.0 and 0.8.200.1.0).
     \item Conversion from \code{simple_triplet_matrix} is now supported
-    (Serguei Sokol in \ghpr{192}).  
+    (Serguei Sokol in \ghpr{192}).
     \item Updated configure code to check for g++ 5.4 or later to enable OpenMP.
     \item Updated the skeleton package to current packaging standards
     \item Suppress warnings from Armadillo about missing OpenMP support
@@ -373,7 +713,7 @@
       \code{std::cerr} stream
       \item added \code{set_cerr_stream()} and \code{get_cerr_stream()}
       to replace \code{set_stream_err1()}, \code{set_stream_err2()},
-      \code{get_stream_err1()}, \code{get_stream_err2()} 
+      \code{get_stream_err1()}, \code{get_stream_err2()}
       \item new configuration options \code{ARMA_COUT_STREAM} and
       \code{ARMA_CERR_STREAM}
     }
@@ -417,7 +757,7 @@
       with diagonal covariance matrices
       \item added \code{.sum_log_p()} to the \code{gmm_diag} class
       \item added \code{gmm_full} class, for Gaussian mixture models
-      with full covariance matrices 
+      with full covariance matrices
       \item expanded \code{.each_slice()} to optionally use OpenMP for
       multi-threaded execution
     }
@@ -446,7 +786,7 @@
       \item Add conversion and unit tests for \code{indMatrix} (\ghpr{144})
       \item Rewrite conversion for \code{ddiMatrix} (\ghpr{145})
       \item Add a warning message for matrices that cannot be converted
-      (\ghpr{147}) 
+      (\ghpr{147})
       \item Add new vignette for sparse matrix support (\ghpr{152}; Dirk
       in \ghpr{153})
       \item Add support for sparse matrix conversion from Python SciPy
@@ -454,7 +794,7 @@
     }
     \item Optional return of row or column vectors in collapsed form if
     appropriate \code{#define} is set (Serguei Sokol in \ghpr{151} and
-    \ghpr{154}) 
+    \ghpr{154})
     \item Correct \code{speye()} for non-symmetric cases (Qiang Kou in
     \ghpr{150} closing \ghit{149}).
     \item Ensure tests using Scientific Python and reticulate are properly
@@ -484,13 +824,13 @@
     \item OpenMP support was added to the skeleton helper in \code{inline.R}
   }
 }
-                         
+
 \section{Changes in RcppArmadillo version 0.7.800.2.0 (2017-04-12)}{
   \itemize{
     \item Upgraded to Armadillo release 7.800.2 (Rogue State Redux)
     \itemize{
       \item The Armadillo license changed to Apache License 2.0
-    }   
+    }
     \item The \code{DESCRIPTION} file now mentions the Apache License
     2.0, as well as the former MPL2 license used for earlier releases.
     \item A new file \code{init.c} was added with calls to
@@ -506,7 +846,7 @@
     \itemize{
       \item added \code{polyfit()} and \code{polyval()}
       \item added second form of \code{log_det()} to directly return the
-      result as a complex number 
+      result as a complex number
       \item added \code{range()} to statistics functions
       \item expanded \code{trimatu()}/\code{trimatl()} and
       \code{symmatu()}/\code{symmatl()} to handle sparse matrice
@@ -529,7 +869,7 @@
     \itemize{
       \item more accurate \code{eigs_sym()} and \code{eigs_gen()}
       \item expanded \code{floor()}, \code{ceil()}, \code{round()},
-      \code{trunc()}, \code{sign()} to handle sparse matrices 
+      \code{trunc()}, \code{sign()} to handle sparse matrices
       \item added \code{arg()}, \code{atan2()}, \code{hypot()}
     }
   }
@@ -578,7 +918,7 @@
 
 \section{Changes in RcppArmadillo version 0.7.200.2.0 (2016-07-22)}{
   \itemize{
-    \item Upgraded to Armadillo release 7.200.2 
+    \item Upgraded to Armadillo release 7.200.2
     \item The sampling extension was rewritten to use Armadillo vector types
     instead of Rcpp types (PR \ghpr{101} by James Balamuta)
   }
@@ -586,7 +926,7 @@
 
 \section{Changes in RcppArmadillo version 0.7.200.1.0 (2016-06-06)}{
   \itemize{
-    \item Upgraded to Armadillo release 7.200.1 
+    \item Upgraded to Armadillo release 7.200.1
     \itemize{
       \item added \code{.index_min()} and \code{.index_max()}
       \item expanded \code{ind2sub()} to handle vectors of indices
@@ -602,15 +942,15 @@
 
 \section{Changes in RcppArmadillo version 0.7.100.3.0 (2016-05-25)}{
   \itemize{
-    \item Upgraded to Armadillo test release 7.100.3 
+    \item Upgraded to Armadillo test release 7.100.3
     \itemize{
       \item added \code{erf()}, \code{erfc()}, \code{lgamma()}
       \item added \code{.head_slices()} and \code{.tail_slices()} to
-      subcube views 
+      subcube views
       \item \code{spsolve()} now requires SuperLU 5.2
       \item \code{eigs_sym()}, \code{eigs_gen()} and \code{svds()} now
       use a built-in reimplementation of ARPACK for real (non-complex)
-      matrices (code contributed by Yixuan Qiu) 
+      matrices (code contributed by Yixuan Qiu)
     }
     \item The \code{configure} code now checks against old \code{g++}
     version which are no longer sufficient to build the package.
@@ -624,13 +964,13 @@
       \item fix for handling empty matrices by \code{kron()}
       \item fix for clang warning in advanced matrix constructors
       \item fix for false deprecated warning in \code{trunc_log()} and
-      \code{trunc_exp()} 
+      \code{trunc_exp()}
       \item fix for gcc-6.1 warning about misleading indentation
       \item corrected documentation for the \code{solve()} function
     }
     \item Added support for \code{int64_t} (\code{ARMA_64BIT_WORD}) when
     required during compilation time. (PR \ghpr{90} by George G. Vega
-    Yon, fixing \ghpr{88}) 
+    Yon, fixing \ghpr{88})
     \item Fixed bug in \code{SpMat} exporter (PR \ghpr{91} by George G. Vega Yon,
     fixing \ghit{89} and \ghit{72})
   }
@@ -678,7 +1018,7 @@
       \item added \code{trunc()}
       \item extended \code{conv()} to optionally provide central convolution
       \item faster handling of multiply-and-accumulate by \code{accu()}
-      when using Intel MKL, ATLAS or OpenBLAS 
+      when using Intel MKL, ATLAS or OpenBLAS
     }
     \item The \code{configure} script now uses \code{#!/usr/bin/env
       bash} to cope with systems that do not have \code{#!/bin/bash} (PR
@@ -693,7 +1033,7 @@
     \item Upgraded to Armadillo 6.400.2 ("Flying Spaghetti Monster Deluxe")
     \itemize{
       \item expanded \code{each_col()}, \code{each_row()} and
-      \code{each_slice()} to handle C++11 lambda functions 
+      \code{each_slice()} to handle C++11 lambda functions
       \item added \code{ind2sub()} and \code{sub2ind()}
       \item fixes for corner cases in gmm_diag class
     }
@@ -744,13 +1084,13 @@
       \item added Schur decomposition: \code{schur()}
       \item stricter handling of matrix objects by \code{hist()} and \code{histc()}
       \item advanced constructors for using auxiliary memory by Mat,
-      Col, Row and Cube now have the default of \emph{strict = false}  
+      Col, Row and Cube now have the default of \emph{strict = false}
       \item Cube class now delays allocation of .slice() related structures until needed
       \item expanded \code{join_slices()} to handle joining cubes with matrices
     }
   }
 }
-    
+
 \section{Changes in RcppArmadillo version 0.6.000.1.0 (2015-09-25)}{
   \itemize{
     \item Upgraded to Armadillo test / bug-fix release 0.6.000.1-test
@@ -801,7 +1141,7 @@
 
 \section{Changes in RcppArmadillo version 0.5.300.4 (2015-08-03)}{
   \itemize{
-    \item Upgraded to Armadillo 5.300.4 ("Plutocrazy Incorporated") 
+    \item Upgraded to Armadillo 5.300.4 ("Plutocrazy Incorporated")
     \itemize{
       \item added generalised Schur decomposition: \code{qz()}
       \item added \code{.has_inf()} and \code{.has_nan()}
@@ -831,7 +1171,7 @@
       \item expanded element initialisation to handle nested initialiser lists (C++11)
       \item workarounds for bugs in GCC, Intel and MSVC C++ compilers
     }
-    \item Added another example to \code{inst/examples/fastLm.r} 
+    \item Added another example to \code{inst/examples/fastLm.r}
   }
 }
 
@@ -864,7 +1204,7 @@
       \item expanded \code{repmat()} to handle sparse matrices
       \item expanded \code{join_rows()} and \code{join_cols()} to handle sparse matrices
       \item \code{sort_index()} and \code{stable_sort_index()} have been
-      placed in the delayed operations framework for increased efficiency 
+      placed in the delayed operations framework for increased efficiency
       \item use of 64 bit integers is automatically enabled when using a C++11 compiler
       \item workaround for a bug in recent releases of Apple Xcode
       \item workaround for a bug in LAPACK 3.5
@@ -874,11 +1214,11 @@
 
 \section{Changes in RcppArmadillo version 0.4.999.1.0 (2015-04-04)}{
   \itemize{
-    \item Upgraded to Armadillo release preview 4.999.1 
+    \item Upgraded to Armadillo release preview 4.999.1
     \item Non-CRAN test release
   }
 }
-    
+
 \section{Changes in RcppArmadillo version 0.4.650.1.1 (2015-02-25)}{
   \itemize{
     \item Upgraded to Armadillo release Version 4.650.1 ("Intravenous Caffeine Injector")
@@ -887,7 +1227,7 @@
       \item added \code{.head_rows()} and \code{.tail_rows()} to submatrix views
       \item added \code{.head_cols()} and \code{.tail_cols()} to submatrix views
       \item expanded \code{eigs_sym()} to optionally calculate
-      eigenvalues with smallest/largest algebraic values 
+      eigenvalues with smallest/largest algebraic values
       fixes for handling of sparse matrices
     }
     \item Applied small correction to main header file to set up C++11
@@ -912,7 +1252,7 @@
       \item added \code{.head()} and \code{.tail()} to submatrix views
       \item faster matrix transposes within compound expressions
       \item faster \code{accu()} and \code{norm()} when compiling with
-      -O3 -ffast-math -march=native (gcc and clang) 
+      -O3 -ffast-math -march=native (gcc and clang)
       \item workaround for a bug in GCC 4.4
     }
   }
@@ -948,12 +1288,12 @@
     \itemize{
       \item faster handling of complex vectors by \code{norm()}
       \item expanded \code{chol()} to optionally specify output matrix
-      as upper or lower triangular 
+      as upper or lower triangular
       \item better handling of non-finite values when saving matrices as text files
     }
     \item The \code{sample} functionality has been extended to provide
     the Walker Alias method (including new unit tests) via a pull request
-    by Christian Gunning 
+    by Christian Gunning
   }
 }
 
@@ -964,7 +1304,7 @@
       \item faster handling of matrix transposes within compound
       expressions
       \item expanded \code{symmatu()}/\code{symmatl()} to optionally
-      disable taking the complex conjugate of elements 
+      disable taking the complex conjugate of elements
       \item expanded \code{sort_index()} to handle complex vectors
       \item expanded the \code{gmm_diag} class with functions to generate random samples
     }
@@ -972,12 +1312,12 @@
     from R as a fallback (when C++11 is not selected so the C++11-based
     RNG is unavailable) which avoids using the older C++98-based \code{std::rand}
     \item The \code{RcppArmadillo.package.skeleton()} function was
-    updated to only set an "Imports:" for Rcpp, but not RcppArmadillo 
+    updated to only set an "Imports:" for Rcpp, but not RcppArmadillo
     which (as a template library) needs only LinkingTo:
     \item The \code{RcppArmadillo.package.skeleton()} function will now
     prefer \code{pkgKitten::kitten()} over \code{package.skeleton()} in
     order to create a working package which passes \code{R CMD check}.
-    \item The \CRANpkg{pkgKitten} package is now a \code{Suggests:} 
+    \item The \CRANpkg{pkgKitten} package is now a \code{Suggests:}
     \item A manual page was added to provide documentation for the
     functions provided by the skeleton package.
     \item A small update was made to the package manual page.
@@ -986,9 +1326,9 @@
 
 \section{Changes in RcppArmadillo version 0.4.400.0 (2014-08-19)}{
   \itemize{
-    \item Upgraded to Armadillo release Version 4.400 (Winter Shark Alley) 
+    \item Upgraded to Armadillo release Version 4.400 (Winter Shark Alley)
     \itemize{
-      \item added \code{gmm_diag} class for statistical modelling using Gaussian Mixture Models; 
+      \item added \code{gmm_diag} class for statistical modelling using Gaussian Mixture Models;
       includes multi-threaded implementation of k-means and Expectation-Maximisation for parameter estimation
       \item added \code{clamp()} for clamping values to be between lower and upper limits
       \item expanded batch insertion constructors for sparse matrices to add values at repeated locations
@@ -999,9 +1339,9 @@
     matrix initialization where space for a sentinel was allocated, but
     the sentinel was not set; with extra thanks to Ryan Curtin for help
     \item Added a few unit tests for sparse matrices
-  }  
+  }
 }
-    
+
 \section{Changes in RcppArmadillo version 0.4.320.0 (2014-07-03)}{
   \itemize{
     \item Upgraded to Armadillo release Version 4.320 (Daintree Tea Raider)
@@ -1015,7 +1355,7 @@
     }
   }
 }
-      
+
 \section{Changes in RcppArmadillo version 0.4.300.8.0 (2014-05-31)}{
   \itemize{
     \item Upgraded to Armadillo release Version 4.300.8 (Medieval Cornea Scraper)
@@ -1059,9 +1399,9 @@
     \itemize{
       \item faster \code{find()}
       \item added \code{find_finite()} and \code{find_nonfinite()} for
-      finding indices of finite and non-finite elements 
+      finding indices of finite and non-finite elements
       \item expressions \code{X=inv(A)*B*C} and \code{X=A.i()*B*C} are
-      automatically converted to X=solve(A,B*C) 
+      automatically converted to X=solve(A,B*C)
     }
     \item Corrected conversion to \code{unsigned int} vectors and
     matrices
@@ -1069,7 +1409,7 @@
     enable complex divide-and-conquer SVD in case of R-supplied LAPACK
   }
 }
-  
+
 \section{Changes in RcppArmadillo version 0.4.200.0 (2014-04-07)}{
   \itemize{
     \item Upgraded to Armadillo release Version 4.200 (Flintlock Swoop)
@@ -1083,7 +1423,7 @@
 
 \section{Changes in RcppArmadillo version 0.4.100.2 (2014-03-07)}{
   \itemize{
-    \item Upgraded to Armadillo release Version 4.100.2 
+    \item Upgraded to Armadillo release Version 4.100.2
     \itemize{
       \item fix for handling null vectors by \code{normalise()}
       \item fix for memory handling by sparse matrices
@@ -1103,9 +1443,9 @@
       \item added \code{normalise()} for normalising vectors to unit p-norm
       \item extended the \code{field} class to handle 3D layout
       \item extended \code{eigs_sym()} and \code{eigs_gen()} to obtain
-      eigenvalues of various forms (eg. largest or smallest magnitude) 
+      eigenvalues of various forms (eg. largest or smallest magnitude)
       \item automatic SIMD vectorisation of elementary expressions
-      (eg. matrix addition) when using Clang 3.4+ with -O3 optimisation 
+      (eg. matrix addition) when using Clang 3.4+ with -O3 optimisation
       \item faster handling of sparse submatrix views
       \item workaround for a bug in LAPACK 3.4
     }
@@ -1130,7 +1470,7 @@
     \item Added two functions to set Armadillo's RNGs (ie the system
     RNG) from a given value and to randomize it, as suggested by Gábor
     Csárdi. Note that these do not work within RStudio (which itself
-    also uses the same system RNG). 
+    also uses the same system RNG).
   }
 }
 
@@ -1159,15 +1499,15 @@
       \item expanded \code{find()} to handle cubes
       \item expanded subcube views to access elements specified in a vector
       \item template argument for \code{running_stat_vec} expanded to
-      accept vector types 
+      accept vector types
       \item more robust fast inverse of 4x4 matrices
       \item faster divide-and-conquer decompositions are now used by
       default for \code{eig_sym()}, \code{pinv()}, \code{princomp()},
-      \code{rank()}, \code{svd()}, \code{svd_econ()} 
+      \code{rank()}, \code{svd()}, \code{svd_econ()}
       \item the form \code{inv(sympd(X))} no longer assumes that X is
-      positive definite; use \code{inv_sympd()} instead 
+      positive definite; use \code{inv_sympd()} instead
       \item added MEX connector for interfacing Octave/Matlab with
-      Armadillo matrices (contributed by George Yammine) 
+      Armadillo matrices (contributed by George Yammine)
     }
   }
 }
@@ -1190,20 +1530,20 @@
     \item Upgraded to Armadillo release Version 3.930 ("Dragon's Back")
     \itemize{
       \item added divide-and-conquer variant of \code{svd_econ()}, for
-      faster SVD 
+      faster SVD
       \item added divide-and-conquer variant of \code{pinv()}, for
-      faster pseudo-inverse 
-      \item added element-wise variants of \code{min()} and \code{max()} 
+      faster pseudo-inverse
+      \item added element-wise variants of \code{min()} and \code{max()}
       \item added \code{size()} based specifications of submatrix view
-      sizes 
+      sizes
       \item added \code{randi()} for generating matrices with random
-      integer values 
+      integer values
       \item added more intuitive specification of sort direction in
-      \code{sort()} and \code{sort_index()} 
+      \code{sort()} and \code{sort_index()}
       \item added more intuitive specification of method in
-      \code{det()}, \code{.i()}, \code{inv()} and \code{solve()} 
+      \code{det()}, \code{.i()}, \code{inv()} and \code{solve()}
       \item added more precise timer for the \code{wall_clock} class
-      when using C++11 
+      when using C++11
     }
     \item New unit tests for complex matrices and vectors
   }
@@ -1247,10 +1587,10 @@
     \item Upgraded to Armadillo release Version 3.910.0 (Pyrenees)
     \itemize{
       \item faster multiplication of a matrix with a transpose of
-      itself, ie. \code{X*X.t()} and \code{X.t()*X} 
+      itself, ie. \code{X*X.t()} and \code{X.t()*X}
       \item added \code{vectorise()} for reshaping matrices into vectors
       \item added \code{all()} and \code{any()} for indicating presence
-      of elements satisfying a relational condition 
+      of elements satisfying a relational condition
     }
     \item Added conversion support for sparse matrices (of type double)
     created by the \CRANpkg{Matrix} package as class \code{dgCMatrix}
@@ -1271,7 +1611,7 @@
     \item Corrected setting of \code{vec_stats} in intialization of row,
     vector and matrix objects
     \item The \pkg{inline} package is no longer used in the examples and
-    unit tests which have all been converted to using Rcpp attributes 
+    unit tests which have all been converted to using Rcpp attributes
   }
 }
 
@@ -1322,12 +1662,12 @@
     \itemize{
       \item added fast Fourier transform: \code{fft()}
       \item added handling of \code{.imbue()} and \code{.transform()} by
-      submatrices and subcubes 
+      submatrices and subcubes
       \item added batch insertion constructors for sparse matrices
       \item minor fix for multiplication of complex sparse matrices
     }
     \item Updated sample() function and test again contributed by
-    Christian Gunning 
+    Christian Gunning
   }
 }
 
@@ -1467,17 +1807,17 @@
 }
 \section{Changes in RcppArmadillo version 0.3.2.3 (2012-07-01)}{
   \itemize{
-    \item Upgraded to Armadillo release 3.2.3 
+    \item Upgraded to Armadillo release 3.2.3
     \itemize{
       \item minor correction for declaration of fixed size vectors and matrices
       \item Reverted three header files \{Mat,Row,Col\}_bones.hpp back to previous release due to compilation failures under g++-4.7
-      \item Added new vignette 'RcppArmadillo-intro' based on a just-submitted introductory paper (by Eddelbuettel and Sanderson) about RcppArmadillo 
+      \item Added new vignette 'RcppArmadillo-intro' based on a just-submitted introductory paper (by Eddelbuettel and Sanderson) about RcppArmadillo
       \item Change from release 3.2.2 which we skipped as it did not really affect builds under R:
       \itemize{
 	\item minor fix for compiling without debugging enabled (aka release mode)
 	\item better detection of ATLAS during installation on Fedora and Red Hat systems
       }
-      \item Small enhancement to fastLm 
+      \item Small enhancement to fastLm
     }
   }
 }
@@ -1509,7 +1849,7 @@
     \item Upgraded to Armadillo release 3.1.92 "v3.2 beta 2"
     \itemize{
       \item added unique(), for finding unique elements of a matrix
-      \item faster eigen decomposition via optional use of "divide and conquer" by eig_sym() 
+      \item faster eigen decomposition via optional use of "divide and conquer" by eig_sym()
       \item faster transpose of vectors and compound expressions
     }
   }
@@ -1522,7 +1862,7 @@
       \item fixes for complex number version of svd_econ()
       \item fixes for potential aliasing issues with submatrix views
     }
-    \item New example script fastLm 
+    \item New example script fastLm
   }
 }
 \section{Changes in RcppArmadillo version 0.3.0.2 (2012-04-19)}{
@@ -1551,11 +1891,11 @@
       \item added shorthand for inverse: .i()
       \item added hist() and histc()
       \item faster repmat()
-      \item faster handling of submatrix views with one row or column 
+      \item faster handling of submatrix views with one row or column
       \item faster generation of random numbers
       \item faster element access in fixed size matrices
-      \item better detection of vector expressions by sum(), cumsum(), prod(), min(), max(), mean(), median(), stddev(), var() 
-      \item expressions X=A.i()*B and X=inv(A)*B are automatically converted to X=solve(A,B) 
+      \item better detection of vector expressions by sum(), cumsum(), prod(), min(), max(), mean(), median(), stddev(), var()
+      \item expressions X=A.i()*B and X=inv(A)*B are automatically converted to X=solve(A,B)
     }
   }
 }
@@ -1582,7 +1922,7 @@
     \itemize{
       \item added .i()
       \item much faster handling of .col() and .row()
-      \item expressions X=A.i()*B and X=inv(A)*B are automatically converted to X=solve(A,B) 
+      \item expressions X=A.i()*B and X=inv(A)*B are automatically converted to X=solve(A,B)
     }
   }
 }
@@ -1595,7 +1935,7 @@
       \item faster handling of submatrix views
       \item faster generation of random numbers
       \item faster element access in fixed size matrices
-      \item better detection of vector expressions by sum(), cumsum(), prod(), min(), max(), mean(), median(), stddev(), var() 
+      \item better detection of vector expressions by sum(), cumsum(), prod(), min(), max(), mean(), median(), stddev(), var()
     }
   }
 }
@@ -1616,7 +1956,7 @@
       \item Support for ARMA_DEFAULT_OSTREAM using Rcpp::Rcout added
       \item Minor bug fix release improving corner cases affecting builds:
       \itemize{
-	\item Missing semicolon added in Mat_meat (when in C++0x mode), with thanks to Teo Guo Ci 
+	\item Missing semicolon added in Mat_meat (when in C++0x mode), with thanks to Teo Guo Ci
 	\item Armadillo version vars now instantiated in RcppArmadillo.cpp which helps older g++ versions, with thanks to Gershon Bialer
 	\item Thanks also to Martin Renner for testing these changes
 	\item Unit tests output fallback directory changed per Brian Ripley's request to not ever use /tmp
@@ -1649,15 +1989,15 @@
     \item Minimal changes relative to 0.2.31 based on 2.3.92, next section is relative to the previous stable release series 2.2.* of Armadillo
     \itemize{
       \item added shorter forms of transposes: .t() and .st()
-      \item added optional use of 64 bit indices, allowing matrices to have more than 4 billion elements 
+      \item added optional use of 64 bit indices, allowing matrices to have more than 4 billion elements
       \item added experimental support for C++11 initialiser lists
       \item faster pinv()
       \item faster inplace transpose
       \item faster handling of expressions with diagonal views
       \item fixes for handling expressions with aliasing and submatrices
       \item fixes for linking on Ubuntu and Debian systems
-      \item fixes for inconsistencies in interactions between matrices and cubes 
-      \item refactored code to eliminate warnings when using the Clang C++ compiler 
+      \item fixes for inconsistencies in interactions between matrices and cubes
+      \item refactored code to eliminate warnings when using the Clang C++ compiler
       \item .print_trans() and .raw_print_trans() are deprecated
     }
   }
@@ -1682,7 +2022,7 @@
       \item faster inplace transpose
       \item bugfixes for handling expressions with aliasing and submatrices
       \item refactored code to eliminate warnings when using the Clang C++ compiler
-      \item .print_trans() and .raw_print_trans() are deprecated 
+      \item .print_trans() and .raw_print_trans() are deprecated
     }
   }
 }
@@ -1723,7 +2063,7 @@
 }
 \section{Changes in RcppArmadillo version 0.2.26 (2011-07-17)}{
   \itemize{
-    \item Upgraded to Armadillo release 2.0.2 
+    \item Upgraded to Armadillo release 2.0.2
     \itemize{
       \item fix for handling of conjugate transpose by as_scalar()
       \item fix for handling of aliasing by diagmat()
@@ -1746,15 +2086,15 @@
       \item faster element access for fixed size matrices
       \item added handling of arbitrarily sized empty matrices (eg. 5x0)
       \item added loading & saving of matrices as CSV text files
-      \item added .count() member function to running_stat and running_stat_vec 
+      \item added .count() member function to running_stat and running_stat_vec
       \item added syl(), strans(), symmatu()/symmatl()
       \item added submatrices of submatrices
       \item det(), inv() and solve() can be forced to use more precise
       \item algorithms for tiny matrices (≤ 4x4)
       \item htrans() has been deprecated; use trans() instead
-      \item API change: trans() now takes the complex conjugate when transposing a complex matrix 
-      \item API change: .is_vec() now outputs true for empty vectors (eg. 0x1) 
-      \item API change: forms of chol(), eig_sym(), eig_gen(), inv(), lu(), pinv(), princomp(), qr(), solve(), svd(), syl() that do not return a bool indicating success now throw std::runtime_error exceptions when failures are detected 
+      \item API change: trans() now takes the complex conjugate when transposing a complex matrix
+      \item API change: .is_vec() now outputs true for empty vectors (eg. 0x1)
+      \item API change: forms of chol(), eig_sym(), eig_gen(), inv(), lu(), pinv(), princomp(), qr(), solve(), svd(), syl() that do not return a bool indicating success now throw std::runtime_error exceptions when failures are detected
       \item API change: princomp_cov() has been removed; princomp() in conjunction with cov() can be used instead
       \item API change: set_log_stream() & get_log_stream() have been replaced by set_stream_err1() & get_stream_err1()
     }
@@ -1764,11 +2104,11 @@
   \itemize{
     \item Upgraded to Armadillo release 1.99.5 "v2.0 beta 5"
     \itemize{
-      \item Forms of chol(), eig_sym(), eig_gen(), inv(), lu(), pinv(), princomp(), qr(), solve(), svd(), syl() that do not return a bool indicating success now throw std::runtime_error exceptions when failures are detected 
+      \item Forms of chol(), eig_sym(), eig_gen(), inv(), lu(), pinv(), princomp(), qr(), solve(), svd(), syl() that do not return a bool indicating success now throw std::runtime_error exceptions when failures are detected
       \item princomp_cov() has been removed; princomp() in conjunction with cov() can be used instead
       \item set_log_stream() & get_log_stream() have been replaced by set_stream_err1() & get_stream_err1()
       \item det(), inv() and solve() can be forced to use more precise algorithms for tiny matrices (≤ 4x4)
-      \item Added loading & saving of matrices as CSV text files 
+      \item Added loading & saving of matrices as CSV text files
     }
     \item fastLmPure() now uses same argument order as R's lm.fit()
     \item Export and document S3 methods in NAMESPACE and manual page as such
@@ -1776,7 +2116,7 @@
 }
 \section{Changes in RcppArmadillo version 0.2.22 (2011-06-06)}{
   \itemize{
-    \item Upgraded to Armadillo release 1.99.4 "v2.0 beta 4" 
+    \item Upgraded to Armadillo release 1.99.4 "v2.0 beta 4"
     \itemize{
       \item fixes for handling of tiny matrices
     }
@@ -1784,7 +2124,7 @@
 }
 \section{Changes in RcppArmadillo version 0.2.21 (2011-05-27)}{
   \itemize{
-    \item Upgraded to Armadillo release 1.99.3 "v2.0 beta 3" 
+    \item Upgraded to Armadillo release 1.99.3 "v2.0 beta 3"
     \itemize{
       \item stricter size checking for row and column vectors
       \item added .count() member function to running_stat and running_stat_vec
@@ -1817,7 +2157,7 @@
   \itemize{
     \item Upgraded to Armadillo version 1.2.0 "Unscrupulous Carbon Emitter"
     \itemize{
-      \item Added ability to use Blas & Lapack libraries with capitalised function names 
+      \item Added ability to use Blas & Lapack libraries with capitalised function names
       \item Reduction of pedantic compiler warnings
     }
   }
@@ -1898,9 +2238,9 @@
       \item Extended submatrix views, including access to elements whose indices are specified in a separate vector
       \item Added handling of raw binary files by save/load functions
       \item Added cumsum()
-      \item Added interpretation of matrices as triangular via trimatu()/trimatl() 
-      \item Faster solve(), inv() via explicit handling of triangular matrices 
-      \item The stream for logging of errors and warnings can now be changed 
+      \item Added interpretation of matrices as triangular via trimatu()/trimatl()
+      \item Faster solve(), inv() via explicit handling of triangular matrices
+      \item The stream for logging of errors and warnings can now be changed
     }
     \item New unexported R function SHLIB, a small wrapper around R CMD SHLIB, which can be used as   Rscript -e "RcppArmadillo:::SHLIB('foo.cpp')"
   }
@@ -1909,7 +2249,7 @@
   \itemize{
     \item Upgraded to Armadillo 1.0.0 "Antipodean Antileech"
     \itemize{
-      \item After 2 1/2 years of collaborative development, we are proud to release the 1.0 milestone version. 
+      \item After 2 1/2 years of collaborative development, we are proud to release the 1.0 milestone version.
       \item Many thanks are extended to all contributors and bug reporters.
     }
     \item R/RcppArmadillo.package.skeleton.R: Updated to no longer rely on GNU make for builds of packages using RcppArmadillo
@@ -1974,7 +2314,7 @@
     \item Upgraded to Armadillo 0.9.10 'Chilli Espresso'
     \item Wrap support for mtOp, i.e. operations involving mixed types such as a complex and an arma::mat, which have been introduced in armadillo 0.9.10
     \item Wrap support for mtGlue, i.e. operations involving matrices of mixed types such as an arma::mat and an arma::imat, which have been introduced in armadillo 0.9.10
-    \item Included an inline plugin to support the plugin system introduced in inline 0.3.5. The unit tests have moved from the src directory to the unit test directory (similar to Rcpp) using cxxfunction with the RcppArmadillo plugin. 
+    \item Included an inline plugin to support the plugin system introduced in inline 0.3.5. The unit tests have moved from the src directory to the unit test directory (similar to Rcpp) using cxxfunction with the RcppArmadillo plugin.
   }
 }
 \section{Changes in RcppArmadillo version 0.2.1 (2010-05-19)}{

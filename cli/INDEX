@@ -3,10 +3,13 @@ ansi_align              Align an ANSI colored string
 ansi_columns            Format a character vector in multiple columns
 ansi_has_any            Check if a string has some ANSI styling
 ansi_hide_cursor        Hide/show cursor in a terminal
+ansi_html               Convert ANSI styled text to HTML
+ansi_html_style         CSS styles for the output of 'ansi_html()'
 ansi_nchar              Count number of characters in an ANSI colored
                         string
-ansi_regex              Perl comparible regular expression that matches
+ansi_regex              Perl compatible regular expression that matches
                         ANSI escape sequences
+ansi_simplify           Simplify ANSI styling tags
 ansi_strip              Remove ANSI escape sequences from a string
 ansi_strsplit           Split an ANSI colored string
 ansi_strtrim            Truncate an ANSI string
@@ -25,6 +28,7 @@ cli_abort               Signal an error, warning or message with a cli
 cli_alert               CLI alerts
 cli_blockquote          CLI block quote
 cli_bullets             List of items
+cli_bullets_raw         List of verbatim items
 cli_code                A block of code
 cli_debug_doc           Debug cli internals
 cli_div                 Generic CLI container
@@ -40,7 +44,7 @@ cli_ol                  Ordered CLI list
 cli_output_connection   The connection option that cli would use
 cli_par                 CLI paragraph
 cli_process_start       Indicate the start and termination of some
-                        computation in the status bar
+                        computation in the status bar (superseded)
 cli_progress_along      Add a progress bar to a mapping function or for
                         loop
 cli_progress_bar        cli progress bars
@@ -54,22 +58,31 @@ cli_progress_step       Simplified cli progress messages, with styling
 cli_progress_styles     List of built-in cli progress styles
 cli_rule                CLI horizontal rule
 cli_sitrep              cli situation report
-cli_status              Update the status bar
-cli_status_clear        Clear the status bar
-cli_status_update       Update the status bar
+cli_status              Update the status bar (superseded)
+cli_status_clear        Clear the status bar (superseded)
+cli_status_update       Update the status bar (superseded)
 cli_text                CLI text
 cli_ul                  Unordered CLI list
 cli_vec                 Add custom cli style to a vector
 cli_verbatim            CLI verbatim text
+code_highlight          Syntax highlight R code
+code_theme_list         Syntax highlighting themes
 combine_ansi_styles     Combine two or more ANSI styles
 console_width           Determine the width of the console
-containers              CLI containers
+containers              About cli containers
 demo_spinners           Show a demo of some (by default all) spinners
+diff_chr                Compare two character vectors elementwise
+diff_str                Compare two character strings, character by
+                        character
 faq                     Frequently Asked Questions
 format_error            Format an error, warning or diagnostic message
 format_inline           Format and returns a line of text
 get_spinner             Character vector to put a spinner on the screen
-inline-markup           CLI inline markup
+hash_animal             Adjective-animal hash
+hash_emoji              Emoji hash
+hash_md5                MD5 hash
+hash_sha256             SHA-256 hash
+inline-markup           About inline markup in the semantic cli
 is_ansi_tty             Detect if a stream support ANSI escape
                         characters
 is_dynamic_tty          Detect whether a stream supports \\r (Carriage
@@ -81,11 +94,12 @@ make_ansi_style         Create a new ANSI style
 make_spinner            Create a spinner
 no                      Pluralization helper functions
 num_ansi_colors         Detect the number of ANSI colors to use
-pluralization           CLI pluralization
+pluralization           About cli pluralization
 pluralize               String templating with pluralization
 progress-c              The cli progress C API
 progress-variables      Progress bar variables
 rule                    Make a rule with one or two text labels
+ruler                   Print the helpful ruler to the screen
 simple_theme            A simple CLI theme
 spark_bar               Draw a sparkline bar graph with unicode block
                         characters
@@ -96,5 +110,11 @@ style_hyperlink         Terminal Hyperlinks
 symbol                  Various handy symbols to use in a command line
                         UI
 test_that_cli           Test cli output with testthat
-themes                  CLI themes
+themes                  About cli themes
 tree                    Draw a tree
+truecolor               ANSI colors palettes
+utf8_graphemes          Break an UTF-8 character vector into grapheme
+                        clusters
+utf8_nchar              Count the number of characters in a character
+                        vector
+utf8_substr             Substring of an UTF-8 string

@@ -1,15 +1,15 @@
 Package: cpp11
 Title: A C++11 Interface for R's C Interface
-Version: 0.4.0
+Version: 0.4.2
 Authors@R: 
     c(person(given = "Jim",
              family = "Hester",
-             role = c("aut", "cre"),
-             email = "jim.hester@rstudio.com",
+             role = "aut",
              comment = c(ORCID = "0000-0002-2739-7082")),
       person(given = "Romain",
              family = "François",
-             role = "ctb"),
+             role = c("aut", "cre"),
+             email = "romain@rstudio.com"),
       person(given = "Benjamin",
              family = "Kietzman",
              role = "ctb"),
@@ -31,15 +31,15 @@ Config/testthat/edition: 3
 Config/Needs/cpp11/cpp_register: brio, cli, decor, desc, glue, tibble,
         vctrs
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 SystemRequirements: C++11
 NeedsCompilation: no
-Packaged: 2021-09-21 15:22:56 UTC; jhester
-Author: Jim Hester [aut, cre] (<https://orcid.org/0000-0002-2739-7082>),
-  Romain François [ctb],
+Packaged: 2021-11-29 17:26:06 UTC; jhester
+Author: Jim Hester [aut] (<https://orcid.org/0000-0002-2739-7082>),
+  Romain François [aut, cre],
   Benjamin Kietzman [ctb],
   RStudio [cph, fnd]
-Maintainer: Jim Hester <jim.hester@rstudio.com>
+Maintainer: Romain François <romain@rstudio.com>
 Repository: CRAN
-Date/Publication: 2021-09-22 08:50:10 UTC
-Built: R 3.6.3; ; 2021-10-21 08:15:46 UTC; unix
+Date/Publication: 2021-11-30 09:10:04 UTC
+Built: R 3.6.3; ; 2022-02-15 16:25:47 UTC; unix

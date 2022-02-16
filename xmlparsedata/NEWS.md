@@ -1,4 +1,18 @@
 
+# 1.0.5
+
+* Translate `\` in lambda expression to `OP-LAMBDA` (#18 @renkun-ken).
+
+* Drop all control characters, except horizontal tab and newline (#19).
+
+# 1.0.4
+
+* Translate ] tokens to `OP-RIGHT-BRACKET` instead of
+  `OP-RIGHT-BRACE` (#11 @AshesITR).
+
+* `xml_parse_data()` now works if `includeText = FALSE`
+  (#14 @renkun-ken).
+
 # 1.0.3
 
 * Ensure that closing xml-tags for code expressions that end at the same

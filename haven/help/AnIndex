@@ -1,8 +1,10 @@
+haven-package	haven-package
 as_factor	as_factor
 as_factor.data.frame	as_factor
 as_factor.haven_labelled	as_factor
 as_factor.labelled	as_factor
 format_tagged_na	tagged_na
+haven	haven-package
 is.labelled	labelled
 is_tagged_na	tagged_na
 labelled	labelled
@@ -18,6 +20,7 @@ read_spss	read_spss
 read_stata	read_dta
 read_xpt	read_xpt
 tagged_na	tagged_na
+vec_arith.haven_labelled	vec_arith.haven_labelled
 write_dta	read_dta
 write_sas	read_sas
 write_sav	read_spss

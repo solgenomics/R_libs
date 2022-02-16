@@ -1,26 +1,20 @@
 Package: magic
-Version: 1.5-9
-Date: 2018-09-14
+Version: 1.6-0
 Title: Create and Investigate Magic Squares
-Author: Robin K. S. Hankin
+Authors@R: person(given=c("Robin", "K. S."), family="Hankin", role = c("aut","cre"), email="hankin.robin@gmail.com", comment = c(ORCID = "0000-0001-5982-0415"))
 Depends: R (>= 2.10), abind
-Description: A collection of efficient, vectorized algorithms for the
- creation and investigation of magic squares and hypercubes, including
- a variety of functions for the manipulation and analysis of
- arbitrarily dimensioned arrays.  The package includes methods for
- creating normal magic squares of any order greater than 2.  The
- ultimate intention is for the package to be a computerized embodiment
- all magic square knowledge, including direct numerical verification
- of properties of magic squares (such as recent results on the
- determinant of odd-ordered semimagic squares).  Some antimagic
- functionality is included.  The package also
- serves as a rebuttal to the often-heard comment "I thought R
- was just for statistics".
-Maintainer: "Robin K. S. Hankin" <hankin.robin@gmail.com>
+Description: A collection of functions for the manipulation and
+ analysis of arbitrarily dimensioned arrays.  The original motivation
+ for the package was the development of efficient, vectorized
+ algorithms for the creation and investigation of magic squares and
+ high-dimensional magic hypercubes.
+Maintainer: Robin K. S. Hankin <hankin.robin@gmail.com>
 License: GPL-2
-Packaged: 2018-09-16 20:24:12 UTC; rhankin
-URL: https://github.com/RobinHankin/magic.git
+URL: https://github.com/RobinHankin/magic
+BugReports: https://github.com/RobinHankin/magic/issues
 NeedsCompilation: no
+Packaged: 2022-02-08 08:30:16 UTC; rhankin
+Author: Robin K. S. Hankin [aut, cre] (<https://orcid.org/0000-0001-5982-0415>)
 Repository: CRAN
-Date/Publication: 2018-09-17 09:00:08 UTC
-Built: R 3.6.0; ; 2019-05-10 11:31:59 UTC; unix
+Date/Publication: 2022-02-09 00:10:07 UTC
+Built: R 3.6.3; ; 2022-02-15 16:31:22 UTC; unix

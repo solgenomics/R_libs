@@ -1,6 +1,10 @@
 stringdist-package	stringdist-package
+afind	afind
 ain	amatch
 amatch	amatch
+extract	afind
+grab	afind
+grabl	afind
 phonetic	phonetic
 printable_ascii	printable_ascii
 qgrams	qgrams
@@ -17,3 +21,4 @@ stringdist-parallelization	stringdist-parallelization
 stringdistmatrix	stringdist
 stringdist_api	stringdist-api
 stringsim	stringsim
+stringsimmatrix	stringsim

@@ -44,6 +44,7 @@ gCentroid	topo-unary-gCentroid
 gContains	pred-binary-gContains
 gContainsProperly	pred-binary-gContains
 gConvexHull	topo-unary-gConvexHull
+gCoverageUnion	topo-unary-gCoverageUnion
 gCoveredBy	pred-binary-gContains
 gCovers	pred-binary-gContains
 gCrosses	pred-binary-gCrosses
@@ -75,6 +76,9 @@ gIsSimple	pred-unary-gIsSimple
 gIsValid	pred-unary-gIsValid
 gLength	misc-gLength
 gLineMerge	topo-bin-gUnion
+gMakeValid	topo-unary-gMakeValid
+gMaximumInscribedCircle	topo-unary-gMaximumInscribedCircle
+gMinumumRotatedRectangle	topo-unary-gMinumumRotatedRectangle
 gNearestPoints	misc-gNearestPoints
 gNode	topo-unary-gNode
 gOverlaps	pred-binary-gCrosses

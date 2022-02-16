@@ -9,3 +9,5 @@ is.ggtree	is.ggtree
 keybox	keybox
 reexports	reexports
 set_font	set_font
+theme_nothing	theme_nothing
+theme_transparent	theme_transparent

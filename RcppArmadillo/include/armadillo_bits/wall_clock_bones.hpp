@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -32,16 +34,9 @@ class wall_clock
   
   private:
   
-  bool valid;
+  bool valid = false;
   
-  #if defined(ARMA_USE_CXX11)
-    std::chrono::steady_clock::time_point chrono_time1;
-  #elif defined(ARMA_HAVE_GETTIMEOFDAY)
-    struct timeval posix_time1;
-    struct timeval posix_time2;
-  #else
-    std::clock_t time1;
-  #endif
+  std::chrono::steady_clock::time_point chrono_time1;
   };
 
 

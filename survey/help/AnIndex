@@ -13,6 +13,8 @@ as.fpc	as.fpc
 as.matrix.repweights	compressWeights
 as.matrix.repweights_compressed	compressWeights
 as.svrepdesign	as.svrepdesign
+as.svrepdesign.default	as.svrepdesign
+as.svrepdesign.svyimputationList	as.svrepdesign
 as.svydesign2	as.svydesign2
 as.vector.repweights_compressed	compressWeights
 barplot.svrepstat	barplot.svystat
@@ -89,7 +91,9 @@ election_pps	election
 estWeights	estweights
 estWeights.data.frame	estweights
 estWeights.twophase	estweights
+extractAIC.svrepglm	anova.svyglm
 extractAIC.svycoxph	svycoxph
+extractAIC.svyglm	anova.svyglm
 fpc	fpc
 ftable.svrepstat	ftable.svystat
 ftable.svyby	ftable.svystat
@@ -127,6 +131,9 @@ na.omit.twophase	twophase
 neighbours	nonresponse
 nhanes	nhanes
 nonresponse	nonresponse
+oldsvyquantile	oldsvyquantile
+oldsvyquantile.survey.design	oldsvyquantile
+oldsvyquantile.svyrep.design	oldsvyquantile
 onestage	svyCprod
 onestage.phase1	twophase
 onestrat	svyCprod
@@ -139,10 +146,12 @@ plot.svycdf	svycdf
 plot.svykm	svykm
 plot.svykmlist	svykm
 plot.svysmooth	svysmooth
+poisson_sampling	poisson_sampling
 postStratify	postStratify
 postStratify.survey.design	postStratify
 postStratify.svyrep.design	postStratify
 postStratify.twophase	postStratify
+ppscov	HR
 ppsmat	HR
 predict.svrepglm	svyglm
 predict.svycoxph	svycoxph
@@ -158,7 +167,7 @@ print.summary.svytable	svychisq
 print.summary.twophase	twophase
 print.svycdf	svycdf
 print.svymle	svymle
-print.svyquantile	svyquantile
+print.svyquantile	oldsvyquantile
 print.svyratio	svyratio
 print.svyratio_separate	svyratio
 print.svyrep.design	svrepdesign
@@ -175,7 +184,6 @@ SE	SE
 SE.default	SE
 SE.svrepstat	SE
 SE.svyby	svyby
-SE.svyquantile	svyquantile
 SE.svyratio	svyratio
 sparseCells	nonresponse
 stratsample	stratsample
@@ -210,6 +218,7 @@ svyboxplot	svyhist
 svyby	svyby
 svyby.default	svyby
 svyby.survey.design2	svyby
+svybys	svyby
 svycdf	svycdf
 svychisq	svychisq
 svychisq.survey.design	svychisq
@@ -231,6 +240,7 @@ svyfactanal	svyfactanal
 svyglm	svyglm
 svyglm.survey.design	svyglm
 svyglm.svyrep.design	svyglm
+svygofchisq	svygofchisq
 svyhist	svyhist
 svyivreg	svyivreg
 svykappa	svykappa
@@ -251,6 +261,8 @@ svyplot	svyplot
 svyplot.default	svyplot
 svyprcomp	svyprcomp
 svypredmeans	svypredmeans
+svyqqmath	svyqqplot
+svyqqplot	svyqqplot
 svyquantile	svyquantile
 svyquantile.survey.design	svyquantile
 svyquantile.svyrep.design	svyquantile
@@ -305,6 +317,7 @@ withPV.survey.design	withPV.survey.design
 withReplicates	withReplicates
 withReplicates.svrepstat	withReplicates
 withReplicates.svrepvar	withReplicates
+withReplicates.svyimputationList	withReplicates
 withReplicates.svyrep.design	withReplicates
 yrbs	yrbs
 [.nonresponse	nonresponse

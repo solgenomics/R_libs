@@ -51,6 +51,8 @@ repair_names	name-repair-superseded
 rowid_to_column	rownames
 rownames	rownames
 rownames_to_column	rownames
+set_char_opts	char
+set_num_opts	num
 set_tidy_names	name-repair-superseded
 size_sum	reexports
 subsetting	subsetting

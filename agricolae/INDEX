@@ -52,6 +52,7 @@ design.dau              Augmented block design
 design.graeco           Graeco - latin square design
 design.lattice          Lattice designs
 design.lsd              Latin Square Design
+design.mat              Experimental design matrix
 design.rcbd             Randomized Complete Block Design
 design.split            Split Plot Design
 design.strip            Strip Plot Design

@@ -207,6 +207,96 @@ us_rent_income %>%
   pivot_wider(names_from = variable, values_from = c(estimate, moe))
 
 ## -----------------------------------------------------------------------------
+weekdays <- c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+
+daily <- tibble(
+  day = factor(c("Tue", "Thu", "Fri", "Mon"), levels = weekdays),
+  value = c(2, 3, 1, 5)
+)
+
+daily
+
+## -----------------------------------------------------------------------------
+pivot_wider(daily, names_from = day, values_from = value)
+
+## -----------------------------------------------------------------------------
+pivot_wider(daily, names_from = day, values_from = value, names_expand = TRUE)
+
+## -----------------------------------------------------------------------------
+percentages <- tibble(
+  year = c(2018, 2019, 2020, 2020),
+  type = factor(c("A", "B", "A", "B"), levels = c("A", "B")),
+  percentage = c(100, 100, 40, 60)
+)
+
+percentages
+
+pivot_wider(
+  percentages,
+  names_from = c(year, type),
+  values_from = percentage,
+  names_expand = TRUE,
+  values_fill = 0
+)
+
+## -----------------------------------------------------------------------------
+daily <- mutate(daily, type = factor(c("A", "B", "B", "A")))
+daily
+
+## -----------------------------------------------------------------------------
+pivot_wider(
+  daily, 
+  names_from = type, 
+  values_from = value,
+  values_fill = 0
+)
+
+## -----------------------------------------------------------------------------
+pivot_wider(
+  daily, 
+  names_from = type, 
+  values_from = value,
+  values_fill = 0,
+  id_expand = TRUE
+)
+
+## -----------------------------------------------------------------------------
+updates <- tibble(
+  county = c("Wake", "Wake", "Wake", "Guilford", "Guilford"),
+  date = c(as.Date("2020-01-01") + 0:2, as.Date("2020-01-03") + 0:1),
+  system = c("A", "B", "C", "A", "C"),
+  value = c(3.2, 4, 5.5, 2, 1.2)
+)
+
+updates
+
+## -----------------------------------------------------------------------------
+pivot_wider(
+  updates, 
+  id_cols = county, 
+  names_from = system, 
+  values_from = value
+)
+
+## -----------------------------------------------------------------------------
+pivot_wider(
+  updates, 
+  id_cols = county, 
+  names_from = system, 
+  values_from = value,
+  unused_fn = list(date = max)
+)
+
+## -----------------------------------------------------------------------------
+pivot_wider(
+  updates, 
+  id_cols = county, 
+  names_from = system, 
+  values_from = value,
+  unused_fn = list(date = list)
+)
+
+## -----------------------------------------------------------------------------
 contacts <- tribble(
   ~field, ~value,
   "name", "Jiena McLellan",

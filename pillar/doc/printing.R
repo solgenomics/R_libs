@@ -39,21 +39,22 @@ setup
 
 ## ----show_source = TRUE-------------------------------------------------------
 #  tbl_format_setup <- function (x, width = NULL, ..., n = NULL, max_extra_cols = NULL, 
-#      max_footer_lines = NULL) 
+#      max_footer_lines = NULL, focus = NULL) 
 #  {
 #      "!!!!DEBUG tbl_format_setup()"
 #      width <- get_width_print(width)
 #      n <- get_n_print(n, nrow(x))
 #      max_extra_cols <- get_max_extra_cols(max_extra_cols)
 #      max_footer_lines <- get_max_footer_lines(max_footer_lines)
-#      out <- tbl_format_setup_(x, width, ..., n = n, max_extra_cols = max_extra_cols, 
-#          max_footer_lines = max_footer_lines)
+#      out <- tbl_format_setup_dispatch(x, width, ..., n = n, max_extra_cols = max_extra_cols, 
+#          max_footer_lines = max_footer_lines, focus = focus)
 #      return(out)
 #      UseMethod("tbl_format_setup")
 #  }
 
 ## ----show_source = TRUE-------------------------------------------------------
-#  tbl_format_setup.tbl <- function (x, width, ..., n, max_extra_cols, max_footer_lines) 
+#  tbl_format_setup.tbl <- function (x, width, ..., n, max_extra_cols, max_footer_lines, 
+#      focus) 
 #  {
 #      "!!!!DEBUG tbl_format_setup.tbl()"
 #      rows <- nrow(x)
@@ -86,17 +87,18 @@ setup
 #      colonnade <- ctl_colonnade(df, has_row_id = if (.row_names_info(x) > 
 #          0) 
 #          "*"
-#      else TRUE, width = width, controller = x)
+#      else TRUE, width = width, controller = x, focus = focus)
 #      body <- colonnade$body
 #      extra_cols <- colonnade$extra_cols
 #      extra_cols_total <- length(extra_cols)
 #      if (extra_cols_total > max_extra_cols) {
 #          length(extra_cols) <- max_extra_cols
 #      }
+#      abbrev_cols <- colonnade$abbrev_cols
 #      new_tbl_format_setup(x = x, df = df, width = width, tbl_sum = tbl_sum, 
 #          body = body, rows_missing = rows_missing, rows_total = rows, 
 #          extra_cols = extra_cols, extra_cols_total = extra_cols_total, 
-#          max_footer_lines = max_footer_lines)
+#          max_footer_lines = max_footer_lines, abbrev_cols = abbrev_cols)
 #  }
 
 ## -----------------------------------------------------------------------------
@@ -138,29 +140,36 @@ typeof(tbl_format_body(tbl, setup))
 #  }
 
 ## -----------------------------------------------------------------------------
-ctl_new_compound_pillar(tbl, tbl$a, width = 20)
-ctl_new_compound_pillar(tbl, tbl$b, width = 20)
+ctl_new_pillar_list(tbl, tbl$a, width = 20)
+ctl_new_pillar_list(tbl, tbl$b, width = 20)
 
 ## ----show_source = TRUE-------------------------------------------------------
-#  ctl_new_compound_pillar.tbl <- function (controller, x, width, ..., title = NULL) 
+#  ctl_new_pillar_list.tbl <- function (controller, x, width, ..., title = NULL, first_pillar = NULL) 
 #  {
-#      "!!!!DEBUG ctl_new_compound_pillar.tbl(`v(width)`, `v(title)`)"
+#      "!!!!DEBUG ctl_new_pillar_list.tbl(`v(width)`, `v(title)`)"
 #      if (is.data.frame(x)) {
-#          new_data_frame_pillar(x, controller, width, title = title)
+#          new_data_frame_pillar_list(x, controller, width, title = title, 
+#              first_pillar = first_pillar)
 #      }
 #      else if (is.matrix(x)) {
-#          new_matrix_pillar(x, controller, width, title = title)
+#          new_matrix_pillar_list(x, controller, width, title = title, 
+#              first_pillar = first_pillar)
 #      }
 #      else if (is.array(x) && length(dim(x)) > 1) {
-#          new_array_pillar(x, controller, width, title = title)
+#          new_array_pillar_list(x, controller, width, title = title, 
+#              first_pillar = first_pillar)
 #      }
 #      else {
-#          ctl_new_pillar(controller, x, width, ..., title = prepare_title(title))
+#          if (is.null(first_pillar)) {
+#              first_pillar <- ctl_new_pillar(controller, x, width, 
+#                  ..., title = prepare_title(title))
+#          }
+#          new_single_pillar_list(first_pillar, width)
 #      }
 #  }
 
 ## -----------------------------------------------------------------------------
-ctl_new_compound_pillar(tbl, tbl$a, width = 20)
+ctl_new_pillar(tbl, tbl$a, width = 20)
 
 ## ----show_source = TRUE-------------------------------------------------------
 #  ctl_new_pillar.tbl <- function (controller, x, width, ..., title = NULL) 
@@ -179,9 +188,12 @@ ctl_new_compound_pillar(tbl, tbl$a, width = 20)
 #  }
 
 ## ----show_source = TRUE-------------------------------------------------------
-#  new_pillar <- function (components, ..., width = NULL, class = NULL) 
+#  new_pillar <- function (components, ..., width = NULL, class = NULL, extra = deprecated()) 
 #  {
 #      "!!!!DEBUG new_pillar(`v(width)`, `v(class)`)"
+#      if (is_present(extra)) {
+#          deprecate_warn("1.7.0", "pillar::new_pillar(extra = )")
+#      }
 #      check_dots_empty()
 #      if (length(components) > 0 && !is_named(components)) {
 #          abort("All components must have names.")
@@ -197,8 +209,8 @@ ctl_new_compound_pillar(tbl, tbl$a, width = 20)
 #      }
 #      if (is.null(width)) {
 #          widths <- pillar_get_widths(x)
-#          width <- sum(widths) - length(widths) + 1
+#          width <- sum(widths) + length(widths) - 1
 #      }
-#      new_vertical(pillar_format_parts_2(x, width)$aligned[[1]])
+#      as_glue(pillar_format_parts_2(x, width)$aligned)
 #  }
 

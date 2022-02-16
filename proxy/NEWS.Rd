@@ -1,5 +1,23 @@
 \name{NEWS}
 \title{News for Package \pkg{proxy}}
+\section{Changes in version 0.4-26}{
+  \itemize{
+    \item Change coercion function for cosine similarity to distance to
+    1-x instead of 1-abs(x)
+   }
+}
+\section{Changes in version 0.4-25}{
+  \itemize{
+    \item fix scaling for gower metric in case of cross-proximities to scale x and y together.y
+   }
+}
+
+\section{Changes in version 0.4-24}{
+  \itemize{
+    \item fix tests in apply.R to comply to new default behavior
+    of encoding character strings in data frames
+   }
+}
 \section{Changes in version 0.4-23}{
   \itemize{
        \item smaller changes in C code to prevent false positives

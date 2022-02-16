@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -35,9 +37,20 @@ inline
 void
 Base<elem_type,derived>::print(const std::string extra_text) const
   {
+  arma_extra_debug_sigprint();
+  
   const quasi_unwrap<derived> tmp( (*this).get_ref() );
   
-  tmp.M.impl_print(extra_text);
+  if(extra_text.length() != 0)
+    {
+    const std::streamsize orig_width = get_cout_stream().width();
+    
+    get_cout_stream() << extra_text << '\n';
+    
+    get_cout_stream().width(orig_width);
+    }
+  
+  arma_ostream::print(get_cout_stream(), tmp.M, true);
   }
 
 
@@ -48,9 +61,20 @@ inline
 void
 Base<elem_type,derived>::print(std::ostream& user_stream, const std::string extra_text) const
   {
+  arma_extra_debug_sigprint();
+  
   const quasi_unwrap<derived> tmp( (*this).get_ref() );
   
-  tmp.M.impl_print(user_stream, extra_text);
+  if(extra_text.length() != 0)
+    {
+    const std::streamsize orig_width = user_stream.width();
+    
+    user_stream << extra_text << '\n';
+    
+    user_stream.width(orig_width);
+    }
+  
+  arma_ostream::print(user_stream, tmp.M, true);
   }
   
 
@@ -61,9 +85,20 @@ inline
 void
 Base<elem_type,derived>::raw_print(const std::string extra_text) const
   {
+  arma_extra_debug_sigprint();
+  
   const quasi_unwrap<derived> tmp( (*this).get_ref() );
   
-  tmp.M.impl_raw_print(extra_text);
+  if(extra_text.length() != 0)
+    {
+    const std::streamsize orig_width = get_cout_stream().width();
+    
+    get_cout_stream() << extra_text << '\n';
+    
+    get_cout_stream().width(orig_width);
+    }
+  
+  arma_ostream::print(get_cout_stream(), tmp.M, false);
   }
 
 
@@ -74,9 +109,68 @@ inline
 void
 Base<elem_type,derived>::raw_print(std::ostream& user_stream, const std::string extra_text) const
   {
+  arma_extra_debug_sigprint();
+  
   const quasi_unwrap<derived> tmp( (*this).get_ref() );
   
-  tmp.M.impl_raw_print(user_stream, extra_text);
+  if(extra_text.length() != 0)
+    {
+    const std::streamsize orig_width = user_stream.width();
+    
+    user_stream << extra_text << '\n';
+    
+    user_stream.width(orig_width);
+    }
+  
+  arma_ostream::print(user_stream, tmp.M, false);
+  }
+
+
+
+template<typename elem_type, typename derived>
+arma_cold
+inline
+void
+Base<elem_type,derived>::brief_print(const std::string extra_text) const
+  {
+  arma_extra_debug_sigprint();
+  
+  const quasi_unwrap<derived> tmp( (*this).get_ref() );
+  
+  if(extra_text.length() != 0)
+    {
+    const std::streamsize orig_width = get_cout_stream().width();
+    
+    get_cout_stream() << extra_text << '\n';
+    
+    get_cout_stream().width(orig_width);
+    }
+  
+  arma_ostream::brief_print(get_cout_stream(), tmp.M);
+  }
+
+
+
+template<typename elem_type, typename derived>
+arma_cold
+inline
+void
+Base<elem_type,derived>::brief_print(std::ostream& user_stream, const std::string extra_text) const
+  {
+  arma_extra_debug_sigprint();
+  
+  const quasi_unwrap<derived> tmp( (*this).get_ref() );
+  
+  if(extra_text.length() != 0)
+    {
+    const std::streamsize orig_width = user_stream.width();
+    
+    user_stream << extra_text << '\n';
+    
+    user_stream.width(orig_width);
+    }
+  
+  arma_ostream::brief_print(user_stream, tmp.M);
   }
 
 
@@ -411,15 +505,15 @@ Base<elem_type,derived>::is_zero(const typename get_pod_type<elem_type>::result 
       const T val_real = access::tmp_real(val);
       const T val_imag = access::tmp_imag(val);
       
-      if(std::abs(val_real) > tol)  { return false; }
-      if(std::abs(val_imag) > tol)  { return false; }
+      if(eop_aux::arma_abs(val_real) > tol)  { return false; }
+      if(eop_aux::arma_abs(val_imag) > tol)  { return false; }
       }
     }
   else  // not complex
     {
     for(uword i=0; i<n_elem; ++i)
       {
-      if(std::abs(Pea[i]) > tol)  { return false; }
+      if(eop_aux::arma_abs(Pea[i]) > tol)  { return false; }
       }
     }
   
@@ -480,19 +574,25 @@ Base<elem_type,derived>::is_diagmat() const
   
   if(A.n_elem <= 1)  { return true; }
   
+  // NOTE: we're NOT assuming the matrix has a square size
+  
   const uword A_n_rows = A.n_rows;
   const uword A_n_cols = A.n_cols;
   
-  const elem_type* A_colmem = A.memptr();
+  const elem_type* A_mem = A.memptr();
+  
+  if(A_mem[1] != elem_type(0))  { return false; }
+  
+  // if we got to this point, do a thorough check
   
   for(uword A_col=0; A_col < A_n_cols; ++A_col)
     {
     for(uword A_row=0; A_row < A_n_rows; ++A_row)
       {
-      if( (A_colmem[A_row] != elem_type(0)) && (A_row != A_col) )  { return false; }
+      if( (A_mem[A_row] != elem_type(0)) && (A_row != A_col) )  { return false; }
       }
     
-    A_colmem += A_n_rows;
+    A_mem += A_n_rows;
     }
   
   return true;
@@ -717,7 +817,8 @@ Base<elem_type,derived>::has_nan() const
 
 
 template<typename elem_type, typename derived>
-arma_inline
+inline
+arma_warn_unused
 const Op<derived,op_vectorise_col>
 Base<elem_type, derived>::as_col() const
   {
@@ -727,7 +828,8 @@ Base<elem_type, derived>::as_col() const
 
 
 template<typename elem_type, typename derived>
-arma_inline
+inline
+arma_warn_unused
 const Op<derived,op_vectorise_row>
 Base<elem_type, derived>::as_row() const
   {
@@ -740,36 +842,11 @@ Base<elem_type, derived>::as_row() const
 // extra functions defined in Base_extra_yes
 
 template<typename elem_type, typename derived>
-arma_inline
+inline
+arma_warn_unused
 const Op<derived,op_inv>
 Base_extra_yes<elem_type, derived>::i() const
   {
-  return Op<derived,op_inv>(static_cast<const derived&>(*this));
-  }
-
-
-
-template<typename elem_type, typename derived>
-arma_deprecated
-inline
-const Op<derived,op_inv>
-Base_extra_yes<elem_type, derived>::i(const bool) const   // argument kept only for compatibility with old user code
-  {
-  // arma_debug_warn(".i(bool) is deprecated and will be removed; change to .i()");
-  
-  return Op<derived,op_inv>(static_cast<const derived&>(*this));
-  }
-
-
-
-template<typename elem_type, typename derived>
-arma_deprecated
-inline
-const Op<derived,op_inv>
-Base_extra_yes<elem_type, derived>::i(const char*) const   // argument kept only for compatibility with old user code
-  {
-  // arma_debug_warn(".i(char*) is deprecated and will be removed; change to .i()");
-  
   return Op<derived,op_inv>(static_cast<const derived&>(*this));
   }
 
@@ -831,6 +908,7 @@ Base_extra_yes<elem_type,derived>::is_sympd(typename get_pod_type<elem_type>::re
 
 template<typename elem_type, typename derived>
 arma_inline
+arma_warn_unused
 const derived&
 Base_eval_Mat<elem_type, derived>::eval() const
   {
@@ -845,7 +923,8 @@ Base_eval_Mat<elem_type, derived>::eval() const
 // extra functions defined in Base_eval_expr
 
 template<typename elem_type, typename derived>
-arma_inline
+inline
+arma_warn_unused
 Mat<elem_type>
 Base_eval_expr<elem_type, derived>::eval() const
   {
@@ -861,6 +940,7 @@ Base_eval_expr<elem_type, derived>::eval() const
 
 template<typename derived>
 arma_inline
+arma_warn_unused
 const Op<derived,op_htrans>
 Base_trans_cx<derived>::t() const
   {
@@ -871,6 +951,7 @@ Base_trans_cx<derived>::t() const
 
 template<typename derived>
 arma_inline
+arma_warn_unused
 const Op<derived,op_htrans>
 Base_trans_cx<derived>::ht() const
   {
@@ -881,6 +962,7 @@ Base_trans_cx<derived>::ht() const
 
 template<typename derived>
 arma_inline
+arma_warn_unused
 const Op<derived,op_strans>
 Base_trans_cx<derived>::st() const
   {
@@ -894,6 +976,7 @@ Base_trans_cx<derived>::st() const
 
 template<typename derived>
 arma_inline
+arma_warn_unused
 const Op<derived,op_htrans>
 Base_trans_default<derived>::t() const
   {
@@ -904,6 +987,7 @@ Base_trans_default<derived>::t() const
 
 template<typename derived>
 arma_inline
+arma_warn_unused
 const Op<derived,op_htrans>
 Base_trans_default<derived>::ht() const
   {
@@ -914,6 +998,7 @@ Base_trans_default<derived>::ht() const
 
 template<typename derived>
 arma_inline
+arma_warn_unused
 const Op<derived,op_htrans>
 Base_trans_default<derived>::st() const
   {

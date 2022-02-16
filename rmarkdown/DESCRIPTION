@@ -1,7 +1,7 @@
 Package: rmarkdown
 Type: Package
 Title: Dynamic Documents for R
-Version: 2.1
+Version: 2.11
 Authors@R: c(
   person("JJ", "Allaire", role = "aut", email = "jj@rstudio.com"),
   person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666")),
@@ -16,9 +16,13 @@ Authors@R: c(
   #
   # Contributors, ordered alphabetically by first name
   person("Andrew", "Dunning", role = "ctb", comment = c(ORCID = "0000-0003-0464-5036")),
-  person("Atsushi", "Yasumoto", role = "ctb", comment = c(ORCID = "0000-0002-8335-495X")),
+  person("Atsushi", "Yasumoto", role = c("ctb", "cph"),
+         comment = c(ORCID = "0000-0002-8335-495X",
+                     cph = "Number sections Lua filter")),
   person("Barret", "Schloerke", role = "ctb"),
+  person("Carson", "Sievert", role = "ctb", comment = c(ORCID = "0000-0002-4958-2844")),
   person("Christophe", "Dervieux", role = "ctb"),
+  person("Devon", "Ryan", role = "ctb", email = "dpryan79@gmail.com", comment = c(ORCID = "0000-0002-8549-0971")),
   person("Frederik", "Aust", role = "ctb", email = "frederik.aust@uni-koeln.de", comment = c(ORCID = "0000-0003-4900-788X")),
   person("Jeff", "Allen", role = "ctb", email = "jeff@rstudio.com"),
   person("JooYoung", "Seo", role="ctb", comment = c(ORCID = "0000-0002-4064-6012")),
@@ -30,11 +34,7 @@ Authors@R: c(
   person("Sergio", "Oller", role = "ctb"),
   #
   # Copyright holders
-  person(family = "RStudio, Inc.", role = "cph"),
-  person(family = "jQuery Foundation", role = "cph",
-         comment = "jQuery library"),
-  person(family = "jQuery contributors", role = c("ctb", "cph"),
-         comment = "jQuery library; authors listed in inst/rmd/h/jquery-AUTHORS.txt"),
+  person(family = "RStudio, PBC", role = "cph"),
   person(family = "jQuery UI contributors", role = c("ctb", "cph"),
          comment = "jQuery UI library; authors listed in inst/rmd/h/jqueryui-AUTHORS.txt"),
   person("Mark", "Otto", role = "ctb",
@@ -70,27 +70,29 @@ Authors@R: c(
   person("Aidan", "Lister", role = c("ctb", "cph"), 
          comment = "jQuery StickyTabs"),
   person("Benct Philip", "Jonsson", role = c("ctb", "cph"), 
-         comment = "pagebreak lua filter"),
+         comment = "pagebreak Lua filter"),
   person("Albert", "Krewinkel", role = c("ctb", "cph"), 
-         comment = "pagebreak lua filter")
+         comment = "pagebreak Lua filter")
   )
 Maintainer: Yihui Xie <xie@yihui.name>
 Description: Convert R Markdown documents into a variety of formats.
 Depends: R (>= 3.0)
 Imports: tools, utils, knitr (>= 1.22), yaml (>= 2.1.19), htmltools (>=
-        0.3.5), evaluate (>= 0.13), base64enc, jsonlite, mime, tinytex
-        (>= 0.11), xfun, methods, stringr (>= 1.2.0)
-Suggests: shiny (>= 0.11), tufte, testthat, digest, dygraphs, tibble,
-        fs, pkgdown, callr (>= 2.0.0)
-SystemRequirements: pandoc (>= 1.12.3) - http://pandoc.org
-URL: https://github.com/rstudio/rmarkdown
+        0.3.5), evaluate (>= 0.13), jsonlite, tinytex (>= 0.31), xfun
+        (>= 0.21), jquerylib, methods, stringr (>= 1.2.0)
+Suggests: shiny (>= 1.6.0), tufte, testthat (>= 3.0.0), digest,
+        dygraphs, vctrs, tibble, fs, rsconnect, withr (>= 2.4.2), bslib
+        (>= 0.2.5.1), sass (>= 0.4.0)
+SystemRequirements: pandoc (>= 1.14) - http://pandoc.org
+URL: https://github.com/rstudio/rmarkdown,
+        https://pkgs.rstudio.com/rmarkdown/
 BugReports: https://github.com/rstudio/rmarkdown/issues
 License: GPL-3
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.2
 Encoding: UTF-8
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2020-01-17 18:28:15 UTC; yihui
+Packaged: 2021-09-14 13:25:46 UTC; yihui
 Author: JJ Allaire [aut],
   Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   Jonathan McPherson [aut],
@@ -102,9 +104,12 @@ Author: JJ Allaire [aut],
   Winston Chang [aut],
   Richard Iannone [aut] (<https://orcid.org/0000-0003-3925-190X>),
   Andrew Dunning [ctb] (<https://orcid.org/0000-0003-0464-5036>),
-  Atsushi Yasumoto [ctb] (<https://orcid.org/0000-0002-8335-495X>),
+  Atsushi Yasumoto [ctb, cph] (<https://orcid.org/0000-0002-8335-495X>,
+    Number sections Lua filter),
   Barret Schloerke [ctb],
+  Carson Sievert [ctb] (<https://orcid.org/0000-0002-4958-2844>),
   Christophe Dervieux [ctb],
+  Devon Ryan [ctb] (<https://orcid.org/0000-0002-8549-0971>),
   Frederik Aust [ctb] (<https://orcid.org/0000-0003-4900-788X>),
   Jeff Allen [ctb],
   JooYoung Seo [ctb] (<https://orcid.org/0000-0002-4064-6012>),
@@ -114,10 +119,7 @@ Author: JJ Allaire [aut],
   Roy Storey [ctb],
   Ruben Arslan [ctb],
   Sergio Oller [ctb],
-  RStudio, Inc. [cph],
-  jQuery Foundation [cph] (jQuery library),
-  jQuery contributors [ctb, cph] (jQuery library; authors listed in
-    inst/rmd/h/jquery-AUTHORS.txt),
+  RStudio, PBC [cph],
   jQuery UI contributors [ctb, cph] (jQuery UI library; authors listed in
     inst/rmd/h/jqueryui-AUTHORS.txt),
   Mark Otto [ctb] (Bootstrap library),
@@ -136,8 +138,8 @@ Author: JJ Allaire [aut],
   Ben Sperry [ctb] (Ionicons),
   Drifty [cph] (Ionicons),
   Aidan Lister [ctb, cph] (jQuery StickyTabs),
-  Benct Philip Jonsson [ctb, cph] (pagebreak lua filter),
-  Albert Krewinkel [ctb, cph] (pagebreak lua filter)
+  Benct Philip Jonsson [ctb, cph] (pagebreak Lua filter),
+  Albert Krewinkel [ctb, cph] (pagebreak Lua filter)
 Repository: CRAN
-Date/Publication: 2020-01-20 19:30:02 UTC
-Built: R 3.6.3; ; 2020-03-24 20:12:46 UTC; unix
+Date/Publication: 2021-09-14 14:10:02 UTC
+Built: R 3.6.3; ; 2022-02-15 17:04:07 UTC; unix
