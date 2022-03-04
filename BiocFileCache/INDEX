@@ -1,0 +1,6 @@
+BiocFileCache-class     BiocFileCache class
+makeBiocFileCacheFromDataFrame
+                        Make BiocFileCache objects from an existing
+                        data.frame
+makeCachedActiveBinding
+                        makeCachedActiveBinding

@@ -1,0 +1,35 @@
+GLtoGP                  Convert genotype likelihoods to genotype
+                        probabilities
+PROVEANDb-class         PROVEANDb objects
+PolyPhenDb-class        PolyPhenDb objects
+PolyPhenDbColumns       PolyPhenDb Columns
+SIFTDb-class            SIFTDb objects
+SIFTDbColumns           SIFTDb Columns
+ScanVcfParam-class      Parameters for scanning VCF files
+VCF-class               VCF class objects
+VCFHeader-class         VCFHeader instances
+VRanges-class           VRanges objects
+VRangesList-class       VRangesList objects
+VariantAnnotation-defunct
+                        Defunct Functions in Package
+                        'VariantAnnotation'
+VariantType-class       VariantType subclasses
+VcfFile                 Manipulate Variant Call Format (Vcf) files.
+filterVcf               Filter VCF files
+genotypeToSnpMatrix     Convert genotype calls from a VCF file to a
+                        SnpMatrix object
+getTranscriptSeqs       Get transcript sequences
+indexVcf                Create index files for VCF files
+isSNV                   Identification of genomic variant types.
+locateVariants          Locate variants
+predictCoding           Predict amino acid coding changes for variants
+probabilityToSnpMatrix
+                        Convert posterior genotype probability to a
+                        SnpMatrix object
+readVcf                 Read VCF files
+scanVcf                 Import VCF files
+seqinfo                 Get seqinfo for VCF file
+snpSummary              Counts and distribution statistics for SNPs in
+                        a VCF object
+summarizeVariants       Summarize variants by sample
+writeVcf                Write VCF files
