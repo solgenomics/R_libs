@@ -1,0 +1,6 @@
+empca                   Principal component analysis by weighted EMPCA,
+                        expectation maximization principal
+                        component-analysis
+nipals                  Principal component analysis by NIPALS,
+                        non-linear iterative partial least squares
+uscrime                 U.S. Crime rates per 100,00 people

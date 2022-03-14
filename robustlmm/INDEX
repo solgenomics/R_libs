@@ -1,0 +1,14 @@
+chgDefaults             Change default arguments
+compare                 Create comparison charts for multiple fits
+getME                   Extract or Get Generalize Components from a
+                        Fitted Mixed Effects Model
+plot-methods            Plot an Object of the "Psi Function" Class
+plot.rlmerMod           Plot Method for "rlmerMod" objects.
+psi-functions           Classical, Huber and smoothed Huber psi- or
+                        rho-functions
+psi2propII              Convert to Propsal II weight function
+residuals.rlmerMod      Get residuals
+rlmerMod-class          rlmerMod Class
+rlmerRcpp               Robust linear mixed models
+robustlmm-package       Robust linear mixed effects models
+show                    Other methods

@@ -1,0 +1,117 @@
+import("graphics", "stats", "Formula")
+
+importFrom("grDevices",
+  "dev.interactive"
+)
+
+importFrom("sandwich",
+  "estfun",
+  "bread"
+)
+
+importFrom("lmtest",
+  "coeftest",
+  "coeftest.default"
+)
+
+importClassFrom("flexmix",
+  "FLXM",
+  "FLXMR",
+  "FLXMRfix"
+)
+
+importFrom("flexmix",
+  "existGradient",
+  "FLXdeterminePostunscaled",
+  "FLXgetModelmatrix",
+  "FLXgetDesign",
+  "FLXgradlogLikfun",
+  "FLXmstep",
+  "FLXremoveComponent",
+  "FLXreplaceParameters",
+  "FLXgetParameters",
+  "refit_optim",
+  "logLik",
+  "summary",
+  "predict",
+  "fitted"
+)
+
+importFrom("modeltools",
+  "clusters",
+  "getModel",
+  "parameters",
+  "posterior",
+  "refit"
+)
+
+importFrom("methods",
+  "as",
+  "callNextMethod",
+  "getMethod",
+  "is",
+  "new",
+  "setOldClass",
+  "setClass",
+  "setMethod",
+  "show",
+  "slot",
+  "slotNames"
+)
+
+export(
+  ## beta regression
+  "betareg",
+  "betareg.control",
+  "betareg.fit",
+  "gleverage",
+  
+  ## beta regression trees
+  "betatree",
+  "sctest.betatree",
+
+  ## beta mixture models
+  "betamix",
+  "extraComponent"
+)
+
+## methods for class betareg
+S3method("bread", "betareg")
+S3method("coef", "betareg")
+S3method("coeftest", "betareg")
+S3method("cooks.distance", "betareg")
+S3method("estfun", "betareg")
+S3method("gleverage", "betareg")
+S3method("hatvalues", "betareg")
+S3method("logLik", "betareg")
+S3method("model.frame", "betareg")
+S3method("model.matrix", "betareg")
+S3method("plot", "betareg")
+S3method("predict", "betareg")
+S3method("print", "betareg")
+S3method("residuals", "betareg")
+S3method("summary", "betareg")
+S3method("terms", "betareg")
+S3method("print", "summary.betareg")
+S3method("update", "betareg")
+S3method("vcov", "betareg")
+
+## methods for class betatree
+S3method("plot", "betatree")
+S3method("print", "betatree")
+S3method("predict", "betatree")
+
+## methods for class betamix
+S3method("coef", "betamix")
+S3method("logLik", "betamix")
+S3method("print", "betamix")
+S3method("summary", "betamix")
+exportMethods("fitted")
+exportMethods("posterior")
+exportMethods("clusters")
+exportMethods("predict")
+
+## conditional registration of strucchange methods
+if(getRversion() >= "3.6.0") {
+  S3method(strucchange::sctest, "betatree")
+}

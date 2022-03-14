@@ -1,0 +1,21 @@
+betamix                 Finite Mixtures of Beta Regression for Rates
+                        and Proportions
+betareg                 Beta Regression for Rates and Proportions
+betareg.control         Control Parameters for Beta Regression
+betatree                Beta Regression Trees
+CarTask                 Partition-primed Probability Judgement Task for
+                        Car Dealership
+FoodExpenditure         Proportion of Household Income Spent on Food
+GasolineYield           Estimation of Gasoline Yields from Crude Oil
+gleverage               Generalized Leverage Values
+ImpreciseTask           Imprecise Probabilities for Sunday Weather and
+                        Boeing Stock Task
+MockJurors              Confidence of Mock Jurors in Their Verdicts
+plot.betareg            Diagnostic Plots for betareg Objects
+predict.betareg         Prediction Method for betareg Objects
+ReadingSkills           Dyslexia and IQ Predicting Reading Accuracy
+residuals.betareg       Residuals Method for betareg Objects
+StressAnxiety           Dependency of Anxiety on Stress
+summary.betareg         Methods for betareg Objects
+WeatherTask             Weather Task With Priming and Precise and
+                        Imprecise Probabilities
