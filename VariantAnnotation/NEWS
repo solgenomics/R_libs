@@ -1,0 +1,708 @@
+CHANGES IN VERSION 1.36.0
+-------------------------
+
+NEW FEATURES
+
+    o ref<-, alt<-, qual<- and filt<- allow replacement value length
+      recycling
+
+CHANGES IN VERSION 1.28.0
+------------------------
+
+NEW FEATURES
+
+    o Update package to support VCF format version 4.3
+
+    - SAMPLE field lines can now have key 'SAMPLE' or 'META'.
+      To avoid a name clash, the existing 'META' DataFrame has
+      been split by row into separate DataFrames. The
+      'meta(VCFHeader)' getter now returns one DataFrame
+      per unique key in the header.
+    - PEDIGREE header line now begins with 'ID'
+
+    o Add vcfFields method for character, VCFHeader, VcfFile and VCF
+      to return all available vcf fields in CharacterList().
+
+    o Add support for single breakend notation (thanks d-cameron)
+
+BUG FIXES
+
+    o .formatInfo() now return a column with all 'NA' for a missing value
+      instead of dropping the column.
+
+
+CHANGES IN VERSION 1.26.0
+------------------------
+
+MODIFICATIONS
+
+    o Clarify fixed fields must be 
+
+    o Following renaming of RangesList class -> IntegerRangesList
+
+    o Updates to accommodate change to '[<-' method for SummarizedExperiment
+
+    o DP4 assumed to come from INFO field
+
+    o Extract altDepth and totalDepth from DP4 GENO field when present
+
+    o predictCoding() now respects 'alt_init_codons' at the start of CDS
+      region only
+
+    o Remove error message in 'rowRanges<-' and 'mcol<-' methods that
+      check for fixed column name.
+
+
+CHANGES IN VERSION 1.24.0
+------------------------
+
+NEW FEATURES
+
+    o Add subset,VCF-method that knows about info()
+
+    o Add alt,ref accessors for VRangesList 
+
+
+    o More efficient show,VCF-method
+
+    o 'rowRanges<-' and 'mcols<-' on VCF class behave as they do
+      on RangedSummarizedExperiment
+
+    o info,VCFHeader() and geno,VCFHeader() return a DataFrame with
+      the correct columns in the case of empty
+
+BUG FIXES
+
+    o Fix "ref<-" recycling on VRanges 
+
+    o Fix bug in locateVariants(); code to fetch IntronVariants() was
+      incorrectly fetching IntergenicVariants()
+
+    o Fix bug in rbind,VCF,VCF-method
+
+
+CHANGES IN VERSION 1.22.0
+------------------------
+
+NEW FEATURES
+
+    o add import() wrapper for VCF files
+
+    o add support for Number='R' in vcf parsing 
+
+    o add indexVcf() and methods for character,VcfFile,VcfFileList 
+
+MODIFICATIONS
+
+    o throw message() instead of warning() when non-nucleotide 
+      variations are set to NA
+
+    o replace 'force=TRUE' with 'pruning.mode="coarse"' in seqlevels() setter
+
+    o add 'pruning.mode' argument to keepSeqlevels() in man page example
+
+    o idempotent VcfFile()
+
+    o add 'idType' arg to IntergenicVariants() constructor 
+
+    o modify locateVariants man page example to work around 
+      issue that distance,GRanges,TxDb does not support gene ranges on 
+      multiple chromosomes
+
+    o modify VcfFile() constructor to detect index file if not specified
+
+    o order vignettes from intro to advanced; use BiocStyle::latex2() 
+
+    o remove unused SNPlocs.Hsapiens.dbSNP.20110815 from the Suggests field 
+
+    o follow rename change in S4Vectors from vector_OR_factor to
+      vector_or_factor
+
+    o pass classDef to .RsamtoolsFileList; VariantAnnotation may not be
+      on the search path
+
+BUG FIXES
+
+    o fix expansion of 'A' fields when there are multiple columns
+
+CHANGES IN VERSION 1.20.0
+------------------------
+
+NEW FEATURES
+
+    o add import() wrapper for VCF files
+
+MODIFICATIONS
+
+    o use now-public R_GetConnection
+
+    o remove defunct readVcfLongForm() generic
+
+    o remove 'genome' argument from readVcf()
+
+    o improvements to VCF to VRanges coercion
+
+    o support Varscan2 AD/RD convention when coercing VCF to VRanges
+
+    o use [["FT"]] to avoid picking up FTZ field
+
+    o summarizeVariants() recognize '.' as missing GT field
+
+    o document scanVcfheader() behavior for duplicate row names
+
+
+BUG FIXES
+
+    o ensure only 1 matching hub resource selected in filterVcf vignette 
+
+    o fix check for FILT == "PASS"
+
+    o correct column alignment in makeVRangesFromGRanges()
+
+    o fix check for AD conformance
+
+
+CHANGES IN VERSION 1.19.0
+------------------------
+
+NEW FEATURES
+
+    o add SnpMatrixToVCF()
+
+    o add patch from Stephanie Gogarten to support 'PL' in genotypeToSnpMatrix()
+
+
+MODIFICATIONS
+
+    o move getSeq,XStringSet-method from VariantAnnotation to BSgenome
+
+    o update filterVcf vignette
+
+    o remove 'pivot' export
+
+    o work on readVcf():
+      - 5X speedup for readVcf (at least in one case) by not using "==" to
+      compare a list to a character (the list gets coerced to character,
+      which is expensive for huge VCFs)
+      - avoiding relist.list()
+
+    o update summarizeVariants() to comply with new SummarizedExperiment 
+      rownames requirement
+
+    o defunct VRangesScanVcfParam() and restrictToSNV()
+
+    o use elementNROWS() instead of elementLengths()
+
+    o togroup(x) now only works on a ManyToOneGrouping object so replace
+      togroup(x, ...) calls with togroup(PartitioningByWidth(x), ...) when 'x'
+      is a list-like object that is not a ManyToOneGrouping object.
+
+    o drop validity assertion that altDepth must be NA when alt is NA
+      there are VCFs in the wild that use e.g. "*" for alt, but include depth
+
+    o export PLtoGP()
+
+    o VariantAnnotation 100% RangedData-free
+
+BUG FIXES
+
+    o use short path names in src/Makevars.win
+
+
+CHANGES IN VERSION 1.18.0
+------------------------
+
+MODIFICATIONS
+
+    o defunct VRangesScanVcfParam() 
+    o defunct restrictToSNV() 
+
+BUG FIXES
+
+    o scanVcf,character,missing-method ignores blank data lines.
+
+    o Build path for C code made robust on Windows.
+
+
+CHANGES IN VERSION 1.16.0
+------------------------
+
+NEW FEATURES
+
+    o support REF and ALT values ".", "+" and "-" in predictCoding()
+
+    o return non-translated characters in VARCODON in predictCoding() output
+
+    o add 'verbose' option to readVcf() and friends
+
+    o writeVcf() writes 'fileformat' header line always 
+
+    o readVcf() converts REF and ALT values "*" and "I" to '' and '.'
+
+
+MODIFICATIONS
+
+    o VRanges uses '*' strand by default
+
+    o coerce 'alt' to DNStringSet for predictCoding,VRanges-method
+
+    o add detail to documentation for 'ignore.strand' in predictCoding()
+
+    o be robust to single requrested INFO column not present in vcf file
+
+    o replace old SummarizedExperiment class from GenomicRanges with the
+      new new RangedSummarizedExperiment from SummarizedExperiment
+      package
+
+    o return strand of 'subject' for intronic variants in locateVariants()
+
+
+BUG FIXES
+
+    o writeVcf() does not duplicate header lines when chunking 
+
+    o remove extra tab after INFO when no FORMAT data are present
+
+    o filteVcf() supports 'param' with ranges
+
+
+
+CHANGES IN VERSION 1.14.0
+------------------------
+
+NEW FEATURES
+
+    o gVCF support:
+      - missing END header written out with writeVcf()
+      - expand() handles <NON_REF> 'REF' value
+
+    o support 'Type=Character' in INFO header fields
+
+    o add 'row.names' argument to expand()
+
+    o add 'Efficient Usage' section to readVcf() man page 
+
+    o efficiency improvements to info(..., row.names=)
+      - anyDuplicated() less expensive than any(duplicated())
+      - use row.names=FALSE when not needed, e.g., show()
+
+    o add genotypeCodesToNucleotides()
+
+    o add support for gvcf in isSNP family of functions
+
+    o add VcfFile and VcfFileList classes
+
+    o support 'Type=Character' of unspecified length (.)
+
+    o add isDelins() from Robert Castelo
+
+    o add makeVRangesFromGRanges() from Thomas Sandmann 
+
+
+MODIFICATIONS
+
+    o VCFHeader support:
+      - SAMPLE and PEDIGREE header fields are now parsed
+      - meta(VCFHeader) returns DataFrameList instead of DataFrame
+      - show(VCFHeader) displays the outer list names in meta
+      - fixed(VCFHeader) returns 'ALT' and 'REF' if present
+
+    o 'ALT' in expandedVCF output is DNAStringSet, not *List
+
+    o remove .listCumsum() and .listCumsumShifted() helpers
+
+    o add multiple INFO field unit test from Julian Gehring
+
+    o add additional expand() unit tests
+
+    o modify readVccfAsVRanges() to use ScanVcfParam() as the
+      'param'; deprecate VRangesScanVcfParam
+
+    o replace mapCoords() with mapToTranscripts()
+
+    o change 'CDSID' output from integer to IntegerList in 
+      locateVariants() and predictCoding()
+
+    o add readVcf,character,ANY,ANY; remove readVcf,character,ANY,ScanVcfParam
+
+    o replace rowData() accessor with rowRanges()
+
+    o replace 'rowData' argument with 'rowRanges' (construct SE, VCF classes)
+
+    o replace getTranscriptSeqs() with extractTranscripts()
+
+BUG FIXES
+
+    o readVcf() properly handles Seqinfo class as 'genome'
+
+    o allow 'ignore.strand' to pass through mapCoords()
+
+    o writeVcf() no longer ignores rows with no genotype field
+
+    o expand() properly handles 
+      - less than all INFO fields are selected
+      - VCF has only one row
+      - only one INFO column
+
+    o don't call path() on non-*File objects
+
+    o split (relist) of VRanges now yields a CompressedVRangesList
+
+    o predictCoding() now ignores zero-width ranges
+
+
+CHANGES IN VERSION 1.12.0
+------------------------
+
+NEW FEATURES
+
+    o allow GRanges in 'rowData' to hold user-defined metadata cols
+      (i.e., cols other than paramRangeID, REF, ALT, etc.)
+
+    o add isSNV() family of functions 
+
+    o add faster method for converting a list matrix to an array
+
+    o add 'c' method for typed Rle classes so class is preserved
+
+    o add CITATION file 
+
+    o rework writeVCF():
+      - FORMAT and genotype fields are parsed in C
+      - output file is written from C
+      - chunking added for large VCFs
+
+MODIFICATIONS
+
+    o add 'row.names' to readVcf() 
+
+    o deprecate restrictToSNV(); replaced by isSNV() family 
+
+    o remove use of seqapply()
+
+    o show info / geno headers without splitting across blocks
+
+    o use mapCoords() in predictCoding() and locateVariants()
+
+    o deprecate refLocsToLocalLocs()
+
+    o propagate strand in predictCoding()
+
+    o replace deprecated seqsplit() with splitAsList()
+
+    o ensure GT field, if present, comes first in VCF output
+
+    o modify DESCRIPTION Author and Maintainer fileds with @R
+
+    o add 'row.names' to info,VCF-method
+
+BUG FIXES
+
+    o modify expand() to work with no 'info' fields are imported 
+
+    o remove duplicate rows from .splicesites()
+
+    o fix handling of real-valued NAs in geno omatrix construction
+      in writeVcf()
+
+
+CHANGES IN VERSION 1.10.0
+------------------------
+
+NEW FEATURES
+
+    o add support for ##contig in VCF header 
+
+    o add 'meta<-', 'info<-', 'geno<-' replacement methods for
+      VCFHeader
+
+    o add 'header<-' replacement method for VCF 
+
+    o add strand to output from locationVariants() 
+
+    o add support for writeVcf() to process Rle data in geno matrix 
+
+    o readVcf() now parses 'geno' fields with Number=G as
+      ((#alleles + 1) * (#alleles + 2)) / 2
+
+    o writeVcf() now sorts the VCF when 'index=TRUE' 
+
+    o add 'fixed<-,VCFHeader,DataFrameList' method 
+
+    o add convenience functions for reading VCF into VRanges 
+
+    o add Rplinkseq test script 
+
+    o add 'isSNV', 'isInsertion', 'isDeletion', 'isIndel',
+      'isTransition', 'isPrecise', 'isSV' and 'isSubstitution'
+      generics 
+
+    o add 'isSNV', 'isInsertion', 'isDeletion', 'isIndel'
+      methods for VRanges and VCF classes
+
+    o add match methods between ExpandedVCF and VRanges
+
+    o add support for VRanges %in% TabixFile
+
+MODIFICATIONS
+
+    o expand,VCF-method ignores 'AD' header of 'AD' geno is NULL
+
+    o add support for SIFT.Hsapiens.dbSNP137 
+
+    o remove locateVariants() dependence on chr7-sub.vcf.gz 
+
+    o modify expand() to handle 'AD' field where 'Number' is integer 
+
+    o rename readVRangesFromVCF() to readVcfAsVRanges() 
+
+    o remove check for circular chromosomes in locateVariants()
+      and predictCoding() and refLocsToLocalLocs() 
+
+    o modify filterVcf() to handle ranges in ScanVcfParam 
+
+    o pass 'genetic.code' through predictCoding()
+
+    o change default to 'row.names=TRUE' for readGT(), readGeno(),
+      and readInfo() 
+
+    o fixed() on empty VCF now returns DataFrame with column names
+      and data types vs an empty DataFrame 
+
+    o update biocViews 
+
+    o modify 'show,VCF' to represent empty values in XStringSet 
+      with '.'
+
+    o replace rtracklayer:::pasteCollapse with unstrsplit()
+
+DEPRECATED and DEFUNCT
+
+    o remove defunct dbSNPFilter(), regionfilter() and MatrixToSnpMatrix() 
+
+    o defunct readVcfLongForm() 
+
+BUG FIXES
+
+    o modify expand.geno() to handle case where header and geno don't match
+
+    o modify writeVcf() to write out rownames with ":" character
+      instead of treating as missing
+
+    o fix how sample names were passed from 'ScanVcfParam' to scanVcf() 
+
+    o fix bug in 'show,VCF' method
+
+    o fix bugs in VRanges -> VCF coercion methods 
+
+    o fix bug in lightweight read* functions that were ignoring
+      samples in ScanVcfParam
+
+    o fix bug in writeVcf() when no 'ALT' is present
+
+
+CHANGES IN VERSION 1.8.0
+------------------------
+
+NEW FEATURES
+
+    o Add 'upstream' and 'downstream' arguments to IntergenicVariants()
+      constructor. 
+
+    o Add 'samples' argument to ScanVcfParam(). 
+
+    o Add readGT(), readGeno() and readInfo().
+
+    o Add VRanges, VRangesList, SimpleVRangesList, and CompressedVRangesList 
+      classes.
+
+    o Add coercion VRanges -> VCF and VCF -> VRanges.
+
+    o Add methods for VRanges family:
+      altDepth(), refDepth(), totalDepth(), altFraction()
+      called(), hardFilters(), sampleNames(), softFilterMatrix()
+      isIndel(), resetFilter().
+
+    o Add stackedSamples,VRangesList method.
+
+MODIFICATIONS
+
+    o VCF validity method now requires the number of rows in info()
+      to match the length of rowData(). 
+
+    o PRECEDEID and FOLLOWID from locateVariants() are now CharacterLists
+      with all genes in 'upstream' and 'downstream' range. 
+
+    o Modify rownames on rowData() GRanges to CHRAM:POS_REF/ALT for
+      variants with no ID. 
+
+    o readVcf() returns info() and geno() in the order specified in
+      the ScanVcfParam. 
+
+    o Work on scanVcf():
+      - free parse memory at first opportunity
+      - define it_next in .c rather than .h
+      - parse ALT "." in C
+      - hash incoming strings
+      - parse only param-requested 'fixed', 'info', 'geno' fields
+
+    o Add dimnames<-,VCF method to prevent 'fixed' fields from being
+      copied into 'rowData' when new rownames or colnames were assigned. 
+
+    o Support read/write for an emtpy VCF. 
+
+    o readVcf(file=character, ...) method attempts coercion to
+      TabixFile.
+
+    o Support for read/write an emtpy VCF. 
+
+    o Add performance section to vignette; convert to BiocStyle.
+
+    o expand,CompressedVcf method expands geno() field 'AD' to
+      length ALT + 1. The expanded field is a (n x y x 2) array. 
+ 
+    o 'genome' argument to readVcf() can be a character(1) or
+      Seqinfo object.
+
+DEPRECATED and DEFUNCT
+
+    o Defunct dbSNPFilter(), regionFilter() and MatrixToSnpMatrix().
+
+    o Deprecate readVcfLongForm(). 
+
+BUG FIXES
+
+    o Fix bug in compatibility of read/writeVcf() when no INFO are columns
+      present. 
+
+    o Fix bug in locateVariants() when 'features' has no txid and cdsid. 
+
+    o Fix bug in asVCF() when writing header lines.
+
+    o Fix bug in "expand" methods for VCF to handle multiple 'A'
+      columns in info().
+
+
+CHANGES IN VERSION 1.6.0
+------------------------
+
+NEW FEATURES
+
+    o VCF is now VIRTUAL. Concrete subclasses are CollapsedVCF 
+      and ExpandedVCF. 
+
+    o Add filterVcf() generic and methods for character and TabixFile. 
+      This method creates one VCF file from another, using FilterRules.
+
+    o Enhance show,VCF method with header information.
+ 
+    o Stephanie Gogarten added genotypeToSnpMatrix() generic and 
+      CollapsedVCF and matrix methods.
+
+    o Chris Wallace added snpSummary() generic and CollapsedVCF
+      method.
+
+    o Add cbind and rbind for VCF objects. 
+
+MODIFICATIONS
+
+    o writeVcf,connection-method allows writing to console and appending.
+
+    o writeVcf,connection-method accepts connections with open="a",
+      only adding a header if the file does not already exist.
+
+    o predictCoding and genotypeToSnpMatrix can now handle
+      ALT as CharacterList. Structural variants are set to
+      empty character ("").
+ 
+    o When no INFO data are present in a vcf file, the info() 
+      slot is now an empty DataFrame. Previously an empty column 
+      named 'INFO' was returned. 
+
+    o Empty VCF class now has an empty VCFHeader 
+
+    o expand,CollapsedVCF-method expands 'geno' data with Number=A. 
+
+    o VCF class accessors "fixed", "info" now return DataFrame instead
+       of GRanges. "rowData" returns fixed fileds as the mcols. 
+
+    o Updates to the vignette. 
+
+DEPRECATED and DEFUNCT
+
+    o Deprecate dbSNPFilter() and regionFilter().
+
+    o Deprecate MatrixToSnpMatrix().
+
+BUG FIXES
+
+    o Multiple bugs fixed in "locateVariants".
+
+    o Multiple bugs fixed in "writeVcf".
+
+    o Bug fixed in subsetting of VCF objects. 
+
+    o Bug fixed in "predictCoding" related to QUERYID column not
+      mapping back to original indices (rows). 
+
+
+CHANGES IN VERSION 1.4.0
+------------------------
+
+NEW FEATURES
+
+    o "summarizeVariants" for summarizing counts by sample
+
+    o new VariantType 'PromoterVariants()' added to "locateVariants"
+
+MODIFICATIONS
+
+    o "ref", "alt", "filt" and "qual" accessors for VCF-class now return
+      a single variable instead of GRanges with variable as metadata 
+
+
+CHANGES IN VERSION 1.2.0
+------------------------
+
+NEW FEATURES
+
+    o "readVcf" has genome argument, can be subset on ranges or VCF elements
+      with "ScanVcfParam"
+
+    o "scanVcfHeader" returns VCFHeader class with accessors fixed, info, geno,
+      etc.
+
+    o "writeVcf" writes out a VCF file from a VCF class
+
+    o "locateVariants" methods
+        - returns GRanges instead of DataFrame
+        - 'region' argument allows specification of variants by region 
+        - output includes txID, geneID and cdsID
+        - has cache argument for repeated calls over multiple vcf files
+
+    o "predictCoding" methods
+        - returns GRanges instead of DataFrame
+        - output includes txID, geneID, cdsID, 
+          cds-based and protein-based coordinates
+ 
+
+CHANGES IN VERSION 1.0.0
+------------------------
+
+NEW FEATURES
+
+    o "readVcf" methods for reading and parsing VCF files into a SummarizedExperiment 
+
+    o "locateVariants" and "predictCoding" for identifying amino acid coding
+      changes in nonsynonymous variants
+ 
+    o "dbSNPFilter" and "regionFilter" for filtering variants on membership in
+      dbSNP or on a particular location in the genome
+ 
+    o access to PolyPhen and SIFT predictions through "keys" , "cols" and
+      "select" methods. See ?SIFT or ?PolyPhen.
+
+BUG FIXES
+
+    o No changes classified as 'bug fixes' (package under active
+    development)

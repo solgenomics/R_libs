@@ -1,0 +1,14 @@
+Amatrix                 Construction of Relationship Matrix A
+AmatrixPolyCross        Construction of pedigree-based relationship
+                        matrix with parental guessing possibility
+datatreat               Organizes pedigree data in a chronological way
+filterpedigree          Filter the pedigree to keep only the genealogy
+                        of a subset of individuals
+formatmatrix            Transform a matrix in 3 columns
+Gmatrix                 Construction of Relationship Matrix G
+Hmatrix                 Construction of Combined Relationship Matrix H
+missingdata             Survying on missing data
+ped.mrode               Pedigree Data
+ped.sol                 Pedigree data for autopolyploid examples
+snp.pine                Molecular data for diploid examples
+snp.sol                 Molecular data for autopolyploid examples

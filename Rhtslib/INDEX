@@ -1,0 +1,3 @@
+pkgconfig               Compiler configuration arguments for use of
+                        Rhtslib
+Rhtslib-package         An R packaged HTSlib 1.7

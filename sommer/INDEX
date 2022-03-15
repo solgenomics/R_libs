@@ -1,8 +1,24 @@
 A.mat                   Additive relationship matrix
+add.diallel.vars        add.diallel.vars
+adiag1                  Binds arrays corner-to-corner
+anova.mmer              anova form a GLMM fitted with mmer
 AR1                     Autocorrelation matrix of order 1.
 ARMA                    Autocorrelation Moving average.
+at                      at covariance structure
+atcg1234                Letter to number converter
+bathy.colors            Generate a sequence of colors for plotting
+                        bathymetric data.
+bbasis                  Function for creating B-spline basis functions
+                        (Eilers & Marx, 2010)
+bivariateRun            bivariateRun functionality
+build.HMM               Build a hybrid marker matrix using parental
+                        genotypes from inbred individuals
+coef.mmer               coef form a GLMM fitted with mmer
+cs                      customized covariance structure
 CS                      Compound symmetry matrix
 D.mat                   Dominance relationship matrix
+dfToMatrix              data frame to matrix
+ds                      diagonal covariance structure
 DT_augment              DT_augment design example.
 DT_btdata               Blue Tit Data for a Quantitative Genetic
                         Experiment
@@ -28,41 +44,25 @@ DT_wheat                wheat lines dataset
 DT_yatesoats            Yield of oats in a split-block experiment
 E.mat                   Epistatic relationship matrix
 EM                      Expectation Maximization Algorithm
-GWAS                    Genome wide association study analysis
-GWAS2                   Genome wide association study
-H.mat                   Combined relationship matrix H
-LD.decay                Calculation of linkage disequilibrium decay
-MEMMA                   Multivariate Efficient Mixed Model Association
-                        Algorithm
-add.diallel.vars        add.diallel.vars
-adiag1                  Binds arrays corner-to-corner
-anova.mmer              anova form a GLMM fitted with mmer
-at                      at covariance structure
-atcg1234                Letter to number converter
-bathy.colors            Generate a sequence of colors for plotting
-                        bathymetric data.
-bbasis                  Function for creating B-spline basis functions
-                        (Eilers & Marx, 2010)
-bivariateRun            bivariateRun functionality
-build.HMM               Build a hybrid marker matrix using parental
-                        genotypes from inbred individuals
-coef.mmer               coef form a GLMM fitted with mmer
-cs                      customized covariance structure
-dfToMatrix              data frame to matrix
-ds                      diagonal covariance structure
 fcm                     fixed effect constraint indication matrix
 fitted.mmer             fitted form a LMM fitted with mmer
 fixm                    fixed indication matrix
 gvs                     general variance structure specification
+GWAS                    Genome wide association study analysis
+GWAS2                   Genome wide association study
+H.mat                   Combined relationship matrix H
 h2.fun                  Obtain heritabilities with three different
                         methods
 imputev                 Imputing a numeric or character vector
 jet.colors              Generate a sequence of colors alog the jet
                         colormap.
+LD.decay                Calculation of linkage disequilibrium decay
 leg                     Legendre polynomial matrix
 list2usmat              list or vector to unstructured matrix
 manhattan               Creating a manhattan plot
 map.plot                Creating a genetic map plot
+MEMMA                   Multivariate Efficient Mixed Model Association
+                        Algorithm
 mmer                    *m*ixed *m*odel *e*quations in *R*
 mmer2                   *m*ixed *m*odel *e*quations in *R*
 overlay                 Overlay Matrix

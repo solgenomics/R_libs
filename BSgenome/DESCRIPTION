@@ -1,0 +1,47 @@
+Package: BSgenome
+Title: Software infrastructure for efficient representation of full
+        genomes and their SNPs
+Description: Infrastructure shared by all the Biostrings-based genome data
+	packages.
+biocViews: Genetics, Infrastructure, DataRepresentation,
+        SequenceMatching, Annotation, SNP
+URL: https://bioconductor.org/packages/BSgenome
+BugReports: https://github.com/Bioconductor/BSgenome/issues
+Version: 1.62.0
+License: Artistic-2.0
+Encoding: UTF-8
+Author: Hervé Pagès
+Maintainer: H. Pagès <hpages.on.github@gmail.com>
+Depends: R (>= 2.8.0), methods, BiocGenerics (>= 0.13.8), S4Vectors (>=
+        0.17.28), IRanges (>= 2.13.16), GenomeInfoDb (>= 1.25.6),
+        GenomicRanges (>= 1.31.10), Biostrings (>= 2.47.6), rtracklayer
+        (>= 1.39.7)
+Imports: methods, utils, stats, matrixStats, BiocGenerics, S4Vectors,
+        IRanges, XVector (>= 0.29.3), GenomeInfoDb, GenomicRanges,
+        Biostrings, Rsamtools, rtracklayer
+Suggests: BiocManager, Biobase, BSgenome.Celegans.UCSC.ce2,
+        BSgenome.Hsapiens.UCSC.hg38,
+        BSgenome.Hsapiens.UCSC.hg38.masked,
+        BSgenome.Mmusculus.UCSC.mm10, BSgenome.Rnorvegicus.UCSC.rn5,
+        BSgenome.Scerevisiae.UCSC.sacCer1,
+        BSgenome.Hsapiens.NCBI.GRCh38,
+        TxDb.Hsapiens.UCSC.hg38.knownGene,
+        TxDb.Mmusculus.UCSC.mm10.knownGene,
+        SNPlocs.Hsapiens.dbSNP144.GRCh38,
+        XtraSNPlocs.Hsapiens.dbSNP144.GRCh38, hgu95av2probe, RUnit
+LazyLoad: yes
+Collate: utils.R OnDiskLongTable_old-class.R OnDiskLongTable-class.R
+        OnDiskNamedSequences-class.R SNPlocs-class.R
+        ODLT_SNPlocs-class.R OldFashionSNPlocs-class.R
+        InjectSNPsHandler-class.R XtraSNPlocs-class.R BSgenome-class.R
+        available.genomes.R injectSNPs.R getSeq-methods.R
+        extractAt-methods.R bsapply.R BSgenomeViews-class.R
+        BSgenome-utils.R export-methods.R BSgenomeForge.R
+git_url: https://git.bioconductor.org/packages/BSgenome
+git_branch: RELEASE_3_14
+git_last_commit: 9b1859e
+git_last_commit_date: 2021-10-26
+Date/Publication: 2021-10-26
+NeedsCompilation: no
+Packaged: 2021-10-26 21:00:07 UTC; biocbuild
+Built: R 4.1.2; ; 2022-03-15 01:09:28 UTC; unix

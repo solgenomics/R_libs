@@ -1,0 +1,130 @@
+useDynLib(VariantAnnotation, .registration=TRUE)
+
+import(methods)
+importFrom(utils, packageVersion)
+importFrom(stats, pchisq, setNames)
+import(BiocGenerics)
+importFrom(MatrixGenerics, rowRanges)
+import(S4Vectors)
+import(IRanges)
+import(GenomeInfoDb)
+import(GenomicRanges)
+import(SummarizedExperiment)
+import(Rsamtools)
+
+import(zlibbioc)
+
+importClassesFrom(Biobase, 
+    AssayData
+)
+
+importFrom(Biobase,
+    sampleNames, "sampleNames<-", samples
+)
+
+importClassesFrom(AnnotationDbi, 
+    AnnotationDb
+)
+
+importMethodsFrom(AnnotationDbi, 
+    colnames, exists, ncol, nrow,
+    columns, keys, keytypes, select
+)
+
+importFrom(GenomicFeatures, 
+    extractTranscriptSeqs, mapToTranscripts, transcriptsBy,
+    intronsByTranscript
+)
+
+importClassesFrom(GenomicFeatures, 
+    TxDb
+)
+
+importMethodsFrom(GenomicFeatures, 
+    cdsBy, exons, transcripts,
+    fiveUTRsByTranscript, threeUTRsByTranscript,
+    distance, mapToTranscripts
+)
+
+importFrom(XVector, "subseq", "subseq<-")
+
+importFrom(Biostrings,
+    AAStringSet, DNAStringSet, DNAStringSetList, DNA_BASES, getSeq,
+    GENETIC_CODE
+)
+
+importMethodsFrom(Biostrings,
+    nchar, reverseComplement, substr, translate
+)
+
+importClassesFrom(Biostrings, 
+    DNAStringSet, DNAStringSetList
+)
+
+importMethodsFrom(DBI, 
+    dbCommit, dbConnect, dbDisconnect, dbExistsTable, 
+    dbGetQuery, dbReadTable, dbWriteTable, dbListTables, 
+    dbListFields
+)
+
+importClassesFrom(BSgenome, 
+    BSgenome
+)
+
+importFrom(rtracklayer,
+    liftOver, import
+)
+
+importFrom(utils, 
+    txtProgressBar, setTxtProgressBar
+)
+
+exportClassPattern("^.*$")
+
+export(
+    VCF, VCFHeader, reference, 
+    header, "header<-", meta, "meta<-",
+    vcfWhich, "vcfWhich<-", vcfFixed, "vcfFixed<-", vcfInfo, "vcfInfo<-", 
+    vcfGeno, "vcfGeno<-", vcfSamples, "vcfSamples<-", vcfTrimEmpty,
+    "vcfTrimEmpty<-",
+    duplicateRSID, CodingVariants, IntronVariants,
+    FiveUTRVariants, ThreeUTRVariants, IntergenicVariants,
+    SpliceSiteVariants, PromoterVariants, AllVariants,
+    upstream, "upstream<-", downstream, "downstream<-",
+    idType, "idType<-",
+    promoter, "promoter<-", intergenic, "intergenic<-",
+    probabilityToSnpMatrix, GLtoGP, PLtoGP,
+    VRanges, VRangesList, asVCF, softFilter, resetFilter,
+    totalDepth, altDepth, refDepth, sampleNames, "sampleNames<-", altFraction,
+    softFilterMatrix, "softFilterMatrix<-", hardFilters, "hardFilters<-",
+    called, stackSamples, "altDepth<-", "refDepth<-", "totalDepth<-",
+    probabilityToSnpMatrix, GLtoGP,
+    readInfo, readGeno, readGT, genotypeCodesToNucleotides,
+    tabulate, VRangesScanVcfParam, readVcfAsVRanges,
+    isSNV, isInsertion, isDeletion, isIndel, isDelins, isTransition,
+    isSubstitution,
+    VcfFile, VcfFileList,
+    makeVRangesFromGRanges
+)
+
+exportMethods(
+    filterVcf, scanVcf, scanVcfHeader, ScanVcfParam,
+    readVcf, writeVcf, expand,
+    predictCoding, getTranscriptSeqs, getSeq,
+    genotypeToSnpMatrix, snpSummary,
+    locateVariants, summarizeVariants,
+    isSNV, isInsertion, isDeletion, isIndel, isDelins, isTransition,
+    isSubstitution,
+
+    fixed, "fixed<-", ref, "ref<-", alt, "alt<-", qual, "qual<-",
+    filt, "filt<-", info, "info<-", geno, "geno<-", strand, 
+    "strand<-", "[", "[<-", cbind, rbind, "mcols<-", indexVcf, vcfFields, subset,
+
+    genome, seqlevels, seqinfo,
+
+    reference, samples, header, meta,
+
+    keys, keytypes, columns, select,
+
+    import
+)

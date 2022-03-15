@@ -1,0 +1,39 @@
+applyPileups            Apply a user-provided function to calculate
+                        pile-up statistics across multiple BAM files.
+ApplyPileupsParam       Parameters for creating pileups from BAM files
+BamFile                 Maintain and use BAM files
+BamSampler              Deprecated functions
+BamViews                Views into a set of BAM files
+BcfFile                 Manipulate BCF files.
+bgzip                   File compression for tabix (bgzip) and fasta
+                        (razip) files. IMPORTANT NOTE: Starting with
+                        Rsamtools 1.99.0 (Bioconductor 3.9), 'razip()'
+                        is defunct. Please use 'bgzip()' instead.
+FaFile                  Manipulate indexed fasta files.
+headerTabix             Retrieve sequence names defined in a tabix
+                        file.
+indexFa                 Operations on indexed 'fasta' files.
+indexTabix              Compress and index tabix-compatible files.
+pileup                  Use filters and output formats to calculate
+                        pile-up statistics for a BAM file.
+PileupFiles             Represent BAM files for pileup summaries.
+quickBamFlagSummary     Group the records of a BAM file based on their
+                        flag bits and count the number of records in
+                        each group
+readPileup              Import samtools 'pileup' files.
+Rsamtools-package       'samtools' aligned sequence utilities interface
+RsamtoolsFile           A base class for managing file references in
+                        Rsamtools
+RsamtoolsFileList       A base class for managing lists of Rsamtools
+                        file references
+scanBam                 Import, count, index, filter, sort, and merge
+                        'BAM' (binary alignment) files.
+ScanBamParam            Parameters for scanning BAM files
+scanBcfHeader           Operations on 'BCF' files.
+ScanBcfParam-class      Parameters for scanning BCF files
+scanTabix               Operations on 'tabix' (indexed, tab-delimited)
+                        files.
+seqnamesTabix           Retrieve sequence names defined in a tabix
+                        file.
+TabixFile               Manipulate tabix indexed tab-delimited files.
+testPairedEndBam        Quickly test if a BAM file has paired end reads

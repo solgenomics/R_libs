@@ -1,0 +1,99 @@
+AAString-class          AAString objects
+align-utils             Utility functions related to sequence alignment
+AlignedXStringSet-class
+                        AlignedXStringSet and QualityAlignedXStringSet
+                        objects
+AMINO_ACID_CODE         The Single-Letter Amino Acid Code
+chartr                  Replace letters in a sequence or set of
+                        sequences
+detail                  Show (display) detailed object content
+dinucleotideFrequencyTest
+                        Pearson's chi-squared Test and G-tests for
+                        String Position Dependence
+DNAString-class         DNAString objects
+findPalindromes         Searching a sequence for palindromes
+GENETIC_CODE            The Standard Genetic Code and its known
+                        variants
+getSeq                  getSeq
+gregexpr2               A replacement for R standard gregexpr function
+HNF4alpha               Known HNF4alpha binding sequences
+InDel-class             InDel objects
+injectHardMask          Injecting a hard mask in a sequence
+IUPAC_CODE_MAP          The IUPAC Extended Genetic Alphabet
+letter                  Subsetting a string
+letterFrequency         Calculate the frequency of letters in a
+                        biological sequence, or the consensus matrix of
+                        a set of sequences
+longestConsecutive      Obtain the length of the longest substring
+                        containing only 'letter'
+lowlevel-matching       Low-level matching functions
+MaskedXString-class     MaskedXString objects
+maskMotif               Masking by content (or by position)
+match-utils             Utility functions operating on the matches
+                        returned by a high-level matching function
+matchLRPatterns         Find paired matches in a sequence
+matchPattern            String searching functions
+matchPDict              Matching a dictionary of patterns against a
+                        reference
+matchPDict-inexact      Inexact matching with
+                        matchPDict()/countPDict()/whichPDict()
+matchProbePair          Find "theoretical amplicons" mapped to a probe
+                        pair
+matchprobes             A function to match a query sequence to the
+                        sequences of a set of probes.
+matchPWM                PWM creating, matching, and related utilities
+MIndex-class            MIndex objects
+misc                    Some miscellaneous stuff
+MultipleAlignment-class
+                        MultipleAlignment objects
+needwunsQS              (Deprecated) Needleman-Wunsch Global Alignment
+oligonucleotideFrequency
+                        Calculate the frequency of oligonucleotides in
+                        a DNA or RNA sequence (and other related
+                        functions)
+padAndClip              Pad and clip strings
+pairwiseAlignment       Optimal Pairwise Alignment
+PairwiseAlignments-class
+                        PairwiseAlignments,
+                        PairwiseAlignmentsSingleSubject, and
+                        PairwiseAlignmentsSingleSubjectSummary objects
+PairwiseAlignments-io   Write a PairwiseAlignments object to a file
+PDict-class             PDict objects
+phiX174Phage            Versions of bacteriophage phiX174 complete
+                        genome and sample short reads
+pid                     Percent Sequence Identity
+pmatchPattern           Longest Common Prefix/Suffix/Substring
+                        searching functions
+QualityScaledXStringSet-class
+                        QualityScaledBStringSet,
+                        QualityScaledDNAStringSet,
+                        QualityScaledRNAStringSet and
+                        QualityScaledAAStringSet objects
+replaceAt               Extract/replace arbitrary substrings from/in a
+                        string or set of strings.
+replaceLetterAt         Replacing letters in a sequence (or set of
+                        sequences) at some specified locations
+reverseComplement       Sequence reversing and complementing
+RNAString-class         RNAString objects
+seqinfo                 seqinfo method for DNAStringSet objects
+stringDist              String Distance/Alignment Score Matrix
+substitution.matrices   Scoring matrices
+toComplex               Turning a DNA sequence into a vector of complex
+                        numbers
+translate               Translating DNA/RNA sequences
+trimLRPatterns          Trim Flanking Patterns from Sequences
+xscat                   Concatenate sequences contained in XString,
+                        XStringSet and/or XStringViews objects
+XString-class           BString objects
+XStringPartialMatches-class
+                        XStringPartialMatches objects
+XStringQuality-class    PhredQuality, SolexaQuality and IlluminaQuality
+                        objects
+XStringSet-class        XStringSet objects
+XStringSet-comparison   Comparing and ordering the elements in one or
+                        more XStringSet objects
+XStringSet-io           Read/write an XStringSet object from/to a file
+XStringSetList-class    XStringSetList objects
+XStringViews-class      The XStringViews class
+yeastSEQCHR1            An annotation data file for CHR1 in the
+                        yeastSEQ package

@@ -1,0 +1,35 @@
+Package: KEGGREST
+Version: 1.34.0
+Title: Client-side REST access to the Kyoto Encyclopedia of Genes and
+        Genomes (KEGG)
+Authors@R: c(
+    person("Dan", "Tenenbaum", role = "aut"),
+    person("Jeremy", "Volkening", role = "ctb"),
+    person(
+        "Bioconductor Package", "Maintainer",
+        email = "maintainer@bioconductor.org", role = c("aut", "cre"))
+    )
+Depends: R (>= 3.5.0)
+Imports: methods, httr, png, Biostrings
+Suggests: RUnit, BiocGenerics, knitr, markdown
+Description: 
+    A package that provides a client interface to the Kyoto
+    Encyclopedia of Genes and Genomes (KEGG) REST server. Based on
+    KEGGSOAP by J. Zhang, R. Gentleman, and Marc Carlson, and KEGG
+    (python package) by Aurelien Mazurie.
+License: Artistic-2.0
+VignetteBuilder: knitr
+biocViews: Annotation, Pathways, ThirdPartyClient, KEGG
+RoxygenNote: 7.1.1
+git_url: https://git.bioconductor.org/packages/KEGGREST
+git_branch: RELEASE_3_14
+git_last_commit: 2056750
+git_last_commit_date: 2021-10-26
+Date/Publication: 2021-10-26
+NeedsCompilation: no
+Packaged: 2021-10-26 21:45:20 UTC; biocbuild
+Author: Dan Tenenbaum [aut],
+  Jeremy Volkening [ctb],
+  Bioconductor Package Maintainer [aut, cre]
+Maintainer: Bioconductor Package Maintainer <maintainer@bioconductor.org>
+Built: R 4.1.2; ; 2022-03-15 01:07:32 UTC; unix
