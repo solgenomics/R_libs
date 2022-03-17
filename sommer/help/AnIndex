@@ -12,7 +12,6 @@ A_example	DT_example
 A_gryphon	DT_gryphon
 A_ige	DT_ige
 bathy.colors	bathy.colors
-bbasis	bbasis
 bivariateRun	bivariateRun
 build.HMM	build.HMM
 coef.mmer	coef
@@ -82,11 +81,8 @@ randef	randef
 residuals.mmer	residuals
 simGECorMat	simGECorMat
 sommer	sommer-package
-spl2Da	spl2Da
-spl2Db	spl2Db
-spl2Dmats	spl2Dmats
+spl2D	spl2D
 summary.mmer	summary
-tpsmmbwrapper	tpsmmbwrapper
 transformConstraints	transformConstraints
 transp	transp
 uncm	uncm
