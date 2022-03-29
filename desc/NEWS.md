@@ -1,4 +1,9 @@
 
+# desc 1.4.1
+
+* The `$coerce_authors_at_r()` method now does a much better job at setting
+  the authors' roles (#114, @dpprdan).
+
 # desc 1.4.0
 
 * DESCRIPTION objects created with the `!new` command now omit `LazyData: true` 
