@@ -462,6 +462,8 @@ topic-defuse	topic-defuse
 topic-double-evaluation	topic-double-evaluation
 topic-embrace-constants	topic-embrace-constants
 topic-embrace-non-args	topic-embrace-non-args
+topic-error-call	topic-error-call
+topic-error-chaining	topic-error-chaining
 topic-inject	topic-inject
 topic-inject-out-of-context	topic-inject-out-of-context
 topic-metaprogramming	topic-metaprogramming

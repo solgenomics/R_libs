@@ -1,3 +1,30 @@
+# rlang 1.0.2
+
+* Backtraces of parent errors are now reused on rethrow. This avoids
+  capturing the same backtrace twice and solves consistency problems
+  by making sure both errors in a chain have the same backtrace.
+
+* Fixed backtrace oversimplification when `cnd` is a base error in
+  `abort(parent = cnd)`.
+
+* Internal errors thrown with `abort(.internal = TRUE)` now mention
+  the name of the package the error should be reported to.
+
+* Backtraces are now separated from error messages with a `---` ruler
+  line (#1368).
+
+* The internal bullet formatting routine now ignores unknown names
+  (#1364). This makes it consistent with the cli package, increases
+  resilience against hard-to-detect errors, and increases forward
+  compatibility.
+
+* `abort()` and friends no longer calls non-existent functions
+  (e.g. `cli::format_error()` or `cli::format_warning`) when the
+  installed version of cli is too old (#1367, tidyverse/dplyr#6189).
+
+* Fixed an OOB subsetting error in `abort()`.
+
+
 # rlang 1.0.1
 
 * New `rlang_call_format_srcrefs` global option (#1349). Similar to

@@ -1,3 +1,4 @@
+desc-package	desc-package
 check_encoding	check_encoding
 check_field	check_field
 cran_ascii_fields	cran_ascii_fields
@@ -58,3 +59,4 @@ desc_set_urls	desc_set_urls
 desc_set_version	desc_set_version
 desc_to_latex	desc_to_latex
 desc_validate	desc_validate
+_PACKAGE	desc-package

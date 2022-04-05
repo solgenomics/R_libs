@@ -15,16 +15,19 @@ howto-faq-coercion-data-frame
                         (Data frames)
 howto-faq-fix-scalar-type-error
                         FAQ - Why isn't my class treated as a vector?
+internal-faq-matches-algorithm
+                        Internal FAQ - Implementation of
+                        'vec_locate_matches()'
 internal-faq-ptype2-identity
                         Internal FAQ - 'vec_ptype2()', 'NULL', and
                         unspecified vectors
+list_drop_empty         Drop empty elements from a list
 list_of                 'list_of' S3 class for homogenous lists
 name_spec               Name specifications
 new_data_frame          Assemble attributes for data frame construction
 reference-faq-compatibility
                         FAQ - Is my class compatible with vctrs?
 theory-faq-coercion     FAQ - How does coercion work in vctrs?
-vec-rep                 Repeat a vector
 vec_as_names            Retrieve and repair names
 vec_assert              Assert an argument has known prototype and/or
                         size
@@ -41,7 +44,10 @@ vec_fill_missing        Fill in missing values with the previous or
                         following value
 vec_identify_runs       Runs
 vec_init                Initialize a vector
+vec_interleave          Interleave many vectors into one vector
 vec_is_list             Is the object a list?
+vec_locate_matches      Locate observations matching specified
+                        conditions
 vec_match               Find matching observations across vectors
 vec_names               Get or set the names of a vector
 vec_order               Order and sort vectors
@@ -52,3 +58,4 @@ vec_seq_along           Useful sequences
 vec_size                Number of observations
 vec_split               Split a vector into groups
 vec_unique              Find and count unique values
+vec-rep                 Repeat a vector
