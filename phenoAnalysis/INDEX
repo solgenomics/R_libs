@@ -10,10 +10,14 @@ cleanMetaCols           Removes meta data columns from the phenotype
                         data
 combinePhenoData        combine phenotype data
 extractPhenotype        Reads phenotype data from one or more files.
+filterMissingValues     Filters out columns and rows by percentage of
+                        missing value
 getAdjMeans             calculates the genotype adjusted means for a
                         trait.
 getAnovaTable           Generates the anova table
+getDataFrame            Reads phenotype data from a file.
 getModelSummary         fits model and returns the model output summary
+getNumericCols          removes non-numeric columns from a data frame
 mergeVariables          merges variables from 2 or more data files.
 models                  fits linear mixed model
 runAnova                fits model and returns the model output summary
