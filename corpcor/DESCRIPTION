@@ -28,4 +28,4 @@ NeedsCompilation: no
 Packaged: 2021-09-16 14:05:52 UTC; strimmer
 Repository: CRAN
 Date/Publication: 2021-09-16 15:30:08 UTC
-Built: R 4.1.2; ; 2022-02-15 23:22:02 UTC; unix
+Built: R 4.2.0; ; 2022-05-17 23:43:46 UTC; unix

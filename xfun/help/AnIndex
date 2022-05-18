@@ -44,6 +44,7 @@ in_dir	in_dir
 isFALSE	isFALSE
 is_abs_path	is_abs_path
 is_ascii	is_ascii
+is_blank	is_blank
 is_CRAN_incoming	is_R_CMD_check
 is_linux	os
 is_macos	os

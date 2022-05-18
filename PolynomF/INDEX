@@ -9,6 +9,7 @@ c.polynom               Concatenation of polynomial objects into lists
 change_origin           Change origin of a polynomial
 coef.polynom            Polynomial coefficients
 deriv.polynom           Polynomial Calculus
+neville                 Lagrange Interpolation Polynomials
 plot.polylist           Plot method for polynomials
 poly_calc               Lagrange interpolation polynomial
 poly_orth               Simpl orthogonal polynomials

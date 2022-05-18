@@ -5,9 +5,7 @@ cart2bary               Conversion of Cartesian to Barycentric
                         coordinates.
 cart2pol                Transform Cartesian coordinates to polar or
                         cylindrical coordinates.
-cart2sph                If called with a single matrix argument then
-                        each row of 'c' represents the Cartesian
-                        coordinate ('x', 'y', 'z').
+cart2sph                Transform Cartesian to spherical coordinates
 convhulln               Compute smallest convex hull that encloses a
                         set of points
 delaunayn               Delaunay triangulation in N dimensions

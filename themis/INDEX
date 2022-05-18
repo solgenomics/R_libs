@@ -1,15 +1,18 @@
-adasyn                  Adaptive Synthetic Sampling Approach algorithm
-bsmote                  borderline-SMOTE algorithm
-circle_example          Synthetic Dataset with a circle
-smote                   SMOTE algorithm
-step_adasyn             Adaptive Synthetic Sampling Approach
-step_bsmote             Apply borderline-SMOTE algorithm
+adasyn                  Adaptive Synthetic Algorithm
+bsmote                  borderline-SMOTE Algorithm
+circle_example          Synthetic Dataset With a Circle
+nearmiss                Remove Points Near Other Classes
+smote                   SMOTE Algorithm
+smotenc                 SMOTENC Algorithm
+step_adasyn             Apply Adaptive Synthetic Algorithm
+step_bsmote             Apply borderline-SMOTE Algorithm
 step_downsample         Down-Sample a Data Set Based on a Factor
                         Variable
-step_nearmiss           Under-sampling by removing points near other
-                        classes.
-step_rose               Apply ROSE algorithm
-step_smote              Apply SMOTE algorithm
-step_tomek              Under-sampling by removing Tomek<e2><80><99>s
-                        links.
+step_nearmiss           Remove Points Near Other Classes
+step_rose               Apply ROSE Algorithm
+step_smote              Apply SMOTE Algorithm
+step_smotenc            Apply SMOTENC algorithm
+step_tomek              Remove Tomek<e2><80><99>s Links
 step_upsample           Up-Sample a Data Set Based on a Factor Variable
+tidy.step_adasyn        Tidy the Result of a Recipe
+tomek                   Remove Tomek's links

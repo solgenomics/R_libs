@@ -9,6 +9,7 @@ getVariances            getVariances
 mice                    mice dataset
 mice.A                  Pedigree info for the mice dataset
 mice.X                  Molecular markers
+mice.map                Genetic map info for the mice dataset
 mice.pheno              Phenotypical data for the mice dataset
 plot.BGLR               Plots for BGLR Analysis
 predict.BGLR            Model Predictions

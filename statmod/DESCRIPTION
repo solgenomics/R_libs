@@ -13,4 +13,4 @@ NeedsCompilation: yes
 Packaged: 2021-05-10 10:41:09 UTC; smyth
 Repository: CRAN
 Date/Publication: 2021-05-10 11:20:05 UTC
-Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 22:58:24 UTC; unix
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-05-17 23:45:37 UTC; unix

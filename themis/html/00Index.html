@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head><title>R: Extra Recipes Steps for Dealing with Unbalanced Data</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
@@ -12,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;themis&rsquo; version 0.1.4</h2>
+</div><h2>Documentation for package &lsquo;themis&rsquo; version 0.2.2</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 </ul>
@@ -22,44 +22,56 @@
 
 <table width="100%">
 <tr><td style="width: 25%;"><a href="adasyn.html">adasyn</a></td>
-<td>Adaptive Synthetic Sampling Approach algorithm</td></tr>
+<td>Adaptive Synthetic Algorithm</td></tr>
 <tr><td style="width: 25%;"><a href="bsmote.html">bsmote</a></td>
-<td>borderline-SMOTE algorithm</td></tr>
+<td>borderline-SMOTE Algorithm</td></tr>
 <tr><td style="width: 25%;"><a href="circle_example.html">circle_example</a></td>
-<td>Synthetic Dataset with a circle</td></tr>
+<td>Synthetic Dataset With a Circle</td></tr>
+<tr><td style="width: 25%;"><a href="nearmiss.html">nearmiss</a></td>
+<td>Remove Points Near Other Classes</td></tr>
 <tr><td style="width: 25%;"><a href="smote.html">smote</a></td>
-<td>SMOTE algorithm</td></tr>
+<td>SMOTE Algorithm</td></tr>
+<tr><td style="width: 25%;"><a href="smotenc.html">smotenc</a></td>
+<td>SMOTENC Algorithm</td></tr>
 <tr><td style="width: 25%;"><a href="step_adasyn.html">step_adasyn</a></td>
-<td>Adaptive Synthetic Sampling Approach</td></tr>
+<td>Apply Adaptive Synthetic Algorithm</td></tr>
 <tr><td style="width: 25%;"><a href="step_bsmote.html">step_bsmote</a></td>
-<td>Apply borderline-SMOTE algorithm</td></tr>
+<td>Apply borderline-SMOTE Algorithm</td></tr>
 <tr><td style="width: 25%;"><a href="step_downsample.html">step_downsample</a></td>
 <td>Down-Sample a Data Set Based on a Factor Variable</td></tr>
 <tr><td style="width: 25%;"><a href="step_nearmiss.html">step_nearmiss</a></td>
-<td>Under-sampling by removing points near other classes.</td></tr>
+<td>Remove Points Near Other Classes</td></tr>
 <tr><td style="width: 25%;"><a href="step_rose.html">step_rose</a></td>
-<td>Apply ROSE algorithm</td></tr>
+<td>Apply ROSE Algorithm</td></tr>
 <tr><td style="width: 25%;"><a href="step_smote.html">step_smote</a></td>
-<td>Apply SMOTE algorithm</td></tr>
+<td>Apply SMOTE Algorithm</td></tr>
+<tr><td style="width: 25%;"><a href="step_smotenc.html">step_smotenc</a></td>
+<td>Apply SMOTENC algorithm</td></tr>
 <tr><td style="width: 25%;"><a href="step_tomek.html">step_tomek</a></td>
-<td>Under-sampling by removing Tomek&lt;e2&gt;&lt;80&gt;&lt;99&gt;s links.</td></tr>
+<td>Remove Tomek&lt;e2&gt;&lt;80&gt;&lt;99&gt;s Links</td></tr>
 <tr><td style="width: 25%;"><a href="step_upsample.html">step_upsample</a></td>
 <td>Up-Sample a Data Set Based on a Factor Variable</td></tr>
-<tr><td style="width: 25%;"><a href="step_adasyn.html">tidy.step_adasyn</a></td>
-<td>Adaptive Synthetic Sampling Approach</td></tr>
-<tr><td style="width: 25%;"><a href="step_bsmote.html">tidy.step_bsmote</a></td>
-<td>Apply borderline-SMOTE algorithm</td></tr>
-<tr><td style="width: 25%;"><a href="step_downsample.html">tidy.step_downsample</a></td>
-<td>Down-Sample a Data Set Based on a Factor Variable</td></tr>
-<tr><td style="width: 25%;"><a href="step_nearmiss.html">tidy.step_nearmiss</a></td>
-<td>Under-sampling by removing points near other classes.</td></tr>
-<tr><td style="width: 25%;"><a href="step_rose.html">tidy.step_rose</a></td>
-<td>Apply ROSE algorithm</td></tr>
-<tr><td style="width: 25%;"><a href="step_smote.html">tidy.step_smote</a></td>
-<td>Apply SMOTE algorithm</td></tr>
-<tr><td style="width: 25%;"><a href="step_tomek.html">tidy.step_tomek</a></td>
-<td>Under-sampling by removing Tomek&lt;e2&gt;&lt;80&gt;&lt;99&gt;s links.</td></tr>
-<tr><td style="width: 25%;"><a href="step_upsample.html">tidy.step_upsample</a></td>
-<td>Up-Sample a Data Set Based on a Factor Variable</td></tr>
+<tr><td style="width: 25%;"><a href="tidy.recipe.html">tidy.recipe</a></td>
+<td>Tidy the Result of a Recipe</td></tr>
+<tr><td style="width: 25%;"><a href="tidy.recipe.html">tidy.step_adasyn</a></td>
+<td>Tidy the Result of a Recipe</td></tr>
+<tr><td style="width: 25%;"><a href="tidy.recipe.html">tidy.step_bsmote</a></td>
+<td>Tidy the Result of a Recipe</td></tr>
+<tr><td style="width: 25%;"><a href="tidy.recipe.html">tidy.step_downsample</a></td>
+<td>Tidy the Result of a Recipe</td></tr>
+<tr><td style="width: 25%;"><a href="tidy.recipe.html">tidy.step_nearmiss</a></td>
+<td>Tidy the Result of a Recipe</td></tr>
+<tr><td style="width: 25%;"><a href="tidy.recipe.html">tidy.step_rose</a></td>
+<td>Tidy the Result of a Recipe</td></tr>
+<tr><td style="width: 25%;"><a href="tidy.recipe.html">tidy.step_smote</a></td>
+<td>Tidy the Result of a Recipe</td></tr>
+<tr><td style="width: 25%;"><a href="tidy.recipe.html">tidy.step_smotenc</a></td>
+<td>Tidy the Result of a Recipe</td></tr>
+<tr><td style="width: 25%;"><a href="tidy.recipe.html">tidy.step_tomek</a></td>
+<td>Tidy the Result of a Recipe</td></tr>
+<tr><td style="width: 25%;"><a href="tidy.recipe.html">tidy.step_upsample</a></td>
+<td>Tidy the Result of a Recipe</td></tr>
+<tr><td style="width: 25%;"><a href="tomek.html">tomek</a></td>
+<td>Remove Tomek's links</td></tr>
 </table>
 </div></body></html>

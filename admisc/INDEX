@@ -1,4 +1,4 @@
-admisc-package          Adrian Dusa's Miscellaneous
+admisc                  Adrian Dusa's Miscellaneous
 agtb                    Check difference and / or (in)equality of
                         numbers
 asNumeric               Numeric vectors
@@ -19,8 +19,9 @@ hclr                    Colors from the HCL spectrum
 insideBrackets          Extract information from a multi-value SOP/DNF
                         expression
 intersection            Intersect expressions
-list.rda                Load and list objects from an .rda file
+listRDA                 Load and list objects from an .rda file
 negate                  Negate Boolean expressions
+numdec                  Count number of decimals
 permutations            Calculates the permutations of a vector
 recode                  Recode a variable
 recreate                Facilitate expression substitution

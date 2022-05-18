@@ -2,8 +2,8 @@ Package: prospectr
 Type: Package
 Title: Miscellaneous Functions for Processing and Sample Selection of
         Spectroscopic Data
-Version: 0.2.2
-Date: 2021-11-25
+Version: 0.2.4
+Date: 2022-04-03
 Author: 
     Antoine Stevens [aut, cre] (<https://orcid.org/0000-0002-1588-7519>), 
     Leonardo Ramirez-Lopez [aut, cre] (<https://orcid.org/0000-0002-5369-5120>),
@@ -27,6 +27,6 @@ LazyData: true
 LazyDataCompression: xz
 Repository: CRAN
 Encoding: UTF-8
-Packaged: 2021-11-26 17:32:39 UTC; NIR_Workstation
-Date/Publication: 2021-11-27 06:00:05 UTC
-Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 23:37:00 UTC; unix
+Packaged: 2022-04-03 20:09:26 UTC; NIR_Workstation
+Date/Publication: 2022-04-03 20:30:02 UTC
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-05-17 23:52:07 UTC; unix

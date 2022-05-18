@@ -15,4 +15,4 @@ NeedsCompilation: yes
 Packaged: 2021-04-09 15:50:52 UTC; maechler
 Repository: CRAN
 Date/Publication: 2021-04-13 22:00:08 UTC
-Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 23:01:11 UTC; unix
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-05-17 23:47:26 UTC; unix

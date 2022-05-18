@@ -24,8 +24,8 @@ eubon_children          EUBON children
 eubon_hierarchy         EUBON hierarchy
 eubon_search            EUBON taxonomy search
 fungorum                Index Fungorum
-gbif_downstream         Retrieve all taxa names downstream in hierarchy
-                        for GBIF
+gbif_downstream         Retrieve all taxonomic names downstream in
+                        hierarchy for GBIF
 gbif_name_usage         Lookup details for specific names in all
                         taxonomies in GBIF.
 gbif_parse              Parse taxon names using the GBIF name parser.
@@ -134,6 +134,7 @@ taxize_capwords         Capitalize the first letter of a character
                         string.
 taxize_cite             Get citations and licenses for data sources
                         used in taxize
+taxize_options          taxize options
 taxon-state             Last taxon state object from a get_* function
                         call
 theplantlist            Lookup-table for family, genus, and species

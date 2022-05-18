@@ -60,3 +60,4 @@ tag_words_line	tag_parsers
 unescape_rd_for_md	markdown-internals
 update_collate	update_collate
 vignette_roclet	vignette_roclet
+warn_roxy_tag	roxy_tag

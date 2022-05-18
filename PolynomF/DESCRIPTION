@@ -4,8 +4,8 @@ Title: Polynomials in R
 Description: Implements univariate polynomial operations in R, including
   polynomial arithmetic, finding zeros, plotting, and some operations on
   lists of polynomials.
-Version: 2.0-3
-Date: 2020-02-04
+Version: 2.0-5
+Date: 2022-05-02
 NeedsCompilation: yes
 Imports: stats, Rcpp, methods
 Depends: R (>= 3.0.0), graphics, grDevices
@@ -14,10 +14,10 @@ Maintainer: Bill Venables <Bill.Venables@gmail.com>
 License: GPL-2
 Encoding: UTF-8
 LinkingTo: Rcpp
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.2
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
-Packaged: 2020-02-04 11:58:09 UTC; bill
+Packaged: 2022-05-02 03:05:25 UTC; Bill
 Repository: CRAN
-Date/Publication: 2020-02-04 12:30:06 UTC
-Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 23:40:20 UTC; unix
+Date/Publication: 2022-05-02 03:30:02 UTC
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-05-17 23:46:11 UTC; unix

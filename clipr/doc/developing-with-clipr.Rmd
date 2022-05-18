@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 To check whether the system has been properly configured to allow access to the clipboard, you may run `clipr_available()` which will either return `TRUE` or `FALSE`.
 This will be particularly useful for Linux-based systems, where clipr's functionality depends on the installation of additional software.
-If you wish to display system requirements and configuration messages to X11 users, `dr_clipr()` will print these.
+If you wish to display system requirements and configuration messages to X11 and Wayland users, `dr_clipr()` will print these.
 
 ## Interactive & non-interactive use
 
@@ -40,7 +40,7 @@ A few best practices will also help you responsibly test your clipr-using packag
 
 1. Examples that will try to use `read_clip()` or `write_clip()` ought to be wrapped in `\dontrun{}`
 2. Tests calling clipr should be conditionally skipped, based on the output of `clipr_available()`. This is necessary to pass CRAN checks, as otherwise `write_clip` will error out.
-3. If you are using [Travis.ci](https://travis-ci.org/) to check your package build on Linux, consult the [`.travis.yml`](https://github.com/mdlincoln/clipr/blob/master/.travis.yml) for this package, which includes code for setting the `DISPLAY` and `CLIPR_ALLOW` environment variables, installing `xclip` and `xsel`, and running a pre-build script that will set up `xclip`/`xsel` to run headlessly.
+3. If you are using a headless system to check your package build on Linux, consult the [GitHub Actions workflow](https://github.com/mdlincoln/clipr/blob/main/.github/workflows/R-CMD-check.yaml) for this package, which includes code for setting the `DISPLAY` and `CLIPR_ALLOW` environment variables, installing `xclip` and `xsel`, and running a pre-build script that will set up `xclip`/`xsel` to run headlessly under XVFB.
 
 ## Using clipr with Shiny
 

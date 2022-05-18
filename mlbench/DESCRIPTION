@@ -15,4 +15,4 @@ NeedsCompilation: yes
 Packaged: 2021-01-29 12:01:24 UTC; leisch
 Repository: CRAN
 Date/Publication: 2021-01-29 13:40:02 UTC
-Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 23:22:58 UTC; unix
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-05-17 23:44:58 UTC; unix

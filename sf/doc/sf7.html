@@ -547,32 +547,32 @@ In st_voronoi.sfc(st_geometry(x), st_sfc(envelope), dTolerance,  :
 <a class="sourceLine" id="cb23-4" title="4">  uk_buffer_sf =<span class="st"> </span><span class="kw">st_buffer</span>(uk_projected, <span class="dt">dist =</span> <span class="dv">20000</span>)</a>
 <a class="sourceLine" id="cb23-5" title="5">})</a>
 <a class="sourceLine" id="cb23-6" title="6"><span class="co">##    user  system elapsed </span></a>
-<a class="sourceLine" id="cb23-7" title="7"><span class="co">##   0.053   0.000   0.053</span></a>
+<a class="sourceLine" id="cb23-7" title="7"><span class="co">##   0.039   0.000   0.038</span></a>
 <a class="sourceLine" id="cb23-8" title="8"><span class="co"># sf way with few than the 30 segments in the buffer</span></a>
 <a class="sourceLine" id="cb23-9" title="9"><span class="kw">system.time</span>({</a>
 <a class="sourceLine" id="cb23-10" title="10">  uk_projected =<span class="st"> </span><span class="kw">st_transform</span>(uk_sfc, <span class="dv">27700</span>)</a>
 <a class="sourceLine" id="cb23-11" title="11">  uk_buffer_sf2 =<span class="st"> </span><span class="kw">st_buffer</span>(uk_projected, <span class="dt">dist =</span> <span class="dv">20000</span>, <span class="dt">nQuadSegs =</span> <span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb23-12" title="12">})</a>
 <a class="sourceLine" id="cb23-13" title="13"><span class="co">##    user  system elapsed </span></a>
-<a class="sourceLine" id="cb23-14" title="14"><span class="co">##   0.025   0.000   0.025</span></a>
+<a class="sourceLine" id="cb23-14" title="14"><span class="co">##   0.026   0.000   0.026</span></a>
 <a class="sourceLine" id="cb23-15" title="15"><span class="co"># s2 with default cell size</span></a>
 <a class="sourceLine" id="cb23-16" title="16"><span class="kw">system.time</span>({</a>
 <a class="sourceLine" id="cb23-17" title="17">  uk_buffer =<span class="st"> </span><span class="kw">s2_buffer_cells</span>(uk, <span class="dt">distance =</span> <span class="dv">20000</span>)</a>
 <a class="sourceLine" id="cb23-18" title="18">})</a>
 <a class="sourceLine" id="cb23-19" title="19"><span class="co">##    user  system elapsed </span></a>
-<a class="sourceLine" id="cb23-20" title="20"><span class="co">##   0.542   0.000   0.542</span></a>
+<a class="sourceLine" id="cb23-20" title="20"><span class="co">##   0.501   0.000   0.502</span></a>
 <a class="sourceLine" id="cb23-21" title="21"><span class="co"># s2 with 10000 cells</span></a>
 <a class="sourceLine" id="cb23-22" title="22"><span class="kw">system.time</span>({</a>
 <a class="sourceLine" id="cb23-23" title="23">  uk_buffer2 =<span class="st"> </span><span class="kw">s2_buffer_cells</span>(uk, <span class="dt">distance =</span> <span class="dv">20000</span>, <span class="dt">max_cells =</span> <span class="dv">10000</span>)</a>
 <a class="sourceLine" id="cb23-24" title="24">})</a>
 <a class="sourceLine" id="cb23-25" title="25"><span class="co">##    user  system elapsed </span></a>
-<a class="sourceLine" id="cb23-26" title="26"><span class="co">##   5.016   0.000   5.016</span></a>
+<a class="sourceLine" id="cb23-26" title="26"><span class="co">##   4.865   0.000   4.865</span></a>
 <a class="sourceLine" id="cb23-27" title="27"><span class="co"># s2 with 100 cells</span></a>
 <a class="sourceLine" id="cb23-28" title="28"><span class="kw">system.time</span>({</a>
 <a class="sourceLine" id="cb23-29" title="29">  uk_buffer2 =<span class="st"> </span><span class="kw">s2_buffer_cells</span>(uk, <span class="dt">distance =</span> <span class="dv">20000</span>, <span class="dt">max_cells =</span> <span class="dv">100</span>)</a>
 <a class="sourceLine" id="cb23-30" title="30">})</a>
 <a class="sourceLine" id="cb23-31" title="31"><span class="co">##    user  system elapsed </span></a>
-<a class="sourceLine" id="cb23-32" title="32"><span class="co">##   0.057   0.000   0.058</span></a></code></pre></div>
+<a class="sourceLine" id="cb23-32" title="32"><span class="co">##   0.056   0.000   0.057</span></a></code></pre></div>
 <p>The result of the previous benchmarks emphasise the point that there are trade-offs between geographic resolution and computational resources, something that web developers working on geographic services such as Google Maps understand well. In this case the default setting of 1000 cells, which runs slightly faster than the default transform -&gt; buffer workflow, is probably appropriate given the low resolution of the input geometry representing the UK.</p>
 </div>
 <div id="st_buffer-or-st_is_within_distance" class="section level2">

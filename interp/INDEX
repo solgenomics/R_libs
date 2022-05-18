@@ -1,8 +1,26 @@
+akima                   Waveform Distortion Data for Bivariate
+                        Interpolation
+akima474                Sample data from Akima's Bicubic Spline
+                        Interpolation code (TOMS 474)
 arcs                    Extract a list of arcs from a triangulation
                         object.
 area                    Extract a list of triangle areas from a
                         triangulation object.
-circles                 Add circles to a plot
+aspline                 Univariate Akima interpolation
+bicubic                 Bivariate Interpolation for Data on a
+                        Rectangular grid
+bicubic.grid            Bicubic Interpolation for Data on a Rectangular
+                        grid
+bilinear                Bilinear Interpolation for Data on a
+                        Rectangular grid
+bilinear.grid           Bilinear Interpolation for Data on a
+                        Rectangular grid
+cells                   extract info about voronoi cells
+circles                 plot circles
+circtest                circtest / sample data
+circum                  Determine the circumcircle (and some other
+                        characteristics) of a triangle
+circumcircle            Determine the circumcircle of a set of points
 convex.hull             Return the convex hull of a triangulation
                         object
 franke.data             Test datasets from Franke for interpolation of
@@ -10,9 +28,12 @@ franke.data             Test datasets from Franke for interpolation of
 identify.triSht         Identify points in a triangulation plot
 interp                  Interpolation function
 interp-package          Interpolation of data
+interp2xyz              From interp() Result, Produce 3-column Matrix
 interpp                 Pointwise interpolate irregular gridded data
 locpoly                 Local polynomial fit.
 nearest.neighbours      Nearest neighbour structure for a data set
+neighbours              List of neighbours from a triangulation or
+                        voronoi object
 on                      Determines if a point is on or left of the
                         vector described by two other points.
 on.convex.hull          Determines if points are on or in the convex
@@ -33,6 +54,7 @@ tri.mesh                Delaunay triangulation
 triSht                  A triangulation object
 triangles               Extract a list of triangles from a
                         triangulation object
+tritest                 tritest / sample data
 voronoi                 Voronoi object
 voronoi.area            Calculate area of Voronoi polygons
 voronoi.findrejectsites

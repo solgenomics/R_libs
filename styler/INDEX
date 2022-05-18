@@ -3,7 +3,6 @@ cache_clear             Clear the cache
 cache_info              Show information about the styler cache
 caching                 Remember the past to be quicker in the future
 create_style_guide      Create a style guide
-local_test_setup        Establish testing setup for current environment
 math_token_spacing      Specify spacing around math tokens
 print.vertical          Print styled code
 reindention             Specify what is re-indented how

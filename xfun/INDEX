@@ -39,6 +39,8 @@ isFALSE                 Test if an object is identical to 'FALSE'
 is_abs_path             Test if paths are relative or absolute
 is_ascii                Check if a character vector consists of
                         entirely ASCII characters
+is_blank                Test if a character vector consists of blank
+                        strings
 is_sub_path             Test if a path is a subpath of a dir
 is_web_path             Test if a path is a web path
 is_windows              Test for types of operating systems

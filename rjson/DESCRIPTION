@@ -12,4 +12,4 @@ Repository: CRAN
 Date/Publication: 2022-01-09 03:32:41 UTC
 Packaged: 2022-01-08 19:22:39 UTC; root
 NeedsCompilation: yes
-Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 23:11:39 UTC; unix
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-05-17 23:45:22 UTC; unix

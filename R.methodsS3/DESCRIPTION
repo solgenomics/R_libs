@@ -14,17 +14,7 @@ LazyLoad: TRUE
 URL: https://github.com/HenrikBengtsson/R.methodsS3
 BugReports: https://github.com/HenrikBengtsson/R.methodsS3/issues
 NeedsCompilation: no
-Packaged: 2022-02-15 23:42:45 UTC; root
+Packaged: 2020-08-24 14:42:23 UTC; hb
 Repository: CRAN
 Date/Publication: 2020-08-26 16:20:06 UTC
-RemoteType: github
-RemoteHost: api.github.com
-RemoteRepo: R.methodsS3
-RemoteUsername: cran
-RemoteRef: HEAD
-RemoteSha: b6286abd637399982f955b8bb89dccff5c92fea7
-GithubRepo: R.methodsS3
-GithubUsername: cran
-GithubRef: HEAD
-GithubSHA1: b6286abd637399982f955b8bb89dccff5c92fea7
-Built: R 4.1.2; ; 2022-02-15 23:42:46 UTC; unix
+Built: R 4.2.0; ; 2022-05-17 23:43:15 UTC; unix

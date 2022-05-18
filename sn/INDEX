@@ -74,4 +74,4 @@ summary.SUNdistr-class
 summary.selm            Summarizing 'selm' fits
 vech                    vech, tr and other matrix operators
 wines                   Piedmont wines data
-zeta                    Function log(2*Phi(x)) and its derivatives
+zeta                    Function log(2 Phi(x)) and its derivatives

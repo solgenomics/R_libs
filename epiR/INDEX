@@ -59,7 +59,8 @@ epi.pooled              Estimate herd test characteristics when pooled
 epi.popsize             Estimate population size on the basis of
                         capture-recapture sampling
 epi.prcc                Partial rank correlation coefficients
-epi.prev                Estimate true prevalence
+epi.prev                Estimate true prevalence and the expected
+                        number of false positives
 epi.psi                 Proportional similarity index
 epi.smd                 Fixed-effects meta-analysis of continuous
                         outcomes using the standardised mean difference

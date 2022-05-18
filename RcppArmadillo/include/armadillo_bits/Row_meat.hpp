@@ -51,12 +51,11 @@ Row<eT>::Row(const uword in_n_elem)
   {
   arma_extra_debug_sigprint();
   
-  #if (!defined(ARMA_DONT_ZERO_INIT))
+  if(arma_config::zero_init)
     {
     arma_extra_debug_print("Row::constructor: zeroing memory");
     arrayops::fill_zeros(Mat<eT>::memptr(), Mat<eT>::n_elem);
     }
-  #endif
   }
 
 
@@ -70,12 +69,11 @@ Row<eT>::Row(const uword in_n_rows, const uword in_n_cols)
   
   Mat<eT>::init_warm(in_n_rows, in_n_cols);
   
-  #if (!defined(ARMA_DONT_ZERO_INIT))
+  if(arma_config::zero_init)
     {
     arma_extra_debug_print("Row::constructor: zeroing memory");
     arrayops::fill_zeros(Mat<eT>::memptr(), Mat<eT>::n_elem);
     }
-  #endif
   }
 
 
@@ -89,12 +87,11 @@ Row<eT>::Row(const SizeMat& s)
   
   Mat<eT>::init_warm(s.n_rows, s.n_cols);
   
-  #if (!defined(ARMA_DONT_ZERO_INIT))
+  if(arma_config::zero_init)
     {
     arma_extra_debug_print("Row::constructor: zeroing memory");
     arrayops::fill_zeros(Mat<eT>::memptr(), Mat<eT>::n_elem);
     }
-  #endif
   }
 
 
@@ -1236,7 +1233,7 @@ Row<eT>::fixed<fixed_n_elem>::fixed()
   {
   arma_extra_debug_sigprint_this(this);
   
-  #if (!defined(ARMA_DONT_ZERO_INIT))
+  if(arma_config::zero_init)
     {
     arma_extra_debug_print("Row::fixed::constructor: zeroing memory");
     
@@ -1244,7 +1241,6 @@ Row<eT>::fixed<fixed_n_elem>::fixed()
     
     arrayops::inplace_set_fixed<eT,fixed_n_elem>( mem_use, eT(0) );
     }
-  #endif
   }
 
 
@@ -1856,7 +1852,7 @@ Row<eT>::Row(const arma_fixed_indicator&, const uword in_n_elem, const eT* in_me
 
 
 
-#ifdef ARMA_EXTRA_ROW_MEAT
+#if defined(ARMA_EXTRA_ROW_MEAT)
   #include ARMA_INCFILE_WRAP(ARMA_EXTRA_ROW_MEAT)
 #endif
 

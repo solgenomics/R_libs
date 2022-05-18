@@ -29,4 +29,4 @@ Packaged: 2021-11-28 23:34:08 UTC; gagolews
 License_is_FOSS: yes
 Repository: CRAN
 Date/Publication: 2021-11-29 09:00:02 UTC
-Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 22:48:48 UTC; unix
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-05-17 23:45:48 UTC; unix

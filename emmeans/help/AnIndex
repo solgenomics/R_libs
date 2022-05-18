@@ -3,7 +3,7 @@ emmeans-package	emmeans-package
 .emm_basis	extending-emmeans
 .emm_register	extending-emmeans
 .recover_data	extending-emmeans
-add_grouping	add_grouping
+add_grouping	manip-factors
 as.data.frame.emmGrid	summary.emmGrid
 as.emmGrid	as.emmGrid
 as.emm_list	as.emmGrid
@@ -16,6 +16,7 @@ auto.noise	auto.noise
 cld.emmGrid	CLD.emmGrid
 cld.emm_list	CLD.emmGrid
 coef.emmGrid	contrast
+comb_facs	manip-factors
 confint.emmGrid	summary.emmGrid
 consec.emmc	emmc-functions
 contrast	contrast
@@ -92,6 +93,7 @@ recover_data.call	extending-emmeans
 ref_grid	ref_grid
 regrid	regrid
 revpairwise.emmc	emmc-functions
+split_fac	manip-factors
 str.emmGrid	emmGrid-methods
 subset.emmGrid	rbind.emmGrid
 summary.emmGrid	summary.emmGrid

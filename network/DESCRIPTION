@@ -39,4 +39,4 @@ NeedsCompilation: yes
 Packaged: 2021-06-14 01:46:28 UTC; buttsc
 Repository: CRAN
 Date/Publication: 2021-06-14 06:40:01 UTC
-Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 23:39:02 UTC; unix
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-05-17 23:56:03 UTC; unix

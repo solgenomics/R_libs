@@ -1,6 +1,6 @@
 Package: statnet.common
-Version: 4.5.0
-Date: 2021-06-05
+Version: 4.6.0
+Date: 2022-04-26
 Title: Common R Scripts and Utilities Used by the Statnet Project
         Software
 Authors@R: c(
@@ -13,16 +13,16 @@ Imports: utils, methods, coda, parallel, tools
 BugReports: https://github.com/statnet/statnet.common/issues
 License: GPL-3 + file LICENSE
 URL: https://statnet.org
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Encoding: UTF-8
 Suggests: covr
 NeedsCompilation: yes
-Packaged: 2021-06-05 08:57:46 UTC; pavel
+Packaged: 2022-04-26 13:31:33 UTC; pavel
 Author: Pavel N. Krivitsky [aut, cre] (<https://orcid.org/0000-0002-9101-3362>,
     University of New South Wales),
   Skye Bender-deMoll [ctb],
   Chad Klumb [ctb] (University of Washington)
 Maintainer: Pavel N. Krivitsky <pavel@statnet.org>
 Repository: CRAN
-Date/Publication: 2021-06-05 13:40:02 UTC
-Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 23:38:24 UTC; unix
+Date/Publication: 2022-05-02 08:20:02 UTC
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-05-17 23:48:27 UTC; unix

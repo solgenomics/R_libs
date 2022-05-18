@@ -1,3 +1,27 @@
+CHANGES IN epiR VERSION 2.0.44
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o Function epi.prev updated to return the expected number of false positive test results in addition to apparent and true prevalence.
+    [Suggested by Mark Stevenson]
+    
+
+CHANGES IN epiR VERSION 2.0.43
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o Measures of association vignette updated with code to compute measures of association for a series of candidate risk factors.
+    [Suggested by Bruno Avila]
+    
+
+CHANGES IN epiR VERSION 2.0.42
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o Function for epi.interaction now handles models of class geeglm (from the geepack package) and glmerMod (from lme4).
+    [Suggested by Diana Garofalo]
+
+
 CHANGES IN epiR VERSION 2.0.41
 
 SIGNIFICANT USER-VISIBLE CHANGES

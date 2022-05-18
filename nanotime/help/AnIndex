@@ -1,6 +1,7 @@
 nanotime-package	nanotime
 !=,nanoival,nanoival-method	nanoival
 !=,nanoperiod,nanoperiod-method	nanoperiod
+%in%,nanotime,nanoival-method	set_operations
 %in%.nanotime	set_operations
 *,ANY,nanoduration-method	nanoduration
 *,ANY,nanoperiod-method	nanoperiod

@@ -504,6 +504,33 @@ Error: Invalid usage of futures: A future whose value has not yet been collected
 
 <h2>Miscellaneous</h2>
 
+<h3>Capturing errors, outputting their messages, and returning a default value</h3>
+
+<p>Sometimes a function call produce an error for a particular input. In such cases, we might want to return a default value, say, a missing value, instead of signaling an error. This can be done using:</p>
+
+<pre><code class="r">res &lt;- tryCatch({
+  unstable_calc(x)
+}, error = function(e) {
+  NA_real_
+})
+</code></pre>
+
+<p>Here, <code>res</code> takes the value of <code>unstable_calc(x)</code>, unless it produces an error, in case it takes value <code>NA_real_</code>.</p>
+
+<p>In addition to the above, we could produce a warning whenever we get an error and replace it with a missing value. We can do this as:</p>
+
+<pre><code class="r">res &lt;- tryCatch({
+  unstable_calc(x)
+}, error = function(e) {
+  warning(conditionMessage(e))
+  NA_real_
+})
+</code></pre>
+
+<p>This will turn the error into a warning with the same message.  If we want to just output the message without producing a warning, we can use <code>message(conditionMessage(e))</code>.</p>
+
+<p>Importantly, we must not use just <code>warning(e)</code> or <code>message(e)</code>, although it appears to work at a first glance.  If we do, we will end up re-signaling the error but without interruption.  It is an important distinction that will reveal itself if used within futures.  The above example with <code>warning(conditionMessage(e))</code> will work as expected, but if we use <code>warning(e)</code> the future framework will produce an error, not a warning.</p>
+
 <h3>Clashes with other packages</h3>
 
 <p>Sometimes other packages have functions or operators with the same name as the future package, and if those packages are attached <em>after</em> the future package, their objects will mask the ones of the future package.  For instance, the igraph package also defines a <code>%&lt;-%</code> operator which clashes with the one in future <em>if used at the prompt or in a script</em> (it is not a problem inside package because there we explicitly import objects in a known order).  Here is what we might get:</p>

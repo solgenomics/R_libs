@@ -646,6 +646,9 @@ selectRange	selectRange
 selectRange,SpatRaster-method	selectRange
 set.cats	inplace
 set.cats,SpatRaster-method	inplace
+set.crs	inplace
+set.crs,SpatRaster-method	inplace
+set.crs,SpatVector-method	inplace
 set.ext	inplace
 set.ext,SpatRaster-method	inplace
 set.ext,SpatVector-method	inplace

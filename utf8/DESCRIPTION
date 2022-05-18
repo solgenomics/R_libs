@@ -32,4 +32,4 @@ Author: Patrick O. Perry [aut, cph],
 Maintainer: Kirill Müller <krlmlr+r@mailbox.org>
 Repository: CRAN
 Date/Publication: 2021-07-24 15:00:02 UTC
-Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 22:48:19 UTC; unix
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-05-17 23:45:48 UTC; unix

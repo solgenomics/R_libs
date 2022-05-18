@@ -18,7 +18,6 @@ Lahman-package          Sean Lahman's Baseball Database
 LahmanData              Lahman Datasets
 Managers                Managers table
 ManagersHalf            ManagersHalf table
-Master                  Master table
 Parks                   Parks table
 People                  People table
 Pitching                Pitching table

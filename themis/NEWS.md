@@ -1,3 +1,29 @@
+# themis 0.2.2
+
+* `tomek()` has been added, rewritten to apply to multiple classes, removing the need for the unbalanced package, which has been removed as a dependency. 
+
+# themis 0.2.1
+
+* A bug was fixed in `step_downsample()` and `step_upsample()` that made the steps unable to be tuned. (#90)
+
+# themis 0.2.0
+
+## New steps
+
+* `step_smotenc()` have been added to implement SMOTENC which can handle categorical as well as numerical values. Thanks to @RobertGregg (#82)
+
+## Improvements and Other Changes
+
+* export `nearmiss()` functions to users.
+* Update examples to no longer use `iris` or `okc` data sets.
+* All recipe steps now officially support empty selections to be more aligned with dplyr and other packages that use tidyselect (#55)
+
+## Bug fixes
+
+* `step_rose()` now correctly allows you to use characters variables. (#26)
+* `step_tomek()` now ignore non-predictor variables when appropriate. (#51)
+* Fix bug where wrong ordering of columns caused error in `smote()`. (#76)
+
 # themis 0.1.4
 
 * export `smote()`, `adasyn()`, and `bsmote()` functions to users.

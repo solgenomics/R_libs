@@ -274,6 +274,10 @@ f &lt;- future({ cat(&quot;world!&quot;, file = con); flush(con) })
 <td align="left">DBIConnection (<code>externalptr</code>)</td>
 </tr>
 <tr>
+<td align="left"><strong>inline</strong></td>
+<td align="left">CFunc (<code>externalptr</code> of class DLLHandle)</td>
+</tr>
+<tr>
 <td align="left"><strong>keras</strong></td>
 <td align="left">keras.engine.sequential.Sequential (<code>externalptr</code>)</td>
 </tr>
@@ -306,10 +310,6 @@ f &lt;- future({ cat(&quot;world!&quot;, file = con); flush(con) })
 <td align="left">jclassName (<code>externalptr</code>)</td>
 </tr>
 <tr>
-<td align="left"><strong>rstan</strong></td>
-<td align="left">stanmodel (<code>externalptr</code>)</td>
-</tr>
-<tr>
 <td align="left"><strong>ShortRead</strong></td>
 <td align="left">FastqFile, FastqStreamer, FastqStreamerList (<code>connection</code>)</td>
 </tr>
@@ -336,6 +336,26 @@ f &lt;- future({ cat(&quot;world!&quot;, file = con); flush(con) })
 </tbody></table>
 
 <p>These are illustrated in sections &#39;Packages that rely on external pointers&#39; and &#39;Packages with other types of non-external objects&#39; below.</p>
+
+<p>Importantly, there are objects with external pointer than can indeed be exported.  Here are some example,</p>
+
+<table><thead>
+<tr>
+<th align="left">Package</th>
+<th align="left">Examples of exportable types or classes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left"><strong>data.table</strong></td>
+<td align="left">data.table (<code>externalptr</code>)</td>
+</tr>
+<tr>
+<td align="left"><strong>rstan</strong></td>
+<td align="left">stanmodel (<code>externalptr</code>)</td>
+</tr>
+</tbody></table>
+
+<p>These are discussed in sections &#39;False positives - packages with exportable external pointers&#39; at the very end of this vignette.</p>
 
 <h3>Packages with connections</h3>
 
@@ -365,13 +385,13 @@ y
 
 <p>If an object carries an <em>external pointer</em>, it is likely that it can only be used in the R session where it was created.  If it is exported to and used in a parallel process, it will likely cause an error there.  As shown above, and in below examples, setting option <code>future.globals.onReference</code> to <code>&quot;error&quot;</code> will make <strong>future</strong> to scan for <em>external pointer</em>:s before launching the future on a parallel worker, and throw an error if one is detected.</p>
 
-<p>However, there are objects with <em>external pointer</em>:s that can be exported, e.g. <code>data.table</code> objects of the <a href="https://cran.r-project.org/package=data.table">data.table</a> package is one such example.  In other words, the existence of a <em>external pointer</em> is just a suggestion for an object being non-exportable - it is not a sufficient condition.</p>
+<p>However, there are objects with <em>external pointer</em>:s that can be exported, e.g. <code>data.table</code> objects of the <strong><a href="https://cran.r-project.org/package=data.table">data.table</a></strong> package is one such example.  In other words, the existence of a <em>external pointer</em> is just a suggestion for an object being non-exportable - it is not a sufficient condition.</p>
 
 <p>Below are some examples of packages who produce non-exportable objects with <em>external pointer</em>:s.</p>
 
 <h4>Package: DBI</h4>
 
-<p><a href="https://cran.r-project.org/package=DBI">DBI</a> provides a unified database interface for communication between R and various database engines.  Analogously to regular connections in R, DBIConnection objects can <em>not</em> safely be exported to another R process, e.g.</p>
+<p><strong><a href="https://cran.r-project.org/package=DBI">DBI</a></strong> provides a unified database interface for communication between R and various database engines.  Analogously to regular connections in R, DBIConnection objects can <em>not</em> safely be exported to another R process, e.g.</p>
 
 <pre><code class="r">library(future)
 options(future.globals.onReference = &quot;error&quot;)
@@ -383,9 +403,43 @@ dummy %&lt;-% print(con)
 ## (&#39;con&#39; of class &#39;SQLiteConnection&#39;) used in the future expression
 </code></pre>
 
+<h4>Package: inline</h4>
+
+<p>Another example is <strong><a href="https://cran.r-project.org/package=inline">inline</a></strong>, which allow us to easily create R functions that are implemented in C and C++, e.g.</p>
+
+<pre><code class="r">library(inline)
+code &lt;- &quot;
+  int i;
+  for (i = 0; i &lt; *n; i++) x[0] = x[0] + (i+1);
+&quot;
+sum_1_to_n &lt;- cfunction(signature(n=&quot;integer&quot;, x=&quot;numeric&quot;), code, language = &quot;C&quot;, convention = &quot;.C&quot;)
+y &lt;- sum_1_to_n(10, 0)$x
+print(y)
+## 55
+</code></pre>
+
+<p>However, if we would attempt to call <code>sum_1_to_n()</code> in a future, we get an error:</p>
+
+<pre><code class="r">library(future)
+plan(cluster, workers = 1L)
+f &lt;- future(sum_1_to_n(10, 0))
+v &lt;- value(f)
+## Error in .Primitive(&quot;.C&quot;)(&lt;pointer: (nil)&gt;, n = as.integer(n), x = as.double(x)) : 
+##   NULL value passed as symbol address
+</code></pre>
+
+<p>This is because:</p>
+
+<pre><code class="r">options(future.globals.onReference = &quot;error&quot;)
+f &lt;- future(sum_1_to_n(10, 0))
+## Error: Detected a non-exportable reference (&#39;externalptr&#39; of class
+## &#39;DLLHandle&#39;) in one of the globals (&#39;sum_1_to_n&#39; of class &#39;CFunc&#39;)
+## used in the future expression
+</code></pre>
+
 <h4>Package: keras</h4>
 
-<p>The <a href="https://cran.r-project.org/package=DBI">keras</a> package provides an R interface to <a href="https://keras.io/">Keras</a>, which &ldquo;is a high-level neural networks API developed with a focus on enabling fast experimentation&rdquo;.  The R implementation accesses the Keras Python API via <a href="https://cran.r-project.org/package=reticulate">reticulate</a>.  However, Keras model instances in R make use of R connections and external pointers, which prevents them from being exported to external R processes.  For example, if the attempt to use a Keras model in a multisession workers, the worker will produce a run-time error:</p>
+<p>The <strong><a href="https://cran.r-project.org/package=DBI">keras</a></strong> package provides an R interface to <a href="https://keras.io/">Keras</a>, which &ldquo;is a high-level neural networks API developed with a focus on enabling fast experimentation&rdquo;.  The R implementation accesses the Keras Python API via <strong><a href="https://cran.r-project.org/package=reticulate">reticulate</a></strong>.  However, Keras model instances in R make use of R connections and external pointers, which prevents them from being exported to external R processes.  For example, if the attempt to use a Keras model in a multisession workers, the worker will produce a run-time error:</p>
 
 <pre><code class="r">library(keras)
 
@@ -412,7 +466,7 @@ the future expression
 
 <h4>Package: magic</h4>
 
-<p>The <a href="https://cran.r-project.org/package=magick">magick</a> package provides an R-level API for ImageMagick to work with images.  When working with this API, the images are represented internally as external pointers of class &#39;magick_image&#39; that cannot be be exported to another R process, e.g.</p>
+<p>The <strong><a href="https://cran.r-project.org/package=magick">magick</a></strong> package provides an R-level API for <a href="https://imagemagick.org/">ImageMagick</a> to work with images.  When working with this API, the images are represented internally as external pointers of class &#39;magick_image&#39; that cannot be be exported to another R process, e.g.</p>
 
 <pre><code class="r">library(future)
 plan(multisession)
@@ -439,7 +493,7 @@ v &lt;- value(f)
 
 <h4>Package: raster</h4>
 
-<p>The <a href="https://cran.r-project.org/package=raster">raster</a> package provides methods for working with spatial data, which are held in &#39;RasterLayer&#39; objects.  Not all but some of these objects use an external pointer.  For example,</p>
+<p>The <strong><a href="https://cran.r-project.org/package=raster">raster</a></strong> package provides methods for working with spatial data, which are held in &#39;RasterLayer&#39; objects.  Not all but some of these objects use an external pointer.  For example,</p>
 
 <pre><code class="r">library(future)
 plan(multisession)
@@ -461,7 +515,7 @@ globals (&#39;s&#39; of class &#39;RasterLayer&#39;) used in the future expressi
 
 <h4>Package: Rcpp</h4>
 
-<p>Another example is <a href="https://cran.r-project.org/package=Rcpp">Rcpp</a> , which allow us to easily create R functions that are implemented in C++, e.g.</p>
+<p>Another example is <strong><a href="https://cran.r-project.org/package=Rcpp">Rcpp</a></strong>, which allow us to easily create R functions that are implemented in C++, e.g.</p>
 
 <pre><code class="r">Rcpp::sourceCpp(code = &quot;
 #include &lt;Rcpp.h&gt;
@@ -490,7 +544,7 @@ n
 ## Error in .Call(&lt;pointer: (nil)&gt;, x) : NULL value passed as symbol address
 </code></pre>
 
-<p>We can detect / protect against this using:</p>
+<p>We can detect and protect against this using:</p>
 
 <pre><code class="r">options(future.globals.onReference = &quot;error&quot;)
 n %&lt;-% my_length(x)
@@ -501,7 +555,7 @@ n %&lt;-% my_length(x)
 
 <h4>Package: reticulate</h4>
 
-<p>The <a href="https://cran.r-project.org/package=reticulate">reticulate</a> package provides methods for creating and calling Python code from within R.  If one attempt to use Python-binding objects from this package, we get errors like:</p>
+<p>The <strong><a href="https://cran.r-project.org/package=reticulate">reticulate</a></strong> package provides methods for creating and calling Python code from within R.  If one attempt to use Python-binding objects from this package, we get errors like:</p>
 
 <pre><code class="r">library(future)
 plan(multisession)
@@ -513,7 +567,7 @@ pwd
 ##   attempt to apply non-function
 </code></pre>
 
-<p>and by telling the future package to validate globals further, we get:</p>
+<p>and by telling the <strong>future</strong> package to validate globals further, we get:</p>
 
 <pre><code class="r">options(future.globals.onReference = &quot;error&quot;)
 pwd %&lt;-% os$getcwd()
@@ -544,7 +598,7 @@ y %&lt;-% twice(1.2)
 
 <h4>Package: rJava</h4>
 
-<p>Here is an example that shows how <a href="https://cran.r-project.org/package=rJava">rJava</a> objects cannot be exported to external R processes.</p>
+<p>Here is an example that shows how <strong><a href="https://cran.r-project.org/package=rJava">rJava</a></strong> objects cannot be exported to external R processes.</p>
 
 <pre><code class="r">library(future)
 plan(multisession)
@@ -670,6 +724,8 @@ dr %&lt;-% dim(data)
 
 <h4>Package: udpipe</h4>
 
+<p>The <strong><a href="https://cran.r-project.org/package=udpipe">udpipe</a></strong> package use non-exportable objects;</p>
+
 <pre><code class="r">library(future)
 plan(multisession)
 library(udpipe)
@@ -689,11 +745,11 @@ x %&lt;-% udpipe_annotate(udmodel, x = &quot;Ik ging op reis en ik nam mee.&quot
 ## globals (&#39;udmodel&#39; of class &#39;udpipe_model&#39;) used in the future expression
 </code></pre>
 
-<p>Now, it is indeed possible to parallelize \pkg{udpipe} calls.  For details on how to do this, see the &#39;UDPipe Natural Language Processing - Parallel&#39; vignette that comes with the \pkg{udpipe} package.</p>
+<p>Now, it is indeed possible to parallelize \pkg{udpipe} calls.  For details on how to do this, see the &#39;UDPipe Natural Language Processing - Parallel&#39; vignette that comes with the <strong>udpipe</strong> package.</p>
 
 <h4>Package: xgboost</h4>
 
-<p>The <a href="https://cran.r-project.org/package=xgboost">xgboost</a> package provides fast gradient-boosting methods.  Some of its data structures use external pointers.  For example,</p>
+<p>The <strong><a href="https://cran.r-project.org/package=xgboost">xgboost</a></strong> package provides fast gradient-boosting methods.  Some of its data structures use external pointers.  For example,</p>
 
 <pre><code class="r">library(future)
 plan(multisession)
@@ -727,7 +783,7 @@ f &lt;- future(dim(dtrain))
 
 <h4>Package: xml2</h4>
 
-<p>Another example is XML objects of the <a href="https://cran.r-project.org/package=xml2">xml2</a> package, which may produce evaluation errors (or just invalid results depending on how they are used), e.g.</p>
+<p>Another example is XML objects of the <strong><a href="https://cran.r-project.org/package=xml2">xml2</a></strong> package, which may produce evaluation errors (or just invalid results depending on how they are used), e.g.</p>
 
 <pre><code class="r">library(future)
 plan(multisession)
@@ -772,7 +828,7 @@ children &lt;- xml_unserialize(value(f))
 
 <h4>Package: ncdf4</h4>
 
-<p>Package <a href="https://cran.r-project.org/package=ncdf4">ncdf4</a> provides an R API to work with data that live in netCDF files.  For example, we can create a simple netCDF file that holds a variable &#39;x&#39;:</p>
+<p>Package <strong><a href="https://cran.r-project.org/package=ncdf4">ncdf4</a></strong> provides an R API to work with data that live in netCDF files.  For example, we can create a simple netCDF file that holds a variable &#39;x&#39;:</p>
 
 <pre><code class="r">library(ncdf4)
 x &lt;- ncvar_def(&quot;x&quot;, units=&quot;count&quot;, dim=list())
@@ -818,6 +874,98 @@ f &lt;- future({
 y &lt;- value(f)
 y
 ## [1] 42
+</code></pre>
+
+<h3>False positives - packages with exportable external pointers</h3>
+
+<h4>Package data.table</h4>
+
+<p>The <strong><a href="https://cran.r-project.org/package=data.table">data.table</a></strong> package creates objects comprising external pointers.  Contrary to above non-exportable examples, such objects can saved to file and used in another R session, or exported to a parallel worker. This is because <strong>data.table</strong> is capable of restoring these objects to a valid state.  Consider the following example:</p>
+
+<pre><code class="r">library(data.table)
+DT &lt;- data.table(a = 1:3, b = letters[1:3])
+
+## Extract second row
+row &lt;- DT[2]
+print(row)
+#&gt;    a b
+#&gt; 1: 2 b
+</code></pre>
+
+<p>If we would try the last step with a future with strict checking for references enabled, we would get an error:</p>
+
+<pre><code class="r">library(future)
+plan(multisession)
+options(future.globals.onReference = &quot;error&quot;)
+
+row %&lt;-% DT[2]
+Error: Detected a non-exportable reference (&#39;externalptr&#39;) in one of
+the globals (&#39;DT&#39; of class &#39;data.table&#39;) used in the future expression
+</code></pre>
+
+<p>This is a false positive.  If we relax the checks, it does indeed work:</p>
+
+<pre><code class="r">options(future.globals.onReference = NULL)
+
+row &lt;- DT[2]
+print(row)
+#&gt;    a b
+#&gt; 1: 2 b
+</code></pre>
+
+<h4>Package rstan</h4>
+
+<p>The <strong><a href="https://cran.r-project.org/package=rstan">rstan</a></strong> package creates objects comprising external pointers.  Contrary to above non-exportable examples, such objects can saved to file and used in another R session, or exported to a parallel worker. This is because <strong>rstan</strong> is capable of restoring these objects to a valid state.  Consider the following example from <code>example(&quot;rstan&quot;, package = &quot;rstan&quot;)</code>:</p>
+
+<pre><code class="r">library(rstan)
+
+code &lt;- &quot;
+data {
+  int&lt;lower=0&gt; N;
+  real y[N];
+} 
+
+parameters {
+  real mu;
+} 
+
+model {
+  target += normal_lpdf(mu | 0, 10);
+  target += normal_lpdf(y  | mu, 1);
+} 
+&quot;
+
+y &lt;- rnorm(20) 
+data &lt;- list(N = 20, y = y); 
+fit &lt;- stan(model_code = code, model_name = &quot;example&quot;, 
+            data = data, iter = 2012L, chains = 3L,
+            sample_file = file.path(tempdir(), &quot;norm.csv&quot;))
+
+e &lt;- extract(fit, permuted = FALSE)
+</code></pre>
+
+<p>If we would try the last step with a future with strict checking for references enabled, we would get an error:</p>
+
+<pre><code class="r">library(future)
+plan(multisession)
+options(future.globals.onReference = &quot;error&quot;)
+
+e %&lt;-% extract(fit, permuted = FALSE)
+Error: Detected a non-exportable reference (&#39;externalptr&#39; of class &#39;DLLHandle&#39;)
+in one of the globals (&#39;fit&#39; of class &#39;stanfit&#39;) used in the future expression
+</code></pre>
+
+<p>However, this is a false positive.  The <code>fit</code> object, which is of class &#39;stanfit&#39;, can indeed be exported to be used in an external R process, e.g.</p>
+
+<pre><code class="r">options(future.globals.onReference = NULL)
+
+e %&lt;-% extract(fit, permuted = FALSE)
+str(e)
+#&gt;  num [1:1006, 1:3, 1:2] -0.3028 -0.4017 -0.3379 -0.2358 0.0443 ...
+#&gt;  - attr(*, &quot;dimnames&quot;)=List of 3
+#&gt;   ..$ iterations: NULL
+#&gt;   ..$ chains    : chr [1:3] &quot;chain:1&quot; &quot;chain:2&quot; &quot;chain:3&quot;
+#&gt;   ..$ parameters: chr [1:2] &quot;mu&quot; &quot;lp__&quot;
 </code></pre>
 
 </body>

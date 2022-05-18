@@ -37,6 +37,7 @@ getFinancials           Download and View Financial Statements
 getMetals               Download Daily Metals Prices
 getModelData            Update model's dataset
 getOptionChain          Download Option Chains
+getOptionChain.orats    Download Option Chain Data from orats
 getQuote                Download Current Stock Quote
 getSplits               Load Financial Split Data
 getSymbols              Load and Manage Data from Multiple Sources

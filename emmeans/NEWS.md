@@ -1,6 +1,42 @@
 ---
 title: "NEWS for the emmeans package"
 ---
+
+## emmeans 1.7.4
+  * Added an argument `enhance.levels` to `contrast()` that allows
+    better labeling of the levels being contrasted. For example, now
+    (by default) if a factor `treat` has numeric levels, then comparisons
+    will have levels like `treat1 - treat2` rather than `1 - 2`. We can
+    request similar behavior with non-numeric levels, but only if we 
+    specify which factors.
+  * Two new functions `comb_facs()` and `split_fac()` for manipulating
+    the factors in an `emmGrid`.
+  * Added an argument `wts` to `eff.emmc` and `del.eff.emmc`, which
+    allows for weighted versions of effect-style contrasts (#346)
+  * Made `qdrg()` more robust in accommodating various manifestations
+    of rank-deficient models.
+  * `qdrg()` now always uses `df` if provided. Previously forced `df = Inf`
+    when a link function was provided.
+  * Fix to `df.error` calculation with `gls` (#347)
+
+
+## emmeans 1.7.3
+  * **argument change** `ref_grid(..., transform = ...)` now should
+    be `ref_grid(..., regrid = ...)` to avoid confusing `transform` 
+    with the `tran` option (which kind of does the opposite). If we match 
+    `transform` and don't match `tran`, it will still work, but a 
+    message is displayed with advice to use `regrid` instead.
+  * Repairs to `averaging` support (#324). 
+    Previous versions were potentially dead wrong except for models 
+    created by `lm()` (and maybe some of those were bad too)
+  * Added a `which` argument to `emm()` to select which list elements 
+    to pass to `multcomp::glht()`
+  * Support for rank-deficient `gls` models (note that **nlme** 
+    allows such models with `gls`, but not `lme`)
+  * Bug in `lqm` / `lqmm` support (#340)
+  * Other minor corrections (e.g. #334)
+
+
 ## emmeans 1.7.2
   * Improvements to `averaging` support (#319)
   * Fixed bug in comparison arrows when `by = NULL` (#321)

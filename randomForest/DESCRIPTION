@@ -14,4 +14,4 @@ NeedsCompilation: yes
 Packaged: 2022-01-29 02:41:20 UTC; andy
 Repository: CRAN
 Date/Publication: 2022-02-03 07:50:02 UTC
-Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 22:56:05 UTC; unix
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-05-17 23:45:19 UTC; unix

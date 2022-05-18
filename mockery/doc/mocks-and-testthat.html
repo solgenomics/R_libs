@@ -1,48 +1,76 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <meta name="author" content="Lukasz A. Bartnik" />
 
-<meta name="date" content="2019-09-03" />
+<meta name="date" content="2022-02-19" />
 
 <title>Mocks: Integrating with testthat</title>
 
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
-<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -51,9 +79,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -110,6 +138,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
+
 <style type="text/css">body {
 background-color: #fff;
 margin: 1em auto;
@@ -120,9 +149,6 @@ padding-right: 2em;
 font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 font-size: 14px;
 line-height: 1.35;
-}
-#header {
-text-align: center;
 }
 #TOC {
 clear: both;
@@ -291,7 +317,8 @@ code > span.st { color: #d14; }
 code > span.co { color: #888888; font-style: italic; } 
 code > span.ot { color: #007020; } 
 code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
 
@@ -306,7 +333,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Mocks: Integrating with <code>testthat</code></h1>
 <h4 class="author">Lukasz A. Bartnik</h4>
-<h4 class="date">2019-09-03</h4>
+<h4 class="date">2022-02-19</h4>
 
 
 
@@ -317,72 +344,72 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div id="creating-a-mock-function" class="section level3">
 <h3>Creating a <code>mock</code> function</h3>
 <p>Mocking is a well-known technique when it comes to unit-testing and in most languages there is some notion of a mock object. In R, however, the natural equivalent of a mock object is a mock <em>function</em> - and this is exactly what a call to <code>mock()</code> will produce.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">m &lt;-<span class="st"> </span><span class="kw">mock</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mock</span>()</span></code></pre></div>
 </div>
 <div id="return-values" class="section level3">
 <h3>Return values</h3>
 <p>Let’s look at arguments accepted by the <code>mock()</code> <em>factory</em> function. The main is a list of values which will be returned upon subsequent calls to <code>m</code>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">m &lt;-<span class="st"> </span><span class="kw">mock</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">m</span>()</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; [1] 1</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">m</span>()</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; [1] 2</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="kw">m</span>()</a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; [1] 3</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mock</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">m</span>()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">m</span>()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">m</span>()</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 3</span></span></code></pre></div>
 <p><code>mock()</code> can take also an expression which will be evaluated upon a call.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">m &lt;-<span class="st"> </span><span class="kw">mock</span>(x <span class="op">+</span><span class="st"> </span>y)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw">m</span>()</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; [1] 3</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mock</span>(x <span class="sc">+</span> y)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">m</span>()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 3</span></span></code></pre></div>
 </div>
 <div id="cycling-through-return-values" class="section level3">
 <h3>Cycling through return values</h3>
 <p>By default, if the total number of calls exceeds the number of defined return values, the <em>mock</em> function will throw an exception. However, one can also choose to cycle through the list of retun values by setting the <code>cycle</code> argument of <code>mock()</code> to <code>TRUE</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">m &lt;-<span class="st"> </span><span class="kw">mock</span>(<span class="dv">1</span>, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">m</span>()</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; [1] 1</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="kw">m</span>()</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; [1] 2</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="kw">m</span>()</a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; Error: too many calls to mock object and cycle set to FALSE</span></a></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">m &lt;-<span class="st"> </span><span class="kw">mock</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dt">cycle =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">m</span>()</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; [1] 1</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw">m</span>()</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; [1] 2</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="kw">m</span>()</a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; [1] 1</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="kw">m</span>()</a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; [1] 2</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mock</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">m</span>()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">m</span>()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">m</span>()</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error: too many calls to mock object and cycle set to FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mock</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="at">cycle =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">m</span>()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">m</span>()</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">m</span>()</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">m</span>()</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2</span></span></code></pre></div>
 <p>If a return value is defined by an expression, this expression will be evaluated each time a cycle reaches its position.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">m &lt;-<span class="st"> </span><span class="kw">mock</span>(<span class="dv">1</span>, x <span class="op">+</span><span class="st"> </span>y, <span class="dt">cycle =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw">m</span>()</a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; [1] 1</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="kw">m</span>()</a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; [1] 3</span></a></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">y &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">m</span>()</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; [1] 1</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw">m</span>()</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; [1] 11</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mock</span>(<span class="dv">1</span>, x <span class="sc">+</span> y, <span class="at">cycle =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">m</span>()</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">m</span>()</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 3</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">m</span>()</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">m</span>()</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 11</span></span></code></pre></div>
 </div>
 <div id="evaluating-expression-in-an-environment-of-choice" class="section level3">
 <h3>Evaluating expression in an environment of choice</h3>
 <p>Finally, one can specify the environment where the return expression is evaluated.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">e &lt;-<span class="st"> </span><span class="kw">new.env</span>()</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">m &lt;-<span class="st"> </span><span class="kw">mock</span>(x <span class="op">+</span><span class="st"> </span>y, <span class="dt">envir =</span> e, <span class="dt">cycle =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="kw">m</span>()</a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; [1] 3</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8">e<span class="op">$</span>x &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="kw">m</span>()</a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; [1] 12</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">new.env</span>()</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mock</span>(x <span class="sc">+</span> y, <span class="at">envir =</span> e, <span class="at">cycle =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">m</span>()</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 3</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>e<span class="sc">$</span>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">m</span>()</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 12</span></span></code></pre></div>
 </div>
 </div>
 <div id="integration-with-with_mock" class="section level2">
@@ -390,76 +417,76 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div id="simple-integration" class="section level3">
 <h3>Simple integration</h3>
 <p>Using mock functions with <code>testthat</code>’s <code>with_mock()</code> is pretty straightforward.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">library</span>(testthat)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">m &lt;-<span class="st"> </span><span class="kw">mock</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">f &lt;-<span class="st"> </span><span class="cf">function</span> (x) <span class="kw">summary</span>(x)</a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="kw">with_mock</span>(<span class="dt">f =</span> m, {</a>
-<a class="sourceLine" id="cb9-6" data-line-number="6">  <span class="kw">expect_equal</span>(<span class="kw">f</span>(iris), <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb9-7" data-line-number="7">})</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(testthat)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mock</span>(<span class="dv">1</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span> (x) <span class="fu">summary</span>(x)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">with_mock</span>(<span class="at">f =</span> m, {</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_equal</span>(<span class="fu">f</span>(iris), <span class="dv">1</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 </div>
 <div id="verifying-the-number-of-calls" class="section level3">
 <h3>Verifying the number of calls</h3>
 <p>The <code>mockery</code> package comes with a few additional expectations which might turn out to be a very useful extension to <code>testthat</code>’s API. One can for example verify the number and signature of calls invoked on a mock function, as well as the values of arguments passed in those calls.</p>
 <p>First, let’s make sure the mocked function is called exactly as many times as we expect. This can be done with <code>expect_called()</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">m &lt;-<span class="st"> </span><span class="kw">mock</span>(<span class="dv">1</span>, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw">m</span>()</a>
-<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; [1] 1</span></a>
-<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="kw">expect_called</span>(m, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb10-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="kw">m</span>()</a>
-<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; [1] 2</span></a>
-<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="kw">expect_called</span>(m, <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mock</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">m</span>()</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_called</span>(m, <span class="dv">1</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">m</span>()</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_called</span>(m, <span class="dv">2</span>)</span></code></pre></div>
 <p>And here is what happens when we get the number of calls wrong.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">expect_called</span>(m, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; Error: mock object has not been called 1 time.</span></a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="kw">expect_called</span>(m, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt; Error: mock object has not been called 3 times.</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_called</span>(m, <span class="dv">1</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error: mock object has not been called 1 time.</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_called</span>(m, <span class="dv">3</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error: mock object has not been called 3 times.</span></span></code></pre></div>
 </div>
 <div id="verify-the-call-signature" class="section level3">
 <h3>Verify the call signature</h3>
 <p>Another new expectation is <code>expect_call()</code> which compares the signature of the actual call as invoked on the mock function with the expected one. It takes as arguments: the mock function, the call number, expected call.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">m &lt;-<span class="st"> </span><span class="kw">mock</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw">with_mock</span>(<span class="dt">summary =</span> m, {</a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">  <span class="kw">summary</span>(iris)</a>
-<a class="sourceLine" id="cb12-4" data-line-number="4">})</a>
-<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt; [1] 1</span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="kw">expect_call</span>(m, <span class="dv">1</span>, <span class="kw">summary</span>(iris))</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mock</span>(<span class="dv">1</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">with_mock</span>(<span class="at">summary =</span> m, {</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(iris)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_call</span>(m, <span class="dv">1</span>, <span class="fu">summary</span>(iris))</span></code></pre></div>
 <p>And here is what happens if the call doesn’t match.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">expect_call</span>(m, <span class="dv">1</span>, <span class="kw">summary</span>(x))</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; Error: expected call summary(x) does not mach actual call summary(iris).</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_call</span>(m, <span class="dv">1</span>, <span class="fu">summary</span>(x))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error: expected call summary(x) does not mach actual call summary(iris).</span></span></code></pre></div>
 </div>
 <div id="verify-values-of-argument" class="section level3">
 <h3>Verify values of argument</h3>
 <p>Finally, one can verify whether the actual values of arguments passed to the mock function match the expectation. Following the previous example of <code>summary(iris)</code> we can make sure that the <code>object</code> parameter passed to <code>m()</code> was actually the <code>iris</code> dataset.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">expect_args</span>(m, <span class="dv">1</span>, iris)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_args</span>(m, <span class="dv">1</span>, iris)</span></code></pre></div>
 <p>Here is what happens if the value turns out to be different.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">expect_args</span>(m, <span class="dv">1</span>, iris[<span class="op">-</span><span class="dv">1</span>, ])</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co">#&gt; Error: arguments to call #1 not equal to expected arguments.</span></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt; Component 1: Attributes: &lt; Component &quot;row.names&quot;: Numeric: lengths (150, 149) differ &gt;</span></a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt; Component 1: Component 1: Numeric: lengths (150, 149) differ</span></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt; Component 1: Component 2: Numeric: lengths (150, 149) differ</span></a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt; Component 1: Component 3: Numeric: lengths (150, 149) differ</span></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt; Component 1: Component 4: Numeric: lengths (150, 149) differ</span></a>
-<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt; Component 1: Component 5: Lengths: 150, 149</span></a>
-<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="co">#&gt; Component 1: Component 5: Lengths (150, 149) differ (string compare on first 149)</span></a>
-<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="co">#&gt; Component 1: Component 5: 2 string mismatches</span></a>
-<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="co">#&gt; expected argument list does not mach actual one.</span></a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_args</span>(m, <span class="dv">1</span>, iris[<span class="sc">-</span><span class="dv">1</span>, ])</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error: arguments to call #1 not equal to expected arguments.</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Component 1: Attributes: &lt; Component &quot;row.names&quot;: Numeric: lengths (150, 149) differ &gt;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Component 1: Component 1: Numeric: lengths (150, 149) differ</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Component 1: Component 2: Numeric: lengths (150, 149) differ</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Component 1: Component 3: Numeric: lengths (150, 149) differ</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Component 1: Component 4: Numeric: lengths (150, 149) differ</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Component 1: Component 5: Lengths: 150, 149</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Component 1: Component 5: Lengths (150, 149) differ (string compare on first 149)</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Component 1: Component 5: 2 string mismatches</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; expected argument list does not mach actual one.</span></span></code></pre></div>
 <p>If the call has been made with an explicit argument name the same has to appear in <code>expect_args()</code>.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">m &lt;-<span class="st"> </span><span class="kw">mock</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw">with_mock</span>(<span class="dt">summary =</span> m, {</a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">  <span class="kw">summary</span>(<span class="dt">object =</span> iris)</a>
-<a class="sourceLine" id="cb16-4" data-line-number="4">})</a>
-<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co">#&gt; [1] 1</span></a>
-<a class="sourceLine" id="cb16-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="kw">expect_args</span>(m, <span class="dv">1</span>, <span class="dt">object =</span> iris)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mock</span>(<span class="dv">1</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">with_mock</span>(<span class="at">summary =</span> m, {</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(<span class="at">object =</span> iris)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_args</span>(m, <span class="dv">1</span>, <span class="at">object =</span> iris)</span></code></pre></div>
 <p>Omitting the name results in an error.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">expect_args</span>(m, <span class="dv">1</span>, iris)</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#&gt; Error: arguments to call #1 not equal to expected arguments.</span></a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co">#&gt; names for target but not for current</span></a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co">#&gt; expected argument list does not mach actual one.</span></a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_args</span>(m, <span class="dv">1</span>, iris)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error: arguments to call #1 not equal to expected arguments.</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; names for target but not for current</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; expected argument list does not mach actual one.</span></span></code></pre></div>
 </div>
 </div>
 <div id="further-reading" class="section level2">

@@ -1,5 +1,5 @@
 Package: globals
-Version: 0.14.0
+Version: 0.15.0
 Depends: R (>= 3.1.2)
 Imports: codetools
 Title: Identify Global Objects in R Expressions
@@ -16,14 +16,15 @@ Description: Identifies global ("unknown" or "free") objects in R expressions
 License: LGPL (>= 2.1)
 LazyLoad: TRUE
 ByteCompile: TRUE
-URL: https://github.com/HenrikBengtsson/globals
+URL: https://globals.futureverse.org,
+        https://github.com/HenrikBengtsson/globals
 BugReports: https://github.com/HenrikBengtsson/globals/issues
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 NeedsCompilation: no
-Packaged: 2020-11-22 16:11:06 UTC; hb
+Packaged: 2022-05-08 18:28:44 UTC; hb
 Author: Henrik Bengtsson [aut, cre, cph],
   Davis Vaughan [ctb]
 Maintainer: Henrik Bengtsson <henrikb@braju.com>
 Repository: CRAN
-Date/Publication: 2020-11-22 17:00:02 UTC
-Built: R 4.1.2; ; 2022-02-15 22:56:25 UTC; unix
+Date/Publication: 2022-05-09 07:10:10 UTC
+Built: R 4.2.0; ; 2022-05-17 23:44:16 UTC; unix

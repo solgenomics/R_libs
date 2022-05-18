@@ -348,6 +348,7 @@ tukeyNonaddTest	residualPlots
 vcov.boot	hist.boot
 vif	vif
 vif.default	vif
+vif.lm	vif
 vif.merMod	vif
 vif.polr	vif
 vif.svyolr	vif

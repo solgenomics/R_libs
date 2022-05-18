@@ -3,6 +3,8 @@ ERRVL                   Return the first argument passed (out of any
                         'try' encountering an error.
 NVL                     Convenience functions for handling 'NULL'
                         objects.
+Welford                 A Welford accumulator for sample mean and
+                        variance
 all_identical           Test if all items in a vector or a list are
                         identical.
 as.control.list         Convert to a control list.

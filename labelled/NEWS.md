@@ -1,3 +1,9 @@
+# labelled 2.9.1
+
+* improved error messages for missing variable names (#118, @ajb5d)
+* better implementation of `look_for()` when no keyword is provided (#116)
+* bug fix in `user_na_to_tagged_na()` (#114)
+
 # labelled 2.9.0
 
 **look_for() improvements:**

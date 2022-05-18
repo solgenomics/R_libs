@@ -60,11 +60,11 @@ model_get_model_matrix.plm	model_get_model_matrix
 model_get_n	model_get_n
 model_get_n.coxph	model_get_n
 model_get_n.default	model_get_n
-model_get_n.gam	model_get_n
 model_get_n.glm	model_get_n
 model_get_n.glmerMod	model_get_n
 model_get_n.multinom	model_get_n
 model_get_n.survreg	model_get_n
+model_get_n.tidycrr	model_get_n
 model_get_nlevels	model_get_nlevels
 model_get_nlevels.default	model_get_nlevels
 model_get_offset	model_get_offset
@@ -107,6 +107,7 @@ one_of	reexports
 reexports	reexports
 select_helpers	select_helpers
 starts_with	reexports
+supported_models	supported_models
 tidy_add_coefficients_type	tidy_add_coefficients_type
 tidy_add_contrasts	tidy_add_contrasts
 tidy_add_estimate_to_reference_rows	tidy_add_estimate_to_reference_rows
