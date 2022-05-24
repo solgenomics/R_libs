@@ -1,6 +1,6 @@
 Package: asreml
 Title: Fits the Linear Mixed Model
-Version: 4.1.0.126
+Version: 4.1.0.176
 Authors@R: person("David", "Butler", email = "dbutler@uow.edu.au",
            role = c("aut", "cre"))
 Author: David Butler
@@ -10,11 +10,12 @@ Description: asreml estimates variance components under the
 Depends: R (>= 3.6.0), stats, utils, Matrix
 Imports: data.table (>= 1.9.6), ggplot2, grid, methods, jsonlite
 Suggests: tcltk, lattice, grDevices
+Encoding: UTF-8
 License: file LICENSE
 URL: www.vsni.co.uk
 LazyData: true
 ByteCompile: yes
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.2
 NeedsCompilation: no
-Packaged: 2020-03-27 12:36:02 UTC; ci
-Built: R 4.1.2; ; 2022-02-15 23:55:18 UTC; unix
+Packaged: 2022-05-07 15:09:28 UTC; ci
+Built: R 4.2.0; ; 2022-05-24 23:37:44 UTC; unix

@@ -25,6 +25,7 @@ export(
   vcm.lm,
   asreml.license.status,
   asreml.license.activate,
+  asreml.license.deactivate,
   asreml.license.offline,
   asreml.license.online,
   asreml,

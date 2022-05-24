@@ -20,6 +20,11 @@ arma	timeSeries
 armah	timeSeries
 armav	timeSeries
 asreml	asreml
+asreml.license.activate	asreml.license.activate
+asreml.license.deactivate	asreml.license.deactivate
+asreml.license.offline	asreml.license.offline
+asreml.license.online	asreml.license.online
+asreml.license.status	asreml.license.status
 asreml.object	asreml.object
 asreml.options	asreml.options
 asreml.read.table	asreml.read.table
@@ -128,7 +133,9 @@ asr_sphv	metric-2d
 asr_spl	modelFunctions
 asr_str	str
 asr_us	unstructured
+asr_varioGram	asr_varioGram
 asr_vm	knownStruc
+asuv	asuv
 asv	asv
 asv.asreml	asv.asreml
 at	modelFunctions
@@ -197,6 +204,7 @@ Levels	Levels
 lin	modelFunctions
 lrt	lrt
 lrt.asreml	lrt.asreml
+lsasr	lsasr
 lvr	metric-1d
 lvrh	metric-1d
 lvrv	metric-1d
@@ -232,6 +240,8 @@ owt	owt
 plot	plot.asreml
 plot.asreml	plot.asreml
 plot.varioGram	plot.varioGram
+plot_coef	plot_coef
+plot_coef.asreml	plot_coef.asreml
 pol	modelFunctions
 pow	modelFunctions
 predict.asreml	predict.asreml
@@ -257,6 +267,7 @@ sph	metric-2d
 sphh	metric-2d
 sphv	metric-2d
 spl	modelFunctions
+splinek	splinek
 str	str
 Subset	Subset
 summary	summary.asreml

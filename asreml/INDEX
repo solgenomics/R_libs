@@ -3,10 +3,20 @@ Subset                  Subset a factor.
 Units                   Unit level numbers.
 ainverse                Calculate an inverse relationship matrix.
 asr_families            GLM family objects for asreml.
+asr_varioGram           Empirical variogram.
 asreml                  Fit the linear mixed model.
+asreml.license.activate
+                        Activates an asreml license.
+asreml.license.deactivate
+                        Deactivates the current asreml license.
+asreml.license.offline
+                        Request an asreml license to be used offline.
+asreml.license.online   Request an asreml license to be used online
+asreml.license.status   Check the status of the asreml license.
 asreml.object           ASReml object
 asreml.options          Set asreml options.
 asreml.read.table       Read in a data frame.
+asuv                    Univariate data frame.
 asv                     Approximate stratum variances method.
 asv.asreml              Approximate stratum variances.
 binnor                  Footrot scores on lambs.
@@ -28,6 +38,7 @@ knownStruc              Known variance structures.
 lamb                    Footrot counts on lambs.
 lrt                     Likelihood ratio tests.
 lrt.asreml              REML Likelihood ratio tests
+lsasr                   Asreml object size.
 matern                  Matern variance structure.
 meff                    Marker effects.
 meff.asreml             Marker effects.
@@ -48,6 +59,8 @@ own                     User-defined variance models.
 owt                     Orange whether trial
 plot.asreml             Plot diagnostics for an asreml object.
 plot.varioGram          Plot a variogram.
+plot_coef               Plot method for model coefficients.
+plot_coef.asreml        Plot constructor for 'plot_coef'
 predict.asreml          Predict linear functions of effects.
 print.asreml.predict    Print predictions.
 print.wald              Print a wald object.
@@ -58,6 +71,7 @@ riceMV                  Rice bloodworms (multivariate form).
 shf                     Slate Hall farm wheat variety trial.
 sp2Matrix               Convert sparse matrix.
 sp2mat                  Convert sparse matrix.
+splinek                 Spline knot points.
 str                     General variance structures.
 summary.asreml          Summarize an asreml object
 timeSeries              Time series type variance models.
