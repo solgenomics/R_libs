@@ -72,12 +72,11 @@ Mat<eT>::Mat(const uword in_n_rows, const uword in_n_cols)
   
   init_cold();
   
-  #if (!defined(ARMA_DONT_ZERO_INIT))
+  if(arma_config::zero_init)
     {
     arma_extra_debug_print("Mat::constructor: zeroing memory");
     arrayops::fill_zeros(memptr(), n_elem);
     }
-  #endif
   }
 
 
@@ -97,12 +96,11 @@ Mat<eT>::Mat(const SizeMat& s)
   
   init_cold();
   
-  #if (!defined(ARMA_DONT_ZERO_INIT))
+  if(arma_config::zero_init)
     {
     arma_extra_debug_print("Mat::constructor: zeroing memory");
     arrayops::fill_zeros(memptr(), n_elem);
     }
-  #endif
   }
 
 
@@ -6090,6 +6088,34 @@ Mat<eT>::at(const uword in_row, const uword in_col) const
 
 
 
+#if defined(__cpp_multidimensional_subscript)
+  
+  //! element accessor; no bounds check
+  template<typename eT>
+  arma_inline
+  arma_warn_unused
+  eT&
+  Mat<eT>::operator[] (const uword in_row, const uword in_col)
+    {
+    return access::rw( mem[in_row + in_col*n_rows] );
+    }
+  
+  
+  
+  //! element accessor; no bounds check
+  template<typename eT>
+  arma_inline
+  arma_warn_unused
+  const eT&
+  Mat<eT>::operator[] (const uword in_row, const uword in_col) const
+    {
+    return mem[in_row + in_col*n_rows];
+    }
+  
+#endif
+
+
+
 //! prefix ++
 template<typename eT>
 arma_inline
@@ -6205,7 +6231,7 @@ arma_warn_unused
 bool
 Mat<eT>::is_finite() const
   {
-  return arrayops::is_finite( memptr(), n_elem );
+  return arrayops::is_finite(memptr(), n_elem);
   }
 
 
@@ -6232,6 +6258,19 @@ Mat<eT>::has_nan() const
   arma_extra_debug_sigprint();
   
   return arrayops::has_nan(memptr(), n_elem);
+  }
+
+
+
+template<typename eT>
+inline
+arma_warn_unused
+bool
+Mat<eT>::has_nonfinite() const
+  {
+  arma_extra_debug_sigprint();
+  
+  return (arrayops::is_finite(memptr(), n_elem) == false);
   }
 
 
@@ -9142,7 +9181,7 @@ Mat<eT>::fixed<fixed_n_rows, fixed_n_cols>::fixed()
   {
   arma_extra_debug_sigprint_this(this);
   
-  #if (!defined(ARMA_DONT_ZERO_INIT))
+  if(arma_config::zero_init)
     {
     arma_extra_debug_print("Mat::fixed::constructor: zeroing memory");
     
@@ -9150,7 +9189,6 @@ Mat<eT>::fixed<fixed_n_rows, fixed_n_cols>::fixed()
     
     arrayops::inplace_set_fixed<eT,fixed_n_elem>( mem_use, eT(0) );
     }
-  #endif
   }
 
 
@@ -9563,6 +9601,38 @@ Mat<eT>::fixed<fixed_n_rows, fixed_n_cols>::operator() (const uword ii) const
   
   return (use_extra) ? mem_local_extra[ii] : mem_local[ii];
   }
+
+
+
+#if defined(__cpp_multidimensional_subscript)
+  
+  template<typename eT>
+  template<uword fixed_n_rows, uword fixed_n_cols>
+  arma_inline
+  arma_warn_unused
+  eT&
+  Mat<eT>::fixed<fixed_n_rows, fixed_n_cols>::operator[] (const uword in_row, const uword in_col)
+    {
+    const uword iq = in_row + in_col*fixed_n_rows;
+    
+    return (use_extra) ? mem_local_extra[iq] : mem_local[iq];
+    }
+  
+  
+  
+  template<typename eT>
+  template<uword fixed_n_rows, uword fixed_n_cols>
+  arma_inline
+  arma_warn_unused
+  const eT&
+  Mat<eT>::fixed<fixed_n_rows, fixed_n_cols>::operator[] (const uword in_row, const uword in_col) const
+    {
+    const uword iq = in_row + in_col*fixed_n_rows;
+    
+    return (use_extra) ? mem_local_extra[iq] : mem_local[iq];
+    }
+  
+#endif
 
 
 
@@ -10000,7 +10070,7 @@ Mat_aux::set_imag(Mat< std::complex<T> >& out, const Base<T,T1>& X)
 
 
 
-#ifdef ARMA_EXTRA_MAT_MEAT
+#if defined(ARMA_EXTRA_MAT_MEAT)
   #include ARMA_INCFILE_WRAP(ARMA_EXTRA_MAT_MEAT)
 #endif
 

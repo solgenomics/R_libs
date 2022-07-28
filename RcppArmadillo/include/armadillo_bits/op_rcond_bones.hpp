@@ -16,29 +16,17 @@
 // ------------------------------------------------------------------------
 
 
-#if defined(ARMA_USE_ATLAS)
-  #if !defined(ARMA_ATLAS_INCLUDE_DIR)
-    extern "C"
-      {
-      #include <cblas.h>
-      #include <clapack.h>
-      }
-  #else
-    #define ARMA_STR1(x) x
-    #define ARMA_STR2(x) ARMA_STR1(x)
-    
-    #define ARMA_CBLAS   ARMA_STR2(ARMA_ATLAS_INCLUDE_DIR)ARMA_STR2(cblas.h)
-    #define ARMA_CLAPACK ARMA_STR2(ARMA_ATLAS_INCLUDE_DIR)ARMA_STR2(clapack.h)
-    
-    extern "C"
-      {
-      #include ARMA_INCFILE_WRAP(ARMA_CBLAS)
-      #include ARMA_INCFILE_WRAP(ARMA_CLAPACK)
-      }
-    
-    #undef ARMA_STR1
-    #undef ARMA_STR2
-    #undef ARMA_CBLAS
-    #undef ARMA_CLAPACK
-  #endif
-#endif
+//! \addtogroup op_rcond
+//! @{
+
+
+class op_rcond
+  : public traits_op_default
+  {
+  public:
+  
+  template<typename T1> static inline typename T1::pod_type apply(const Base<typename T1::elem_type, T1>& X);
+  };
+
+
+//! @}

@@ -4,13 +4,14 @@ data(DT_example)
 DT <- DT_example
 A <- A_example
 
-ans1 <- mmer(Yield~1,
+ans1 <- mmec(Yield~1,
              random= ~ Name + Env + Env:Name + Env:Block,
-             rcov= ~ units, iters=3,
+             rcov= ~ units, nIters=3,
              data=DT, verbose = FALSE)
 summary(ans1)$varcomp
 (n.env <- length(levels(DT$Env)))
-vpredict(ans1, h2 ~ V1 / ( V1 + (V3/n.env) + (V5/(2*n.env)) ) )
+# vpredict(ans1, h2 ~ V1 / ( V1 + (V3/n.env) + (V5/(2*n.env)) ) )
+
 
 ## -----------------------------------------------------------------------------
 data(DT_cpdata)
@@ -23,37 +24,42 @@ A <- A.mat(GT) # additive relationship matrix
 D <- D.mat(GT) # dominance relationship matrix
 E <- E.mat(GT) # epistatic relationship matrix
 ans.ADE <- mmer(color~1, 
-                 random=~vs(id,Gu=A) + vs(idd,Gu=D), 
-                 rcov=~units, iters=3,
+                 random=~vsr(id,Gu=A) + vsr(idd,Gu=D), 
+                 rcov=~units, nIters=3,
                  data=DT,verbose = FALSE)
 (summary(ans.ADE)$varcomp)
 vpredict(ans.ADE, h2 ~ (V1) / ( V1+V3) ) # narrow sense
 vpredict(ans.ADE, h2 ~ (V1+V2) / ( V1+V2+V3) ) # broad-sense
 
+
 ## ---- fig.show='hold'---------------------------------------------------------
-data(DT_cornhybrids)
-DT <- DT_cornhybrids
-DTi <- DTi_cornhybrids
-GT <- GT_cornhybrids
-### fit the model
-modFD <- mmer(Yield~1, 
-               random=~ vs(at(Location,c("3","4")),GCA2), 
-               rcov= ~ vs(ds(Location),units), iters=3,
-               data=DT, verbose = FALSE)
-summary(modFD)
+# data(DT_cornhybrids)
+# DT <- DT_cornhybrids
+# DTi <- DTi_cornhybrids
+# GT <- GT_cornhybrids
+# ### fit the model
+# modFD <- mmec(Yield~1, 
+#               random=~ vsc(atc(Location,c("3","4")),isc(GCA2)), 
+#               rcov= ~ vsc(dsc(Location),isc(units)), nIters=3,
+#               returnParam = F,
+#               data=DT, verbose = FALSE)
+# summary(modFD)
+
 
 ## -----------------------------------------------------------------------------
-data(DT_cornhybrids)
-DT <- DT_cornhybrids
-DTi <- DTi_cornhybrids
-GT <- GT_cornhybrids
-GT[1:4,1:4]
-### fit the model
-modFD <- mmer(Yield~1, 
-              random=~ vs(at(Location,c("3","4")),GCA2,Gu=GT), 
-              rcov= ~ vs(ds(Location),units), iters=3,
-              data=DT, verbose = FALSE)
-summary(modFD)
+# data(DT_cornhybrids)
+# DT <- DT_cornhybrids
+# DTi <- DTi_cornhybrids
+# GT <- as(GT_cornhybrids, Class = "sparseMatrix")
+# GT[1:4,1:4]
+# DT=DT[with(DT, order(Location)), ]
+# ### fit the model
+# modFD <- mmec(Yield~1, 
+#               random=~ vsc(atc(Location,c("3","4")),isc(GCA2),Gu=GT), 
+#               rcov= ~ vsc(dsc(Location),isc(units)), nIters=3,
+#               data=DT, verbose = FALSE)
+# summary(modFD)
+
 
 ## -----------------------------------------------------------------------------
 data(DT_cpdata)
@@ -63,23 +69,26 @@ MP <- MP_cpdata
 ### look at the data
 A <- A.mat(GT) # additive relationship matrix
 ans <- mmer(color~1, 
-                random=~vs(id,Gu=A), 
-                rcov=~units, iters=3,
+                random=~vsr(id,Gu=A), 
+                rcov=~units, nIters=3,
                 data=DT, verbose = FALSE)
 (summary(ans.ADE)$varcomp)
 vpredict(ans, h2 ~ (V1) / ( V1+V2) )
 
 
+
 ## -----------------------------------------------------------------------------
-data(DT_btdata)
-DT <- DT_btdata
-mix3 <- mmer(cbind(tarsus, back) ~ sex,
-               random = ~ vs(dam, Gtc=unsm(2)) + vs(fosternest,Gtc=diag(2)),
-               rcov=~vs(units,Gtc=unsm(2)), iters=3,
-               data = DT, verbose = FALSE)
-summary(mix3)
-#### calculate the genetic correlation
-vpredict(mix3, gen.cor ~ V2 / sqrt(V1*V3))
+## just silenced to avoid too much time building the vignettes
+# data(DT_btdata)
+# DT <- DT_btdata
+# mix3 <- mmer(cbind(tarsus, back) ~ sex,
+#                random = ~ vsr(dam, Gtc=unsm(2)) + vsr(fosternest,Gtc=diag(2)),
+#                rcov=~vsr(units,Gtc=unsm(2)), nIters=3,
+#                data = DT, verbose = FALSE)
+# summary(mix3)
+# #### calculate the genetic correlation
+# vpredict(mix3, gen.cor ~ V2 / sqrt(V1*V3))
+
 
 ## -----------------------------------------------------------------------------
 data(DT_cornhybrids)
@@ -87,10 +96,10 @@ DT <- DT_cornhybrids
 DTi <- DTi_cornhybrids
 GT <- GT_cornhybrids
 
-modFD <- mmer(Yield~Location, 
-               random=~GCA1+GCA2+SCA, 
-               rcov=~units, iters=3,
-               data=DT, verbose = FALSE)
+modFD <- mmec(Yield~Location, 
+              random=~GCA1+GCA2+SCA, 
+              rcov=~units, nIters=3,
+              data=DT, verbose = FALSE)
 (suma <- summary(modFD)$varcomp)
 Vgca <- sum(suma[1:2,1])
 Vsca <- suma[3,1]
@@ -101,6 +110,7 @@ Vg <- Va + Vd
 (H2 <- Vg / (Vg + (Ve)) )
 (h2 <- Va / (Vg + (Ve)) )
 
+
 ## -----------------------------------------------------------------------------
 data("DT_halfdiallel")
 DT <- DT_halfdiallel
@@ -109,16 +119,17 @@ DT$femalef <- as.factor(DT$female)
 DT$malef <- as.factor(DT$male)
 DT$genof <- as.factor(DT$geno)
 #### model using overlay
-modh <- mmer(sugar~1, 
-             random=~vs(overlay(femalef,malef)) 
-             + genof, iters=3,
+modh <- mmec(sugar~1, 
+             random=~vsc(isc(overlay(femalef,malef)) )
+             + genof, nIters=3,
              data=DT, verbose = FALSE)
 summary(modh)$varcomp
+
 
 ## -----------------------------------------------------------------------------
 data(DT_wheat)
 DT <- DT_wheat
-GT <- GT_wheat
+GT <- GT_wheat[,1:200]
 colnames(DT) <- paste0("X",1:ncol(DT))
 DT <- as.data.frame(DT);DT$id <- as.factor(rownames(DT))
 # select environment 1
@@ -133,8 +144,8 @@ y.trn[vv,"X1"] <- NA
 head(y.trn)
 ## GBLUP
 ans <- mmer(X1~1,
-            random=~vs(id,Gu=K), 
-            rcov=~units,iters=3,
+            random=~vsr(id,Gu=K), 
+            rcov=~units,nIters=3,
             data=y.trn, verbose = FALSE) # kinship based
 ans$U$`u:id`$X1 <- as.data.frame(ans$U$`u:id`$X1)
 rownames(ans$U$`u:id`$X1) <- gsub("id","",rownames(ans$U$`u:id`$X1))
@@ -142,8 +153,8 @@ cor(ans$U$`u:id`$X1[vv,],DT[vv,"X1"], use="complete")
 
 ## rrBLUP
 ans2 <- mmer(X1~1,
-             random=~vs(list(GT), buildGu = FALSE), 
-             rcov=~units, getPEV = FALSE, iters=3,
+             random=~vsr(list(GT), buildGu = FALSE), 
+             rcov=~units, getPEV = FALSE, nIters=3,
              data=y.trn, verbose = FALSE) # kinship based
 
 u <- GT %*% as.matrix(ans2$U$`u:GT`$X1) # BLUPs for individuals
@@ -151,51 +162,56 @@ rownames(u) <- rownames(GT)
 cor(u[vv,],DT[vv,"X1"]) # same correlation
 # the same can be applied in multi-response models in GBLUP or rrBLUP
 
-## -----------------------------------------------------------------------------
-data(DT_ige)
-DT <- DT_ige
-Af <- A_ige
-An <- A_ige
-
-## Direct genetic effects model
-modDGE <- mmer(trait ~ block,
-               random = ~ focal,
-               rcov = ~ units, iters=3,
-               data = DT, verbose=FALSE)
-summary(modDGE)$varcomp
-
 
 ## -----------------------------------------------------------------------------
-data(DT_ige)
-DT <- DT_ige
-A <- A_ige
+# data(DT_ige)
+# DT <- DT_ige
+# Af <- A_ige
+# An <- A_ige
+# 
+# ## Direct genetic effects model
+# modDGE <- mmec(trait ~ block,
+#                random = ~ focal,
+#                rcov = ~ units, nIters=3,
+#                data = DT, verbose=FALSE)
+# summary(modDGE)$varcomp
 
-## Indirect genetic effects model
-modDGE <- mmer(trait ~ block,
-               random = ~ focal + neighbour,
-               rcov = ~ units, iters=3,
-               data = DT, verbose=FALSE)
-summary(modDGE)$varcomp
 
 
 ## -----------------------------------------------------------------------------
+# data(DT_ige)
+# DT <- DT_ige
+# A <- A_ige
+# 
+# ## Indirect genetic effects model
+# modDGE <- mmec(trait ~ block,
+#                random = ~ focal + neighbour,
+#                rcov = ~ units, nIters=3,
+#                data = DT, verbose=FALSE)
+# summary(modDGE)$varcomp
 
-### Indirect genetic effects model
-modIGE <- mmer(trait ~ block,
-               random = ~ gvs(focal, neighbour),
-               rcov = ~ units, iters=3,
-               data = DT, verbose=FALSE)
-summary(modIGE)$varcomp
 
 
 ## -----------------------------------------------------------------------------
 
 ### Indirect genetic effects model
-modIGE <- mmer(trait ~ block,
-               random = ~ gvs(focal, neighbour, Gu=list(Af,An)),
-               rcov = ~ units, iters=3,
-               data = DT, verbose=FALSE)
-summary(modIGE)$varcomp
+# modIGE <- mmer(trait ~ block,
+#                random = ~ gvsr(focal, neighbour),
+#                rcov = ~ units, nIters=3,
+#                data = DT, verbose=FALSE)
+# summary(modIGE)$varcomp
+
+
+
+## -----------------------------------------------------------------------------
+
+### Indirect genetic effects model
+# modIGE <- mmer(trait ~ block,
+#                random = ~ gvsr(focal, neighbour, Gu=list(Af,An)),
+#                rcov = ~ units, nIters=3,
+#                data = DT, verbose=FALSE)
+# summary(modIGE)$varcomp
+
 
 
 ## -----------------------------------------------------------------------------
@@ -205,21 +221,24 @@ Md <- (Md_technow*2) - 1
 Mf <- (Mf_technow*2) - 1
 Ad <- A.mat(Md)
 Af <- A.mat(Mf)
+Adi <- as(solve(Ad + diag(1e-4,ncol(Ad),ncol(Ad))), Class="sparseMatrix")
+Afi <- as(solve(Af + diag(1e-4,ncol(Af),ncol(Af))), Class="sparseMatrix")
 # RUN THE PREDICTION MODEL
 y.trn <- DT
 vv1 <- which(!is.na(DT$GY))
 vv2 <- sample(vv1, 100)
 y.trn[vv2,"GY"] <- NA
-anss2 <- mmer(GY~1, 
-               random=~vs(dent,Gu=Ad) + vs(flint,Gu=Af), 
-               rcov=~units, iters=3,
-               data=y.trn, verbose = FALSE) 
+anss2 <- mmec(GY~1, 
+              random=~vsc(isc(dent),Gu=Adi) + vsc(isc(flint),Gu=Afi), 
+              rcov=~units, nIters=3,
+              data=y.trn, verbose = FALSE) 
 summary(anss2)$varcomp
 
-zu1 <- model.matrix(~dent-1,y.trn) %*% anss2$U$`u:dent`$GY
-zu2 <- model.matrix(~flint-1,y.trn) %*% anss2$U$`u:flint`$GY
-u <- zu1+zu2+anss2$Beta[1,"Estimate"]
-cor(u[vv2,], DT$GY[vv2])
+# zu1 <- model.matrix(~dent-1,y.trn) %*% anss2$U$`u:dent`$GY
+# zu2 <- model.matrix(~flint-1,y.trn) %*% anss2$U$`u:flint`$GY
+# u <- zu1+zu2+anss2$Beta[1,"Estimate"]
+# cor(u[vv2,], DT$GY[vv2])
+
 
 ## -----------------------------------------------------------------------------
 data(DT_cpdata)
@@ -229,11 +248,11 @@ MP <- MP_cpdata
 ### mimic two fields
 A <- A.mat(GT)
 mix <- mmer(Yield~1,
-            random=~vs(id, Gu=A) +
-              vs(Rowf) +
-              vs(Colf) +
-              spl2Da(Row,Col), iters=3,
-            rcov=~vs(units),
+            random=~vsr(id, Gu=A) +
+              vsr(Rowf) +
+              vsr(Colf) +
+              spl2Da(Row,Col), nIters=3,
+            rcov=~vsr(units),
             data=DT, verbose = FALSE)
 summary(mix)
 # make a plot to observe the spatial effects found by the spl2D()
@@ -241,21 +260,24 @@ W <- with(DT,spl2Da(Row,Col)) # 2D spline incidence matrix
 DT$spatial <- W$Z$`A:all`%*%mix$U$`A:all`$Yield # 2D spline BLUPs
 lattice::levelplot(spatial~Row*Col, data=DT) # plot the spatial effect by row and column
 
-## -----------------------------------------------------------------------------
-data(DT_cpdata)
-DT <- DT_cpdata
-GT <- GT_cpdata
-MP <- MP_cpdata
-A <- A.mat(GT)
-ans.m <- mmer(cbind(Yield,color)~1,
-               random=~ vs(id, Gu=A, Gtc=unsm(2))
-               + vs(Rowf,Gtc=diag(2))
-               + vs(Colf,Gtc=diag(2)),
-               rcov=~ vs(units, Gtc=unsm(2)), iters=3,
-               data=DT, verbose = FALSE)
 
 ## -----------------------------------------------------------------------------
-cov2cor(ans.m$sigma$`u:id`)
+# data(DT_cpdata)
+# DT <- DT_cpdata
+# GT <- GT_cpdata
+# MP <- MP_cpdata
+# A <- A.mat(GT)
+# ans.m <- mmer(cbind(Yield,color)~1,
+#                random=~ vsr(id, Gu=A, Gtc=unsm(2))
+#                + vsr(Rowf,Gtc=diag(2))
+#                + vsr(Colf,Gtc=diag(2)),
+#                rcov=~ vsr(units, Gtc=unsm(2)), nIters=3,
+#                data=DT, verbose = FALSE)
+
+
+## -----------------------------------------------------------------------------
+# cov2cor(ans.m$sigma$`u:id`)
+
 
 ## -----------------------------------------------------------------------------
 library(sommer)
@@ -267,7 +289,7 @@ M <- GT_cpdata
 # MARKER MODEL
 ################
 mix.marker <- mmer(color~1,
-                   random=~Rowf+vs(M),
+                   random=~Rowf+vsr(M),
                    rcov=~units,data=DT, 
                    verbose = FALSE)
 
@@ -283,7 +305,7 @@ MMTinv<-solve(MMT) ## inverse
 MTMMTinv<-t(M)%*%MMTinv # M' %*% (M'M)-
 
 mix.part <- mmer(color~1,
-                 random=~Rowf+vs(id, Gu=MMT),
+                 random=~Rowf+vsr(id, Gu=MMT),
                  rcov=~units,data=DT,
                  verbose = FALSE)
 
@@ -294,44 +316,46 @@ me.part<-MTMMTinv%*%matrix(mix.part$U$`u:id`$color,ncol=1)
 plot(me.marker,me.part)
 
 
+
 ## -----------------------------------------------------------------------------
 
-data("DT_wheat")
-rownames(GT_wheat) <- rownames(DT_wheat)
-G <- A.mat(GT_wheat)
-Y <- data.frame(DT_wheat)
+# data("DT_wheat")
+# rownames(GT_wheat) <- rownames(DT_wheat)
+# G <- A.mat(GT_wheat)
+# Y <- data.frame(DT_wheat)
+# 
+# # make the decomposition
+# UD<-eigen(G) # get the decomposition: G = UDU'
+# U<-UD$vectors
+# D<-diag(UD$values)# This will be our new 'relationship-matrix'
+# rownames(D) <- colnames(D) <- rownames(G)
+# X<-model.matrix(~1, data=Y) # here: only one fixed effect (intercept)
+# UX<-t(U)%*%X # premultiply X and y by U' 
+# UY <- t(U) %*% as.matrix(Y) # multivariate
+# 
+# # dataset for decomposed model
+# DTd<-data.frame(id = rownames(G) ,UY, UX =UX[,1])
+# DTd$id<-as.character(DTd$id)
+# 
+# modeld <- mmer(cbind(X1,X2) ~ UX - 1, 
+#               random = ~vsr(id,Gu=D), 
+#               rcov = ~vsr(units),
+#               data=DTd, verbose = FALSE)
+# 
+# # dataset for normal model
+# DTn<-data.frame(id = rownames(G) , DT_wheat)
+# DTn$id<-as.character(DTn$id)
+# 
+# modeln <- mmer(cbind(X1,X2) ~ 1, 
+#               random = ~vsr(id,Gu=G), 
+#               rcov = ~vsr(units),
+#               data=DTn, verbose = FALSE)
+# 
+# ## compare regular and transformed blups
+# plot(x=(solve(t(U)))%*%modeld$U$`u:id`$X2[colnames(D)], 
+#      y=modeln$U$`u:id`$X2[colnames(D)], xlab="UDU blup",
+#      ylab="blup")
 
-# make the decomposition
-UD<-eigen(G) # get the decomposition: G = UDU'
-U<-UD$vectors
-D<-diag(UD$values)# This will be our new 'relationship-matrix'
-rownames(D) <- colnames(D) <- rownames(G)
-X<-model.matrix(~1, data=Y) # here: only one fixed effect (intercept)
-UX<-t(U)%*%X # premultiply X and y by U' 
-UY <- t(U) %*% as.matrix(Y) # multivariate
-
-# dataset for decomposed model
-DTd<-data.frame(id = rownames(G) ,UY, UX =UX[,1])
-DTd$id<-as.character(DTd$id)
-
-modeld <- mmer(cbind(X1,X2) ~ UX - 1, 
-              random = ~vs(id,Gu=D), 
-              rcov = ~vs(units),
-              data=DTd, verbose = FALSE)
-
-# dataset for normal model
-DTn<-data.frame(id = rownames(G) , DT_wheat)
-DTn$id<-as.character(DTn$id)
-
-modeln <- mmer(cbind(X1,X2) ~ 1, 
-              random = ~vs(id,Gu=G), 
-              rcov = ~vs(units),
-              data=DTn, verbose = FALSE)
-
-## compare regular and transformed blups
-plot(x=(solve(t(U)))%*%modeld$U$`u:id`$X2[colnames(D)], 
-     y=modeln$U$`u:id`$X2[colnames(D)], xlab="UDU blup",
-     ylab="blup")
 
 
 ## -----------------------------------------------------------------------------
@@ -343,7 +367,7 @@ DT$setf <- as.factor(DT$set)
 DT$repf <- as.factor(DT$rep)
 DT$malef <- as.factor(DT$male)
 DT$femalef <- as.factor(DT$female)
-levelplot(yield~male*female|set, data=DT, main="NC design I")
+#levelplot(yield~male*female|set, data=DT, main="NC design I")
 ##############################
 ## Expected Mean Square method
 ##############################
@@ -365,7 +389,7 @@ Vg=c(Va,Vd); names(Vg) <- c("Va","Vd"); Vg
 ## REML method
 ##############################
 mix2 <- mmer(yield~ setf + setf:repf,
-            random=~femalef:malef:setf + malef:setf, iters=3,
+            random=~femalef:malef:setf + malef:setf, nIters=3,
             data=DT, verbose = FALSE)
 vc <- summary(mix2)$varcomp; vc
 Vfm <- vc[1,"VarComp"]
@@ -377,6 +401,7 @@ Vd=4*(Vfm-Vm) # assuming no inbreeding(4/(1+F)^2)
 Vg=c(Va,Vd); names(Vg) <- c("Va","Vd"); Vg
 
 
+
 ## -----------------------------------------------------------------------------
 DT <- DT_expdesigns$car2
 DT <- aggregate(yield~set+male+female+rep, data=DT, FUN = mean)
@@ -384,7 +409,7 @@ DT$setf <- as.factor(DT$set)
 DT$repf <- as.factor(DT$rep)
 DT$malef <- as.factor(DT$male)
 DT$femalef <- as.factor(DT$female)
-levelplot(yield~male*female|set, data=DT, main="NC desing II")
+#levelplot(yield~male*female|set, data=DT, main="NC desing II")
 head(DT)
 
 N=with(DT,table(female, male, set))
@@ -422,7 +447,7 @@ Vg=c(Va,Vd); names(Vg) <- c("Va","Vd"); Vg
 
 mix2 <- mmer(yield~ setf + setf:repf ,
             random=~femalef:malef:setf + malef:setf + femalef:setf, 
-            iters=3,
+            nIters=3,
             data=DT, verbose = FALSE)
 vc <- summary(mix2)$varcomp; vc
 Vfm <- vc[1,"VarComp"]
@@ -435,57 +460,28 @@ Vd=4*(Vfm); # assuming no inbreeding(4/(1+F)^2)
 Vg=c(Va,Vd); names(Vg) <- c("Va","Vd"); Vg
 
 
-## -----------------------------------------------------------------------------
-
-data(DT_cpdata)
-DT <- DT_cpdata
-GT <- GT_cpdata
-MP <- MP_cpdata
-#### create the variance-covariance matrix
-A <- A.mat(GT) # additive relationship matrix
-#### look at the data and fit the model
-mix1 <- mmer(Yield~1,
-              random=~vs(id,Gu=A),
-              rcov=~units, iters=3,
-              data=DT, verbose = FALSE)
-
-####=========================================####
-#### adding dominance and forcing the other VC's
-####=========================================####
-DT$idd <- DT$id;
-D <- D.mat(GT) # dominance relationship matrix
-mm <- matrix(3,1,1) ## matrix to fix the var comp
-
-mix2 <- mmer(Yield~1,
-              random=~vs(id, Gu=A, Gti=mix1$sigma_scaled$`u:id`, Gtc=mm)
-                      + vs(idd, Gu=D, Gtc=unsm(1)), iters=3,
-              rcov=~vs(units,Gti=mix1$sigma_scaled$units, Gtc=mm),
-              data=DT, verbose = FALSE)
-
-# analyze variance components
-summary(mix1)$varcomp
-summary(mix2)$varcomp
-
 
 ## -----------------------------------------------------------------------------
 data(DT_cpdata)
 DT <- DT_cpdata
-GT <- GT_cpdata
+GT <- GT_cpdata[,1:200]
 MP <- MP_cpdata
 #### create the variance-covariance matrix
 A <- A.mat(GT) # additive relationship matrix
 n <- nrow(DT) # to be used for degrees of freedom
 k <- 1 # to be used for degrees of freedom (number of levels in fixed effects)
 
+
 ## -----------------------------------------------------------------------------
 ###########################
 #### Regular GWAS/EMMAX approach
 ###########################
 mix2 <- GWAS(color~1,
-             random=~vs(id, Gu=A) + Rowf + Colf,
+             random=~vsr(id, Gu=A) + Rowf + Colf,
              rcov=~units, M=GT, gTerm = "u:id",
-             verbose = FALSE, iters=3,
+             verbose = FALSE, nIters=3,
              data=DT)
+
 
 ## -----------------------------------------------------------------------------
 ###########################
@@ -493,8 +489,8 @@ mix2 <- GWAS(color~1,
 ###########################
 Z <- GT[as.character(DT$id),]
 mixRRBLUP <- mmer(color~1,
-              random=~vs(Z) + Rowf + Colf,
-              rcov=~units, iters=3,
+              random=~vsr(Z) + Rowf + Colf,
+              rcov=~units, nIters=3,
               verbose = FALSE,
               data=DT)
 
@@ -503,17 +499,18 @@ se.a <- sqrt(diag(kronecker(diag(ncol(Z)),mixRRBLUP$sigma$`u:Z`) - mixRRBLUP$Pev
 t.stat <- a/se.a # t-statistic
 pvalRRBLUP <- dt(t.stat,df=n-k-1) # -log10(pval)
 
+
 ## -----------------------------------------------------------------------------
 ###########################
 #### GWAS by GBLUP approach
 ###########################
 M<- GT
 MMT <-tcrossprod(M) ## MM' = additive relationship matrix
-MMTinv<-solve(MMT) ## inverse of MM'
+MMTinv<-solve(MMT + diag(1e-6, ncol(MMT), ncol(MMT))) ## inverse of MM'
 MTMMTinv<-t(M)%*%MMTinv # M' %*% (M'M)-
 mixGBLUP <- mmer(color~1,
-             random=~vs(id, Gu=MMT) + Rowf + Colf,
-             rcov=~units, iters=3,
+             random=~vsr(id, Gu=MMT) + Rowf + Colf,
+             rcov=~units, nIters=3,
              verbose = FALSE,
              data=DT)
 a.from.g <-MTMMTinv%*%matrix(mixGBLUP$U$`u:id`$color,ncol=1)
@@ -523,11 +520,12 @@ se.a.from.g <- sqrt(diag(var.a.from.g))
 t.stat.from.g <- a.from.g/se.a.from.g # t-statistic
 pvalGBLUP <- dt(t.stat.from.g,df=n-k-1) # -log10(pval)
 
+
 ## -----------------------------------------------------------------------------
 ###########################
 #### Compare results
 ###########################
-plot(mix2$scores[,1], main="GWAS")
+# plot(mix2$scores[,1], main="GWAS")
 plot(-log(pvalRRBLUP), main="GWAS by RRBLUP/SNP-BLUP") 
 plot(-log(pvalGBLUP), main="GWAS by GBLUP")
 
