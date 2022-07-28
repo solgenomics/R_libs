@@ -1,4 +1,24 @@
 
+# ps 1.7.1
+
+* ps now returns data frames instead of tibbles. While data frames and
+  tibbles are very similar, they are not completely compatible. To convert
+  the output of ps to tibbles call the `tibble::as_tibble()` function
+  on them.
+
+* `ps()` now does not fail if both `user` and `after` are specified (#129).
+
+# ps 1.7.0
+
+* ps now compiles on platforms that enable OpenMP (#109).
+
+* New functions `ps_get_cpu_affinity()` and `ps_set_cpu_affinity()` to query
+  and set CPU affinity (#123).
+
+* `ps_memory_info()` now does not mix up `rss` and `vms` on Linux.
+
+* `ps_memory_info()` now reports memory in bytes instead of pages on Linux (#115)
+
 # ps 1.6.0
 
 * New function `ps_system_cpu_times()` to calculate system CPU times.

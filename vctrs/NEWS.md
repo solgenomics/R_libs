@@ -1,3 +1,12 @@
+# vctrs 0.4.1
+
+* OOB errors with `character()` indexes use "that don't exist" instead
+  of "past the end" (#1543).
+
+* Fixed memory protection issues related to common type
+  determination (#1551, tidyverse/tidyr#1348).
+
+
 # vctrs 0.4.0
 
 * New experimental `vec_locate_sorted_groups()` for returning the locations of

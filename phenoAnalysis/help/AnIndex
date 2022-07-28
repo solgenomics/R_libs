@@ -5,13 +5,16 @@ cleanEmptyReps	cleanEmptyReps
 cleanMetaCols	cleanMetaCols
 combinePhenoData	combinePhenoData
 extractPhenotype	extractPhenotype
+filterMissingValues	filterMissingValues
 fixedAlpha	models
 fixedAugmentedRCBD	models
 fixedCRD	models
 fixedRCBD	models
 getAdjMeans	getAdjMeans
 getAnovaTable	getAnovaTable
+getDataFrame	getDataFrame
 getModelSummary	getModelSummary
+getNumericCols	getNumericCols
 mergeVariables	mergeVariables
 models	models
 randomAlpha	models
