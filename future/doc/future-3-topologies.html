@@ -206,8 +206,8 @@ hr {
 
 <p>Futures can be nested in R such that one future creates another set of futures and so on.  This may, for instance, occur within nested for loops, e.g.</p>
 
-<pre><code class="r">library(&quot;future&quot;)
-library(&quot;listenv&quot;)
+<pre><code class="r">library(future)
+library(listenv)
 x &lt;- listenv()
 for (ii in 1:3) {
   x[[ii]] %&lt;-% {
@@ -230,8 +230,8 @@ unlist(x)
 
 <p>Here is the layout of what such an analysis could look like in R using futures.</p>
 
-<pre><code class="r">library(&quot;future&quot;)
-library(&quot;listenv&quot;)
+<pre><code class="r">library(future)
+library(listenv)
 htseq_align &lt;- function(fq, chr) { chr }
 
 fqs &lt;- dir(pattern = &quot;[.]fastq$&quot;)
@@ -310,7 +310,10 @@ plan(list(tweak(cluster, workers = nodes), multisession))
 <p>One possible downside to the above setup is that we might not utilize all available cores all the time.  This is because the alignment of the shorter chromosomes will finish sooner than the longer ones, which means that we might at the end of each sample have only a few alignment processes running on each machine leaving the remaining cores idle/unused.  An alternative set up is then to use the following setup:</p>
 
 <pre><code class="r">nodes &lt;- rep(c(&quot;n1&quot;, &quot;n2&quot;, &quot;n3&quot;), each = 8)
-plan(list(tweak(cluster, workers = nodes), multisession))
+plan(list(
+  tweak(cluster, workers = nodes),
+  tweak(multisession, workers = 2)
+))
 </code></pre>
 
 <p>This will cause up to 24 (= 3*8) samples to be processed in parallel each processing two chromosomes at the same time.</p>
@@ -321,15 +324,17 @@ plan(list(tweak(cluster, workers = nodes), multisession))
 
 <p>With the above setup, we can use nested futures in our local R session to evaluate R expression on the remote compute cluster and its three nodes.  Here is a proof of concept illustrating how the different nested futures are evaluated on different machines.</p>
 
-<pre><code class="r">library(&quot;future&quot;)
-library(&quot;listenv&quot;)
+<pre><code class="r">library(future)
+library(listenv)
 
-## Set up access to remote login node
-login &lt;- tweak(remote, workers = &quot;remote.server.org&quot;)
+## Set up access to remote login node (must have Rscript)
+login &lt;- tweak(cluster, workers = &quot;remote.server.org&quot;, persistent = TRUE)
 plan(login)
 
 ## Set up cluster nodes on login node
-nodes %&lt;-% { .keepme &lt;- parallel::makeCluster(c(&quot;n1&quot;, &quot;n2&quot;, &quot;n3&quot;)) }
+nodes %&lt;-% { .keepme &lt;- parallelly::makeClusterPSOCK(c(&quot;n1&quot;, &quot;n2&quot;, &quot;n3&quot;)) }
+print(nodes)
+## socket cluster with 3 nodes on hosts &#39;n1&#39;, &#39;n2&#39;, &#39;n3&#39;
 
 ## Specify future topology
 ## login node -&gt; { cluster nodes } -&gt; { multiple cores }

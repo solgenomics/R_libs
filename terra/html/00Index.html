@@ -12,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;terra&rsquo; version 1.5-17</h2>
+</div><h2>Documentation for package &lsquo;terra&rsquo; version 1.6-3</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 </ul>
@@ -51,7 +51,7 @@
 
 <table width="100%">
 <tr><td style="width: 25%;"><a href="terra-package.html">terra-package</a></td>
-<td>The terra package</td></tr>
+<td>Description of the methods in the terra package</td></tr>
 </table>
 
 <h2><a name="A">-- A --</a></h2>
@@ -105,16 +105,14 @@
 <td>Estimate values for cell values that are 'NA' by interpolating between layers</td></tr>
 <tr><td style="width: 25%;"><a href="approximate.html">approximate-method</a></td>
 <td>Estimate values for cell values that are 'NA' by interpolating between layers</td></tr>
-<tr><td style="width: 25%;"><a href="expanse.html">area</a></td>
-<td>Get the expanse (area) of individual polygons or for all (summed) raster cells</td></tr>
-<tr><td style="width: 25%;"><a href="expanse.html">area-method</a></td>
-<td>Get the expanse (area) of individual polygons or for all (summed) raster cells</td></tr>
+<tr><td style="width: 25%;"><a href="deprecated.html">area</a></td>
+<td>deprecated methods</td></tr>
+<tr><td style="width: 25%;"><a href="deprecated.html">area-method</a></td>
+<td>deprecated methods</td></tr>
 <tr><td style="width: 25%;"><a href="arith-generic.html">Arith-method</a></td>
 <td>Arithmetic</td></tr>
 <tr><td style="width: 25%;"><a href="arith-generic.html">Arith-methods</a></td>
 <td>Arithmetic</td></tr>
-<tr><td style="width: 25%;"><a href="north.html">arrow</a></td>
-<td>North arrow</td></tr>
 <tr><td style="width: 25%;"><a href="coerce.html">as.array</a></td>
 <td>Coercion of a SpatRaster to a vector, matrix or array</td></tr>
 <tr><td style="width: 25%;"><a href="coerce.html">as.array-method</a></td>
@@ -148,9 +146,9 @@
 <tr><td style="width: 25%;"><a href="as.spatvector.html">as.lines-method</a></td>
 <td>Conversion to a SpatVector, or to another SpatVector type</td></tr>
 <tr><td style="width: 25%;"><a href="as.list.html">as.list</a></td>
-<td>SpatRaster or SpatVector to list</td></tr>
+<td>SpatRaster* or SpatVector to list</td></tr>
 <tr><td style="width: 25%;"><a href="as.list.html">as.list-method</a></td>
-<td>SpatRaster or SpatVector to list</td></tr>
+<td>SpatRaster* or SpatVector to list</td></tr>
 <tr><td style="width: 25%;"><a href="is.bool.html">as.logical-method</a></td>
 <td>Raster value types</td></tr>
 <tr><td style="width: 25%;"><a href="coerce.html">as.matrix</a></td>
@@ -256,9 +254,9 @@
 <tr><td style="width: 25%;"><a href="cellSize.html">cellSize-method</a></td>
 <td>Area covered by each raster cell</td></tr>
 <tr><td style="width: 25%;"><a href="centroids.html">centroids</a></td>
-<td>Get centroids</td></tr>
+<td>Centroids</td></tr>
 <tr><td style="width: 25%;"><a href="centroids.html">centroids-method</a></td>
-<td>Get centroids</td></tr>
+<td>Centroids</td></tr>
 <tr><td style="width: 25%;"><a href="clamp.html">clamp</a></td>
 <td>Clamp values</td></tr>
 <tr><td style="width: 25%;"><a href="clamp.html">clamp-method</a></td>
@@ -295,6 +293,10 @@
 <td>Color table</td></tr>
 <tr><td style="width: 25%;"><a href="colors.html">coltab&lt;--method</a></td>
 <td>Color table</td></tr>
+<tr><td style="width: 25%;"><a href="combineGeoms.html">combineGeoms</a></td>
+<td>Combine geometries</td></tr>
+<tr><td style="width: 25%;"><a href="combineGeoms.html">combineGeoms-method</a></td>
+<td>Combine geometries</td></tr>
 <tr><td style="width: 25%;"><a href="compare-generics.html">Compare-method</a></td>
 <td>Compare and logical methods</td></tr>
 <tr><td style="width: 25%;"><a href="compare-generics.html">Compare-methods</a></td>
@@ -303,6 +305,10 @@
 <td>Compare geometries of SpatRasters</td></tr>
 <tr><td style="width: 25%;"><a href="compareGeom.html">compareGeom-method</a></td>
 <td>Compare geometries of SpatRasters</td></tr>
+<tr><td style="width: 25%;"><a href="concats.html">concats</a></td>
+<td>Concatenate categorical rasters</td></tr>
+<tr><td style="width: 25%;"><a href="concats.html">concats-method</a></td>
+<td>Concatenate categorical rasters</td></tr>
 <tr><td style="width: 25%;"><a href="contour.html">contour</a></td>
 <td>Contour plot</td></tr>
 <tr><td style="width: 25%;"><a href="contour.html">contour-method</a></td>
@@ -311,6 +317,10 @@
 <td>Convex hull and minimal rotated rectangle</td></tr>
 <tr><td style="width: 25%;"><a href="convhull.html">convHull-method</a></td>
 <td>Convex hull and minimal rotated rectangle</td></tr>
+<tr><td style="width: 25%;"><a href="costDistance.html">costDistance</a></td>
+<td>Cost distance</td></tr>
+<tr><td style="width: 25%;"><a href="costDistance.html">costDistance-method</a></td>
+<td>Cost distance</td></tr>
 <tr><td style="width: 25%;"><a href="cover.html">cover</a></td>
 <td>Replace values with values from another object</td></tr>
 <tr><td style="width: 25%;"><a href="cover.html">cover-method</a></td>
@@ -348,10 +358,10 @@
 <td>Deep copy</td></tr>
 <tr><td style="width: 25%;"><a href="deepcopy.html">deepcopy-method</a></td>
 <td>Deep copy</td></tr>
-<tr><td style="width: 25%;"><a href="voronoi.html">delauny</a></td>
-<td>Voronoi diagram and Delauny triangles</td></tr>
-<tr><td style="width: 25%;"><a href="voronoi.html">delauny-method</a></td>
-<td>Voronoi diagram and Delauny triangles</td></tr>
+<tr><td style="width: 25%;"><a href="voronoi.html">delaunay</a></td>
+<td>Voronoi diagram and Delaunay triangles</td></tr>
+<tr><td style="width: 25%;"><a href="voronoi.html">delaunay-method</a></td>
+<td>Voronoi diagram and Delaunay triangles</td></tr>
 <tr><td style="width: 25%;"><a href="densify.html">densify</a></td>
 <td>Add additional nodes to lines or polygons</td></tr>
 <tr><td style="width: 25%;"><a href="densify.html">densify-method</a></td>
@@ -407,6 +417,10 @@
 <h2><a name="E">-- E --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="topology.html">emptyGeoms</a></td>
+<td>Vector topology methods</td></tr>
+<tr><td style="width: 25%;"><a href="topology.html">emptyGeoms-method</a></td>
+<td>Vector topology methods</td></tr>
 <tr><td style="width: 25%;"><a href="erase.html">erase</a></td>
 <td>Erase parts of a SpatVector object</td></tr>
 <tr><td style="width: 25%;"><a href="erase.html">erase-method</a></td>
@@ -503,6 +517,8 @@
 <td>Geometry type of a SpatVector</td></tr>
 <tr><td style="width: 25%;"><a href="geomtype.html">geomtype-method</a></td>
 <td>Geometry type of a SpatVector</td></tr>
+<tr><td style="width: 25%;"><a href="gdal.html">getGDALconfig</a></td>
+<td>GDAL version, supported file formats, and cache size</td></tr>
 <tr><td style="width: 25%;"><a href="global.html">global</a></td>
 <td>global statistics</td></tr>
 <tr><td style="width: 25%;"><a href="global.html">global-method</a></td>
@@ -516,6 +532,14 @@
 <h2><a name="H">-- H --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="colors.html">has.colors</a></td>
+<td>Color table</td></tr>
+<tr><td style="width: 25%;"><a href="colors.html">has.colors-method</a></td>
+<td>Color table</td></tr>
+<tr><td style="width: 25%;"><a href="RGB.html">has.RGB</a></td>
+<td>Layers representing colors</td></tr>
+<tr><td style="width: 25%;"><a href="RGB.html">has.RGB-method</a></td>
+<td>Layers representing colors</td></tr>
 <tr><td style="width: 25%;"><a href="minmax.html">hasMinMax</a></td>
 <td>Get or compute the minimum and maximum cell values</td></tr>
 <tr><td style="width: 25%;"><a href="minmax.html">hasMinMax-method</a></td>
@@ -654,6 +678,8 @@
 <td>Add SpatVector data to a map</td></tr>
 <tr><td style="width: 25%;"><a href="lines.html">lines-method</a></td>
 <td>Add SpatVector data to a map</td></tr>
+<tr><td style="width: 25%;"><a href="plet.html">lines-method</a></td>
+<td>Plot with leaflet</td></tr>
 <tr><td style="width: 25%;"><a href="math-generics.html">log</a></td>
 <td>General mathematical methods</td></tr>
 <tr><td style="width: 25%;"><a href="math-generics.html">log-method</a></td>
@@ -814,6 +840,10 @@
 <td>Dimensions of a SpatRaster or SpatVector and related objects</td></tr>
 <tr><td style="width: 25%;"><a href="north.html">north</a></td>
 <td>North arrow</td></tr>
+<tr><td style="width: 25%;"><a href="not.na.html">not.na</a></td>
+<td>is not NA</td></tr>
+<tr><td style="width: 25%;"><a href="not.na.html">not.na-method</a></td>
+<td>is not NA</td></tr>
 <tr><td style="width: 25%;"><a href="dimensions.html">nrow</a></td>
 <td>Dimensions of a SpatRaster or SpatVector and related objects</td></tr>
 <tr><td style="width: 25%;"><a href="dimensions.html">nrow-method</a></td>
@@ -868,6 +898,10 @@
 <td>Perspective plot</td></tr>
 <tr><td style="width: 25%;"><a href="persp.html">persp-method</a></td>
 <td>Perspective plot</td></tr>
+<tr><td style="width: 25%;"><a href="plet.html">plet</a></td>
+<td>Plot with leaflet</td></tr>
+<tr><td style="width: 25%;"><a href="plet.html">plet-method</a></td>
+<td>Plot with leaflet</td></tr>
 <tr><td style="width: 25%;"><a href="plot.html">plot</a></td>
 <td>Make a map</td></tr>
 <tr><td style="width: 25%;"><a href="plot.html">plot-method</a></td>
@@ -882,6 +916,8 @@
 <td>Add SpatVector data to a map</td></tr>
 <tr><td style="width: 25%;"><a href="lines.html">points-method</a></td>
 <td>Add SpatVector data to a map</td></tr>
+<tr><td style="width: 25%;"><a href="plet.html">points-method</a></td>
+<td>Plot with leaflet</td></tr>
 <tr><td style="width: 25%;"><a href="lines.html">polys</a></td>
 <td>Add SpatVector data to a map</td></tr>
 <tr><td style="width: 25%;"><a href="lines.html">polys-method</a></td>
@@ -932,6 +968,10 @@
 <td>Rasterize vector data</td></tr>
 <tr><td style="width: 25%;"><a href="rasterize.html">rasterize-method</a></td>
 <td>Rasterize vector data</td></tr>
+<tr><td style="width: 25%;"><a href="rasterizeGeom.html">rasterizeGeom</a></td>
+<td>Rasterize geometric properties of vector data</td></tr>
+<tr><td style="width: 25%;"><a href="rasterizeGeom.html">rasterizeGeom-method</a></td>
+<td>Rasterize geometric properties of vector data</td></tr>
 <tr><td style="width: 25%;"><a href="SpatRaster-class.html">RasterSource</a></td>
 <td>SpatRaster class</td></tr>
 <tr><td style="width: 25%;"><a href="SpatRaster-class.html">RasterSource-class</a></td>
@@ -959,9 +999,9 @@
 <tr><td style="width: 25%;"><a href="readwrite.html">readValues-method</a></td>
 <td>Read from, or write to, file</td></tr>
 <tr><td style="width: 25%;"><a href="rectify.html">rectify</a></td>
-<td>rectify a SpatRaster</td></tr>
+<td>Rectify a SpatRaster</td></tr>
 <tr><td style="width: 25%;"><a href="rectify.html">rectify-method</a></td>
-<td>rectify a SpatRaster</td></tr>
+<td>Rectify a SpatRaster</td></tr>
 <tr><td style="width: 25%;"><a href="relate.html">relate</a></td>
 <td>relate</td></tr>
 <tr><td style="width: 25%;"><a href="relate.html">relate-method</a></td>
@@ -998,10 +1038,6 @@
 <td>Layers representing colors</td></tr>
 <tr><td style="width: 25%;"><a href="RGB.html">RGB-method</a></td>
 <td>Layers representing colors</td></tr>
-<tr><td style="width: 25%;"><a href="RGB.html">RGB2col</a></td>
-<td>Layers representing colors</td></tr>
-<tr><td style="width: 25%;"><a href="RGB.html">RGB2col-method</a></td>
-<td>Layers representing colors</td></tr>
 <tr><td style="width: 25%;"><a href="RGB.html">RGB&lt;-</a></td>
 <td>Layers representing colors</td></tr>
 <tr><td style="width: 25%;"><a href="RGB.html">RGB&lt;--method</a></td>
@@ -1035,6 +1071,10 @@
 <td>Apply a terra function that takes only a single layer and returns a SpatRaster to all layers of a SpatRaster</td></tr>
 <tr><td style="width: 25%;"><a href="sapp.html">sapp-method</a></td>
 <td>Apply a terra function that takes only a single layer and returns a SpatRaster to all layers of a SpatRaster</td></tr>
+<tr><td style="width: 25%;"><a href="serialize.html">saveRDS</a></td>
+<td>serialize and saveRDS for SpatRaster and SpatVector</td></tr>
+<tr><td style="width: 25%;"><a href="serialize.html">saveRDS-method</a></td>
+<td>serialize and saveRDS for SpatRaster and SpatVector</td></tr>
 <tr><td style="width: 25%;"><a href="sbar.html">sbar</a></td>
 <td>scale bar</td></tr>
 <tr><td style="width: 25%;"><a href="scale.html">scale</a></td>
@@ -1061,9 +1101,17 @@
 <td>Select the values of a range of layers, as specified by cell values in another SpatRaster</td></tr>
 <tr><td style="width: 25%;"><a href="selectRange.html">selectRange-method</a></td>
 <td>Select the values of a range of layers, as specified by cell values in another SpatRaster</td></tr>
+<tr><td style="width: 25%;"><a href="serialize.html">serialize</a></td>
+<td>serialize and saveRDS for SpatRaster and SpatVector</td></tr>
+<tr><td style="width: 25%;"><a href="serialize.html">serialize-method</a></td>
+<td>serialize and saveRDS for SpatRaster and SpatVector</td></tr>
 <tr><td style="width: 25%;"><a href="inplace.html">set.cats</a></td>
 <td>Change values in-place</td></tr>
 <tr><td style="width: 25%;"><a href="inplace.html">set.cats-method</a></td>
+<td>Change values in-place</td></tr>
+<tr><td style="width: 25%;"><a href="inplace.html">set.crs</a></td>
+<td>Change values in-place</td></tr>
+<tr><td style="width: 25%;"><a href="inplace.html">set.crs-method</a></td>
 <td>Change values in-place</td></tr>
 <tr><td style="width: 25%;"><a href="inplace.html">set.ext</a></td>
 <td>Change values in-place</td></tr>
@@ -1077,10 +1125,12 @@
 <td>Change values in-place</td></tr>
 <tr><td style="width: 25%;"><a href="inplace.html">set.values-method</a></td>
 <td>Change values in-place</td></tr>
-<tr><td style="width: 25%;"><a href="factors.html">setCats</a></td>
-<td>Categorical rasters</td></tr>
-<tr><td style="width: 25%;"><a href="factors.html">setCats-method</a></td>
-<td>Categorical rasters</td></tr>
+<tr><td style="width: 25%;"><a href="inplace.html">setCats</a></td>
+<td>Change values in-place</td></tr>
+<tr><td style="width: 25%;"><a href="inplace.html">setCats-method</a></td>
+<td>Change values in-place</td></tr>
+<tr><td style="width: 25%;"><a href="gdal.html">setGDALconfig</a></td>
+<td>GDAL version, supported file formats, and cache size</td></tr>
 <tr><td style="width: 25%;"><a href="minmax.html">setMinMax</a></td>
 <td>Get or compute the minimum and maximum cell values</td></tr>
 <tr><td style="width: 25%;"><a href="minmax.html">setMinMax-method</a></td>
@@ -1117,6 +1167,10 @@
 <td>Vector topology methods</td></tr>
 <tr><td style="width: 25%;"><a href="topology.html">snap-method</a></td>
 <td>Vector topology methods</td></tr>
+<tr><td style="width: 25%;"><a href="sort.html">sort</a></td>
+<td>Sort a SpatRaster</td></tr>
+<tr><td style="width: 25%;"><a href="sort.html">sort-method</a></td>
+<td>Sort a SpatRaster</td></tr>
 <tr><td style="width: 25%;"><a href="sources.html">sources</a></td>
 <td>Data sources of a SpatRaster</td></tr>
 <tr><td style="width: 25%;"><a href="sources.html">sources-method</a></td>
@@ -1157,10 +1211,6 @@
 <td>General mathematical methods</td></tr>
 <tr><td style="width: 25%;"><a href="math-generics.html">sqrt-method</a></td>
 <td>General mathematical methods</td></tr>
-<tr><td style="width: 25%;"><a href="src.html">src</a></td>
-<td>Create a SpatRasterCollection</td></tr>
-<tr><td style="width: 25%;"><a href="src.html">src-method</a></td>
-<td>Create a SpatRasterCollection</td></tr>
 <tr><td style="width: 25%;"><a href="summarize-generics.html">stdev</a></td>
 <td>Summarize</td></tr>
 <tr><td style="width: 25%;"><a href="summarize-generics.html">stdev-method</a></td>
@@ -1170,11 +1220,9 @@
 <tr><td style="width: 25%;"><a href="stretch.html">stretch-method</a></td>
 <td>Stretch</td></tr>
 <tr><td style="width: 25%;"><a href="subset.html">subset</a></td>
-<td>Subset of a SpatRaster</td></tr>
-<tr><td style="width: 25%;"><a href="subset-vector.html">subset-method</a></td>
-<td>Subset of a SpatVector</td></tr>
+<td>Subset a SpatRaster or a SpatVector</td></tr>
 <tr><td style="width: 25%;"><a href="subset.html">subset-method</a></td>
-<td>Subset of a SpatRaster</td></tr>
+<td>Subset a SpatRaster or a SpatVector</td></tr>
 <tr><td style="width: 25%;"><a href="subst.html">subst</a></td>
 <td>replace cell values</td></tr>
 <tr><td style="width: 25%;"><a href="subst.html">subst-method</a></td>
@@ -1217,11 +1265,11 @@
 <tr><td style="width: 25%;"><a href="tapp.html">tapp-method</a></td>
 <td>Apply a function to subsets of layers of a SpatRaster</td></tr>
 <tr><td style="width: 25%;"><a href="terra-package.html">terra</a></td>
-<td>The terra package</td></tr>
+<td>Description of the methods in the terra package</td></tr>
 <tr><td style="width: 25%;"><a href="terrain.html">terrain</a></td>
-<td>terrain characteristic</td></tr>
+<td>terrain characteristics</td></tr>
 <tr><td style="width: 25%;"><a href="terrain.html">terrain-method</a></td>
-<td>terrain characteristic</td></tr>
+<td>terrain characteristics</td></tr>
 <tr><td style="width: 25%;"><a href="terraOptions.html">terraOptions</a></td>
 <td>Options</td></tr>
 <tr><td style="width: 25%;"><a href="text.html">text</a></td>
@@ -1243,6 +1291,10 @@
 <tr><td style="width: 25%;"><a href="time.html">time&lt;-</a></td>
 <td>time of SpatRaster layers</td></tr>
 <tr><td style="width: 25%;"><a href="time.html">time&lt;--method</a></td>
+<td>time of SpatRaster layers</td></tr>
+<tr><td style="width: 25%;"><a href="time.html">timeInfo</a></td>
+<td>time of SpatRaster layers</td></tr>
+<tr><td style="width: 25%;"><a href="time.html">timeInfo-method</a></td>
 <td>time of SpatRaster layers</td></tr>
 <tr><td style="width: 25%;"><a href="tmpFile.html">tmpFiles</a></td>
 <td>Temporary files</td></tr>
@@ -1305,9 +1357,9 @@
 <tr><td style="width: 25%;"><a href="vector_layers.html">vector_layers</a></td>
 <td>List or remove layers from a vector file</td></tr>
 <tr><td style="width: 25%;"><a href="voronoi.html">voronoi</a></td>
-<td>Voronoi diagram and Delauny triangles</td></tr>
+<td>Voronoi diagram and Delaunay triangles</td></tr>
 <tr><td style="width: 25%;"><a href="voronoi.html">voronoi-method</a></td>
-<td>Voronoi diagram and Delauny triangles</td></tr>
+<td>Voronoi diagram and Delaunay triangles</td></tr>
 <tr><td style="width: 25%;"><a href="vrt.html">vrt</a></td>
 <td>Virtual Raster Tiles</td></tr>
 <tr><td style="width: 25%;"><a href="vrt.html">vrt-method</a></td>
@@ -1321,6 +1373,14 @@
 <td>Weighted mean of layers</td></tr>
 <tr><td style="width: 25%;"><a href="weighted.mean.html">weighted.mean-method</a></td>
 <td>Weighted mean of layers</td></tr>
+<tr><td style="width: 25%;"><a href="where.html">where.max</a></td>
+<td>Where are the cells with the min or max values?</td></tr>
+<tr><td style="width: 25%;"><a href="where.html">where.max-method</a></td>
+<td>Where are the cells with the min or max values?</td></tr>
+<tr><td style="width: 25%;"><a href="where.html">where.min</a></td>
+<td>Where are the cells with the min or max values?</td></tr>
+<tr><td style="width: 25%;"><a href="where.html">where.min-method</a></td>
+<td>Where are the cells with the min or max values?</td></tr>
 <tr><td style="width: 25%;"><a href="which.html">which.lyr</a></td>
 <td>Which cells are TRUE?</td></tr>
 <tr><td style="width: 25%;"><a href="which.html">which.lyr-method</a></td>
@@ -1470,7 +1530,7 @@
 <tr><td style="width: 25%;"><a href="replace-vector.html">$-method</a></td>
 <td>Get or replace attribute values of a SpatVector</td></tr>
 <tr><td style="width: 25%;"><a href="subset.html">$-method</a></td>
-<td>Subset of a SpatRaster</td></tr>
+<td>Subset a SpatRaster or a SpatVector</td></tr>
 <tr><td style="width: 25%;"><a href="replace-vector.html">$&lt;-</a></td>
 <td>Get or replace attribute values of a SpatVector</td></tr>
 <tr><td style="width: 25%;"><a href="ext.html">$&lt;--method</a></td>
@@ -1489,10 +1549,8 @@
 <td>Extract values from a SpatRaster</td></tr>
 <tr><td style="width: 25%;"><a href="replace.html">[-method</a></td>
 <td>Replace values of a SpatRaster</td></tr>
-<tr><td style="width: 25%;"><a href="subset-vector.html">[-method</a></td>
-<td>Subset of a SpatVector</td></tr>
 <tr><td style="width: 25%;"><a href="subset.html">[-method</a></td>
-<td>Subset of a SpatRaster</td></tr>
+<td>Subset a SpatRaster or a SpatVector</td></tr>
 <tr><td style="width: 25%;"><a href="svc.html">[-method</a></td>
 <td>Create a SpatVectorCollection</td></tr>
 <tr><td style="width: 25%;"><a href="ext.html">[&lt;--method</a></td>
@@ -1508,7 +1566,7 @@
 <tr><td style="width: 25%;"><a href="replace-vector.html">[[-method</a></td>
 <td>Get or replace attribute values of a SpatVector</td></tr>
 <tr><td style="width: 25%;"><a href="subset.html">[[-method</a></td>
-<td>Subset of a SpatRaster</td></tr>
+<td>Subset a SpatRaster or a SpatVector</td></tr>
 <tr><td style="width: 25%;"><a href="svc.html">[[-method</a></td>
 <td>Create a SpatVectorCollection</td></tr>
 <tr><td style="width: 25%;"><a href="replace-vector.html">[[&lt;--method</a></td>

@@ -88,7 +88,7 @@ ggplot() +
 #  mapviewOptions(fgb = FALSE) # needed when creating web pages
 #  mapview(nc["BIR74"], col.regions = sf.colors(10), fgb = FALSE)
 
-## -----------------------------------------------------------------------------
+## ----eval=require("tmap", quietly = TRUE)-------------------------------------
 library(tmap)
 qtm(nc)
 

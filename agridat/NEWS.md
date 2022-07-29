@@ -1,3 +1,13 @@
+# agridat 1.21 - Jun 2022
+
+## New data with motivation
+
+* bachmaier.quadratic (confidence intervals for optimum of quadratic)
+* ducker.groundnut.uniformity
+* kling.augmented (augmented design)
+* sharma.met (Finlay-Wilkinson regression)
+
+
 # agridat 1.19 - Dec 2021
 
 ## New data
@@ -10,7 +20,7 @@ arankacami.groundnut.uniformity, barrero.maize, buntaran.wheat, gomez.heterogene
 
 * Re-named `correa.soybean.uniformity` to `dasilva.soybean.uniformity`.
 
-* There are more than 200 URLs in the vignettes and these were slow to check and generated too many false warnings. Stopped the Rmd to html conversion from creating URL links. 
+* There are more than 200 URLs in the vignettes and these were slow to check and generated too many false warnings. Stopped the Rmd to html conversion from creating URL links via an option in the Rmd YAML.
 
 
 # agridat 1.18 - Jan 2021
@@ -29,7 +39,7 @@ alwan.lamb, baker.strawberry.uniformity, besag.checks, bryan.corn.uniformity, da
 
 ## Other notes
 
-* Examples using `asreml()` now asreml version 4.
+* Examples now use asreml version 4.
 
 * Re-named `hutchinson.cotton.uniformity` to `panse.cotton.uniformity`.
 

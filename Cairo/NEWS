@@ -1,5 +1,49 @@
 NEWS/Changelog
 
+1.6-0	(2022-07-05)
+    o	Added text drawing using Harfbuzz and ICU. This significantly
+	improves the quality of text rendeded by Cairo and enables
+	support for right-to-left and bi-directional text. (#23)
+	It also enables the use of ligatures. (#18)
+	This feature is only enabled if `pkg-config` is present and
+	knows how to use the `harfbuzz-icu` module.
+
+    o	The `family=` argument in text drawing is now honored also for
+	FreeType and Harfbuzz back-ends.
+
+    o	configure gains two arguments: `--with-freetype` and
+	`--with-harfbuzz`. They both default to `auto` which means
+	FreeType and Harfbuzz will be used if present. If set to `yes`
+	then the support is required. If set to `no` (or the
+	`--without` form is used) then the corresponding support is
+	explicitly disabled. Note that Harfbuzz requires FreeType.
+
+    o	added `--enable-debug` argument to configure which will make
+	Cairo extremely chatty on the console.
+
+    o	By default `cairo-ft` will be ignored on Windows, becasue it
+	it does not work without associated FontConfig configuration
+	files and font cache. (#37)
+	This behavior can be changed by using `-DUSE_CAIRO_FT=1` to
+	force the use of `cairo-ft` unconditionally.
+
+    o	Cairo.capabilities() now also reports two capabilities
+	which are not format-related: "freetype" and "harfbuzz". The
+	former indicates whether `cairo-ft` is used and the later
+	indicates whether the newly introduced Harfbuzz + ICU
+	bi-directional rendering support is present.
+
+
+1.5-15	(2022-03-16)
+    o	CairoX11 (xlib back-end): install an X11 I/O error handler
+	while processing events such that broken connections are
+	detected and don't kill R.
+
+    o	added the option to license under GPL v3. All original
+	authors explicitly agreed and included code based on R is
+	licensed under GPL-2+ allowing this.
+
+
 1.5-14	(2021-12-21)
     o	update configure/autoconf, some dependencies such as libtiff
 	are now also detected using pkg-config. Tests are now correctly

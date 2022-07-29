@@ -48,6 +48,7 @@ px	px
 px.default	px
 px.freqtab	px
 range.freqtab	summary.freqtab
+sample.freqtab	sample.freqtab
 scales	freqtab
 sd.freqtab	summary.freqtab
 skew.freqtab	summary.freqtab

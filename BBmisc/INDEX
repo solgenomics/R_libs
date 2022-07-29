@@ -6,9 +6,9 @@ argsAsNamedList         Parses '...' arguments to a named list.
 asMatrixCols            Extracts a named element from a list of lists.
 asQuoted                Converts a string into a quoted expression.
 binPack                 Simple bin packing.
-cFactor                 Combine multiple factors and return a factor.
 capitalizeStrings       Capitalize strings in a vector
 catf                    Wrapper for cat and sprintf.
+cFactor                 Combine multiple factors and return a factor.
 checkArg                Check for a function argument.
 checkListElementClass   Check that a list contains only elements of a
                         required type.

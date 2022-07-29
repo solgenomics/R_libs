@@ -24,8 +24,8 @@ eubon_children          EUBON children
 eubon_hierarchy         EUBON hierarchy
 eubon_search            EUBON taxonomy search
 fungorum                Index Fungorum
-gbif_downstream         Retrieve all taxa names downstream in hierarchy
-                        for GBIF
+gbif_downstream         Retrieve all taxonomic names downstream in
+                        hierarchy for GBIF
 gbif_name_usage         Lookup details for specific names in all
                         taxonomies in GBIF.
 gbif_parse              Parse taxon names using the GBIF name parser.
@@ -105,9 +105,9 @@ ncbi_get_taxon_summary
 ping                    Ping an API used in taxize to see if it's
                         working.
 plantGenusNames         Vector of plant genus names from ThePlantList
+plantminer              Search for taxonomy data from Plantminer.com
 plantNames              Vector of plant species (genus - specific
                         epithet) names from ThePlantList
-plantminer              Search for taxonomy data from Plantminer.com
 pow_lookup              Lookup taxa in Kew's Plants of the World
 pow_search              Search Kew's Plants of the World
 pow_synonyms            Lookup synonyms in Kew's Plants of the World
@@ -126,14 +126,15 @@ synonyms                Retrieve synonyms from various sources given
 tax_agg                 Aggregate species data to given taxonomic rank
 tax_name                Get taxonomic names for a given rank
 tax_rank                Get rank for a given taxonomic name.
-taxize-authentication   taxize authentication
-taxize-defunct          Defunct functions in taxize
-taxize-package          Taxonomic Information from Around the Web
-taxize-params           taxize parameters
 taxize_capwords         Capitalize the first letter of a character
                         string.
 taxize_cite             Get citations and licenses for data sources
                         used in taxize
+taxize_options          taxize options
+taxize-authentication   taxize authentication
+taxize-defunct          Defunct functions in taxize
+taxize-package          Taxonomic Information from Around the Web
+taxize-params           taxize parameters
 taxon-state             Last taxon state object from a get_* function
                         call
 theplantlist            Lookup-table for family, genus, and species

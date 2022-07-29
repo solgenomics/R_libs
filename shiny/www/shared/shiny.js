@@ -1,4 +1,4 @@
-/*! shiny 1.7.0 | (c) 2012-2021 RStudio, PBC. | License: GPL-3 | file LICENSE */
+/*! shiny 1.7.2 | (c) 2012-2022 RStudio, PBC. | License: GPL-3 | file LICENSE */
 (function() {
   var __create = Object.create;
   var __defProp = Object.defineProperty;
@@ -214,10 +214,10 @@
   // node_modules/core-js/internals/ie8-dom-define.js
   var require_ie8_dom_define = __commonJS({
     "node_modules/core-js/internals/ie8-dom-define.js": function(exports, module) {
-      var DESCRIPTORS6 = require_descriptors();
+      var DESCRIPTORS7 = require_descriptors();
       var fails11 = require_fails();
       var createElement = require_document_create_element();
-      module.exports = !DESCRIPTORS6 && !fails11(function() {
+      module.exports = !DESCRIPTORS7 && !fails11(function() {
         return Object.defineProperty(createElement("div"), "a", {
           get: function() {
             return 7;
@@ -230,16 +230,16 @@
   // node_modules/core-js/internals/object-get-own-property-descriptor.js
   var require_object_get_own_property_descriptor = __commonJS({
     "node_modules/core-js/internals/object-get-own-property-descriptor.js": function(exports) {
-      var DESCRIPTORS6 = require_descriptors();
+      var DESCRIPTORS7 = require_descriptors();
       var propertyIsEnumerableModule2 = require_object_property_is_enumerable();
       var createPropertyDescriptor2 = require_create_property_descriptor();
-      var toIndexedObject5 = require_to_indexed_object();
+      var toIndexedObject6 = require_to_indexed_object();
       var toPrimitive3 = require_to_primitive();
       var has5 = require_has();
       var IE8_DOM_DEFINE = require_ie8_dom_define();
       var $getOwnPropertyDescriptor2 = Object.getOwnPropertyDescriptor;
-      exports.f = DESCRIPTORS6 ? $getOwnPropertyDescriptor2 : function getOwnPropertyDescriptor4(O, P) {
-        O = toIndexedObject5(O);
+      exports.f = DESCRIPTORS7 ? $getOwnPropertyDescriptor2 : function getOwnPropertyDescriptor4(O, P) {
+        O = toIndexedObject6(O);
         P = toPrimitive3(P, true);
         if (IE8_DOM_DEFINE)
           try {
@@ -268,12 +268,12 @@
   // node_modules/core-js/internals/object-define-property.js
   var require_object_define_property = __commonJS({
     "node_modules/core-js/internals/object-define-property.js": function(exports) {
-      var DESCRIPTORS6 = require_descriptors();
+      var DESCRIPTORS7 = require_descriptors();
       var IE8_DOM_DEFINE = require_ie8_dom_define();
       var anObject10 = require_an_object();
       var toPrimitive3 = require_to_primitive();
       var $defineProperty2 = Object.defineProperty;
-      exports.f = DESCRIPTORS6 ? $defineProperty2 : function defineProperty5(O, P, Attributes) {
+      exports.f = DESCRIPTORS7 ? $defineProperty2 : function defineProperty5(O, P, Attributes) {
         anObject10(O);
         P = toPrimitive3(P, true);
         anObject10(Attributes);
@@ -294,10 +294,10 @@
   // node_modules/core-js/internals/create-non-enumerable-property.js
   var require_create_non_enumerable_property = __commonJS({
     "node_modules/core-js/internals/create-non-enumerable-property.js": function(exports, module) {
-      var DESCRIPTORS6 = require_descriptors();
+      var DESCRIPTORS7 = require_descriptors();
       var definePropertyModule2 = require_object_define_property();
       var createPropertyDescriptor2 = require_create_property_descriptor();
-      module.exports = DESCRIPTORS6 ? function(object, key, value) {
+      module.exports = DESCRIPTORS7 ? function(object, key, value) {
         return definePropertyModule2.f(object, key, createPropertyDescriptor2(1, value));
       } : function(object, key, value) {
         object[key] = value;
@@ -594,12 +594,12 @@
   // node_modules/core-js/internals/array-includes.js
   var require_array_includes = __commonJS({
     "node_modules/core-js/internals/array-includes.js": function(exports, module) {
-      var toIndexedObject5 = require_to_indexed_object();
+      var toIndexedObject6 = require_to_indexed_object();
       var toLength8 = require_to_length();
       var toAbsoluteIndex4 = require_to_absolute_index();
       var createMethod = function(IS_INCLUDES) {
         return function($this, el, fromIndex) {
-          var O = toIndexedObject5($this);
+          var O = toIndexedObject6($this);
           var length = toLength8(O.length);
           var index = toAbsoluteIndex4(fromIndex, length);
           var value;
@@ -628,11 +628,11 @@
   var require_object_keys_internal = __commonJS({
     "node_modules/core-js/internals/object-keys-internal.js": function(exports, module) {
       var has5 = require_has();
-      var toIndexedObject5 = require_to_indexed_object();
+      var toIndexedObject6 = require_to_indexed_object();
       var indexOf2 = require_array_includes().indexOf;
       var hiddenKeys2 = require_hidden_keys();
       module.exports = function(object, names) {
-        var O = toIndexedObject5(object);
+        var O = toIndexedObject6(object);
         var i = 0;
         var result = [];
         var key;
@@ -688,7 +688,7 @@
       var getOwnPropertyNamesModule2 = require_object_get_own_property_names();
       var getOwnPropertySymbolsModule2 = require_object_get_own_property_symbols();
       var anObject10 = require_an_object();
-      module.exports = getBuiltIn3("Reflect", "ownKeys") || function ownKeys(it) {
+      module.exports = getBuiltIn3("Reflect", "ownKeys") || function ownKeys3(it) {
         var keys2 = getOwnPropertyNamesModule2.f(anObject10(it));
         var getOwnPropertySymbols3 = getOwnPropertySymbolsModule2.f;
         return getOwnPropertySymbols3 ? keys2.concat(getOwnPropertySymbols3(it)) : keys2;
@@ -700,13 +700,13 @@
   var require_copy_constructor_properties = __commonJS({
     "node_modules/core-js/internals/copy-constructor-properties.js": function(exports, module) {
       var has5 = require_has();
-      var ownKeys = require_own_keys();
-      var getOwnPropertyDescriptorModule3 = require_object_get_own_property_descriptor();
+      var ownKeys3 = require_own_keys();
+      var getOwnPropertyDescriptorModule4 = require_object_get_own_property_descriptor();
       var definePropertyModule2 = require_object_define_property();
       module.exports = function(target, source) {
-        var keys2 = ownKeys(source);
+        var keys2 = ownKeys3(source);
         var defineProperty5 = definePropertyModule2.f;
-        var getOwnPropertyDescriptor4 = getOwnPropertyDescriptorModule3.f;
+        var getOwnPropertyDescriptor4 = getOwnPropertyDescriptorModule4.f;
         for (var i = 0; i < keys2.length; i++) {
           var key = keys2[i];
           if (!has5(target, key))
@@ -969,9 +969,9 @@
   var require_es_regexp_exec = __commonJS({
     "node_modules/core-js/modules/es.regexp.exec.js": function() {
       "use strict";
-      var $72 = require_export();
+      var $71 = require_export();
       var exec = require_regexp_exec();
-      $72({ target: "RegExp", proto: true, forced: /./.exec !== exec }, {
+      $71({ target: "RegExp", proto: true, forced: /./.exec !== exec }, {
         exec: exec
       });
     }
@@ -1563,11 +1563,11 @@
   // node_modules/core-js/internals/object-define-properties.js
   var require_object_define_properties = __commonJS({
     "node_modules/core-js/internals/object-define-properties.js": function(exports, module) {
-      var DESCRIPTORS6 = require_descriptors();
+      var DESCRIPTORS7 = require_descriptors();
       var definePropertyModule2 = require_object_define_property();
       var anObject10 = require_an_object();
       var objectKeys2 = require_object_keys();
-      module.exports = DESCRIPTORS6 ? Object.defineProperties : function defineProperties2(O, Properties) {
+      module.exports = DESCRIPTORS7 ? Object.defineProperties : function defineProperties2(O, Properties) {
         anObject10(O);
         var keys2 = objectKeys2(Properties);
         var length = keys2.length;
@@ -1783,7 +1783,7 @@
   // node_modules/core-js/internals/object-get-own-property-names-external.js
   var require_object_get_own_property_names_external = __commonJS({
     "node_modules/core-js/internals/object-get-own-property-names-external.js": function(exports, module) {
-      var toIndexedObject5 = require_to_indexed_object();
+      var toIndexedObject6 = require_to_indexed_object();
       var $getOwnPropertyNames2 = require_object_get_own_property_names().f;
       var toString2 = {}.toString;
       var windowNames = typeof window == "object" && window && Object.getOwnPropertyNames ? Object.getOwnPropertyNames(window) : [];
@@ -1795,7 +1795,7 @@
         }
       };
       module.exports.f = function getOwnPropertyNames3(it) {
-        return windowNames && toString2.call(it) == "[object Window]" ? getWindowNames(it) : $getOwnPropertyNames2(toIndexedObject5(it));
+        return windowNames && toString2.call(it) == "[object Window]" ? getWindowNames(it) : $getOwnPropertyNames2(toIndexedObject6(it));
       };
     }
   });
@@ -1917,7 +1917,7 @@
   var require_define_iterator = __commonJS({
     "node_modules/core-js/internals/define-iterator.js": function(exports, module) {
       "use strict";
-      var $72 = require_export();
+      var $71 = require_export();
       var createIteratorConstructor = require_create_iterator_constructor();
       var getPrototypeOf3 = require_object_get_prototype_of();
       var setPrototypeOf2 = require_object_set_prototype_of();
@@ -2007,7 +2007,7 @@
               }
             }
           else
-            $72({ target: NAME2, proto: true, forced: BUGGY_SAFARI_ITERATORS || INCORRECT_VALUES_NAME }, methods);
+            $71({ target: NAME2, proto: true, forced: BUGGY_SAFARI_ITERATORS || INCORRECT_VALUES_NAME }, methods);
         }
         return methods;
       };
@@ -2018,7 +2018,7 @@
   var require_es_array_iterator = __commonJS({
     "node_modules/core-js/modules/es.array.iterator.js": function(exports, module) {
       "use strict";
-      var toIndexedObject5 = require_to_indexed_object();
+      var toIndexedObject6 = require_to_indexed_object();
       var addToUnscopables2 = require_add_to_unscopables();
       var Iterators = require_iterators();
       var InternalStateModule3 = require_internal_state();
@@ -2029,7 +2029,7 @@
       module.exports = defineIterator2(Array, "Array", function(iterated, kind) {
         setInternalState3(this, {
           type: ARRAY_ITERATOR,
-          target: toIndexedObject5(iterated),
+          target: toIndexedObject6(iterated),
           index: 0,
           kind: kind
         });
@@ -2131,16 +2131,29 @@
     }
   });
 
+  // node_modules/core-js/internals/array-for-each.js
+  var require_array_for_each = __commonJS({
+    "node_modules/core-js/internals/array-for-each.js": function(exports, module) {
+      "use strict";
+      var $forEach2 = require_array_iteration().forEach;
+      var arrayMethodIsStrict4 = require_array_method_is_strict();
+      var STRICT_METHOD4 = arrayMethodIsStrict4("forEach");
+      module.exports = !STRICT_METHOD4 ? function forEach3(callbackfn) {
+        return $forEach2(this, callbackfn, arguments.length > 1 ? arguments[1] : void 0);
+      } : [].forEach;
+    }
+  });
+
   // node_modules/core-js/internals/object-to-array.js
   var require_object_to_array = __commonJS({
     "node_modules/core-js/internals/object-to-array.js": function(exports, module) {
-      var DESCRIPTORS6 = require_descriptors();
+      var DESCRIPTORS7 = require_descriptors();
       var objectKeys2 = require_object_keys();
-      var toIndexedObject5 = require_to_indexed_object();
+      var toIndexedObject6 = require_to_indexed_object();
       var propertyIsEnumerable2 = require_object_property_is_enumerable().f;
       var createMethod = function(TO_ENTRIES) {
         return function(it) {
-          var O = toIndexedObject5(it);
+          var O = toIndexedObject6(it);
           var keys2 = objectKeys2(O);
           var length = keys2.length;
           var i = 0;
@@ -2148,7 +2161,7 @@
           var key;
           while (length > i) {
             key = keys2[i++];
-            if (!DESCRIPTORS6 || propertyIsEnumerable2.call(O, key)) {
+            if (!DESCRIPTORS7 || propertyIsEnumerable2.call(O, key)) {
               result.push(TO_ENTRIES ? [key, O[key]] : O[key]);
             }
           }
@@ -2227,7 +2240,7 @@
       var callWithSafeIterationClosing = require_call_with_safe_iteration_closing();
       var isArrayIteratorMethod = require_is_array_iterator_method();
       var toLength8 = require_to_length();
-      var createProperty4 = require_create_property();
+      var createProperty5 = require_create_property();
       var getIteratorMethod = require_get_iterator_method();
       module.exports = function from2(arrayLike) {
         var O = toObject6(arrayLike);
@@ -2246,14 +2259,14 @@
           result = new C();
           for (; !(step = next2.call(iterator)).done; index++) {
             value = mapping ? callWithSafeIterationClosing(iterator, mapfn, [step.value, index], true) : step.value;
-            createProperty4(result, index, value);
+            createProperty5(result, index, value);
           }
         } else {
           length = toLength8(O.length);
           result = new C(length);
           for (; length > index; index++) {
             value = mapping ? mapfn(O[index], index) : O[index];
-            createProperty4(result, index, value);
+            createProperty5(result, index, value);
           }
         }
         result.length = index;
@@ -2474,7 +2487,7 @@
     "node_modules/core-js/internals/array-buffer.js": function(exports, module) {
       "use strict";
       var global8 = require_global();
-      var DESCRIPTORS6 = require_descriptors();
+      var DESCRIPTORS7 = require_descriptors();
       var NATIVE_ARRAY_BUFFER2 = require_array_buffer_native();
       var createNonEnumerableProperty4 = require_create_non_enumerable_property();
       var redefineAll = require_redefine_all();
@@ -2558,7 +2571,7 @@
             bytes: arrayFill.call(new Array(byteLength), 0),
             byteLength: byteLength
           });
-          if (!DESCRIPTORS6)
+          if (!DESCRIPTORS7)
             this.byteLength = byteLength;
         };
         $DataView = function DataView3(buffer, byteOffset, byteLength) {
@@ -2576,13 +2589,13 @@
             byteLength: byteLength,
             byteOffset: offset
           });
-          if (!DESCRIPTORS6) {
+          if (!DESCRIPTORS7) {
             this.buffer = buffer;
             this.byteLength = byteLength;
             this.byteOffset = offset;
           }
         };
-        if (DESCRIPTORS6) {
+        if (DESCRIPTORS7) {
           addGetter($ArrayBuffer, "byteLength");
           addGetter($DataView, "buffer");
           addGetter($DataView, "byteLength");
@@ -2702,12 +2715,12 @@
       var getBuiltIn3 = require_get_built_in();
       var definePropertyModule2 = require_object_define_property();
       var wellKnownSymbol5 = require_well_known_symbol();
-      var DESCRIPTORS6 = require_descriptors();
+      var DESCRIPTORS7 = require_descriptors();
       var SPECIES2 = wellKnownSymbol5("species");
       module.exports = function(CONSTRUCTOR_NAME) {
         var Constructor = getBuiltIn3(CONSTRUCTOR_NAME);
         var defineProperty5 = definePropertyModule2.f;
-        if (DESCRIPTORS6 && Constructor && !Constructor[SPECIES2]) {
+        if (DESCRIPTORS7 && Constructor && !Constructor[SPECIES2]) {
           defineProperty5(Constructor, SPECIES2, {
             configurable: true,
             get: function() {
@@ -2766,19 +2779,6 @@
       var classof2 = require_classof_raw();
       var global8 = require_global();
       module.exports = classof2(global8.process) == "process";
-    }
-  });
-
-  // node_modules/core-js/internals/array-for-each.js
-  var require_array_for_each = __commonJS({
-    "node_modules/core-js/internals/array-for-each.js": function(exports, module) {
-      "use strict";
-      var $forEach2 = require_array_iteration().forEach;
-      var arrayMethodIsStrict4 = require_array_method_is_strict();
-      var STRICT_METHOD4 = arrayMethodIsStrict4("forEach");
-      module.exports = !STRICT_METHOD4 ? function forEach3(callbackfn) {
-        return $forEach2(this, callbackfn, arguments.length > 1 ? arguments[1] : void 0);
-      } : [].forEach;
     }
   });
 
@@ -2896,7 +2896,7 @@
   }
 
   // srcts/src/shiny/index.ts
-  var import_jquery43 = __toModule(require_jquery());
+  var import_jquery41 = __toModule(require_jquery());
 
   // node_modules/core-js/modules/es.function.name.js
   var DESCRIPTORS = require_descriptors();
@@ -3634,9 +3634,6 @@
   function isBS3() {
     return !window.bootstrap;
   }
-  function toLowerCase(str) {
-    return str.toLowerCase();
-  }
 
   // srcts/src/bindings/registry.ts
   function _classCallCheck(instance, Constructor) {
@@ -3762,7 +3759,7 @@
     }, {
       key: "getId",
       value: function getId(el) {
-        return el["data-input-id"] || el.id;
+        return el.getAttribute("data-input-id") || el.id;
       }
     }, {
       key: "getType",
@@ -4317,11 +4314,11 @@
   function _typeof(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof = function _typeof27(obj2) {
+      _typeof = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof = function _typeof27(obj2) {
+      _typeof = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -4358,7 +4355,7 @@
       _setPrototypeOf(subClass, superClass);
   }
   function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -4405,7 +4402,7 @@
     }
   }
   function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf(o);
@@ -4482,11 +4479,11 @@
   function _typeof2(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof2 = function _typeof27(obj2) {
+      _typeof2 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof2 = function _typeof27(obj2) {
+      _typeof2 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -4523,7 +4520,7 @@
       _setPrototypeOf2(subClass, superClass);
   }
   function _setPrototypeOf2(o, p) {
-    _setPrototypeOf2 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf2 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -4570,7 +4567,7 @@
     }
   }
   function _getPrototypeOf2(o) {
-    _getPrototypeOf2 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf2 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf2(o);
@@ -4791,11 +4788,11 @@
   function _typeof3(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof3 = function _typeof27(obj2) {
+      _typeof3 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof3 = function _typeof27(obj2) {
+      _typeof3 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -4857,7 +4854,7 @@
       _setPrototypeOf3(subClass, superClass);
   }
   function _setPrototypeOf3(o, p) {
-    _setPrototypeOf3 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf3 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -4904,7 +4901,7 @@
     }
   }
   function _getPrototypeOf3(o) {
-    _getPrototypeOf3 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf3 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf3(o);
@@ -5027,11 +5024,11 @@
   function _typeof4(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof4 = function _typeof27(obj2) {
+      _typeof4 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof4 = function _typeof27(obj2) {
+      _typeof4 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -5068,7 +5065,7 @@
       _setPrototypeOf4(subClass, superClass);
   }
   function _setPrototypeOf4(o, p) {
-    _setPrototypeOf4 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf4 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -5115,7 +5112,7 @@
     }
   }
   function _getPrototypeOf4(o) {
-    _getPrototypeOf4 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf4 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf4(o);
@@ -5195,11 +5192,11 @@
   function _typeof5(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof5 = function _typeof27(obj2) {
+      _typeof5 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof5 = function _typeof27(obj2) {
+      _typeof5 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -5236,7 +5233,7 @@
       _setPrototypeOf5(subClass, superClass);
   }
   function _setPrototypeOf5(o, p) {
-    _setPrototypeOf5 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf5 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -5283,7 +5280,7 @@
     }
   }
   function _getPrototypeOf5(o) {
-    _getPrototypeOf5 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf5 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf5(o);
@@ -5316,11 +5313,11 @@
   function _typeof6(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof6 = function _typeof27(obj2) {
+      _typeof6 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof6 = function _typeof27(obj2) {
+      _typeof6 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -5357,7 +5354,7 @@
       _setPrototypeOf6(subClass, superClass);
   }
   function _setPrototypeOf6(o, p) {
-    _setPrototypeOf6 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf6 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -5404,7 +5401,7 @@
     }
   }
   function _getPrototypeOf6(o) {
-    _getPrototypeOf6 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf6 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf6(o);
@@ -5431,11 +5428,11 @@
   function _typeof7(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof7 = function _typeof27(obj2) {
+      _typeof7 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof7 = function _typeof27(obj2) {
+      _typeof7 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -5472,7 +5469,7 @@
       _setPrototypeOf7(subClass, superClass);
   }
   function _setPrototypeOf7(o, p) {
-    _setPrototypeOf7 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf7 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -5519,7 +5516,7 @@
     }
   }
   function _getPrototypeOf7(o) {
-    _getPrototypeOf7 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf7 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf7(o);
@@ -5616,11 +5613,11 @@
   function _typeof8(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof8 = function _typeof27(obj2) {
+      _typeof8 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof8 = function _typeof27(obj2) {
+      _typeof8 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -5657,7 +5654,7 @@
       _setPrototypeOf8(subClass, superClass);
   }
   function _setPrototypeOf8(o, p) {
-    _setPrototypeOf8 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf8 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -5704,7 +5701,7 @@
     }
   }
   function _getPrototypeOf8(o) {
-    _getPrototypeOf8 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf8 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf8(o);
@@ -5947,11 +5944,11 @@
   function _typeof9(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof9 = function _typeof27(obj2) {
+      _typeof9 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof9 = function _typeof27(obj2) {
+      _typeof9 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -5988,7 +5985,7 @@
       _setPrototypeOf9(subClass, superClass);
   }
   function _setPrototypeOf9(o, p) {
-    _setPrototypeOf9 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf9 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -6035,7 +6032,7 @@
     }
   }
   function _getPrototypeOf9(o) {
-    _getPrototypeOf9 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf9 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf9(o);
@@ -6332,11 +6329,11 @@
   function _typeof10(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof10 = function _typeof27(obj2) {
+      _typeof10 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof10 = function _typeof27(obj2) {
+      _typeof10 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -6373,7 +6370,7 @@
       _setPrototypeOf10(subClass, superClass);
   }
   function _setPrototypeOf10(o, p) {
-    _setPrototypeOf10 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf10 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -6420,7 +6417,7 @@
     }
   }
   function _getPrototypeOf10(o) {
-    _getPrototypeOf10 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf10 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf10(o);
@@ -6574,11 +6571,11 @@
   function _typeof11(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof11 = function _typeof27(obj2) {
+      _typeof11 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof11 = function _typeof27(obj2) {
+      _typeof11 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -6615,7 +6612,7 @@
       _setPrototypeOf11(subClass, superClass);
   }
   function _setPrototypeOf11(o, p) {
-    _setPrototypeOf11 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf11 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -6662,7 +6659,7 @@
     }
   }
   function _getPrototypeOf11(o) {
-    _getPrototypeOf11 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf11 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf11(o);
@@ -6881,11 +6878,11 @@
   function _typeof12(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof12 = function _typeof27(obj2) {
+      _typeof12 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof12 = function _typeof27(obj2) {
+      _typeof12 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -6922,7 +6919,7 @@
       _setPrototypeOf12(subClass, superClass);
   }
   function _setPrototypeOf12(o, p) {
-    _setPrototypeOf12 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf12 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -6969,7 +6966,7 @@
     }
   }
   function _getPrototypeOf12(o) {
-    _getPrototypeOf12 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf12 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf12(o);
@@ -7058,11 +7055,11 @@
   function _typeof13(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof13 = function _typeof27(obj2) {
+      _typeof13 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof13 = function _typeof27(obj2) {
+      _typeof13 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -7099,7 +7096,7 @@
       _setPrototypeOf13(subClass, superClass);
   }
   function _setPrototypeOf13(o, p) {
-    _setPrototypeOf13 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf13 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -7146,7 +7143,7 @@
     }
   }
   function _getPrototypeOf13(o) {
-    _getPrototypeOf13 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf13 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf13(o);
@@ -7307,11 +7304,11 @@
   function _typeof14(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof14 = function _typeof27(obj2) {
+      _typeof14 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof14 = function _typeof27(obj2) {
+      _typeof14 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -7326,7 +7323,7 @@
       _setPrototypeOf14(subClass, superClass);
   }
   function _setPrototypeOf14(o, p) {
-    _setPrototypeOf14 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf14 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -7373,7 +7370,7 @@
     }
   }
   function _getPrototypeOf14(o) {
-    _getPrototypeOf14 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf14 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf14(o);
@@ -7647,11 +7644,11 @@
   function _typeof15(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof15 = function _typeof27(obj2) {
+      _typeof15 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof15 = function _typeof27(obj2) {
+      _typeof15 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -7688,7 +7685,7 @@
       _setPrototypeOf15(subClass, superClass);
   }
   function _setPrototypeOf15(o, p) {
-    _setPrototypeOf15 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf15 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -7735,7 +7732,7 @@
     }
   }
   function _getPrototypeOf15(o) {
-    _getPrototypeOf15 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf15 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf15(o);
@@ -8040,7 +8037,7 @@
     }, {
       key: "getId",
       value: function getId(el) {
-        return el["data-input-id"] || el.id;
+        return el.getAttribute("data-input-id") || el.id;
       }
     }, {
       key: "onValueChange",
@@ -8093,11 +8090,11 @@
   function _typeof16(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof16 = function _typeof27(obj2) {
+      _typeof16 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof16 = function _typeof27(obj2) {
+      _typeof16 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -8134,7 +8131,7 @@
       _setPrototypeOf16(subClass, superClass);
   }
   function _setPrototypeOf16(o, p) {
-    _setPrototypeOf16 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf16 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -8181,7 +8178,7 @@
     }
   }
   function _getPrototypeOf16(o) {
-    _getPrototypeOf16 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf16 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf16(o);
@@ -8213,11 +8210,11 @@
   function _typeof17(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof17 = function _typeof27(obj2) {
+      _typeof17 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof17 = function _typeof27(obj2) {
+      _typeof17 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -8254,7 +8251,7 @@
       _setPrototypeOf17(subClass, superClass);
   }
   function _setPrototypeOf17(o, p) {
-    _setPrototypeOf17 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf17 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -8301,7 +8298,7 @@
     }
   }
   function _getPrototypeOf17(o) {
-    _getPrototypeOf17 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf17 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf17(o);
@@ -8459,7 +8456,11 @@
     }, {
       key: "$invoke",
       value: function $invoke() {
-        this.func.apply(this.target, this.args);
+        if (this.args && this.args.length > 0) {
+          this.func.apply(this.target, this.args);
+        } else {
+          this.func.apply(this.target);
+        }
         this.args = null;
       }
     }]);
@@ -8467,8 +8468,7 @@
   }();
   function debounce(threshold, func) {
     var timerId = null;
-    return function() {
-      var _this2 = this;
+    return function thisFunc() {
       for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
         args[_key3] = arguments[_key3];
       }
@@ -8480,7 +8480,7 @@
         if (timerId === null)
           return;
         timerId = null;
-        func.apply(_this2, args);
+        func.apply(thisFunc, args);
       }, threshold);
     };
   }
@@ -8592,21 +8592,12 @@
     _createClass23(Throttler2, [{
       key: "normalCall",
       value: function normalCall() {
-        var _this = this;
         for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
           args[_key] = arguments[_key];
         }
         this.args = args;
         if (this.timerId === null) {
           this.$invoke();
-          this.timerId = setTimeout(function() {
-            var _this$normalCall;
-            if (_this.timerId === null)
-              return;
-            _this.$clearTimer();
-            if (args.length > 0)
-              (_this$normalCall = _this.normalCall).apply.apply(_this$normalCall, [_this].concat(args));
-          }, this.delayMs);
         }
       }
     }, {
@@ -8622,7 +8613,7 @@
     }, {
       key: "isPending",
       value: function isPending() {
-        return this.timerId !== null;
+        return this.args !== null;
       }
     }, {
       key: "$clearTimer",
@@ -8635,8 +8626,20 @@
     }, {
       key: "$invoke",
       value: function $invoke() {
+        var _this = this;
+        if (this.args === null) {
+          return;
+        }
         this.func.apply(this.target, this.args);
         this.args = null;
+        this.timerId = setTimeout(function() {
+          if (_this.timerId === null)
+            return;
+          _this.$clearTimer();
+          if (_this.isPending()) {
+            _this.$invoke();
+          }
+        }, this.delayMs);
       }
     }]);
     return Throttler2;
@@ -8646,11 +8649,11 @@
   function _typeof18(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof18 = function _typeof27(obj2) {
+      _typeof18 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof18 = function _typeof27(obj2) {
+      _typeof18 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -8687,7 +8690,7 @@
       _setPrototypeOf18(subClass, superClass);
   }
   function _setPrototypeOf18(o, p) {
-    _setPrototypeOf18 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf18 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -8734,7 +8737,7 @@
     }
   }
   function _getPrototypeOf18(o) {
-    _getPrototypeOf18 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf18 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf18(o);
@@ -8825,29 +8828,53 @@
   var import_es_array_iterator20 = __toModule(require_es_array_iterator());
   var import_jquery28 = __toModule(require_jquery());
 
-  // srcts/src/shiny/render.ts
-  var import_es_regexp_exec6 = __toModule(require_es_regexp_exec());
+  // node_modules/core-js/modules/es.array.for-each.js
+  "use strict";
+  var $45 = require_export();
+  var forEach = require_array_for_each();
+  $45({ target: "Array", proto: true, forced: [].forEach != forEach }, {
+    forEach: forEach
+  });
+
+  // node_modules/core-js/modules/web.dom-collections.for-each.js
+  var global6 = require_global();
+  var DOMIterables2 = require_dom_iterables();
+  var forEach2 = require_array_for_each();
+  var createNonEnumerableProperty3 = require_create_non_enumerable_property();
+  for (var COLLECTION_NAME in DOMIterables2) {
+    Collection = global6[COLLECTION_NAME];
+    CollectionPrototype = Collection && Collection.prototype;
+    if (CollectionPrototype && CollectionPrototype.forEach !== forEach2)
+      try {
+        createNonEnumerableProperty3(CollectionPrototype, "forEach", forEach2);
+      } catch (error) {
+        CollectionPrototype.forEach = forEach2;
+      }
+  }
+  var Collection;
+  var CollectionPrototype;
 
   // node_modules/core-js/modules/es.object.entries.js
-  var $45 = require_export();
+  var $46 = require_export();
   var $entries = require_object_to_array().entries;
-  $45({ target: "Object", stat: true }, {
+  $46({ target: "Object", stat: true }, {
     entries: function entries(O) {
       return $entries(O);
     }
   });
 
   // srcts/src/shiny/render.ts
+  var import_es_regexp_exec6 = __toModule(require_es_regexp_exec());
   var import_es_array_iterator19 = __toModule(require_es_array_iterator());
 
   // node_modules/core-js/modules/es.array.from.js
-  var $46 = require_export();
+  var $47 = require_export();
   var from = require_array_from();
   var checkCorrectnessOfIteration = require_check_correctness_of_iteration();
   var INCORRECT_ITERATION = !checkCorrectnessOfIteration(function(iterable) {
     Array.from(iterable);
   });
-  $46({ target: "Array", stat: true, forced: INCORRECT_ITERATION }, {
+  $47({ target: "Array", stat: true, forced: INCORRECT_ITERATION }, {
     from: from
   });
 
@@ -8920,18 +8947,24 @@
     var processed = processHtml(html);
     addToHead(processed.head);
     register(processed.singletons);
-    if (where === "replace") {
-      (0, import_jquery26.default)(el).html(processed.html);
-    } else {
-      var elElements;
-      if (el instanceof HTMLElement) {
-        elElements = [el];
-      } else {
-        elElements = el.toArray();
-      }
-      import_jquery26.default.each(elElements, function(i, el2) {
-        el2.insertAdjacentHTML(toLowerCase(where), processed.html);
-      });
+    switch (where.toLowerCase()) {
+      case "replace":
+        (0, import_jquery26.default)(el).html(processed.html);
+        break;
+      case "beforebegin":
+        (0, import_jquery26.default)(el).before(processed.html);
+        break;
+      case "afterbegin":
+        (0, import_jquery26.default)(el).prepend(processed.html);
+        break;
+      case "beforeend":
+        (0, import_jquery26.default)(el).append(processed.html);
+        break;
+      case "afterend":
+        (0, import_jquery26.default)(el).after(processed.html);
+        break;
+      default:
+        throw new Error("Unknown where position: " + where);
     }
     return processed;
   }
@@ -9052,11 +9085,11 @@
   function _typeof19(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof19 = function _typeof27(obj2) {
+      _typeof19 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof19 = function _typeof27(obj2) {
+      _typeof19 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -9064,9 +9097,7 @@
   }
   function renderDependencies(dependencies) {
     if (dependencies) {
-      import_jquery27.default.each(dependencies, function(i, dep) {
-        renderDependency(dep);
-      });
+      dependencies.forEach(renderDependency);
     }
   }
   function renderContent(el, content) {
@@ -9074,7 +9105,7 @@
     if (where === "replace") {
       shinyUnbindAll(el);
     }
-    var html;
+    var html = "";
     var dependencies = [];
     if (content === null) {
       html = "";
@@ -9123,138 +9154,218 @@
     }
     return htmlDependencies[names[idx]] === dep.version;
   }
-  function renderDependency(dep) {
-    var restyle = needsRestyle(dep);
-    if (hasOwnProperty(htmlDependencies, dep.name) && !restyle)
+  function renderDependency(dep_) {
+    var dep = normalizeHtmlDependency(dep_);
+    var stylesheetLinks = dep.stylesheet.map(function(x) {
+      if (!hasOwnProperty(x, "rel"))
+        x.rel = "stylesheet";
+      if (!hasOwnProperty(x, "type"))
+        x.type = "text/css";
+      var link = document.createElement("link");
+      Object.entries(x).forEach(function(_ref) {
+        var _ref2 = _slicedToArray(_ref, 2), attr = _ref2[0], val = _ref2[1];
+        if (attr === "href") {
+          val = encodeURI(val);
+        }
+        link.setAttribute(attr, val ? val : "");
+      });
+      return link;
+    });
+    if (needsRestyle(dep)) {
+      addStylesheetsAndRestyle(stylesheetLinks);
+      return true;
+    }
+    if (hasOwnProperty(htmlDependencies, dep.name))
       return false;
     registerDependency(dep.name, dep.version);
-    var href = dep.src.href;
     var $head = (0, import_jquery27.default)("head").first();
-    if (dep.meta && !restyle) {
-      var metas = import_jquery27.default.map(asArray(dep.meta), function(obj, idx) {
-        var name = Object.keys(obj)[0];
-        return (0, import_jquery27.default)("<meta>").attr("name", name).attr("content", obj[name]);
-        idx;
-      });
-      $head.append(metas);
-    }
-    if (dep.stylesheet) {
-      var links = import_jquery27.default.map(asArray(dep.stylesheet), function(stylesheet) {
-        return (0, import_jquery27.default)("<link rel='stylesheet' type='text/css'>").attr("href", href + "/" + encodeURI(stylesheet));
-      });
-      if (!restyle) {
-        $head.append(links);
-      } else {
-        var refreshStyle = function refreshStyle2(href2, oldSheet) {
-          var xhr = new XMLHttpRequest();
-          xhr.open("GET", href2);
-          xhr.onload = function() {
-            var id = "shiny_restyle_" + href2.split("?restyle")[0].replace(/\W/g, "_");
-            var oldStyle = $head.find("style#" + id);
-            var newStyle = (0, import_jquery27.default)("<style>").attr("id", id).html(xhr.responseText);
-            $head.append(newStyle);
-            oldStyle.remove();
-            removeSheet(oldSheet);
-            sendImageSizeFns.transitioned();
-          };
-          xhr.send();
-        };
-        var findSheet = function findSheet2(href2) {
-          for (var i = 0; i < document.styleSheets.length; i++) {
-            var sheet = document.styleSheets[i];
-            if (typeof sheet.href === "string" && sheet.href.indexOf(href2) > -1) {
-              return sheet;
-            }
-          }
-          return null;
-        };
-        var removeSheet = function removeSheet2(sheet) {
-          if (!sheet)
-            return;
-          sheet.disabled = true;
-          if (isIE())
-            sheet.cssText = "";
-          (0, import_jquery27.default)(sheet.ownerNode).remove();
-        };
-        import_jquery27.default.map(links, function(link) {
-          var oldSheet = findSheet(link.attr("href"));
-          var href2 = link.attr("href") + "?restyle=" + new Date().getTime();
-          if (isIE()) {
-            refreshStyle(href2, oldSheet);
-          } else {
-            link.attr("href", href2);
-            link.attr("onload", function() {
-              var $dummyEl = (0, import_jquery27.default)("<div>").css("transition", "0.1s all").css("position", "absolute").css("top", "-1000px").css("left", "0");
-              $dummyEl.one("transitionend", function() {
-                $dummyEl.remove();
-                removeSheet(oldSheet);
-                sendImageSizeFns.transitioned();
-              });
-              (0, import_jquery27.default)(document.body).append($dummyEl);
-              var color = "#" + Math.floor(Math.random() * 16777215).toString(16);
-              setTimeout(function() {
-                return $dummyEl.css("color", color);
-              }, 10);
-            });
-            $head.append(link);
-          }
-        });
+    dep.meta.forEach(function(x) {
+      var meta = document.createElement("meta");
+      for (var _i2 = 0, _Object$entries = Object.entries(x); _i2 < _Object$entries.length; _i2++) {
+        var _Object$entries$_i = _slicedToArray(_Object$entries[_i2], 2), attr = _Object$entries$_i[0], val = _Object$entries$_i[1];
+        meta.setAttribute(attr, val);
       }
+      $head.append(meta);
+    });
+    if (stylesheetLinks.length !== 0) {
+      $head.append(stylesheetLinks);
     }
-    if (dep.script && !restyle) {
-      var scriptsAttrs = asArray(dep.script);
-      var scripts = import_jquery27.default.map(scriptsAttrs, function(x) {
-        var script = document.createElement("script");
-        if (typeof x === "string") {
-          x = {
-            src: x
-          };
+    dep.script.forEach(function(x) {
+      var script = document.createElement("script");
+      Object.entries(x).forEach(function(_ref3) {
+        var _ref4 = _slicedToArray(_ref3, 2), attr = _ref4[0], val = _ref4[1];
+        if (attr === "src") {
+          val = encodeURI(val);
         }
-        for (var _i = 0, _Object$entries = Object.entries(x); _i < _Object$entries.length; _i++) {
-          var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2), attr = _Object$entries$_i[0], val = _Object$entries$_i[1];
-          if (attr === "src") {
-            val = href + "/" + encodeURI(val);
-          }
-          script.setAttribute(attr, val ? val : "");
-        }
-        return script;
+        script.setAttribute(attr, val ? val : "");
       });
-      $head.append(scripts);
-    }
-    if (dep.attachment && !restyle) {
-      var attachments = dep.attachment;
-      if (typeof attachments === "string")
-        attachments = [attachments];
-      if (Array.isArray(attachments)) {
-        var tmp = {};
-        import_jquery27.default.each(attachments, function(index, attachment) {
-          var key = index + 1 + "";
-          tmp[key] = attachment;
-        });
-        attachments = tmp;
-      }
-      var attach = import_jquery27.default.map(attachments, function(attachment, key) {
-        return (0, import_jquery27.default)("<link rel='attachment'>").attr("id", dep.name + "-" + key + "-attachment").attr("href", href + "/" + encodeURI(attachment));
-      });
-      $head.append(attach);
-    }
-    if (dep.head && !restyle) {
+      $head.append(script);
+    });
+    dep.attachment.forEach(function(x) {
+      var link = (0, import_jquery27.default)("<link rel='attachment'>").attr("id", dep.name + "-" + x.key + "-attachment").attr("href", encodeURI(x.href));
+      $head.append(link);
+    });
+    if (dep.head) {
       var $newHead = (0, import_jquery27.default)("<head></head>");
       $newHead.html(dep.head);
       $head.append($newHead.children());
     }
     return true;
   }
+  function addStylesheetsAndRestyle(links) {
+    var $head = (0, import_jquery27.default)("head").first();
+    var refreshStyle = function refreshStyle2(href, oldSheet) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", href);
+      xhr.onload = function() {
+        var id = "shiny_restyle_" + href.split("?restyle")[0].replace(/\W/g, "_");
+        var oldStyle = $head.find("style#" + id);
+        var newStyle = (0, import_jquery27.default)("<style>").attr("id", id).html(xhr.responseText);
+        $head.append(newStyle);
+        oldStyle.remove();
+        removeSheet(oldSheet);
+        sendImageSizeFns.transitioned();
+      };
+      xhr.send();
+    };
+    var findSheet = function findSheet2(href) {
+      if (!href)
+        return null;
+      for (var i = 0; i < document.styleSheets.length; i++) {
+        var sheet = document.styleSheets[i];
+        if (typeof sheet.href === "string" && sheet.href.indexOf(href) > -1) {
+          return sheet;
+        }
+      }
+      return null;
+    };
+    var removeSheet = function removeSheet2(sheet) {
+      if (!sheet)
+        return;
+      sheet.disabled = true;
+      if (isIE())
+        sheet.cssText = "";
+      if (sheet.ownerNode instanceof Element) {
+        (0, import_jquery27.default)(sheet.ownerNode).remove();
+      }
+    };
+    links.map(function(link) {
+      var $link = (0, import_jquery27.default)(link);
+      var oldSheet = findSheet($link.attr("href"));
+      var href = $link.attr("href") + "?restyle=" + new Date().getTime();
+      if (isIE()) {
+        refreshStyle(href, oldSheet);
+      } else {
+        $link.attr("href", href);
+        $link.attr("onload", function() {
+          var $dummyEl = (0, import_jquery27.default)("<div>").css("transition", "0.1s all").css("position", "absolute").css("top", "-1000px").css("left", "0");
+          $dummyEl.one("transitionend", function() {
+            $dummyEl.remove();
+            removeSheet(oldSheet);
+            sendImageSizeFns.transitioned();
+          });
+          (0, import_jquery27.default)(document.body).append($dummyEl);
+          var color = "#" + Math.floor(Math.random() * 16777215).toString(16);
+          setTimeout(function() {
+            return $dummyEl.css("color", color);
+          }, 10);
+        });
+        $head.append(link);
+      }
+    });
+  }
+  function normalizeHtmlDependency(dep) {
+    var _dep$src;
+    var hrefPrefix = (_dep$src = dep.src) === null || _dep$src === void 0 ? void 0 : _dep$src.href;
+    var result = {
+      name: dep.name,
+      version: dep.version,
+      restyle: dep.restyle,
+      meta: [],
+      stylesheet: [],
+      script: [],
+      attachment: [],
+      head: dep.head
+    };
+    if (dep.meta) {
+      if (Array.isArray(dep.meta)) {
+        result.meta = dep.meta;
+      } else {
+        result.meta = Object.entries(dep.meta).map(function(_ref5) {
+          var _ref6 = _slicedToArray(_ref5, 2), attr = _ref6[0], val = _ref6[1];
+          return {
+            name: attr,
+            content: val
+          };
+        });
+      }
+    }
+    result.stylesheet = asArray(dep.stylesheet).map(function(s) {
+      if (typeof s === "string") {
+        s = {
+          href: s
+        };
+      }
+      if (hrefPrefix) {
+        s.href = hrefPrefix + "/" + s.href;
+      }
+      return s;
+    });
+    result.script = asArray(dep.script).map(function(s) {
+      if (typeof s === "string") {
+        s = {
+          src: s
+        };
+      }
+      if (hrefPrefix) {
+        s.src = hrefPrefix + "/" + s.src;
+      }
+      return s;
+    });
+    var attachments = dep.attachment;
+    if (!attachments)
+      attachments = [];
+    if (typeof attachments === "string")
+      attachments = [attachments];
+    if (Array.isArray(attachments)) {
+      var tmp = attachments;
+      attachments = tmp.map(function(attachment, index) {
+        if (typeof attachment === "string") {
+          return {
+            key: (index + 1).toString(),
+            href: attachment
+          };
+        } else {
+          return attachment;
+        }
+      });
+    } else {
+      attachments = Object.entries(attachments).map(function(_ref7) {
+        var _ref8 = _slicedToArray(_ref7, 2), attr = _ref8[0], val = _ref8[1];
+        return {
+          key: attr,
+          href: val
+        };
+      });
+    }
+    result.attachment = attachments.map(function(s) {
+      if (hrefPrefix) {
+        s.href = hrefPrefix + "/" + s.href;
+      }
+      return s;
+    });
+    return result;
+  }
 
   // srcts/src/bindings/output/html.ts
   function _typeof20(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof20 = function _typeof27(obj2) {
+      _typeof20 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof20 = function _typeof27(obj2) {
+      _typeof20 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -9291,7 +9402,7 @@
       _setPrototypeOf19(subClass, superClass);
   }
   function _setPrototypeOf19(o, p) {
-    _setPrototypeOf19 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf19 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -9338,7 +9449,7 @@
     }
   }
   function _getPrototypeOf19(o) {
-    _getPrototypeOf19 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf19 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf19(o);
@@ -9372,11 +9483,11 @@
 
   // node_modules/core-js/modules/es.array.filter.js
   "use strict";
-  var $50 = require_export();
+  var $51 = require_export();
   var $filter = require_array_iteration().filter;
   var arrayMethodHasSpeciesSupport5 = require_array_method_has_species_support();
   var HAS_SPECIES_SUPPORT4 = arrayMethodHasSpeciesSupport5("filter");
-  $50({ target: "Array", proto: true, forced: !HAS_SPECIES_SUPPORT4 }, {
+  $51({ target: "Array", proto: true, forced: !HAS_SPECIES_SUPPORT4 }, {
     filter: function filter(callbackfn) {
       return $filter(this, callbackfn, arguments.length > 1 ? arguments[1] : void 0);
     }
@@ -10341,11 +10452,11 @@
   function _typeof21(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof21 = function _typeof27(obj2) {
+      _typeof21 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof21 = function _typeof27(obj2) {
+      _typeof21 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -10382,7 +10493,7 @@
       _setPrototypeOf20(subClass, superClass);
   }
   function _setPrototypeOf20(o, p) {
-    _setPrototypeOf20 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf20 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -10429,7 +10540,7 @@
     }
   }
   function _getPrototypeOf20(o) {
-    _getPrototypeOf20 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf20 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf20(o);
@@ -10831,13 +10942,9 @@
 
   // srcts/src/shiny/init.ts
   var import_es_regexp_exec10 = __toModule(require_es_regexp_exec());
-  var import_jquery42 = __toModule(require_jquery());
+  var import_jquery40 = __toModule(require_jquery());
 
   // srcts/src/inputPolicies/inputBatchSender.ts
-  var import_es_array_iterator22 = __toModule(require_es_array_iterator());
-  var import_jquery37 = __toModule(require_jquery());
-
-  // srcts/src/inputPolicies/inputPolicy.ts
   function _classCallCheck28(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -10868,37 +10975,63 @@
     }
     return obj;
   }
-  var InputPolicy = /* @__PURE__ */ function() {
-    function InputPolicy2() {
-      _classCallCheck28(this, InputPolicy2);
+  var InputBatchSender = /* @__PURE__ */ function() {
+    function InputBatchSender2(shinyapp) {
+      _classCallCheck28(this, InputBatchSender2);
       _defineProperty9(this, "target", void 0);
+      _defineProperty9(this, "shinyapp", void 0);
+      _defineProperty9(this, "timerId", null);
+      _defineProperty9(this, "pendingData", {});
+      _defineProperty9(this, "reentrant", false);
+      _defineProperty9(this, "lastChanceCallback", []);
+      this.shinyapp = shinyapp;
     }
-    _createClass28(InputPolicy2, [{
+    _createClass28(InputBatchSender2, [{
       key: "setInput",
-      value: function setInput(name, value, opts) {
-        throw "not implemented";
-        name;
-        value;
-        opts;
+      value: function setInput(nameType, value, opts) {
+        this.pendingData[nameType] = value;
+        if (!this.reentrant) {
+          if (opts.priority === "event") {
+            this._sendNow();
+          } else if (!this.timerId) {
+            this.timerId = setTimeout(this._sendNow.bind(this), 0);
+          }
+        }
+      }
+    }, {
+      key: "_sendNow",
+      value: function _sendNow() {
+        if (this.reentrant) {
+          console.trace("Unexpected reentrancy in InputBatchSender!");
+        }
+        this.reentrant = true;
+        try {
+          this.timerId = null;
+          this.lastChanceCallback.forEach(function(callback) {
+            return callback();
+          });
+          var currentData = this.pendingData;
+          this.pendingData = {};
+          this.shinyapp.sendInput(currentData);
+        } finally {
+          this.reentrant = false;
+        }
       }
     }]);
-    return InputPolicy2;
+    return InputBatchSender2;
   }();
 
-  // srcts/src/inputPolicies/inputBatchSender.ts
-  function _typeof22(obj) {
-    "@babel/helpers - typeof";
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof22 = function _typeof27(obj2) {
-        return typeof obj2;
-      };
-    } else {
-      _typeof22 = function _typeof27(obj2) {
-        return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
-      };
-    }
-    return _typeof22(obj);
+  // srcts/src/inputPolicies/splitInputNameType.ts
+  var import_es_regexp_exec8 = __toModule(require_es_regexp_exec());
+  function splitInputNameType(nameType) {
+    var name2 = nameType.split(":");
+    return {
+      name: name2[0],
+      inputType: name2.length > 1 ? name2[1] : ""
+    };
   }
+
+  // srcts/src/inputPolicies/inputNoResendDecorator.ts
   function _classCallCheck29(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -10921,67 +11054,6 @@
       _defineProperties29(Constructor, staticProps);
     return Constructor;
   }
-  function _inherits21(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
-    if (superClass)
-      _setPrototypeOf21(subClass, superClass);
-  }
-  function _setPrototypeOf21(o, p) {
-    _setPrototypeOf21 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
-      o2.__proto__ = p2;
-      return o2;
-    };
-    return _setPrototypeOf21(o, p);
-  }
-  function _createSuper21(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct21();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf21(Derived), result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf21(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn21(this, result);
-    };
-  }
-  function _possibleConstructorReturn21(self2, call) {
-    if (call && (_typeof22(call) === "object" || typeof call === "function")) {
-      return call;
-    }
-    return _assertThisInitialized21(self2);
-  }
-  function _assertThisInitialized21(self2) {
-    if (self2 === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-    return self2;
-  }
-  function _isNativeReflectConstruct21() {
-    if (typeof Reflect === "undefined" || !Reflect.construct)
-      return false;
-    if (Reflect.construct.sham)
-      return false;
-    if (typeof Proxy === "function")
-      return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-      }));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-  function _getPrototypeOf21(o) {
-    _getPrototypeOf21 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
-      return o2.__proto__ || Object.getPrototypeOf(o2);
-    };
-    return _getPrototypeOf21(o);
-  }
   function _defineProperty10(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
@@ -10990,188 +11062,16 @@
     }
     return obj;
   }
-  var InputBatchSender = /* @__PURE__ */ function(_InputPolicy) {
-    _inherits21(InputBatchSender2, _InputPolicy);
-    var _super = _createSuper21(InputBatchSender2);
-    function InputBatchSender2(shinyapp) {
-      var _this;
-      _classCallCheck29(this, InputBatchSender2);
-      _this = _super.call(this);
-      _defineProperty10(_assertThisInitialized21(_this), "shinyapp", void 0);
-      _defineProperty10(_assertThisInitialized21(_this), "timerId", null);
-      _defineProperty10(_assertThisInitialized21(_this), "pendingData", {});
-      _defineProperty10(_assertThisInitialized21(_this), "reentrant", false);
-      _defineProperty10(_assertThisInitialized21(_this), "lastChanceCallback", []);
-      _this.shinyapp = shinyapp;
-      return _this;
-    }
-    _createClass29(InputBatchSender2, [{
-      key: "setInput",
-      value: function setInput(nameType, value, opts) {
-        this.pendingData[nameType] = value;
-        if (!this.reentrant) {
-          if (opts.priority === "event") {
-            this._sendNow();
-          } else if (!this.timerId) {
-            this.timerId = setTimeout(this._sendNow.bind(this), 0);
-          }
-        }
-      }
-    }, {
-      key: "_sendNow",
-      value: function _sendNow() {
-        if (this.reentrant) {
-          console.trace("Unexpected reentrancy in InputBatchSender!");
-        }
-        this.reentrant = true;
-        try {
-          this.timerId = null;
-          import_jquery37.default.each(this.lastChanceCallback, function(i, callback) {
-            callback();
-          });
-          var currentData = this.pendingData;
-          this.pendingData = {};
-          this.shinyapp.sendInput(currentData);
-        } finally {
-          this.reentrant = false;
-        }
-      }
-    }]);
-    return InputBatchSender2;
-  }(InputPolicy);
-
-  // srcts/src/inputPolicies/inputNoResendDecorator.ts
-  var import_es_array_iterator23 = __toModule(require_es_array_iterator());
-
-  // srcts/src/inputPolicies/splitInputNameType.ts
-  var import_es_regexp_exec8 = __toModule(require_es_regexp_exec());
-  function splitInputNameType(nameType) {
-    var name2 = nameType.split(":");
-    return {
-      name: name2[0],
-      inputType: name2.length > 1 ? name2[1] : ""
-    };
-  }
-
-  // srcts/src/inputPolicies/inputNoResendDecorator.ts
-  function _typeof23(obj) {
-    "@babel/helpers - typeof";
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof23 = function _typeof27(obj2) {
-        return typeof obj2;
-      };
-    } else {
-      _typeof23 = function _typeof27(obj2) {
-        return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
-      };
-    }
-    return _typeof23(obj);
-  }
-  function _classCallCheck30(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-  function _defineProperties30(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor)
-        descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-  function _createClass30(Constructor, protoProps, staticProps) {
-    if (protoProps)
-      _defineProperties30(Constructor.prototype, protoProps);
-    if (staticProps)
-      _defineProperties30(Constructor, staticProps);
-    return Constructor;
-  }
-  function _inherits22(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
-    if (superClass)
-      _setPrototypeOf22(subClass, superClass);
-  }
-  function _setPrototypeOf22(o, p) {
-    _setPrototypeOf22 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
-      o2.__proto__ = p2;
-      return o2;
-    };
-    return _setPrototypeOf22(o, p);
-  }
-  function _createSuper22(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct22();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf22(Derived), result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf22(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn22(this, result);
-    };
-  }
-  function _possibleConstructorReturn22(self2, call) {
-    if (call && (_typeof23(call) === "object" || typeof call === "function")) {
-      return call;
-    }
-    return _assertThisInitialized22(self2);
-  }
-  function _assertThisInitialized22(self2) {
-    if (self2 === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-    return self2;
-  }
-  function _isNativeReflectConstruct22() {
-    if (typeof Reflect === "undefined" || !Reflect.construct)
-      return false;
-    if (Reflect.construct.sham)
-      return false;
-    if (typeof Proxy === "function")
-      return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-      }));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-  function _getPrototypeOf22(o) {
-    _getPrototypeOf22 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
-      return o2.__proto__ || Object.getPrototypeOf(o2);
-    };
-    return _getPrototypeOf22(o);
-  }
-  function _defineProperty11(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
-    } else {
-      obj[key] = value;
-    }
-    return obj;
-  }
-  var InputNoResendDecorator = /* @__PURE__ */ function(_InputPolicy) {
-    _inherits22(InputNoResendDecorator2, _InputPolicy);
-    var _super = _createSuper22(InputNoResendDecorator2);
+  var InputNoResendDecorator = /* @__PURE__ */ function() {
     function InputNoResendDecorator2(target) {
-      var _this;
       var initialValues = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
-      _classCallCheck30(this, InputNoResendDecorator2);
-      _this = _super.call(this);
-      _defineProperty11(_assertThisInitialized22(_this), "lastSentValues", void 0);
-      _this.target = target;
-      _this.reset(initialValues);
-      return _this;
+      _classCallCheck29(this, InputNoResendDecorator2);
+      _defineProperty10(this, "target", void 0);
+      _defineProperty10(this, "lastSentValues", {});
+      this.target = target;
+      this.reset(initialValues);
     }
-    _createClass30(InputNoResendDecorator2, [{
+    _createClass29(InputNoResendDecorator2, [{
       key: "setInput",
       value: function setInput(nameType, value, opts) {
         var _splitInputNameType = splitInputNameType(nameType), inputName = _splitInputNameType.name, inputType = _splitInputNameType.inputType;
@@ -11208,24 +11108,72 @@
       }
     }]);
     return InputNoResendDecorator2;
-  }(InputPolicy);
+  }();
 
   // srcts/src/inputPolicies/inputEventDecorator.ts
-  var import_es_array_iterator24 = __toModule(require_es_array_iterator());
-  var import_jquery38 = __toModule(require_jquery());
-  function _typeof24(obj) {
-    "@babel/helpers - typeof";
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof24 = function _typeof27(obj2) {
-        return typeof obj2;
-      };
-    } else {
-      _typeof24 = function _typeof27(obj2) {
-        return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
-      };
+  var import_jquery37 = __toModule(require_jquery());
+  function _classCallCheck30(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
     }
-    return _typeof24(obj);
   }
+  function _defineProperties30(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor)
+        descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  function _createClass30(Constructor, protoProps, staticProps) {
+    if (protoProps)
+      _defineProperties30(Constructor.prototype, protoProps);
+    if (staticProps)
+      _defineProperties30(Constructor, staticProps);
+    return Constructor;
+  }
+  function _defineProperty11(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  var InputEventDecorator = /* @__PURE__ */ function() {
+    function InputEventDecorator2(target) {
+      _classCallCheck30(this, InputEventDecorator2);
+      _defineProperty11(this, "target", void 0);
+      this.target = target;
+    }
+    _createClass30(InputEventDecorator2, [{
+      key: "setInput",
+      value: function setInput(nameType, value, opts) {
+        var evt = jQuery.Event("shiny:inputchanged");
+        var input = splitInputNameType(nameType);
+        evt.name = input.name;
+        evt.inputType = input.inputType;
+        evt.value = value;
+        evt.binding = opts.binding || null;
+        evt.el = opts.el || null;
+        evt.priority = opts.priority;
+        (0, import_jquery37.default)(opts.el || window.document).trigger(evt);
+        if (!evt.isDefaultPrevented()) {
+          var name = evt.name;
+          if (evt.inputType !== "")
+            name += ":" + evt.inputType;
+          this.target.setInput(name, evt.value, {
+            priority: opts.priority
+          });
+        }
+      }
+    }]);
+    return InputEventDecorator2;
+  }();
+
+  // srcts/src/inputPolicies/inputRateDecorator.ts
   function _classCallCheck31(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -11248,200 +11196,6 @@
       _defineProperties31(Constructor, staticProps);
     return Constructor;
   }
-  function _inherits23(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
-    if (superClass)
-      _setPrototypeOf23(subClass, superClass);
-  }
-  function _setPrototypeOf23(o, p) {
-    _setPrototypeOf23 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
-      o2.__proto__ = p2;
-      return o2;
-    };
-    return _setPrototypeOf23(o, p);
-  }
-  function _createSuper23(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct23();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf23(Derived), result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf23(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn23(this, result);
-    };
-  }
-  function _possibleConstructorReturn23(self2, call) {
-    if (call && (_typeof24(call) === "object" || typeof call === "function")) {
-      return call;
-    }
-    return _assertThisInitialized23(self2);
-  }
-  function _assertThisInitialized23(self2) {
-    if (self2 === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-    return self2;
-  }
-  function _isNativeReflectConstruct23() {
-    if (typeof Reflect === "undefined" || !Reflect.construct)
-      return false;
-    if (Reflect.construct.sham)
-      return false;
-    if (typeof Proxy === "function")
-      return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-      }));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-  function _getPrototypeOf23(o) {
-    _getPrototypeOf23 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
-      return o2.__proto__ || Object.getPrototypeOf(o2);
-    };
-    return _getPrototypeOf23(o);
-  }
-  var InputEventDecorator = /* @__PURE__ */ function(_InputPolicy) {
-    _inherits23(InputEventDecorator2, _InputPolicy);
-    var _super = _createSuper23(InputEventDecorator2);
-    function InputEventDecorator2(target) {
-      var _this;
-      _classCallCheck31(this, InputEventDecorator2);
-      _this = _super.call(this);
-      _this.target = target;
-      return _this;
-    }
-    _createClass31(InputEventDecorator2, [{
-      key: "setInput",
-      value: function setInput(nameType, value, opts) {
-        var evt = jQuery.Event("shiny:inputchanged");
-        var input = splitInputNameType(nameType);
-        evt.name = input.name;
-        evt.inputType = input.inputType;
-        evt.value = value;
-        evt.binding = opts.binding;
-        evt.el = opts.el;
-        evt.priority = opts.priority;
-        (0, import_jquery38.default)(opts.el).trigger(evt);
-        if (!evt.isDefaultPrevented()) {
-          var name = evt.name;
-          if (evt.inputType !== "")
-            name += ":" + evt.inputType;
-          this.target.setInput(name, evt.value, {
-            priority: opts.priority
-          });
-        }
-      }
-    }]);
-    return InputEventDecorator2;
-  }(InputPolicy);
-
-  // srcts/src/inputPolicies/inputRateDecorator.ts
-  var import_es_array_iterator25 = __toModule(require_es_array_iterator());
-  function _typeof25(obj) {
-    "@babel/helpers - typeof";
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof25 = function _typeof27(obj2) {
-        return typeof obj2;
-      };
-    } else {
-      _typeof25 = function _typeof27(obj2) {
-        return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
-      };
-    }
-    return _typeof25(obj);
-  }
-  function _classCallCheck32(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-  function _defineProperties32(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor)
-        descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-  function _createClass32(Constructor, protoProps, staticProps) {
-    if (protoProps)
-      _defineProperties32(Constructor.prototype, protoProps);
-    if (staticProps)
-      _defineProperties32(Constructor, staticProps);
-    return Constructor;
-  }
-  function _inherits24(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
-    if (superClass)
-      _setPrototypeOf24(subClass, superClass);
-  }
-  function _setPrototypeOf24(o, p) {
-    _setPrototypeOf24 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
-      o2.__proto__ = p2;
-      return o2;
-    };
-    return _setPrototypeOf24(o, p);
-  }
-  function _createSuper24(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct24();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf24(Derived), result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf24(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn24(this, result);
-    };
-  }
-  function _possibleConstructorReturn24(self2, call) {
-    if (call && (_typeof25(call) === "object" || typeof call === "function")) {
-      return call;
-    }
-    return _assertThisInitialized24(self2);
-  }
-  function _assertThisInitialized24(self2) {
-    if (self2 === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-    return self2;
-  }
-  function _isNativeReflectConstruct24() {
-    if (typeof Reflect === "undefined" || !Reflect.construct)
-      return false;
-    if (Reflect.construct.sham)
-      return false;
-    if (typeof Proxy === "function")
-      return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-      }));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-  function _getPrototypeOf24(o) {
-    _getPrototypeOf24 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
-      return o2.__proto__ || Object.getPrototypeOf(o2);
-    };
-    return _getPrototypeOf24(o);
-  }
   function _defineProperty12(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
@@ -11450,18 +11204,14 @@
     }
     return obj;
   }
-  var InputRateDecorator = /* @__PURE__ */ function(_InputPolicy) {
-    _inherits24(InputRateDecorator2, _InputPolicy);
-    var _super = _createSuper24(InputRateDecorator2);
+  var InputRateDecorator = /* @__PURE__ */ function() {
     function InputRateDecorator2(target) {
-      var _this;
-      _classCallCheck32(this, InputRateDecorator2);
-      _this = _super.call(this);
-      _defineProperty12(_assertThisInitialized24(_this), "inputRatePolicies", {});
-      _this.target = target;
-      return _this;
+      _classCallCheck31(this, InputRateDecorator2);
+      _defineProperty12(this, "target", void 0);
+      _defineProperty12(this, "inputRatePolicies", {});
+      this.target = target;
     }
-    _createClass32(InputRateDecorator2, [{
+    _createClass31(InputRateDecorator2, [{
       key: "setInput",
       value: function setInput(nameType, value, opts) {
         var _splitInputNameType = splitInputNameType(nameType), inputName = _splitInputNameType.name;
@@ -11496,29 +11246,15 @@
       }
     }]);
     return InputRateDecorator2;
-  }(InputPolicy);
+  }();
 
   // srcts/src/inputPolicies/inputDeferDecorator.ts
-  var import_es_array_iterator26 = __toModule(require_es_array_iterator());
-  function _typeof26(obj) {
-    "@babel/helpers - typeof";
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof26 = function _typeof27(obj2) {
-        return typeof obj2;
-      };
-    } else {
-      _typeof26 = function _typeof27(obj2) {
-        return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
-      };
-    }
-    return _typeof26(obj);
-  }
-  function _classCallCheck33(instance, Constructor) {
+  function _classCallCheck32(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-  function _defineProperties33(target, props) {
+  function _defineProperties32(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
       descriptor.enumerable = descriptor.enumerable || false;
@@ -11528,73 +11264,12 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-  function _createClass33(Constructor, protoProps, staticProps) {
+  function _createClass32(Constructor, protoProps, staticProps) {
     if (protoProps)
-      _defineProperties33(Constructor.prototype, protoProps);
+      _defineProperties32(Constructor.prototype, protoProps);
     if (staticProps)
-      _defineProperties33(Constructor, staticProps);
+      _defineProperties32(Constructor, staticProps);
     return Constructor;
-  }
-  function _inherits25(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
-    if (superClass)
-      _setPrototypeOf25(subClass, superClass);
-  }
-  function _setPrototypeOf25(o, p) {
-    _setPrototypeOf25 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
-      o2.__proto__ = p2;
-      return o2;
-    };
-    return _setPrototypeOf25(o, p);
-  }
-  function _createSuper25(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct25();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf25(Derived), result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf25(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn25(this, result);
-    };
-  }
-  function _possibleConstructorReturn25(self2, call) {
-    if (call && (_typeof26(call) === "object" || typeof call === "function")) {
-      return call;
-    }
-    return _assertThisInitialized25(self2);
-  }
-  function _assertThisInitialized25(self2) {
-    if (self2 === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-    return self2;
-  }
-  function _isNativeReflectConstruct25() {
-    if (typeof Reflect === "undefined" || !Reflect.construct)
-      return false;
-    if (Reflect.construct.sham)
-      return false;
-    if (typeof Proxy === "function")
-      return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-      }));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-  function _getPrototypeOf25(o) {
-    _getPrototypeOf25 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
-      return o2.__proto__ || Object.getPrototypeOf(o2);
-    };
-    return _getPrototypeOf25(o);
   }
   function _defineProperty13(obj, key, value) {
     if (key in obj) {
@@ -11604,18 +11279,14 @@
     }
     return obj;
   }
-  var InputDeferDecorator = /* @__PURE__ */ function(_InputPolicy) {
-    _inherits25(InputDeferDecorator2, _InputPolicy);
-    var _super = _createSuper25(InputDeferDecorator2);
+  var InputDeferDecorator = /* @__PURE__ */ function() {
     function InputDeferDecorator2(target) {
-      var _this;
-      _classCallCheck33(this, InputDeferDecorator2);
-      _this = _super.call(this);
-      _defineProperty13(_assertThisInitialized25(_this), "pendingInput", {});
-      _this.target = target;
-      return _this;
+      _classCallCheck32(this, InputDeferDecorator2);
+      _defineProperty13(this, "pendingInput", {});
+      _defineProperty13(this, "target", void 0);
+      this.target = target;
     }
-    _createClass33(InputDeferDecorator2, [{
+    _createClass32(InputDeferDecorator2, [{
       key: "setInput",
       value: function setInput(nameType, value, opts) {
         if (/^\./.test(nameType))
@@ -11638,14 +11309,84 @@
       }
     }]);
     return InputDeferDecorator2;
-  }(InputPolicy);
+  }();
+
+  // node_modules/core-js/modules/es.object.get-own-property-descriptors.js
+  var $61 = require_export();
+  var DESCRIPTORS6 = require_descriptors();
+  var ownKeys = require_own_keys();
+  var toIndexedObject5 = require_to_indexed_object();
+  var getOwnPropertyDescriptorModule3 = require_object_get_own_property_descriptor();
+  var createProperty4 = require_create_property();
+  $61({ target: "Object", stat: true, sham: !DESCRIPTORS6 }, {
+    getOwnPropertyDescriptors: function getOwnPropertyDescriptors(object) {
+      var O = toIndexedObject5(object);
+      var getOwnPropertyDescriptor4 = getOwnPropertyDescriptorModule3.f;
+      var keys2 = ownKeys(O);
+      var result = {};
+      var index = 0;
+      var key, descriptor;
+      while (keys2.length > index) {
+        descriptor = getOwnPropertyDescriptor4(O, key = keys2[index++]);
+        if (descriptor !== void 0)
+          createProperty4(result, key, descriptor);
+      }
+      return result;
+    }
+  });
 
   // srcts/src/inputPolicies/inputValidateDecorator.ts
-  var import_jquery39 = __toModule(require_jquery());
-  function _classCallCheck34(instance, Constructor) {
+  function _classCallCheck33(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
+  }
+  function _defineProperties33(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor)
+        descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  function _createClass33(Constructor, protoProps, staticProps) {
+    if (protoProps)
+      _defineProperties33(Constructor.prototype, protoProps);
+    if (staticProps)
+      _defineProperties33(Constructor, staticProps);
+    return Constructor;
+  }
+  function ownKeys2(object, enumerableOnly) {
+    var keys2 = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) {
+        symbols = symbols.filter(function(sym) {
+          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+        });
+      }
+      keys2.push.apply(keys2, symbols);
+    }
+    return keys2;
+  }
+  function _objectSpread(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+      if (i % 2) {
+        ownKeys2(Object(source), true).forEach(function(key) {
+          _defineProperty14(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys2(Object(source)).forEach(function(key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
+    }
+    return target;
   }
   function _defineProperty14(obj, key, value) {
     if (key in obj) {
@@ -11656,40 +11397,43 @@
     return obj;
   }
   function addDefaultInputOpts(opts) {
-    var newOpts = import_jquery39.default.extend({
-      priority: "immediate",
-      binding: null,
-      el: null
+    var newOpts = _objectSpread({
+      priority: "immediate"
     }, opts);
-    if (newOpts && typeof newOpts.priority !== "undefined") {
-      switch (newOpts.priority) {
-        case "deferred":
-        case "immediate":
-        case "event":
-          break;
-        default:
-          throw new Error("Unexpected input value mode: '" + newOpts.priority + "'");
-      }
+    switch (newOpts.priority) {
+      case "deferred":
+      case "immediate":
+      case "event":
+        break;
+      default:
+        throw new Error("Unexpected input value mode: '" + newOpts.priority + "'");
     }
     return newOpts;
   }
-  var InputValidateDecorator = function InputValidateDecorator2(target) {
-    _classCallCheck34(this, InputValidateDecorator2);
-    _defineProperty14(this, "target", void 0);
-    _defineProperty14(this, "setInput", function(nameType, value, opts) {
-      if (!nameType)
-        throw "Can't set input with empty name.";
-      var newOpts = addDefaultInputOpts(opts);
-      this.target.setInput(nameType, value, newOpts);
-    });
-    this.target = target;
-  };
+  var InputValidateDecorator = /* @__PURE__ */ function() {
+    function InputValidateDecorator2(target) {
+      _classCallCheck33(this, InputValidateDecorator2);
+      _defineProperty14(this, "target", void 0);
+      this.target = target;
+    }
+    _createClass33(InputValidateDecorator2, [{
+      key: "setInput",
+      value: function setInput(nameType, value) {
+        var opts = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
+        if (!nameType)
+          throw "Can't set input with empty name.";
+        var newOpts = addDefaultInputOpts(opts);
+        this.target.setInput(nameType, value, newOpts);
+      }
+    }]);
+    return InputValidateDecorator2;
+  }();
 
   // srcts/src/shiny/bind.ts
-  var import_jquery40 = __toModule(require_jquery());
+  var import_jquery38 = __toModule(require_jquery());
 
   // srcts/src/bindings/outputAdapter.ts
-  function _classCallCheck35(instance, Constructor) {
+  function _classCallCheck34(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
@@ -11721,7 +11465,7 @@
   }
   var OutputBindingAdapter = /* @__PURE__ */ function() {
     function OutputBindingAdapter2(el, binding) {
-      _classCallCheck35(this, OutputBindingAdapter2);
+      _classCallCheck34(this, OutputBindingAdapter2);
       _defineProperty15(this, "el", void 0);
       _defineProperty15(this, "binding", void 0);
       this.el = el;
@@ -11808,8 +11552,8 @@
           };
         }();
         binding.subscribe(el, thisCallback);
-        (0, import_jquery40.default)(el).data("shiny-input-binding", binding);
-        (0, import_jquery40.default)(el).addClass("shiny-bound-input");
+        (0, import_jquery38.default)(el).data("shiny-input-binding", binding);
+        (0, import_jquery38.default)(el).addClass("shiny-bound-input");
         var ratePolicy = binding.getRatePolicy(el);
         if (ratePolicy !== null) {
           inputsRate.setRatePolicy(effectiveId, ratePolicy.policy, ratePolicy.delay);
@@ -11818,7 +11562,7 @@
           binding: binding,
           node: el
         };
-        (0, import_jquery40.default)(el).trigger({
+        (0, import_jquery38.default)(el).trigger({
           type: "shiny:bound",
           binding: binding,
           bindingType: "input"
@@ -11838,7 +11582,7 @@
   function bindOutputs(_ref) {
     var sendOutputHiddenState = _ref.sendOutputHiddenState, maybeAddThemeObserver = _ref.maybeAddThemeObserver, outputBindings = _ref.outputBindings;
     var scope = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : document.documentElement;
-    var $scope = (0, import_jquery40.default)(scope);
+    var $scope = (0, import_jquery38.default)(scope);
     var bindings = outputBindings.getBindings();
     for (var i = 0; i < bindings.length; i++) {
       var binding = bindings[i].binding;
@@ -11848,9 +11592,9 @@
         var id = binding.getId(_el);
         if (!id)
           continue;
-        if (!import_jquery40.default.contains(document.documentElement, _el))
+        if (!import_jquery38.default.contains(document.documentElement, _el))
           continue;
-        var $el = (0, import_jquery40.default)(_el);
+        var $el = (0, import_jquery38.default)(_el);
         if ($el.hasClass("shiny-bound-output")) {
           continue;
         }
@@ -11874,20 +11618,20 @@
   function unbindInputs() {
     var scope = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : document.documentElement;
     var includeSelf = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : false;
-    var inputs = (0, import_jquery40.default)(scope).find(".shiny-bound-input").toArray();
-    if (includeSelf && (0, import_jquery40.default)(scope).hasClass("shiny-bound-input")) {
+    var inputs = (0, import_jquery38.default)(scope).find(".shiny-bound-input").toArray();
+    if (includeSelf && (0, import_jquery38.default)(scope).hasClass("shiny-bound-input")) {
       inputs.push(scope);
     }
     for (var i = 0; i < inputs.length; i++) {
       var _el2 = inputs[i];
-      var binding = (0, import_jquery40.default)(_el2).data("shiny-input-binding");
+      var binding = (0, import_jquery38.default)(_el2).data("shiny-input-binding");
       if (!binding)
         continue;
       var id = binding.getId(_el2);
-      (0, import_jquery40.default)(_el2).removeClass("shiny-bound-input");
+      (0, import_jquery38.default)(_el2).removeClass("shiny-bound-input");
       delete boundInputs[id];
       binding.unsubscribe(_el2);
-      (0, import_jquery40.default)(_el2).trigger({
+      (0, import_jquery38.default)(_el2).trigger({
         type: "shiny:unbound",
         binding: binding,
         bindingType: "input"
@@ -11898,12 +11642,12 @@
     var sendOutputHiddenState = _ref2.sendOutputHiddenState;
     var scope = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : document.documentElement;
     var includeSelf = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : false;
-    var outputs = (0, import_jquery40.default)(scope).find(".shiny-bound-output").toArray();
-    if (includeSelf && (0, import_jquery40.default)(scope).hasClass("shiny-bound-output")) {
+    var outputs = (0, import_jquery38.default)(scope).find(".shiny-bound-output").toArray();
+    if (includeSelf && (0, import_jquery38.default)(scope).hasClass("shiny-bound-output")) {
       outputs.push(scope);
     }
     for (var i = 0; i < outputs.length; i++) {
-      var $el = (0, import_jquery40.default)(outputs[i]);
+      var $el = (0, import_jquery38.default)(outputs[i]);
       var bindingAdapter = $el.data("shiny-output-binding");
       if (!bindingAdapter)
         continue;
@@ -11932,7 +11676,7 @@
   function bindAll(shinyCtx, scope) {
     var currentInputItems = _bindAll(shinyCtx, scope);
     var inputs = shinyCtx.inputs;
-    import_jquery40.default.each(currentInputItems, function(name, item) {
+    import_jquery38.default.each(currentInputItems, function(name, item) {
       inputs.setInput(name, item.value, item.opts);
     });
     shinyCtx.initDeferredIframes();
@@ -11941,12 +11685,12 @@
   // node_modules/core-js/modules/es.array-buffer.constructor.js
   "use strict";
   var $63 = require_export();
-  var global6 = require_global();
+  var global7 = require_global();
   var arrayBufferModule = require_array_buffer();
   var setSpecies = require_set_species();
   var ARRAY_BUFFER = "ArrayBuffer";
   var ArrayBuffer2 = arrayBufferModule[ARRAY_BUFFER];
-  var NativeArrayBuffer = global6[ARRAY_BUFFER];
+  var NativeArrayBuffer = global7[ARRAY_BUFFER];
   $63({ global: true, forced: NativeArrayBuffer !== ArrayBuffer2 }, {
     ArrayBuffer: ArrayBuffer2
   });
@@ -12011,36 +11755,8 @@
 
   // srcts/src/shiny/shinyapp.ts
   var import_es_regexp_exec9 = __toModule(require_es_regexp_exec());
-
-  // node_modules/core-js/modules/es.array.for-each.js
-  "use strict";
-  var $67 = require_export();
-  var forEach = require_array_for_each();
-  $67({ target: "Array", proto: true, forced: [].forEach != forEach }, {
-    forEach: forEach
-  });
-
-  // node_modules/core-js/modules/web.dom-collections.for-each.js
-  var global7 = require_global();
-  var DOMIterables2 = require_dom_iterables();
-  var forEach2 = require_array_for_each();
-  var createNonEnumerableProperty3 = require_create_non_enumerable_property();
-  for (var COLLECTION_NAME in DOMIterables2) {
-    Collection = global7[COLLECTION_NAME];
-    CollectionPrototype = Collection && Collection.prototype;
-    if (CollectionPrototype && CollectionPrototype.forEach !== forEach2)
-      try {
-        createNonEnumerableProperty3(CollectionPrototype, "forEach", forEach2);
-      } catch (error) {
-        CollectionPrototype.forEach = forEach2;
-      }
-  }
-  var Collection;
-  var CollectionPrototype;
-
-  // srcts/src/shiny/shinyapp.ts
-  var import_jquery41 = __toModule(require_jquery());
-  function _classCallCheck36(instance, Constructor) {
+  var import_jquery39 = __toModule(require_jquery());
+  function _classCallCheck35(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
@@ -12106,7 +11822,7 @@
   }
   var ShinyApp = /* @__PURE__ */ function() {
     function ShinyApp2() {
-      _classCallCheck36(this, ShinyApp2);
+      _classCallCheck35(this, ShinyApp2);
       _defineProperty16(this, "$socket", null);
       _defineProperty16(this, "config", null);
       _defineProperty16(this, "$inputValues", {});
@@ -12142,7 +11858,7 @@
           var key = message.id;
           var binding2 = this.$bindings[key];
           if (binding2) {
-            (0, import_jquery41.default)(binding2.el).trigger({
+            (0, import_jquery39.default)(binding2.el).trigger({
               type: "shiny:outputinvalidated",
               binding: binding2,
               name: key
@@ -12159,13 +11875,13 @@
               duration: null
             });
           } else if (message.style === "old") {
-            var $container = (0, import_jquery41.default)(".shiny-progress-container");
+            var $container = (0, import_jquery39.default)(".shiny-progress-container");
             if ($container.length === 0) {
-              $container = (0, import_jquery41.default)('<div class="shiny-progress-container"></div>');
-              (0, import_jquery41.default)(document.body).append($container);
+              $container = (0, import_jquery39.default)('<div class="shiny-progress-container"></div>');
+              (0, import_jquery39.default)(document.body).append($container);
             }
-            var depth = (0, import_jquery41.default)(".shiny-progress.open").length;
-            var $progress = (0, import_jquery41.default)('<div class="shiny-progress open"><div class="progress active"><div class="progress-bar bar"></div></div><div class="progress-text"><span class="progress-message">message</span><span class="progress-detail"></span></div></div>');
+            var depth = (0, import_jquery39.default)(".shiny-progress.open").length;
+            var $progress = (0, import_jquery39.default)('<div class="shiny-progress open"><div class="progress active"><div class="progress-bar bar"></div></div><div class="progress-text"><span class="progress-message">message</span><span class="progress-detail"></span></div></div>');
             $progress.attr("id", message.id);
             $container.append($progress);
             var $progressBar = $progress.find(".progress");
@@ -12177,7 +11893,7 @@
         },
         update: function update(message) {
           if (message.style === "notification") {
-            var $progress = (0, import_jquery41.default)("#shiny-progress-" + message.id);
+            var $progress = (0, import_jquery39.default)("#shiny-progress-" + message.id);
             if ($progress.length === 0)
               return;
             if (typeof message.message !== "undefined") {
@@ -12191,7 +11907,7 @@
               $progress.find(".progress-bar").width(message.value * 100 + "%");
             }
           } else if (message.style === "old") {
-            var _$progress = (0, import_jquery41.default)("#" + message.id + ".shiny-progress");
+            var _$progress = (0, import_jquery39.default)("#" + message.id + ".shiny-progress");
             if (typeof message.message !== "undefined") {
               _$progress.find(".progress-message").text(message.message);
             }
@@ -12209,13 +11925,13 @@
           if (message.style === "notification") {
             remove(message.id);
           } else if (message.style === "old") {
-            var $progress = (0, import_jquery41.default)("#" + message.id + ".shiny-progress");
+            var $progress = (0, import_jquery39.default)("#" + message.id + ".shiny-progress");
             $progress.removeClass("open");
             $progress.fadeOut({
               complete: function complete() {
                 $progress.remove();
-                if ((0, import_jquery41.default)(".shiny-progress").length === 0)
-                  (0, import_jquery41.default)(".shiny-progress-container").remove();
+                if ((0, import_jquery39.default)(".shiny-progress").length === 0)
+                  (0, import_jquery39.default)(".shiny-progress-container").remove();
               }
             });
           }
@@ -12230,7 +11946,7 @@
           throw "Connect was already called on this application object";
         this.$socket = this.createSocket();
         this.$initialInput = initialInput;
-        import_jquery41.default.extend(this.$inputValues, initialInput);
+        import_jquery39.default.extend(this.$inputValues, initialInput);
         this.$updateConditionals();
       }
     }, {
@@ -12245,7 +11961,7 @@
         if (this.isConnected())
           throw "Attempted to reconnect, but already connected.";
         this.$socket = this.createSocket();
-        this.$initialInput = import_jquery41.default.extend({}, this.$inputValues);
+        this.$initialInput = import_jquery39.default.extend({}, this.$inputValues);
         this.$updateConditionals();
       }
     }, {
@@ -12274,7 +11990,7 @@
         var hasOpened = false;
         socket.onopen = function() {
           hasOpened = true;
-          (0, import_jquery41.default)(document).trigger({
+          (0, import_jquery39.default)(document).trigger({
             type: "shiny:connected",
             socket: socket
           });
@@ -12293,7 +12009,7 @@
         };
         socket.onclose = function() {
           if (hasOpened) {
-            (0, import_jquery41.default)(document).trigger({
+            (0, import_jquery39.default)(document).trigger({
               type: "shiny:disconnected",
               socket: socket
             });
@@ -12312,7 +12028,7 @@
           data: values
         });
         this.$sendMsg(msg);
-        import_jquery41.default.extend(this.$inputValues, values);
+        import_jquery39.default.extend(this.$inputValues, values);
         this.$updateConditionals();
       }
     }, {
@@ -12338,9 +12054,9 @@
     }, {
       key: "onDisconnected",
       value: function onDisconnected() {
-        var $overlay = (0, import_jquery41.default)("#shiny-disconnected-overlay");
+        var $overlay = (0, import_jquery39.default)("#shiny-disconnected-overlay");
         if ($overlay.length === 0) {
-          (0, import_jquery41.default)(document.body).append('<div id="shiny-disconnected-overlay"></div>');
+          (0, import_jquery39.default)(document.body).append('<div id="shiny-disconnected-overlay"></div>');
         }
         if (this.$allowReconnect === true && this.$socket.allowReconnect === true || this.$allowReconnect === "force") {
           var delay = this.reconnectDelay.next();
@@ -12351,7 +12067,7 @@
     }, {
       key: "onConnected",
       value: function onConnected() {
-        (0, import_jquery41.default)("#shiny-disconnected-overlay").remove();
+        (0, import_jquery39.default)("#shiny-disconnected-overlay").remove();
         hideReconnectDialog();
         this.reconnectDelay.reset();
       }
@@ -12415,7 +12131,7 @@
         evt.name = name;
         evt.error = error;
         evt.binding = binding;
-        (0, import_jquery41.default)(binding ? binding.el : document).trigger(evt);
+        (0, import_jquery39.default)(binding ? binding.el : document).trigger(evt);
         if (!evt.isDefaultPrevented() && binding && binding.onValueError) {
           binding.onValueError(evt.error);
         }
@@ -12429,12 +12145,12 @@
         evt.value = value;
         evt.binding = binding;
         if (this.$values[name] === value) {
-          (0, import_jquery41.default)(binding ? binding.el : document).trigger(evt);
+          (0, import_jquery39.default)(binding ? binding.el : document).trigger(evt);
           return void 0;
         }
         this.$values[name] = value;
         delete this.$errors[name];
-        (0, import_jquery41.default)(binding ? binding.el : document).trigger(evt);
+        (0, import_jquery39.default)(binding ? binding.el : document).trigger(evt);
         if (!evt.isDefaultPrevented() && binding) {
           binding.onValueChange(evt.value);
         }
@@ -12472,7 +12188,7 @@
         }).map(function(k) {
           return _defineProperty16({}, k.substring(nsPrefix.length), scopeComponent[k]);
         }).reduce(function(obj, pair) {
-          return import_jquery41.default.extend(obj, pair);
+          return import_jquery39.default.extend(obj, pair);
         }, {});
       }
     }, {
@@ -12489,7 +12205,7 @@
     }, {
       key: "$updateConditionals",
       value: function $updateConditionals() {
-        (0, import_jquery41.default)(document).trigger({
+        (0, import_jquery39.default)(document).trigger({
           type: "shiny:conditional"
         });
         var inputs = {};
@@ -12503,9 +12219,9 @@
           input: inputs,
           output: this.$values
         };
-        var conditionals = (0, import_jquery41.default)(document).find("[data-display-if]");
+        var conditionals = (0, import_jquery39.default)(document).find("[data-display-if]");
         for (var i = 0; i < conditionals.length; i++) {
-          var el = (0, import_jquery41.default)(conditionals[i]);
+          var el = (0, import_jquery39.default)(conditionals[i]);
           var condFunc = el.data("data-display-if-func");
           if (!condFunc) {
             var condExpr = el.attr("data-display-if");
@@ -12549,7 +12265,7 @@
         }
         var evt = jQuery.Event("shiny:message");
         evt.message = msgObj;
-        (0, import_jquery41.default)(document).trigger(evt);
+        (0, import_jquery39.default)(document).trigger(evt);
         if (evt.isDefaultPrevented())
           return;
         this._sendMessagesToHandlers(evt.message, messageHandlers, messageHandlerOrder);
@@ -12588,7 +12304,7 @@
         });
         addMessageHandler("inputMessages", function(message) {
           for (var i = 0; i < message.length; i++) {
-            var $obj = (0, import_jquery41.default)(".shiny-bound-input#" + $escape(message[i].id));
+            var $obj = (0, import_jquery39.default)(".shiny-bound-input#" + $escape(message[i].id));
             var inputBinding = $obj.data("shiny-input-binding");
             if ($obj.length > 0) {
               if (!$obj.attr("aria-live"))
@@ -12597,7 +12313,7 @@
               var evt = jQuery.Event("shiny:updateinput");
               evt.message = message[i].message;
               evt.binding = inputBinding;
-              (0, import_jquery41.default)(el).trigger(evt);
+              (0, import_jquery39.default)(el).trigger(evt);
               if (!evt.isDefaultPrevented())
                 inputBinding.receiveMessage(el, evt.message);
             }
@@ -12670,21 +12386,21 @@
           };
           if (message.user)
             setShinyUser(message.user);
-          (0, import_jquery41.default)(document).trigger("shiny:sessioninitialized");
+          (0, import_jquery39.default)(document).trigger("shiny:sessioninitialized");
         });
         addMessageHandler("busy", function(message) {
           if (message === "busy") {
-            (0, import_jquery41.default)(document.documentElement).addClass("shiny-busy");
-            (0, import_jquery41.default)(document).trigger("shiny:busy");
+            (0, import_jquery39.default)(document.documentElement).addClass("shiny-busy");
+            (0, import_jquery39.default)(document).trigger("shiny:busy");
           } else if (message === "idle") {
-            (0, import_jquery41.default)(document.documentElement).removeClass("shiny-busy");
-            (0, import_jquery41.default)(document).trigger("shiny:idle");
+            (0, import_jquery39.default)(document.documentElement).removeClass("shiny-busy");
+            (0, import_jquery39.default)(document).trigger("shiny:idle");
           }
         });
         addMessageHandler("recalculating", function(message) {
           if (hasOwnProperty(message, "name") && hasOwnProperty(message, "status")) {
             var binding = _this3.$bindings[message.name];
-            (0, import_jquery41.default)(binding ? binding.el : null).trigger({
+            (0, import_jquery39.default)(binding ? binding.el : null).trigger({
               type: "shiny:" + message.status
             });
           }
@@ -12695,10 +12411,10 @@
           message;
         });
         addMessageHandler("shiny-insert-ui", function(message) {
-          var targets = (0, import_jquery41.default)(message.selector);
+          var targets = (0, import_jquery39.default)(message.selector);
           if (targets.length === 0) {
             console.warn('The selector you chose ("' + message.selector + '") could not be found in the DOM.');
-            renderHtml2(message.content.html, (0, import_jquery41.default)([]).get(0), message.content.deps);
+            renderHtml2(message.content.html, (0, import_jquery39.default)([]).get(0), message.content.deps);
           } else {
             targets.each(function(i, target) {
               renderContent(target, message.content, message.where);
@@ -12707,10 +12423,10 @@
           }
         });
         addMessageHandler("shiny-remove-ui", function(message) {
-          var els = (0, import_jquery41.default)(message.selector);
+          var els = (0, import_jquery39.default)(message.selector);
           els.each(function(i, el) {
             shinyUnbindAll(el, true);
-            (0, import_jquery41.default)(el).remove();
+            (0, import_jquery39.default)(el).remove();
             return message.multiple;
           });
         });
@@ -12720,14 +12436,14 @@
           }
         });
         function getTabset(id) {
-          var $tabset = (0, import_jquery41.default)("#" + $escape(id));
+          var $tabset = (0, import_jquery39.default)("#" + $escape(id));
           if ($tabset.length === 0)
             throw "There is no tabsetPanel (or navbarPage or navlistPanel) with id equal to '" + id + "'";
           return $tabset;
         }
         function getTabContent($tabset) {
           var tabsetId = $tabset.attr("data-tabsetid");
-          var $tabContent = (0, import_jquery41.default)("div.tab-content[data-tabsetid='" + $escape(tabsetId) + "']");
+          var $tabContent = (0, import_jquery39.default)("div.tab-content[data-tabsetid='" + $escape(tabsetId) + "']");
           return $tabContent;
         }
         function getTargetTabs($tabset, $tabContent, target) {
@@ -12744,12 +12460,12 @@
             var dropdownId = $dropdownTabset.attr("data-tabsetid");
             var $dropdownLiTags = $dropdownTabset.find("a[data-toggle='tab']").parent("li");
             $dropdownLiTags.each(function(i, el) {
-              $liTags.push((0, import_jquery41.default)(el));
+              $liTags.push((0, import_jquery39.default)(el));
             });
             var selector = "div.tab-pane[id^='tab-" + $escape(dropdownId) + "']";
             var $dropdownDivs = $tabContent.find(selector);
             $dropdownDivs.each(function(i, el) {
-              $divTags.push((0, import_jquery41.default)(el));
+              $divTags.push((0, import_jquery39.default)(el));
             });
           } else {
             $divTags.push($tabContent.find("div" + dataValue));
@@ -12765,8 +12481,8 @@
           var $tabset = $parentTabset;
           var $tabContent = getTabContent($tabset);
           var tabsetId = $parentTabset.attr("data-tabsetid");
-          var $divTag = (0, import_jquery41.default)(message.divTag.html);
-          var $liTag = (0, import_jquery41.default)(message.liTag.html);
+          var $divTag = (0, import_jquery39.default)(message.divTag.html);
+          var $liTag = (0, import_jquery39.default)(message.liTag.html);
           var $aTag = $liTag.find("> a");
           var target = null;
           var $targetLiTag = null;
@@ -12819,7 +12535,7 @@
           function getTabIndex($tabset2, tabsetId2) {
             var existingTabIds = [0];
             $tabset2.find("> li").each(function() {
-              var $tab = (0, import_jquery41.default)(this).find("> a[data-toggle='tab']");
+              var $tab = (0, import_jquery39.default)(this).find("> a[data-toggle='tab']");
               if ($tab.length > 0) {
                 var href = $tab.attr("href").replace(/.*(?=#[^\s]+$)/, "");
                 var _index = href.replace("#tab-" + tabsetId2 + "-", "");
@@ -12830,7 +12546,7 @@
           }
           function getDropdown() {
             if (message.menuName !== null) {
-              var $dropdownATag = (0, import_jquery41.default)("a.dropdown-toggle[data-value='" + $escape(message.menuName) + "']");
+              var $dropdownATag = (0, import_jquery39.default)("a.dropdown-toggle[data-value='" + $escape(message.menuName) + "']");
               if ($dropdownATag.length === 0) {
                 throw "There is no navbarMenu with menuName equal to '" + message.menuName + "'";
               }
@@ -12868,15 +12584,15 @@
         }
         function tabApplyFunction(target, func) {
           var liTags = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : false;
-          import_jquery41.default.each(target, function(key, el) {
+          import_jquery39.default.each(target, function(key, el) {
             if (key === "$liTag") {
               func(el);
             } else if (key === "$divTags") {
-              import_jquery41.default.each(el, function(i, div) {
+              import_jquery39.default.each(el, function(i, div) {
                 func(div);
               });
             } else if (liTags && key === "$liTags") {
-              import_jquery41.default.each(el, function(i, div) {
+              import_jquery39.default.each(el, function(i, div) {
                 func(div);
               });
             }
@@ -12934,7 +12650,7 @@
           if (window.location.hash !== oldHash)
             what = "hash";
           if (what === "hash")
-            (0, import_jquery41.default)(document).trigger("hashchange");
+            (0, import_jquery39.default)(document).trigger("hashchange");
         });
         addMessageHandler("resetBrush", function(message) {
           resetBrush(message.brushId);
@@ -12967,10 +12683,10 @@
     var inputsRate = new InputRateDecorator(inputsEvent);
     var inputsDefer = new InputDeferDecorator(inputsEvent);
     var target;
-    if ((0, import_jquery42.default)('input[type="submit"], button[type="submit"]').length > 0) {
+    if ((0, import_jquery40.default)('input[type="submit"], button[type="submit"]').length > 0) {
       target = inputsDefer;
-      (0, import_jquery42.default)('input[type="submit"], button[type="submit"]').each(function() {
-        (0, import_jquery42.default)(this).click(function(event) {
+      (0, import_jquery40.default)('input[type="submit"], button[type="submit"]').each(function() {
+        (0, import_jquery40.default)(this).click(function(event) {
           event.preventDefault();
           inputsDefer.submit();
         });
@@ -12979,7 +12695,8 @@
       target = inputsRate;
     }
     var inputs = new InputValidateDecorator(target);
-    windowShiny3.setInputValue = windowShiny3.onInputChange = function(name, value, opts) {
+    windowShiny3.setInputValue = windowShiny3.onInputChange = function(name, value) {
+      var opts = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
       var newOpts = addDefaultInputOpts(opts);
       inputs.setInput(name, value, newOpts);
     };
@@ -13014,7 +12731,7 @@
         var inputObjects = binding.find(scope);
         if (inputObjects) {
           for (var j = 0; j < inputObjects.length; j++) {
-            var $inputObjectJ = (0, import_jquery42.default)(inputObjects[j]);
+            var $inputObjectJ = (0, import_jquery40.default)(inputObjects[j]);
             if (!$inputObjectJ.data("_shiny_initialized")) {
               $inputObjectJ.data("_shiny_initialized", true);
               binding.initialize(inputObjects[j]);
@@ -13025,7 +12742,7 @@
     }
     windowShiny3.initializeInputs = initializeInputs;
     function getIdFromEl(el) {
-      var $el = (0, import_jquery42.default)(el);
+      var $el = (0, import_jquery40.default)(el);
       var bindingAdapter = $el.data("shiny-output-binding");
       if (!bindingAdapter)
         return null;
@@ -13036,7 +12753,7 @@
     var initialValues = mapValues(_bindAll(shinyBindCtx(), document.documentElement), function(x) {
       return x.value;
     });
-    (0, import_jquery42.default)(".shiny-image-output, .shiny-plot-output, .shiny-report-size").each(function() {
+    (0, import_jquery40.default)(".shiny-image-output, .shiny-plot-output, .shiny-report-size").each(function() {
       var id = getIdFromEl(this);
       if (this.offsetWidth !== 0 || this.offsetHeight !== 0) {
         initialValues[".clientdata_output_" + id + "_width"] = this.offsetWidth;
@@ -13067,7 +12784,7 @@
         size: fontSize
       };
     }
-    (0, import_jquery42.default)(".shiny-image-output, .shiny-plot-output, .shiny-report-theme").each(function() {
+    (0, import_jquery40.default)(".shiny-image-output, .shiny-plot-output, .shiny-report-theme").each(function() {
       var el = this;
       var id = getIdFromEl(el);
       initialValues[".clientdata_output_" + id + "_bg"] = getComputedBgColor(el);
@@ -13085,7 +12802,7 @@
       if (!reportTheme) {
         return;
       }
-      var $el = (0, import_jquery42.default)(el);
+      var $el = (0, import_jquery40.default)(el);
       if ($el.data("shiny-theme-observer")) {
         return;
       }
@@ -13113,18 +12830,18 @@
       inputs.setInput(".clientdata_output_" + id + "_font", getComputedFont(el));
     }
     function doSendImageSize() {
-      (0, import_jquery42.default)(".shiny-image-output, .shiny-plot-output, .shiny-report-size").each(function() {
+      (0, import_jquery40.default)(".shiny-image-output, .shiny-plot-output, .shiny-report-size").each(function() {
         var id = getIdFromEl(this);
         if (this.offsetWidth !== 0 || this.offsetHeight !== 0) {
           inputs.setInput(".clientdata_output_" + id + "_width", this.offsetWidth);
           inputs.setInput(".clientdata_output_" + id + "_height", this.offsetHeight);
         }
       });
-      (0, import_jquery42.default)(".shiny-image-output, .shiny-plot-output, .shiny-report-theme").each(function() {
+      (0, import_jquery40.default)(".shiny-image-output, .shiny-plot-output, .shiny-report-theme").each(function() {
         doSendTheme(this);
       });
-      (0, import_jquery42.default)(".shiny-bound-output").each(function() {
-        var $this = (0, import_jquery42.default)(this), binding = $this.data("shiny-output-binding");
+      (0, import_jquery40.default)(".shiny-bound-output").each(function() {
+        var $this = (0, import_jquery40.default)(this), binding = $this.data("shiny-output-binding");
         $this.trigger({
           type: "shiny:visualchange",
           visible: !isHidden(this),
@@ -13144,7 +12861,7 @@
       }
     }
     var lastKnownVisibleOutputs = {};
-    (0, import_jquery42.default)(".shiny-bound-output").each(function() {
+    (0, import_jquery40.default)(".shiny-bound-output").each(function() {
       var id = getIdFromEl(this);
       if (isHidden(this)) {
         initialValues[".clientdata_output_" + id + "_hidden"] = true;
@@ -13155,7 +12872,7 @@
     });
     function doSendOutputHiddenState() {
       var visibleOutputs = {};
-      (0, import_jquery42.default)(".shiny-bound-output").each(function() {
+      (0, import_jquery40.default)(".shiny-bound-output").each(function() {
         var id = getIdFromEl(this);
         delete lastKnownVisibleOutputs[id];
         var hidden = isHidden(this), evt = {
@@ -13168,7 +12885,7 @@
           visibleOutputs[id] = true;
           inputs.setInput(".clientdata_output_" + id + "_hidden", false);
         }
-        var $this = (0, import_jquery42.default)(this);
+        var $this = (0, import_jquery40.default)(this);
         evt.binding = $this.data("shiny-output-binding");
         $this.trigger(evt);
       });
@@ -13200,16 +12917,16 @@
         handler.apply(this, [namespace, handler].concat(args));
       };
     }
-    (0, import_jquery42.default)(window).resize(debounce(500, sendImageSizeFns.regular));
+    (0, import_jquery40.default)(window).resize(debounce(500, sendImageSizeFns.regular));
     var bs3classes = ["modal", "dropdown", "tab", "tooltip", "popover", "collapse"];
-    import_jquery42.default.each(bs3classes, function(idx, classname) {
-      (0, import_jquery42.default)(document.body).on("shown.bs." + classname + ".sendImageSize", "*", filterEventsByNamespace("bs", sendImageSizeFns.regular));
-      (0, import_jquery42.default)(document.body).on("shown.bs." + classname + ".sendOutputHiddenState hidden.bs." + classname + ".sendOutputHiddenState", "*", filterEventsByNamespace("bs", sendOutputHiddenState));
+    import_jquery40.default.each(bs3classes, function(idx, classname) {
+      (0, import_jquery40.default)(document.body).on("shown.bs." + classname + ".sendImageSize", "*", filterEventsByNamespace("bs", sendImageSizeFns.regular));
+      (0, import_jquery40.default)(document.body).on("shown.bs." + classname + ".sendOutputHiddenState hidden.bs." + classname + ".sendOutputHiddenState", "*", filterEventsByNamespace("bs", sendOutputHiddenState));
     });
-    (0, import_jquery42.default)(document.body).on("shown.sendImageSize", "*", sendImageSizeFns.regular);
-    (0, import_jquery42.default)(document.body).on("shown.sendOutputHiddenState hidden.sendOutputHiddenState", "*", sendOutputHiddenState);
+    (0, import_jquery40.default)(document.body).on("shown.sendImageSize", "*", sendImageSizeFns.regular);
+    (0, import_jquery40.default)(document.body).on("shown.sendOutputHiddenState hidden.sendOutputHiddenState", "*", sendOutputHiddenState);
     initialValues[".clientdata_pixelratio"] = pixelRatio();
-    (0, import_jquery42.default)(window).resize(function() {
+    (0, import_jquery40.default)(window).resize(function() {
       inputs.setInput(".clientdata_pixelratio", pixelRatio());
     });
     initialValues[".clientdata_url_protocol"] = window.location.protocol;
@@ -13217,27 +12934,27 @@
     initialValues[".clientdata_url_port"] = window.location.port;
     initialValues[".clientdata_url_pathname"] = window.location.pathname;
     initialValues[".clientdata_url_search"] = window.location.search;
-    (0, import_jquery42.default)(window).on("pushstate", function(e) {
+    (0, import_jquery40.default)(window).on("pushstate", function(e) {
       inputs.setInput(".clientdata_url_search", window.location.search);
       return;
       e;
     });
-    (0, import_jquery42.default)(window).on("popstate", function(e) {
+    (0, import_jquery40.default)(window).on("popstate", function(e) {
       inputs.setInput(".clientdata_url_search", window.location.search);
       return;
       e;
     });
     initialValues[".clientdata_url_hash_initial"] = window.location.hash;
     initialValues[".clientdata_url_hash"] = window.location.hash;
-    (0, import_jquery42.default)(window).on("hashchange", function(e) {
+    (0, import_jquery40.default)(window).on("hashchange", function(e) {
       inputs.setInput(".clientdata_url_hash", window.location.hash);
       return;
       e;
     });
-    var singletonText = initialValues[".clientdata_singletons"] = (0, import_jquery42.default)('script[type="application/shiny-singletons"]').text();
+    var singletonText = initialValues[".clientdata_singletons"] = (0, import_jquery40.default)('script[type="application/shiny-singletons"]').text();
     registerNames(singletonText.split(/,/));
-    var dependencyText = (0, import_jquery42.default)('script[type="application/html-dependencies"]').text();
-    import_jquery42.default.each(dependencyText.split(/;/), function(i, depStr) {
+    var dependencyText = (0, import_jquery40.default)('script[type="application/html-dependencies"]').text();
+    import_jquery40.default.each(dependencyText.split(/;/), function(i, depStr) {
       var match = /\s*^(.+)\[(.+)\]\s*$/.exec(depStr);
       if (match) {
         registerDependency(match[1], match[2]);
@@ -13245,7 +12962,7 @@
     });
     inputsNoResend.reset(initialValues);
     shinyapp.connect(initialValues);
-    (0, import_jquery42.default)(document).one("shiny:connected", function() {
+    (0, import_jquery40.default)(document).one("shiny:connected", function() {
       initDeferredIframes();
     });
   }
@@ -13253,8 +12970,8 @@
     if (!window.Shiny || !window.Shiny.shinyapp || !window.Shiny.shinyapp.isConnected()) {
       return;
     }
-    (0, import_jquery42.default)(".shiny-frame-deferred").each(function(i, el) {
-      var $el = (0, import_jquery42.default)(el);
+    (0, import_jquery40.default)(".shiny-frame-deferred").each(function(i, el) {
+      var $el = (0, import_jquery40.default)(el);
       $el.removeClass("shiny-frame-deferred");
       $el.attr("src", $el.attr("data-deferred-src"));
       $el.attr("data-deferred-src", null);
@@ -13265,7 +12982,7 @@
   var windowShiny2;
   function setShiny(windowShiny_) {
     windowShiny2 = windowShiny_;
-    windowShiny2.version = "1.7.0";
+    windowShiny2.version = "1.7.2";
     var _initInputBindings = initInputBindings(), inputBindings = _initInputBindings.inputBindings, fileInputBinding2 = _initInputBindings.fileInputBinding;
     var _initOutputBindings = initOutputBindings(), outputBindings = _initOutputBindings.outputBindings;
     setFileInputBinding(fileInputBinding2);
@@ -13290,7 +13007,7 @@
     windowShiny2.renderDependencies = renderDependencies;
     windowShiny2.renderContent = renderContent;
     windowShiny2.renderHtml = renderHtml2;
-    (0, import_jquery43.default)(function() {
+    (0, import_jquery41.default)(function() {
       setTimeout(function() {
         initShiny(windowShiny2);
       }, 1);
@@ -13309,21 +13026,21 @@
   }
 
   // srcts/src/shiny/reactlog.ts
-  var import_jquery44 = __toModule(require_jquery());
+  var import_jquery42 = __toModule(require_jquery());
   function initReactlog() {
-    (0, import_jquery44.default)(document).on("keydown", function(e) {
+    (0, import_jquery42.default)(document).on("keydown", function(e) {
       if (e.which !== 114 || !e.ctrlKey && !e.metaKey || e.shiftKey || e.altKey)
         return;
       var url = "reactlog?w=" + window.escape(shinyShinyApp().config.workerId) + "&s=" + window.escape(shinyShinyApp().config.sessionId);
       window.open(url);
       e.preventDefault();
     });
-    (0, import_jquery44.default)(document).on("keydown", function(e) {
+    (0, import_jquery42.default)(document).on("keydown", function(e) {
       if (!(e.which === 115 && (e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey || e.which === 114 && (e.ctrlKey || e.metaKey) && e.shiftKey && !e.altKey)) {
         return;
       }
       var url = "reactlog/mark?w=" + window.escape(shinyShinyApp().config.workerId) + "&s=" + window.escape(shinyShinyApp().config.sessionId);
-      import_jquery44.default.get(url, function(result) {
+      import_jquery42.default.get(url, function(result) {
         if (result !== "marked")
           return;
         var html = '<span id="shiny-reactlog-mark-text">Marked time point in reactlog</span>';

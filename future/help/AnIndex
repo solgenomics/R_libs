@@ -19,7 +19,6 @@ as.FutureGlobals.Globals	FutureGlobals
 as.FutureGlobals.list	FutureGlobals
 as.raster.Mandelbrot	mandelbrot
 assert_no_references	find_references
-as_lecyer_cmrg_seed	as_lecyer_cmrg_seed
 autoStopCluster	re-exports
 availableCores	re-exports
 availableWorkers	re-exports
@@ -67,11 +66,9 @@ FutureWarning	FutureCondition
 getExpression	getExpression
 getExpression.Future	getExpression
 getGlobalsAndPackages	getGlobalsAndPackages
-is_lecyer_cmrg_seed	as_lecyer_cmrg_seed
 makeClusterMPI	re-exports
 makeClusterPSOCK	re-exports
 makeNodePSOCK	re-exports
-make_rng_seeds	make_rng_seeds
 mandelbrot	mandelbrot
 mandelbrot_tiles	mandelbrot
 multicore	multicore

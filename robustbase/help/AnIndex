@@ -79,6 +79,7 @@ hard.rejection	covOGK
 hatvalues.lmrob	summary.lmrob
 hbk	hbk
 heart	heart
+huberize	huberize
 huberM	huberM
 huberPsi	psiFunc
 internals	robustbase-internal
@@ -184,3 +185,4 @@ weights.glmrob	weights.lmrob
 weights.lmrob	weights.lmrob
 wgt.himedian	wgt.himedian
 wood	wood
+x30o50	xtrData

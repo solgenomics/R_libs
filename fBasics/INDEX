@@ -1,21 +1,18 @@
-DistributionFits        Parameter Fit of a Distribution
-Heaviside               Haviside and Related Functions
-Ids                     Set and Retrieve Column/Row Names
-NormalityTests          Normality Tests
 acfPlot                 Autocorrelation Function Plots
 akimaInterp             Bivariate Spline Interpolation
 baseMethods             Generic Functions Extensions
 basicStats              Basic Time Series Statistics
 boxPlot                 Time Series Box Plots
 characterTable          Table of Characters
-colVec                  Column and Row Vectors
 colorLocator            Color Selection
 colorPalette            Color Palettes
 colorTable              Table of Colors
+colVec                  Column and Row Vectors
 correlationTest         Correlation Tests
 decor                   Decor Functions
 dght                    Generalized Hyperbolic Student-t
 distCheck               Distribution Check
+DistributionFits        Parameter Fit of a Distribution
 fBasics-deprecated      Deprecated Functions in Package fBasics
 fBasics-package         Portfolio Modelling, Optimization and
                         Backtesting
@@ -37,6 +34,7 @@ gldFit                  GH Distribution Fit
 gldMode                 Generalized Lambda Distribution Mode
 gldRobMoments           Robust Moments for the GLD
 gridVector              Grid Vector Coordinates
+Heaviside               Haviside and Related Functions
 hilbert                 Hilbert Matrix
 histPlot                Histogram and Density Plots
 hyp                     Hyperbolic Distribution
@@ -45,6 +43,7 @@ hypMode                 Hyperbolic Mode
 hypMoments              Hyperbolic Distribution Moments
 hypRobMoments           Robust Moments for the HYP
 hypSlider               Hyperbolic Distribution Slider
+Ids                     Set and Retrieve Column/Row Names
 interactivePlot         Interactive Plot Utility
 inv                     The Inverse of a Matrix
 krigeInterp             Bivariate Krige Interpolation
@@ -65,6 +64,7 @@ nigRobMoments           Robust Moments for the NIG
 nigShapeTriangle        NIG Shape Triangle
 nigSlider               nigerbolic Distribution Slider
 norm2                   Matrix Norm
+NormalityTests          Normality Tests
 normRobMoments          Robust Moments for the NORM
 pascal                  Pascal Matrix
 pdl                     Polynomial Distributed Lags

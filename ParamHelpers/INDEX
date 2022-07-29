@@ -1,7 +1,3 @@
-LearnerParam            Create a description object for a parameter of
-                        a machine learning algorithm.
-OptPath                 Create optimization path.
-Param                   Create a description object for a parameter.
 addOptPathEl            Add a new element to an optimization path.
 as.data.frame.OptPathDF
                         Convert optimization path to data.frame.
@@ -34,9 +30,9 @@ getOptPathCol           Get column from the optimization path.
 getOptPathCols          Get columns from the optimization path.
 getOptPathDOB           Get date-of-birth vector from the optimization
                         path.
+getOptPathEl            Get an element from the optimization path.
 getOptPathEOL           Get end-of-life vector from the optimization
                         path.
-getOptPathEl            Get an element from the optimization path.
 getOptPathErrorMessages
                         Get error-message vector from the optimization
                         path.
@@ -83,8 +79,12 @@ isType                  Check parameter / parameter set contain ONLY a
 isTypeString            Check if type string is of certain type.
 isVector                Check parameter / parameter set for vector
                         params.
+LearnerParam            Create a description object for a parameter of
+                        a machine learning algorithm.
 listToDfOneRow          Convert a list to a data.frame with one row
 makeParamSet            Construct a parameter set.
+OptPath                 Create optimization path.
+Param                   Create a description object for a parameter.
 paramValueToString      Convert a value to a string.
 plotEAF                 Plots attainment functions for data stored in
                         multiple OptPaths.

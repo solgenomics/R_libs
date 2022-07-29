@@ -40,6 +40,7 @@ facing3d                Subset an object to parts facing in a
                         particular direction
 figWidth                Get R Markdown figure dimensions in pixels
 getBoundary3d           Extract the boundary of a mesh
+gltfTypes               Names of glTF types.
 GramSchmidt             The Gram-Schmidt algorithm
 grid3d                  Add a grid to a 3D plot
 identify3d              Identify points in plot
@@ -116,7 +117,8 @@ setGraphicsDelay        Set a one-time slowdown on opening standard
                         graphics
 setupKnitr              Displaying RGL scenes in 'knitr' documents
 setUserCallbacks        Set mouse callbacks in R or Javascript code
-setUserShaders          Set user-defined shaders for RGL objects.
+setUserShaders          Set user-defined shaders for RGL objects, or
+                        get shaders.
 shade3d                 Draw 3D mesh objects
 shadow3d                Project shadows of mesh onto object.
 shapelist3d             Create and plot a list of shapes

@@ -1,13 +1,3 @@
-Qpenalty                Penalty function for log-likelihood of 'selm'
-                        models
-SECdistrMv-class        Class '"SECdistrMv"'
-SECdistrUv-class        Class '"SECdistrUv"'
-SUNdistr-base           The Unified Skew-Normal (SUN) probability
-                        distribution
-SUNdistr-class          Class '"SUNdistr"' and its methods
-SUNdistr-op             Operations on SUNdistr-class objects
-SymmModulatedDistr      Symmetry-modulated distributions
-T.Owen                  Owen's function
 affineTransSECdistr     Affine transformations and marginals of a
                         skew-elliptical distribution
 ais                     Australian Institute of Sport data
@@ -43,15 +33,19 @@ overview-sn             Package 'sn': overview of the package structure
                         and commands
 plot.SECdistr           Plotting methods for classes 'SECdistrUv' and
                         'SECdistrMv'
-plot.SUNdistr           Plotting method for class 'SUNdistr'
 plot.selm               Diagnostic plots for 'selm' fits
+plot.SUNdistr           Plotting method for class 'SUNdistr'
 pprodt2                 The distribution of the product of two jointly
                         normal or _t_ variables
 predict.selm            Predict method for selm-class objects
 profile.selm            Profile log-likelihood function of selm-class
                         objects
+Qpenalty                Penalty function for log-likelihood of 'selm'
+                        models
 residuals.selm          Residuals and fitted values from 'selm' fits
 sd                      Standard deviation
+SECdistrMv-class        Class '"SECdistrMv"'
+SECdistrUv-class        Class '"SECdistrUv"'
 selm                    Fitting linear models with skew-elliptical
                         error term
 selm-class              Classes 'selm' and 'mselm' of objects created
@@ -68,10 +62,16 @@ summary.SECdistr        Summary of a SEC distribution object
 summary.SECdistrMv-class
                         Classes 'summary.SECdistrMv' and
                         'summary.SECdistrUv'
+summary.selm            Summarizing 'selm' fits
 summary.SUNdistr        Summary of a SUN distribution object
 summary.SUNdistr-class
                         Class 'summary.SUNdistr'
-summary.selm            Summarizing 'selm' fits
+SUNdistr-base           The Unified Skew-Normal (SUN) probability
+                        distribution
+SUNdistr-class          Class '"SUNdistr"' and its methods
+SUNdistr-op             Operations on SUNdistr-class objects
+SymmModulatedDistr      Symmetry-modulated distributions
+T.Owen                  Owen's function
 vech                    vech, tr and other matrix operators
 wines                   Piedmont wines data
-zeta                    Function log(2*Phi(x)) and its derivatives
+zeta                    Function log(2 Phi(x)) and its derivatives

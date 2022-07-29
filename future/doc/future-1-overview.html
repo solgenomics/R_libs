@@ -225,7 +225,7 @@ Hello world!
 
 <p>Here is the same code snippet modified to use futures instead:</p>
 
-<pre><code class="r">&gt; library(&quot;future&quot;)
+<pre><code class="r">&gt; library(future)
 &gt; v %&lt;-% {
 +   cat(&quot;Hello world!\n&quot;)
 +   3.14
@@ -239,7 +239,7 @@ Hello world!
 
 <p>So why are futures useful?  Because we can choose to evaluate the future expression in a separate R process asynchronously by simply switching settings as:</p>
 
-<pre><code class="r">&gt; library(&quot;future&quot;)
+<pre><code class="r">&gt; library(future)
 &gt; plan(multisession)
 &gt; v %&lt;-% {
 +   cat(&quot;Hello world!\n&quot;)
@@ -259,7 +259,7 @@ in separate processes running in the background.  In other words, futures provid
 
 <p>Futures can be created either <em>implicitly</em> or <em>explicitly</em>.  In the introductory example above we used <em>implicit futures</em> created via the <code>v %&lt;-% { expr }</code> construct.  An alternative is <em>explicit futures</em> using the <code>f &lt;- future({ expr })</code> and <code>v &lt;- value(f)</code> constructs.  With these, our example could alternatively be written as:</p>
 
-<pre><code class="r">&gt; library(&quot;future&quot;)
+<pre><code class="r">&gt; library(future)
 &gt; f &lt;- future({
 +   cat(&quot;Hello world!\n&quot;)
 +   3.14
@@ -330,11 +330,6 @@ Hello world!
 <td align="left">all</td>
 <td align="left">external R sessions on current, local, and/or remote machines</td>
 </tr>
-<tr>
-<td align="left"><code>remote</code></td>
-<td align="left">all</td>
-<td align="left">Simple access to remote R sessions</td>
-</tr>
 </tbody></table>
 
 <p><em>Comment:</em> The alias strategy <code>multiprocess</code> was deprecated in future (&gt;= 1.20.0) in favor of <code>multisession</code> and <code>multicore</code>.</p>
@@ -375,7 +370,7 @@ Hello world!
 
 <h3>Synchronous Futures</h3>
 
-<p>Synchronous futures are resolved one after another and most commonly by the R process that creates them.  When a synchronous future is being resolved it blocks the main process until resolved.  </p>
+<p>Synchronous futures are resolved one after another and most commonly by the R process that creates them.  When a synchronous future is being resolved it blocks the main process until resolved.</p>
 
 <h4>Sequential Futures</h4>
 
@@ -384,7 +379,7 @@ Hello world!
 <pre><code class="r">&gt; plan(sequential)
 &gt; pid &lt;- Sys.getpid()
 &gt; pid
-[1] 8000
+[1] 262086
 &gt; a %&lt;-% {
 +     pid &lt;- Sys.getpid()
 +     cat(&quot;Future &#39;a&#39; ...\n&quot;)
@@ -402,14 +397,14 @@ Hello world!
 Future &#39;a&#39; ...
 &gt; b
 Future &#39;b&#39; ...
-[1] 8000
+[1] 262086
 &gt; c
 Future &#39;c&#39; ...
 [1] 6.28
 &gt; a
 [1] 3.14
 &gt; pid
-[1] 8000
+[1] 262086
 </code></pre>
 
 <p>Since eager sequential evaluation is taking place, each of the three futures is resolved instantaneously in the moment it is created.  Note also how <code>pid</code> in the calling environment, which was assigned the process ID of the current process, is neither overwritten nor removed.  This is because futures are evaluated in a local environment.  Since synchronous (uni-)processing is used, future <code>b</code> is resolved by the main R process (still in a local environment), which is why the value of <code>b</code> and <code>pid</code> are the same.</p>
@@ -425,7 +420,7 @@ Future &#39;c&#39; ...
 <pre><code class="r">&gt; plan(multisession)
 &gt; pid &lt;- Sys.getpid()
 &gt; pid
-[1] 8000
+[1] 262086
 &gt; a %&lt;-% {
 +     pid &lt;- Sys.getpid()
 +     cat(&quot;Future &#39;a&#39; ...\n&quot;)
@@ -443,14 +438,14 @@ Future &#39;c&#39; ...
 Future &#39;a&#39; ...
 &gt; b
 Future &#39;b&#39; ...
-[1] 8079
+[1] 262148
 &gt; c
 Future &#39;c&#39; ...
 [1] 6.28
 &gt; a
 [1] 3.14
 &gt; pid
-[1] 8000
+[1] 262086
 </code></pre>
 
 <p>The first thing we observe is that the values of <code>a</code>, <code>c</code> and <code>pid</code> are the same as previously.  However, we notice that <code>b</code> is different from before.  This is because future <code>b</code> is evaluated in a different R process and therefore it returns a different process ID.</p>
@@ -484,7 +479,7 @@ mc.cores
 <pre><code class="r">&gt; plan(cluster, workers = c(&quot;n1&quot;, &quot;n2&quot;, &quot;n3&quot;))
 &gt; pid &lt;- Sys.getpid()
 &gt; pid
-[1] 8000
+[1] 262086
 &gt; a %&lt;-% {
 +     pid &lt;- Sys.getpid()
 +     cat(&quot;Future &#39;a&#39; ...\n&quot;)
@@ -502,14 +497,14 @@ mc.cores
 Future &#39;a&#39; ...
 &gt; b
 Future &#39;b&#39; ...
-[1] 8164
+[1] 262265
 &gt; c
 Future &#39;c&#39; ...
 [1] 6.28
 &gt; a
 [1] 3.14
 &gt; pid
-[1] 8000
+[1] 262086
 </code></pre>
 
 <p>Any types of clusters that <code>parallel::makeCluster()</code> creates can be used for cluster futures.  For instance, the above cluster can be explicitly set up as:</p>
@@ -522,6 +517,13 @@ plan(cluster, workers = cl)
 Clusters created implicitly using <code>plan(cluster, workers = hosts)</code> where <code>hosts</code> is a character vector will also be shut down when the main R session terminates, or when the future strategy is changed, e.g. by calling <code>plan(sequential)</code>.</p>
 
 <p>Note that with automatic authentication setup (e.g. SSH key pairs), there is nothing preventing us from using the same approach for using a cluster of remote machines.</p>
+
+<p>If you want to run multiple workers on each node, replicate the node name as many times as the number of workers to run on that node.  For example,</p>
+
+<pre><code>&gt; plan(cluster, workers = c(rep(&quot;n1&quot;, times = 3), &quot;n2&quot;, rep(&quot;n3&quot;, times = 5)))
+</code></pre>
+
+<p>will run three workers on <code>n1</code>, one on <code>n2</code>, and five on <code>n3</code>, in total nine parallel workers.</p>
 
 <h3>Nested Futures and Evaluation Topologies</h3>
 
@@ -548,24 +550,24 @@ Clusters created implicitly using <code>plan(cluster, workers = hosts)</code> wh
 +     c(b.pid = Sys.getpid(), b1.pid = b1, b2.pid = b2)
 + }
 &gt; pid
-[1] 8000
+[1] 262086
 &gt; a
 Future &#39;a&#39; ...
-[1] 8220
+[1] 262386
 &gt; b
 Future &#39;b&#39; ...
 Future &#39;b1&#39; ...
 Future &#39;b2&#39; ...
  b.pid b1.pid b2.pid 
-  8251   8251   8251 
+262385 262385 262385 
 </code></pre>
 
 <p>By inspection the process IDs, we see that there are in total three different processes involved for resolving the futures.  There is the main R process
-(pid 8000),
+(pid 262086),
 and there are the two processes used by <code>a</code>
-(pid 8220)
+(pid 262386)
 and <code>b</code>
-(pid 8251).
+(pid 262385).
 However, the two futures (<code>b1</code> and <code>b2</code>) that is nested by <code>b</code> are evaluated by the same R process as <code>b</code>.  This is because nested futures use sequential evaluation unless otherwise specified.  There are a few reasons for this, but the main reason is that it protects us from spawning off a large number of background processes by mistake, e.g. via recursive calls.</p>
 
 <p>To specify a different type of <em>evaluation topology</em>, other than the first level of futures being resolved by multisession evaluation and the second level by sequential evaluation, we can provide a list of evaluation strategies to <code>plan()</code>.  First, the same evaluation strategies as above can be explicitly specified as:</p>
@@ -578,16 +580,16 @@ However, the two futures (<code>b1</code> and <code>b2</code>) that is nested by
 <pre><code class="r">&gt; plan(list(multisession, multisession))
 [...]
 &gt; pid
-[1] 8000
+[1] 262086
 &gt; a
 Future &#39;a&#39; ...
-[1] 8310
+[1] 262517
 &gt; b
 Future &#39;b&#39; ...
 Future &#39;b1&#39; ...
 Future &#39;b2&#39; ...
  b.pid b1.pid b2.pid 
-  8341   8341   8341 
+262516 262516 262516 
 </code></pre>
 
 <p>The reason for this is, also here, to protect us from launching more processes than what the machine can support.  Internally, this is done by setting <code>mc.cores = 1</code> such that functions like <code>parallel::mclapply()</code> will fall back to run sequentially.  This is the case for both multisession and multicore evaluation.</p>
@@ -597,22 +599,22 @@ Future &#39;b2&#39; ...
 <pre><code class="r">&gt; plan(list(sequential, multisession))
 [...]
 &gt; pid
-[1] 8000
+[1] 262086
 &gt; a
 Future &#39;a&#39; ...
-[1] 8000
+[1] 262086
 &gt; b
 Future &#39;b&#39; ...
 Future &#39;b1&#39; ...
 Future &#39;b2&#39; ...
  b.pid b1.pid b2.pid 
-  8000   8418   8449 
+262086 262664 262665 
 </code></pre>
 
 <p>which clearly show that <code>a</code> and <code>b</code> are resolved in the calling process
-(pid 8000)
+(pid 262086)
 whereas the two nested futures (<code>b1</code> and <code>b2</code>) are resolved in two separate R processes
-(pids 8418 and 8449).</p>
+(pids 262664 and 262665).</p>
 
 <p>Having said this, it is indeed possible to use nested multisession evaluation strategies, if we explicitly specify (read <em>force</em>) the number of cores available at each level.  In order to do this we need to &ldquo;tweak&rdquo; the default settings, which can be done as follows:</p>
 
@@ -620,24 +622,24 @@ whereas the two nested futures (<code>b1</code> and <code>b2</code>) are resolve
 +     workers = 2)))
 [...]
 &gt; pid
-[1] 8000
+[1] 262086
 &gt; a
 Future &#39;a&#39; ...
-[1] 8500
+[1] 262772
 &gt; b
 Future &#39;b&#39; ...
 Future &#39;b1&#39; ...
 Future &#39;b2&#39; ...
  b.pid b1.pid b2.pid 
-  8531   8589   8620 
+262773 262883 262882 
 </code></pre>
 
 <p>First, we see that both <code>a</code> and <code>b</code> are resolved in different processes
-(pids 8500 and 8531)
+(pids 262772 and 262773)
 than the calling process
-(pid 8000).
+(pid 262086).
 Second, the two nested futures (<code>b1</code> and <code>b2</code>) are resolved in yet two other R processes
-(pids 8589 and 8620).</p>
+(pids 262883 and 262882).</p>
 
 <p>For more details on working with nested futures and different evaluation strategies at each level, see Vignette &#39;<a href="future-3-topologies.html">Futures in R: Future Topologies</a>&#39;.</p>
 
@@ -666,11 +668,17 @@ Waiting for &#39;a&#39; to be resolved ...
 3 
 4 
 5 
+6 
+7 
+8 
+9 
+10 
+11 
 &gt; cat(&quot;Waiting for &#39;a&#39; to be resolved ... DONE\n&quot;)
 Waiting for &#39;a&#39; to be resolved ... DONE
 &gt; a
 Future &#39;a&#39; ...done
-[1] 8657
+[1] 262969
 </code></pre>
 
 <h2>Failed Futures</h2>
@@ -731,9 +739,9 @@ Moreover, if a global is defined in a package, then that global is not exported.
 &gt; v &lt;- lapply(f, FUN = value)
 &gt; str(v)
 List of 3
- $ : int 8742
- $ : int 8773
- $ : int 8742
+ $ : int 263104
+ $ : int 263105
+ $ : int 263104
 </code></pre>
 
 <p>This is <em>not</em> possible to do when using implicit futures.  This is because the <code>%&lt;-%</code> assignment operator <em>cannot</em> be used in all cases where the regular <code>&lt;-</code> assignment operator can be used.  It can only be used to assign future values to <em>environments</em> (including the calling environment) much like how <code>assign(name, value, envir)</code> works.  However, we can assign implicit futures to environments using <em>named indices</em>, e.g.</p>
@@ -748,16 +756,16 @@ List of 3
 &gt; v &lt;- as.list(v)
 &gt; str(v)
 List of 3
- $ a: int 8832
- $ b: int 8864
- $ c: int 8832
+ $ a: int 263220
+ $ b: int 263221
+ $ c: int 263220
 </code></pre>
 
 <p>Here <code>as.list(v)</code> blocks until all futures in the environment <code>v</code> have been resolved.  Then their values are collected and returned as a regular list.</p>
 
 <p>If <em>numeric indices</em> are required, then <em>list environments</em> can be used.  List environments, which are implemented by the <a href="https://cran.r-project.org/package=listenv">listenv</a> package, are regular environments with customized subsetting operators making it possible to index them much like how lists can be indexed.  By using list environments where we otherwise would use lists, we can also assign implicit futures to list-like objects using numeric indices.  For example,</p>
 
-<pre><code class="r">&gt; library(&quot;listenv&quot;)
+<pre><code class="r">&gt; library(listenv)
 &gt; plan(multisession)
 &gt; v &lt;- listenv()
 &gt; for (ii in 1:3) {
@@ -768,9 +776,9 @@ List of 3
 &gt; v &lt;- as.list(v)
 &gt; str(v)
 List of 3
- $ : int 8929
- $ : int 8960
- $ : int 8929
+ $ : int 263336
+ $ : int 263335
+ $ : int 263336
 </code></pre>
 
 <p>As previously, <code>as.list(v)</code> blocks until all futures are resolved.</p>
@@ -779,7 +787,7 @@ List of 3
 
 <p>To see a live illustration how different types of futures are evaluated, run the Mandelbrot demo of this package.  First, try with the sequential evaluation,</p>
 
-<pre><code class="r">library(&quot;future&quot;)
+<pre><code class="r">library(future)
 plan(sequential)
 demo(&quot;mandelbrot&quot;, package = &quot;future&quot;, ask = FALSE)
 </code></pre>

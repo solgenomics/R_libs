@@ -17,7 +17,7 @@ dev_sitrep              Report package development situation
 document                Use roxygen to document a package.
 install                 Install a local development package.
 install_deps            Install package dependencies if needed.
-lint                    Lint all source files in a package.
+lint                    Lint all source files in a package
 load_all                Load complete package
 missing_s3              Find missing s3 exports.
 release                 Release package to CRAN.
@@ -30,5 +30,5 @@ source_url              Run a script through some protocols such as
                         http, https, ftp, etc.
 spell_check             Spell checking
 test                    Execute testthat tests in a package
-uninstall               Uninstall a local development package.
+uninstall               Uninstall a local development package
 wd                      Set working directory.

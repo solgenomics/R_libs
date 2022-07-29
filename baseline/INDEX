@@ -1,11 +1,8 @@
-C1s                     XPS core line data
-PLSRTest-class          Class "PLSRTest"
 algorithm               Extraction methods for "baselineAlgTest"
                         objects
 baseline                Baseline correction
 baseline-class          Class "baseline"
 baseline-package        Baseline correction
-baseline.TAP            TAP
 baseline.als            Asymmetric Least Squares
 baseline.fillPeaks      Fill peaks
 baseline.irls           Iterative Restricted Least Squares
@@ -18,15 +15,17 @@ baseline.peakDetection
 baseline.rfbaseline     Robust Baseline Estimation
 baseline.rollingBall    Rolling ball
 baseline.shirley        Shirley Background Estimation
+baseline.TAP            TAP
 baselineAlg-class       Class "baselineAlg"
-baselineAlgResult-class
-                        Class "baselineAlgResult"
-baselineAlgTest-class   Class "baselineAlgTest"
 baselineAlgorithms      List of available baseline algorithms
 baselineAlgorithmsGUI   List of available baseline algorithms for GUI
                         function
+baselineAlgResult-class
+                        Class "baselineAlgResult"
+baselineAlgTest-class   Class "baselineAlgTest"
 baselineEnv             Baseline environment
 baselineGUI             Interactive plotting tool
+C1s                     XPS core line data
 custom.baseline         Customized baseline correction
 doOptim                 Optimise several baseline algorithms on a data
                         set
@@ -46,6 +45,7 @@ param.ind.min           Extraction methods for "baselineAlgResult"
 plotBaseline            Plot method for "baseline" objects
 plotOptim               Plotting tool for result objects from
                         optimization
+PLSRTest-class          Class "PLSRTest"
 predictionResult-class
                         Class "predictionResult"
 predictionTest-class    Class "predictionTest"

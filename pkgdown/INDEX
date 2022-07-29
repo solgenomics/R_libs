@@ -9,6 +9,7 @@ build_site              Build a complete pkgdown website
 build_site_github_pages
                         Build site for GitHub pages
 build_tutorials         Build tutorials section
+check_pkgdown           Check _pkgdown.yml
 clean_site              Clean site
 deploy_to_branch        Build and deploy a site locally
 in_pkgdown              Determine if code is executed by pkgdown

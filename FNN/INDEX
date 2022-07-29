@@ -1,8 +1,8 @@
-KL.dist                 Kullback-Leibler Divergence
-KL.divergence           Kullback-Leibler Divergence
 crossentropy            Cross Entropy
 entropy                 Shannon Entropy
 get.knn                 Search Nearest Neighbors
+KL.dist                 Kullback-Leibler Divergence
+KL.divergence           Kullback-Leibler Divergence
 knn                     k-Nearest Neighbour Classification
 knn.cv                  k-Nearest Neighbour Classification
                         Cross-Validation

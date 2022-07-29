@@ -1,13 +1,13 @@
-TimeSeriesData          Time Series Data Sets
 absMoments              Absolute Moments of GARCH Distributions
 coef-methods            GARCH Coefficients Methods
 fGARCH-class            Class "fGARCH"
-fGARCHSPEC-class        Class "fGARCHSPEC"
 fGarch-package          Modelling Heterskedasticity in Financial Time
                         Series
+fGARCHSPEC-class        Class "fGARCHSPEC"
 fitted-methods          Extract GARCH Model Fitted Values
 formula-methods         Extract GARCH Model formula
-garchFit                Univariate GARCH Time Series Fitting
+garchFit                Univariate or Multivariate GARCH Time Series
+                        Fitting
 garchFitControl         GARCH Fitting Algorithms and Control
 garchSim                Univariate GARCH/APARCH Time Series Simulation
 garchSpec               Univariate GARCH Time Series Specification
@@ -35,4 +35,5 @@ std                     Student-t Distribution
 stdFit                  Student-t Distribution Parameter Estimation
 stdSlider               Student-t Distribution Slider
 summary-methods         GARCH Summary Methods
+TimeSeriesData          Time Series Data Sets
 volatility.fGARCH       Extract GARCH Model Volatility

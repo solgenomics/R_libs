@@ -208,7 +208,7 @@ hr {
 
 <p>For simplicitly, lets start with an illustration on how standard output (&ldquo;stdout&rdquo;) is captured and relayed:</p>
 
-<pre><code class="r">&gt; library(&quot;future&quot;)
+<pre><code class="r">&gt; library(future)
 &gt; plan(multisession)
 
 &gt; fa &lt;- future({ cat(&quot;Hello world!\n&quot;); print(1:3); 42L })
@@ -250,7 +250,7 @@ Hello world!
 
 <p>Output is relayed the same way when using future assignments (<code>%&lt;-%</code>).  For example,</p>
 
-<pre><code class="r">&gt; library(&quot;future&quot;)
+<pre><code class="r">&gt; library(future)
 &gt; plan(multisession)
 
 &gt; a %&lt;-% { cat(&quot;Hello world!\n&quot;); print(1:3); 42L }
@@ -286,7 +286,7 @@ Hello world!
 
 <p>Next, lets see what happens if we use <code>message()</code> to produce output:</p>
 
-<pre><code class="r">&gt; library(&quot;future&quot;)
+<pre><code class="r">&gt; library(future)
 &gt; plan(multisession)
 &gt; fa &lt;- future({ message(&quot;Hello world!&quot;); 42L })
 &gt; value(fa)
@@ -296,7 +296,7 @@ Hello world!
 
 <p>Note that contrary to the captured stdout, which is captured as one single block output, messages are conditions that are captured separately.  Unfortunately, it is <em>not</em> possible to preserve the ordering of interweaved stdout and message output.  When using futures, stdout output will always be relayed first followed by each of the individual conditions captured.  For example,</p>
 
-<pre><code class="r">&gt; library(&quot;future&quot;)
+<pre><code class="r">&gt; library(future)
 &gt; plan(multisession)
 &gt; fa &lt;- future({ message(&quot;Hello&quot;); print(1:3); message(&quot;world!&quot;); cat(&quot;ping\n&quot;); 42L })
 &gt; value(fa)
@@ -311,7 +311,7 @@ world!      ## &lt;= 2nd message
 
 <p>The output is relayed automatically also when using frontends such as <a href="https://cran.r-project.org/package=future.apply">future.apply</a> or <a href="https://cran.r-project.org/package=foreach">foreach</a> with <a href="https://cran.r-project.org/package=doFuture">doFuture</a>.  Again, it works with any future backend.  For example,</p>
 
-<pre><code class="r">&gt; library(&quot;future.apply&quot;)
+<pre><code class="r">&gt; library(future.apply)
 &gt; plan(future.callr::callr)
 
 &gt; y &lt;- future_lapply(1:3, FUN = function(x) { cat(&quot;x =&quot;, x, &quot;\n&quot;); message(&quot;x : &quot;, x); sqrt(x) })
@@ -331,7 +331,7 @@ List of 3
 
 <p>Equivalently,</p>
 
-<pre><code class="r">&gt; library(&quot;doFuture&quot;)
+<pre><code class="r">&gt; library(doFuture)
 &gt; registerDoFuture()
 &gt; plan(future.callr::callr)
 
@@ -354,7 +354,7 @@ List of 3
 
 <p>To capture the output produced by futures, use <code>capture.output()</code> as you would do when capturing output elsewhere in R.  For example,</p>
 
-<pre><code class="r">&gt; library(&quot;future&quot;)
+<pre><code class="r">&gt; library(future)
 &gt; fa &lt;- future({ cat(&quot;Hello world!\n&quot;); print(1:3); 42L })
 &gt; stdout &lt;- capture.output(a &lt;- value(fa))
 &gt; stdout
@@ -365,7 +365,7 @@ List of 3
 
 <h2>Suppressing messages</h2>
 
-<pre><code class="r">&gt; library(&quot;future&quot;)
+<pre><code class="r">&gt; library(future)
 &gt; plan(multisession)
 &gt; fa &lt;- future({ message(&quot;Hello&quot;); print(1:3); message(&quot;world!&quot;); cat(&quot;ping\n&quot;); 42L })
 &gt; suppressMessages(a &lt;- value(fa))

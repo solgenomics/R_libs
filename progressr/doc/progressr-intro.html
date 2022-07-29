@@ -353,7 +353,7 @@ my_fcn &lt;- function(xs) {
 my_fcn(1:5)
 #  |====================                               |  40%
 </code></pre>
-<p><em>Note:</em> This solution does not involved the <code>.progress = TRUE</code> argument that <strong>plyr</strong> implements.  Because <strong>progressr</strong> is more flexible, and because <code>.progress</code> is automatically disabled when running in parallel (see below), I recommend to use the above <strong>progressr</strong> approach instead.  Having said this, as proof-of-concept, the <strong>progressr</strong> package implements support <code>.progress = &quot;progressr&quot;</code> if you still prefer the <strong>plyr</strong> way of doing it.</p>
+<p>Note how this solution does not make use of <strong>plyr</strong>'s <code>.progress</code> argument, because the above solution is more powerful and more flexible, e.g. we have more control on progress updates and their messages.  However, if you prefer the traditional <strong>plyr</strong> approach, you can use <code>.progress = &quot;progressr&quot;</code>, e.g. <code>y &lt;- llply(..., .progress = &quot;progressr&quot;)</code>.</p>
 <h2>Parallel processing and progress updates</h2>
 <p>The <strong><a href="https://cran.r-project.org/package=future">future</a></strong> framework, which provides a unified API for parallel and distributed processing in R, has built-in support for the kind of progression updates produced by the <strong>progressr</strong> package.  This means that you can use it with for instance <strong><a href="https://cran.r-project.org/package=future.apply">future.apply</a></strong>, <strong><a href="https://cran.r-project.org/package=furrr">furrr</a></strong>, and <strong><a href="https://cran.r-project.org/package=foreach">foreach</a></strong> with <strong><a href="https://cran.r-project.org/package=doFuture">doFuture</a></strong>, and <strong><a href="https://cran.r-project.org/package=plyr">plyr</a></strong> or <strong><a href="https://www.bioconductor.org/packages/BiocParallel/">BiocParallel</a></strong> with <strong>doFuture</strong>.  In contrast, <em>non-future</em> parallelization methods such as <strong>parallel</strong>'s <code>mclapply()</code> and, <code>parallel::parLapply()</code>, and <strong>foreach</strong> adapters like <strong>doParallel</strong> do <em>not</em> support progress reports via <strong>progressr</strong>.</p>
 <h3>future_lapply() - parallel lapply()</h3>
@@ -468,7 +468,7 @@ my_fcn &lt;- function(xs) {
 my_fcn(1:5)
 # / [================&gt;-----------------------------]  40% x=2
 </code></pre>
-<p><em>Note:</em> Although <strong>progressr</strong> implements support for using <code>.progress = &quot;progressr&quot;</code> with <strong>plyr</strong>, unfortunately, this will <em>not</em> work when using <code>.parallel = TRUE</code>.  This is because <strong>plyr</strong> resets <code>.progress</code> to the default <code>&quot;none&quot;</code> internally regardless how we set <code>.progress</code>. See <a href="https://github.com/HenrikBengtsson/progressr/issues/70">https://github.com/HenrikBengtsson/progressr/issues/70</a> for details and a hack that works around this limitation.</p>
+<p><em>Note:</em> As an alternative to the above, recommended approach, one can use <code>.progress = &quot;progressr&quot;</code> together with <code>.parallel = TRUE</code>.  This requires <strong>plyr</strong> (&gt;= 1.8.7).</p>
 <h3>Near-live versus buffered progress updates with futures</h3>
 <p>As of November 2020, there are four types of <strong>future</strong> backends that are known(*) to provide near-live progress updates:</p>
 <ol>
@@ -528,6 +528,7 @@ $ Rscript -e &quot;library(progressr)&quot; -e &quot;with_progress(y &lt;- slow_
 <p>For a more up-to-date view on what features might be added, see <a href="https://github.com/HenrikBengtsson/progressr/issues">https://github.com/HenrikBengtsson/progressr/issues</a>.</p>
 <h2>Appendix</h2>
 <h3>Known issues</h3>
+<h4>A progressor cannot be created in the global environment</h4>
 <p>It is not possible to create a progressor in the global environment, e.g. in the the top-level of a script.  It has to be created inside a function, within <code>with_progress({ ... })</code>, <code>local({ ... })</code>, or a similar construct.  For example, the following:</p>
 <pre><code class="language-r">library(progressr)
 handlers(global = TRUE)
@@ -563,6 +564,18 @@ with_progress({
 #  |====================                               |  40%
 </code></pre>
 <p>The main reason for this is to limit the life span of each progressor.  If we created it in the global environment, there is a significant risk it would never finish and block all of the following progressors.</p>
+<h4>The global progress handler cannot be set everywhere</h4>
+<p>It is <em>not</em> possible to call <code>handlers(global = TRUE)</code> in all circumstances.  For example, it cannot be called within <code>tryCatch()</code> and <code>withCallingHandlers()</code>;</p>
+<pre><code class="language-r">&gt; tryCatch(handlers(global = TRUE), error = identity)
+Error in globalCallingHandlers(NULL) : 
+  should not be called with handlers on the stack
+</code></pre>
+<p>This is not a bug - neither in <strong>progressr</strong> nor in R itself. It's due to a conservative design on how <em>global</em> calling handlers should work in R. If it allowed, there's a risk we might end up getting weird and unpredictable behaviors when messages, warnings, errors, and other types of conditions are signaled.</p>
+<p>Because <code>tryCatch()</code> and <code>withCallingHandlers()</code> is used in many places throughout base R, this means that we also cannot call <code>handlers(global = TRUE)</code> as part of a package's startup process, e.g. <code>.onLoad()</code> or <code>.onAttach()</code>.</p>
+<p>Another example of this error is if <code>handlers(global = TRUE)</code> is used inside package vignettes and dynamic documents such as Rmarkdown.  In such cases, the global progress handler has to be enabled <em>prior</em> to processing the document, e.g.</p>
+<pre><code class="language-r">&gt; progressr::handlers(global = TRUE)
+&gt; rmarkdown::render(&quot;input.Rmd&quot;)
+</code></pre>
 <h3>Under the hood</h3>
 <p>When using the <strong>progressr</strong> package, progression updates are communicated via R's condition framework, which provides methods for creating, signaling, capturing, muffling, and relaying conditions.  Progression updates are of classes <code>progression</code> and <code>immediateCondition</code>(*).  The below figure gives an example how progression conditions are created, signaled, and rendered.</p>
 <p>(*) The <code>immediateCondition</code> class of conditions are relayed as soon as possible by the <strong><a href="https://cran.r-project.org/package=future">future</a></strong> framework, which means that progression updates produced in parallel workers are reported to the end user as soon as the main R session have received them.</p>

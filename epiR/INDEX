@@ -1,7 +1,5 @@
 epi.2by2                Summary measures for count data presented in a
                         2 by 2 table
-epi.RtoBUGS             R to WinBUGS data conversion
-epi.SClip               Lip cancer in Scotland 1975 - 1980
 epi.about               The library epiR: summary information
 epi.asc                 Write matrix to an ASCII raster file
 epi.betabuster          An R version of Wes Johnson and Chun-Lung Su's
@@ -59,8 +57,11 @@ epi.pooled              Estimate herd test characteristics when pooled
 epi.popsize             Estimate population size on the basis of
                         capture-recapture sampling
 epi.prcc                Partial rank correlation coefficients
-epi.prev                Estimate true prevalence
+epi.prev                Estimate true prevalence and the expected
+                        number of false positives
 epi.psi                 Proportional similarity index
+epi.RtoBUGS             R to WinBUGS data conversion
+epi.SClip               Lip cancer in Scotland 1975 - 1980
 epi.smd                 Fixed-effects meta-analysis of continuous
                         outcomes using the standardised mean difference
                         method

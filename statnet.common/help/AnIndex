@@ -120,9 +120,11 @@ trim_env.environment	trim_env
 ult	ult
 ult<-	ult
 unwhich	unwhich
+update.Welford	Welford
 UPDATE_MY_SCTRL_EXPR	snctrl-API
 update_snctrl	snctrl-API
 vector.namesmatch	vector.namesmatch
+Welford	Welford
 wmatrix	wmatrix
 wmatrix_weights	wmatrix_weights
 [.wmatrix	wmatrix

@@ -3,13 +3,13 @@ browse-this             Visit important project-related web pages
 create_from_github      Create a project from a GitHub repo
 create_package          Create a package or project
 edit                    Open configuration files
-git-default-branch      Get or set the default Git branch
 git_credentials         Produce or register credentials for git2r
 git_protocol            See or set the default Git protocol
 git_sitrep              Git/GitHub sitrep
 git_vaccinate           Vaccinate your global gitignore file
-github-token            Get help with GitHub personal access tokens
+git-default-branch      Get or set the default Git branch
 github_actions          GitHub Actions setup
+github-token            Get help with GitHub personal access tokens
 issue-this              Helpers for GitHub issues
 proj_activate           Activate a project
 proj_sitrep             Report working directory and usethis/RStudio

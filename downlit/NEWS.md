@@ -1,6 +1,34 @@
-# downlit 0.4.0
+# downlit 0.4.2
 
-# downlit 0.3.0
+* `highlight()` no longer errors if a package imputed to have been attached
+  isn't installed.
+
+* Correctly link `requireNamespace(MASS)` (#151).
+
+# downlit 0.4.1
+
+## Syntax highlighting
+
+* Supports new base pipe `|>` syntax (#126).
+
+* Every line get its own `<span>` to match pandoc (#122).
+
+* Multi-line tokens (e.g. strings) now get a `<span>` per line (#139).
+
+* Very long strings or other tokens are no longer truncated (@dmurdoch, #128).
+
+## Auto-linkg
+
+* Function calls (in inline and code blocks) will no longer to non-function
+  topics (#135).
+
+* Re-exports detection no longer relies on name of `.Rd` file (#134).
+
+* Link to correct topic with `::()` and `utils::help()` (@IndrajeetPatil, #131).
+
+* Generate correct link for Bioconductor vignettes (@zeehio, #145)
+
+# downlit 0.4.0
 
 ## Syntax highlighting
 

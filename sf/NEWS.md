@@ -1,3 +1,53 @@
+# version 1.0-8
+
+* `st_drop_geometry.default()` returns `x` unmodified;
+
+* `sf_project()` accepts 3- or 4-column matrices, containing z and t values;
+
+* optimizations for `st_sfc()` by @paleolimbot; #1938, #1925
+
+* `[<-.sfc()` recomputes the bounding box; `st_sfc()` gets parameter `compute_bbox`; #1965
+
+* add new algorithm and drop option to `st_make_valid()` when using GEOS and GEOS >= 3.10.1; #1655
+
+* add `st_minimum_rotated_rectangle()`, available when GEOS >= 3.9.0; #1953
+
+* fix `st_sample()` with `type = "hexagonal"` for corner case (n=1), add a `progress` argument for a progress bar; #1945
+
+* add package `pbapply` to Suggests; #1945
+
+* add pdf driver to windows build; #1942
+
+* clarify `pipeline` argument in `st_transform()` when axis order is ambiguous; #1934
+
+* handle argument `xpd` in calls to `plot.sfc_POLYGON()` and `plot.sfc_MULTIPOLYGON()`
+
+* add `pivot_wider()` method, by Henning Teickner; #1915
+
+* add `gdal_addo()` to add or remove overviews from raster images; #1921
+
+* `st_layers()` returns `crs` of each layer in a `crs` list of `crs` objects
+
+* restore `st_graticule()` behaviour to pre-sf 1.0-0; https://github.com/tidyverse/ggplot2/issues/4571
+
+* `gdal_metadata()` sets metadata item names properly
+
+* `st_read()` gains an argument `optional` passed on to `as.data.frame` to avoid changing column names; #1916
+
+* GPX files are autodetected by `st_read()`; #1917
+
+* unnecessary coordinate names are not returned in `st_sample()`, making the output size smaller; #1879
+
+# version 1.0-7
+
+* `st_drop_geometry()` is a generic; #1914
+
+* `st_crs(x)$ud_unit` returns the unit of the coordinate reference system of `x`
+
+* geometric predicates return `sgbp` objects omitting self-intersections etc. by passing `remove_self = TRUE` and unique symmetric relationship by passing `retain_unique = TRUE` (to `...` if needed); this simplifies identifying (and removing) duplicated geometries; duplicates are identified by e.g. by `st_equals(x, retain_unique = TRUE) |> unlist() |> unique()`; #1893
+
+* fix compile issue against GDAL < 2.5.0 introduced in 1.0-6; #1899
+
 # version 1.0-6
 
 * adapt to new `spatstat.random` package; #1892

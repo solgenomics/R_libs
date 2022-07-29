@@ -11,6 +11,7 @@ arankacami.groundnut.uniformity	arankacami.groundnut.uniformity
 archbold.apple	archbold.apple
 ars.earlywhitecorn96	ars.earlywhitecorn96
 australia.soybean	australia.soybean
+bachmaier.nitrogen	bachmaier.nitrogen
 baker.barley.uniformity	baker.barley.uniformity
 baker.strawberry.uniformity	baker.strawberry.uniformity
 baker.wheat.uniformity	baker.wheat.uniformity
@@ -90,6 +91,7 @@ devries.pine	devries.pine
 digby.jointregression	digby.jointregression
 diggle.cow	diggle.cow
 draper.safflower.uniformity	draper.safflower.uniformity
+ducker.groundnut.uniformity	ducker.groundnut.uniformity
 durban.competition	durban.competition
 durban.rowcol	durban.rowcol
 durban.splitplot	durban.splitplot
@@ -193,6 +195,7 @@ kenward.cattle	kenward.cattle
 kerr.sugarcane.uniformity	kerr.sugarcane.uniformity
 khin.rice.uniformity	khin.rice.uniformity
 kiesselbach.oats.uniformity	kiesselbach.oats.uniformity
+kling.augmented	kling.augmented
 kreusler.maize	kreusler.maize
 kristensen.barley.uniformity	kristensen.barley.uniformity
 kulkarni.sorghum.uniformity	kulkarni.sorghum.uniformity
@@ -291,6 +294,7 @@ sayer.sugarcane.uniformity	sayer.sugarcane.uniformity
 senshu.rice	senshu.rice
 shafi.tomato.uniformity	shafi.tomato.uniformity
 shafii.rapeseed	shafii.rapeseed
+sharma.met	sharma.met
 shaw.oats	shaw.oats
 silva.cotton	silva.cotton
 sinclair.clover	sinclair.clover

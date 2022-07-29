@@ -12,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;rstpm2&rsquo; version 1.5.2</h2>
+</div><h2>Documentation for package &lsquo;rstpm2&rsquo; version 1.5.7</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -44,6 +44,10 @@
 <td>Predictions for continuous time, nonhomogeneous Markov multi-state models using parametric and penalised survival models.</td></tr>
 <tr><td style="width: 25%;"><a href="markov_msm.html">as.data.frame.markov_msm_ratio</a></td>
 <td>Predictions for continuous time, nonhomogeneous Markov multi-state models using parametric and penalised survival models.</td></tr>
+<tr><td style="width: 25%;"><a href="markov_sde.html">as.data.frame.markov_sde</a></td>
+<td>Predictions for continuous time, nonhomogeneous Markov multi-state models using Aalen's additive hazards models.</td></tr>
+<tr><td style="width: 25%;"><a href="bhazard.html">bhazard</a></td>
+<td>Placemarker function for a baseline hazard function.</td></tr>
 <tr><td style="width: 25%;"><a href="pstpm2-class.html">BIC-method</a></td>
 <td>Class "pstpm2"</td></tr>
 <tr><td style="width: 25%;"><a href="brcancer.html">brcancer</a></td>
@@ -68,6 +72,8 @@
 <td>Class "pstpm2"</td></tr>
 <tr><td style="width: 25%;"><a href="stpm2-class.html">eform-method</a></td>
 <td>Class "stpm2" ~~~</td></tr>
+<tr><td style="width: 25%;"><a href="eform.html">eform.default</a></td>
+<td>S3 method for to provide exponentiated coefficents with confidence intervals.</td></tr>
 <tr><td style="width: 25%;"><a href="eform.html">eform.stpm2</a></td>
 <td>S3 method for to provide exponentiated coefficents with confidence intervals.</td></tr>
 <tr><td style="width: 25%;"><a href="grad.html">grad</a></td>
@@ -98,6 +104,8 @@
 <td>S3 methods for lines</td></tr>
 <tr><td style="width: 25%;"><a href="markov_msm.html">markov_msm</a></td>
 <td>Predictions for continuous time, nonhomogeneous Markov multi-state models using parametric and penalised survival models.</td></tr>
+<tr><td style="width: 25%;"><a href="markov_sde.html">markov_sde</a></td>
+<td>Predictions for continuous time, nonhomogeneous Markov multi-state models using Aalen's additive hazards models.</td></tr>
 <tr><td style="width: 25%;"><a href="nsx.html">nsx</a></td>
 <td>Generate a Basis Matrix for Natural Cubic Splines (with eXtensions)</td></tr>
 <tr><td style="width: 25%;"><a href="nsxD.html">nsxD</a></td>
@@ -118,6 +126,8 @@
 <td>plots for an stpm2 fit</td></tr>
 <tr><td style="width: 25%;"><a href="markov_msm.html">plot.markov_msm</a></td>
 <td>Predictions for continuous time, nonhomogeneous Markov multi-state models using parametric and penalised survival models.</td></tr>
+<tr><td style="width: 25%;"><a href="markov_sde.html">plot.markov_sde</a></td>
+<td>Predictions for continuous time, nonhomogeneous Markov multi-state models using Aalen's additive hazards models.</td></tr>
 <tr><td style="width: 25%;"><a href="popmort.html">popmort</a></td>
 <td>Background mortality rates for the colon dataset.</td></tr>
 <tr><td style="width: 25%;"><a href="aft-class.html">predict-method</a></td>
@@ -168,12 +178,16 @@
 <td>Internal functions for the rstpm2 package.</td></tr>
 <tr><td style="width: 25%;"><a href="Rstpm2-package.html">Rstpm2</a></td>
 <td>Flexible parametric survival models.</td></tr>
+<tr><td style="width: 25%;"><a href="smoothpwc.html">smoothpwc</a></td>
+<td>Utility to use a smooth function in markov_msm based on piece-wise constant values</td></tr>
 <tr><td style="width: 25%;"><a href="markov_msm.html">splineFun</a></td>
 <td>Predictions for continuous time, nonhomogeneous Markov multi-state models using parametric and penalised survival models.</td></tr>
 <tr><td style="width: 25%;"><a href="markov_msm.html">standardise</a></td>
 <td>Predictions for continuous time, nonhomogeneous Markov multi-state models using parametric and penalised survival models.</td></tr>
 <tr><td style="width: 25%;"><a href="markov_msm.html">standardise.markov_msm</a></td>
 <td>Predictions for continuous time, nonhomogeneous Markov multi-state models using parametric and penalised survival models.</td></tr>
+<tr><td style="width: 25%;"><a href="markov_sde.html">standardise.markov_sde</a></td>
+<td>Predictions for continuous time, nonhomogeneous Markov multi-state models using Aalen's additive hazards models.</td></tr>
 <tr><td style="width: 25%;"><a href="gsm.html">stpm2</a></td>
 <td>Parametric and penalised generalised survival models</td></tr>
 <tr><td style="width: 25%;"><a href="stpm2-class.html">stpm2-class</a></td>
@@ -188,6 +202,10 @@
 <td>Predictions for continuous time, nonhomogeneous Markov multi-state models using parametric and penalised survival models.</td></tr>
 <tr><td style="width: 25%;"><a href="tvcCoxph-class.html">tvcCoxph-class</a></td>
 <td>Class '"tvcCoxph"'</td></tr>
+<tr><td style="width: 25%;"><a href="update-methods.html">update-method</a></td>
+<td>Methods for Function update</td></tr>
+<tr><td style="width: 25%;"><a href="update-methods.html">update-methods</a></td>
+<td>Methods for Function update</td></tr>
 <tr><td style="width: 25%;"><a href="markov_msm.html">vcov.markov_msm</a></td>
 <td>Predictions for continuous time, nonhomogeneous Markov multi-state models using parametric and penalised survival models.</td></tr>
 <tr><td style="width: 25%;"><a href="vuniroot.html">vuniroot</a></td>

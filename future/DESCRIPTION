@@ -1,9 +1,9 @@
 Package: future
-Version: 1.23.0
+Version: 1.27.0
 Title: Unified Parallel and Distributed Processing in R for Everyone
-Imports: digest, globals (>= 0.14.0), listenv (>= 0.8.0), parallel,
-        parallelly (>= 1.26.1), tools, utils
-Suggests: RhpcBLASctl, R.rsp, markdown
+Imports: digest, globals (>= 0.15.0), listenv (>= 0.8.0), parallel,
+        parallelly (>= 1.31.1), tools, utils
+Suggests: methods, RhpcBLASctl, R.rsp, markdown
 VignetteBuilder: R.rsp
 Authors@R: c(person("Henrik", "Bengtsson", role=c("aut", "cre", "cph"),
                                           email = "henrikb@braju.com"))
@@ -29,11 +29,11 @@ ByteCompile: TRUE
 URL: https://future.futureverse.org,
         https://github.com/HenrikBengtsson/future
 BugReports: https://github.com/HenrikBengtsson/future/issues
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 NeedsCompilation: no
-Packaged: 2021-10-31 03:16:06 UTC; hb
+Packaged: 2022-07-21 17:15:20 UTC; hb
 Author: Henrik Bengtsson [aut, cre, cph]
 Maintainer: Henrik Bengtsson <henrikb@braju.com>
 Repository: CRAN
-Date/Publication: 2021-10-31 06:30:02 UTC
-Built: R 4.1.2; ; 2022-02-15 22:58:26 UTC; unix
+Date/Publication: 2022-07-22 11:00:02 UTC
+Built: R 4.1.3; ; 2022-07-29 17:35:36 UTC; unix

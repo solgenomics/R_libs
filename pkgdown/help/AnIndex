@@ -15,6 +15,7 @@ build_search	build_search
 build_site	build_site
 build_site_github_pages	build_site_github_pages
 build_tutorials	build_tutorials
+check_pkgdown	check_pkgdown
 clean_site	clean_site
 data_template	render_page
 deploy_site_github	deploy_site_github
@@ -26,6 +27,7 @@ in_pkgdown	in_pkgdown
 pkgdown	pkgdown-package
 pkgdown_print	pkgdown_print
 pkgdown_sitrep	pkgdown_sitrep
+preview_page	preview_page
 preview_site	preview_site
 rd2html	rd2html
 render_page	render_page

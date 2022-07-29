@@ -1,19 +1,18 @@
-Ops                     S3 Ops Group Generic Functions for simple
-                        feature geometries
 aggregate.sf            aggregate an 'sf' object
 as                      Methods to coerce simple features to Spatial*
                         and 'Spatial*DataFrame' objects
 bind                    Bind rows (features) of sf objects
+db_drivers              Drivers for which update should be 'TRUE' by
+                        default
 dbDataType,PostgreSQLConnection,sf-method
                         Determine database type for R vector
 dbWriteTable,PostgreSQLConnection,character,sf-method
                         Write 'sf' object to Database
-db_drivers              Drivers for which update should be 'TRUE' by
-                        default
 extension_map           Map extension to driver
 gdal                    functions to interact with gdal not meant to be
                         called directly by users (but e.g. by
                         stars::read_stars)
+gdal_addo               add or remove overviews to/from a raster image
 gdal_utils              Native interface to gdal utils
 geos_binary_ops         Geometric operations on pairs of simple feature
                         geometry sets
@@ -33,6 +32,8 @@ is_geometry_column      Check if the columns could be of a coercable
                         type for sf
 merge.sf                merge method for sf and data.frame object
 nc                      North Carolina SIDS data
+Ops                     S3 Ops Group Generic Functions for simple
+                        feature geometries
 plot                    plot sf object
 prefix_map              Map prefix to driver
 proj_tools              Manage PROJ settings
@@ -41,10 +42,10 @@ rawToHex                Convert raw vector(s) into hexadecimal
 s2                      functions for spherical geometry, using s2
                         package
 sf                      Create sf object
-sf-defunct              Deprecated functions in 'sf'
 sf_extSoftVersion       Provide the external dependencies versions of
                         the libraries linked to sf
 sf_project              directly transform a set of coordinates
+sf-defunct              Deprecated functions in 'sf'
 sfc                     Create simple feature geometry list column
 sgbp                    Methods for dealing with sparse geometry binary
                         predicate lists
@@ -83,7 +84,7 @@ st_is_longlat           Assert whether simple feature coordinates are
                         longlat degrees
 st_jitter               jitter geometries
 st_join                 spatial join, spatial filter
-st_layers               List layers in a datasource
+st_layers               Return properties of layers in a datasource
 st_line_sample          Sample points on a linear geometry
 st_m_range              Return 'm' range of a simple feature or simple
                         feature set

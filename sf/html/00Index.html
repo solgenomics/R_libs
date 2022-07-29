@@ -12,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;sf&rsquo; version 1.0-6</h2>
+</div><h2>Documentation for package &lsquo;sf&rsquo; version 1.0-8</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -99,6 +99,8 @@
 <td>Methods for dealing with sparse geometry binary predicate lists</td></tr>
 <tr><td style="width: 25%;"><a href="tidyverse.html">distinct.sf</a></td>
 <td>Tidyverse methods for sf objects (remove .sf suffix!)</td></tr>
+<tr><td style="width: 25%;"><a href="tidyverse.html">dplyr_reconstruct.sf</a></td>
+<td>Tidyverse methods for sf objects (remove .sf suffix!)</td></tr>
 </table>
 
 <h2><a name="E">-- E --</a></h2>
@@ -130,6 +132,8 @@
 <td>Tidyverse methods for sf objects (remove .sf suffix!)</td></tr>
 <tr><td style="width: 25%;"><a href="gdal.html">gdal</a></td>
 <td>functions to interact with gdal not meant to be called directly by users (but e.g. by stars::read_stars)</td></tr>
+<tr><td style="width: 25%;"><a href="gdal_addo.html">gdal_addo</a></td>
+<td>add or remove overviews to/from a raster image</td></tr>
 <tr><td style="width: 25%;"><a href="gdal.html">gdal_create</a></td>
 <td>functions to interact with gdal not meant to be called directly by users (but e.g. by stars::read_stars)</td></tr>
 <tr><td style="width: 25%;"><a href="gdal.html">gdal_crs</a></td>
@@ -259,6 +263,10 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="tibble.html">pillar_shaft.sfc</a></td>
 <td>Summarize simple feature type for tibble</td></tr>
+<tr><td style="width: 25%;"><a href="tidyverse.html">pivot_longer.sf</a></td>
+<td>Tidyverse methods for sf objects (remove .sf suffix!)</td></tr>
+<tr><td style="width: 25%;"><a href="tidyverse.html">pivot_wider.sf</a></td>
+<td>Tidyverse methods for sf objects (remove .sf suffix!)</td></tr>
 <tr><td style="width: 25%;"><a href="plot.html">plot</a></td>
 <td>plot sf object</td></tr>
 <tr><td style="width: 25%;"><a href="plot.html">plot.sf</a></td>
@@ -617,6 +625,10 @@
 <td>Get GDAL drivers</td></tr>
 <tr><td style="width: 25%;"><a href="st_geometry.html">st_drop_geometry</a></td>
 <td>Get, set, replace or rename geometry from an sf object</td></tr>
+<tr><td style="width: 25%;"><a href="st_geometry.html">st_drop_geometry.default</a></td>
+<td>Get, set, replace or rename geometry from an sf object</td></tr>
+<tr><td style="width: 25%;"><a href="st_geometry.html">st_drop_geometry.sf</a></td>
+<td>Get, set, replace or rename geometry from an sf object</td></tr>
 <tr><td style="width: 25%;"><a href="geos_binary_pred.html">st_equals</a></td>
 <td>Geometric binary predicates on pairs of simple feature geometry sets</td></tr>
 <tr><td style="width: 25%;"><a href="geos_binary_pred.html">st_equals_exact</a></td>
@@ -680,7 +692,7 @@
 <tr><td style="width: 25%;"><a href="st_join.html">st_join.sf</a></td>
 <td>spatial join, spatial filter</td></tr>
 <tr><td style="width: 25%;"><a href="st_layers.html">st_layers</a></td>
-<td>List layers in a datasource</td></tr>
+<td>Return properties of layers in a datasource</td></tr>
 <tr><td style="width: 25%;"><a href="geos_measures.html">st_length</a></td>
 <td>Compute geometric measurements</td></tr>
 <tr><td style="width: 25%;"><a href="st.html">st_linestring</a></td>
@@ -697,6 +709,8 @@
 <td>Check validity or make an invalid geometry valid</td></tr>
 <tr><td style="width: 25%;"><a href="valid.html">st_make_valid.sfg</a></td>
 <td>Check validity or make an invalid geometry valid</td></tr>
+<tr><td style="width: 25%;"><a href="geos_unary.html">st_minimum_rotated_rectangle</a></td>
+<td>Geometric unary operations on simple feature geometry sets</td></tr>
 <tr><td style="width: 25%;"><a href="st.html">st_multilinestring</a></td>
 <td>Create simple feature from a numeric vector, matrix or list</td></tr>
 <tr><td style="width: 25%;"><a href="st.html">st_multipoint</a></td>

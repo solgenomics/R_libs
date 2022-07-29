@@ -1,35 +1,26 @@
-BCG                     BCG Vaccine Data
-BtheB                   Beat the Blues Data
-CHFLS                   Chinese Health and Family Life Survey
-CYGOB1                  CYG OB1 Star Cluster Data
-EFT                     Embedded Figures Test Data
-Forbes2000              The Forbes 2000 Ranking of the World's Biggest
-                        Companies (Year 2004)
-GHQ                     General Health Questionnaire
-HSAURtable              Produce LaTeX Tables
-Lanza                   Prevention of Gastointestinal Damages
-Smoking_DollHill1950    Smoking and Lung Cancer (IV)
-Smoking_Mueller1940     Smoking and Lung Cancer (I)
-Smoking_SchairerSchoeniger1944
-                        Smoking and Lung Cancer (II)
-Smoking_Wassink1945     Smoking and Lung Cancer (III)
-USairpollution          Air Pollution in US Cities
-USmelanoma              USA Malignant Melanoma Data
-USstates                US States
-UStemp                  Temperatures in 22 US cities
 agefat                  Total Body Composision Data
 aspirin                 Aspirin Data
 backpain                Driving and Back Pain Data
+BCG                     BCG Vaccine Data
 birds                   Birds in Paramo Vegetation Data
 birthdeathrates         Birth and Death Rates Data
 bladdercancer           Bladder Cancer Data
 bp                      Lowering Blood Pressure Data
+BtheB                   Beat the Blues Data
+CHFLS                   Chinese Health and Family Life Survey
 clouds                  Cloud Seeding Data
+CYGOB1                  CYG OB1 Star Cluster Data
+EFT                     Embedded Figures Test Data
 epilepsy                Epilepsy Data
+Forbes2000              The Forbes 2000 Ranking of the World's Biggest
+                        Companies (Year 2004)
 foster                  Foster Feeding Experiment
 gardenflowers           Garden Flowers Data
+GHQ                     General Health Questionnaire
 heptathlon              Olympic Heptathlon Seoul 1988
 household               Household Expenditure Data
+HSAURtable              Produce LaTeX Tables
+Lanza                   Prevention of Gastointestinal Damages
 mastectomy              Survival Times after Mastectomy of Breast
                         Cancer Patients
 men1500m                Winners of the Olympic Men's 1500m
@@ -50,11 +41,20 @@ schizophrenia2          Schizophrenia Data
 schooldays              Days not Spent at School
 skulls                  Egyptian Skulls
 smoking                 Nicotine Gum and Smoking Cessation
+Smoking_DollHill1950    Smoking and Lung Cancer (IV)
+Smoking_Mueller1940     Smoking and Lung Cancer (I)
+Smoking_SchairerSchoeniger1944
+                        Smoking and Lung Cancer (II)
+Smoking_Wassink1945     Smoking and Lung Cancer (III)
 students                Student Risk Taking
 suicides                Crowd Baiting Behaviour and Suicides
 suicides2               Male Suicides Data
 toenail                 Toenail Infection Data
 toothpaste              Toothpaste Data
+USairpollution          Air Pollution in US Cities
+USmelanoma              USA Malignant Melanoma Data
+USstates                US States
+UStemp                  Temperatures in 22 US cities
 voting                  House of Representatives Voting Data
 water                   Mortality and Water Hardness
 watervoles              Water Voles Data

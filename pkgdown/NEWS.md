@@ -1,3 +1,84 @@
+# pkgdown 2.0.6
+
+* If you're using an RStudio daily, output file names are now clickable,
+  previewing the generated HTML in the browser (#2157).
+
+* Getting started vignette no longer needs to be included in the articles index
+  (#2150).
+
+* If there aren't any functions in the `\usage{}` block, then pkgdown will
+  now shows all aliases on the reference index, rather than just the topic 
+  name (#1624).
+
+# pkgdown 2.0.5
+
+* Correctly generate downlit link targets for topics that have a file name 
+  ending in `.` (#2128).
+
+* `build_articles()`: if build fails because the index doesn't include all
+  articles, you're now told what articles are missing (@zkamvar, #2121).
+
+* `build_home()` now escapes angle brackets in author comments(#2127).
+  
+* `build_home()` will automatically render and link `.github/SUPPORT.md`
+  (@IndrajeetPatil, #2124).
+
+* `build_news()` once again fails to link `@username` at start of 
+  bullet. I had to reverted #2030 because of #2122.
+
+* `build_reference()`: restore accidentally nerfed `has_keyword()` and
+  `has_concept()` reference selectors (#2126) and add tests.
+
+# pkgdown 2.0.4
+
+* New `check_pkgdown()` provides a lightweight way to check that your 
+  `_pkgdown.yml` is valid without building the site (#2056). Invalid 
+  `_pkgdown.yml` now consistently generates errors both locally and on
+  CI (#2055).
+
+* `build_article()` now supports inline markdown in the `title` (#2039).
+
+* `build_home()` no longer shows development status badges on the released 
+  version of the site (#2054).
+
+* `build_news()` support automated `@username` links in more places (#2030).
+
+* `build_reference()`: 
+
+    * You can once again exclude topics from the reference index with `-` (#2040). 
+
+    * Inline markdown in `title`s and `subtitle`s is now supported(#2039). 
+
+    * Package logos will be automatically stripped from the `.Rd` you don't end 
+      up with two on one page. (#2083).
+
+    * `\figure{file}{alternative text}` with multline alt text is now parsed
+      correctly (#2080)
+
+    * roxygen 7.2.0 output for generic code blocks (#2092, @jabenninghoff) is
+      processed correctly.
+
+* Front end changes:
+
+    * Automatically added links in code blocks are now styled less aggressively,
+      so they occupy less visual weight on the page (#2007).
+
+    * All article pages are given class `col-md-9` for consistency with other
+      pages (#2045).
+
+    * Fixed width HTML widgets are sized correctly (@dmurdoch, #2062).
+
+    * Footnotes work with more contents, including code (@banfai, #2042).
+
+    * Navbar components now accept `target` argument (#2089, @JSchoenbachler).
+
+* New syntax highlighting themes a11y-light, a11y-dark, monochrome-light, 
+  monochrome-dark, and solarized
+
+# pkgdown 2.0.3
+
+* Fixes for R CMD check
+
 # pkgdown 2.0.2
 
 * New Korean (`ko`) translation thanks to @mrchypark and @peremen (#1994).
@@ -144,7 +225,7 @@
 * pkgdown can now translate all the text that it generates (#1446): this means 
   that if you have a package where the docs are written in another language, you 
   can match all the pkgdown UI to provide a seamless experience to non-English
-  speakers. Activate the translations by setting the `lang` in `_pkgdown.yaml`:
+  speakers. Activate the translations by setting the `lang` in `_pkgdown.yml`:
    
     ```yaml
     lang: fr
@@ -163,7 +244,7 @@
     an issue and we'll help you get started.
   
 * Template packages can now provide `inst/pkgdown/_pkgdown.yml` which is used
-  as a set of defaults for `_pkgdown.yaml`. It can be used to (e.g.) provide 
+  as a set of defaults for `_pkgdown.yml`. It can be used to (e.g.) provide 
   author definitions, select Bootstrap version and define bslib variables, 
   and customise the sidebar, footer, navbar, etc. (#1499).
 

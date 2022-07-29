@@ -7,6 +7,8 @@ datatable	datatable
 dataTableAjax	dataTableAjax
 dataTableOutput	dataTableOutput
 dataTableProxy	proxy
+doColumnSearch	doColumnSearch
+doGlobalSearch	doColumnSearch
 DTOutput	dataTableOutput
 editData	editData
 formatCurrency	formatCurrency
@@ -36,4 +38,5 @@ styleValue	styleInterval
 tableFooter	tableHeader
 tableHeader	tableHeader
 updateCaption	proxy
+updateFilters	replaceData
 updateSearch	proxy

@@ -1,15 +1,3 @@
-CCmaps                  Conditioned choropleth maps
-ContourLines2SLDF       Converter functions to build
-                        SpatialLinesDataFrame objects
-GE_SpatialGrid          Create SpatialGrid for PNG output to GE
-Rgshhs                  Read GSHHS data into sp object
-SpatialLines2PolySet    Convert sp line and polygon objects to
-                        PBSmapping PolySet objects
-SpatialLinesMidPoints   Line midpoints
-SplashDams              Data for Splash Dams in western Oregon
-as.SpatialPolygons.tess
-                        Coercion of spatstat tess object to sp
-                        SpatialPolygons object
 as.im.SpatialGridDataFrame
                         Coercion between sp objects and spatstat im
                         objects
@@ -22,14 +10,21 @@ as.ppp.SpatialPoints    Coercion between sp objects and spatstat ppp
                         objects
 as.psp.Line             Coercion between sp objects and spatstat psp
                         objects
+as.SpatialPolygons.tess
+                        Coercion of spatstat tess object to sp
+                        SpatialPolygons object
+CCmaps                  Conditioned choropleth maps
 checkPolygonsHoles      Check holes in Polygons objects
+ContourLines2SLDF       Converter functions to build
+                        SpatialLinesDataFrame objects
 crepuscule              Methods for sun ephemerides calculations
 dotsInPolys             Put dots in polygons
 elide-methods           Methods for Function elide in Package
                         'maptools'
 gcDestination           Find destination in geographical coordinates
-getKMLcoordinates       Get a list of coordinates out of a KML file
+GE_SpatialGrid          Create SpatialGrid for PNG output to GE
 getinfo.shape           Get shapefile header information
+getKMLcoordinates       Get a list of coordinates out of a KML file
 gpcholes                Hisaji Ono's lake/hole problem
 gzAzimuth               Find azimuth for geographical coordinates
 kmlLine                 Create and write a KML file on the basis of a
@@ -68,13 +63,18 @@ readShapePoly           Read polygon shape files into
                         SpatialPolygonsDataFrame objects
 readShapeSpatial        Read shape files into Spatial*DataFrame objects
 readSplus               Read exported WinBUGS maps
+Rgshhs                  Read GSHHS data into sp object
 snapPointsToLines       Snap a set of points to a set of lines
 sp2Mondrian             write map data for Mondrian
-sp2WB                   Export SpatialPolygons object as S-Plus map for
-                        WinBUGS
 sp2tmap                 Convert SpatialPolygons object for Stata tmap
                         command
+sp2WB                   Export SpatialPolygons object as S-Plus map for
+                        WinBUGS
+SpatialLines2PolySet    Convert sp line and polygon objects to
+                        PBSmapping PolySet objects
+SpatialLinesMidPoints   Line midpoints
 spCbind-methods         cbind for spatial objects
+SplashDams              Data for Splash Dams in western Oregon
 spRbind-methods         rbind for spatial objects
 state.vbm               US State Visibility Based Map
 symbolsInPolys          Place grids of points over polygons

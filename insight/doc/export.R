@@ -40,7 +40,7 @@ knitr::include_graphics("export_table.png", dpi = 72)
 ## -----------------------------------------------------------------------------
 # colored caption, simple footer
 export_table(
-  x, 
+  x,
   caption = c("# Title", "red"),
   footer = "Footer line"
 )
@@ -54,7 +54,7 @@ export_table(out)
 ## -----------------------------------------------------------------------------
 # colored caption and footer
 export_table(
-  x, 
+  x,
   caption = c("# Title", "red"),
   footer = c("Footer line in blue", "blue")
 )
@@ -68,7 +68,7 @@ export_table(out)
 ## -----------------------------------------------------------------------------
 # colored caption, subtitle and footer
 export_table(
-  x, 
+  x,
   caption = c("# Title", "red"),
   subtitle = c("\n   A subtitle in yellow", "yellow"),
   footer = c("Footer line in blue", "blue")
@@ -105,7 +105,7 @@ export_table(out)
 ## -----------------------------------------------------------------------------
 # add captions and footers for each table
 export_table(
-  x, 
+  x,
   caption = list("Table 1", "Table 2", "Table 3"),
   footer = list("Footer 1\n\n", "Footer 2\n\n", "Footer 3\n\n")
 )
@@ -120,10 +120,12 @@ export_table(out)
 ## -----------------------------------------------------------------------------
 # Colored table captions and multiple footers per table
 export_table(
-  x, 
-  caption = list(c("Red Table 1", "red"),
-                 c("Blue Table 2", "bue"),
-                 c("Green Table 3", "green")),
+  x,
+  caption = list(
+    c("Red Table 1", "red"),
+    c("Blue Table 2", "bue"),
+    c("Green Table 3", "green")
+  ),
   footer = list(
     list(c("Footer line 1\n", "green"), c("Second line\n\n", "red")),
     list(c("Footer line A\n", "blue"), c("Second line\n\n", "green")),

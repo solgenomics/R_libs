@@ -1,6 +1,6 @@
 Package: mnormt
-Version: 2.0.2
-Date: 2020-08-31
+Version: 2.1.0
+Date: 2022-06-07
 Title: The Multivariate Normal and t Distributions, and Their Truncated
         Versions
 Author: Adelchi Azzalini [aut, cre],
@@ -11,7 +11,6 @@ Author: Adelchi Azzalini [aut, cre],
    Yihong Ge [ctb] (Fortran routines BNVU and MVBVU).
 Maintainer: Adelchi Azzalini <adelchi.azzalini@unipd.it>
 Depends: R (>= 2.2.0)
-Imports: tmvnsim (>= 1.0-2)
 Description: Functions are provided for computing the density and the
   distribution function of d-dimensional normal and "t" random variables,
   possibly truncated (on one side or two sides),  and for generating random 
@@ -24,7 +23,7 @@ License: GPL-2 | GPL-3
 URL: http://azzalini.stat.unipd.it/SW/Pkg-mnormt/
 NeedsCompilation: yes
 Encoding: UTF-8
-Packaged: 2020-09-01 10:22:47 UTC; aa
+Packaged: 2022-06-07 08:16:55 UTC; aa
 Repository: CRAN
-Date/Publication: 2020-09-01 12:50:07 UTC
-Built: R 4.1.2; x86_64-pc-linux-gnu; 2022-02-15 23:06:43 UTC; unix
+Date/Publication: 2022-06-07 12:20:06 UTC
+Built: R 4.1.3; x86_64-pc-linux-gnu; 2022-07-29 16:57:10 UTC; unix

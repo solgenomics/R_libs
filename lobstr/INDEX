@@ -6,3 +6,5 @@ obj_addr                Find memory location of objects and their
 obj_size                Calculate the size of an object.
 ref                     Display tree of references
 sxp                     Inspect an object
+tree                    Pretty tree-like object printing
+tree_label              Build element or node label in tree

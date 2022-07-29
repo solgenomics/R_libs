@@ -1,4 +1,3 @@
-mockery-package	mockery
 call-expectations	call-expectations
 expect_args	call-expectations
 expect_call	call-expectations

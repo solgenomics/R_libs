@@ -1,3 +1,15 @@
+# CHANGES IN xfun VERSION 0.31
+
+- `github_releases(use_jsonlite = FALSE)` supports R versions below 4.1.0 now.
+
+- `session_info()` silently drops empty package names now (thanks, @phargarten2, #65).
+
+# CHANGES IN xfun VERSION 0.30
+
+- Added a new function `is_blank()` (previously existed in **knitr**) to test if all elements of a character vector are blank (white spaces or empty strings).
+
+- Added a new argument `error = TRUE` to `existing_files()`.
+
 # CHANGES IN xfun VERSION 0.29
 
 - `github_releases()` can fetch all releases (tags) of a Github repo now.

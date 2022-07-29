@@ -1,8 +1,27 @@
+# lobstr 1.1.2
+
+* Switched to cpp11 from Rcpp.
+
+* Relicensed as MIT (#51).
+
+* `obj_size()` and `sxp()` now support non-nil terminated pairlists.
+
+* `obj_size()` now displays large objects with KB, MB, etc (#57, #60),
+  and no longer returns NA for objects larger than 2^31 bytes (#45).
+
+* `obj_sizes()` now computes relative sizes correctly (without meaningless
+  floating point differences).
+
+* `ref()` lists all contents of environments even those with names beginning
+  with `.` (@krlmlr, #53).
+
+* New, experimental `tree()` function as alternative to `str()` (#56).
+
 # lobstr 1.1.1
 
 * Fix PROTECT error.
 
-* Remove UTF-8 charatecrs from comments
+* Remove UTF-8 characters from comments
 
 # lobstr 1.1.0
 

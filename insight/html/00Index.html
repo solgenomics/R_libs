@@ -12,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;insight&rsquo; version 0.16.0</h2>
+</div><h2>Documentation for package &lsquo;insight&rsquo; version 0.18.0</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -33,6 +33,7 @@
 <a href="#L">L</a>
 <a href="#M">M</a>
 <a href="#N">N</a>
+<a href="#O">O</a>
 <a href="#P">P</a>
 <a href="#S">S</a>
 <a href="#T">T</a>
@@ -69,6 +70,10 @@
 <td>Color-formatting for data columns based on condition</td></tr>
 <tr><td style="width: 25%;"><a href="print_color.html">colour_text</a></td>
 <td>Coloured console output</td></tr>
+<tr><td style="width: 25%;"><a href="compact_character.html">compact_character</a></td>
+<td>Remove empty strings from character</td></tr>
+<tr><td style="width: 25%;"><a href="compact_list.html">compact_list</a></td>
+<td>Remove empty elements from lists</td></tr>
 </table>
 
 <h2><a name="D">-- D --</a></h2>
@@ -223,35 +228,9 @@
 <td>Get the data that was used to fit the model</td></tr>
 <tr><td style="width: 25%;"><a href="get_data.html">get_data.afex_aov</a></td>
 <td>Get the data that was used to fit the model</td></tr>
-<tr><td style="width: 25%;"><a href="get_data.html">get_data.brmsfit</a></td>
-<td>Get the data that was used to fit the model</td></tr>
-<tr><td style="width: 25%;"><a href="get_data.html">get_data.clmm</a></td>
-<td>Get the data that was used to fit the model</td></tr>
-<tr><td style="width: 25%;"><a href="get_data.html">get_data.gee</a></td>
-<td>Get the data that was used to fit the model</td></tr>
-<tr><td style="width: 25%;"><a href="get_data.html">get_data.glmmadmb</a></td>
+<tr><td style="width: 25%;"><a href="get_data.html">get_data.default</a></td>
 <td>Get the data that was used to fit the model</td></tr>
 <tr><td style="width: 25%;"><a href="get_data.html">get_data.glmmTMB</a></td>
-<td>Get the data that was used to fit the model</td></tr>
-<tr><td style="width: 25%;"><a href="get_data.html">get_data.hurdle</a></td>
-<td>Get the data that was used to fit the model</td></tr>
-<tr><td style="width: 25%;"><a href="get_data.html">get_data.lme</a></td>
-<td>Get the data that was used to fit the model</td></tr>
-<tr><td style="width: 25%;"><a href="get_data.html">get_data.MCMCglmm</a></td>
-<td>Get the data that was used to fit the model</td></tr>
-<tr><td style="width: 25%;"><a href="get_data.html">get_data.merMod</a></td>
-<td>Get the data that was used to fit the model</td></tr>
-<tr><td style="width: 25%;"><a href="get_data.html">get_data.mixed</a></td>
-<td>Get the data that was used to fit the model</td></tr>
-<tr><td style="width: 25%;"><a href="get_data.html">get_data.MixMod</a></td>
-<td>Get the data that was used to fit the model</td></tr>
-<tr><td style="width: 25%;"><a href="get_data.html">get_data.rlmerMod</a></td>
-<td>Get the data that was used to fit the model</td></tr>
-<tr><td style="width: 25%;"><a href="get_data.html">get_data.rqss</a></td>
-<td>Get the data that was used to fit the model</td></tr>
-<tr><td style="width: 25%;"><a href="get_data.html">get_data.stanreg</a></td>
-<td>Get the data that was used to fit the model</td></tr>
-<tr><td style="width: 25%;"><a href="get_data.html">get_data.zcpglm</a></td>
 <td>Get the data that was used to fit the model</td></tr>
 <tr><td style="width: 25%;"><a href="get_datagrid.html">get_datagrid</a></td>
 <td>Create a reference grid</td></tr>
@@ -352,15 +331,23 @@
 <tr><td style="width: 25%;"><a href="get_parameters.zeroinfl.html">get_parameters.zeroinfl</a></td>
 <td>Get model parameters from zero-inflated and hurdle models</td></tr>
 <tr><td style="width: 25%;"><a href="get_predicted.html">get_predicted</a></td>
-<td>Model Predictions (robust)</td></tr>
+<td>Model predictions (robust) and their confidence intervals</td></tr>
+<tr><td style="width: 25%;"><a href="get_predicted.html">get_predicted.default</a></td>
+<td>Model predictions (robust) and their confidence intervals</td></tr>
+<tr><td style="width: 25%;"><a href="get_predicted.html">get_predicted.gam</a></td>
+<td>Model predictions (robust) and their confidence intervals</td></tr>
 <tr><td style="width: 25%;"><a href="get_predicted.html">get_predicted.lm</a></td>
-<td>Model Predictions (robust)</td></tr>
+<td>Model predictions (robust) and their confidence intervals</td></tr>
+<tr><td style="width: 25%;"><a href="get_predicted.html">get_predicted.lmerMod</a></td>
+<td>Model predictions (robust) and their confidence intervals</td></tr>
+<tr><td style="width: 25%;"><a href="get_predicted.html">get_predicted.principal</a></td>
+<td>Model predictions (robust) and their confidence intervals</td></tr>
 <tr><td style="width: 25%;"><a href="get_predicted.html">get_predicted.stanreg</a></td>
-<td>Model Predictions (robust)</td></tr>
+<td>Model predictions (robust) and their confidence intervals</td></tr>
 <tr><td style="width: 25%;"><a href="get_predicted_ci.html">get_predicted_ci</a></td>
-<td>Confidence and Prediction Interval for Model Predictions</td></tr>
+<td>Confidence intervals around predicted values</td></tr>
 <tr><td style="width: 25%;"><a href="get_predicted_ci.html">get_predicted_ci.default</a></td>
-<td>Confidence and Prediction Interval for Model Predictions</td></tr>
+<td>Confidence intervals around predicted values</td></tr>
 <tr><td style="width: 25%;"><a href="get_predictors.html">get_predictors</a></td>
 <td>Get the data from model predictors</td></tr>
 <tr><td style="width: 25%;"><a href="get_priors.html">get_priors</a></td>
@@ -415,10 +402,6 @@
 <td>Get variance-covariance matrix from models</td></tr>
 <tr><td style="width: 25%;"><a href="get_varcov.html">get_varcov.default</a></td>
 <td>Get variance-covariance matrix from models</td></tr>
-<tr><td style="width: 25%;"><a href="get_varcov.html">get_varcov.DirichletRegModel</a></td>
-<td>Get variance-covariance matrix from models</td></tr>
-<tr><td style="width: 25%;"><a href="get_varcov.html">get_varcov.gamlss</a></td>
-<td>Get variance-covariance matrix from models</td></tr>
 <tr><td style="width: 25%;"><a href="get_varcov.html">get_varcov.glmmTMB</a></td>
 <td>Get variance-covariance matrix from models</td></tr>
 <tr><td style="width: 25%;"><a href="get_varcov.html">get_varcov.hurdle</a></td>
@@ -428,8 +411,6 @@
 <tr><td style="width: 25%;"><a href="get_varcov.html">get_varcov.mixor</a></td>
 <td>Get variance-covariance matrix from models</td></tr>
 <tr><td style="width: 25%;"><a href="get_varcov.html">get_varcov.truncreg</a></td>
-<td>Get variance-covariance matrix from models</td></tr>
-<tr><td style="width: 25%;"><a href="get_varcov.html">get_varcov.zcpglm</a></td>
 <td>Get variance-covariance matrix from models</td></tr>
 <tr><td style="width: 25%;"><a href="get_variance.html">get_variance</a></td>
 <td>Get variance components from random effects models</td></tr>
@@ -463,6 +444,8 @@
 <h2><a name="I">-- I --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="is_empty_object.html">is_empty_object</a></td>
+<td>Check if object is empty</td></tr>
 <tr><td style="width: 25%;"><a href="is_gam_model.html">is_gam_model</a></td>
 <td>Checks if a model is a generalized additive model</td></tr>
 <tr><td style="width: 25%;"><a href="is_mixed_model.html">is_mixed_model</a></td>
@@ -470,7 +453,7 @@
 <tr><td style="width: 25%;"><a href="is_model.html">is_model</a></td>
 <td>Checks if an object is a regression model or statistical test object</td></tr>
 <tr><td style="width: 25%;"><a href="is_model_supported.html">is_model_supported</a></td>
-<td>Checks if an object is a regression model object supported in 'insight' package.</td></tr>
+<td>Checks if a regression model object is supported in 'insight' package</td></tr>
 <tr><td style="width: 25%;"><a href="is_multivariate.html">is_multivariate</a></td>
 <td>Checks if an object stems from a multivariate response model</td></tr>
 <tr><td style="width: 25%;"><a href="is_nested_models.html">is_nested_models</a></td>
@@ -550,13 +533,24 @@
 <td>Count number of parameters in a model</td></tr>
 <tr><td style="width: 25%;"><a href="n_parameters.html">n_parameters.zeroinfl</a></td>
 <td>Count number of parameters in a model</td></tr>
+<tr><td style="width: 25%;"><a href="trim_ws.html">n_unique</a></td>
+<td>Small helper functions</td></tr>
+<tr><td style="width: 25%;"><a href="trim_ws.html">n_unique.default</a></td>
+<td>Small helper functions</td></tr>
+</table>
+
+<h2><a name="O">-- O --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="object_has_names.html">object_has_names</a></td>
+<td>Check names and rownames</td></tr>
+<tr><td style="width: 25%;"><a href="object_has_names.html">object_has_rownames</a></td>
+<td>Check names and rownames</td></tr>
 </table>
 
 <h2><a name="P">-- P --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="format_table.html">parameters_table</a></td>
-<td>Parameter table formatting</td></tr>
 <tr><td style="width: 25%;"><a href="print_color.html">print_color</a></td>
 <td>Coloured console output</td></tr>
 <tr><td style="width: 25%;"><a href="print_color.html">print_colour</a></td>
@@ -576,6 +570,8 @@
 <h2><a name="S">-- S --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="trim_ws.html">safe_deparse</a></td>
+<td>Small helper functions</td></tr>
 <tr><td style="width: 25%;"><a href="standardize_column_order.html">standardize_column_order</a></td>
 <td>Standardize column order</td></tr>
 <tr><td style="width: 25%;"><a href="standardize_column_order.html">standardize_column_order.parameters_model</a></td>
@@ -585,7 +581,7 @@
 <tr><td style="width: 25%;"><a href="standardize_names.html">standardize_names.parameters_model</a></td>
 <td>Standardize column names</td></tr>
 <tr><td style="width: 25%;"><a href="is_model_supported.html">supported_models</a></td>
-<td>Checks if an object is a regression model object supported in 'insight' package.</td></tr>
+<td>Checks if a regression model object is supported in 'insight' package</td></tr>
 </table>
 
 <h2><a name="T">-- T --</a></h2>
@@ -595,5 +591,9 @@
 <td>Remove backticks from a string</td></tr>
 <tr><td style="width: 25%;"><a href="text_remove_backticks.html">text_remove_backticks.data.frame</a></td>
 <td>Remove backticks from a string</td></tr>
+<tr><td style="width: 25%;"><a href="trim_ws.html">trim_ws</a></td>
+<td>Small helper functions</td></tr>
+<tr><td style="width: 25%;"><a href="trim_ws.html">trim_ws.data.frame</a></td>
+<td>Small helper functions</td></tr>
 </table>
 </div></body></html>

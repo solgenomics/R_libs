@@ -1,13 +1,14 @@
 Package: timeDate
 Title: Rmetrics - Chronological and Calendar Objects
-Date: 2018-02-21
-Version: 3043.102
-Author: Diethelm Wuertz [aut],
-	Tobias Setz [cre],
-	Yohan Chalabi [ctb],
-	Martin Maechler [ctb],
-	Joe W. Byers [ctb]
-Maintainer: Tobias Setz <tobias.setz@live.com>
+Date: 2022-07-19
+Version: 4021.104
+Authors@R: c(person("Diethelm", "Wuertz", role="aut", comment = "original code")
+	   , person("Tobias", "Setz", role = c("aut"), email = "tobias.setz@live.com")
+	   , person("Yohan", "Chalabi", role = "aut")
+	   , person("Martin","Maechler", role = "ctb", email = "maechler@stat.math.ethz.ch", comment = c(ORCID = "0000-0002-8685-9910"))
+	   , person(given = c("Joe", "W."), family = "Byers", role = "ctb")
+	   , person(given = c("Georgi", "N."), family = "Boshnakov", 
+                    role = c("cre", "ctb"), email = "georgi.boshnakov@manchester.ac.uk") )
 Description: The 'timeDate' class fulfils the conventions of the ISO 8601 
 	standard as well as of the ANSI C and POSIX standards. Beyond
 	these standards it provides the "Financial Center" concept
@@ -18,13 +19,23 @@ Description: The 'timeDate' class fulfils the conventions of the ISO 8601
 	data records from the same time zone, even if the financial 
 	centers changed day light saving times at different calendar
 	dates.
-Depends: R (>= 2.15.1), graphics, utils, stats, methods
+Depends: R (>= 2.15.1)
+Imports: graphics, utils, stats, methods
 Suggests: date, RUnit
-LazyData: yes
 License: GPL (>= 2)
-URL: https://www.rmetrics.org
+URL:
+        https://r-forge.r-project.org/scm/viewvc.php/pkg/timeDate/?root=rmetrics
+        (devel), https://www.rmetrics.org
+BugReports: https://r-forge.r-project.org/projects/rmetrics
 NeedsCompilation: no
-Packaged: 2018-02-21 13:20:37 UTC; Tobias Setz
+Packaged: 2022-07-19 11:08:08 UTC; georgi
+Author: Diethelm Wuertz [aut] (original code),
+  Tobias Setz [aut],
+  Yohan Chalabi [aut],
+  Martin Maechler [ctb] (<https://orcid.org/0000-0002-8685-9910>),
+  Joe W. Byers [ctb],
+  Georgi N. Boshnakov [cre, ctb]
+Maintainer: Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>
 Repository: CRAN
-Date/Publication: 2018-02-21 23:23:49 UTC
-Built: R 4.1.2; ; 2022-02-15 23:21:41 UTC; unix
+Date/Publication: 2022-07-19 13:30:02 UTC
+Built: R 4.1.3; ; 2022-07-29 17:33:26 UTC; unix

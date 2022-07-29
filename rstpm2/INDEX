@@ -1,7 +1,8 @@
-Rstpm2-package          Flexible parametric survival models.
 aft                     Parametric accelerated failure time model with
                         smooth time functions
 aft-class               Class "stpm2" ~~~
+bhazard                 Placemarker function for a baseline hazard
+                        function.
 brcancer                German breast cancer data from Stata.
 coef<-                  Generic method to update the coef in an object.
 colon                   Colon cancer.
@@ -22,6 +23,9 @@ lines.stpm2             S3 methods for lines
 markov_msm              Predictions for continuous time, nonhomogeneous
                         Markov multi-state models using parametric and
                         penalised survival models.
+markov_sde              Predictions for continuous time, nonhomogeneous
+                        Markov multi-state models using Aalen's
+                        additive hazards models.
 nsx                     Generate a Basis Matrix for Natural Cubic
                         Splines (with eXtensions)
 nsxD                    Generate a Basis Matrix for the first
@@ -39,6 +43,10 @@ predictnl               Estimation of standard errors using the
 predictnl-methods       ~~ Methods for Function predictnl ~~
 pstpm2-class            Class "pstpm2"
 residuals-methods       Residual values for an stpm2 or pstpm2 fit
+Rstpm2-package          Flexible parametric survival models.
+smoothpwc               Utility to use a smooth function in markov_msm
+                        based on piece-wise constant values
 stpm2-class             Class "stpm2" ~~~
 tvcCoxph-class          Class '"tvcCoxph"'
+update-methods          Methods for Function update
 vuniroot                Vectorised One Dimensional Root (Zero) Finding

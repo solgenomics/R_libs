@@ -17,6 +17,8 @@ archbold.apple          Split-split plot experiment of apple trees
 ars.earlywhitecorn96    Multi-environment trial of early white food
                         corn
 australia.soybean       Multi-environment trial of soybean in Australia
+bachmaier.nitrogen      Trial of wheat with nitrogen fertilizer in two
+                        fertility zones
 baker.barley.uniformity
                         Uniformity trials of barley, 10 years on same
                         ground
@@ -138,6 +140,8 @@ diggle.cow              Bodyweight of cows in a 2-by-2 factorial
                         experiment
 draper.safflower.uniformity
                         Uniformity trial of safflower
+ducker.groundnut.uniformity
+                        Uniformity trial of groundnut.
 durban.competition      Sugar beet yields with competition effects
 durban.rowcol           Row-column experiment of spring barley, many
                         varieties
@@ -302,6 +306,7 @@ kerr.sugarcane.uniformity
 khin.rice.uniformity    Uniformity trial of rice
 kiesselbach.oats.uniformity
                         Uniformity trial of oats
+kling.augmented         Augmented design of meadowfoam
 kreusler.maize          Growth of maize plants in Germany during
                         1875-1878
 kristensen.barley.uniformity
@@ -327,12 +332,6 @@ lessman.sorghum.uniformity
                         Uniformity trial of sorghum
 li.millet.uniformity    Uniformity trial of millet
 libs                    Load multiple packages and install if needed
-                        The 'agridat' package uses dozens of packages
-                        in the examples for each dataset. The 'libs'
-                        function provides a simple way to load multiple
-                        packages at once, and can install any missing
-                        packages on-the-fly. This is very similar to
-                        the 'pacman::p_load' function.
 lillemo.wheat           Multi-environment trial of wheat susceptibile
                         to powdery mildew
 lin.superiority         Multi-environment trial of 33 barley genotypes
@@ -464,6 +463,7 @@ senshu.rice             Multi-environment trial of rice, with solar
 shafi.tomato.uniformity
                         Uniformity trial of tomato
 shafii.rapeseed         Multi-environment trial of rapeseed in U.S.
+sharma.met              Multi-environment trial
 shaw.oats               Multi-environment trial of oats in India
 silva.cotton            Number of cotton bolls for different levels of
                         defoliation.

@@ -1,4 +1,3 @@
-NIRsoil                 NIRSoil
 baseline                baseline
 binning                 Signal binning
 blockNorm               Sum of squares block weighting
@@ -14,11 +13,12 @@ kenStone                Kennard-Stone algorithm for calibration
 movav                   Moving average
 msc                     Multiplicative Scatter Correction (msc)
 naes                    k-means sampling
+NIRsoil                 NIRSoil
 prospectr-package       Overview of the functions in the prospectr
                         package
 puchwein                Puchwein algorithm for calibration sampling
-readASD                 Read ASD FieldSpec Pro binary and ASCII files
 read_nircal             Import BUCHI NIRCal files
+readASD                 Read ASD FieldSpec Pro binary and ASCII files
 resample                Resample spectral data
 resample2               Resample a high resolution signal to a low
                         resolution signal using full width half maximum

@@ -64,9 +64,9 @@ RUN export DEBIAN_FRONTEND=noninteractive; apt-get -y update \
 	libtiff5-dev
 
 # GEOS:
-ENV GEOS_VERSION 3.10.0
+ENV GEOS_VERSION 3.10.2
 
-RUN wget http://download.osgeo.org/geos/geos-${GEOS_VERSION}.tar.bz2 \
+RUN wget -q http://download.osgeo.org/geos/geos-${GEOS_VERSION}.tar.bz2 \
   && bzip2 -d geos-*bz2 \
   && tar xf geos*tar \
   && cd geos* \
@@ -79,9 +79,11 @@ RUN wget http://download.osgeo.org/geos/geos-${GEOS_VERSION}.tar.bz2 \
   && ldconfig
 
 #RUN git clone --depth 1 https://github.com/OSGeo/PROJ.git
-RUN wget http://download.osgeo.org/proj/proj-8.2.0.tar.gz
-RUN tar zxvf proj-8.2.0.tar.gz
-RUN cd proj-8.2.0 \
+# https://download.osgeo.org/proj/proj-9.0.0RC1.tar.gz
+ENV PROJ_VERSION 9.0.0
+RUN wget -q http://download.osgeo.org/proj/proj-${PROJ_VERSION}.tar.gz
+RUN tar zxvf proj-${PROJ_VERSION}.tar.gz
+RUN cd proj* \
   && ls -l \
   && mkdir build \
   && cd build \
@@ -101,30 +103,18 @@ RUN cd proj-8.2.0 \
 # GDAL:
 
 # https://download.osgeo.org/gdal/3.1.0/gdal-3.1.0rc2.tar.gz
-ENV GDAL_VERSION 3.4.1
-ENV GDAL_VERSION_NAME 3.4.1rc1
+ENV GDAL_VERSION 3.5.0
+ENV GDAL_VERSION_NAME 3.5.0rc1
 
-RUN wget http://download.osgeo.org/gdal/${GDAL_VERSION}/gdal-${GDAL_VERSION_NAME}.tar.gz \
+RUN wget -q http://download.osgeo.org/gdal/${GDAL_VERSION}/gdal-${GDAL_VERSION_NAME}.tar.gz \
   && tar -xf gdal-${GDAL_VERSION_NAME}.tar.gz \
   && cd gdal* \
-  && ./configure \
+  && mkdir build \
+  && cd ./build \
+  && cmake .. \
   && make \
   && make install \
-  && cd .. \
   && ldconfig
-
-#RUN git clone --depth 1 https://github.com/OSGeo/gdal.git
-#RUN cd gdal/gdal \
-#  && ls -l \
-#  && ./configure \
-#  && make \
-#  && make install \
-#  && cd .. \
-#  && ldconfig
-
-# RUN svn  checkout svn://scm.r-forge.r-project.org/svnroot/rgdal/
-# RUN R CMD build rgdal/pkg --no-build-vignettes
-# RUN R CMD INSTALL rgdal_*.tar.gz 
 
 RUN Rscript -e 'install.packages(c("sp", "rgeos", "rgdal", "RPostgreSQL", "RSQLite", "testthat", "knitr", "tidyr", "geosphere", "maptools", "maps", "microbenchmark", "raster", "dplyr", "tibble", "units", "DBI",  "covr", "protolite", "tmap", "mapview", "odbc", "pool", "rmarkdown", "RPostgres","spatstat", "stars", "XML", "tmaptools", "tmap", "terra", "PCICt", "RNetCDF", "future.apply", "ggforce", "ggthemes", "gstat", "ncmeta", "pbapply", "plm", "spacetime", "xts", "zoo", "tidync", "ncdfgeom", "cubelyr", "clue"))'
 
@@ -134,6 +124,7 @@ RUN git clone --depth 10 https://github.com/r-spatial/stars.git
 #RUN git config --global user.email "edzer.pebesma@uni-muenster.de"
 
 RUN R CMD build --no-build-vignettes --no-manual lwgeom
+RUN Rscript -e 'install.packages(c("rmarkdown"))'
 RUN R CMD build --no-build-vignettes --no-manual sf
 # RUN pkg-config proj --modversion
 RUN Rscript -e 'install.packages(c("classInt"))'

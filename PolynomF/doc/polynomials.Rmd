@@ -1,8 +1,9 @@
 ---
 title: "Univariate Polynomials in R"
 author: "Bill Venables"
-date: "2019-06-18"
+date: "2022-05-02"
 output: 
+  html_output: rmarkdown::html_vignette
   pdf_document:
     keep_tex: true
     toc: true
@@ -20,9 +21,11 @@ vignette: >
 knitr::opts_chunk$set(collapse = TRUE,
                       comment = "",
                       fig.height = 5.5,
-                      fig.width = 7,
-                      fig.align = "center",
-                      out.height = "0.3\\textheight")
+                      fig.width = 7)
+if(knitr::is_latex_output()) {
+  knitr::opts_chunk$set(fig.align = "center",
+                        out.height = "30%")
+}
 library(PolynomF)
 library(knitr)
 setHook("plot.new",
@@ -120,17 +123,18 @@ polynomial arguments using ordinary arithmetic operators.
 In this release, functions in previous releases using a period, `"."` in their name
 which were _not_ S3 methods have been replaced by names using an underscore
 in place of the period.  Thus the previously named function `poly.calc` has
-become `poly_calc`.  The old names have been retained as aliases, for now, but
-will issue a `Deprecated` warning.  A full list is given in Table 1 below.
+become `poly_calc`.  The old names have been removed and now defunct.
 
-```{r, echo=FALSE}
-old <- paste0("`", ls("package:PolynomF", pattern = "\\."), "`")
-new <- gsub("\\.", "_", old)
-tab <- data.frame(`Old name` = old, `New name` = new, check.names = FALSE)
-kable(tab, caption = "Function name changes in version 2.0-0")
-```
+<!-- A full list is given in Table 1 below. -->
 
-With version 2.0-1 the functions listed as 'deprecated' in Table 1 are 'defunct'.
+<!-- ```{r, echo=FALSE} -->
+<!-- old <- paste0("`", ls("package:PolynomF", pattern = "\\."), "`") -->
+<!-- new <- gsub("\\.", "_", old) -->
+<!-- tab <- data.frame(`Old name` = old, `New name` = new, check.names = FALSE) -->
+<!-- kable(tab, caption = "Function name changes in version 2.0-0") -->
+<!-- ``` -->
+
+<!-- With version 2.0-1 the functions listed as 'deprecated' in Table 1 are 'defunct'. -->
 
 ### Additional orthogonal polynomial facilities
 
@@ -145,7 +149,7 @@ $L_2-$norm.
 Weighted discrete orthogonal polynomials can be included as a special case, and the 
 inner product definition for this case serves as a template, as in this example,
 a special case of the Poisson-Charlier polynomials:
-```{r, fig.width = 8, out.height="0.25\\textheight"}
+```{r, fig.width = 8}
 Discrete <- function(p, q = p, x, w = function(x, ...) 1, ...) sum(w(x, ...)*p(x)*q(x))
 PC <- poly_orth_general(inner_product = Discrete, degree = 4, 
                         x = 0:100, w = dpois, lambda = 1)
@@ -202,7 +206,7 @@ recurrence relation are known, using them directly would be more efficient.
 
 ## Miscellaneous computations using polynomial arithmetic
 
-```{r, out.height="0.23\\textheight"}
+```{r}
 (p1 <- poly_calc(1:6))       ## a monic polynomial with given zeros
 solve(p1)                    ## check that the zeros are as specified
 polyroot(coef(p1))           ## check using the Traub-Jenkins algorithm
@@ -235,7 +239,7 @@ setNames(p3(0:4), paste0("z=", 0:4))          ## should have zeros at 1, 2, 3
 Find the orthogonal polynomials on $x_0 = (0, 1, 2, 3, 5)$ and
 construct R functions to evaluate them at arbitrary $x$ values.
 
-```{r, fig.width = 8.5*0.9, fig.height = 5*0.9, out.height="0.25\\textheight"}
+```{r}
 x0 <- c(0:3, 5)
 op <- poly_orth(x0, norm = TRUE)
 plot(op, lwd = 2, legend = TRUE)
@@ -270,7 +274,7 @@ $$
 $$
 We now explore the quality of this approximation for the central part of a
 $N(0,\sigma=\frac14)$ density using $N=14$, (possibly a little overkill!).
-```{r, out.height="0.26\\textheight"}
+```{r}
 x <- polynomial()
 Tr <- polylist(1, x)
 for(j in 3:15) {
@@ -289,7 +293,7 @@ zap(outer(Tr, Tr, Vectorize(ChebyT))*2/pi) ## check of orthogonality
 ```
 
 The approximating polynomial for the normal density can now be found and tested.
-```{r, fig.height = 5*0.9, fig.width = 6.5*0.9, out.height = "0.26\\textheight"}
+```{r}
 fx <- function(x) dnorm(x, sd = 0.25)
 b <- sapply(Tr, ChebyT, q = fx)/sapply(Tr, ChebyT)
 fx_approx <- sum(b * Tr)
@@ -299,7 +303,7 @@ curve(1e4*(fx(x) - fx_approx(x)), xlim = c(-1,1)) ## error pattern x 10000
 
 ```
 The approximation may be extended to the cumulative distribution function:
-```{r, fig.height = 5*0.9, fig.width = 6.5*0.9, out.height = "0.26\\textheight"}
+```{r}
 Fx <- function(x) pnorm(x, sd = 0.25) 
 Fx_approx <- integral(fx_approx) + 0.5
 curve(Fx, xlim = c(-1, 1))
@@ -327,7 +331,7 @@ $$
 We use these polynomials to build a polynomial approximation to the arc sine function,
 $f(x) = \sin^{-1}x$.  The process is entirely analogous to the one outlined previously.
 
-```{r, fig.height = 5, fig.width = 7, out.height = "0.26\\textheight"}
+```{r}
 x <- polynomial()
 Ur <- polylist(1, 2*x)
 
@@ -372,7 +376,7 @@ Consider a simple branching process where each organism has at most _three_ offs
 probabilities
 $$\textstyle p_0 = {\textstyle \frac1{10}},\quad  p_1 = {\textstyle \frac5{10}},\quad  p_2 = {\textstyle \frac3{10}},\quad  p_3={\textstyle \frac1{10}},\quad  p_4 = p_5 = \cdots = 0.$$
 The following will explore some of its properties without further discussion.
-```{r, fig.height = 5*0.9, fig.width = 6.5*0.9, out.height = "0.27\\textheight"}
+```{r}
 P <- polynomial(c(1, 5, 3, 1))/10
 s <- polynomial(c(0, 1))
 (mean_offspring <- deriv(P)(1))
@@ -404,7 +408,7 @@ arrows(ex, P(ex), ex, par("usr")[3], angle = 15, length = 0.125)
 
 This can easily lead to surprising numerical problems.
 
-```{r, fig.height = 5, fig.width = 6.5, out.height = "0.31\\textheight"}
+```{r}
 x0 <- 80:89
 y0 <- c(487, 370, 361, 313, 246, 234, 173, 128, 88, 83)
 p <- poly_calc(x0, y0)        ## leads to catastropic numerical failure!

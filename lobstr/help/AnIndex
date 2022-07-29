@@ -7,3 +7,5 @@ obj_size	obj_size
 obj_sizes	obj_size
 ref	ref
 sxp	sxp
+tree	tree
+tree_label	tree_label

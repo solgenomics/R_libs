@@ -1,8 +1,3 @@
-ERRVL                   Return the first argument passed (out of any
-                        number) that is not a 'try-error' (result of
-                        'try' encountering an error.
-NVL                     Convenience functions for handling 'NULL'
-                        objects.
 all_identical           Test if all items in a vector or a list are
                         identical.
 as.control.list         Convert to a control list.
@@ -18,9 +13,9 @@ compress_rows.data.frame
 control.list.accessor   Named element accessor for ergm control lists
 control.remap           Overwrite control parameters of one
                         configuration with another.
-deInf                   Truncate values of high magnitude in a vector.
 default_options         Set 'options()' according to a named list,
                         skipping those already set.
+deInf                   Truncate values of high magnitude in a vector.
 deprecation-utilities   Utilities to help with deprecating functions.
 despace                 A one-line function to strip whitespace from
                         its argument.
@@ -28,6 +23,9 @@ diff.control.list       Identify and the differences between two
                         control lists.
 empty_env               Replace an object's environment with a simple,
                         static environment.
+ERRVL                   Return the first argument passed (out of any
+                        number) that is not a 'try-error' (result of
+                        'try' encountering an error.
 fixed.pval              Format a p-value in fixed notation.
 forkTimeout             Evaluate an R expression with a hard time limit
                         by forking a process
@@ -42,6 +40,8 @@ logspace.utils          Utilities for performing calculations on
                         logarithmic scale.
 mcmc-utilities          Utility operations for 'mcmc.list' objects
 message_print           'print' objects to the 'message' output.
+NVL                     Convenience functions for handling 'NULL'
+                        objects.
 once                    Evaluate a function once for a given input.
 opttest                 Optionally test code depending on environment
                         variable.
@@ -78,5 +78,7 @@ unwhich                 Construct a logical vector with 'TRUE' in
 vector.namesmatch       reorder vector v into order determined by
                         matching the names of its elements to a vector
                         of names
+Welford                 A Welford accumulator for sample mean and
+                        variance
 wmatrix                 A data matrix with row weights
 wmatrix_weights         Set or extract weighted matrix row weights

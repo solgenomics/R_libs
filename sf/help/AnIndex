@@ -28,6 +28,7 @@ dbWriteTable,PostgreSQLConnection,character,sf-method	dbWriteTable
 db_drivers	db_drivers
 dim.sgbp	sgbp
 distinct.sf	tidyverse
+dplyr_reconstruct.sf	tidyverse
 extension_map	extension_map
 filter.sf	tidyverse
 format.bbox	st_bbox
@@ -36,6 +37,7 @@ format.sfg	st
 full_join.sf	tidyverse
 gather.sf	tidyverse
 gdal	gdal
+gdal_addo	gdal_addo
 gdal_create	gdal
 gdal_crs	gdal
 gdal_extract	gdal
@@ -83,6 +85,8 @@ Ops	Ops
 Ops.sfc	Ops
 Ops.sfg	Ops
 pillar_shaft.sfc	tibble
+pivot_longer.sf	tidyverse
+pivot_wider.sf	tidyverse
 plot	plot
 plot.sf	plot
 plot.sfc_CIRCULARSTRING	plot
@@ -258,6 +262,8 @@ st_disjoint	geos_binary_pred
 st_distance	geos_measures
 st_drivers	st_drivers
 st_drop_geometry	st_geometry
+st_drop_geometry.default	st_geometry
+st_drop_geometry.sf	st_geometry
 st_equals	geos_binary_pred
 st_equals_exact	geos_binary_pred
 st_filter	st_join
@@ -298,6 +304,7 @@ st_make_grid	st_make_grid
 st_make_valid	valid
 st_make_valid.sfc	valid
 st_make_valid.sfg	valid
+st_minimum_rotated_rectangle	geos_unary
 st_multilinestring	st
 st_multipoint	st
 st_multipolygon	st

@@ -71,7 +71,6 @@ Assert$isMatrix	isMatrix.Assert
 Assert$isScalar	isScalar.Assert
 Assert$isVector	isVector.Assert
 Assert.check	check.Assert
-Assert.inherits	inheritsFrom.Assert
 Assert.inheritsFrom	inheritsFrom.Assert
 Assert.isMatrix	isMatrix.Assert
 Assert.isScalar	isScalar.Assert
@@ -428,10 +427,6 @@ inAnyInterval.numeric	inAnyInterval.numeric
 increase	Non-documented_objects
 increase,ProgressBar-method	increase.ProgressBar
 increase.ProgressBar	increase.ProgressBar
-inherits	Non-documented_objects
-inherits,Assert-method	inheritsFrom.Assert
-inherits.Assert	inheritsFrom.Assert
-inherits.default	Non-documented_objects
 inheritsFrom	inheritsFrom.Assert
 inheritsFrom,Assert-method	inheritsFrom.Assert
 inheritsFrom.Assert	inheritsFrom.Assert

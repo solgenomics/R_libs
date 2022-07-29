@@ -37,6 +37,7 @@ as.phyDat.factor	phyDat
 as.phyDat.matrix	phyDat
 as.phyDat.MultipleAlignment	phyDat
 as.phylo.splits	as.splits
+as.pml	pml
 as.prop.part.splits	as.splits
 as.splits	as.splits
 as.splits.bitsplits	as.splits
@@ -44,7 +45,7 @@ as.splits.multiPhylo	as.splits
 as.splits.networx	as.splits
 as.splits.phylo	as.splits
 bab	bab
-baseFreq	phyDat
+baseFreq	baseFreq
 bootstrap.phyDat	bootstrap.pml
 bootstrap.pml	bootstrap.pml
 BranchAndBound	bab
@@ -70,6 +71,7 @@ Descendants	Ancestors
 designSplits	designTree
 designTree	designTree
 dfactorial	dfactorial
+discrete.beta	discrete.gamma
 discrete.gamma	discrete.gamma
 dist.hamming	dist.hamming
 dist.logDet	dist.hamming
@@ -88,6 +90,8 @@ getClips	getClans
 getDiversity	getClans
 getRoot	midpoint
 getSlices	getClans
+glance	reexports
+glance.phyDat	baseFreq
 h2st	hadamard
 h4st	hadamard
 hadamard	hadamard
@@ -133,7 +137,7 @@ plotBS	plotBS
 plotRates	discrete.gamma
 plot_gamma_plus_inv	discrete.gamma
 pml	pml
-pml.control	pml
+pml.control	pml.control
 pml.fit	pml.fit
 pml.free	pml.fit
 pml.init	pml.fit
@@ -147,12 +151,15 @@ presenceAbsence	addConfidences
 print.splits	as.splits
 pruneTree	midpoint
 random.addition	parsimony
+ratchet.control	pml.control
 read.aa	read.aa
 read.nexus.dist	writeDist
 read.nexus.networx	read.nexus.splits
 read.nexus.splits	read.nexus.splits
 read.phyDat	read.phyDat
 readDist	writeDist
+reexports	reexports
+removeAmbiguousSites	phyDat
 removeTrivialSplits	as.splits
 removeUndeterminedSites	phyDat
 RF.dist	treedist
@@ -174,6 +181,7 @@ subset.phyDat	phyDat
 summary.clanistics	getClans
 superTree	superTree
 threshStateC	phangorn-internal
+tidy	reexports
 treedist	treedist
 unique.dist	writeDist
 unique.phyDat	phyDat

@@ -4,6 +4,8 @@ clean_names             Get clean names of model terms
 clean_parameters        Get clean names of model parameters
 color_if                Color-formatting for data columns based on
                         condition
+compact_character       Remove empty strings from character
+compact_list            Remove empty elements from lists
 display                 Generic export of data frames into formatted
                         tables
 download_model          Download circus models
@@ -86,9 +88,9 @@ get_parameters.htest    Get model parameters from htest-objects
 get_parameters.zeroinfl
                         Get model parameters from zero-inflated and
                         hurdle models
-get_predicted           Model Predictions (robust)
-get_predicted_ci        Confidence and Prediction Interval for Model
-                        Predictions
+get_predicted           Model predictions (robust) and their confidence
+                        intervals
+get_predicted_ci        Confidence intervals around predicted values
 get_predictors          Get the data from model predictors
 get_priors              Get summary of priors used for a model
 get_random              Get the data from random effects
@@ -103,13 +105,14 @@ get_variance            Get variance components from random effects
                         models
 get_weights             Get the values from model weights
 has_intercept           Checks if model has an intercept
+is_empty_object         Check if object is empty
 is_gam_model            Checks if a model is a generalized additive
                         model
 is_mixed_model          Checks if a model is a mixed effects model
 is_model                Checks if an object is a regression model or
                         statistical test object
-is_model_supported      Checks if an object is a regression model
-                        object supported in 'insight' package.
+is_model_supported      Checks if a regression model object is
+                        supported in 'insight' package
 is_multivariate         Checks if an object stems from a multivariate
                         response model
 is_nested_models        Checks whether a list of models are nested
@@ -124,6 +127,7 @@ n_obs                   Get number of observations from a model
 n_parameters            Count number of parameters in a model
 null_model              Compute intercept-only model for regression
                         models
+object_has_names        Check names and rownames
 print_color             Coloured console output
 print_parameters        Prepare summary statistics of model parameters
                         for printing
@@ -131,3 +135,4 @@ standardize_column_order
                         Standardize column order
 standardize_names       Standardize column names
 text_remove_backticks   Remove backticks from a string
+trim_ws                 Small helper functions

@@ -1,5 +1,3 @@
-NelPlo                  Nelson-Plosser Macroeconomic Time Series
-USeconomic              U.S. Economic Variables
 adf.test                Augmented Dickey-Fuller Test
 arma                    Fit ARMA Models to Time Series
 arma-methods            Methods for Fitted ARMA Models
@@ -18,6 +16,7 @@ jarque.bera.test        Jarque-Bera Test
 kpss.test               KPSS Test for Stationarity
 maxdrawdown             Maximum Drawdown or Maximum Loss
 na.remove               NA Handling Routines for Time Series
+NelPlo                  Nelson-Plosser Macroeconomic Time Series
 nino                    Sea Surface Temperature (SST) Nino 3 and Nino
                         3.4 Indices
 plotOHLC                Plot Open-High-Low-Close Bar Chart
@@ -39,4 +38,5 @@ tcmd                    Daily Yields on Treasury Securities
 terasvirta.test         Teraesvirta Neural Network Test for
                         Nonlinearity
 tsbootstrap             Bootstrap for General Stationary Data
+USeconomic              U.S. Economic Variables
 white.test              White Neural Network Test for Nonlinearity

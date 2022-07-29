@@ -8,6 +8,7 @@ mom.mtruncnorm          Moments and other quantities of a (possibly)
                         truncated multivariate normal distribution
 mom2cum                 Conversion of an array of moments to cumulants
 pd.solve                Inverse of a symmetric positive-definite matrix
+plot_fxy                Plotting a function of two variables
 recintab                Moments of arbitrary order of a (possibly)
                         truncated multivariate normal variable
 sample_Mardia_measures

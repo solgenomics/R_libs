@@ -1,5 +1,6 @@
 rmarkdown-package	rmarkdown-package
 all_output_formats	all_output_formats
+available_templates	available_templates
 beamer_presentation	beamer_presentation
 clean_site	render_site
 compile_notebook	compile_notebook
@@ -14,12 +15,14 @@ from_rmarkdown	rmarkdown_format
 github_document	github_document
 html-dependencies	html-dependencies
 html_dependency_bootstrap	html-dependencies
+html_dependency_codefolding_lua	html-dependencies
 html_dependency_font_awesome	html-dependencies
 html_dependency_highlightjs	html-dependencies
 html_dependency_ionicons	html-dependencies
 html_dependency_jquery	html-dependencies
 html_dependency_jqueryui	html-dependencies
 html_dependency_pagedtable	html-dependencies
+html_dependency_tabset	html-dependencies
 html_dependency_tocify	html-dependencies
 html_document	html_document
 html_document_base	html_document_base

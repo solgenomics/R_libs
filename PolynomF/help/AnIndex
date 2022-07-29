@@ -29,6 +29,7 @@ integral.polynom	deriv.polynom
 is_polylist	polynom
 is_polynom	polynom
 Jacobi	poly_orth_general
+lagrange	neville
 LCM	LCM
 LCM.polylist	LCM
 LCM.polynom	LCM
@@ -38,6 +39,7 @@ lines.polynom	plot.polynom
 lowest_common_multiple	LCM
 Math.polylist	GroupGenerics
 Math.polynom	GroupGenerics
+neville	neville
 Ops.polylist	Ops.polynom
 Ops.polynom	Ops.polynom
 plot.polylist	plot.polynom

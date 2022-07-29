@@ -1,11 +1,16 @@
 \name{NEWS}
 \title{NEWS file for the bdsmatrix package}
-\section{Changes in version 1.3.4}{
+\section{Changes in version 1.3.6}{
   \itemize{
-    \item Change an instance of class(x) == to inherits(x,  This was
-    causing errors for coxme.
+    \item Change lines with "if (class(x) == 'bsdmatrix')" to use
+    inherit()
+}}    
+\section{Changes in version 1.3.5}{
+  \itemize{
+    \item Remove Sint C type, per request from CRAN
+    \item The internal ismat() function had an if (condition) where the
+    condition was length 2.  Fixed
 }}
-    
 \section{Changes in version 1.3.3}{
   \itemize{
     \item Change base:::backsolve to base::backsolve per request from
