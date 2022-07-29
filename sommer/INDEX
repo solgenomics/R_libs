@@ -74,6 +74,7 @@ mmer                    *m*ixed *m*odel *e*quations for *r* records
 overlay                 Overlay Matrix
 plot.mmec               plot form a LMM plot with mmec
 plot.mmer               plot form a LMM plot with mmer
+pmonitor                plot the change of VC across iterations
 predict.mmec            Predict form of a LMM fitted with mmec
 predict.mmer            Predict form of a LMM fitted with mmer
 randef                  extracting random effects
@@ -100,6 +101,7 @@ unsm                    unstructured indication matrix
 usc                     unstructured covariance structure
 usr                     unstructured covariance structure
 vpredict                vpredict form of a LMM fitted with mmer
+vs                      variance structure specification
 vsc                     variance structure specification
 vsr                     variance structure specification
 wald.test               Wald Test for Model Coefficients

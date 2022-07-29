@@ -80,6 +80,7 @@ MP_polyploid	DT_polyploid
 overlay	overlay
 plot.mmec	plot_mmec
 plot.mmer	plot_mmer
+pmonitor	plot.monitor
 predict.mmec	predict_mmec
 predict.mmer	predict_mmer
 print.mmec	summary_mmec
@@ -107,6 +108,7 @@ usc	usc
 usr	usr
 vpredict	vpredict
 vpredict.mmer	vpredict
+vs	vs
 vsc	vsc
 vsr	vsr
 wald.test	wald

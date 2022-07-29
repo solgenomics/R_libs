@@ -154,3 +154,47 @@ ansCS <- mmer(Yield~Env,
 summary(ansCS)
 
 
+
+## -----------------------------------------------------------------------------
+
+##########
+## stage 1
+## use mmer for dense field trials
+##########
+data(DT_h2)
+DT <- DT_h2
+head(DT)
+envs <- unique(DT$Env)
+BLUEL <- list()
+XtXL <- list()
+for(i in 1:length(envs)){
+  ans1 <- mmer(y~Name-1,
+                random=~Block,
+                verbose=FALSE,
+                data=droplevels(DT[which(DT$Env == envs[i]),]
+               )
+  )
+  ans1$Beta$Env <- envs[i]
+  
+  BLUEL[[i]] <- ans1$Beta
+  XtXL[[i]] <- ans1$VarBeta
+}
+
+DT2 <- do.call(rbind, BLUEL)
+OM <- do.call(adiag1,XtXL)
+
+##########
+## stage 2
+## use mmec for sparse equation
+##########
+m <- matrix(1/var(DT2$Estimate, na.rm = TRUE))
+ans2 <- mmec(Estimate~Env,
+             random=~Effect + Env:Effect, 
+             rcov=~vsc(isc(units,thetaC = matrix(3), theta = m)),
+             W=OM, tolParConvNorm = .001, 
+             verbose=FALSE,
+             data=DT2
+             )
+summary(ans2)$varcomp
+
+
