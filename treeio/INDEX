@@ -1,4 +1,3 @@
-Nnode.treedata          Nnode
 as.treedata.phylo       as.treedata
 as.ultrametric          as.ultrametric
 drop.tip                drop.tip method
@@ -13,6 +12,7 @@ jplace-class            Class "jplace" This class stores phylogenetic
 label_branch_paml       label_branch_paml
 mask                    mask
 merge_tree              merge_tree
+Nnode.treedata          Nnode
 print.treedataList      print
 raxml2nwk               raxml2nwk
 read.astral             read.astral

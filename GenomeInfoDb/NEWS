@@ -1,3 +1,114 @@
+CHANGES IN VERSION 1.32.0
+-------------------------
+
+DEPRECATED AND DEFUNCT
+
+    o releaseName() is now defunct on GenomeDescription objects.
+
+    o Remove fetchExtendedChromInfoFromUCSC() and available.species().
+      Both were defunct in BioC 3.14.
+
+
+CHANGES IN VERSION 1.30.0
+-------------------------
+
+NEW FEATURES
+
+    o Register NCBI assemblies:
+        - mRatBN7.2
+        - UMICH_Zoey_3.1
+        - Callithrix_jacchus_cj1700_1.1
+        - MU-UCD_Fhet_4.1 (GCA_011125445.2)
+
+    o Register UCSC genomes:
+        - rn7
+        - canFam5
+        - calJac4
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o UCSC hg38 genome is now based on GRCh38.p13 instead of GRCh38.p12
+
+    o UCSC mm10 genome is now based on GRCm38.p6 instead of GRCm38
+
+    o seqlevelsStyle() setter now issues a warning when some seqlevels
+      cannot be switched.
+
+
+CHANGES IN VERSION 1.28.0
+-------------------------
+
+NEW FEATURES
+
+    o Small improvement to the Seqinfo() constructor: if the user doesn't
+      supply the 'seqnames' argument when calling the Seqinfo() constructor,
+      now we try to infer the seqnames from the other arguments.
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o Improve seqinfo<- documentation and error messages.
+
+DEPRECATED AND DEFUNCT
+
+    o fetchExtendedChromInfoFromUCSC() is now defunct (was deprecated in
+      BioC 3.11)
+
+
+CHANGES IN VERSION 1.26.0
+-------------------------
+
+NEW FEATURES
+
+    o The seqlevelsStyle() getter and setter now support style "RefSeq" when
+      the underlying genome is known.
+
+    o Register a bunch of new NCBI assemblies and UCSC genomes. Use
+      registered_NCBI_assemblies() and registered_UCSC_genomes() to get the
+      lists of supported NCBI assemblies and UCSC genomes.
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o The seqlevelsStyle() getter and setter do a better job when the
+      underlying genome is known. The new behaviors address two long-standing
+      shortcomings of the old behaviors:
+
+      - In general, the seqlevelsStyle() setter didn't know how to rename
+        the scaffolds in an object. Now it does.
+
+      - Also, for some assemblies that use unconventional chromosome naming
+        conventions (e.g. Macaca_fascicularis_5.0), the seqlevelsStyle()
+        getter was not able to detect the naming style and the seqlevelsStyle()
+        setter was not able to rename the chromosomes. Now they both do the
+        right thing.
+
+      These improvements address these shortcomings but only in the situation
+      where the underlying genome is known e.g. when 'unique(genome(x))' is
+      "macFas5" or "Macaca_fascicularis_5.0". When the underlying genome is
+      not known, nothing has changed.
+
+DEPRECATED AND DEFUNCT
+
+    o Deprecate releaseName() method for GenomeDescription objects.
+
+BUG FIXES
+
+    o Small fix to getChromInfoFromNCBI().
+
+
+CHANGES IN VERSION 1.24.0
+-------------------------
+
+NEW FEATURES
+
+    o Add getChromInfoFromUCSC(), getChromInfoFromNCBI(), and
+      getChromInfoFromEnsembl().
+
+DEPRECATED AND DEFUNCT
+
+    o Deprecate fetchExtendedChromInfoFromUCSC() in favor of
+      getChromInfoFromUCSC().
+
+
 CHANGES IN VERSION 1.20.0
 -------------------------
 

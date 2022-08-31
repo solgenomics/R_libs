@@ -1,3 +1,15 @@
+# tidytree 0.4.0
+
++ update citation with the tree data book (2022-08-13, Sat)
+
+# tidytree 0.3.9
+
++ update package startup message (2022-03-04, Fri)
+
+# tidytree 0.3.8
+
++ add the CRC book in startup message (2022-02-17, Thu)
+
 # tidytree 0.3.7
 
 + update startup message to randomly print two citation items of the ggtree package suite (2022-01-10, Mon)

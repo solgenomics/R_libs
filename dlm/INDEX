@@ -1,9 +1,6 @@
-ARtransPars             Function to parametrize a stationary AR process
-FF                      Components of a dlm object
-NelPlo                  Nelson-Plosser macroeconomic time series
-USecon                  US macroeconomic time series
 arms                    Function to perform Adaptive Rejection
                         Metropolis Sampling
+ARtransPars             Function to parametrize a stationary AR process
 bdiag                   Build a block diagonal matrix
 convex.bounds           Find the boundaries of a convex set
 dlm                     dlm objects
@@ -29,6 +26,9 @@ dlmSum                  Outer sum of Dynamic Linear Models
 dlmSvd2var              Compute a nonnegative definite matrix from its
                         Singular Value Decomposition
 dropFirst               Drop the first element of a vector or matrix
+FF                      Components of a dlm object
 mcmcMean                Utility functions for MCMC output analysis
+NelPlo                  Nelson-Plosser macroeconomic time series
 residuals.dlmFiltered   One-step forecast errors
 rwishart                Random Wishart matrix
+USecon                  US macroeconomic time series

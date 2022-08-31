@@ -1,26 +1,23 @@
-BCG                     BCG Vaccine Data
-BtheB                   Beat the Blues Data
-CHFLS                   Chinese Health and Family Life Survey
-CYGOB1                  CYG OB1 Star Cluster Data
-Forbes2000              The Forbes 2000 Ranking of the World's Biggest
-                        Companies (Year 2004)
-GHQ                     General Health Questionnaire
-HSAURtable              Produce LaTeX Tables
-Lanza                   Prevention of Gastointestinal Damages
-USairpollution          Air Pollution in US Cities
-USmelanoma              USA Malignant Melanoma Data
-USstates                US States
 agefat                  Total Body Composision Data
 aspirin                 Aspirin Data
 backpain                Driving and Back Pain Data
+BCG                     BCG Vaccine Data
 birthdeathrates         Birth and Death Rates Data
 bladdercancer           Bladder Cancer Data
+BtheB                   Beat the Blues Data
+CHFLS                   Chinese Health and Family Life Survey
 clouds                  Cloud Seeding Data
+CYGOB1                  CYG OB1 Star Cluster Data
 epilepsy                Epilepsy Data
+Forbes2000              The Forbes 2000 Ranking of the World's Biggest
+                        Companies (Year 2004)
 foster                  Foster Feeding Experiment
 gardenflowers           Garden Flowers
+GHQ                     General Health Questionnaire
 heptathlon              Olympic Heptathlon Seoul 1988
 household               Household Expenditure Data
+HSAURtable              Produce LaTeX Tables
+Lanza                   Prevention of Gastointestinal Damages
 mastectomy              Survival Times after Mastectomy of Breast
                         Cancer Patients
 men1500m                Winners of the Olympic Men's 1500m
@@ -46,6 +43,9 @@ suicides                Crowd Baiting Behaviour and Suicides
 suicides2               Male Suicides Data
 toenail                 Toenail Infection Data
 toothpaste              Toothpaste Data
+USairpollution          Air Pollution in US Cities
+USmelanoma              USA Malignant Melanoma Data
+USstates                US States
 voting                  House of Representatives Voting Data
 water                   Mortality and Water Hardness
 watervoles              Water Voles Data

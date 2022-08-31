@@ -24,4 +24,4 @@ Author: Hadley Wickham [aut, cre],
 Maintainer: Hadley Wickham <hadley@rstudio.com>
 Repository: CRAN
 Date/Publication: 2021-04-29 12:40:02 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2021-10-20 13:24:13 UTC; unix
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-08-30 19:22:08 UTC; unix

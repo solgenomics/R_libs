@@ -18,4 +18,4 @@ NeedsCompilation: yes
 Repository: CRAN
 Date/Publication: 2021-03-28 06:51:14 UTC
 Packaged: 2021-03-26 08:09:51 UTC; mdietze
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2022-02-15 16:45:03 UTC; unix
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-08-30 19:21:42 UTC; unix

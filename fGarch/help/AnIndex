@@ -1,4 +1,5 @@
 fGarch-package	00fGarch-package
+.gogarchFit	garchFit
 absMoments	dist-absMoments
 coef,ANY-method	methods-coef
 coef,fGARCH-method	methods-coef
@@ -75,4 +76,5 @@ summary-methods	methods-summary
 TimeSeriesData	data
 update,fGARCH-method	class-fGARCH
 update,fGARCHSPEC-method	class-fGARCHSPEC
+volatility	methods-volatility
 volatility.fGARCH	methods-volatility

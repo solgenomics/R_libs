@@ -1,3 +1,4 @@
+classify_intervals      Classify univariate vector to interval
 classIntervals          Choose univariate class intervals
 findColours             assign colours to classes from classInterval
                         object

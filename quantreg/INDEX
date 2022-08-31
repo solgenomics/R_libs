@@ -1,15 +1,3 @@
-Bosco                   Boscovich Data
-CobarOre                Cobar Ore data
-FAQ                     FAQ and ChangeLog of a package
-KhmaladzeTest           Tests of Location and Location Scale Shift
-                        Hypotheses for Linear Models
-LassoLambdaHat          Lambda selection for QR lasso problems
-Mammals                 Garland(1983) Data on Running Speed of Mammals
-Munge                   Munge rqss formula
-ParetoTest              Estimation and Inference on the Pareto Tail
-                        Exponent for Linear Models
-Peirce                  C.S. Peirce's Auditory Response Data
-QTECox                  Function to obtain QTE from a Cox model
 akj                     Density Estimation using Adaptive Kernel method
 anova.rq                Anova function for quantile regression fits
 bandwidth.rq            bandwidth selection for rq functions
@@ -18,6 +6,8 @@ boot.crq                Bootstrapping Censored Quantile Regression
 boot.rq                 Bootstrapping Quantile Regression
 boot.rq.pwxy            Preprocessing weighted bootstrap method
 boot.rq.pxy             Preprocessing bootstrap method
+Bosco                   Boscovich Data
+CobarOre                Cobar Ore data
 combos                  Ordered Combinations
 critval                 Hotelling Critical Values
 crq                     Functions to fit censored quantile regression
@@ -25,16 +15,27 @@ crq                     Functions to fit censored quantile regression
 dither                  Function to randomly perturb a vector
 dynrq                   Dynamic Linear Quantile Regression
 engel                   Engel Data
+FAQ                     FAQ and ChangeLog of a package
 gasprice                Time Series of US Gasoline Prices
+KhmaladzeTest           Tests of Location and Location Scale Shift
+                        Hypotheses for Linear Models
 kuantile                Quicker Sample Quantiles
+LassoLambdaHat          Lambda selection for QR lasso problems
 latex                   Make a latex version of an R object
 latex.summary.rqs       Make a latex table from a table of rq results
 latex.table             Writes a latex formatted table to a file
 lm.fit.recursive        Recursive Least Squares
 lprq                    locally polynomial quantile regression
+Mammals                 Garland(1983) Data on Running Speed of Mammals
+MelTemp                 Daily maximum temperatures in Melbourne,
+                        Australia
+Munge                   Munge rqss formula
 nlrq                    Function to compute nonlinear quantile
                         regression estimates
 nlrq.control            Set control parameters for nlrq
+ParetoTest              Estimation and Inference on the Pareto Tail
+                        Exponent for Linear Models
+Peirce                  C.S. Peirce's Auditory Response Data
 plot.KhmaladzeTest      Plot a KhmaladzeTest object
 plot.rq.process         plot the coordinates of the quantile regression
                         process
@@ -51,6 +52,7 @@ print.summary.rq        Print Quantile Regression Summary Object
 q489                    Even Quicker Sample Quantiles
 qrisk                   Function to compute Choquet portfolio weights
 qss                     Additive Nonparametric Terms for rqss Fitting
+QTECox                  Function to obtain QTE from a Cox model
 ranks                   Quantile Regression Ranks
 rearrange               Rearrangement
 residuals.nlrq          Return residuals of an nlrq object

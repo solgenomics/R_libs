@@ -1,4 +1,96 @@
-# styler 1.2
+# styler 1.7.0
+
+**API changes**
+
+* new R option `styler.cache_root` (defaulting to `"styler"`) that determines 
+  the sub-directory under the {R.cache} cache directory that {styler} uses. Non-
+  default caches won't be cleaned up by {styler}. We suggest `"styler-perm"` 
+  (also used by {precommit}).
+
+* stylerignore markers are now interpreted as regular expressions instead of 
+  comments that must match exactly. This allows to specify multiple markers in 
+  one regular expression for `styler.ignore_start` and `styler.ignore_stop`, 
+  e.g. to use markers for lintr and styler on the same line, you can use
+  `options(styler.ignore_start = "nolint start|styler: off"`:
+
+  ```r
+  # nolint start, styler: off
+  1 +1
+  # nolint end
+  # styler: on
+  ```
+  As a consequence of this approach, the defaults for `styler.ignore_start` and 
+  `styler.ignore_stop` omit the `#` (#849).
+
+
+**Features**
+
+* {styler} can be ran via GitHub Actions using 
+  `usethis::use_github_action("style")` (#914).
+* added guarantee that styled code is parsable (#892).
+* Developers can now create style guides with indention characters other than 
+  spaces (#916).
+
+**Documentation**
+
+* Add vignette on distributing style guide (#846, #861).
+* Fix argument name `filetype` in Example for `style_dir()` (#855).
+
+
+**Bug fixes**
+
+* Piped function without brackets `substitute(x %>% y)` don't get `()` added
+  anymore for one level deep (not more yet, see #889), as this can change 
+  outcome of the code (#876).
+* `.onLoad()` method no longer broken with {cli} >= 3.1 (#893).
+* Function calls containing `+` should no longer give any error on styling when 
+  there are comments and line breaks under certain circumstances (#905). 
+* rules that add tokens don't break stylerignore sequences anymore (#891).
+* Alignment detection respects stylerignore (#850).
+* Unaligned expressions with quoted key (e.g. `c("x" = 2)`) are now correctly
+  detected (#881).
+* `~` causes now indention, like `+`, `-`, `|` etc. (#902).
+* `Warning: Unknown or uninitialised column:` was fixed (#885).
+* function calls with unequal number of token on different lines are no longer 
+  deemed aligned if there are arbitrary spaces around the tokens on the lines 
+  with most tokens (#902).
+* if a line starts with `EQ_SUB` (`=`), the corresponding key is moved to that
+  line too (#923).
+* ensure a trailing blank line also if the input is cached (#867).
+* Preserve trailing blank line in roxygen examples to simplify concatenation of
+  examples (#880).
+* `indenty_by` is now also respected when curly braces are added to an if
+  statement by {styler} (#915).
+* An error is now thrown on styling if input unicode characters can't be 
+  correctly parsed for Windows and R < 4.2 (#883).
+* styling of text does not error anymore when the R option `OutDec` is set to 
+  a non-default value (#912).
+
+
+**Infrastructure**
+
+* Remove dependency on {xfun} (#866).
+* Remove {glue} dependency that was only used by {touchstone} script and is 
+  declared as a dependency already in the respective action (#910).
+* Bump minimal R requirement to 3.4 in line with the 
+  [tidyverse](https://www.tidyverse.org/blog/2019/04/r-version-support/), which
+  allowed to remove the dependency at {backports} and some exception handling.
+* rename default branch to main (#859).
+* the built package size has been reduced by ~50% by listing `*-in_tree` files
+  in `.Rbuildignore` (#879).
+* Enable pre-commit.ci (#843).
+* use pre-commit via GitHub Actions (#872).
+* terminate running jobs on new push to save resources (#888).
+* Use the {touchstone} GitHub Action instead of the literal script (#889).
+* upgrade R CMD check Github Actions to use `v2`.
+* {styler} test are relaxed to not assume a specific error message on the 
+  wrong usage of `_` (#929).
+
+Thanks to all contributors that made this release possible:
+
+[&#x0040;bersbersbers](https://github.com/bersbersbers), [&#x0040;daniel-wrench](https://github.com/daniel-wrench), [&#x0040;dbykova](https://github.com/dbykova), [&#x0040;EngrStudent](https://github.com/EngrStudent), [&#x0040;hadley](https://github.com/hadley), [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;jam1015](https://github.com/jam1015), [&#x0040;jooyoungseo](https://github.com/jooyoungseo), [&#x0040;kalaschnik](https://github.com/kalaschnik), [&#x0040;kaytif](https://github.com/kaytif), [&#x0040;kpagacz](https://github.com/kpagacz), [&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;lionel-](https://github.com/lionel-), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;maelle](https://github.com/maelle), [&#x0040;MichaelChirico](https://github.com/MichaelChirico), [&#x0040;mine-cetinkaya-rundel](https://github.com/mine-cetinkaya-rundel), [&#x0040;neuwirthe](https://github.com/neuwirthe), [&#x0040;Polkas](https://github.com/Polkas), [&#x0040;pwang2](https://github.com/pwang2), [&#x0040;sebffischer](https://github.com/sebffischer), [&#x0040;ShixiangWang](https://github.com/ShixiangWang), [&#x0040;ssh352](https://github.com/ssh352), and [&#x0040;xjtusjtu](https://github.com/xjtusjtu).
+
+# styler 1.6.2
 
 * clean up cache files older than one week (#842).
 
@@ -501,7 +593,7 @@ Thanks to all contributors involved, in particular
 [&#x0040;tvatter](https://github.com/tvatter),
 [&#x0040;wdearden](https://github.com/wdearden),
 [&#x0040;wmayner](https://github.com/wmayner), and
-[&#x0040;yech1990](https://github.com/yech1990).
+&#x0040;yech1990.
 
 # styler 1.1.0
 

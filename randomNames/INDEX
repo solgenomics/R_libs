@@ -1,0 +1,4 @@
+randomNames             Random Names Function
+randomNames-package     Generate Random Given and Surnames
+randomNamesData         First names (by gender and ethnicity) and last
+                        names (by ethnicity) for randomNames function

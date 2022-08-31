@@ -1,8 +1,8 @@
 Package: pepa
 Type: Package
 Title: Package for the Execution of Pre Cooked Analysis
-Version: 1.3.9
-Date: 2019-11-11
+Version: 1.4.0
+Date: 2021-07-16
 Author: Raul Eyzaguirre
 Contributor: Omar Benites
 Maintainer: Raul Eyzaguirre <R.EYZAGUIRRE@CGIAR.ORG>
@@ -14,17 +14,18 @@ License: MIT + file LICENSE
 Copyright: International Potato Center (2015)
 LazyData: true
 Suggests: testthat
-RoxygenNote: 6.1.1
+Encoding: UTF-8
+RoxygenNote: 7.1.2
 RemoteType: github
 RemoteHost: api.github.com
 RemoteRepo: pepa
 RemoteUsername: reyzaguirre
-RemoteRef: master
-RemoteSha: 7b140cf25c16392b09c7d3c913c7e08666f264fe
+RemoteRef: HEAD
+RemoteSha: 660f4d232bcf3bb9e407770b07e481b5981d5e8c
 GithubRepo: pepa
 GithubUsername: reyzaguirre
-GithubRef: master
-GithubSHA1: 7b140cf25c16392b09c7d3c913c7e08666f264fe
+GithubRef: HEAD
+GithubSHA1: 660f4d232bcf3bb9e407770b07e481b5981d5e8c
 NeedsCompilation: no
-Packaged: 2020-04-28 00:53:01 UTC; vagrant
-Built: R 3.6.3; ; 2020-04-28 00:53:02 UTC; unix
+Packaged: 2022-08-30 22:29:58 UTC; root
+Built: R 4.2.0; ; 2022-08-30 22:29:58 UTC; unix

@@ -1,3 +1,57 @@
+CHANGES IN VERSION 2.52.0
+-------------------------
+
+BUG FIXES
+
+    o Stop reporting message about the use of https when using useEnsembl()
+    with a 'version' argument.
+    o Use virtualSchemaName provided by a Mart, rather than simply "default".
+    This caused issues with the Ensembl Plants Mart.
+
+CHANGES IN VERSION 2.50.0
+-------------------------
+
+MINOR CHANGES
+
+    o useMart() and listMarts() will warn users if using http to access 
+    Ensembl.  https will be enforced by Ensembl from late 2021.
+
+BUG FIXES
+
+    o Address issue where checking the list of Ensembl Archives would stop
+    all queries from working if the main www.ensembl.org site was unavailable.
+    o Fix bug introduced in getSequence() where asking for flanking sequences
+    resulted in an invalid query.
+    o The argument 'host' is no longer ignored in useEnsembl() (Thanks to forum
+    user "A" - https://support.bioconductor.org/p/9139019/)
+
+CHANGES IN VERSION 2.48.0
+-------------------------
+
+NEW FEATURES
+
+    o getSequence() now allows the cache to be turned off via the 'useCache'
+    argument.
+    o Automatic detection of SSL issues with Ensembl, and appropriate settings
+    applied to httr functions used by biomaRt.
+
+BUG FIXES
+
+    o Addressed issue with getSequence() and ID types that are not
+    available on the 'sequences' page.  This could result in truncated
+    sequences being returned from a query.
+    o getBM() would fail if it found a cache entry, but the file was corrupted.
+    Invalid entries are now detected and deleted if encountered.
+    
+CHANGES IN VERSION 2.46.0
+-------------------------
+
+BUG FIXES
+
+    o getLDS() now detects if trying to use datasets from different Marts
+    and reports this to the user.
+    
+
 CHANGES IN VERSION 2.42.0
 -------------------------
 

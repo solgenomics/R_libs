@@ -84,6 +84,24 @@ FUN <- function(fl, param) {
 ## ----forking_default_multicore---------------------------------------------
 MulticoreParam()
 
+## ----db_problems, eval = FALSE---------------------------------------------
+#  library(org.Hs.eg.db)
+#  FUN <- function(x, ...) {
+#      ...
+#      mapIds(org.Hs.eg.db, ...)
+#      ...
+#  }
+#  bplapply(X, FUN, ..., BPPARAM = MulticoreParam())
+
+## ----db_solution_1, eval = FALSE-------------------------------------------
+#  FUN <- function(x, ...) {
+#      library(org.Hs.eg.db)
+#      ...
+#      mapIds(org.Hs.eg.db, ...)
+#      ...
+#  }
+#  bplapply(X, FUN, ..., BPPARAM = MulticoreParam())
+
 ## ----cluster_FUN-----------------------------------------------------------
 FUN <- function(fl, param, gr) {
   suppressPackageStartupMessages({
@@ -98,6 +116,16 @@ snow <- SnowParam(workers = 2, type = "SOCK")
 
 ## ----cluster_bplapply------------------------------------------------------
 bplapply(fls[1:3], FUN, BPPARAM = snow, param = param, gr = gr)
+
+## ----db_solution_2, eval = FALSE-------------------------------------------
+#  register(SnowParam())  # default evaluation
+#  bpstart()              # start the cluster
+#  ...
+#  bplapply(X, FUN1, ...)
+#  ...
+#  bplapply(X, FUN2, ...)  # re-use workers
+#  ...
+#  bpstop()
 
 ## ----ad_hoc_sock_snow_param------------------------------------------------
 hosts <- c("rhino01", "rhino01", "rhino02")

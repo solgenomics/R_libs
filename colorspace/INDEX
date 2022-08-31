@@ -1,11 +1,3 @@
-HLS                     Create HLS Colors
-HSV                     Create HSV Colors
-LAB                     Create LAB Colors
-LUV                     Create LUV Colors
-RGB                     Create RGB Colors
-USSouthPolygon          Polygon for County Map of US South States:
-                        Alabama, Georgia, and South Carolina
-XYZ                     Create XYZ Colors
 adjust_transparency     Adjust or Extract Transparency of Colors
 choose_palette          Graphical User Interface for Choosing HCL Color
                         Palettes
@@ -27,7 +19,11 @@ hclplot                 Palette Plot in HCL Space
 hex                     Convert Colors to Hexadecimal Strings
 hex2RGB                 Convert Hexadecimal Color Specifications to
                         sRGB Objects
+HLS                     Create HLS Colors
+HSV                     Create HSV Colors
+LAB                     Create LAB Colors
 lighten                 Algorithmically Lighten or Darken Colors
+LUV                     Create LUV Colors
 max_chroma              Compute Maximum Chroma for Given Hue and
                         Luminance in HCL
 mixcolor                Compute the Convex Combination of Two Colors
@@ -35,9 +31,9 @@ polarLAB                Create polarLAB Colors
 polarLUV                Create polarLUV (HCL) Colors
 rainbow_hcl             HCL (and HSV) Color Palettes Corresponding to
                         Base R Palettes
-readRGB                 Read RGB Color Descriptions
 readhex                 Read Hexadecimal Color Descriptions
-sRGB                    Create sRGB Colors
+readRGB                 Read RGB Color Descriptions
+RGB                     Create RGB Colors
 scale_colour_binned_diverging
                         HCL-Based Binned Diverging Color Scales for
                         ggplot2
@@ -76,6 +72,10 @@ scale_colour_discrete_sequential
                         ggplot2
 simulate_cvd            Simulate Color Vision Deficiency
 specplot                Color Spectrum Plot
+sRGB                    Create sRGB Colors
 swatchplot              Palette Swatch Plot
+USSouthPolygon          Polygon for County Map of US South States:
+                        Alabama, Georgia, and South Carolina
 whitepoint              Access or Modify the Whitepoint
 writehex                Write Hexadecimal Color Descriptions
+XYZ                     Create XYZ Colors

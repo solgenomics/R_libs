@@ -1,12 +1,12 @@
-#setRealizationBackend("RleArray")
-#setRealizationBackend("HDF5Array")
+#setAutoRealizationBackend("RleArray")
+#setAutoRealizationBackend("HDF5Array")
 
 ### We do "linear blocks" (i.e. block.shape="first-dim-grows-first") only,
 ### because they are the easiest to unsplit.
 .split_array_by_block <- function(x, block.length)
 {
-    grid <- blockGrid(x, block.length, chunk.grid=NULL,
-                         block.shape="first-dim-grows-first")
+    grid <- defaultAutoGrid(x, block.length, chunk.grid=NULL,
+                               block.shape="first-dim-grows-first")
     lapply(grid, function(viewport) read_block(x, viewport))
 }
 

@@ -1,8 +1,5 @@
-B3                      West German Business Cycles 1955-1994
-EDAM                    Computation of an Eight Direction Arranged Map
-GermanCredit            Statlog German Credit
-NaiveBayes              Naive Bayes Classifier
 b.scal                  Calculation of beta scaling parameters
+B3                      West German Business Cycles 1955-1994
 benchB3                 Benchmarking on B3 data
 betascale               Scale membership values according to a beta
                         scaling
@@ -22,8 +19,10 @@ drawparti               Plotting the 2-d partitions of classification
                         methods
 e.scal                  Function to calculate e- or softmax scaled
                         membership values
+EDAM                    Computation of an Eight Direction Arranged Map
 errormatrix             Tabulation of prediction errors by classes
 friedman.data           Friedman's classification benchmark data
+GermanCredit            Statlog German Credit
 greedy.wilks            Stepwise forward variable selection for
                         classification
 hmm.sop                 Calculation of HMM Sum of Path
@@ -32,16 +31,17 @@ loclda                  Localized Linear Discriminant Analysis (LocLDA)
 locpvs                  Pairwise variable selection for classification
                         in local models
 meclight.default        Minimal Error Classification
+NaiveBayes              Naive Bayes Classifier
 nm                      Nearest Mean Classification
 partimat                Plotting the 2-d partitions of classification
                         methods
 plineplot               Plotting marginal posterior class probabilities
 plot.NaiveBayes         Naive Bayes Plot
 plot.woe                Plot information values
-predict.NaiveBayes      Naive Bayes Classifier
 predict.loclda          Localized Linear Discriminant Analysis (LocLDA)
 predict.locpvs          predict method for locpvs objects
 predict.meclight        Prediction of Minimal Error Classification
+predict.NaiveBayes      Naive Bayes Classifier
 predict.pvs             predict method for pvs objects
 predict.rda             Regularized Discriminant Analysis (RDA)
 predict.sknn            Simple k Nearest Neighbours Classification

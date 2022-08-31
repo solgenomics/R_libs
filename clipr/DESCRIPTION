@@ -1,26 +1,19 @@
 Type: Package
 Package: clipr
 Title: Read and Write from the System Clipboard
-Version: 0.7.1
-Authors@R: 
-    c(person(given = "Matthew",
-             family = "Lincoln",
-             role = c("aut", "cre"),
-             email = "matthew.d.lincoln@gmail.com",
-             comment = c(ORCID = "0000-0002-4387-3384")),
-      person(given = "Louis",
-             family = "Maddox",
-             role = "ctb"),
-      person(given = "Steve",
-             family = "Simpson",
-             role = "ctb"),
-      person(given = "Jennifer",
-             family = "Bryan",
-             role = "ctb"))
+Version: 0.8.0
+Authors@R: c(
+    person("Matthew", "Lincoln", , "matthew.d.lincoln@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-4387-3384")),
+    person("Louis", "Maddox", role = "ctb"),
+    person("Steve", "Simpson", role = "ctb"),
+    person("Jennifer", "Bryan", role = "ctb")
+  )
 Description: Simple utility functions to read from and write to
     the Windows, OS X, and X11 clipboards.
 License: GPL-3
-URL: https://github.com/mdlincoln/clipr
+URL: https://github.com/mdlincoln/clipr,
+        http://matthewlincoln.net/clipr/
 BugReports: https://github.com/mdlincoln/clipr/issues
 Imports: utils
 Suggests: covr, knitr, rmarkdown, rstudioapi (>= 0.5), testthat (>=
@@ -28,18 +21,19 @@ Suggests: covr, knitr, rmarkdown, rstudioapi (>= 0.5), testthat (>=
 VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-US
-LazyData: TRUE
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 SystemRequirements: xclip (https://github.com/astrand/xclip) or xsel
         (http://www.vergenet.net/~conrad/software/xsel/) for accessing
-        the X11 clipboard
+        the X11 clipboard, or wl-clipboard
+        (https://github.com/bugaevc/wl-clipboard) for systems using
+        Wayland.
 NeedsCompilation: no
-Packaged: 2020-10-08 13:13:31 UTC; mlincoln
+Packaged: 2022-02-19 02:20:21 UTC; mlincoln
 Author: Matthew Lincoln [aut, cre] (<https://orcid.org/0000-0002-4387-3384>),
   Louis Maddox [ctb],
   Steve Simpson [ctb],
   Jennifer Bryan [ctb]
 Maintainer: Matthew Lincoln <matthew.d.lincoln@gmail.com>
 Repository: CRAN
-Date/Publication: 2020-10-08 14:00:05 UTC
-Built: R 3.6.3; ; 2022-02-15 16:25:35 UTC; unix
+Date/Publication: 2022-02-22 00:58:45 UTC
+Built: R 4.2.0; ; 2022-08-30 19:08:41 UTC; unix

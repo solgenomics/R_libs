@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head><title>R: Efficient manipulation of biological strings</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> Efficient manipulation of biological strings
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;Biostrings&rsquo; version 2.54.0</h2>
+</div><h2>Documentation for package &lsquo;Biostrings&rsquo; version 2.64.1</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -314,6 +315,8 @@
 <td>PhredQuality, SolexaQuality and IlluminaQuality objects</td></tr>
 <tr><td style="width: 25%;"><a href="XStringSet-class.html">coerce-method</a></td>
 <td>XStringSet objects</td></tr>
+<tr><td style="width: 25%;"><a href="XStringSetList-class.html">coerce-method</a></td>
+<td>XStringSetList objects</td></tr>
 <tr><td style="width: 25%;"><a href="XStringViews-class.html">coerce-method</a></td>
 <td>The XStringViews class</td></tr>
 <tr><td style="width: 25%;"><a href="MaskedXString-class.html">collapse-method</a></td>
@@ -873,14 +876,14 @@
 <td>Scoring matrices</td></tr>
 <tr><td style="width: 25%;"><a href="substitution_matrices.html">PAM70</a></td>
 <td>Scoring matrices</td></tr>
-<tr><td style="width: 25%;"><a href="AlignedXStringSet-class.html">parallelSlotNames-method</a></td>
-<td>AlignedXStringSet and QualityAlignedXStringSet objects</td></tr>
-<tr><td style="width: 25%;"><a href="PairwiseAlignments-class.html">parallelSlotNames-method</a></td>
-<td>PairwiseAlignments, PairwiseAlignmentsSingleSubject, and PairwiseAlignmentsSingleSubjectSummary objects</td></tr>
-<tr><td style="width: 25%;"><a href="QualityScaledXStringSet-class.html">parallelSlotNames-method</a></td>
-<td>QualityScaledBStringSet, QualityScaledDNAStringSet, QualityScaledRNAStringSet and QualityScaledAAStringSet objects</td></tr>
 <tr><td style="width: 25%;"><a href="AlignedXStringSet-class.html">parallelVectorNames-method</a></td>
 <td>AlignedXStringSet and QualityAlignedXStringSet objects</td></tr>
+<tr><td style="width: 25%;"><a href="AlignedXStringSet-class.html">parallel_slot_names-method</a></td>
+<td>AlignedXStringSet and QualityAlignedXStringSet objects</td></tr>
+<tr><td style="width: 25%;"><a href="PairwiseAlignments-class.html">parallel_slot_names-method</a></td>
+<td>PairwiseAlignments, PairwiseAlignmentsSingleSubject, and PairwiseAlignmentsSingleSubjectSummary objects</td></tr>
+<tr><td style="width: 25%;"><a href="QualityScaledXStringSet-class.html">parallel_slot_names-method</a></td>
+<td>QualityScaledBStringSet, QualityScaledDNAStringSet, QualityScaledRNAStringSet and QualityScaledAAStringSet objects</td></tr>
 <tr><td style="width: 25%;"><a href="XStringPartialMatches-class.html">pattern</a></td>
 <td>XStringPartialMatches objects</td></tr>
 <tr><td style="width: 25%;"><a href="PairwiseAlignments-class.html">pattern-method</a></td>
@@ -989,6 +992,8 @@
 <td>MultipleAlignment objects</td></tr>
 <tr><td style="width: 25%;"><a href="XStringSet-io.html">readRNAStringSet</a></td>
 <td>Read/write an XStringSet object from/to a file</td></tr>
+<tr><td style="width: 25%;"><a href="XStringSetList-class.html">relistToClass-method</a></td>
+<td>XStringSetList objects</td></tr>
 <tr><td style="width: 25%;"><a href="chartr.html">replaceAmbiguities</a></td>
 <td>Replace letters in a sequence or set of sequences</td></tr>
 <tr><td style="width: 25%;"><a href="replaceAt.html">replaceAt</a></td>
@@ -1054,6 +1059,12 @@
 <td>Read/write an XStringSet object from/to a file</td></tr>
 <tr><td style="width: 25%;"><a href="PairwiseAlignments-class.html">score-method</a></td>
 <td>PairwiseAlignments, PairwiseAlignmentsSingleSubject, and PairwiseAlignmentsSingleSubjectSummary objects</td></tr>
+<tr><td style="width: 25%;"><a href="seqinfo.html">seqinfo</a></td>
+<td>seqinfo method for DNAStringSet objects</td></tr>
+<tr><td style="width: 25%;"><a href="seqinfo.html">seqinfo-method</a></td>
+<td>seqinfo method for DNAStringSet objects</td></tr>
+<tr><td style="width: 25%;"><a href="seqinfo.html">seqinfo&lt;--method</a></td>
+<td>seqinfo method for DNAStringSet objects</td></tr>
 <tr><td style="width: 25%;"><a href="AlignedXStringSet-class.html">seqtype-method</a></td>
 <td>AlignedXStringSet and QualityAlignedXStringSet objects</td></tr>
 <tr><td style="width: 25%;"><a href="MaskedXString-class.html">seqtype-method</a></td>
@@ -1108,6 +1119,8 @@
 <td>BString objects</td></tr>
 <tr><td style="width: 25%;"><a href="XStringSet-class.html">showAsCell-method</a></td>
 <td>XStringSet objects</td></tr>
+<tr><td style="width: 25%;"><a href="XStringSetList-class.html">showAsCell-method</a></td>
+<td>XStringSetList objects</td></tr>
 <tr><td style="width: 25%;"><a href="XStringQuality-class.html">SolexaQuality</a></td>
 <td>PhredQuality, SolexaQuality and IlluminaQuality objects</td></tr>
 <tr><td style="width: 25%;"><a href="XStringQuality-class.html">SolexaQuality-class</a></td>
@@ -1366,4 +1379,4 @@
 <tr><td style="width: 25%;"><a href="PDict-class.html">[[-method</a></td>
 <td>PDict objects</td></tr>
 </table>
-</body></html>
+</div></body></html>

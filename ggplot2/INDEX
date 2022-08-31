@@ -1,5 +1,4 @@
 +.gg                    Add components to a plot
-CoordSf                 Visualise sf objects
 aes                     Construct aesthetic mappings
 aes_                    Define aesthetic mappings programmatically
 aes_colour_fill_alpha   Colour related aesthetics: colour, fill, and
@@ -27,6 +26,7 @@ coord_flip              Cartesian coordinates with x and y flipped
 coord_map               Map projections
 coord_polar             Polar coordinates
 coord_trans             Transformed Cartesian coordinate system
+CoordSf                 Visualise sf objects
 cut_interval            Discretise numeric data into categorical
 diamonds                Prices of over 50,000 round cut diamonds
 draw_key                Key glyphs for legends

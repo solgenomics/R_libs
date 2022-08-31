@@ -7,6 +7,8 @@ import(BiocGenerics)
 import(Biobase)
 import(S4Vectors)
 import(IRanges)
+importFrom(stats, setNames)
+importFrom(KEGGREST, keggList)
 
 exportClasses(
     ## from R/AllClasses.R
@@ -32,7 +34,6 @@ exportClasses(
     "AnnotationDb",
     "OrgDb",
     "ChipDb",
-    "InparanoidDb",
     "GODb",
     "ReactomeDb",
 
@@ -87,7 +88,7 @@ exportMethods(
     "ncol", "dim",
     "toggleProbes",
     "hasMultiProbes","hasSingleProbes",
-    "getBimapFilters","setInpBimapFilter",
+    "getBimapFilters",
 
     ## from R/GOTerms.R
     "GOID",
@@ -172,6 +173,7 @@ export(
     make_eg_to_go_map,
     make_go_to_eg_map,
     toSQLStringSet,
+    organismKEGGFrame,
 
     #Convenience function to allow automatic mapping of IDs:
     inpIDMapper,

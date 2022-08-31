@@ -67,7 +67,6 @@ knitr::opts_chunk$set(eval = FALSE)
 #    p = 2,   g = gg(x),  n = 3 * 3, #
 #    31,    fds =    -1, gz = f / 3,
 #  )
-#  
 
 ## -----------------------------------------------------------------------------
 #  # all arguments of first column named -> must left align values after `=`,

@@ -1,4 +1,3 @@
-MatrixExp               Matrix exponential
 aneur                   Aortic aneurysm progression data
 boot.msm                Bootstrap resampling for multi-state models
 bos                     Bronchiolitis obliterans syndrome after lung
@@ -28,6 +27,7 @@ hmodel.object           Developer documentation: hidden Markov model
                         structure object
 logLik.msm              Extract model log-likelihood
 lrtest.msm              Likelihood ratio test
+MatrixExp               Matrix exponential
 medists                 Measurement error distributions
 model.frame.msm         Extract original data from 'msm' objects.
 msm                     Multi-state Markov and hidden Markov models in

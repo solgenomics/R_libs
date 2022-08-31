@@ -67,7 +67,7 @@ tapply(dfr[, trait.est], list(dfr[, geno], dfr[, env]), mean)
 
 ### {{i+1}}.2.1. Checking assumptions
 
-As it was stated in section 1, it is supposed that the error has a normal distribution with the same variance for all the genotypes and environments. The following plots help to evaluate this assumptions:
+As it was stated in section 1, it is supposed that the error has a normal distribution with the same variance for all the genotypes and environments. The following plots help to evaluate these assumptions:
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 10}
 
@@ -95,7 +95,7 @@ The coefficient of variation for this experiment is `r format(cv, digits = 4)`%.
 
 ```{r echo = FALSE}
 
-if (at[1, 5] < 0.05 & at[4, 5] > 0.05) {
+if (at[1, 5] < 0.05 & (at[4, 5] > 0.05 | pe)) {
   y <- dfr[, trait.est]
   agricolae::LSD.test(y, dfr[, geno], at[5, 1], at[5, 3])$groups
 }
@@ -115,7 +115,7 @@ if (at[4, 5] < 0.05) {
 
 ```{r echo = FALSE}
 
-if (at[1, 5] < 0.05 & at[4, 5] > 0.05) {
+if (at[1, 5] < 0.05 & (at[4, 5] > 0.05 | pe)) {
   y <- dfr[, trait.est]
   agricolae::HSD.test(y, dfr[, geno], at[5, 1], at[5, 3])$groups
 }
@@ -132,12 +132,11 @@ if (at[4, 5] < 0.05) {
 ```
 
 `r if (at[2, 5] < 0.05 & at[1, 5] > 0.05 & at[4, 5] > 0.05) {paste0("### ", {{i+1}}, ".2.3. LSD test for environments")}`
-`r if (at[4, 5] < 0.05) {paste0("### ", {{i+1}}, ".2.5. LSD test for environments")}`
-`r if (at[1, 5] < 0.05 & at[2, 5] < 0.05 & at[4, 5] > 0.05) {paste0("### ", {{i+1}}, ".2.5. LSD test for environments")}`
+`r if (at[4, 5] < 0.05 | (at[1, 5] < 0.05 & at[2, 5] < 0.05)) {paste0("### ", {{i+1}}, ".2.5. LSD test for environments")}`
 
 ```{r echo = FALSE}
 
-if (at[2, 5] < 0.05 & at[4, 5] > 0.05) {
+if (at[2, 5] < 0.05 & (at[4, 5] > 0.05 | pe)) {
   y <- dfr[, trait.est]
   agricolae::LSD.test(y, dfr[, env], at[3, 1], at[3, 3])$groups
 }
@@ -154,12 +153,11 @@ if (at[4, 5] < 0.05) {
 ```
 
 `r if (at[2, 5] < 0.05 & at[1, 5] > 0.05 & at[4, 5] > 0.05) {paste0("### ", {{i+1}}, ".2.4. Tukey test for environments")}`
-`r if (at[4, 5] < 0.05) {paste0("### ", {{i+1}}, ".2.6. Tukey test for environments")}`
-`r if (at[1, 5] < 0.05 & at[2, 5] < 0.05 & at[4, 5] > 0.05) {paste0("### ", {{i+1}}, ".2.6. Tukey test for environments")}`
+`r if (at[4, 5] < 0.05 | (at[1, 5] < 0.05 & at[2, 5] < 0.05)) {paste0("### ", {{i+1}}, ".2.6. Tukey test for environments")}`
 
 ```{r echo = FALSE}
 
-if (at[2, 5] < 0.05 & at[4, 5] > 0.05) {
+if (at[2, 5] < 0.05 & (at[4, 5] > 0.05 | pe)) {
   y <- dfr[, trait.est]
   agricolae::HSD.test(y, dfr[, env], at[3, 1], at[3, 3])$groups
 }

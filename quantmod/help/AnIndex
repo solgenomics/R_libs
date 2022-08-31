@@ -109,6 +109,7 @@ getFX	getFX
 getMetals	getMetals
 getModelData	getModelData
 getOptionChain	getOptionChain
+getOptionChain.orats	getOptionChain.orats
 getPrice	OHLC.Transformations
 getQuote	getQuote
 getSplits	getSplits

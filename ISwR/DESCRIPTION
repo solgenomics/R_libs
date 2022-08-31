@@ -15,4 +15,4 @@ NeedsCompilation: no
 Packaged: 2020-01-15 09:57:42 UTC; pd
 Repository: CRAN
 Date/Publication: 2020-01-20 09:50:02 UTC
-Built: R 3.6.3; ; 2020-03-24 19:42:47 UTC; unix
+Built: R 4.2.0; ; 2022-08-30 19:13:09 UTC; unix

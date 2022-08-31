@@ -4,7 +4,59 @@
 \title{lme4 News}
 \encoding{UTF-8}
 
-\section{CHANGES IN VERSION 1.1-28 (2022-02-02)}{
+\section{CHANGES IN VERSION 1.1-30}{
+  \subsection{USER-VISIBLE CHANGES}{
+    \itemize{
+      \item \code{nl} (term names) component added to output list of
+      \code{mkReTrms (GH #679)}
+      \item eliminate partial-matching of \code{eta} (for
+      \code{etastart}) (GH #686: not actually "user-visible" unless
+      \code{getOption("warnPartialMatchDollar")} is \code{TRUE})
+      \item \code{summary} method doesn't break for GLMMs other than
+  binomial/Poisson when \code{merDeriv}'s \code{vcov.glmerMod} method is
+  attached (GH #688)
+}
+  } % user-visible changes
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item better handling of \code{simulate(., re.form = NULL)} when
+      model frame contains derived components (e.g. \code{offset()},
+      \code{log(x)})
+      (\url{https://github.com/florianhartig/DHARMa/issues/335})
+      \item \code{bootMer} works with \code{glmmTMB} again (broken in
+      1.1-29)
+      \item \code{maxfun} argument to \code{allFit} controls max
+      function evaluations for every optimizer type (GH#685)
+    }
+  } % bug fixes
+} % version 1.1-30
+
+\section{CHANGES IN VERSION 1.1-29 (2022-04-07)}{
+  \subsection{USER-VISIBLE CHANGES}{
+    \itemize{
+      \item prediction with new levels (when not allowed) returns a more
+  informative error message (displays a list of unobserved levels)
+    }
+  }
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item \code{glmer.nb} now works when \code{lme4} is not loaded (GH #658, @brgew)
+      \item tests for singularity (\code{check.conv.singular}) now run
+  independently of derivative computation (e.g., when
+  \code{calc.derivs=FALSE}) (GH #660, @palday)
+  \item \code{influence.merMod} now works when data were originally
+  specified as a tibble
+  \item fixed bug in \code{cooks.distance} method for
+  \code{influence.merMod} (i.e., objects created via
+  \code{influence(fitted_model)}) (John Fox) (GH #672)
+  \item \code{predict} works for formulas containing . when
+  \code{newdata} is specified (GH #653)
+  \item \code{bootMer} now correctly inherits control settings from original fit
+    } % itemize
+  } % bug fixes
+} % 1.1-29
+
+\section{CHANGES IN VERSION 1.1-28 (2022-02-04)}{
   \subsection{USER-VISIBLE CHANGES}{
     \itemize{
       \item construction of interacting factors (e.g. when \code{f1:f2} or

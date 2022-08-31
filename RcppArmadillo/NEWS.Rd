@@ -3,6 +3,122 @@
 \newcommand{\ghpr}{\href{https://github.com/RcppCore/RcppArmadillo/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/RcppCore/RcppArmadillo/issues/#1}{##1}}
 
+\section{Changes in RcppArmadillo version 0.11.2.3.1 (2022-08-16)}{
+  \itemize{
+    \item Accomodate upcoming pkg{Matrix} 1.4-2 deprecation for
+    conversion (Dirk in \ghpr{387})
+    \item CRAN release with small upstream changes in Armadillo
+    11.2.{1,2,3} made since the last CRAN release 0.11.2.0.0
+    (Dirk in \ghpr{383}, \ghpr{384} and \ghpr{386})
+    \item Undefine \code{arma_deprecated} warning as it affects a number
+    of CRAN packages which will likely need a small transition
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.2.2.0 (2022-07-04) (GitHub Only)}{
+  \itemize{
+    \item Upgraded to Armadillo release 11.2.2 (Classic Roast)
+    \itemize{
+      \item fix incorrect and/or slow convergence in single-threaded
+      versions of \code{kmeans()}, \code{gmm_diag::learn()},
+      \code{gmm_full::learn()}
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.2.1.0 (2022-06-28) (GitHub Only)}{
+  \itemize{
+    \item Upgraded to Armadillo release 11.2.1 (Classic Roast)
+    \itemize{
+      \item old style matrix initialisation via the \code{<<} operator
+      will now emit a compile-time deprecation warning
+      \item use of the old and inactive \code{ARMA_DONT_PRINT_ERRORS}
+      option will now emit a compile-time deprecation warning
+      \item the option \code{ARMA_WARN_LEVEL} can be used instead
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.2.0.0 (2022-06-10)}{
+  \itemize{
+    \item Upgraded to Armadillo release 11.2 (Classic Roast)
+    \itemize{
+      \item faster handling of sparse submatrix column views by
+      \code{norm()}, \code{accu()}, \code{nonzeros() }
+      \item extended \code{randu()} and \code{randn()} to allow
+      specification of distribution parameters
+      \item internal refactoring, leading to faster compilation times
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.1.1.0 (2022-05-15)}{
+  \itemize{
+    \item Upgraded to Armadillo release 11.1.1 (Angry Kitchen Appliance)
+    \itemize{
+      \item added \code{inv_opts::no_ugly} option to \code{inv()} and
+      \code{inv_sympd()} to disallow inverses of poorly conditioned matrices
+      \item more efficient handling of rank-deficient matrices via
+      \code{inv_opts::allow_approx} option in \code{inv()} and \code{inv_sympd()}
+      \item better detection of rank deficient matrices by \code{solve()}
+      \item faster handling of symmetric and diagonal matrices by \code{cond()}
+    }
+    \item The \code{configure} script again propagates the'found' case again,
+    thanks to Justin Silverman for the heads-up and suggested fix (Dirk
+    and Justin in \ghpr{376} and \ghpr{377} fixing \ghit{375}).
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.0.1.0 (2022-04-14)}{
+  \itemize{
+    \item Upgraded to Armadillo release 11.0.1 (Creme Brulee)
+    \itemize{
+      \item fix miscompilation of \code{inv()} and \code{inv_sympd()}
+      functions when using \code{inv_opts::allow_approx} and
+      \code{inv_opts::tiny} options
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.0.0.0 (2022-04-04)}{
+  \itemize{
+    \item Upgraded to Armadillo release 11.0.0 (Creme Brulee)
+    \itemize{
+      \item added variants of \code{inv()} and \code{inv_sympd()} that
+      provide rcond (reciprocal condition number)
+      \item expanded \code{inv()} and \code{inv_sympd()} with options
+      \code{inv_opts::tiny} and \code{inv_opts::allow_approx}
+      \item stricter handling of singular matrices by \code{inv()} and
+      \code{inv_sympd()}
+      \item stricter handling of non-sympd matrices by \code{inv()} and
+      \code{inv_sympd()}
+      \item stricter handling of non-finitie matrices by \code{pinv()}
+      \item more robust handling of rank deficient matrices by
+      \code{solve()}
+      \item faster handling of diagonal matrices by \code{rcond()}
+      \item changed \code{eigs_sym()} and \code{eigs_gen()} to use
+      higher quality RNG
+      \item \code{quantile()} and \code{median()} will now throw an
+      exception if given matrices/vectors have NaN elements
+      \item workaround for yet another bug in Intel MKL
+    }
+    \item Until May 2022, protect correction to Field behavior via
+    define of \code{RCPP_ARMADILLO_FIX_Field}
+    \item If a LAPACK installation with missing complex routines is
+    found (as e.g. Ubuntu using 3.9.0) then the LAPACK unit test is
+    skipped.
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.8.2.0 (2022-02-01)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.8.2 (Realm Raider)
+    \itemize{
+      \item fix potential speed regression in \code{pinv()} and \code{rank()}
+    }
+  }
+}
+
 \section{Changes in RcppArmadillo version 0.10.8.1.0 (2022-01-23)}{
   \itemize{
     \item Upgraded to Armadillo release 10.8.1 (Realm Raider)

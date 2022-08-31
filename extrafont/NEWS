@@ -1,3 +1,15 @@
+extrafont 0.18
+----------------------------------------------------------------
+
+* Extrafont now supports .pfa files in addition to .pfb files. (thanks to Paul
+  Murrell)
+
+* `loadfonts()` now has a new default device, `"all"`, which loads fonts for
+  all devices. (Thanks to Jeff Arnold)
+
+* Properly handles the encoding of the path of the executable of Rttf2pt1.
+  (Thanks to Gabriel Magno)
+
 extrafont 0.17
 ----------------------------------------------------------------
 

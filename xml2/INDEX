@@ -6,7 +6,6 @@ url_absolute            Convert between relative and absolute urls.
 url_escape              Escape and unescape urls.
 url_parse               Parse a url into its component pieces.
 write_xml               Write XML or HTML to disk.
-xml2_example            Get path to a xml2 example
 xml_attr                Retrieve an attribute.
 xml_cdata               Construct a cdata node
 xml_children            Navigate around the family tree.
@@ -29,3 +28,4 @@ xml_text                Extract or modify the text
 xml_type                Determine the type of a node.
 xml_url                 The URL of an XML document
 xml_validate            Validate XML schema
+xml2_example            Get path to a xml2 example

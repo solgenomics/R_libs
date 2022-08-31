@@ -42,7 +42,6 @@ cache_more_specs	cache_more_specs
 cache_write	cache_write
 caching	caching
 calls_sys	calls_sys
-can_verify_roundtrip	can_verify_roundtrip
 catch_style_file_output	catch_style_file_output
 choose_indention	choose_indention
 combine_children	combine_children
@@ -73,7 +72,6 @@ enhance_mapping_special	enhance_mapping_special
 enrich_terminals	enrich_terminals
 ensure_correct_txt	ensure_correct_txt
 ensure_last_n_empty	ensure_last_n_empty
-ensure_valid_pd	ensure_valid_pd
 env_add_stylerignore	env_add_stylerignore
 env_current	env_current
 expressions_are_identical	expressions_are_identical
@@ -152,6 +150,7 @@ parse_safely	parse_safely
 parse_transform_serialize_r	parse_transform_serialize_r
 parse_transform_serialize_roxygen	parse_transform_serialize_roxygen
 parse_transform_serialize_r_block	parse_transform_serialize_r_block
+parse_tree_must_be_identical	parse_tree_must_be_identical
 pd_is	pd_is
 pd_is_multi_line	pd_is_multi_line
 post_parse_roxygen	post_parse_roxygen
@@ -257,3 +256,4 @@ wrap_expr_in_expr	wrap_expr_in_expr
 wrap_if_else_while_for_fun_multi_line_in_curly	wrap_if_else_while_for_fun_multi_line_in_curly
 wrap_multiline_curly	wrap_multiline_curly
 wrap_subexpr_in_curly	wrap_subexpr_in_curly
+write_utf8	write_utf8

@@ -13,6 +13,7 @@ seq_qgrams              Get a table of qgram counts for integer
 seq_sim                 Compute similarity scores between sequences of
                         integers
 stringdist              Compute distance metrics between strings
+stringdist_api          Calling stringdist from 'C' or 'C++'
 stringdist-encoding     String metrics in 'stringdist'
 stringdist-metrics      String metrics in 'stringdist'
 stringdist-package      A package for string distance calculation and
@@ -20,5 +21,4 @@ stringdist-package      A package for string distance calculation and
 stringdist-parallelization
                         Multithreading and parallelization in
                         'stringdist'
-stringdist_api          Calling stringdist from 'C' or 'C++'
 stringsim               Compute similarity scores between strings

@@ -24,4 +24,4 @@ NeedsCompilation: no
 Packaged: 2021-05-19 12:10:58 UTC; edd
 Repository: CRAN
 Date/Publication: 2021-05-19 12:30:02 UTC
-Built: R 3.6.3; ; 2022-02-15 16:24:51 UTC; unix
+Built: R 4.2.0; ; 2022-08-30 19:17:35 UTC; unix

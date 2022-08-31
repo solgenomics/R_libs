@@ -1,5 +1,7 @@
 add_step                Add a New Operation to the Current Recipe
 bake                    Apply a trained preprocessing recipe
+case_weights            Using case weights with recipes
+case-weight-helpers     Helpers for steps with case weights
 check_class             Check Variable Class
 check_cols              Check if all Columns are Present
 check_missing           Check for Missing Values
@@ -23,12 +25,11 @@ recipes                 recipes: A package for computing and
 recipes_eval_select     Evaluate a selection with tidyselect semantics
                         specific to recipes
 roles                   Manually Alter Roles
-selections              Methods for Selecting Variables in Step
-                        Functions
-step_BoxCox             Box-Cox Transformation for Non-Negative Data
-step_YeoJohnson         Yeo-Johnson Transformation
+selections              Methods for selecting variables in step
+                        functions
 step_arrange            Sort rows using dplyr
 step_bin2factor         Create a Factors from A Dummy Variable
+step_BoxCox             Box-Cox Transformation for Non-Negative Data
 step_bs                 B-Spline Basis Functions
 step_center             Centering numeric data
 step_classdist          Distances to Class Centroids
@@ -39,11 +40,13 @@ step_cut                Cut a numeric variable into a factor
 step_date               Date Feature Generator
 step_depth              Data Depths
 step_discretize         Discretize Numeric Variables
-step_dummy              Dummy Variables Creation
+step_dummy              Create traditional dummy variables
+step_dummy_extract      Extract patterns from nominal data
 step_dummy_multi_choice
-                        Multiple Choice Dummy Variables Creation
+                        Handle levels in multiple predictors together
 step_factor2string      Convert Factors to Strings
 step_filter             Filter rows using dplyr
+step_filter_missing     Missing Value Column Filter
 step_geodist            Distance between two locations
 step_harmonic           Add sin and cos terms for harmonic analysis
 step_holiday            Holiday Feature Generator
@@ -77,7 +80,10 @@ step_logit              Logit Transformation
 step_mutate             Add new variables using dplyr
 step_mutate_at          Mutate multiple columns using dplyr
 step_naomit             Remove observations with missing values
-step_nnmf               NNMF Signal Extraction
+step_nnmf               Non-Negative Matrix Factorization Signal
+                        Extraction
+step_nnmf_sparse        Non-Negative Matrix Factorization Signal
+                        Extraction with lasso Penalization
 step_normalize          Center and scale numeric data
 step_novel              Simple Value Assignments for Novel Factor
                         Levels
@@ -87,13 +93,13 @@ step_nzv                Near-Zero Variance Filter
 step_ordinalscore       Convert Ordinal Factors to Numeric Scores
 step_other              Collapse Some Categorical Levels
 step_pca                PCA Signal Extraction
+step_percentile         Percentile Transformation
 step_pls                Partial Least Squares Feature Extraction
 step_poly               Orthogonal Polynomial Basis Functions
 step_profile            Create a Profiling Version of a Data Set
 step_range              Scaling Numeric Data to a Specific Range
 step_ratio              Ratio Variable Creation
-step_regex              Create Dummy Variables using Regular
-                        Expressions
+step_regex              Detect a regular expression
 step_relevel            Relevel factors to a desired level
 step_relu               Apply (Smoothed) Rectified Linear
                         Transformation
@@ -108,10 +114,14 @@ step_slice              Filter rows by position using dplyr
 step_spatialsign        Spatial Sign Preprocessing
 step_sqrt               Square Root Transformation
 step_string2factor      Convert Strings to Factors
+step_time               Time Feature Generator
 step_unknown            Assign missing categories to "unknown"
 step_unorder            Convert Ordered Factors to Unordered Factors
 step_window             Moving Window Functions
+step_YeoJohnson         Yeo-Johnson Transformation
 step_zv                 Zero Variance Filter
 summary.recipe          Summarize a recipe
 tidy.step_BoxCox        Tidy the Result of a Recipe
+update_role_requirements
+                        Update role specific requirements
 update.step             Update a recipe step

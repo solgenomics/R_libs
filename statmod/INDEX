@@ -1,6 +1,5 @@
-Digamma                 Digamma generalized linear model family
-InverseGaussian         Inverse Gaussian Distribution
 compareGrowthCurves     Compare Groups of Growth Curves
+Digamma                 Digamma generalized linear model family
 elda                    Extreme Limiting Dilution Analysis
 fitNBP                  Negative Binomial Model for SAGE Libraries with
                         Pearson Estimation of Dispersion
@@ -15,6 +14,7 @@ glmgam.fit              Fit Gamma Generalized Linear Model by Fisher
 glmnb.fit               Fit Negative Binomial Generalized Linear Model
                         with Log-Link
 hommel.test             Test Multiple Comparisons Using Hommel's Method
+InverseGaussian         Inverse Gaussian Distribution
 logmdigamma             Log Minus Digamma Function
 matvec                  Multiply a Matrix by a Vector
 meanT                   Mean t-Statistic Between Two Groups of Growth

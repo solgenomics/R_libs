@@ -1,3 +1,7 @@
+# modelr 0.1.9
+
+* Redocument to fix HTML issues in .Rd
+
 # modelr 0.1.8
 
 * Eliminate direct dplyr dependency in favour of vctrs.

@@ -1,3 +1,4 @@
+treeio-package	treeio-package
 %>%	reexports
 ancestor	reexports
 as.phylo	reexports
@@ -77,6 +78,7 @@ root.treedata	root-method
 rootnode	reexports
 rtree	reexports
 treedata	reexports
+treeio	treeio-package
 tree_subset	tree_subset
 tree_subset.phylo	tree_subset
 tree_subset.treedata	tree_subset

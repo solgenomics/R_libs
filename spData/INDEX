@@ -1,4 +1,3 @@
-SplashDams              Data for Splash Dams in western Oregon
 afcon                   Spatial patterns of conflict in Africa 1966-78
 alaska                  Alaska multipolygon
 auckland                Marshall's infant mortality in Auckland dataset
@@ -28,6 +27,7 @@ nydata                  New York leukemia data
 nz                      Regions in New Zealand
 nz_height               High points in New Zealand
 seine                   Small river network in France
+SplashDams              Data for Splash Dams in western Oregon
 state.vbm               US State Visibility Based Map
 urban_agglomerations    Major urban areas worldwide
 us_states               US states polygons

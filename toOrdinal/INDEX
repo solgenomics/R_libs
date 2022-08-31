@@ -1,0 +1,3 @@
+toOrdinal               Cardinal to ordinal number conversion function
+toOrdinal-package       Cardinal to Ordinal Number Conversion
+toOrdinalDate           Convert date to ordinal calendar date

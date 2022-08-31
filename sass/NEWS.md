@@ -1,3 +1,19 @@
+# sass 0.4.2
+
+## Bug fixes
+
+* `sass()` no longer encounters a false positive cache hit when `sass_file()` is used inside a `sass_bundle()`. (#107, #108)
+* `font_google()` no longer produces a directory name with a `_` prefix (which was causing the directory to be ignored when deployed to GitHub Pages). (#105, #106)
+
+# sass 0.4.1
+
+## Improvements
+
+* Several speed improvements for `sass()` and `as_sass_layer()`, particularly when `sass(write_attachments = TRUE)` encounters a `cache` hit. (#98)
+* Removed compilation warnings with gcc-12. (#100)
+* Removed linking errors that occur when custom C++ flags are used to compile
+  (#94, #104).
+
 # sass 0.4.0
 
 ## Possibly breaking changes
@@ -10,7 +26,7 @@
 
 * Added new font importing helpers, namely `font_google()`, `font_link()`, `font_face()`, and `font_collection()` for intelligently importing web fonts files. They must be used inside a named list, for example: `list("font-variable" = font_google("Pacifico"))`. See `help(font_face, package = "sass")` for more details and examples. (#74)
 
-* A new `sass_layer_file()` function was added to read in a `.scss` file as a `sass_layer()`. Special comments of the form `/*-- scss:(functions|defaults|rules|mixins) --*/` can be used to place certain sections of the file into `functions`, `defaults`, `rules`, and `mixins`. The primary motivation for this is to allow [quarto's theme file format](https://github.com/quarto-dev/quarto-cli/blob/main/design/quarto-themes.md) to also be used Shiny and R Markdown. (#81)
+* A new `sass_layer_file()` function was added to read in a `.scss` file as a `sass_layer()`. Special comments of the form `/*-- scss:(functions|defaults|rules|mixins) --*/` can be used to place certain sections of the file into `functions`, `defaults`, `rules`, and `mixins`. The primary motivation for this is to allow [quarto's theme file format](https://quarto.org/docs/output-formats/html-themes-more.html) to also be used Shiny and R Markdown. (#81)
 
 * Closed #87: Added new `sass_options_get()` and `sass_options_set()` for setting and reading `sass_options()` globally (`sass()`'s `options` argument now defaults to `sass_options_get()` instead of `sass_options()`). In addition, when `shiny::devmode()` is enabled, Sass source maps are included by default. (#88) 
 

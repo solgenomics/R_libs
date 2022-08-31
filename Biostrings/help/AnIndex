@@ -184,6 +184,16 @@ coerce,integer,SolexaQuality-method	XStringQuality-class
 coerce,IntegerList,IlluminaQuality-method	XStringQuality-class
 coerce,IntegerList,PhredQuality-method	XStringQuality-class
 coerce,IntegerList,SolexaQuality-method	XStringQuality-class
+coerce,List,AAStringSetList-method	XStringSetList-class
+coerce,list,AAStringSetList-method	XStringSetList-class
+coerce,List,BStringSetList-method	XStringSetList-class
+coerce,list,BStringSetList-method	XStringSetList-class
+coerce,List,DNAStringSetList-method	XStringSetList-class
+coerce,list,DNAStringSetList-method	XStringSetList-class
+coerce,List,RNAStringSetList-method	XStringSetList-class
+coerce,list,RNAStringSetList-method	XStringSetList-class
+coerce,List,XStringSetList-method	XStringSetList-class
+coerce,list,XStringSetList-method	XStringSetList-class
 coerce,MaskedAAString,AAString-method	MaskedXString-class
 coerce,MaskedBString,BString-method	MaskedXString-class
 coerce,MaskedDNAString,DNAString-method	MaskedXString-class
@@ -607,6 +617,7 @@ palindromeArmLength	findPalindromes
 palindromeArmLength,DNAString-method	findPalindromes
 palindromeArmLength,RNAString-method	findPalindromes
 palindromeArmLength,XString-method	findPalindromes
+palindromeArmLength,XStringSet-method	findPalindromes
 palindromeArmLength,XStringViews-method	findPalindromes
 palindromeLeftArm	findPalindromes
 palindromeLeftArm,XString-method	findPalindromes
@@ -619,10 +630,10 @@ PAM250	substitution_matrices
 PAM30	substitution_matrices
 PAM40	substitution_matrices
 PAM70	substitution_matrices
-parallelSlotNames,AlignedXStringSet0-method	AlignedXStringSet-class
-parallelSlotNames,PairwiseAlignments-method	PairwiseAlignments-class
-parallelSlotNames,QualityScaledXStringSet-method	QualityScaledXStringSet-class
 parallelVectorNames,AlignedXStringSet0-method	AlignedXStringSet-class
+parallel_slot_names,AlignedXStringSet0-method	AlignedXStringSet-class
+parallel_slot_names,PairwiseAlignments-method	PairwiseAlignments-class
+parallel_slot_names,QualityScaledXStringSet-method	QualityScaledXStringSet-class
 pattern	XStringPartialMatches-class
 pattern,PairwiseAlignments-method	PairwiseAlignments-class
 pattern,XStringPartialMatches-method	XStringPartialMatches-class
@@ -682,6 +693,7 @@ readDNAStringSet	XStringSet-io
 readQualityScaledDNAStringSet	QualityScaledXStringSet-class
 readRNAMultipleAlignment	MultipleAlignment-class
 readRNAStringSet	XStringSet-io
+relistToClass,XStringSet-method	XStringSetList-class
 replaceAmbiguities	chartr
 replaceAt	replaceAt
 replaceAt,XString-method	replaceAt
@@ -723,6 +735,9 @@ rownames<-,MultipleAlignment-method	MultipleAlignment-class
 saveXStringSet	XStringSet-io
 score,PairwiseAlignments-method	PairwiseAlignments-class
 score,PairwiseAlignmentsSingleSubjectSummary-method	PairwiseAlignments-class
+seqinfo	seqinfo
+seqinfo,DNAStringSet-method	seqinfo
+seqinfo<-,DNAStringSet-method	seqinfo
 seqtype	Biostrings-internals
 seqtype,AAString-method	XString-class
 seqtype,AlignedXStringSet0-method	AlignedXStringSet-class
@@ -759,6 +774,7 @@ show,XStringSetList-method	XStringSetList-class
 show,XStringViews-method	XStringViews-class
 showAsCell,XString-method	XString-class
 showAsCell,XStringSet-method	XStringSet-class
+showAsCell,XStringSetList-method	XStringSetList-class
 SolexaQuality	XStringQuality-class
 SolexaQuality-class	XStringQuality-class
 SparseList	Biostrings-internals

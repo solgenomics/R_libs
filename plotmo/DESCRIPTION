@@ -1,5 +1,5 @@
 Package: plotmo
-Version: 3.6.1
+Version: 3.6.2
 Title: Plot a Model's Residuals, Response, and Partial Dependence Plots
 Author: Stephen Milborrow
 Maintainer: Stephen Milborrow <milbo@sonic.net>
@@ -14,7 +14,7 @@ Suggests: C50 (>= 0.1.0-24), earth (>= 5.1.2), gbm (>= 2.1.1), glmnet
 License: GPL-3
 URL: http://www.milbo.users.sonic.net
 NeedsCompilation: no
-Packaged: 2021-07-17 07:23:34 UTC; milbo
+Packaged: 2022-05-20 21:50:51 UTC; milbo
 Repository: CRAN
-Date/Publication: 2021-07-17 10:40:02 UTC
-Built: R 3.6.3; ; 2022-02-15 16:49:30 UTC; unix
+Date/Publication: 2022-05-21 19:30:02 UTC
+Built: R 4.2.0; ; 2022-08-30 19:27:19 UTC; unix

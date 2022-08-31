@@ -1,3 +1,15 @@
+Version 0.16
+================================================================================
+
+- Fixed a bug that an empty **ggplot2** plot could be recorded and incorrectly saved (thanks, @sjspielman, rstudio/rmarkdown#2363).
+
+Version 0.15
+================================================================================
+
+- `new_output_handler()` gains a `calling_handlers` argument. These are passed to `withCallingHandlers()` before `evaluate()` captures any conditions.
+
+- Fixed #106: do not assume that `is.atomic(NULL)` returns `TRUE` (thanks, @mmaechler).
+
 Version 0.14
 ================================================================================
 

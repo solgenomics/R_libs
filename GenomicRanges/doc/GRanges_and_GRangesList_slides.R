@@ -1,5 +1,4 @@
 ### R code from vignette source 'GRanges_and_GRangesList_slides.Rnw'
-### Encoding: UTF-8
 
 ###################################################
 ### code chunk number 1: setup

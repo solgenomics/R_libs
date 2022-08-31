@@ -1,6 +1,6 @@
 Package: dtplyr
 Title: Data Table Back-End for 'dplyr'
-Version: 1.2.1
+Version: 1.2.2
 Authors@R: c(
     person("Hadley", "Wickham", , "hadley@rstudio.com", role = c("cre", "aut")),
     person("Maximilian", "Girlich", role = "aut"),
@@ -24,9 +24,9 @@ VignetteBuilder: knitr
 Config/Needs/website: tidyverse/tidytemplate
 Config/testthat/edition: 3
 Encoding: UTF-8
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 NeedsCompilation: no
-Packaged: 2022-01-19 21:59:49 UTC; hadleywickham
+Packaged: 2022-08-20 12:54:11 UTC; hadleywickham
 Author: Hadley Wickham [cre, aut],
   Maximilian Girlich [aut],
   Mark Fairbanks [aut],
@@ -34,5 +34,5 @@ Author: Hadley Wickham [cre, aut],
   RStudio [cph, fnd]
 Maintainer: Hadley Wickham <hadley@rstudio.com>
 Repository: CRAN
-Date/Publication: 2022-01-19 22:32:41 UTC
-Built: R 3.6.3; ; 2022-02-15 17:06:39 UTC; unix
+Date/Publication: 2022-08-20 13:20:02 UTC
+Built: R 4.2.0; ; 2022-08-30 20:00:09 UTC; unix

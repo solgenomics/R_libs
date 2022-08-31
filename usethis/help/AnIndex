@@ -185,6 +185,7 @@ use_reprex	rprofile-helper
 use_revdep	use_revdep
 use_rmarkdown_template	use_rmarkdown_template
 use_roxygen_md	use_roxygen_md
+use_rscloud_badge	badges
 use_rstudio	use_rstudio
 use_spell_check	use_spell_check
 use_template	use_template

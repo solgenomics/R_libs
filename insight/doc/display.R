@@ -5,7 +5,7 @@ knitr::opts_chunk$set(
 )
 
 if (!requireNamespace("poorman", quietly = TRUE) ||
-    !requireNamespace("gt", quietly = TRUE)) {
+  !requireNamespace("gt", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 } else {
   library(poorman)
@@ -28,7 +28,6 @@ df
 
 ## ---- eval=FALSE--------------------------------------------------------------
 #  knitr::kable(df, format = "markdown")
-#  
 
 ## ---- results='asis'----------------------------------------------------------
 knitr::kable(df, format = "html")
@@ -37,8 +36,8 @@ knitr::kable(df, format = "html")
 format_table(df)
 
 ## -----------------------------------------------------------------------------
-df %>% 
-  mutate(p = format_p(p, stars = TRUE)) %>% 
+df %>%
+  mutate(p = format_p(p, stars = TRUE)) %>%
   format_table()
 
 ## -----------------------------------------------------------------------------
@@ -51,7 +50,7 @@ export_table(df, format = "md")
 export_table(df, format = "html")
 
 ## -----------------------------------------------------------------------------
-df %>% 
-  format_table(ci_brackets = c("(", ")")) %>% 
+df %>%
+  format_table(ci_brackets = c("(", ")")) %>%
   export_table(format = "html")
 

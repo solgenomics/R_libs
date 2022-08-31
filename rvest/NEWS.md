@@ -1,3 +1,7 @@
+# rvest 1.0.3
+
+* Re-document to fix HTML issues in `.Rd`.
+
 # rvest 1.0.2
 
 * Fixes for CRAN

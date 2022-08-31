@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2021-12-18" />
+<meta name="date" content="2022-05-24" />
 
 <title>Fun with bignum: how RSA encryption works</title>
 
@@ -255,6 +255,7 @@ if (window.hljs) {
 
 
 
+
 <style type="text/css">
 .main-container {
   max-width: 940px;
@@ -275,6 +276,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -358,14 +362,27 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">Fun with bignum: how RSA encryption works</h1>
-<h4 class="date">2021-12-18</h4>
+<h1 class="title toc-ignore">Fun with bignum: how RSA encryption
+works</h1>
+<h4 class="date">2022-05-24</h4>
 
 </div>
 
 
-<p>Primitive types such as <code>int</code> or <code>double</code> store numbers in exactly 4 or 8 bytes, with finite precision. This suffices for most applications, but cryptography requires arithmetic on very large numbers, without loss of precision. Therefore OpenSSL uses a <strong>bignum</strong> data type which holds arbitrary sized integers and implements all basic arithmetic and comparison operators such as <code>+</code>, <code>-</code>, <code>*</code>, <code>^</code>, <code>%%</code>, <code>%/%</code>, <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code> and <code>&gt;=</code>.</p>
-<p>One special case, the <a href="https://en.wikipedia.org/wiki/Modular_exponentiation"><strong>modular exponent</strong></a> <code>a^b %% m</code> can be calculated using <code>bignum_mod_exp</code>, even when <code>b</code> is too large for calculating <code>a^b</code>.</p>
+<p>Primitive types such as <code>int</code> or <code>double</code> store
+numbers in exactly 4 or 8 bytes, with finite precision. This suffices
+for most applications, but cryptography requires arithmetic on very
+large numbers, without loss of precision. Therefore OpenSSL uses a
+<strong>bignum</strong> data type which holds arbitrary sized integers
+and implements all basic arithmetic and comparison operators such as
+<code>+</code>, <code>-</code>, <code>*</code>, <code>^</code>,
+<code>%%</code>, <code>%/%</code>, <code>==</code>, <code>!=</code>,
+<code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code> and
+<code>&gt;=</code>.</p>
+<p>One special case, the <a href="https://en.wikipedia.org/wiki/Modular_exponentiation"><strong>modular
+exponent</strong></a> <code>a^b %% m</code> can be calculated using
+<code>bignum_mod_exp</code>, even when <code>b</code> is too large for
+calculating <code>a^b</code>.</p>
 <pre class="r"><code># create a bignum
 y &lt;- bignum(&quot;123456789123456789&quot;)
 z &lt;- bignum(&quot;D41D8CD98F00B204E9800998ECF8427E&quot;, hex = TRUE)
@@ -379,25 +396,39 @@ mod &lt;- z %% y
 z2 &lt;- div * y + mod
 stopifnot(z2 == z)
 stopifnot(div &lt; z)</code></pre>
-<p>RSA involves a public key and a private key. The public key should be known by everyone and is used for encrypting messages. Messages encrypted with the public key can only be decrypted in a reasonable amount of time using the private key. In RSA, this asymmetry is based on the practical difficulty of factoring the product of two large prime numbers.</p>
+<p>RSA involves a public key and a private key. The public key should be
+known by everyone and is used for encrypting messages. Messages
+encrypted with the public key can only be decrypted in a reasonable
+amount of time using the private key. In RSA, this asymmetry is based on
+the practical difficulty of factoring the product of two large prime
+numbers.</p>
 <div id="rsa-key-generation" class="section level3">
 <h3>RSA key generation</h3>
 <p>An RSA key-pair is generated as follows (adapted from <a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)">wikipedia</a>):</p>
 <ul>
 <li>Choose two distinct prime numbers <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>. Keep these secret.</li>
-<li>Compute the product <span class="math inline">\(n = p*q\)</span>. This <span class="math inline">\(n\)</span> value is public and used as the modulus.</li>
-<li>Compute <span class="math inline">\(\phi(n) = (p − 1)(q − 1)\)</span>.</li>
-<li>Choose an integer <span class="math inline">\(e\)</span> smaller than <span class="math inline">\(\phi(n)\)</span> such that <span class="math inline">\(e\)</span> and <span class="math inline">\(\phi(n)\)</span> are coprime. OpenSSL always uses <span class="math inline">\(65537\)</span>.</li>
-<li>Compute a value for <span class="math inline">\(d\)</span> such that <span class="math inline">\((d * e)\pmod{\phi(n)} = 1\)</span>.</li>
+<li>Compute the product <span class="math inline">\(n = p*q\)</span>.
+This <span class="math inline">\(n\)</span> value is public and used as
+the modulus.</li>
+<li>Compute <span class="math inline">\(\phi(n) = (p − 1)(q −
+1)\)</span>.</li>
+<li>Choose an integer <span class="math inline">\(e\)</span> smaller
+than <span class="math inline">\(\phi(n)\)</span> such that <span class="math inline">\(e\)</span> and <span class="math inline">\(\phi(n)\)</span> are coprime. OpenSSL always uses
+<span class="math inline">\(65537\)</span>.</li>
+<li>Compute a value for <span class="math inline">\(d\)</span> such that
+<span class="math inline">\((d * e)\pmod{\phi(n)} = 1\)</span>.</li>
 </ul>
 <p>OpenSSL has a key generator that does these things for us.</p>
 <pre class="r"><code>(key &lt;- rsa_keygen(512))</code></pre>
 <pre><code>## [512-bit rsa private key]
-## md5: 235b0a9eca858e0cacce62093a38aeb4</code></pre>
+## md5: e020f94a93f1e9fe4ce5f6d59c2f036a
+## sha256: a045461c7d9215139bed66c8772164da3cfe27ba5fb89cd126abd50e71ac1ebb</code></pre>
 <pre class="r"><code>(pubkey &lt;- key$pubkey)</code></pre>
 <pre><code>## [512-bit rsa public key]
-## md5: 235b0a9eca858e0cacce62093a38aeb4</code></pre>
-<p>Usually we would use <code>rsa_encrypt</code> and <code>rsa_decrypt</code> to perform the encryption:</p>
+## md5: e020f94a93f1e9fe4ce5f6d59c2f036a
+## sha256: a045461c7d9215139bed66c8772164da3cfe27ba5fb89cd126abd50e71ac1ebb</code></pre>
+<p>Usually we would use <code>rsa_encrypt</code> and
+<code>rsa_decrypt</code> to perform the encryption:</p>
 <pre class="r"><code>msg &lt;- charToRaw(&quot;hello world&quot;)
 ciphertext &lt;- rsa_encrypt(msg, pubkey)
 rawToChar(rsa_decrypt(ciphertext, key))</code></pre>
@@ -406,49 +437,62 @@ rawToChar(rsa_decrypt(ciphertext, key))</code></pre>
 </div>
 <div id="how-rsa-encryption-works" class="section level3">
 <h3>How RSA encryption works</h3>
-<p>The <code>data</code> field of the private key extracts the underlying bignum integers:</p>
+<p>The <code>data</code> field of the private key extracts the
+underlying bignum integers:</p>
 <pre class="r"><code>key$data</code></pre>
 <pre><code>## $e
 ## [b] 65537
 ## $n
-## [b] 9927422417765524117081694640115564961428523231177370298931563426616043196851628526068248925561614776787215786736158751588359289928144477068205063228611911
+## [b] 10233830949767391512118597272803556274386681286353818042780580180053845558954337207311088110510976330873929137121157228825407365411440499226780550273661723
 ## $p
-## [b] 111543374614876956508643303712985214456956697118389341866338386408669151273281
+## [b] 113901548592372787568781548298973315915043543300225732183806017802822573566311
 ## $q
-## [b] 89000556528271529525390109853098445459388042161419133314139854286231634564231
+## [b] 89848040489703066280016137416345911780945028458157078339258283252474174286893
 ## $d
-## [b] 7232474949397023276838771873704285589031635109873731209740855201904414277078112828404080937977793890063907086425656803903385094243758778827506602621308673
+## [b] 8866551034663506987649817229153893660313260450134369017305096711836632813265402015089388050320679287455330100459414112376862579627732317202764936149792233
 ## $dp
-## [b] 60342383746522538658428669146286491498801329625026713559198027858048981327233
+## [b] 917649841414358787193747921050061961993118251713065697133673762910879638113
 ## $dq
-## [b] 50897231458917690084716967929326588604489134872939373140068169107430542011883
+## [b] 7510071651167941728823846083384086923966871628145695944923583253079230461321
 ## $qi
-## [b] 71201366782086280182370336781562580998314503351010883792512172332969658951368</code></pre>
-<p>You can verify that the equations above hold for this key. The public key is simply a subset of the key which only contains <span class="math inline">\(n\)</span> and <span class="math inline">\(e\)</span>:</p>
+## [b] 67701285569612286206819166643770397634991961469122258547556787921682886169026</code></pre>
+<p>You can verify that the equations above hold for this key. The public
+key is simply a subset of the key which only contains <span class="math inline">\(n\)</span> and <span class="math inline">\(e\)</span>:</p>
 <pre class="r"><code>pubkey$data</code></pre>
 <pre><code>## $e
 ## [b] 65537
 ## $n
-## [b] 9927422417765524117081694640115564961428523231177370298931563426616043196851628526068248925561614776787215786736158751588359289928144477068205063228611911</code></pre>
-<p>In order to encrypt a message into ciphertext we have to treat the message data as an integer. The message cannot be larger than the key size. For example convert the text <code>hello world</code> into an integer:</p>
+## [b] 10233830949767391512118597272803556274386681286353818042780580180053845558954337207311088110510976330873929137121157228825407365411440499226780550273661723</code></pre>
+<p>In order to encrypt a message into ciphertext we have to treat the
+message data as an integer. The message cannot be larger than the key
+size. For example convert the text <code>hello world</code> into an
+integer:</p>
 <pre class="r"><code>m &lt;- bignum(charToRaw(&quot;hello world&quot;))
 print(m)</code></pre>
 <pre><code>## [b] 126207244316550804821666916</code></pre>
-<p>To encrypt this message <span class="math inline">\(m\)</span> into ciphertext <span class="math inline">\(c\)</span> we calculate <span class="math inline">\(c = m^e\pmod n\)</span>. Using the public key from above:</p>
+<p>To encrypt this message <span class="math inline">\(m\)</span> into
+ciphertext <span class="math inline">\(c\)</span> we calculate <span class="math inline">\(c = m^e\pmod n\)</span>. Using the public key from
+above:</p>
 <pre class="r"><code>e &lt;- pubkey$data$e
 n &lt;- pubkey$data$n
 c &lt;- (m ^ e) %% n
 print(c)</code></pre>
-<pre><code>## [b] 3895557644525166139860001004797409852564727765706430288172308526252447255935134240346141501359807385977825632545162384845637423986174468663536640915981418</code></pre>
-<p>This number represents our encrypted message! It is usually exchanged using base64 notation for human readability:</p>
+<pre><code>## [b] 1284313849763694830823852014322852785705851212998288167411823013583525565463000036017122570344270864795969068394757287590688377649330363456537542083819381</code></pre>
+<p>This number represents our encrypted message! It is usually exchanged
+using base64 notation for human readability:</p>
 <pre class="r"><code>base64_encode(c)</code></pre>
-<pre><code>## [1] &quot;SmEW0QbDj+onpz5TzHIsxzIIheyeW2CSwlJZ8cUCcREBGOZhWl+6hXSv9gH+yasDptwYJXeVHQ9FU+C/NtDEag==&quot;</code></pre>
-<p>The ciphertext can be decrypted using <span class="math inline">\(d\)</span> from the corresponding private key via <span class="math inline">\(m = c^d \pmod{n}\)</span>. Note that <code>c^d</code> is too large to calculate directly so we need to use <code>bignum_mod_exp</code> instead.</p>
+<pre><code>## [1] &quot;GIWYZ5p6Om4uw0uC/vCamiBIbYnElIRFhw01LuMN7RoKbFTgWlsicd4hJUdqefiP73EG9F8iQZgeoR5v7JU3dQ==&quot;</code></pre>
+<p>The ciphertext can be decrypted using <span class="math inline">\(d\)</span> from the corresponding private key via
+<span class="math inline">\(m = c^d \pmod{n}\)</span>. Note that
+<code>c^d</code> is too large to calculate directly so we need to use
+<code>bignum_mod_exp</code> instead.</p>
 <pre class="r"><code>d &lt;- key$data$d
 out &lt;- bignum_mod_exp(c, d, n)
 rawToChar(out)</code></pre>
 <pre><code>## [1] &quot;hello world&quot;</code></pre>
-<p>The only difference with the actual <code>rsa_encrypt</code> and <code>rsa_decrypt</code> functions is that these add some additional padding to the data.</p>
+<p>The only difference with the actual <code>rsa_encrypt</code> and
+<code>rsa_decrypt</code> functions is that these add some additional
+padding to the data.</p>
 </div>
 
 

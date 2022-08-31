@@ -1,5 +1,51 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# RSQLite 2.2.16 (2022-08-16)
+
+- Upgrade bundled SQLite to 3.39.2 (#431).
+
+
+# RSQLite 2.2.15 (2022-07-15)
+
+- Upgrade bundled SQLite to 3.39.1 (#429).
+
+
+# RSQLite 2.2.14 (2022-05-05)
+
+- Upgrade bundled SQLite to version 3.38.5 (#421, #423).
+
+
+# RSQLite 2.2.13 (2022-04-29)
+
+- Upgrade bundled SQLite to version 3.38.3 (#418).
+
+
+# RSQLite 2.2.12 (2022-04-02)
+
+## Features
+
+- Upgrade bundled SQLite to version 3.38.2 (#415).
+
+## Internal
+
+- Prefer `empty()` over `size() == 0` (#410, @MichaelChirico).
+- Refactor to improve code consistency (#411, @MichaelChirico).
+- Use more parsimonious header to avoid CRAN warnings.
+
+
+# RSQLite 2.2.11 (2022-03-07)
+
+## Features
+
+- `initExtension()` gains `extension` argument (#407, #408) with options
+  `"math"`, `"regexp"`, `"series"` and `"csv"` (#274, #389, @mgirlich).
+- Upgrade bundled SQLite to version 3.38.0 (#405).
+
+## Bug fixes
+
+- Skip failing test on CRAN.
+
+
 # RSQLite 2.2.10 (2022-02-16)
 
 ## Features

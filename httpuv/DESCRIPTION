@@ -48,4 +48,4 @@ Author: Joe Cheng [aut],
 Maintainer: Winston Chang <winston@rstudio.com>
 Repository: CRAN
 Date/Publication: 2022-01-05 00:40:11 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2022-02-15 17:02:15 UTC; unix
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-08-30 19:51:33 UTC; unix

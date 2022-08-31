@@ -8,9 +8,11 @@ aov.lxt                 Analysis for a Line x Tester genetic design.
 aov.met                 ANOVA for MET with a RCBD
 aov.rcbd                ANOVA for a RCBD
 asc                     Data for a 2-factor factorial with a CRD
-cdt                     Compute derived traits for sweetpotato
-check.data              Check consistency for potato and sweetpotato
-                        experimental data
+cdt.pt                  Compute derived traits for potato
+cdt.sp                  Compute derived traits for sweetpotato
+check.data.pt           Check consistency for potato experimental data
+check.data.sp           Check consistency for sweetpotato experimental
+                        data
 check.freq              Check frequencies for complete replications
 check.names.pt          Check fieldbook traits names for potato
 check.names.sp          Check fieldbook traits names for sweetpotato
@@ -24,7 +26,8 @@ ck.lxt                  Check data for a line by tester genetic design
 ck.pos                  Check row and column positions
 ck.rcbd                 Check data for a RCBD
 ck.w                    Check data for a Wescott layout
-clean.data              Clean data
+clean.data.pt           Clean potato data
+clean.data.sp           Clean sweetpotato data
 cr.a01d                 Alpha (0,1) design
 cr.abd                  Augmented Block Design
 cr.crd                  Completely Randomized Design
@@ -64,8 +67,11 @@ rts3                    Response to selection with several locations
                         and years
 rts4                    Response to selection with several locations in
                         two steps (two years)
-setna                   Set values to 'NA'.
-setzero                 Set values to '0'.
+setna.pt                Set values to 'NA' for potato data.
+setna.sp                Set values to 'NA' for sweetpotato data.
+setzero.pt              Set values to '0' for potato data.
+setzero.sp              Set values to '0' for sweetpotato data.
 spg                     Some traits for a multi-environment trial (MET)
+spt2co                  Sweetpotato CO numbers
 ssg1to3                 Stage selection gain from 1 to 3 stages
 tai                     Tai's stability analysis

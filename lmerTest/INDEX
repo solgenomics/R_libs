@@ -1,4 +1,3 @@
-TVbo                    Sensory Assesment of B&O TVs
 anova.lmerModLmerTest   ANOVA Tables for Linear Mixed Models
 as_lmerModLmerTest      Coerce lmerMod Objects to lmerModLmerTest
 carrots                 Consumer Preference Mapping of Carrots
@@ -21,3 +20,4 @@ show_tests.ls_means     Show LS-means Hypothesis Tests and Contrasts
 step.lmerModLmerTest    Backward Elimination for Linear Mixed Models
 summary.lmerModLmerTest
                         Summary Method for Linear Mixed Models
+TVbo                    Sensory Assesment of B&O TVs

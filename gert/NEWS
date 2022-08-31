@@ -1,3 +1,17 @@
+1.7.1
+  - The static libgit2 for linux has been updated to 1.5.0 (this is only used
+    on linux systems where no sufficient libgit2 is available).
+
+1.7.0
+  - git_status() gains parameter pathspec
+  - git_ls() gains paremeter 'ref' and works with bare repositories
+
+1.6.0
+  - We recommend at least libgit2 1.0 now
+  - Windows: update to libgit2 1.4.2
+  - Tests: switch to ECDSA keys for ssh remote unit tests
+  - git_log() gains a parameter 'after'
+
 1.5.0
   - Windows: use ${HOMEDRIVE}${HOMEPATH} path as home if it exists, to match
     git-for-windows. On most systems this is the same as ${USERPROFILE}.

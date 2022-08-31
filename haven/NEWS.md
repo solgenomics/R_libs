@@ -1,3 +1,85 @@
+# haven 2.5.1
+
+* All `labelled()` vectors now have left-aligned column headers when printing
+  in tibbles for better alignment with labels (#676).
+  
+* `write_*()` now accept functions as well as strings in the 
+  `.name_repair` argument in line with the documentation. Previously they only 
+  supported string values (#684).
+
+* `write_sav()` variable name validation no longer treats all non-ASCII 
+  characters as invalid (#689).
+
+# haven 2.5.0
+
+## New author
+
+* @gorcha is now a haven author in recognition of his significant and sustained
+  contributions.
+
+## File writing improvements
+
+* All `write_` functions can now write custom variable widths by setting the
+  `width` attribute (#650).
+
+* When writing files, the minimum width for character variables is now 1. This
+  fixes issues with statistical software reading blank character variables with
+  width 0 (#650).
+
+* `write_dta()` now uses strL when strings are too long to be stored in an str#
+  variable (#437). strL is used when strings are longer than 2045 characters by
+  default, which matches Stata's behaviour, but this can be reduced with the
+  `strl_threshold` argument.
+
+* `write_xpt()` can now write dataset labels with the `label` argument,  which
+  defaults to the `label` attribute of the input data frame, if present (#562).
+  
+* `write_sav()` now checks for case-insensitive duplicate variable names
+  (@juansebastianl, #641) and verifies that variable names are valid SPSS
+  variables.
+
+* The `compress` argument for `write_sav()` now supports all 3 SPSS compression
+  modes specified as a character string - "byte", "none" and "zsav" (#614).
+  `TRUE` and `FALSE` can be used for backwards compatibility, and correspond to
+  the "zsav" and "none" options respectively.
+
+* `write_sav()` successfully writes user missing values and ranges for
+  `labelled()` integer vectors (#596).
+
+* POSIXct and POSIXlt values with no time component (e.g. "2010-01-01") were
+  being converted to `NA` when attempting to convert the output timezone to UTC.
+  These now output successfully (#634).
+
+* Fix bug in output timezone conversion that was causing variable labels and
+  other variable attributes to disappear (#624).
+
+## Other improvements and fixes
+
+* Updated to ReadStat 1.1.8 RC.
+
+  * Fix bug when writing formats to XPT files (#650).
+  * Fix off by one error in indexing for strL variables (#437).
+
+* `labelled()` vectors now throw a warning when combining two vectors with
+  conflicting labels (#667).
+
+* `zap_labels()` gains a `user_na` argument to control whether user-defined
+  missing values are converted to `NA` or left as is (#638).
+
+* vctrs casting and coercion generics now do less work when working with two
+  identical `labelled()` vectors. This significantly improves performance when
+  working with `labelled()` vectors in grouped data frames (#658).
+
+* Errors and warnings now use `cli_abort()` and `cli_warning()` (#661).
+
+## Dependency changes
+
+* R 3.4 is now the minimum supported version, in line with [tidyverse  policy](https://www.tidyverse.org/blog/2019/04/r-version-support/).
+
+* cli >= 3.0.0 has been added to Imports to support new error messaging.
+  
+* lifecycle has been added to Imports, and is now used to manage deprecations.
+
 # haven 2.4.3
 
 * Fix build failure on Solaris.
@@ -8,7 +90,7 @@
 
 * `read_dta()` no longer crashes if it sees StrL variables with missing values
   (@gorcha, #594, #600, #608).
-urlchecker::url_check()
+
 * `write_dta()` now correctly handles "labelled"-class numeric (double) variables 
    that don't have value labels (@jmobrien, #606, #609).
 
@@ -305,7 +387,7 @@ This also brings with it a deprecation: `cols_only` in `read_sas()` has been dep
   user missing values from SPSS. These can either be a set of distinct
   values, or for numeric vectors, a range. `zap_labels()` strips labels,
   and replaces user-defined missing values with `NA`. New `zap_missing()`
-  just replaces user-defined missing vlaues with `NA`. 
+  just replaces user-defined missing values with `NA`. 
   
     `labelled_spss()` is potentially dangerous to work with in R because
     base functions don't know about `labelled_spss()` functions so will 

@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head><title>R: Conveniently import and query gene models</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> Conveniently import and query gene models
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;GenomicFeatures&rsquo; version 1.38.2</h2>
+</div><h2>Documentation for package &lsquo;GenomicFeatures&rsquo; version 1.48.3</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -89,8 +90,6 @@
 <h2><a name="D">-- D --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="DEFAULT_CIRC_SEQS.html">DEFAULT_CIRC_SEQS</a></td>
-<td>character vector: strings that are usually circular chromosomes</td></tr>
 <tr><td style="width: 25%;"><a href="disjointExons.html">disjointExons</a></td>
 <td>Extract non-overlapping exon parts from an object</td></tr>
 <tr><td style="width: 25%;"><a href="disjointExons.html">disjointExons-method</a></td>
@@ -116,6 +115,8 @@
 <td>Extract genomic features from a TxDb-like object based on their genomic location</td></tr>
 <tr><td style="width: 25%;"><a href="transcriptsByOverlaps.html">exonsByOverlaps-method</a></td>
 <td>Extract genomic features from a TxDb-like object based on their genomic location</td></tr>
+<tr><td style="width: 25%;"><a href="extendExonsIntoIntrons.html">extendExonsIntoIntrons</a></td>
+<td>Extend exons by a given number of bases into their adjacent introns</td></tr>
 <tr><td style="width: 25%;"><a href="extractTranscriptSeqs.html">extractTranscriptSeqs</a></td>
 <td>Extract transcript (or CDS) sequences from chromosome sequences</td></tr>
 <tr><td style="width: 25%;"><a href="extractTranscriptSeqs.html">extractTranscriptSeqs-method</a></td>
@@ -152,8 +153,6 @@
 <td>Extract genomic features from a TxDb-like object</td></tr>
 <tr><td style="width: 25%;"><a href="makeTxDbFromBiomart.html">getChromInfoFromBiomart</a></td>
 <td>Make a TxDb object from annotations available on a BioMart database</td></tr>
-<tr><td style="width: 25%;"><a href="makeTxDbFromUCSC.html">getChromInfoFromUCSC</a></td>
-<td>Make a TxDb object from annotations available at the UCSC Genome Browser</td></tr>
 <tr><td style="width: 25%;"><a href="getPromoterSeq-methods.html">getPromoterSeq</a></td>
 <td>Get gene promoter sequences</td></tr>
 <tr><td style="width: 25%;"><a href="getPromoterSeq-methods.html">getPromoterSeq-method</a></td>
@@ -270,6 +269,10 @@
 <td>Extract genomic features from a TxDb-like object</td></tr>
 <tr><td style="width: 25%;"><a href="transcripts.html">promoters-method</a></td>
 <td>Extract genomic features from a TxDb-like object</td></tr>
+<tr><td style="width: 25%;"><a href="proteinToGenome.html">proteinToGenome</a></td>
+<td>Map protein-relative coordinates to genomic coordinates</td></tr>
+<tr><td style="width: 25%;"><a href="proteinToGenome.html">proteinToGenome-method</a></td>
+<td>Map protein-relative coordinates to genomic coordinates</td></tr>
 </table>
 
 <h2><a name="S">-- S --</a></h2>
@@ -286,8 +289,6 @@
 <tr><td style="width: 25%;"><a href="TxDb-class.html">seqlevels&lt;--method</a></td>
 <td>TxDb objects</td></tr>
 <tr><td style="width: 25%;"><a href="TxDb-class.html">show-method</a></td>
-<td>TxDb objects</td></tr>
-<tr><td style="width: 25%;"><a href="TxDb-class.html">species-method</a></td>
 <td>TxDb objects</td></tr>
 <tr><td style="width: 25%;"><a href="makeTxDbPackage.html">supportedMiRBaseBuildValues</a></td>
 <td>Making a TxDb package from annotations available at the UCSC Genome Browser, biomaRt or from another source.</td></tr>
@@ -346,4 +347,4 @@
 <tr><td style="width: 25%;"><a href="makeFeatureDbFromUCSC.html">UCSCFeatureDbTableSchema</a></td>
 <td>Making a FeatureDb object from annotations available at the UCSC Genome Browser</td></tr>
 </table>
-</body></html>
+</div></body></html>

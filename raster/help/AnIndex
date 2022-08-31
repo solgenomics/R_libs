@@ -91,6 +91,7 @@ bind,SpatialLines,SpatialLines-method	bind
 bind,SpatialPoints,SpatialPoints-method	bind
 bind,SpatialPolygons,SpatialPolygons-method	bind
 blockSize	blockSize
+blockSize,Raster-method	blockSize
 boundaries	boundaries
 boundaries,RasterLayer-method	boundaries
 boxplot	boxplot

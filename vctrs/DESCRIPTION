@@ -1,6 +1,6 @@
 Package: vctrs
 Title: Vector Helpers
-Version: 0.3.8
+Version: 0.4.1
 Authors@R: 
     c(person(given = "Hadley",
              family = "Wickham",
@@ -27,16 +27,20 @@ License: MIT + file LICENSE
 URL: https://vctrs.r-lib.org/
 BugReports: https://github.com/r-lib/vctrs/issues
 Depends: R (>= 3.3)
-Imports: ellipsis (>= 0.2.0), glue, rlang (>= 0.4.10)
+Imports: cli (>= 3.2.0), glue, rlang (>= 1.0.2)
 Suggests: bit64, covr, crayon, dplyr (>= 0.8.5), generics, knitr,
-        pillar (>= 1.4.4), pkgdown, rmarkdown, testthat (>= 2.3.0),
-        tibble, withr, xml2, waldo (>= 0.2.0), zeallot
+        pillar (>= 1.4.4), pkgdown (>= 2.0.1), rmarkdown, testthat (>=
+        3.0.0), tibble (>= 3.1.3), withr, xml2, waldo (>= 0.2.0),
+        zeallot
 VignetteBuilder: knitr
+SystemRequirements: C++11
 Encoding: UTF-8
 Language: en-GB
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
+Config/testthat/edition: 3
+Config/Needs/website: tidyverse/tidytemplate
 NeedsCompilation: yes
-Packaged: 2021-04-29 15:14:11 UTC; lionel
+Packaged: 2022-04-13 08:56:33 UTC; lionel
 Author: Hadley Wickham [aut],
   Lionel Henry [aut, cre],
   Davis Vaughan [aut],
@@ -45,5 +49,5 @@ Author: Hadley Wickham [aut],
   RStudio [cph]
 Maintainer: Lionel Henry <lionel@rstudio.com>
 Repository: CRAN
-Date/Publication: 2021-04-29 16:00:03 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2021-10-20 13:24:29 UTC; unix
+Date/Publication: 2022-04-13 10:30:02 UTC
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-08-30 19:50:49 UTC; unix

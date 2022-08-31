@@ -1,15 +1,8 @@
+accuracy.default        Accuracy measures for a forecast model
 Acf                     (Partial) Autocorrelation and Cross-Correlation
                         Function Estimation
-Arima                   Fit ARIMA model to univariate time series
-BoxCox                  Box Cox Transformation
-BoxCox.lambda           Automatic selection of Box Cox transformation
-                        parameter
-CV                      Cross-validation statistic
-CVar                    k-fold Cross-Validation applied to an
-                        autoregressive model
-StatForecast            Forecast plot
-accuracy                Accuracy measures for a forecast model
 arfima                  Fit a fractionally differenced ARFIMA model
+Arima                   Fit ARIMA model to univariate time series
 arima.errors            Errors from a regression model with ARIMA
                         errors
 arimaorder              Return the order of an ARIMA or ARFIMA model
@@ -32,10 +25,16 @@ bats                    BATS model (Exponential smoothing state space
 bizdays                 Number of trading days in each season
 bld.mbb.bootstrap       Box-Cox and Loess-based decomposition
                         bootstrap.
+BoxCox                  Box Cox Transformation
+BoxCox.lambda           Automatic selection of Box Cox transformation
+                        parameter
 checkresiduals          Check that residuals from a time series model
                         look like white noise
 croston                 Forecasts for intermittent demand using
                         Croston's method
+CV                      Cross-validation statistic
+CVar                    k-fold Cross-Validation applied to an
+                        autoregressive model
 dm.test                 Diebold-Mariano test for predictive accuracy
 dshw                    Double-Seasonal Holt-Winters Forecasting
 easter                  Easter holidays in each season
@@ -43,15 +42,13 @@ ets                     Exponential smoothing state space model
 findfrequency           Find dominant frequency of a time series
 fitted.ARFIMA           h-step in-sample forecasts for time series
                         models.
-forecast                Forecasting time series
-forecast-package        Forecasting Functions for Time Series and
-                        Linear Models
-forecast.HoltWinters    Forecasting using Holt-Winters objects
-forecast.StructTS       Forecasting using Structural Time Series models
+forecast-package        forecast: Forecasting Functions for Time Series
+                        and Linear Models
 forecast.baggedModel    Forecasting using a bagged model
 forecast.bats           Forecasting using BATS and TBATS models
 forecast.ets            Forecasting using ETS models
 forecast.fracdiff       Forecasting using ARIMA or ARFIMA models
+forecast.HoltWinters    Forecasting using Holt-Winters objects
 forecast.lm             Forecast a linear model with possible time
                         series components
 forecast.mlm            Forecast a multiple linear model with possible
@@ -60,6 +57,8 @@ forecast.modelAR        Forecasting using user-defined model
 forecast.mts            Forecasting time series
 forecast.nnetar         Forecasting using neural network models
 forecast.stl            Forecasting using stl objects
+forecast.StructTS       Forecasting using Structural Time Series models
+forecast.ts             Forecasting time series
 fourier                 Fourier terms for modelling seasonality
 gas                     Australian monthly gas production
 getResponse             Get response variable from time series model.
@@ -101,6 +100,7 @@ ses                     Exponential smoothing forecasts
 simulate.ets            Simulation from a time series model
 sindexf                 Forecast seasonal index
 splinef                 Cubic Spline Forecast
+StatForecast            Forecast plot
 subset.ts               Subsetting a time series
 taylor                  Half-hourly electricity demand
 tbats                   TBATS model (Exponential smoothing state space
@@ -108,9 +108,9 @@ tbats                   TBATS model (Exponential smoothing state space
                         Trend and Seasonal components)
 tbats.components        Extract components of a TBATS model
 thetaf                  Theta method forecast
-tsCV                    Time series cross-validation
 tsclean                 Identify and replace outliers and missing
                         values in a time series
+tsCV                    Time series cross-validation
 tslm                    Fit a linear model with time series components
 tsoutliers              Identify and replace outliers in a time series
 wineind                 Australian total wine sales

@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2021-12-18" />
+<meta name="date" content="2022-05-24" />
 
 <title>Importing and exporting RSA/DSA/EC keys</title>
 
@@ -255,6 +255,7 @@ if (window.hljs) {
 
 
 
+
 <style type="text/css">
 .main-container {
   max-width: 940px;
@@ -275,6 +276,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -358,98 +362,134 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">Importing and exporting RSA/DSA/EC keys</h1>
-<h4 class="date">2021-12-18</h4>
+<h1 class="title toc-ignore">Importing and exporting RSA/DSA/EC
+keys</h1>
+<h4 class="date">2022-05-24</h4>
 
 </div>
 
 
-<p>The <code>openssl</code> package implements a modern interface to libssl and libcrypto for R. It builds on the new <code>EVP</code> api which was introduced in OpenSSL 1.0 and provides a unified API to the various methods and formats. OpenSSL supports three major public key crypto systems:</p>
+<p>The <code>openssl</code> package implements a modern interface to
+libssl and libcrypto for R. It builds on the new <code>EVP</code> api
+which was introduced in OpenSSL 1.0 and provides a unified API to the
+various methods and formats. OpenSSL supports three major public key
+crypto systems:</p>
 <ul>
-<li><strong>RSA</strong> : Most popular method. Supports both encryption and signatures.</li>
-<li><strong>DSA</strong> : Digital Signature Algorithm. Mostly for signatures, not very popular anymore.</li>
-<li><strong>ECDSA</strong> : Elliptic Curve DSA. Supports signatures and encryption via Diffie Hellman. Gaining popularity.</li>
+<li><strong>RSA</strong> : Most popular method. Supports both encryption
+and signatures.</li>
+<li><strong>DSA</strong> : Digital Signature Algorithm. Mostly for
+signatures, not very popular anymore.</li>
+<li><strong>ECDSA</strong> : Elliptic Curve DSA. Supports signatures and
+encryption via Diffie Hellman. Gaining popularity.</li>
 </ul>
-<p>For each type there are several common <strong>formats</strong> for storing keys and certificates:</p>
+<p>For each type there are several common <strong>formats</strong> for
+storing keys and certificates:</p>
 <ul>
-<li><a href="#the-der-format"><strong>DER</strong></a>: binary format, serialized ASN.1 structure</li>
-<li><a href="#the-pem-format"><strong>PEM</strong></a>: base64 encoded DER + header wrapped in <code>===</code></li>
-<li><a href="#the-openssh-format"><strong>SSH</strong></a>: single line of base64 with a header. Only for pubkeys.</li>
-<li><a href="#the-json-web-key-jwk-format"><strong>JWK</strong></a>: JSON Web key. Stores key data in a JSON object</li>
+<li><a href="#the-der-format"><strong>DER</strong></a>: binary format,
+serialized ASN.1 structure</li>
+<li><a href="#the-pem-format"><strong>PEM</strong></a>: base64 encoded
+DER + header wrapped in <code>===</code></li>
+<li><a href="#the-openssh-format"><strong>SSH</strong></a>: single line
+of base64 with a header. Only for pubkeys.</li>
+<li><a href="#the-json-web-key-jwk-format"><strong>JWK</strong></a>:
+JSON Web key. Stores key data in a JSON object</li>
 </ul>
-<p>The openssl package automatically detects the format when possible. However being able to recognize the various formats can be useful.</p>
+<p>The openssl package automatically detects the format when possible.
+However being able to recognize the various formats can be useful.</p>
 <div id="the-der-format" class="section level3">
 <h3>The DER format</h3>
-<p>DER is the standard <strong>binary</strong> format using by protocols for storing and exchanging keys and certificates. It consists of a <a href="https://en.wikipedia.org/wiki/Abstract_Syntax_Notation_One#Example_encoded_in_DER">serialized ASN.1</a> structure which hold the key’s (very large) prime numbers.</p>
+<p>DER is the standard <strong>binary</strong> format using by protocols
+for storing and exchanging keys and certificates. It consists of a <a href="https://en.wikipedia.org/wiki/Abstract_Syntax_Notation_One#Example_encoded_in_DER">serialized
+ASN.1</a> structure which hold the key’s (very large) prime numbers.</p>
 <pre class="r"><code>key &lt;- ec_keygen()
 pubkey &lt;- key$pubkey
 bin &lt;- write_der(pubkey)
 print(bin)</code></pre>
 <pre><code> [1] 30 59 30 13 06 07 2a 86 48 ce 3d 02 01 06 08 2a 86 48 ce 3d 03 01 07 03 42
-[26] 00 04 da 61 31 1b 82 4b b0 6c dc 26 1a 01 ac ed 52 9b 4f e4 4b bd ba 7c 54
-[51] 73 de d8 70 3a f7 6d 9d 65 a1 99 d3 49 c1 82 12 b8 64 87 c4 3e 93 43 4a 51
-[76] 99 e8 3d fa f4 90 7c 79 40 e2 61 4e 7a 1a 5e 12</code></pre>
-<p>To read a DER key use <code>read_key</code> or <code>read_pubkey</code> with <code>der = TRUE</code>.</p>
+[26] 00 04 f8 d2 ee ea 51 09 5d bc c5 1d d7 22 8f 44 a8 e9 c5 a9 0d b5 38 0e 8d
+[51] 58 67 e9 e4 bb 76 5f 49 6d fa 4b 38 17 45 07 bf 65 27 93 84 d6 a7 13 ec 33
+[76] db b4 89 9b 04 80 01 d9 a6 2b a9 26 2d 23 62 6b</code></pre>
+<p>To read a DER key use <code>read_key</code> or
+<code>read_pubkey</code> with <code>der = TRUE</code>.</p>
 <pre class="r"><code>read_pubkey(bin, der = TRUE)</code></pre>
 <pre><code>[256-bit ecdsa public key]
-md5: 5f94a29c35d272497759e613daf69199</code></pre>
-<p>Users typically don’t need to worry about the key’s underlying primes, but have a look at <code>key$data</code> if you are curious.</p>
+md5: 860b767da000d9b7fd9e7360ec91cf31
+sha256: 4898b4e8676aa99b3d50cfc53fddcdb06fc39e6971838a86ce31200f4c110479</code></pre>
+<p>Users typically don’t need to worry about the key’s underlying
+primes, but have a look at <code>key$data</code> if you are curious.</p>
 </div>
 <div id="the-pem-format" class="section level3">
 <h3>The PEM format</h3>
-<p>In practice the user rarely encounters DER because it is mainly for internal use. When humans exchange keys and certificates they typically use the PEM format. PEM is simply <strong>base64 encoded DER data, plus a header</strong>. The header identifies the key (and possibly encryption) type.</p>
+<p>In practice the user rarely encounters DER because it is mainly for
+internal use. When humans exchange keys and certificates they typically
+use the PEM format. PEM is simply <strong>base64 encoded DER data, plus
+a header</strong>. The header identifies the key (and possibly
+encryption) type.</p>
 <pre class="r"><code>cat(write_pem(pubkey))</code></pre>
 <pre><code>-----BEGIN PUBLIC KEY-----
-MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE2mExG4JLsGzcJhoBrO1Sm0/kS726
-fFRz3thwOvdtnWWhmdNJwYISuGSHxD6TQ0pRmeg9+vSQfHlA4mFOehpeEg==
+MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE+NLu6lEJXbzFHdcij0So6cWpDbU4
+Do1YZ+nku3ZfSW36SzgXRQe/ZSeThNanE+wz27SJmwSAAdmmK6kmLSNiaw==
 -----END PUBLIC KEY-----</code></pre>
 <pre class="r"><code>cat(write_pem(key, password = NULL))</code></pre>
 <pre><code>-----BEGIN PRIVATE KEY-----
-MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgCyO7cBFZNDF7K4br
-6/U0ttLLPr6OYhNq/vAizt1gW8ahRANCAATaYTEbgkuwbNwmGgGs7VKbT+RLvbp8
-VHPe2HA6922dZaGZ00nBghK4ZIfEPpNDSlGZ6D369JB8eUDiYU56Gl4S
+MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQg24nhKvgwtndxZrvG
+YWKjv3RzHdQqpsEfEEDTqkIKoB2hRANCAAT40u7qUQldvMUd1yKPRKjpxakNtTgO
+jVhn6eS7dl9JbfpLOBdFB79lJ5OE1qcT7DPbtImbBIAB2aYrqSYtI2Jr
 -----END PRIVATE KEY-----</code></pre>
-<p>The PEM format allows for protecting private keys with a password. R will prompt you for the password when reading such a protected key.</p>
+<p>The PEM format allows for protecting private keys with a password. R
+will prompt you for the password when reading such a protected key.</p>
 <pre class="r"><code>cat(write_pem(key, password = &quot;supersecret&quot;))</code></pre>
 <pre><code>-----BEGIN ENCRYPTED PRIVATE KEY-----
-MIHjME4GCSqGSIb3DQEFDTBBMCkGCSqGSIb3DQEFDDAcBAhWbzyJTPORewICCAAw
-DAYIKoZIhvcNAgkFADAUBggqhkiG9w0DBwQIW9hmnxd18eMEgZANDMWmhSd/XusS
-gZNy0ExQFG6drCIOZ/MA9ifXp+88/z2HT3pshfpkyaSdf7zGSJmsjNEkE0ZDnUId
-+dj2tCKopOiCSNd7x9tQh7pbaZzc0HR+XqyZgz2TGl8/esFRh2cvQwwn5UGp7cLK
-m8H5iaTCG+m+mJogd3M1ZqQEjCWAmwSqw1BMAe7ry4FhBv0VwHQ=
+MIHjME4GCSqGSIb3DQEFDTBBMCkGCSqGSIb3DQEFDDAcBAgk05QNKRbOFAICCAAw
+DAYIKoZIhvcNAgkFADAUBggqhkiG9w0DBwQIj3cnvtPspNAEgZAkovJRCmwBBXQ/
+ZMXN/ZvS8e7sAgz6ik93HTWXxpT3cxew5KTCGqfzWRliYDw1au2NMZ8oPwfnxfrZ
+ABdI+badlVYtnSODzVyKVOcosZRaZWNVE/rsCgaC2xltcb3LApjq2cZelJNuREst
+Di1lKJBPKBAv2MDiUg6T9LHlrJnTA6MFSQQCI7gzWOsBI993xq8=
 -----END ENCRYPTED PRIVATE KEY-----</code></pre>
 </div>
 <div id="the-openssh-format" class="section level3">
 <h3>The OpenSSH format</h3>
-<p>For better or worse, OpenSSH uses a custom format for <strong>public keys</strong>. The advantage of this format is that it fits on a single line which is nice for e.g. your <code>~/.ssh/known_hosts</code> file. There is no special format for private keys, OpenSSH uses PEM as well.</p>
+<p>For better or worse, OpenSSH uses a custom format for <strong>public
+keys</strong>. The advantage of this format is that it fits on a single
+line which is nice for e.g. your <code>~/.ssh/known_hosts</code> file.
+There is no special format for private keys, OpenSSH uses PEM as
+well.</p>
 <pre class="r"><code>str &lt;- write_ssh(pubkey)
 print(str)</code></pre>
-<pre><code>[1] &quot;ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNphMRuCS7Bs3CYaAaztUptP5Eu9unxUc97YcDr3bZ1loZnTScGCErhkh8Q+k0NKUZnoPfr0kHx5QOJhTnoaXhI=&quot;</code></pre>
-<p>The <code>read_pubkey</code> function will automatically detect if a file contains a <code>PEM</code> or <code>SSH</code> key.</p>
+<pre><code>[1] &quot;ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPjS7upRCV28xR3XIo9EqOnFqQ21OA6NWGfp5Lt2X0lt+ks4F0UHv2Unk4TWpxPsM9u0iZsEgAHZpiupJi0jYms=&quot;</code></pre>
+<p>The <code>read_pubkey</code> function will automatically detect if a
+file contains a <code>PEM</code> or <code>SSH</code> key.</p>
 <pre class="r"><code>read_pubkey(str)</code></pre>
 <pre><code>[256-bit ecdsa public key]
-md5: 5f94a29c35d272497759e613daf69199</code></pre>
+md5: 860b767da000d9b7fd9e7360ec91cf31
+sha256: 4898b4e8676aa99b3d50cfc53fddcdb06fc39e6971838a86ce31200f4c110479</code></pre>
 </div>
 <div id="the-json-web-key-jwk-format" class="section level3">
 <h3>The JSON Web Key (JWK) format</h3>
-<p>Yet another recent format to store RSA or EC keys are JSON Web Keys (JWK). JWK is part of the <strong>Javascript Object Signing and Encryption (JOSE)</strong> specification. The <code>write_jwk</code> and <code>read_jwk</code> functions are implemented in a separate package which uses the <code>openssl</code> package.</p>
+<p>Yet another recent format to store RSA or EC keys are JSON Web Keys
+(JWK). JWK is part of the <strong>Javascript Object Signing and
+Encryption (JOSE)</strong> specification. The <code>write_jwk</code> and
+<code>read_jwk</code> functions are implemented in a separate package
+which uses the <code>openssl</code> package.</p>
 <pre class="r"><code>library(jose)
 json &lt;- write_jwk(pubkey)
 jsonlite::prettify(json)</code></pre>
 <pre><code>{
     &quot;kty&quot;: &quot;EC&quot;,
     &quot;crv&quot;: &quot;P-256&quot;,
-    &quot;x&quot;: &quot;2mExG4JLsGzcJhoBrO1Sm0_kS726fFRz3thwOvdtnWU&quot;,
-    &quot;y&quot;: &quot;oZnTScGCErhkh8Q-k0NKUZnoPfr0kHx5QOJhTnoaXhI&quot;
+    &quot;x&quot;: &quot;-NLu6lEJXbzFHdcij0So6cWpDbU4Do1YZ-nku3ZfSW0&quot;,
+    &quot;y&quot;: &quot;-ks4F0UHv2Unk4TWpxPsM9u0iZsEgAHZpiupJi0jYms&quot;
 }
  </code></pre>
-<p>Keys from <code>jose</code> and <code>openssl</code> are the same.</p>
+<p>Keys from <code>jose</code> and <code>openssl</code> are the
+same.</p>
 <pre class="r"><code>mykey &lt;- read_jwk(json)
 identical(mykey, pubkey)</code></pre>
 <pre><code>[1] TRUE</code></pre>
 <pre class="r"><code>print(mykey)</code></pre>
 <pre><code>[256-bit ecdsa public key]
-md5: 5f94a29c35d272497759e613daf69199</code></pre>
+md5: 860b767da000d9b7fd9e7360ec91cf31
+sha256: 4898b4e8676aa99b3d50cfc53fddcdb06fc39e6971838a86ce31200f4c110479</code></pre>
 </div>
 
 

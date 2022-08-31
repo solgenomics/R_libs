@@ -27,9 +27,9 @@ list_modify             Modify a list
 lmap                    Apply a function to list-elements of a list
 map                     Apply a function to each element of a list or
                         atomic vector
-map2                    Map over multiple inputs simultaneously.
 map_if                  Apply a function to each element of a vector
                         conditionally
+map2                    Map over multiple inputs simultaneously.
 modify                  Modify elements selectively
 modify_in               Modify a pluck location
 negate                  Negate a predicate function.
@@ -39,8 +39,8 @@ partial                 Partial apply a function, filling in some
 pluck                   Pluck or chuck a single element from a vector
                         or environment
 prepend                 Prepend a vector
-rate-helpers            Create delaying rate settings
 rate_sleep              Wait for a given time
+rate-helpers            Create delaying rate settings
 rbernoulli              Generate random sample from a Bernoulli
                         distribution
 rdunif                  Generate random sample from a discrete uniform

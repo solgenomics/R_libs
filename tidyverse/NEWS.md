@@ -1,3 +1,11 @@
+# tidyverse 1.3.2
+
+* Text version of the citation now lists all authors (#269).
+
+* All packages have been bumped to their latest versions.
+
+* Messaging uses modern approach to avoid red text in RStudio (#296).
+
 # tidyverse 1.3.1
 
 * tidyverse now installs dtplyr (#216), googledrive, and googlesheets4 (#229).

@@ -1,10 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head><title>R: Utilities for manipulating chromosome names, including modifying
 them to follow a particular naming style</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> Utilities for manipulating chromosome names, including modifying
 them to follow a particular naming style
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
@@ -13,7 +14,7 @@ them to follow a particular naming style
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;GenomeInfoDb&rsquo; version 1.22.1</h2>
+</div><h2>Documentation for package &lsquo;GenomeInfoDb&rsquo; version 1.32.3</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -26,8 +27,8 @@ them to follow a particular naming style
 <table width="100%">
 <tr><td style="width: 25%;"><a href="Seqinfo-class.html">as.data.frame-method</a></td>
 <td>Seqinfo objects</td></tr>
-<tr><td style="width: 25%;"><a href="loadTaxonomyDb.html">available.species</a></td>
-<td>Return a data.frame that lists the known taxonomy IDs and their corresponding organisms.</td></tr>
+<tr><td style="width: 25%;"><a href="Seqinfo-class.html">as.data.frame.Seqinfo</a></td>
+<td>Seqinfo objects</td></tr>
 <tr><td style="width: 25%;"><a href="GenomeDescription-class.html">bsgenomeName</a></td>
 <td>GenomeDescription objects</td></tr>
 <tr><td style="width: 25%;"><a href="GenomeDescription-class.html">bsgenomeName-method</a></td>
@@ -50,8 +51,6 @@ them to follow a particular naming style
 <td>Conveniently rename the seqlevels of an object according to a given style</td></tr>
 <tr><td style="width: 25%;"><a href="seqlevelsStyle.html">extractSeqlevelsByGroup</a></td>
 <td>Conveniently rename the seqlevels of an object according to a given style</td></tr>
-<tr><td style="width: 25%;"><a href="fetchExtendedChromInfoFromUCSC.html">fetchExtendedChromInfoFromUCSC</a></td>
-<td>Fetching chromosomes info for some of the UCSC genomes</td></tr>
 <tr><td style="width: 25%;"><a href="seqinfo.html">genome</a></td>
 <td>Accessing/modifying sequence information</td></tr>
 <tr><td style="width: 25%;"><a href="Seqinfo-class.html">genome-method</a></td>
@@ -72,6 +71,12 @@ them to follow a particular naming style
 <td>GenomeDescription objects</td></tr>
 <tr><td style="width: 25%;"><a href="seqlevelsStyle.html">genomeStyles</a></td>
 <td>Conveniently rename the seqlevels of an object according to a given style</td></tr>
+<tr><td style="width: 25%;"><a href="getChromInfoFromEnsembl.html">getChromInfoFromEnsembl</a></td>
+<td>Get chromosome information for an Ensembl species</td></tr>
+<tr><td style="width: 25%;"><a href="getChromInfoFromNCBI.html">getChromInfoFromNCBI</a></td>
+<td>Get chromosome information for an NCBI assembly</td></tr>
+<tr><td style="width: 25%;"><a href="getChromInfoFromUCSC.html">getChromInfoFromUCSC</a></td>
+<td>Get chromosome information for a UCSC genome</td></tr>
 <tr><td style="width: 25%;"><a href="Seqinfo-class.html">intersect-method</a></td>
 <td>Seqinfo objects</td></tr>
 <tr><td style="width: 25%;"><a href="seqinfo.html">isCircular</a></td>
@@ -122,6 +127,10 @@ them to follow a particular naming style
 <td>GenomeDescription objects</td></tr>
 <tr><td style="width: 25%;"><a href="rankSeqlevels.html">rankSeqlevels</a></td>
 <td>Assign sequence IDs to sequence names</td></tr>
+<tr><td style="width: 25%;"><a href="getChromInfoFromNCBI.html">registered_NCBI_assemblies</a></td>
+<td>Get chromosome information for an NCBI assembly</td></tr>
+<tr><td style="width: 25%;"><a href="getChromInfoFromUCSC.html">registered_UCSC_genomes</a></td>
+<td>Get chromosome information for a UCSC genome</td></tr>
 <tr><td style="width: 25%;"><a href="GenomeDescription-class.html">releaseDate</a></td>
 <td>GenomeDescription objects</td></tr>
 <tr><td style="width: 25%;"><a href="GenomeDescription-class.html">releaseDate-method</a></td>
@@ -217,4 +226,4 @@ them to follow a particular naming style
 <tr><td style="width: 25%;"><a href="Seqinfo-class.html">[-method</a></td>
 <td>Seqinfo objects</td></tr>
 </table>
-</body></html>
+</div></body></html>

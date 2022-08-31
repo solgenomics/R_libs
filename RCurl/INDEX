@@ -1,13 +1,8 @@
+|,BitwiseValue,BitwiseValue-method
+                        Classes and coercion methods for enumerations
+                        in libcurl
 AUTH_ANY                Constants for identifying Authentication
                         Schemes
-CFILE                   Create a C-level handle for a file
-CURLHandle-class        Class "CURLHandle" for synchronous HTTP
-                        requests
-CurlFeatureBits         Constants for libcurl
-HTTP_VERSION_1_0        Symbolic constants for specifying HTTP and SSL
-                        versions in libcurl
-MultiCURLHandle-class   Class "MultiCURLHandle" for asynchronous,
-                        concurrent HTTP requests
 base64                  Encode/Decode base64 content
 basicHeaderGatherer     Functions for processing the response header of
                         a libcurl request
@@ -15,6 +10,7 @@ basicTextGatherer       Cumulate text across callbacks (from an HTTP
                         response)
 binaryBuffer            Create internal C-level data structure for
                         collecting binary data
+CFILE                   Create a C-level handle for a file
 chunkToLineReader       Utility that collects data from the HTTP reply
                         into lines and calls user-provided function.
 clone                   Clone/duplicate an object
@@ -24,7 +20,10 @@ complete                Complete an asynchronous HTTP request
 curlError               Raise a warning or error about a CURL problem
 curlEscape              Handle characters in URL that need to be
                         escaped
+CurlFeatureBits         Constants for libcurl
 curlGlobalInit          Start and stop the Curl library
+CURLHandle-class        Class "CURLHandle" for synchronous HTTP
+                        requests
 curlOptions             Constructor and accessors for CURLOptions
                         objects
 curlPerform             Perform the HTTP query
@@ -49,15 +48,16 @@ getURIAsynchronous      Download multiple URIs concurrently, with
                         inter-leaved downloads
 getURL                  Download a URI
 guessMIMEType           Infer the MIME type from a file name
+HTTP_VERSION_1_0        Symbolic constants for specifying HTTP and SSL
+                        versions in libcurl
 httpPUT                 Simple high-level functions for HTTP PUT and
                         DELETE
 merge.list              Method for merging two lists by name
 mimeTypeExtensions      Mapping from extension to MIME type
+MultiCURLHandle-class   Class "MultiCURLHandle" for asynchronous,
+                        concurrent HTTP requests
 postForm                Submit an HTML form
 reset                   Generic function for resetting an object
 scp                     Retrieve contents of a file from a remote host
                         via SCP (Secure Copy)
 url.exists              Check if URL exists
-|,BitwiseValue,BitwiseValue-method
-                        Classes and coercion methods for enumerations
-                        in libcurl

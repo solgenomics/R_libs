@@ -88,7 +88,7 @@ class Row : public Mat<eT>
   inline            Row(const subview_cube<eT>& X);
   inline Row& operator=(const subview_cube<eT>& X);
   
-  arma_cold inline mat_injector<Row> operator<<(const eT val);
+  arma_deprecated inline mat_injector<Row> operator<<(const eT val);
   
   arma_inline arma_warn_unused const Op<Row<eT>,op_htrans>  t() const;
   arma_inline arma_warn_unused const Op<Row<eT>,op_htrans> ht() const;
@@ -169,7 +169,7 @@ class Row : public Mat<eT>
   
   public:
   
-  #ifdef ARMA_EXTRA_ROW_PROTO
+  #if defined(ARMA_EXTRA_ROW_PROTO)
     #include ARMA_INCFILE_WRAP(ARMA_EXTRA_ROW_PROTO)
   #endif
   };

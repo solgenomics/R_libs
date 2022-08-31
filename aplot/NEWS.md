@@ -1,3 +1,21 @@
+# aplot 0.1.6
+
++ bug fixed 
+
+# aplot 0.1.5
+
++ `output` parameter in `plot_list()` can specify to return a `gglist` or `patchwork` object (2022-06-01, Wed)
++ `plot_list()` calls `gglist()` and return a `gglist` object (2022-05-05, Thu)
+
+# aplot 0.1.4
+
++ `gglist()` function to construct composite plot (2022-05-05, Thu)
++ based on the update of `ggrange()`, now in `xlim2()` and `ylim2()`, we should specify `region = 'plot'` (2022-04-06, Wed)
++ mv `ggrange()`, `xrange()` and `yrange()` to 'ggfun' (2022-04-01, Fri)
+
+# aplot 0.1.3
+
++ update `ggrange()` to support extracting plot limit and range (newly added) (2022-04-01, Fri)
 
 # aplot 0.1.2
 

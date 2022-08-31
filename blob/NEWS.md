@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# blob 1.2.3 (2022-04-10)
+
+- `as_blob(NA_character_)` returns a missing `blob` instead of `as_blob("NA")` (#26, @michaelchirico).
+
+
 # blob 1.2.2 (2021-07-23)
 
 - Moved to "stable" lifecycle stage.

@@ -22,10 +22,10 @@ wk_crs_proj_definition
 wk_debug                Debug filters and handlers
 wk_flatten              Extract simple geometries
 wk_format               Format well-known geometry for printing
-wk_handle.data.frame    Use data.frame with wk
-wk_handle.wk_crc        Read geometry vectors
 wk_handle_slice.data.frame
                         Handle specific regions of objects
+wk_handle.data.frame    Use data.frame with wk
+wk_handle.wk_crc        Read geometry vectors
 wk_identity             Copy a geometry vector
 wk_is_geodesic          Set and get vector geodesic edge interpolation
 wk_linestring           Create lines, polygons, and collections

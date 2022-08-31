@@ -30,4 +30,4 @@ NeedsCompilation: no
 Packaged: 2021-12-14 21:51:21 UTC; edd
 Repository: CRAN
 Date/Publication: 2021-12-15 07:50:08 UTC
-Built: R 3.6.3; ; 2022-02-15 16:25:24 UTC; unix
+Built: R 4.2.0; ; 2022-08-30 19:08:16 UTC; unix

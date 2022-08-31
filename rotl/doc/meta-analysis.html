@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="David Winter" />
+
+<meta name="date" content="2021-12-08" />
+
+<title>Using the Open Tree synthesis in a comparative analysis</title>
+
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%0A%7D%0Apre%20%7B%0A%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Using the Open Tree synthesis in a comparative analysis</h1>
+<h4 class="author">David Winter</h4>
+<h4 class="date">2021-12-08</h4>
+
+
+
+<div id="phylogenetic-comparative-methods" class="section level2">
+<h2>Phylogenetic Comparative Methods</h2>
+<p>The development of phylogenetic comparative methods has made phylogenies and important source of data in fields as diverse as ecology, genomic and medicine. Comparative methods can be used to investigate patterns in the evolution of traits or the diversification of lineages. In other cases a phylogeny is treated as a “nuisance parameter”, allowing with the autocorrelation created by the shared evolutionary history of the different species included to be controlled for.</p>
+<p>In many cases finding a tree that relates the species for which trait data are available is a rate-limiting step in such comparative analyses. Here we show how the synthetic tree provided by Open Tree of Life (and made available in R via <code>rotl</code>) can help to fill this gap.</p>
+</div>
+<div id="a-phylogenetic-meta-analysis" class="section level2">
+<h2>A phylogenetic meta-analysis</h2>
+<p>To demonstrate the use of <code>rotl</code> in a comparative analysis, we will partially reproduce the results of <a href="https://doi.org/10.1111/jeb.12282">Rutkowska <em>et al</em> 2014</a>. Very briefly, this study is a meta-analysis summarising the results of multiple studies testing for systematic differences in the size of eggs which contain male and female offspring. Such a difference might mean that birds invest more heavily in one sex than the other.</p>
+<p>Because this study involves data from 51 different species, Rutkowska <em>et al</em> used a phylogenetic comparative approach to account for the shared evolutionary history among some of the studied-species.</p>
+<div id="gather-the-data" class="section level3">
+<h3>Gather the data</h3>
+<p>If we are going to reproduce this analysis, we will first need to gather the data. Thankfully, the data is available as supplementary material from the publisher’s website. We provide a copy of this data with the package:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rotl)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## This dataset is available from the publisher&#39;s study website:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>egg_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;egg.csv&quot;</span>, <span class="at">package =</span> <span class="st">&quot;rotl&quot;</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="do">## }</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(egg_data)</span></code></pre></div>
+<pre><code>##                   animal                   Spp       Lndim Measure Neggs
+## 1 Zonotrichia_leucophrys White-crowned sparrow 0.000000000  volume   294
+## 2      Passer_domesticus         House sparrow 0.009407469  volume   149
+## 3        Serinus_canaria                Canary 0.000000000  volume    52
+## 4          Turdus_merula    European blackbird 0.021189299  volume    82
+## 5    Agelaius_phoeniceus  Red-winged blackbird 0.218316086  volume   394
+## 6    Quiscalus_mexicanus  Great-tailed grackle 0.281894985    mass   822
+##   Nclutches        ESr Type         StudyID Year        D        EN         Zr
+## 1        73 0.14004594 stat        Mead1987 1987 3.421918  85.91673 0.14097244
+## 2        31 0.11175203 stat     Cordero2000 2000 4.045161  36.83413 0.11222075
+## 3        21 0.49679140 stat     Leitner2006 2006 2.180952  23.84279 0.54503712
+## 4        54 0.38598540 stat     Martyka2010 2010 1.414815  57.95812 0.40707397
+## 5       106 0.07410136  raw Weatherhead1985 1985 3.173585 124.14982 0.07423744
+## 6       205 0.05178834  raw     Teather1989 1989 3.407805 241.21099 0.05183471
+##           VZr
+## 1 0.012060292
+## 2 0.029555954
+## 3 0.047978211
+## 4 0.018195675
+## 5 0.008254242
+## 6 0.004197959</code></pre>
+<p>The most important variable in this dataset is <code>Zr</code>, which is a <a href="https://en.wikipedia.org/wiki/Fisher_transformation">normalized effect size</a> for difference ,in size between eggs that contain males and females. Values close to zero come from studies that found the sex of an egg’s inhabitant had little effect in its size, while large positive or negative values correspond to studies with substantial sex biases (towards males and females respectively). Since this is a meta-analysis we should produce the classic <a href="https://en.wikipedia.org/wiki/Funnel_plot">funnel plot</a> with effects-size on the y-axis and precision (the inverse of the sample standard error) on the x-axis. Here we calculate precision from the sample variance (<code>Vzr</code>):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="fu">sqrt</span>(egg_data<span class="sc">$</span>VZr), egg_data<span class="sc">$</span>Zr,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">16</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Effect size (Zr)&quot;</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Precision (1/SE)&quot;</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Effect sizes for sex bias in egg size among 51 brid species&quot;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>In order to use this data later on we need to first convert it to a standard <code>data.frame</code>. We can also convert the <code>animal</code> column (the species names) to lower case, and remove the underscores in their names, which will make it easier to match names later on:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>egg_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(egg_data)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Convert taxon names to lower case</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>egg_data<span class="sc">$</span>animal <span class="ot">&lt;-</span> <span class="fu">tolower</span>(egg_data<span class="sc">$</span>animal)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Let&#39;s remove the underscores (_) from the taxon names</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>egg_data<span class="sc">$</span>animal <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot; &quot;</span>, egg_data<span class="sc">$</span>animal)</span></code></pre></div>
+</div>
+<div id="find-the-species-in-ott" class="section level3">
+<h3>Find the species in OTT</h3>
+<p>We can use the OTL synthesis tree to relate these species. To do so we first need to find Open Tree Taxonomy (OTT) IDs for each species. We can do that with the Taxonomic Name Resolution Service function <code>tnrs_match_names</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>taxa <span class="ot">&lt;-</span> <span class="fu">tnrs_match_names</span>(<span class="fu">unique</span>(egg_data<span class="sc">$</span>animal), <span class="at">context =</span> <span class="st">&quot;Animals&quot;</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(taxa)</span></code></pre></div>
+<pre><code>##            search_string            unique_name approximate_match ott_id
+## 1 zonotrichia leucophrys Zonotrichia leucophrys             FALSE 265553
+## 2      passer domesticus      Passer domesticus             FALSE 745175
+## 3        serinus canaria        Serinus canaria             FALSE 464865
+## 4          turdus merula          Turdus merula             FALSE 568572
+## 5    agelaius phoeniceus    Agelaius phoeniceus             FALSE 226605
+## 6    quiscalus mexicanus    Quiscalus mexicanus             FALSE 743411
+##   is_synonym          flags number_matches
+## 1      FALSE                             1
+## 2      FALSE                             1
+## 3      FALSE sibling_higher              1
+## 4      FALSE                             1
+## 5      FALSE                             1
+## 6      FALSE                             1</code></pre>
+<p>All of these species are in OTT, but a few of them go by different names in the Open Tree than we have in our data set. Because the tree <code>rotl</code> fetches will have Open Tree names, we need to create a named vector that maps the names we have for each species to the names Open Tree uses for them:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>taxon_map <span class="ot">&lt;-</span> <span class="fu">structure</span>(taxa<span class="sc">$</span>search_string, <span class="at">names =</span> taxa<span class="sc">$</span>unique_name)</span></code></pre></div>
+<p>Now we can use this map to retrieve “data set names” from “OTT names”:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>taxon_map[<span class="st">&quot;Anser caerulescens&quot;</span>]</span></code></pre></div>
+<pre><code>##  Anser caerulescens 
+## &quot;chen caerulescens&quot;</code></pre>
+</div>
+<div id="get-a-tree" class="section level3">
+<h3>Get a tree</h3>
+<p>Now we can get the tree. There are really too many tips here to show nicely, so we will leave them out of this plot</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tr <span class="ot">&lt;-</span> <span class="fu">tol_induced_subtree</span>(<span class="fu">ott_id</span>(taxa)[<span class="fu">is_in_tree</span>(<span class="fu">ott_id</span>(taxa))])</span></code></pre></div>
+<pre><code>## Warning in collapse_singles(tr, show_progress): Dropping singleton nodes
+## with labels: mrcaott246ott5481, mrcaott246ott7145, mrcaott246ott928360,
+## mrcaott246ott1858, mrcaott246ott2907, mrcaott246ott3600042, mrcaott246ott7113,
+## Passeriformes ott1041547, mrcaott246ott3212, mrcaott246ott428578,
+## mrcaott246ott44866, mrcaott246ott5929, mrcaott246ott32658, mrcaott246ott22325,
+## mrcaott246ott176461, mrcaott246ott10351, mrcaott246ott5934, mrcaott246ott1566,
+## mrcaott1566ott3598440, mrcaott1566ott496009, mrcaott1566ott35326,
+## mrcaott1566ott32651, mrcaott1566ott24297, mrcaott1566ott22300,
+## mrcaott22300ott35350, mrcaott22300ott547548, mrcaott22300ott909199,
+## mrcaott22300ott67150, mrcaott22300ott130294, mrcaott22300ott3598245,
+## mrcaott22300ott416087, mrcaott22300ott629342, mrcaott22300ott416089,
+## mrcaott22300ott107840, mrcaott113980ott364210, mrcaott364210ott3598839,
+## mrcaott364210ott5341363, mrcaott19467ott431648, mrcaott19467ott252687,
+## mrcaott19467ott482248, mrcaott19467ott401023, mrcaott19467ott233446,
+## mrcaott19467ott168078, mrcaott19467ott1046624, mrcaott19467ott161293,
+## mrcaott19467ott46396, mrcaott46396ott46398, mrcaott46398ott168083,
+## mrcaott168083ott431676, mrcaott2175ott968664, mrcaott2175ott259082,
+## mrcaott2175ott59905, mrcaott2175ott2224, mrcaott2224ott366470,
+## mrcaott3364ott73828, mrcaott3364ott4083, mrcaott4083ott35042,
+## mrcaott4083ott370807, mrcaott4083ott469177, mrcaott4083ott11712,
+## mrcaott4083ott52094, mrcaott4083ott95949, Erythrura ott465905,
+## mrcaott24017ott389884, mrcaott24017ott24025, mrcaott24025ott596770,
+## mrcaott24025ott453058, mrcaott24025ott141501, mrcaott141501ott966119,
+## mrcaott141501ott865472, mrcaott141501ott389883, mrcaott105913ott311555,
+## mrcaott311555ott1082386, mrcaott311555ott445491, Taeniopygia
+## ott708325, mrcaott4088ott95302, mrcaott4088ott8371, mrcaott4088ott5616,
+## mrcaott5616ott28339, mrcaott5616ott6023, mrcaott6023ott243614,
+## mrcaott6023ott101225, mrcaott6023ott125079, mrcaott125079ott463026,
+## mrcaott125079ott765405, Zonotrichia (genus in domain Eukaryota) ott789032,
+## mrcaott125079ott265547, mrcaott125079ott265554, mrcaott5620ott254662,
+## mrcaott5620ott29804, mrcaott29804ott449580, mrcaott29804ott449562,
+## mrcaott29804ott86894, mrcaott29804ott93045, mrcaott93045ott264496,
+## mrcaott264496ott264500, mrcaott264500ott3597163, mrcaott264500ott283668,
+## Quiscalus ott743410, mrcaott283673ott673386, mrcaott283673ott741944,
+## mrcaott283673ott735243, mrcaott213448ott213452, mrcaott213448ott1009279,
+## mrcaott213448ott213451, mrcaott213454ott430627, mrcaott430627ott498751,
+## mrcaott430627ott617797, mrcaott430627ott3597159, mrcaott99175ott364331,
+## Xanthocephalus ott364336, mrcaott6366ott28332, mrcaott6366ott88283,
+## mrcaott6366ott341465, mrcaott6366ott157599, mrcaott6366ott178457,
+## mrcaott6366ott405215, mrcaott6366ott238142, mrcaott6366ott6375,
+## mrcaott6375ott119724, mrcaott6375ott238137, mrcaott238137ott328909,
+## mrcaott238137ott464865, Haemorhous ott3601758, mrcaott9416ott840030,
+## mrcaott9416ott96147, mrcaott9416ott7068473, Passer ott515158,
+## mrcaott9416ott407769, mrcaott9416ott25628, mrcaott9416ott407764,
+## mrcaott9416ott68955, mrcaott9416ott73636, mrcaott1488ott72472,
+## mrcaott1488ott63797, mrcaott1488ott284404, mrcaott1488ott110316,
+## mrcaott1488ott17016, mrcaott1488ott44217, mrcaott1488ott16185, Hirundinidae
+## ott897681, mrcaott16185ott67916, mrcaott67916ott67921, mrcaott67916ott119537,
+## mrcaott67916ott67920, Delichon ott922719, mrcaott107463ott353520,
+## mrcaott107463ott177058, mrcaott107463ott107476, mrcaott107476ott337752,
+## mrcaott337752ott374222, mrcaott337752ott7068616, mrcaott2375ott73144,
+## mrcaott2375ott71358, mrcaott2375ott814750, mrcaott2375ott61147,
+## mrcaott61147ott84656, Cyanistes ott73150, mrcaott123763ott258794,
+## mrcaott4820ott409116, mrcaott4820ott17162, mrcaott4820ott20998,
+## mrcaott4820ott20989, mrcaott4820ott58860, mrcaott4820ott23690,
+## mrcaott4820ott20996, mrcaott4820ott11462, mrcaott4820ott140440,
+## mrcaott4820ott197505, mrcaott4820ott75978, mrcaott4820ott11315,
+## mrcaott4820ott5933, mrcaott5933ott60465, mrcaott5933ott25637,
+## mrcaott25637ott199843, mrcaott25637ott473431, mrcaott25637ott686166,
+## mrcaott25637ott111993, mrcaott25637ott183621, mrcaott183621ott501241,
+## mrcaott501241ott3598010, mrcaott501241ott597018, mrcaott686165ott686168,
+## mrcaott60456ott662804, mrcaott60456ott75990, Pica ott776480, Falconiformes
+## ott212187, Falconidae ott212186, mrcaott47588ott225286, mrcaott47588ott748842,
+## mrcaott47588ott201377, mrcaott201377ott773020, Cerchneis ott3596159,
+## mrcaott179290ott352521, mrcaott179290ott624976, mrcaott179290ott624973,
+## mrcaott179290ott624974, mrcaott179290ott432111, mrcaott5272ott92263,
+## mrcaott5272ott24121, Scolopacidae ott887699, mrcaott24121ott217797,
+## mrcaott24121ott45306, mrcaott24121ott654830, mrcaott24121ott214779,
+## mrcaott24121ott651066, mrcaott651066ott1090732, mrcaott7639ott306220,
+## mrcaott7639ott57833, mrcaott7639ott383929, mrcaott7639ott279504,
+## mrcaott7639ott47401, mrcaott7639ott341047, mrcaott7639ott234666,
+## mrcaott7639ott341034, mrcaott7639ott285543, Sterna ott16767,
+## mrcaott285543ott341030, mrcaott285543ott738509, mrcaott285543ott966606,
+## mrcaott285543ott966604, mrcaott22965ott738512, mrcaott22965ott80679,
+## mrcaott22965ott558955, mrcaott22965ott154126, mrcaott22965ott241571,
+## mrcaott22965ott282132, mrcaott22965ott414141, mrcaott22965ott704174,
+## mrcaott22965ott704175, mrcaott22965ott324050, mrcaott22965ott353849,
+## mrcaott22965ott75913, mrcaott75913ott335736, mrcaott335737ott450107,
+## mrcaott425206ott887691, mrcaott425206ott515355, mrcaott119599ott993041,
+## mrcaott119599ott509055, mrcaott416082ott4947414, mrcaott147723ott219032,
+## Stercorariidae ott168297, Stercorarius ott742632, mrcaott742640ott742641,
+## mrcaott57823ott57827, mrcaott57823ott242771, mrcaott57823ott112937,
+## mrcaott112937ott129402, mrcaott112937ott341980, mrcaott112937ott112941,
+## mrcaott112941ott112948, mrcaott112948ott5341357, mrcaott112948ott242776,
+## mrcaott242776ott313115, mrcaott242776ott704464, mrcaott242776ott331994,
+## mrcaott331994ott413796, mrcaott9830ott86672, mrcaott9830ott90560,
+## mrcaott9830ott324158, mrcaott9830ott55044, mrcaott9830ott285638,
+## mrcaott9830ott117726, Sulidae ott452462, mrcaott170197ott403772, Sula ott160486,
+## mrcaott170197ott5859716, mrcaott170197ott429615, mrcaott429615ott1030312,
+## Procellariiformes ott452461, mrcaott18206ott31011, mrcaott31011ott71459,
+## Diomedeidae ott85277, mrcaott71459ott320282, Phoebastria ott941509,
+## mrcaott320282ott320284, Sphenisciformes ott494366, Spheniscidae ott494367,
+## mrcaott60413ott3600120, mrcaott60413ott4130813, mrcaott60413ott4130835,
+## mrcaott60413ott4130830, mrcaott60413ott3600127, mrcaott60413ott4130831,
+## mrcaott60413ott3600124, mrcaott60413ott3600128, mrcaott60413ott3600129,
+## mrcaott60413ott4130819, mrcaott60413ott4130817, mrcaott60413ott60417,
+## mrcaott60413ott3600131, mrcaott60413ott917663, Eudyptes ott494364,
+## mrcaott82219ott116946, mrcaott116946ott219197, mrcaott134466ott494361,
+## Pygoscelis ott494365, mrcaott134466ott783352, mrcaott5021ott198671,
+## mrcaott5021ott75792, Cuculiformes ott212171, mrcaott75792ott212172,
+## mrcaott75792ott3601282, mrcaott75792ott119216, mrcaott119216ott212175,
+## mrcaott119216ott169265, mrcaott169265ott550039, mrcaott169265ott462546,
+## mrcaott462546ott3596355, mrcaott462546ott549514, mrcaott549514ott3596314,
+## mrcaott549514ott3596309, mrcaott549514ott7068132, mrcaott549514ott3596308,
+## mrcaott549514ott3596307, mrcaott549514ott3596306, mrcaott549514ott792626,
+## mrcaott17146ott57819, Columbiformes ott363030, mrcaott17146ott45505,
+## mrcaott45505ott50388, mrcaott45505ott506098, mrcaott45505ott51607,
+## mrcaott51607ott277822, mrcaott51607ott67614, mrcaott51607ott244134,
+## Columba ott938415, mrcaott51607ott277817, mrcaott277817ott320359,
+## mrcaott320359ott493986, mrcaott320359ott767317, mrcaott320359ott921832,
+## mrcaott320359ott938416, Galliformes ott837585, mrcaott4765ott6520194,
+## mrcaott4765ott109888, mrcaott4765ott75785, mrcaott4765ott104461,
+## mrcaott4765ott151684, mrcaott4765ott54193, mrcaott4765ott49319,
+## mrcaott4765ott3596087, mrcaott4765ott415487, mrcaott4765ott51354,
+## mrcaott4765ott446490, Tetraoninae ott999677, mrcaott4765ott55929,
+## mrcaott4765ott539045, mrcaott4765ott234824, Centrocercus ott728081,
+## mrcaott53700ott572162, mrcaott53700ott466627, mrcaott53700ott309383,
+## mrcaott53700ott102722, mrcaott102722ott137547, Phasianus ott102718,
+## mrcaott49310ott102705, mrcaott49310ott153554, mrcaott153554ott867027, Gall</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tr, <span class="at">show.tip.label =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<p>There are a few things to note here. First, the tree has no branch lengths. At present this is true for the whole of the Open Tree synthetic tree. Some comparative methods require either branch lengths or an ultrametric tree. Before you can use one of those methods you will need to get a tree with branch lengths. You could try looking for published trees made available by the Open Tree with <code>studies_find_trees</code>. Alternatively, you could estimate branch lengths from the toplogy of a phylogeny returned by <code>tol_induced_subtree</code>, perhaps by downloading DNA sequences from the NCBI with <code>rentrez</code> or “hanging” the tree on nodes of known-age using penalized likelihood method in <code>ape::chronos</code>. In this case, we will use only the topology of the tree as input to our comparative analysis, so we can skip these steps.</p>
+<p>Second, the tip labels contain OTT IDs, which means they will not perfectly match the species names in our dataset or the taxon map that we created earlier:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tr<span class="sc">$</span>tip.label[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;Ficedula_albicollis_ott107840&quot; &quot;Luscinia_svecica_ott274225&quot;   
+## [3] &quot;Turdus_merula_ott568572&quot;       &quot;Sturnus_unicolor_ott366470&quot;</code></pre>
+<p>Finally, the tree contains node labels for those nodes that match a higher taxonomic group, and empty character vectors (<code>&quot;&quot;</code>) for all other nodes. Some comparative methods either do no expect node labels at all, or require all labeled nodes to have a unique name (meaning multiple “empty” labels will cause and error).</p>
+<p>We can deal with all these details easily. <code>rotl</code> provides the convenience function <code>strip_ott_ids</code> to remove the extra information from the tip labels. With the IDs removed, we can use our taxon map to replace the tip labels in the tree with the species names from dataset.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>otl_tips <span class="ot">&lt;-</span> <span class="fu">strip_ott_ids</span>(tr<span class="sc">$</span>tip.label, <span class="at">remove_underscores =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>tr<span class="sc">$</span>tip.label <span class="ot">&lt;-</span> taxon_map[ otl_tips ]</span></code></pre></div>
+<p>Finally, we can remove the node labels by setting the <code>node.label</code> attribute of the tree to <code>NULL</code>.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>tr<span class="sc">$</span>node.label <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>egg_data <span class="ot">&lt;-</span> egg_data[egg_data<span class="sc">$</span>animal <span class="sc">%in%</span> tr<span class="sc">$</span>tip.label, ]</span></code></pre></div>
+</div>
+<div id="perform-the-meta-analysis" class="section level3">
+<h3>Perform the meta-analysis</h3>
+<p>Now we have data and a tree, and we know the names in the tree match the ones in the data. It’s time to do the comparative analysis. Rutkowska <em>et al</em>. used <code>MCMCglmm</code>, a Bayesian MCMC approach to fitting multi-level models,to perform their meta-analysis, and we will do the same. Of course, to properly analyse these data you would take some care in deciding on the appropriate priors to use and inspect the results carefully. In this case, we are really interested in using this as a demonstration, so we will just run a simple model.</p>
+<p>Specifically we sill fit a model where the only variable that might explain the values of <code>Zr</code> is the random factor <code>animal</code>, which corresponds to the phylogenetic relationships among species. We also provide <code>Zvr</code> as the measurement error variance, effectively adding extra weight to the results of more powerful studies. Here’s how we specify and fit that model with <code>MCMCglmm</code>:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">require</span>(MCMCglmm, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  pr <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">R =</span> <span class="fu">list</span>(<span class="at">V =</span> <span class="dv">1</span>, <span class="at">nu =</span> <span class="fl">0.002</span>),</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">G =</span> <span class="fu">list</span>(<span class="at">G1 =</span> <span class="fu">list</span>(<span class="at">V =</span> <span class="dv">1</span>, <span class="at">nu =</span> <span class="fl">0.002</span>))</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  model <span class="ot">&lt;-</span> <span class="fu">MCMCglmm</span>(Zr <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">random =</span> <span class="sc">~</span>animal,</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">pedigree =</span> tr,</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">mev =</span> egg_data<span class="sc">$</span>VZr,</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">prior =</span> pr,</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> egg_data,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  model <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;mcmcglmm_model.rds&quot;</span>, <span class="at">package =</span> <span class="st">&quot;rotl&quot;</span>))</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;ape&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:phylobase&#39;:
+## 
+##     edges</code></pre>
+<pre><code>## Warning in inverseA(pedigree = pedigree, scale = scale, nodes = nodes): no
+## branch lengths: compute.brlen from ape has been used</code></pre>
+<p>Now that we have a result we can find out how much phylogenetic signal exists for sex-biased differences in egg-size. In a multi-level model we can use variance components to look at this, specifically the proportion of the total variance that can be explained by phylogeny is called the phylogenetic reliability, <em>H</em>. Let’s calculate the <em>H</em> for this model:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>var_comps <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(model<span class="sc">$</span>VCV)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>var_comps[<span class="st">&quot;animal&quot;</span>] <span class="sc">/</span> <span class="fu">sum</span>(var_comps)</span></code></pre></div>
+<pre><code>##     animal 
+## 0.00283581</code></pre>
+<p>It appears there is almost no phylogenetic signal to the data. The relationships among species explain much less that one percent of the total variance in the data. If you were wondering, Rutkowska <em>et al</em>. report a similar result, even after adding more predictors to their model most of the variance in <code>Zr</code> was left unexplained.</p>
+</div>
+</div>
+<div id="what-other-comparative-methods-can-i-use-in-r" class="section level2">
+<h2>What other comparative methods can I use in R?</h2>
+<p>Here we have demonstrated just one comparative analysis that you might do in R. There are an ever-growing number of packages that allow an ever-growing number of analysis to performed in R. Some “classics” like ancestral state reconstruction, phylogenetic independent contrasts and lineage through time plots are implemented in <code>ape</code>. Packages like <code>phytools</code>, <code>caper</code> and <code>diversitree</code> provide extensions to these methods. The <a href="https://CRAN.R-project.org/view=Phylogenetics">CRAN Phylogenetics Taskview</a> gives a good idea of the diversity of packages and analyses that can be completed in R.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

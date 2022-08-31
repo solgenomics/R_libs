@@ -1,8 +1,7 @@
 ### R code from vignette source 'BSgenomeForge.Rnw'
-### Encoding: UTF-8
 
 ###################################################
-### code chunk number 1: BSgenomeForge.Rnw:193-196
+### code chunk number 1: BSgenomeForge.Rnw:189-192
 ###################################################
 library(Biostrings)
 file <- system.file("extdata", "ce2chrM.fa.gz", package="BSgenome")
@@ -10,7 +9,7 @@ fasta.seqlengths(file)
 
 
 ###################################################
-### code chunk number 2: BSgenomeForge.Rnw:429-440
+### code chunk number 2: BSgenomeForge.Rnw:423-434
 ###################################################
 library(BSgenome)
 seed_files <- system.file("extdata", "GentlemanLab", package="BSgenome")
@@ -26,14 +25,14 @@ cat(readLines(rn4_seed), sep="\n")
 
 
 ###################################################
-### code chunk number 3: BSgenomeForge.Rnw:453-455 (eval = FALSE)
+### code chunk number 3: BSgenomeForge.Rnw:447-449 (eval = FALSE)
 ###################################################
 ## library(BSgenome)
 ## forgeBSgenomeDataPkg("path/to/my/seed")
 
 
 ###################################################
-### code chunk number 4: BSgenomeForge.Rnw:678-683
+### code chunk number 4: BSgenomeForge.Rnw:672-677
 ###################################################
 library(BSgenome)
 seed_files <- system.file("extdata", "GentlemanLab", package="BSgenome")
@@ -43,14 +42,14 @@ cat(readLines(rn4_masked_seed), sep="\n")
 
 
 ###################################################
-### code chunk number 5: BSgenomeForge.Rnw:698-700 (eval = FALSE)
+### code chunk number 5: BSgenomeForge.Rnw:692-694 (eval = FALSE)
 ###################################################
 ## library(BSgenome)
 ## forgeMaskedBSgenomeDataPkg("path/to/my/seed")
 
 
 ###################################################
-### code chunk number 6: BSgenomeForge.Rnw:742-743
+### code chunk number 6: BSgenomeForge.Rnw:736-737
 ###################################################
 sessionInfo()
 

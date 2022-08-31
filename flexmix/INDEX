@@ -1,12 +1,30 @@
 AIC,flexmix-method      Methods for Function AIC
+betablocker             Clinical Trial of Beta-Blockers
 BIC,flexmix-method      Methods for Function BIC
+bioChemists             Articles by Graduate Students in Biochemistry
+                        Ph.D. Programs
+boot                    Bootstrap a flexmix Object
 BregFix                 Artificial Example for Binomial Regression
+candy                   Candy Packs Purchased
+clusters,flexmix,missing-method
+                        Determine Cluster Membership and Posterior
+                        Probabilities
+dmft                    Dental Data
 EIC                     Entropic Measure Information Criterion
 ExLinear                Artificial Data from a Generalized Linear
                         Regression Mixture
+ExNclus                 Artificial Example with 4 Gaussians
 ExNPreg                 Artificial Example for Normal, Poisson and
                         Binomial Regression
-ExNclus                 Artificial Example with 4 Gaussians
+fabricfault             Fabric Faults
+fitted,flexmix-method   Extract Model Fitted Values
+flexmix                 Flexible Mixture Modeling
+flexmix-class           Class "flexmix"
+FLXcomponent-class      Class "FLXcomponent"
+FLXcontrol-class        Class "FLXcontrol"
+FLXdist                 Finite Mixtures of Distributions
+FLXdist-class           Class "FLXdist"
+FLXfit                  Fitter Function for FlexMix Models
 FLXM-class              Class "FLXM"
 FLXMCdist1              FlexMix Clustering of Univariate Distributions
 FLXMCfactanal           Driver for Mixtures of Factor Analyzers
@@ -29,36 +47,18 @@ FLXMRrobglm             FlexMix Driver for Robust Estimation of
                         Generalized Linear Models
 FLXMRziglm              FlexMix Interface to Zero Inflated Generalized
                         Linear Models
+FLXnested-class         Class "FLXnested"
 FLXP-class              Class "FLXP"
 FLXPconstant            Creates the Concomitant Variable Model
-FLXcomponent-class      Class "FLXcomponent"
-FLXcontrol-class        Class "FLXcontrol"
-FLXdist                 Finite Mixtures of Distributions
-FLXdist-class           Class "FLXdist"
-FLXfit                  Fitter Function for FlexMix Models
-FLXnested-class         Class "FLXnested"
+group                   Extract Grouping Variable
 ICL,flexmix-method      Integrated Completed Likelihood Criterion
 KLdiv,matrix-method     Kullback-Leibler Divergence
 Lapply,FLXRmstep-method
                         Methods for Function Lapply
-Mehta                   Mehta Trial
-NregFix                 Artificial Example for Normal Regression
-betablocker             Clinical Trial of Beta-Blockers
-bioChemists             Articles by Graduate Students in Biochemistry
-                        Ph.D. Programs
-boot                    Bootstrap a flexmix Object
-candy                   Candy Packs Purchased
-clusters,flexmix,missing-method
-                        Determine Cluster Membership and Posterior
-                        Probabilities
-dmft                    Dental Data
-fabricfault             Fabric Faults
-fitted,flexmix-method   Extract Model Fitted Values
-flexmix                 Flexible Mixture Modeling
-flexmix-class           Class "flexmix"
-group                   Extract Grouping Variable
 logLik,flexmix-method   Methods for Function logLik in Package
                         'flexmix'
+Mehta                   Mehta Trial
+NregFix                 Artificial Example for Normal Regression
 patent                  Patents and R&D Spending
 plot-methods            Rootogram of Posterior Probabilities
 plotEll                 Plot Confidence Ellipses for FLXMCmvnorm

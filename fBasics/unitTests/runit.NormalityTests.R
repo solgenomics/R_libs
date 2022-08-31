@@ -70,7 +70,7 @@ function()
     print(TEST)
     checkIdentical(as.character(class(TEST)), "fHTEST")
 
-    if(try(require(akima))) {
+    if(try(require(interp))) {
         TEST = jbTest(X)
         print(TEST)
         checkIdentical(as.character(class(TEST)), "fHTEST") }
@@ -110,7 +110,8 @@ function()
 test.NormalityTests.MSFT =
 function()
 {
-    X = returnSeries(MSFT)[, 1]
+    data("MSFT", package = "timeSeries", envir = environment())
+    X = returns(MSFT)[, 1]
 
     TEST = ksnormTest(X)
     print(TEST)
@@ -125,7 +126,7 @@ function()
     checkIdentical(as.character(class(TEST)), "fHTEST")
 
 
-    if(try(require(akima))) {
+    if(try(require(interp))) {
         TEST = jbTest(X)
         print(TEST)
         checkIdentical(as.character(class(TEST)), "fHTEST")}

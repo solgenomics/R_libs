@@ -22,7 +22,7 @@
 #endif
 //// The level of warning messages printed to ARMA_CERR_STREAM.
 //// Must be an integer >= 0. The default value is 2.
-//// 0 = no warnings
+//// 0 = no warnings; generally not recommended
 //// 1 = only critical warnings about arguments and/or data which are likely to lead to incorrect results
 //// 2 = as per level 1, and warnings about poorly conditioned systems (low rcond) detected by solve(), spsolve(), etc
 //// 3 = as per level 2, and warnings about failed decompositions, failed saving/loading, etc
@@ -68,6 +68,11 @@
 //// Make sure the directory has a trailing /
 #endif
 
+#if !defined(ARMA_USE_ATLAS)
+// #define ARMA_USE_ATLAS
+//// NOTE: support for ATLAS is deprecated and will be removed.
+#endif
+
 // #define ARMA_USE_WRAPPER
 //// Comment out the above line if you're getting linking errors when compiling your programs,
 //// or if you prefer to directly link with LAPACK, BLAS + etc instead of the Armadillo runtime library.
@@ -111,12 +116,6 @@
 //// You may also need to enable or disable the following options:
 //// ARMA_BLAS_LONG, ARMA_BLAS_LONG_LONG, ARMA_USE_FORTRAN_HIDDEN_ARGS
 
-// #define ARMA_USE_ATLAS
-// #define ARMA_ATLAS_INCLUDE_DIR /usr/include/
-//// If you're using ATLAS and the compiler can't find cblas.h and/or clapack.h
-//// uncomment the above define and specify the appropriate include directory.
-//// Make sure the directory has a trailing /
-
 #if !defined(ARMA_USE_OPENMP)
 // #define ARMA_USE_OPENMP
 //// Uncomment the above line to forcefully enable use of OpenMP for parallelisation.
@@ -146,11 +145,22 @@
   #define ARMA_OPTIMISE_SYMPD
   //// Comment out the above line if you don't want automatically optimised handling
   //// of symmetric/hermitian positive definite matrices by various functions:
-  //// solve(), inv(), pinv(), expmat(), logmat(), sqrtmat(), rcond()
+  //// solve(), inv(), pinv(), expmat(), logmat(), sqrtmat(), rcond(), rank()
 #endif
 
-// #define ARMA_USE_HDF5_ALT
-#if defined(ARMA_USE_HDF5_ALT) && defined(ARMA_USE_WRAPPER)
+#if !defined(ARMA_OPTIMISE_INVEXPR)
+  #define ARMA_OPTIMISE_INVEXPR
+  //// Comment out the above line if you don't want automatically optimised handling
+  //// of inv() and inv_sympd() within compound expressions
+#endif
+
+#if !defined(ARMA_CHECK_NONFINITE)
+  #define ARMA_CHECK_NONFINITE
+  //// Comment out the above line if you don't want automatic checking for nonfinite matrices
+#endif
+
+// #define ARMA_USE_HDF5_CMAKE
+#if defined(ARMA_USE_HDF5_CMAKE) && defined(ARMA_USE_WRAPPER)
   #undef  ARMA_USE_HDF5
   #define ARMA_USE_HDF5
   
@@ -214,14 +224,12 @@
 #endif
 
 
-#if !defined(ARMA_PRINT_ERRORS)
-#define ARMA_PRINT_ERRORS
-//// Comment out the above line if you don't want errors and warnings printed (eg. failed decompositions)
-#endif
-
 #if !defined(ARMA_PRINT_EXCEPTIONS)
-// #define ARMA_PRINT_EXCEPTIONS
-//// see also compiler_setup.hpp
+  // #define ARMA_PRINT_EXCEPTIONS
+  #if defined(ARMA_PRINT_EXCEPTIONS_INTERNAL)
+    #undef  ARMA_PRINT_EXCEPTIONS
+    #define ARMA_PRINT_EXCEPTIONS
+  #endif
 #endif
 
 #if !defined(ARMA_PRINT_HDF5_ERRORS)
@@ -251,12 +259,11 @@
 
 #if defined(ARMA_DONT_USE_ATLAS)
   #undef ARMA_USE_ATLAS
-  #undef ARMA_ATLAS_INCLUDE_DIR
 #endif
 
 #if defined(ARMA_DONT_USE_WRAPPER)
   #undef ARMA_USE_WRAPPER
-  #undef ARMA_USE_HDF5_ALT
+  #undef ARMA_USE_HDF5_CMAKE
 #endif
 
 #if defined(ARMA_DONT_USE_FORTRAN_HIDDEN_ARGS)
@@ -303,7 +310,7 @@
 
 #if defined(ARMA_DONT_USE_HDF5)
   #undef ARMA_USE_HDF5
-  #undef ARMA_USE_HDF5_ALT
+  #undef ARMA_USE_HDF5_CMAKE
 #endif
 
 #if defined(ARMA_DONT_OPTIMISE_BAND) || defined(ARMA_DONT_OPTIMISE_SOLVE_BAND)
@@ -314,8 +321,24 @@
   #undef ARMA_OPTIMISE_SYMPD
 #endif
 
+#if defined(ARMA_DONT_OPTIMISE_INVEXPR)
+  #undef ARMA_OPTIMISE_INVEXPR
+#endif
+
+#if defined(ARMA_DONT_CHECK_NONFINITE)
+  #undef ARMA_CHECK_NONFINITE
+#endif
+
 #if defined(ARMA_DONT_PRINT_ERRORS)
-  #undef ARMA_PRINT_ERRORS
+  #pragma message ("INFO: support for ARMA_DONT_PRINT_ERRORS option has been removed")
+  
+  #if defined(ARMA_PRINT_EXCEPTIONS)
+    #pragma message ("INFO: suggest to use ARMA_WARN_LEVEL and ARMA_DONT_PRINT_EXCEPTIONS options instead")
+  #else
+    #pragma message ("INFO: suggest to use ARMA_WARN_LEVEL option instead")
+  #endif
+  
+  #pragma message ("INFO: see the documentation for details")
 #endif
 
 #if defined(ARMA_DONT_PRINT_EXCEPTIONS)

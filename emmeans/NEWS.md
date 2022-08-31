@@ -1,6 +1,106 @@
 ---
 title: "NEWS for the emmeans package"
 ---
+
+## emmeans 1.8.0
+  * Fixed minor bug in `lme` support (#356)
+  * Added support for `svyolr` objects from the **survey** package (#350)
+  * Improvements to `mgcv::gam` support. Previously, random smoothers were
+    included. Thanks for Maarten Jung for observing this and helping to 
+    identify them.
+  * Improvements to `test(..., joint = TRUE)` and `joint_tests()`...
+      - Sometimes did incorrect computations with rank deficient models
+      - `"est.fcns"` attribute is actually estimable
+      - Results for `(confounded)` entry in `joint_tests()` is now much
+        better formulated and more robust. 
+      - Added section related to this in `xplanations` vignette
+      - Version dependency for `estimability (>= 1.4.1)` due to
+        a bug in version 1.4
+  * In `joint_tests()`, we changed the default from `cov.reduce = range`
+    to `cov.reduce = meanint`, where `meanint(x)` returns `mean(x) + c(-1, 1)`.
+    This centers the covariate values around their means, rather than their 
+    midranges, and is more in line with the default of 
+    `ref_grid(..., cov.reduce = mean)`. However, this change in default
+    will change the results of `joint_tests()` from past experiences with
+    models having covariates that interact with factors or other covariates.
+    We also added a section on covariates to the help for `joint_tests()`,
+    and added another function `symmint()` for use in `cov.reduce`.
+  * `print.summary_emm()` now puts `by` groups in correct order rather
+    than in order of appearance.
+  * The `as.data.frame` method has a new argument `destroy.annotations`, which
+    defaults to `FALSE` -- in which case it returns a `summary_emm` object
+    (which inherits from `data.frame`). I see that many users routinely wrap
+    their results in `as.data.frame` because they want to access displayed results
+    in later steps. But in doing so they have missed potentially useful
+    annotations. Users who have used `as.data.frame` to see results with
+    lots of digits should instead use `emm_options(opt.digits = FALSE)`.
+  * New R version dependency `>= 4.1.0`, allowing freedom to use the native pipe 
+    operator `|>` and other features.
+  * *Housecleaning:* We removed completely the `trend` argument in `emmeans()`,
+    which has long since been deprecated. We removed wrappers that implement
+    `pmmeans()`, `pmtrends()`, etc. -- which I believe nobody ever used.
+
+
+## emmeans 1.7.5
+  * Modified the defaults for several methods for class `emm_list`,
+    and added more complete documentation. We also added hidden
+    `emm_list` support to several functions like
+    `add_grouping()`, `emmip()`, and `emmeans()` itself.
+    These changes, we hope, help in situations where users create
+    objects like `emm <- emmeans(model, pairwise ~ treatment)` but are
+    not experienced or attuned to the distinction between `emmGrid` and
+    `emm_list` objects. The mechanism for this is to provide a 
+    default of \code{I_bet(1)} for which element of the `emm_list` to
+    use. A message is shown that specifies which element was selected
+    and encourages the user to specify it explicitly in the future
+    via either `[[ ]]` or a `which` argument; for example, `plot(emm[[1]])`
+    or `plot(emm, which = 1)`.
+  * The object returned by `joint_tests()` and `test(..., joint = TRUE)` now has
+    an `"est.fcns"` attribute, which is a list of the linear functions associated
+    with the joint test(s).
+  * `joint_tests()` results now possibly include a `(confounded)` entry for
+    effects not purely explained  by a model term.f
+  * New `cross.adjust` argument in `summary.emmGrid()` allows for additional 
+    *P*-value adjustment across `by` groups.
+  * Apparently, `glm.nb` support no longer requires `data` (#355) so
+    the documentation was updated.
+    
+
+## emmeans 1.7.4
+  * Added an argument `enhance.levels` to `contrast()` that allows
+    better labeling of the levels being contrasted. For example, now
+    (by default) if a factor `treat` has numeric levels, then comparisons
+    will have levels like `treat1 - treat2` rather than `1 - 2`. We can
+    request similar behavior with non-numeric levels, but only if we 
+    specify which factors.
+  * Two new functions `comb_facs()` and `split_fac()` for manipulating
+    the factors in an `emmGrid`.
+  * Added an argument `wts` to `eff.emmc` and `del.eff.emmc`, which
+    allows for weighted versions of effect-style contrasts (#346)
+  * Made `qdrg()` more robust in accommodating various manifestations
+    of rank-deficient models.
+  * `qdrg()` now always uses `df` if provided. Previously forced `df = Inf`
+    when a link function was provided.
+  * Fix to `df.error` calculation with `gls` (#347)
+
+
+## emmeans 1.7.3
+  * **argument change** `ref_grid(..., transform = ...)` now should
+    be `ref_grid(..., regrid = ...)` to avoid confusing `transform` 
+    with the `tran` option (which kind of does the opposite). If we match 
+    `transform` and don't match `tran`, it will still work, but a 
+    message is displayed with advice to use `regrid` instead.
+  * Repairs to `averaging` support (#324). 
+    Previous versions were potentially dead wrong except for models 
+    created by `lm()` (and maybe some of those were bad too)
+  * Added a `which` argument to `emm()` to select which list elements 
+    to pass to `multcomp::glht()`
+  * Support for rank-deficient `gls` models (note that **nlme** 
+    allows such models with `gls`, but not `lme`)
+  * Bug in `lqm` / `lqmm` support (#340)
+  * Other minor corrections (e.g. #334)
+
+
 ## emmeans 1.7.2
   * Improvements to `averaging` support (#319)
   * Fixed bug in comparison arrows when `by = NULL` (#321)

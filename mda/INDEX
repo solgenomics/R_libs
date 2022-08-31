@@ -1,9 +1,9 @@
-ESL.mixture             Mixture example from "Elements of Statistical
-                        Learning"
 bruto                   Fit an Additive Spline Model by Adaptive
                         Backfitting
 coef.fda                Produce coefficients for an fda or mda object
 confusion               Confusion Matrices
+ESL.mixture             Mixture example from "Elements of Statistical
+                        Learning"
 fda                     Flexible Discriminant Analysis
 gen.ridge               Penalized Regression
 glass                   Glass Identification Database

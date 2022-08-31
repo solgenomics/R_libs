@@ -1,6 +1,5 @@
 .dimnames.xts           Internal Documentation
 .parseISO8601           Internal ISO 8601:2004(e) Time Parser
-CLASS                   Extract and Set .CLASS Attribute
 [.xts                   Extract Subsets of xts Objects
 addEventLines           Add vertical lines to an existing xts plot
 addLegend               Add Legend
@@ -15,6 +14,7 @@ as.environment.xts      Coerce an 'xts' Object to an Environment by
 as.xts                  Convert Object To And From Class xts
 as.xts.methods          Convert Object To And From Class xts
 axTicksByTime           Compute x-Axis Tickmark Locations by Time
+CLASS                   Extract and Set .CLASS Attribute
 coredata.xts            Extract/Replace Core Data of an xts Object
 diff.xts                Lags and Differences of xts Objects
 dimnames.xts            Dimnames of an xts Object

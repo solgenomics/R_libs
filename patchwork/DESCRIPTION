@@ -1,7 +1,7 @@
 Package: patchwork
 Type: Package
 Title: The Composer of Plots
-Version: 1.1.1
+Version: 1.1.2
 Authors@R: 
     person(given = "Thomas Lin",
            family = "Pedersen",
@@ -18,10 +18,9 @@ Description: The 'ggplot2' package provides a strong API for sequentially
     'cowplot'.
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
 Imports: ggplot2 (>= 3.0.0), gtable, grid, stats, grDevices, utils,
         graphics
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1
 URL: https://patchwork.data-imaginist.com,
         https://github.com/thomasp85/patchwork
 BugReports: https://github.com/thomasp85/patchwork/issues
@@ -29,9 +28,9 @@ Suggests: knitr, rmarkdown, gridGraphics, gridExtra, ragg, testthat (>=
         2.1.0), vdiffr, covr, png
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2020-12-15 10:14:48 UTC; thomas
+Packaged: 2022-08-18 17:21:47 UTC; thomas
 Author: Thomas Lin Pedersen [cre, aut]
     (<https://orcid.org/0000-0002-5147-4711>)
 Repository: CRAN
-Date/Publication: 2020-12-17 09:40:02 UTC
-Built: R 3.6.3; ; 2021-10-21 08:15:50 UTC; unix
+Date/Publication: 2022-08-19 09:00:10 UTC
+Built: R 4.2.0; ; 2022-08-30 20:01:34 UTC; unix

@@ -1,4 +1,5 @@
 %nin%	nin
+.q	Cs
 abs.error.pred	abs.error.pred
 addMarginal	addMarginal
 all.digits	sedit
@@ -10,7 +11,6 @@ aregImpute	aregImpute
 aregTran	Hmisc-internal
 arrGrob	ggMisc
 as.character.mChoice	mChoice
-as.data.frame.ffdflabel	ffCompress
 as.data.frame.impute	Hmisc-internal
 as.data.frame.labelled	label
 as.data.frame.roundN	Hmisc-internal
@@ -112,11 +112,12 @@ equalBins	equalBins
 errbar	errbar
 escapeBS	escapeRegex
 escapeRegex	escapeRegex
+estSeqMarkovOrd	estSeqMarkovOrd
+estSeqSim	estSeqSim
 event.chart	event.chart
 event.convert	event.convert
 event.history	event.history
 expr.tree	Hmisc-internal
-ffCompress	ffCompress
 fillin	Hmisc-internal
 find.matches	find.matches
 first.word	first.word
@@ -155,6 +156,7 @@ gbayes2	gbayes
 gbayesMixPost	gbayes
 gbayesMixPowerNP	gbayes
 gbayesMixPredNoData	gbayes
+gbayesSeqSim	gbayesSeqSim
 get2rowHeads	Hmisc-internal
 getHdata	getHdata
 getLatestSource	Misc
@@ -164,6 +166,7 @@ getZip	getZip
 ggfreqScatter	ggfreqScatter
 ggplot.summaryP	summaryP
 ggplot.transcan	transcan
+ggplotlyr	ggplotlyr
 GiniMd	GiniMd
 Gompertz2	spower
 groupn	Hmisc-internal
@@ -199,6 +202,7 @@ impute	impute
 impute.default	impute
 impute.transcan	transcan
 inmChoice	mChoice
+intMarkovOrd	intMarkovOrd
 inverseFunction	Misc
 invertTabulated	transcan
 is.discrete	discrete
@@ -290,6 +294,7 @@ minor.tick	minor.tick
 monotone	transace
 monthDays	yearDays
 mtitle	mtitle
+multEventChart	popower
 multLines	multLines
 na.delete	na.delete
 na.detail.response	na.detail.response
@@ -320,6 +325,7 @@ optionsCmds	Hmisc-internal
 ordGridFun	Hmisc-internal
 ordTestpo	summary.formula
 outerText	Misc
+pairUpDiff	pairUpDiff
 panel.bpplot	panel.bpplot
 panel.Dotplot	xYplot
 panel.Ecdf	Ecdf
@@ -349,6 +355,7 @@ plot.summaryP	summaryP
 plot.summaryS	summaryS
 plot.transcan	transcan
 plot.varclus	varclus
+plotCorrM	plotCorrM
 plotCorrPrecision	plotCorrPrecision
 plotlyM	plotlyM
 plotlyParm	Misc
@@ -418,6 +425,8 @@ print.transcan	transcan
 print.varclus	varclus
 prList	label
 prn	prnz
+propsPO	popower
+propsTrans	popower
 prselect	prselect
 prType	Misc
 pstamp	pstamp
@@ -428,6 +437,7 @@ putKeyEmpty	labcurve
 Quantile	transace
 Quantile.areg.boot	transace
 Quantile2	spower
+R2Measures	R2Measures
 rcorr	rcorr
 rcorr.cens	rcorr.cens
 rcorrcens	rcorr.cens
@@ -472,7 +482,9 @@ show.dvi	latex
 show.latex	latex
 show.pch	show.pch
 showPsfrag	showPsfrag
+simMarkovOrd	simMarkovOrd
 simplifyDims	simplifyDims
+simPOcuts	popower
 simRegOrd	simRegOrd
 sKey	legendfunctions
 smean.cl.boot	smean.sd
@@ -483,6 +495,8 @@ smearingEst	transace
 smedian.hilow	smean.sd
 solvet	solvet
 somers2	somers2
+soprobMarkovOrd	soprobMarkovOrd
+soprobMarkovOrdm	soprobMarkovOrdm
 spearman	biVar
 spearman.test	biVar
 spearman2	biVar
@@ -586,7 +600,6 @@ zoom	Hmisc-internal
 [.Cbind	xYplot
 [.describe	describe
 [.discrete	discrete
-[.ffdflabel	ffCompress
 [.impute	impute
 [.labelled	label
 [.mChoice	mChoice

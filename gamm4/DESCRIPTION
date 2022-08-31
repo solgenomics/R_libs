@@ -11,4 +11,4 @@ NeedsCompilation: no
 Packaged: 2020-04-03 16:27:09 UTC; sw283
 Repository: CRAN
 Date/Publication: 2020-04-03 19:30:02 UTC
-Built: R 3.6.3; ; 2022-02-15 17:11:07 UTC; unix
+Built: R 4.2.0; ; 2022-08-30 20:05:25 UTC; unix

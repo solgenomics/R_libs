@@ -1,5 +1,6 @@
 import(methods)
-importFrom(utils, data, download.file, read.delim, read.table, read.csv)
+importFrom(utils, data, download.file, read.delim, read.table, read.csv,
+                  as.roman)
 importFrom(stats, setNames)
 importFrom(stats4, summary)
 
@@ -9,42 +10,6 @@ import(BiocGenerics)
 import(S4Vectors)
 import(IRanges)  # for CompressedList
 import(GenomeInfoDbData)
-
-
-### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-### Export non-generic functions
-###
-
-export(
-    ## rankSeqlevels.R:
-    orderSeqlevels,
-    rankSeqlevels,
-
-    ## fetchExtendedChromInfoFromUCSC.R:
-    fetchExtendedChromInfoFromUCSC,
-
-    ## mapGenomeBuilds.R
-    mapGenomeBuilds,
-    genomeBuilds,
-    listOrganisms,
-
-    ## seqlevelsStyle.R:
-    genomeStyles,
-    extractSeqlevels,
-    extractSeqlevelsByGroup,
-    mapSeqlevels,
-    seqlevelsInGroup,
-
-    ## seqlevels-wrappers.R:
-    keepSeqlevels, dropSeqlevels, renameSeqlevels, restoreSeqlevels,
-    standardChromosomes, keepStandardChromosomes,
-
-    ## Seqinfo-class.R:
-    Seqinfo, checkCompatibleSeqinfo,
-
-    ## GenomeDescription-classR:
-    GenomeDescription
-)
 
 
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -61,18 +26,22 @@ exportClasses(
 ### Export S3 methods
 ###
 
+S3method(as.data.frame, Seqinfo)
+
 S3method(summary, Seqinfo)
 
 ### We also export them thru the export() directive so that (a) they can be
 ### called directly, (b) tab-completion on the name of the generic shows them,
 ### and (c) methods() doesn't asterisk them.
 export(
+    as.data.frame.Seqinfo,
+
     summary.Seqinfo
 )
 
 
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-### Export S4 methods for generics not defined in GenomeInfoDb
+### Export S4 methods for generics NOT defined in this package
 ###
 
 exportMethods(
@@ -92,13 +61,60 @@ exportMethods(
 
 
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+### Export non-generic functions
+###
+
+export(
+    ## utils.R:
+    DEFAULT_CIRC_SEQS,
+
+    ## rankSeqlevels.R:
+    orderSeqlevels,
+    rankSeqlevels,
+
+    ## getChromInfoFromNCBI.R:
+    registered_NCBI_assemblies,
+    getChromInfoFromNCBI,
+
+    ## getChromInfoFromUCSC.R:
+    registered_UCSC_genomes,
+    getChromInfoFromUCSC,
+
+    ## getChromInfoFromEnsembl.R:
+    getChromInfoFromEnsembl,
+
+    ## loadTaxonomyDb.R:
+    loadTaxonomyDb,
+
+    ## mapGenomeBuilds.R
+    mapGenomeBuilds,
+    genomeBuilds,
+    listOrganisms,
+
+    ## Seqinfo-class.R:
+    Seqinfo, checkCompatibleSeqinfo,
+
+    ## seqlevelsStyle.R:
+    genomeStyles,
+    extractSeqlevels,
+    extractSeqlevelsByGroup,
+    mapSeqlevels,
+    seqlevelsInGroup,
+
+    ## seqlevels-wrappers.R:
+    keepSeqlevels, dropSeqlevels, renameSeqlevels, restoreSeqlevels,
+    standardChromosomes, keepStandardChromosomes,
+
+    ## GenomeDescription-classR:
+    GenomeDescription
+)
+
+
+### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ### Export S4 generics defined in GenomeInfoDb + export corresponding methods
 ###
 
 export(
-    ## loadTaxonomyDb.R:
-    loadTaxonomyDb, available.species,
-
     ## seqinfo.R:
     seqinfo, "seqinfo<-",
     seqnames, "seqnames<-",
@@ -118,6 +134,7 @@ export(
     releaseDate, releaseName, bsgenomeName
 )
 
+### Exactly the same list as above.
 exportMethods(
     seqinfo,
     seqnames, "seqnames<-",

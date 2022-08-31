@@ -44,6 +44,7 @@ in_dir	in_dir
 isFALSE	isFALSE
 is_abs_path	is_abs_path
 is_ascii	is_ascii
+is_blank	is_blank
 is_CRAN_incoming	is_R_CMD_check
 is_linux	os
 is_macos	os
@@ -96,6 +97,7 @@ same_path	same_path
 sans_ext	file_ext
 session_info	session_info
 set_envvar	set_envvar
+shrink_images	shrink_images
 sort_file	process_file
 split_lines	split_lines
 split_source	split_source
@@ -105,6 +107,7 @@ strings_please	stringsAsStrings
 submit_cran	submit_cran
 system3	system3
 tinify	tinify
+tinify_dir	tinify
 tojson	tojson
 tree	tree
 try_error	try_error

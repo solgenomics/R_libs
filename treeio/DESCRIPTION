@@ -1,7 +1,7 @@
 Package: treeio
 Title: Base Classes and Functions for Phylogenetic Tree Input and
         Output
-Version: 1.17.2
+Version: 1.20.2
 Authors@R: c(
     person("Guangchuang", "Yu",     email = "guangchuangyu@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6485-8781")),
     person("Tommy Tsan-Yuk", "Lam", email = "tylam.tommy@gmail.com",   role = c("ctb", "ths")),
@@ -14,7 +14,7 @@ Authors@R: c(
 Description: 'treeio' is an R package to make it easier to import and store phylogenetic tree with associated data; and to link external data from different sources to phylogeny. It also supports exporting phylogenetic tree with heterogeneous associated data to a single tree file and can be served as a platform for merging tree with associated data and converting file formats.
 Depends: R (>= 3.6.0)
 Imports: ape, dplyr, jsonlite, magrittr, methods, rlang, tibble,
-        tidytree (>= 0.3.0), utils
+        tidytree (>= 0.3.9), utils
 Suggests: Biostrings, ggplot2, ggtree, igraph, knitr, rmarkdown,
         phangorn, prettydoc, testthat, tidyr, vroom, xml2, yaml
 VignetteBuilder: knitr
@@ -23,24 +23,20 @@ License: Artistic-2.0
 Encoding: UTF-8
 URL: https://github.com/YuLab-SMU/treeio (devel),
         https://docs.ropensci.org/treeio/ (docs),
-        https://yulab-smu.top/treedata-book/ (book)
+        https://www.amazon.com/Integration-Manipulation-Visualization-Phylogenetic-Computational-ebook/dp/B0B5NLZR1Z/
+        (book), https://doi.org/10.1093/molbev/msz240 (paper)
 BugReports: https://github.com/YuLab-SMU/treeio/issues
 biocViews: Software, Annotation, Clustering, DataImport,
         DataRepresentation, Alignment, MultipleSequenceAlignment,
         Phylogenetics
-RoxygenNote: 7.1.2
-RemoteType: github
-RemoteHost: api.github.com
-RemoteRepo: treeio
-RemoteUsername: GuangchuangYu
-RemoteRef: master
-RemoteSha: b0d4c3d1254fc7a1d9c05154855d652640684add
-GithubRepo: treeio
-GithubUsername: GuangchuangYu
-GithubRef: master
-GithubSHA1: b0d4c3d1254fc7a1d9c05154855d652640684add
+RoxygenNote: 7.2.1
+git_url: https://git.bioconductor.org/packages/treeio
+git_branch: RELEASE_3_15
+git_last_commit: ed457d6
+git_last_commit_date: 2022-08-13
+Date/Publication: 2022-08-14
 NeedsCompilation: no
-Packaged: 2021-10-21 08:13:41 UTC; isaak
+Packaged: 2022-08-14 22:09:22 UTC; biocbuild
 Author: Guangchuang Yu [aut, cre] (<https://orcid.org/0000-0002-6485-8781>),
   Tommy Tsan-Yuk Lam [ctb, ths],
   Shuangbin Xu [ctb] (<https://orcid.org/0000-0003-3513-5362>),
@@ -49,4 +45,4 @@ Author: Guangchuang Yu [aut, cre] (<https://orcid.org/0000-0002-6485-8781>),
   Tyler Bradley [ctb],
   Konstantinos Geles [ctb]
 Maintainer: Guangchuang Yu <guangchuangyu@gmail.com>
-Built: R 3.6.3; ; 2021-10-21 08:13:43 UTC; unix
+Built: R 4.2.0; ; 2022-08-30 22:10:04 UTC; unix

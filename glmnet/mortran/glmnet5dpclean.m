@@ -61,7 +61,7 @@ c      isd = 1 => regression on standardized predictor variables
 c      Note: output solutions always reference original
 c            variables locations and scales.
 c   intr = intercept flag
-c      intr = 0/1 => don't/do include intercept in model
+c      intr = 0/1 => dont/do include intercept in model
 c   maxit = maximum allowed number of passes over the data for all lambda
 c      values (suggested values, maxit = 100000)
 c
@@ -768,7 +768,8 @@ integer ju(ni);
 allocate(v(1:no),stat=jerr); if(jerr.ne.0) return;
 w=w/sum(w); v=sqrt(w);
 if intr.eq.0 < ym=0.0; y=v*y;
-   ys=sqrt(dot_product(y,y)-dot_product(v,y)**2); y=y/ys;
+" trevor changed 3/24/2020"
+   ys=sqrt(dot_product(y,y)); y=y/ys;
    <j=1,ni; if(ju(j).eq.0) next; xm(j)=0.0; x(:,j)=v*x(:,j);
       xv(j)=dot_product(x(:,j),x(:,j));
       if isd.ne.0 < xbq=dot_product(v,x(:,j))**2; vc=xv(j)-xbq;
@@ -918,7 +919,8 @@ double precision x(no,ni),y(no),w(no),xm(ni),xs(ni),xv(ni); integer ju(ni);
 allocate(v(1:no),stat=jerr); if(jerr.ne.0) return;
 w=w/sum(w); v=sqrt(w);
 if intr.eq.0 < ym=0.0; y=v*y;
-   ys=sqrt(dot_product(y,y)-dot_product(v,y)**2); y=y/ys;
+"trevor changed 3/24/2020"
+   ys=sqrt(dot_product(y,y)); y=y/ys;
    <j=1,ni; if(ju(j).eq.0) next; xm(j)=0.0; x(:,j)=v*x(:,j);
       xv(j)=dot_product(x(:,j),x(:,j));
       if isd.ne.0 < xbq=dot_product(v,x(:,j))**2; vc=xv(j)-xbq;
@@ -977,7 +979,8 @@ rsq=0.0; a=0.0; mm=0; /nlp,nin/=0; iz=0; mnl=min(mnlam,nlam); alm=0.0;
       if(g(k).gt.tlam*vp(k)) ix(k)=1;
    >
    loop < if(iz*jz.ne.0) go to :b:;
-      :again:nlp=nlp+1; dlx=0.0;
+      :again:if(nlp.gt.maxit) <jerr=-m; return;>
+      nlp=nlp+1; dlx=0.0;
       <k=1,ni; if(ix(k).eq.0) next; gk=dot_product(y,x(:,k));
          ak=a(k); u=gk+ak*xv(k); v=abs(u)-vp(k)*ab; a(k)=0.0;
          if(v.gt.0.0)
@@ -1113,7 +1116,8 @@ jerr = jerr*1;
 "End: Naras Edit"
 w=w/sum(w);
 if intr.eq.0 < ym=0.0;
-   ys=sqrt(dot_product(w,y**2)-dot_product(w,y)**2); y=y/ys;
+"trevor changed 3/24/2020"
+   ys=sqrt(dot_product(w,y**2)); y=y/ys;
    <j=1,ni; if(ju(j).eq.0) next; xm(j)=0.0; jb=ix(j); je=ix(j+1)-1;
       xv(j)=dot_product(w(jx(jb:je)),x(jb:je)**2);
       if isd.ne.0 < xbq=dot_product(w(jx(jb:je)),x(jb:je))**2; vc=xv(j)-xbq;
@@ -1263,7 +1267,8 @@ jerr = jerr*1;
 "End: Naras Edit"
 w=w/sum(w);
 if intr.eq.0 < ym=0.0;
-   ys=sqrt(dot_product(w,y**2)-dot_product(w,y)**2); y=y/ys;
+"trevor changed 3/24/2020"
+   ys=sqrt(dot_product(w,y**2)); y=y/ys;
    <j=1,ni; if(ju(j).eq.0) next; xm(j)=0.0; jb=ix(j); je=ix(j+1)-1;
       xv(j)=dot_product(w(jx(jb:je)),x(jb:je)**2);
       if isd.ne.0 < xbq=dot_product(w(jx(jb:je)),x(jb:je))**2; vc=xv(j)-xbq;
@@ -1321,7 +1326,8 @@ rsq=0.0; a=0.0; mm=0; o=0.0; /nlp,nin/=0; iz=0; mnl=min(mnlam,nlam);
       if(g(k).gt.tlam*vp(k)) iy(k)=1;
    >
    loop < if(iz*jz.ne.0) go to :b:;
-      :again:nlp=nlp+1; dlx=0.0;
+      :again:if(nlp.gt.maxit) <jerr=-m; return;>
+      nlp=nlp+1; dlx=0.0;
       <k=1,ni; if(iy(k).eq.0) next; jb=ix(k); je=ix(k+1)-1;
          gk=dot_product(y(jx(jb:je))+o,w(jx(jb:je))*x(jb:je))/xs(k);
          ak=a(k); u=gk+ak*xv(k); v=abs(u)-vp(k)*ab; a(k)=0.0;
@@ -1561,7 +1567,8 @@ shr=shri*dev0;
       if(ga(k).gt.tlam*vp(k)) ixx(k)=1;
    >
    :again:continue;
-   loop < bs(0)=b(0); if(nin.gt.0) bs(m(1:nin))=b(m(1:nin));
+   loop < if(nlp.gt.maxit) <jerr=-ilm; return;>
+      bs(0)=b(0); if(nin.gt.0) bs(m(1:nin))=b(m(1:nin));
       if kopt.eq.0 <
          <j=1,ni; if(ixx(j).gt.0) xv(j)=dot_product(v,x(:,j)**2);>
       >
@@ -1748,6 +1755,7 @@ ga=0.0;
    >
    :again:continue;
    loop < /ix,jx/=0; ig=0;
+      if(nlp.gt.maxit) <jerr=-ilm; return;>
       <ic=1,nc; bs(0,ic)=b(0,ic);
          if(nin.gt.0) bs(m(1:nin),ic)=b(m(1:nin),ic);
          xmz=0.0;
@@ -2099,7 +2107,8 @@ shr=shri*dev0; al=0.0; ixx=0;
       if(ga(k).gt.tlam*vp(k)) ixx(k)=1;
    >
    :again:continue;
-   loop <  bs(0)=b(0); if(nin.gt.0) bs(m(1:nin))=b(m(1:nin));
+   loop < if(nlp.gt.maxit) <jerr=-ilm; return;>
+   bs(0)=b(0); if(nin.gt.0) bs(m(1:nin))=b(m(1:nin));
       <j=1,ni; if(ixx(j).eq.0) next;
          jb=ix(j); je=ix(j+1)-1; jn=ix(j+1)-ix(j);
          sc(1:jn)=v(jx(jb:je));
@@ -2299,6 +2308,7 @@ shr=shri*dev0; ga=0.0;
    >
    :again:continue;
    loop < /ixx,jxx/=0; ig=0;
+      if(nlp.gt.maxit) <jerr=-ilm; return;>
       <ic=1,nc; bs(0,ic)=b(0,ic);
          if(nin.gt.0) bs(m(1:nin),ic)=b(m(1:nin),ic);
          xm(0)=0.0; svr=0.0; o=0.0;
@@ -2548,7 +2558,8 @@ m=0; mm=0; /nlp,nin/=0; mnl=min(mnlam,nlam); as=0.0; cthr=cthri*dev0;
       if(ga(k).gt.tlam*vp(k)) ixx(k)=1;
    >
    :again:continue;
-   loop < if(nin.gt.0) as(m(1:nin))=a(m(1:nin));
+   loop < if(nlp.gt.maxit) <jerr=-ilm; return;>
+      if(nin.gt.0) as(m(1:nin))=a(m(1:nin));
       call vars(no,ni,x,w,ixx,v);
       loop < nlp=nlp+1; dli=0.0;
          <j=1,ni; if(ixx(j).eq.0) next;
@@ -2817,7 +2828,7 @@ m=0; mm=0; /nlp,nin/=0; mnl=min(mnlam,nlam); shr=shri*dev0; ixx=0; al=0.0;
       if(ga(k).gt.tlam*vp(k)) ixx(k)=1;
    >
    :again:continue;
-   loop <
+   loop < if(nlp.gt.maxit) <jerr=-ilm; return;>
       az0=az; if(nin.gt.0) as(m(1:nin))=a(m(1:nin));
       <j=1,ni; if(ixx(j).ne.0) v(j)=dot_product(w,x(:,j)**2);>
       loop < nlp=nlp+1; dlx=0.0;
@@ -3026,7 +3037,7 @@ m=0; mm=0; /nlp,nin/=0; mnl=min(mnlam,nlam); shr=shri*dev0; al=0.0; ixx=0;
       if(ga(k).gt.tlam*vp(k)) ixx(k)=1;
    >
    :again:continue;
-   loop <
+   loop < if(nlp.gt.maxit) <jerr=-ilm; return;>
       az0=az; if(nin.gt.0) as(m(1:nin))=a(m(1:nin));
       <j=1,ni; if(ixx(j).eq.0) next; jb=ix(j); je=ix(j+1)-1;
          xm(j)=dot_product(w(jx(jb:je)),x(jb:je));
@@ -3310,7 +3321,8 @@ rsq=ys0; a=0.0; mm=0; /nlp,nin/=0; iz=0; mnl=min(mnlam,nlam); alm=0.0;
       if(g(k).gt.tlam*vp(k)) ix(k)=1;
    >
    loop < if(iz*jz.ne.0) go to :b:;
-      :again:nlp=nlp+1; dlx=0.0;
+      :again:if(nlp.gt.maxit) <jerr=-m; return;>
+      nlp=nlp+1; dlx=0.0;
       <k=1,ni; if(ix(k).eq.0) next; gkn=0.0;
          <j=1,nr; gj(j)=dot_product(y(:,j),x(:,k));
             gk(j)=gj(j)+a(j,k)*xv(k); gkn=gkn+gk(j)**2
@@ -3616,7 +3628,8 @@ rsq=ys0; a=0.0; mm=0; o=0.0; /nlp,nin/=0; iz=0; mnl=min(mnlam,nlam);
       if(g(k).gt.tlam*vp(k)) iy(k)=1;
    >
    loop < if(iz*jz.ne.0) go to :b:;
-      :again:nlp=nlp+1; dlx=0.0;
+      :again:if(nlp.gt.maxit) <jerr=-m; return;>
+      nlp=nlp+1; dlx=0.0;
       <k=1,ni; if(iy(k).eq.0) next; jb=ix(k); je=ix(k+1)-1; gkn=0.0;
          <j=1,nr;
             gj(j)=dot_product(y(jx(jb:je),j)+o(j),w(jx(jb:je))*x(jb:je))/xs(k);
@@ -3766,6 +3779,7 @@ ga=sqrt(ga);
    >
    :again:continue;
    loop < /ix,jx,kx/=0; t=0.0;
+      if(nlp.gt.maxit) <jerr=-ilm; return;>      
       <ic=1,nc; t=max(t,maxval(q(:,ic)*(1.0-q(:,ic)/sxp)/sxp));>
       if t.lt.eps < kx=1; exit;> t=2.0*t; alt=al1/t; al2t=al2/t;
       <ic=1,nc;
@@ -3959,6 +3973,7 @@ ga=sqrt(ga);
    >
    :again:continue;
    loop < /ixx,jxx,kxx/=0; t=0.0;
+      if(nlp.gt.maxit) <jerr=-ilm; return;>
       <ic=1,nc; t=max(t,maxval(q(:,ic)*(1.0-q(:,ic)/sxp)/sxp));>
       if t.lt.eps < kxx=1; exit;> t=2.0*t; alt=al1/t; al2t=al2/t;
       <ic=1,nc; bs(0,ic)=b(0,ic); if(nin.gt.0) bs(m(1:nin),ic)=b(m(1:nin),ic);

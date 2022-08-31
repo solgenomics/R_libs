@@ -17,4 +17,4 @@ NeedsCompilation: no
 Packaged: 2020-12-09 13:54:12 UTC; husson
 Repository: CRAN
 Date/Publication: 2020-12-11 11:40:06 UTC
-Built: R 3.6.3; ; 2022-02-15 17:11:34 UTC; unix
+Built: R 4.2.0; ; 2022-08-30 20:06:07 UTC; unix

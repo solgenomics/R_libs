@@ -10,7 +10,7 @@ library(styler)
 ## ---- eval = FALSE------------------------------------------------------------
 #  function() {
 #    # a comment
-#    x = 2 # <- change this line
+#    x <- 2 # <- change this line
 #  }
 #  
 #  another(call)

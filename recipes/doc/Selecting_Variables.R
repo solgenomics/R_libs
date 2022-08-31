@@ -3,7 +3,8 @@ knitr::opts_chunk$set(
   message = FALSE,
   digits = 3,
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = requireNamespace("modeldata", quietly = TRUE)
   )
 options(digits = 3)
 

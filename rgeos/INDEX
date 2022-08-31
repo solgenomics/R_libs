@@ -1,11 +1,3 @@
-Ring-class              Class "Ring"
-SpatialCollections      create SpatialCollections
-SpatialCollections-class
-                        Class "SpatialCollections"
-SpatialRings            create SpatialRings or SpatialRingsDataFrame
-SpatialRings-class      Class "SpatialRings"
-SpatialRingsDataFrame-class
-                        Class "SpatialRingsDataFrame"
 bbox2SP                 Converts a bounding box into a SpatialPolygons
                         object.
 createSPComment         RGEOS Polygon Hole Comment Functions
@@ -23,6 +15,7 @@ gDifference             Geometry Difference
 gDistance               Distance between geometries
 gEnvelope               Envelope of Geometry
 gEquals                 Geometry Relationships - Equality
+getScale                RGEOS Utility Functions
 gInterpolate            Interpolate Points along Line Geometry
 gIntersection           Geometry Intersections
 gIntersects             Geometry Relationships - Intersects and
@@ -39,6 +32,8 @@ gMinumumRotatedRectangle
                         Centroid of Geometry
 gNearestPoints          Closest Points of two Geometries
 gNode                   Linestring Noder
+gpc.poly-class          Class "gpc.poly"
+gpc.poly.nohole-class   Class "gpc.poly.nohole"
 gPointOnSurface         Point on Surface of Geometry
 gPolygonize             Linestring Polygonizer
 gProject                Project Points to Line Geometry
@@ -48,12 +43,17 @@ gSimplify               Simplify Geometry
 gSymdifference          Geometry Symmetric Difference
 gTouches                Geometry Relationships - Touches
 gUnion                  Geometry Union
-getScale                RGEOS Utility Functions
-gpc.poly-class          Class "gpc.poly"
-gpc.poly.nohole-class   Class "gpc.poly.nohole"
 new-generics            Generics/Methods for polygon objects
 overGeomGeom            Find spatial join or intersections
 poly_findInBoxGEOS      Experimental Functions
 polyfile                Read/Write polygon data
 polygonsLabel           Compute optimal label positions for polygons
 readWKT                 RGEOS WKT Functions
+Ring-class              Class "Ring"
+SpatialCollections      create SpatialCollections
+SpatialCollections-class
+                        Class "SpatialCollections"
+SpatialRings            create SpatialRings or SpatialRingsDataFrame
+SpatialRings-class      Class "SpatialRings"
+SpatialRingsDataFrame-class
+                        Class "SpatialRingsDataFrame"

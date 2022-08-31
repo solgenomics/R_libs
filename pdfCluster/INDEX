@@ -14,11 +14,11 @@ pdfClassification       Classification of low density data
 pdfCluster              Clustering via nonparametric density estimation
 pdfCluster-class        Class "pdfCluster"
 pdfCluster-package      The pdfCluster package: summary information
+plot-methods            Methods for function plot
 plot,dbs-method         Plot objects of class dbs
 plot,kepdf-method       Plot objects of class kepdf
 plot,pdfCluster-method
                         Plot objects of class pdfCluster
-plot-methods            Methods for function plot
 show-methods            Methods for Function show
 summary-methods         Methods for Function summary
 wine                    Wine data

@@ -1,6 +1,7 @@
 aareg
 acf
 AER
+akima
 Andreas
 anova
 aov
@@ -77,8 +78,10 @@ Fhat
 fitdistr
 fixest
 fn
+FOSS
 frankenstein
 ftable
+funder
 gam
 Gam
 gamlss
@@ -107,6 +110,7 @@ infl
 ing
 io
 irlba
+interp
 ivreg
 Jarque
 joineRML
@@ -118,6 +122,7 @@ lavaan
 Lawley
 leveneTest
 lfe
+lifecycle
 Ljung
 lm
 lme
@@ -233,7 +238,6 @@ SMA
 somwhat
 Sostero
 sp
-sparseMatrix
 SpatialPolygonsDataFrame
 spatialreg
 speedglm
@@ -282,5 +286,6 @@ Willem
 Wilk's
 Wilks
 Wooldridge
+workshopped
 xyz
 Zhou

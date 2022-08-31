@@ -1,13 +1,12 @@
-DLBCL                   Diffuse Large B-Cell Lymphoma
-GlaucomaMVF             Glaucoma Database
-Smoking                 Smoking Styles
 bagging                 Bagging Classification, Regression and Survival
                         Trees
 bootest                 Bootstrap Error Rate Estimators
 control.errorest        Control Error Rate Estimators
 cv                      Cross-validated Error Rate Estimators.
+DLBCL                   Diffuse Large B-Cell Lymphoma
 dystrophy               Detection of muscular dystrophy carriers.
 errorest                Estimators of Prediction Error
+GlaucomaMVF             Glaucoma Database
 inbagg                  Indirect Bagging
 inclass                 Indirect Classification
 ipredknn                k-Nearest Neighbour Classification
@@ -27,6 +26,7 @@ prune.classbagg         Pruning for Bagging
 rsurv                   Simulate Survival Data
 sbrier                  Model Fit for Survival Data
 slda                    Stabilised Linear Discriminant Analysis
+Smoking                 Smoking Styles
 summary.classbagg       Summarising Bagging
 summary.inbagg          Summarising Inbagg
 summary.inclass         Summarising Inclass

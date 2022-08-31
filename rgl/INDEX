@@ -1,7 +1,5 @@
-%>%                     Imported from magrittr
 .check3d                Check for an open RGL window.
-Buffer                  R6 Class for binary buffers in glTF files.
-GramSchmidt             The Gram-Schmidt algorithm
+%>%                     Imported from magrittr
 abclines3d              Lines intersecting the bounding box
 addNormals              Add normal vectors to objects so they render
                         more smoothly
@@ -18,12 +16,13 @@ as.mesh3d.rglId         Convert object in plot to RGL mesh object
 as.rglscene             Convert an object to an rglscene object.
 as.tmesh3d              Convert object to a triangular mesh
 as.triangles3d          Convert an object to triangles
-asRow                   Convenience functions for RGL HTML layouts
 aspect3d                Set the aspect ratios of the current plot
+asRow                   Convenience functions for RGL HTML layouts
 axes3d                  Draw boxes, axes and other text outside the
                         data
 bg3d                    Set up background
 bgplot3d                Use base graphics for RGL background
+Buffer                  R6 Class for binary buffers in glTF files.
 checkDeldir             Check for a compatible version of deldir
 clear3d                 Scene management
 clipMesh3d              Clip mesh or RGL object to general region
@@ -41,6 +40,8 @@ facing3d                Subset an object to parts facing in a
                         particular direction
 figWidth                Get R Markdown figure dimensions in pixels
 getBoundary3d           Extract the boundary of a mesh
+gltfTypes               Names of glTF types.
+GramSchmidt             The Gram-Schmidt algorithm
 grid3d                  Add a grid to a 3D plot
 identify3d              Identify points in plot
 in_pkgdown_example      Are we running in a 'pkgdown' example?
@@ -78,7 +79,6 @@ r3d                     Generic 3D interface
 readSTL                 Read and write STL (stereolithography) format
                         files
 rgl-package             3D visualization device system
-rgl.Sweave              Integrating RGL with Sweave
 rgl.attrib              Get information about shapes
 rgl.attrib.info         Get information about attributes of objects
 rgl.bbox                Set up bounding box decoration
@@ -94,6 +94,7 @@ rgl.select              Switch to select mode, and return the mouse
 rgl.setAxisCallback     User-defined axis labelling callbacks.
 rgl.setMouseCallbacks   User callbacks on mouse events
 rgl.surface             Add surface (obsolete)
+rgl.Sweave              Integrating RGL with Sweave
 rgl.texts               Low-level functions for plotting text
 rgl.useNULL             Report default use of null device
 rgl.user2window         Convert between RGL user and window coordinates
@@ -114,9 +115,10 @@ selectpoints3d          Select points from a scene
 setAxisCallbacks        User-defined axis labelling callbacks.
 setGraphicsDelay        Set a one-time slowdown on opening standard
                         graphics
-setUserCallbacks        Set mouse callbacks in R or Javascript code
-setUserShaders          Set user-defined shaders for RGL objects.
 setupKnitr              Displaying RGL scenes in 'knitr' documents
+setUserCallbacks        Set mouse callbacks in R or Javascript code
+setUserShaders          Set user-defined shaders for RGL objects, or
+                        get shaders.
 shade3d                 Draw 3D mesh objects
 shadow3d                Project shadows of mesh onto object.
 shapelist3d             Create and plot a list of shapes

@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head><title>R: Bioconductor facilities for parallel evaluation</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> Bioconductor facilities for parallel evaluation
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;BiocParallel&rsquo; version 1.20.1</h2>
+</div><h2>Documentation for package &lsquo;BiocParallel&rsquo; version 1.30.3</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -65,6 +66,8 @@
 <td>BiocParallelParam objects</td></tr>
 <tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">BiocParallelParam-class</a></td>
 <td>BiocParallelParam objects</td></tr>
+<tr><td style="width: 25%;"><a href="SnowParam-class.html">BIOCPARALLEL_WORKER_NUMBER</a></td>
+<td>Enable simple network of workstations (SNOW)-style parallel evaluation</td></tr>
 <tr><td style="width: 25%;"><a href="bpaggregate.html">bpaggregate</a></td>
 <td>Apply a function on subsets of data frames</td></tr>
 <tr><td style="width: 25%;"><a href="bpaggregate.html">bpaggregate-method</a></td>
@@ -95,6 +98,8 @@
 <td>Enable parallel evaluation using registered dopar backend</td></tr>
 <tr><td style="width: 25%;"><a href="SnowParam-class.html">bpbackend&lt;--method</a></td>
 <td>Enable simple network of workstations (SNOW)-style parallel evaluation</td></tr>
+<tr><td style="width: 25%;"><a href="bpok.html">bperrorTypes</a></td>
+<td>Resume computation with partial results</td></tr>
 <tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpexportglobals</a></td>
 <td>BiocParallelParam objects</td></tr>
 <tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpexportglobals-method</a></td>
@@ -102,6 +107,30 @@
 <tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpexportglobals&lt;-</a></td>
 <td>BiocParallelParam objects</td></tr>
 <tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpexportglobals&lt;--method</a></td>
+<td>BiocParallelParam objects</td></tr>
+<tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpexportvariables</a></td>
+<td>BiocParallelParam objects</td></tr>
+<tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpexportvariables-method</a></td>
+<td>BiocParallelParam objects</td></tr>
+<tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpexportvariables&lt;-</a></td>
+<td>BiocParallelParam objects</td></tr>
+<tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpexportvariables&lt;--method</a></td>
+<td>BiocParallelParam objects</td></tr>
+<tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpfallback</a></td>
+<td>BiocParallelParam objects</td></tr>
+<tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpfallback-method</a></td>
+<td>BiocParallelParam objects</td></tr>
+<tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpfallback&lt;-</a></td>
+<td>BiocParallelParam objects</td></tr>
+<tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpfallback&lt;--method</a></td>
+<td>BiocParallelParam objects</td></tr>
+<tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpforceGC</a></td>
+<td>BiocParallelParam objects</td></tr>
+<tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpforceGC-method</a></td>
+<td>BiocParallelParam objects</td></tr>
+<tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpforceGC&lt;-</a></td>
+<td>BiocParallelParam objects</td></tr>
+<tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpforceGC&lt;--method</a></td>
 <td>BiocParallelParam objects</td></tr>
 <tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpisup</a></td>
 <td>BiocParallelParam objects</td></tr>
@@ -181,6 +210,8 @@
 <td>BiocParallelParam objects</td></tr>
 <tr><td style="width: 25%;"><a href="bpok.html">bpok</a></td>
 <td>Resume computation with partial results</td></tr>
+<tr><td style="width: 25%;"><a href="bpoptions.html">bpoptions</a></td>
+<td>Additional options to parallel evaluation</td></tr>
 <tr><td style="width: 25%;"><a href="register.html">bpparam</a></td>
 <td>Maintain a global registry of available back-end Params</td></tr>
 <tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpprogressbar</a></td>
@@ -191,6 +222,8 @@
 <td>BiocParallelParam objects</td></tr>
 <tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpprogressbar&lt;--method</a></td>
 <td>BiocParallelParam objects</td></tr>
+<tr><td style="width: 25%;"><a href="bpok.html">bpresult</a></td>
+<td>Resume computation with partial results</td></tr>
 <tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpresultdir</a></td>
 <td>BiocParallelParam objects</td></tr>
 <tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpresultdir-method</a></td>
@@ -212,6 +245,8 @@
 <tr><td style="width: 25%;"><a href="BiocParallelParam-class.html">bpRNGseed&lt;--method</a></td>
 <td>BiocParallelParam objects</td></tr>
 <tr><td style="width: 25%;"><a href="bploop.html">bprunMPIslave</a></td>
+<td>Internal Functions for SNOW-style Parallel Evaluation</td></tr>
+<tr><td style="width: 25%;"><a href="bploop.html">bprunMPIworker</a></td>
 <td>Internal Functions for SNOW-style Parallel Evaluation</td></tr>
 <tr><td style="width: 25%;"><a href="bpschedule.html">bpschedule</a></td>
 <td>Schedule back-end Params</td></tr>
@@ -295,6 +330,8 @@
 <td>Try expression evaluation, recovering from bperror signals</td></tr>
 <tr><td style="width: 25%;"><a href="bpvalidate.html">bpvalidate</a></td>
 <td>Tools for developing functions for parallel execution in distributed memory</td></tr>
+<tr><td style="width: 25%;"><a href="bpvalidate.html">BPValidate-class</a></td>
+<td>Tools for developing functions for parallel execution in distributed memory</td></tr>
 <tr><td style="width: 25%;"><a href="bpvec.html">bpvec</a></td>
 <td>Parallel, vectorized evaluation</td></tr>
 <tr><td style="width: 25%;"><a href="bpvec.html">bpvec-method</a></td>
@@ -371,6 +408,8 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="MulticoreParam-class.html">length-method</a></td>
 <td>Enable multi-core parallel evaluation</td></tr>
+<tr><td style="width: 25%;"><a href="SerialParam-class.html">length-method</a></td>
+<td>Enable serial evaluation</td></tr>
 </table>
 
 <h2><a name="M">-- M --</a></h2>
@@ -398,6 +437,8 @@
 <td>Maintain a global registry of available back-end Params</td></tr>
 <tr><td style="width: 25%;"><a href="register.html">registered</a></td>
 <td>Maintain a global registry of available back-end Params</td></tr>
+<tr><td style="width: 25%;"><a href="SnowParam-class.html">R_PARALLELLY_AVAILABLECORES_FALLBACK</a></td>
+<td>Enable simple network of workstations (SNOW)-style parallel evaluation</td></tr>
 </table>
 
 <h2><a name="S">-- S --</a></h2>
@@ -419,6 +460,8 @@
 <td>Enable multi-core parallel evaluation</td></tr>
 <tr><td style="width: 25%;"><a href="SnowParam-class.html">show-method</a></td>
 <td>Enable simple network of workstations (SNOW)-style parallel evaluation</td></tr>
+<tr><td style="width: 25%;"><a href="bpvalidate.html">show-method</a></td>
+<td>Tools for developing functions for parallel execution in distributed memory</td></tr>
 <tr><td style="width: 25%;"><a href="SnowParam-class.html">SnowParam</a></td>
 <td>Enable simple network of workstations (SNOW)-style parallel evaluation</td></tr>
 <tr><td style="width: 25%;"><a href="SnowParam-class.html">SnowParam-class</a></td>
@@ -448,6 +491,38 @@
 <td>Developer interface</td></tr>
 <tr><td style="width: 25%;"><a href="MulticoreParam-class.html">.close-method</a></td>
 <td>Enable multi-core parallel evaluation</td></tr>
+<tr><td style="width: 25%;"><a href="DeveloperInterface.html">.manager</a></td>
+<td>Developer interface</td></tr>
+<tr><td style="width: 25%;"><a href="DeveloperInterface.html">.manager-method</a></td>
+<td>Developer interface</td></tr>
+<tr><td style="width: 25%;"><a href="DeveloperInterface.html">.manager_capacity</a></td>
+<td>Developer interface</td></tr>
+<tr><td style="width: 25%;"><a href="DeveloperInterface.html">.manager_capacity-method</a></td>
+<td>Developer interface</td></tr>
+<tr><td style="width: 25%;"><a href="DeveloperInterface.html">.manager_cleanup</a></td>
+<td>Developer interface</td></tr>
+<tr><td style="width: 25%;"><a href="DeveloperInterface.html">.manager_cleanup-method</a></td>
+<td>Developer interface</td></tr>
+<tr><td style="width: 25%;"><a href="DeveloperInterface.html">.manager_flush</a></td>
+<td>Developer interface</td></tr>
+<tr><td style="width: 25%;"><a href="DeveloperInterface.html">.manager_flush-method</a></td>
+<td>Developer interface</td></tr>
+<tr><td style="width: 25%;"><a href="DeveloperInterface.html">.manager_recv</a></td>
+<td>Developer interface</td></tr>
+<tr><td style="width: 25%;"><a href="DeveloperInterface.html">.manager_recv-method</a></td>
+<td>Developer interface</td></tr>
+<tr><td style="width: 25%;"><a href="DeveloperInterface.html">.manager_recv_all</a></td>
+<td>Developer interface</td></tr>
+<tr><td style="width: 25%;"><a href="DeveloperInterface.html">.manager_recv_all-method</a></td>
+<td>Developer interface</td></tr>
+<tr><td style="width: 25%;"><a href="DeveloperInterface.html">.manager_send</a></td>
+<td>Developer interface</td></tr>
+<tr><td style="width: 25%;"><a href="DeveloperInterface.html">.manager_send-method</a></td>
+<td>Developer interface</td></tr>
+<tr><td style="width: 25%;"><a href="DeveloperInterface.html">.manager_send_all</a></td>
+<td>Developer interface</td></tr>
+<tr><td style="width: 25%;"><a href="DeveloperInterface.html">.manager_send_all-method</a></td>
+<td>Developer interface</td></tr>
 <tr><td style="width: 25%;"><a href="DeveloperInterface.html">.prototype_update</a></td>
 <td>Developer interface</td></tr>
 <tr><td style="width: 25%;"><a href="DeveloperInterface.html">.recv</a></td>
@@ -468,6 +543,8 @@
 <td>Developer interface</td></tr>
 <tr><td style="width: 25%;"><a href="MulticoreParam-class.html">.recv_any-method</a></td>
 <td>Enable multi-core parallel evaluation</td></tr>
+<tr><td style="width: 25%;"><a href="DeveloperInterface.html">.registerOption</a></td>
+<td>Developer interface</td></tr>
 <tr><td style="width: 25%;"><a href="DeveloperInterface.html">.send</a></td>
 <td>Developer interface</td></tr>
 <tr><td style="width: 25%;"><a href="DeveloperInterface.html">.send-method</a></td>
@@ -484,5 +561,11 @@
 <td>Developer interface</td></tr>
 <tr><td style="width: 25%;"><a href="MulticoreParam-class.html">.send_to-method</a></td>
 <td>Enable multi-core parallel evaluation</td></tr>
+<tr><td style="width: 25%;"><a href="DeveloperInterface.html">.task_const</a></td>
+<td>Developer interface</td></tr>
+<tr><td style="width: 25%;"><a href="DeveloperInterface.html">.task_dynamic</a></td>
+<td>Developer interface</td></tr>
+<tr><td style="width: 25%;"><a href="DeveloperInterface.html">.task_remake</a></td>
+<td>Developer interface</td></tr>
 </table>
-</body></html>
+</div></body></html>

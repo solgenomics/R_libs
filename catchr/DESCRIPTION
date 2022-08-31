@@ -21,14 +21,24 @@ Description: R has a unique way of dealing with warnings, errors, messages,
 License: MIT + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 7.1.1
+Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace",
+        "collate"))
 Imports: rlang (>= 0.3.1), purrr (>= 0.2.0),
 Depends: R (>= 3.3.0)
 Suggests: testthat, beepr, crayon, covr, knitr, rmarkdown, spelling
 VignetteBuilder: knitr
 Language: en-US
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: catchr
+RemoteUsername: burchill
+RemoteRef: HEAD
+RemoteSha: b3d4934f9a2264bcb7df4ce19751197533564496
+GithubRepo: catchr
+GithubUsername: burchill
+GithubRef: HEAD
+GithubSHA1: b3d4934f9a2264bcb7df4ce19751197533564496
 NeedsCompilation: no
-Packaged: 2021-09-20 18:23:22 UTC; zburchill
+Packaged: 2022-08-30 22:37:52 UTC; root
 Author: Zachary Burchill [aut, cre, cph]
-Repository: CRAN
-Date/Publication: 2021-09-23 16:40:05 UTC
-Built: R 3.6.3; ; 2022-02-15 16:45:02 UTC; unix
+Built: R 4.2.0; ; 2022-08-30 22:37:52 UTC; unix

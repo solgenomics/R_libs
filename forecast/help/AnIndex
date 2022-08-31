@@ -1,7 +1,7 @@
 forecast-package	forecast-package
 %>%	reexports
-accuracy	accuracy
-accuracy.default	accuracy
+accuracy	reexports
+accuracy.default	accuracy.default
 Acf	Acf
 arfima	arfima
 Arima	Arima
@@ -11,9 +11,9 @@ as.character.Arima	Arima
 as.character.bats	bats
 as.character.ets	ets
 as.character.tbats	tbats
-as.data.frame.forecast	forecast
+as.data.frame.forecast	forecast.ts
 as.data.frame.mforecast	forecast.mts
-as.ts.forecast	forecast
+as.ts.forecast	forecast.ts
 auto.arima	auto.arima
 autolayer	autolayer
 autolayer.forecast	plot.forecast
@@ -67,12 +67,12 @@ fitted.forecast_ARIMA	fitted.Arima
 fitted.modelAR	fitted.Arima
 fitted.nnetar	fitted.Arima
 fitted.tbats	fitted.Arima
-forecast	forecast
+forecast	reexports
 forecast.ar	forecast.Arima
 forecast.Arima	forecast.Arima
 forecast.baggedModel	forecast.baggedModel
 forecast.bats	forecast.bats
-forecast.default	forecast
+forecast.default	forecast.ts
 forecast.ets	forecast.ets
 forecast.forecast_ARIMA	forecast.Arima
 forecast.fracdiff	forecast.Arima
@@ -86,7 +86,7 @@ forecast.stl	forecast.stl
 forecast.stlm	forecast.stl
 forecast.StructTS	forecast.StructTS
 forecast.tbats	forecast.bats
-forecast.ts	forecast
+forecast.ts	forecast.ts
 fortify.ts	autoplot.ts
 fourier	fourier
 fourierf	fourier
@@ -159,7 +159,7 @@ print.baggedModel	baggedModel
 print.bats	bats
 print.CVar	CVar
 print.ets	ets
-print.forecast	forecast
+print.forecast	forecast.ts
 print.mforecast	forecast.mts
 print.modelAR	modelAR
 print.msts	msts
@@ -200,6 +200,7 @@ simulate.fracdiff	simulate.ets
 simulate.lagwalk	simulate.ets
 simulate.modelAR	simulate.ets
 simulate.nnetar	simulate.ets
+simulate.tbats	simulate.ets
 sindexf	sindexf
 snaive	naive
 splinef	splinef
@@ -210,7 +211,7 @@ subset.msts	subset.ts
 subset.ts	subset.ts
 summary.Arima	Arima
 summary.ets	ets
-summary.forecast	forecast
+summary.forecast	forecast.ts
 summary.mforecast	forecast.mts
 taperedacf	Acf
 taperedpacf	Acf
@@ -228,4 +229,5 @@ tsoutliers	tsoutliers
 window.msts	msts
 wineind	wineind
 woolyrnq	woolyrnq
+_PACKAGE	forecast-package
 `[.msts`	msts

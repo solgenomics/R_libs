@@ -2,6 +2,7 @@ import(methods)
 importFrom(utils, read.table, available.packages, contrib.url,
                   installed.packages, str)
 importFrom(stats, setNames)
+importFrom(matrixStats, rowAlls)
 
 import(BiocGenerics)
 import(S4Vectors)
@@ -78,7 +79,7 @@ exportMethods(
     granges,
 
     ## Methods for generics defined in the Biostrings package:
-    getSeq,
+    getSeq, extractAt,
     seqtype, alphabetFrequency, hasOnlyBaseLetters,
     uniqueLetters, letterFrequency,
     oligonucleotideFrequency, nucleotideFrequencyAt,
@@ -109,6 +110,9 @@ export(
     getRowsFromOnDiskLongTable,
     getRowsByIdFromOnDiskLongTable,
 
+    ## ODLT_SNPlocs-class.R:
+    inferRefAndAltAlleles,
+
     ## OldFashionSNPlocs-class.R:
     newSNPlocs,
 
@@ -135,7 +139,8 @@ export(
     writeBSgenomeToTwobit,
 
     ## BSgenomeForge.R:
-    forgeSeqlengthsFile,
+    forgeSeqlengthsRdsFile,
+    forgeSeqlengthsRdaFile,
     forgeSeqFiles,
     forgeMasksFiles
 )

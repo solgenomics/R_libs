@@ -4,8 +4,8 @@ addtable2plot           Add a table of values to a plot
 arctext                 Display text on a circular arc
 axis.break              Place a "break" mark on an axis
 axis.mult               Display an axis with values having a multiplier
-barNest                 Display a nested breakdown of numeric values
 barlabels               Label the bars on a barplot
+barNest                 Display a nested breakdown of numeric values
 barp                    A bar plotting routine
 battleship.plot         Display a matrix of values as the widths of
                         stacked rectangles
@@ -63,13 +63,14 @@ find_max_cell           Maximum (or minimum) value cell in a matrix.
 floating.pie            Display a floating pie chart
 fullaxis                Add an axis with a line to the edge of the plot
 gantt.chart             Display a Gantt chart
+gap_barp                Display a barplot with a gap (missing range) on
+                        one axis
 gap.barplot             Display a barplot with a gap (missing range) on
                         one axis
 gap.boxplot             Display a boxplot with a gap (missing range)
 gap.plot                Display a plot with one or two gaps (missing
                         ranges) on one axis
-gap_barp                Display a barplot with a gap (missing range) on
-                        one axis
+get_axispos3d           Get axis positions on a 3D plot
 get.breaks              Get the breakpoints for a weighted histogram
 get.gantt.info          Gather the information to create a Gantt chart
 get.segs                Calculate the midpoints and limits for a
@@ -84,7 +85,6 @@ getIntersectList        Enter a set intersection list
 getMarginWidth          Find the margin width necessary to fit text or
                         a legend next to a plot
 getYmult                Correct for aspect and coordinate ratio
-get_axispos3d           Get axis positions on a 3D plot
 gradient.rect           Display a rectangle filled with an arbitrary
                         color gradient
 hexagon                 Draw a hexagon
@@ -117,9 +117,9 @@ pie.labels              Place labels on a pie chart
 pie3D                   Display a 3D pie chart
 pie3D.labels            Display labels on a 3D pie chart
 placeLabels             Place labels in boxes
+plot_bg                 Add a background color to a plot
 plotCI                  Plot confidence intervals/error bars
 plotH                   Scatterplot with histogram-like bars.
-plot_bg                 Add a background color to a plot
 plotrix-package         Specialized plots and plotting accessories
 polar.plot              Plot values on a circular grid of 0 to 360
                         degrees

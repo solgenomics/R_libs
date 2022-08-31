@@ -1,6 +1,6 @@
 Package: admisc
-Version: 0.24
-Date: 2022-02-11
+Version: 0.29
+Date: 2022-06-20
 Title: Adrian Dusa's Miscellaneous
 Authors@R: person(given = "Adrian", family = "Dusa",
                   role = c("aut", "cre", "cph"),
@@ -9,15 +9,14 @@ Authors@R: person(given = "Adrian", family = "Dusa",
 Depends: R (>= 3.5.0)
 Imports: methods
 Suggests: QCA (>= 3.7)
-Description: Contains functions used across packages 'declared', 'DDIwR', 'mixed',
-    'QCA' and 'venn'. Interprets and translates, factorizes and negates SOP - Sum
-    of Products expressions, for both binary and multi-value crisp sets, and
-    extracts information (set names, set values) from those expressions. Other
-    functions perform various other checks if possibly numeric (even if all
-    numbers reside in a character vector) and coerce to numeric, or check if the
-    numbers are whole. It also offers, among many others, a highly flexible
-    recoding routine and a more flexible alternative to the base function
-    'with()'.
+Description: Contains functions used across packages 'DDIwR', 'QCA' and 'venn'.
+    Interprets and translates, factorizes and negates SOP - Sum of Products
+    expressions, for both binary and multi-value crisp sets, and extracts
+    information (set names, set values) from those expressions. Other functions
+    perform various other checks if possibly numeric (even if all numbers reside
+    in a character vector) and coerce to numeric, or check if the numbers are
+    whole. It also offers, among many others, a highly versatile recoding
+    routine and a more flexible alternative to the base function 'with()'.
     Some of the functions in this package use related functions from package
     'QCA'. Users are encouraged to install that package despite not being listed
     in the Imports field, due to circular dependency issues.
@@ -25,9 +24,9 @@ License: GPL (>= 3)
 URL: https://github.com/dusadrian/admisc
 BugReports: https://github.com/dusadrian/admisc/issues
 NeedsCompilation: yes
-Packaged: 2022-02-11 09:11:04 UTC; dusadrian
+Packaged: 2022-06-20 09:58:23 UTC; dusadrian
 Author: Adrian Dusa [aut, cre, cph] (<https://orcid.org/0000-0002-3525-9253>)
 Maintainer: Adrian Dusa <dusa.adrian@unibuc.ro>
 Repository: CRAN
-Date/Publication: 2022-02-11 09:40:02 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2022-02-15 16:24:52 UTC; unix
+Date/Publication: 2022-06-20 11:30:05 UTC
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-08-30 19:07:49 UTC; unix

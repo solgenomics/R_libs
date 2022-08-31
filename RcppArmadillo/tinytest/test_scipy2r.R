@@ -1,6 +1,6 @@
 ## py2r.R: Conversion of SciPy sparse matrix to R
 ##
-## Copyright (C) 2017 - 2020  Binxiang Ni and Dirk Eddelbuettel
+## Copyright (C) 2017 - 2022  Binxiang Ni and Dirk Eddelbuettel
 ##
 ## This file is part of RcppArmadillo.
 ##
@@ -25,7 +25,8 @@
 .onWindows <- .Platform$OS.type == "windows"
 .is32bit <- .Platform$r_arch == "i386"
 
-if (.onWindows && .is32bit) exit_file("Do not bother on 32-bit Windows")
+#if (.onWindows && .is32bit) exit_file("Do not bother on 32-bit Windows")
+if (.onWindows) exit_file("Do not bother on Windows")
 
 if (!requireNamespace("Matrix", quietly=TRUE)) exit_file("Package Matrix missing")
 if (!requireNamespace("reticulate", quietly=TRUE)) exit_file("Package reticulate missing")
@@ -54,7 +55,7 @@ dimnames(M) <- NULL
 
 #test.csc2dgc <- function() {
 csc <- sp$csc_matrix(mat)
-dgC <- methods::as(M, "dgCMatrix")
+dgC <- methods::as(M, "CsparseMatrix")
 expect_equal(dgC, csc, info="csc2dgc")
 
 #test.coo2dgt <- function() {
@@ -68,7 +69,7 @@ expect_equal(dgT, coo, info="coo2dgt") #RcppArmadillo:::.SciPy2R(coo))
 
 #test.csr2dgr <- function() {
 csr <- sp$csr_matrix(mat)
-dgR <- methods::as(M, "dgRMatrix")
+dgR <- methods::as(M, "RsparseMatrix")
 expect_equal(dgR, csr, info="csr2dgr") #RcppArmadillo:::.SciPy2R(csr))
 
 #test.other <- function() {

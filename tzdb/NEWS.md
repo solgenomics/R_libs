@@ -1,3 +1,16 @@
+# tzdb 0.3.0
+
+* Updated the embedded date library
+  (SHA 9ea5654c1206e19245dc21d8a2c433e090c8c3f5) (#22).
+
+* Updated the time zone database to 2022a (#21).
+
+* R >=3.4.0 is now required. This is consistent with the standards of the
+  tidyverse.
+
+* cpp11 >=0.4.2 is now required to ensure that a fix related to unwind
+  protection is included.
+
 # tzdb 0.2.0
 
 * Updated the time zone database to 2021e (#12).

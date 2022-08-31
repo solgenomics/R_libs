@@ -1,40 +1,10 @@
-%&%-methods             Boolean Arithmetic Matrix Products: '%&%' and
-                        Methods
-%*%-methods             Matrix (Cross) Products (of Transpose)
-BunchKaufman-methods    Bunch-Kaufman Decomposition Methods
-CAex                    Albers' example Matrix with "Difficult" Eigen
-                        Factorization
-CHMfactor-class         CHOLMOD-based Cholesky Factorizations
-Cholesky                Cholesky Decomposition of a Sparse Matrix
-Cholesky-class          Cholesky and Bunch-Kaufman Decompositions
-CsparseMatrix-class     Class "CsparseMatrix" of Sparse Matrices in
-                        Column-compressed Form
-Diagonal                Create Diagonal Matrix Object
-Hilbert                 Generate a Hilbert matrix
-KNex                    Koenker-Ng Example Sparse Model Matrix and
-                        Response Vector
-KhatriRao               Khatri-Rao Matrix Product
-LU-class                LU (dense) Matrix Decompositions
-Matrix                  Construct a Classed Matrix
-Matrix-class            Virtual Class "Matrix" Class of Matrices
-MatrixClass             The Matrix (Super-) Class of a Class
-MatrixFactorization-class
-                        Class "MatrixFactorization" of Matrix
-                        Factorizations
-RsparseMatrix-class     Class "RsparseMatrix" of Sparse Matrices in
-                        Row-compressed Form
-Schur                   Schur Decomposition of a Matrix
-Schur-class             Class "Schur" of Schur Matrix Factorizations
-SparseM-coerce-methods
-                        Sparse Matrix Coercion from and to those from
-                        package 'SparseM'
-TsparseMatrix-class     Class "TsparseMatrix" of Sparse Matrices in
-                        Triplet Form
-USCounties              USCounties Contiguity Matrix
 [-methods               Methods for "[": Extraction or Subsetting in
                         Package 'Matrix'
 [<--methods             Methods for "[<-" - Assigning to Subsets for
                         'Matrix'
+%*%-methods             Matrix (Cross) Products (of Transpose)
+%&%-methods             Boolean Arithmetic Matrix Products: '%&%' and
+                        Methods
 abIndex-class           Class "abIndex" of Abstract Index Vectors
 abIseq                  Sequence Generation of "abIndex", Abstract
                         Index Vectors
@@ -45,18 +15,25 @@ band                    Extract bands of a matrix
 bandSparse              Construct Sparse Banded Matrix from
                         (Sup-/Super-) Diagonals
 bdiag                   Construct a Block Diagonal Matrix
+BunchKaufman-methods    Bunch-Kaufman Decomposition Methods
+CAex                    Albers' example Matrix with "Difficult" Eigen
+                        Factorization
 cBind                   'cbind()' and 'rbind()' recursively built on
                         cbind2/rbind2
+CHMfactor-class         CHOLMOD-based Cholesky Factorizations
 chol                    Choleski Decomposition - 'Matrix' S4 Generic
                         and Methods
 chol2inv-methods        Inverse from Choleski or QR Decomposition -
                         Matrix Methods
+Cholesky                Cholesky Decomposition of a Sparse Matrix
+Cholesky-class          Cholesky and Bunch-Kaufman Decompositions
 colSums                 Form Row and Column Sums and Means
 compMatrix-class        Class "compMatrix" of Composite (Factorizable)
                         Matrices
 condest                 Compute Approximate CONDition number and 1-Norm
                         of (Large) Matrices
-dMatrix-class           (Virtual) Class "dMatrix" of "double" Matrices
+CsparseMatrix-class     Class "CsparseMatrix" of Sparse Matrices in
+                        Column-compressed Form
 ddenseMatrix-class      Virtual Class "ddenseMatrix" of Numeric Dense
                         Matrices
 ddiMatrix-class         Class "ddiMatrix" of Diagonal Numeric Matrices
@@ -64,28 +41,31 @@ denseMatrix-class       Virtual Class "denseMatrix" of All Dense
                         Matrices
 dgCMatrix-class         Compressed, sparse, column-oriented numeric
                         matrices
+dgeMatrix-class         Class "dgeMatrix" of Dense Numeric (S4 Class)
+                        Matrices
 dgRMatrix-class         Sparse Compressed, Row-oriented Numeric
                         Matrices
 dgTMatrix-class         Sparse matrices in triplet form
-dgeMatrix-class         Class "dgeMatrix" of Dense Numeric (S4 Class)
-                        Matrices
+Diagonal                Create Diagonal Matrix Object
+diagonalMatrix-class    Class "diagonalMatrix" of Diagonal Matrices
 diagU2N                 Transform Triangular Matrices from Unit
                         Triangular to General Triangular and Back
-diagonalMatrix-class    Class "diagonalMatrix" of Diagonal Matrices
+dMatrix-class           (Virtual) Class "dMatrix" of "double" Matrices
+dmperm                  Dulmage-Mendelsohn Permutation / Decomposition
 dpoMatrix-class         Positive Semi-definite Dense (Packed |
                         Non-packed) Numeric Matrices
 drop0                   Drop "Explicit Zeroes" from a Sparse Matrix
 dsCMatrix-class         Numeric Symmetric Sparse (column compressed)
                         Matrices
-dsRMatrix-class         Symmetric Sparse Compressed Row Matrices
 dsparseMatrix-class     Virtual Class "dsparseMatrix" of Numeric Sparse
                         Matrices
+dsRMatrix-class         Symmetric Sparse Compressed Row Matrices
 dsyMatrix-class         Symmetric Dense (Packed | Non-packed) Numeric
                         Matrices
 dtCMatrix-class         Triangular, (compressed) sparse column matrices
-dtRMatrix-class         Triangular Sparse Compressed Row Matrices
 dtpMatrix-class         Packed Triangular Dense Matrices - "dtpMatrix"
 dtrMatrix-class         Triangular, dense, numeric matrices
+dtRMatrix-class         Triangular Sparse Compressed Row Matrices
 expand                  Expand a (Matrix) Decomposition into Factors
 expm                    Matrix Exponential
 facmul                  Multiplication by Decomposition Factors
@@ -94,12 +74,13 @@ forceSymmetric          Force a Matrix to 'symmetricMatrix' Without
 formatSparseM           Formatting Sparse Numeric Matrices Utilities
 generalMatrix-class     Class "generalMatrix" of General Matrices
 graph2T                 Conversions "graph" <-> (sparse) Matrix
+Hilbert                 Generate a Hilbert matrix
+image-methods           Methods for image() in Package 'Matrix'
 iMatrix-class           Virtual Classes Not Yet Really Implemented and
                         Used
-image-methods           Methods for image() in Package 'Matrix'
-indMatrix-class         Index Matrices
 index-class             Virtual Class "index" - Simple Class for Matrix
                         Indices
+indMatrix-class         Index Matrices
 invPerm                 Inverse Permutation Vector
 is.na-methods           is.na(), is.infinite() Methods for 'Matrix'
                         Objects
@@ -108,6 +89,9 @@ isSymmetric-methods     Methods for Function isSymmetric in Package
                         'Matrix'
 isTriangular            isTriangular() and isDiagonal() Checking if
                         Matrix is Triangular or Diagonal
+KhatriRao               Khatri-Rao Matrix Product
+KNex                    Koenker-Ng Example Sparse Model Matrix and
+                        Response Vector
 kronecker-methods       Methods for Function 'kronecker()' in Package
                         'Matrix'
 ldenseMatrix-class      Virtual Class "ldenseMatrix" of Dense Logical
@@ -120,19 +104,28 @@ lsyMatrix-class         Symmetric Dense Logical Matrices
 ltrMatrix-class         Triangular Dense Logical Matrices
 lu                      (Generalized) Triangular Decomposition of a
                         Matrix
+LU-class                LU (dense) Matrix Decompositions
 mat2triplet             Map Matrix to its Triplet Representation
-nMatrix-class           Class "nMatrix" of Non-zero Pattern Matrices
+Matrix                  Construct a Classed Matrix
+Matrix-class            Virtual Class "Matrix" Class of Matrices
+MatrixClass             The Matrix (Super-) Class of a Class
+MatrixFactorization-class
+                        Class "MatrixFactorization" of Matrix
+                        Factorizations
 ndenseMatrix-class      Virtual Class "ndenseMatrix" of Dense Logical
                         Matrices
 nearPD                  Nearest Positive Definite Matrix
 ngeMatrix-class         Class "ngeMatrix" of General Dense
                         Nonzero-pattern Matrices
+nMatrix-class           Class "nMatrix" of Non-zero Pattern Matrices
 nnzero                  The Number of Non-Zero Values of a Matrix
 norm                    Matrix Norms
 nsparseMatrix-class     Sparse "pattern" Matrices
 nsyMatrix-class         Symmetric Dense Nonzero-Pattern Matrices
 ntrMatrix-class         Triangular Dense Logical Matrices
 number-class            Class "number" of Possibly Complex Numbers
+packedMatrix-class      Class '"packedMatrix"' of packed dense
+                        symmetric/triangular Matrices
 pMatrix-class           Permutation matrices
 printSpMatrix           Format and Print Sparse Matrices Flexibly
 qr-methods              QR Decomposition - S4 Methods and Generic
@@ -144,12 +137,18 @@ replValue-class         Virtual Class "replValue" - Simple Class for
                         subassignment Values
 rleDiff-class           Class "rleDiff" of rle(diff(.)) Stored Vectors
 rsparsematrix           Random Sparse Matrix
+RsparseMatrix-class     Class "RsparseMatrix" of Sparse Matrices in
+                        Row-compressed Form
+Schur                   Schur Decomposition of a Matrix
+Schur-class             Class "Schur" of Schur Matrix Factorizations
 solve-methods           Methods in Package Matrix for Function
                         'solve()'
-spMatrix                Sparse Matrix Constructor From Triplet
 sparse.model.matrix     Construct Sparse Design / Model Matrices
 sparseLU-class          Sparse LU decomposition of a square sparse
                         matrix
+SparseM-coerce-methods
+                        Sparse Matrix Coercion from and to those from
+                        package 'SparseM'
 sparseMatrix            General Sparse Matrix Construction from Nonzero
                         Entries
 sparseMatrix-class      Virtual Class "sparseMatrix" - Mother of Sparse
@@ -157,6 +156,7 @@ sparseMatrix-class      Virtual Class "sparseMatrix" - Mother of Sparse
 sparseQR-class          Sparse QR decomposition of a sparse matrix
 sparseVector            Sparse Vector Construction from Nonzero Entries
 sparseVector-class      Sparse Vector Classes
+spMatrix                Sparse Matrix Constructor From Triplet
 symmetricMatrix-class   Virtual Class of Symmetric Matrices in Package
                         Matrix
 symmpart                Symmetric Part and Skew(symmetric) Part of a
@@ -164,8 +164,11 @@ symmpart                Symmetric Part and Skew(symmetric) Part of a
 triangularMatrix-class
                         Virtual Class of Triangular Matrices in Package
                         Matrix
+TsparseMatrix-class     Class "TsparseMatrix" of Sparse Matrices in
+                        Triplet Form
 uniqTsparse             Unique (Sorted) TsparseMatrix Representations
 unpack                  Representation of Packed and Unpacked (Dense)
                         Matrices
 updown                  Up- and Down-Dating a Cholesky Decomposition
+USCounties              USCounties Contiguity Matrix
 wrld_1deg               World 1-degree grid contiguity matrix

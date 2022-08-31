@@ -1,6 +1,6 @@
-GenzBretz               Choice of Algorithm and Hyper Parameters
 dmvnorm                 Multivariate Normal Density and Random Deviates
 dmvt                    The Multivariate t Distribution
+GenzBretz               Choice of Algorithm and Hyper Parameters
 pmvnorm                 Multivariate Normal Distribution
 pmvt                    Multivariate t Distribution
 qmvnorm                 Quantiles of the Multivariate Normal

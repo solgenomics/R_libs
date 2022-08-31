@@ -1,3 +1,7 @@
+
+import("polynom")
+importFrom("stats", "deriv", "predict")
+
 export( "jacobi.matrices",
   "chebyshev.c.inner.products", "chebyshev.c.recurrences", "chebyshev.c.polynomials", "chebyshev.c.weight",
   "chebyshev.s.inner.products", "chebyshev.s.recurrences", "chebyshev.s.polynomials", "chebyshev.s.weight",

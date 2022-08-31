@@ -41,13 +41,13 @@ test_splitX <- function()
 test_redo_index <- function() {
     .redo_index <- BiocParallel:::.redo_index
     err <- BiocParallel:::.error("")
-    checkIdentical(logical(), .redo_index(list(), list()))
-    checkIdentical(TRUE, .redo_index(list(1), list(err)))
-    checkIdentical(c(FALSE, TRUE), .redo_index(list(1, "2"), list(1, err)))
+    checkIdentical(integer(), .redo_index(list(), list()))
+    checkIdentical(1L, .redo_index(list(1), list(err)))
+    checkIdentical(2L, .redo_index(list(1, "2"), list(1, err)))
     ## all need recalculating
-    checkIdentical(c(TRUE, TRUE), .redo_index(list("1", "2"), list(err, err)))
+    checkIdentical(1:2, .redo_index(list("1", "2"), list(err, err)))
     ## X can be a vector
-    checkIdentical(c(FALSE, TRUE), .redo_index(1:2, list(1, err)))
+    checkIdentical(2L, .redo_index(1:2, list(1, err)))
     ## lengths differ
     checkException(.redo_index(list(1, 2), list(err)), silent=TRUE)
     ## no previous error

@@ -1,5 +1,6 @@
 FormulaParts-class      Class "FormulaParts"
 ICL                     Generic Utility Functions
+info                    Get Information on Fitted Objects
 MEapply                 Apply functions to Data in Object of Class
                         "ModelEnv"
 ModelEnv-class          Class "ModelEnv"
@@ -12,4 +13,3 @@ Predict                 Model Predictions
 StatModel-class         Class "StatModel"
 StatModelCapabilities-class
                         Class "StatModelCapabilities"
-info                    Get Information on Fitted Objects

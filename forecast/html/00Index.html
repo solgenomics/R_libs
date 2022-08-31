@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head><title>R: Forecasting Functions for Time Series and Linear Models</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> Forecasting Functions for Time Series and Linear Models
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;forecast&rsquo; version 8.16</h2>
+</div><h2>Documentation for package &lsquo;forecast&rsquo; version 8.17.0</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -44,15 +45,13 @@
 
 <table width="100%">
 <tr><td style="width: 25%;"><a href="forecast-package.html">forecast-package</a></td>
-<td>Forecasting Functions for Time Series and Linear Models</td></tr>
+<td>forecast: Forecasting Functions for Time Series and Linear Models</td></tr>
 </table>
 
 <h2><a name="A">-- A --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="accuracy.html">accuracy</a></td>
-<td>Accuracy measures for a forecast model</td></tr>
-<tr><td style="width: 25%;"><a href="accuracy.html">accuracy.default</a></td>
+<tr><td style="width: 25%;"><a href="accuracy.default.html">accuracy.default</a></td>
 <td>Accuracy measures for a forecast model</td></tr>
 <tr><td style="width: 25%;"><a href="Acf.html">Acf</a></td>
 <td>(Partial) Autocorrelation and Cross-Correlation Function Estimation</td></tr>
@@ -72,11 +71,11 @@
 <td>Exponential smoothing state space model</td></tr>
 <tr><td style="width: 25%;"><a href="tbats.html">as.character.tbats</a></td>
 <td>TBATS model (Exponential smoothing state space model with Box-Cox transformation, ARMA errors, Trend and Seasonal components)</td></tr>
-<tr><td style="width: 25%;"><a href="forecast.html">as.data.frame.forecast</a></td>
+<tr><td style="width: 25%;"><a href="forecast.ts.html">as.data.frame.forecast</a></td>
 <td>Forecasting time series</td></tr>
 <tr><td style="width: 25%;"><a href="forecast.mts.html">as.data.frame.mforecast</a></td>
 <td>Forecasting time series</td></tr>
-<tr><td style="width: 25%;"><a href="forecast.html">as.ts.forecast</a></td>
+<tr><td style="width: 25%;"><a href="forecast.ts.html">as.ts.forecast</a></td>
 <td>Forecasting time series</td></tr>
 <tr><td style="width: 25%;"><a href="auto.arima.html">auto.arima</a></td>
 <td>Fit best ARIMA model to univariate time series</td></tr>
@@ -207,8 +206,6 @@
 <td>h-step in-sample forecasts for time series models.</td></tr>
 <tr><td style="width: 25%;"><a href="fitted.Arima.html">fitted.tbats</a></td>
 <td>h-step in-sample forecasts for time series models.</td></tr>
-<tr><td style="width: 25%;"><a href="forecast.html">forecast</a></td>
-<td>Forecasting time series</td></tr>
 <tr><td style="width: 25%;"><a href="forecast.Arima.html">forecast.ar</a></td>
 <td>Forecasting using ARIMA or ARFIMA models</td></tr>
 <tr><td style="width: 25%;"><a href="forecast.Arima.html">forecast.Arima</a></td>
@@ -217,7 +214,7 @@
 <td>Forecasting using a bagged model</td></tr>
 <tr><td style="width: 25%;"><a href="forecast.bats.html">forecast.bats</a></td>
 <td>Forecasting using BATS and TBATS models</td></tr>
-<tr><td style="width: 25%;"><a href="forecast.html">forecast.default</a></td>
+<tr><td style="width: 25%;"><a href="forecast.ts.html">forecast.default</a></td>
 <td>Forecasting time series</td></tr>
 <tr><td style="width: 25%;"><a href="forecast.ets.html">forecast.ets</a></td>
 <td>Forecasting using ETS models</td></tr>
@@ -245,7 +242,7 @@
 <td>Forecasting using Structural Time Series models</td></tr>
 <tr><td style="width: 25%;"><a href="forecast.bats.html">forecast.tbats</a></td>
 <td>Forecasting using BATS and TBATS models</td></tr>
-<tr><td style="width: 25%;"><a href="forecast.html">forecast.ts</a></td>
+<tr><td style="width: 25%;"><a href="forecast.ts.html">forecast.ts</a></td>
 <td>Forecasting time series</td></tr>
 <tr><td style="width: 25%;"><a href="autoplot.ts.html">fortify.ts</a></td>
 <td>Automatically create a ggplot for time series objects</td></tr>
@@ -426,7 +423,7 @@
 <td>k-fold Cross-Validation applied to an autoregressive model</td></tr>
 <tr><td style="width: 25%;"><a href="ets.html">print.ets</a></td>
 <td>Exponential smoothing state space model</td></tr>
-<tr><td style="width: 25%;"><a href="forecast.html">print.forecast</a></td>
+<tr><td style="width: 25%;"><a href="forecast.ts.html">print.forecast</a></td>
 <td>Forecasting time series</td></tr>
 <tr><td style="width: 25%;"><a href="forecast.mts.html">print.mforecast</a></td>
 <td>Forecasting time series</td></tr>
@@ -516,6 +513,8 @@
 <td>Simulation from a time series model</td></tr>
 <tr><td style="width: 25%;"><a href="simulate.ets.html">simulate.nnetar</a></td>
 <td>Simulation from a time series model</td></tr>
+<tr><td style="width: 25%;"><a href="simulate.ets.html">simulate.tbats</a></td>
+<td>Simulation from a time series model</td></tr>
 <tr><td style="width: 25%;"><a href="sindexf.html">sindexf</a></td>
 <td>Forecast seasonal index</td></tr>
 <tr><td style="width: 25%;"><a href="naive.html">snaive</a></td>
@@ -536,7 +535,7 @@
 <td>Fit ARIMA model to univariate time series</td></tr>
 <tr><td style="width: 25%;"><a href="ets.html">summary.ets</a></td>
 <td>Exponential smoothing state space model</td></tr>
-<tr><td style="width: 25%;"><a href="forecast.html">summary.forecast</a></td>
+<tr><td style="width: 25%;"><a href="forecast.ts.html">summary.forecast</a></td>
 <td>Forecasting time series</td></tr>
 <tr><td style="width: 25%;"><a href="forecast.mts.html">summary.mforecast</a></td>
 <td>Forecasting time series</td></tr>
@@ -587,7 +586,9 @@
 <h2><a name="misc">-- misc --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="forecast-package.html">_PACKAGE</a></td>
+<td>forecast: Forecasting Functions for Time Series and Linear Models</td></tr>
 <tr><td style="width: 25%;"><a href="msts.html">`[.msts`</a></td>
 <td>Multi-Seasonal Time Series</td></tr>
 </table>
-</body></html>
+</div></body></html>

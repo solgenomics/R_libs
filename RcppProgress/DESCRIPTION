@@ -21,4 +21,4 @@ NeedsCompilation: no
 Packaged: 2020-02-06 10:57:24 UTC; karl
 Repository: CRAN
 Date/Publication: 2020-02-06 12:10:08 UTC
-Built: R 3.6.3; ; 2020-03-24 19:49:04 UTC; unix
+Built: R 4.2.0; ; 2022-08-30 19:17:36 UTC; unix

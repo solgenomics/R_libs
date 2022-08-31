@@ -4,6 +4,7 @@ importFrom(stats, setNames)
 importFrom(tools, file_path_as_absolute)
 importClassFrom(Matrix, Matrix)  # for the "acbind" and "arbind" methods
 import(BiocGenerics)
+importFrom(MatrixGenerics, rowRanges)
 import(S4Vectors)
 import(IRanges)
 import(GenomeInfoDb)
@@ -18,6 +19,7 @@ import(DelayedArray)
 
 exportClasses(
     Assays, SimpleAssays, ShallowData, ShallowSimpleListAssays,
+    Assays_OR_NULL,
     SummarizedExperiment,
     RangedSummarizedExperiment
 )
@@ -29,7 +31,7 @@ exportClasses(
 
 exportMethods(
     length, names, "names<-",
-    dim, dimnames, "dimnames<-",
+    dim, "dimnames<-",
     "[", "[<-", "[[", "[[<-", "$", "$<-",
     as.data.frame,
     coerce,
@@ -39,6 +41,8 @@ exportMethods(
     Compare,
 
     ## Generics defined in BiocGenerics:
+    nrow, ncol,
+    rownames, colnames,
     cbind, rbind,
     duplicated, match,
     is.unsorted, order, rank, sort,
@@ -47,11 +51,12 @@ exportMethods(
     updateObject,
 
     ## Generics defined in S4Vectors:
+    showAsCell,
     "metadata<-",
+    parallel_slot_names, vertical_slot_names, horizontal_slot_names,
     mcols, "mcols<-",
     elementMetadata, "elementMetadata<-",
     values, "values<-",
-    extractROWS, replaceROWS,
     subset,
     pcompare,
 

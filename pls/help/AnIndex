@@ -69,6 +69,7 @@ summary.mvr	summary.mvr
 svdpc.fit	svdpc.fit
 validationplot	validationplot
 var.jack	var.jack
+vcov.mvr	vcov.mvr
 widekernelpls.fit	widekernelpls.fit
 yarn	yarn
 Yloadings	scores

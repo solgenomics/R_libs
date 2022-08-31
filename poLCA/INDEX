@@ -1,0 +1,19 @@
+carcinoma               Diagnoses of carcinoma (sample data)
+cheating                GPA and chronic cheating (sample data)
+election                2000 National Election Studies survey (sample
+                        data)
+gss82                   1982 General Social Survey (sample data)
+poLCA                   Latent class analysis of polytomous outcome
+                        variables
+poLCA.entropy           Entropy of a fitted latent class model
+poLCA.posterior         Posterior probabilities from a latent class
+                        model
+poLCA.predcell          Predicted cell percentages in a latent class
+                        model
+poLCA.reorder           Reorder latent classes in poLCA
+poLCA.simdata           Create simulated cross-classification data
+poLCA.table             Frequency tables of predicted cell counts from
+                        latent class analysis
+rmulti                  Random draws from a multinomial distribution
+values                  Universalistic vs. particularistic values
+                        (sample data)

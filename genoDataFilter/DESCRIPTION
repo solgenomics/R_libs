@@ -15,14 +15,14 @@ RemoteType: github
 RemoteHost: api.github.com
 RemoteRepo: rPackages
 RemoteUsername: solgenomics
-RemoteRef: master
-RemoteSha: 151576053a7ae379a86d7ec0326d9579090a9e48
+RemoteRef: HEAD
+RemoteSha: fcba2ff34d32bb9035134494dc8ba7a0e44eac6b
 RemoteSubdir: genoDataFilter
 GithubRepo: rPackages
 GithubUsername: solgenomics
-GithubRef: master
-GithubSHA1: 151576053a7ae379a86d7ec0326d9579090a9e48
+GithubRef: HEAD
+GithubSHA1: fcba2ff34d32bb9035134494dc8ba7a0e44eac6b
 GithubSubdir: genoDataFilter
 NeedsCompilation: no
-Packaged: 2020-07-22 10:48:22 UTC; isaak
-Built: R 3.6.3; ; 2020-07-22 10:48:22 UTC; unix
+Packaged: 2022-08-31 00:17:15 UTC; root
+Built: R 4.2.0; ; 2022-08-31 00:17:15 UTC; unix

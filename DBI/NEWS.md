@@ -1,5 +1,19 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# DBI 1.1.3 (2022-06-18)
+
+## Features
+
+- `dbAppendTable()` accepts `Id` (#381, @renkun-ken).
+
+
+## Documentation
+
+- `?dbSendQuery` and related methods gain a section "The data retrieval flow" (#386).
+
+- `?dbSendStatement` and related methods gain a section "The command execution flow" (#386).
+
+
 # DBI 1.1.2 (2021-12-19)
 
 ## Features
@@ -9,11 +23,10 @@
 
 ## Documentation
 
-- Method documentation on pkgdown is clickable and contains methods from all known DBI backends except ROracle (#360).
+- The pkgdown documentation for DBI generics (e.g. `?dbConnect`) contains clickable links to all known backends (except ROracle), and an explanatory sentence (#360).
 - `?Id` gains better examples (#295, #370).
 - Elaborate on status of `dbWriteTable()` in the documentation (#352, #372).
 - Make method definition more similar to S3. All `setMethod()` calls refer to top-level functions (#368).
-- The pkgdown documentation for DBI generics (e.g. `?dbConnect`) contains clickable links to many known backends, and an explanatory sentence (#360).
 - `?dbReadTable` and other pages gain pointers to `Id()` and `SQL()` (#359).
 
 

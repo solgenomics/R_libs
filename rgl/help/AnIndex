@@ -88,7 +88,9 @@ filledContour3d.rglId	contourLines3d
 gc3d	subscene3d
 getBoundary3d	getBoundary3d
 getr3dDefaults	open3d
+getShaders	setUserShaders
 getWidgetId	asRow
+gltfTypes	gltfTypes
 GramSchmidt	GramSchmidt
 grid3d	grid3d
 highlevel	rglIds
@@ -262,6 +264,8 @@ rglwidget	rglwidget
 rglwidgetOutput	shiny
 RGL_DEBUGGING	makeDependency
 RGL_SLOW_DEV	setGraphicsDelay
+RGL_USE_NULL	rgl.useNULL
+RGL_USE_WEBSHOT	snapshot
 rotate3d	matrices
 rotationMatrix	matrices
 scale3d	matrices

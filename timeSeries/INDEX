@@ -1,8 +1,5 @@
                         sample
                         scale
-TimeSeriesClass         timeSeries Class
-TimeSeriesData          Time Series Data Sets
-TimeSeriesSubsettings   Subsettig Time Series
 aggregate-methods       timeSeries Class, Functions and Methods
 align-methods           timeSeries Class, Functions and Methods
 as                      timeSeries Class, Coercion and Transformation
@@ -71,5 +68,8 @@ str                     timeSeries Object Structure
 t,timeSeries-method     timeSeries Transpose
 time                    Get and Set Time stamps of a 'timeSeries'
 timeSeries-package      Utilities and Tools Package
+TimeSeriesClass         timeSeries Class
+TimeSeriesData          Time Series Data Sets
+TimeSeriesSubsettings   Subsettig Time Series
 turns                   Turning Points of a Time Series
 window                  window

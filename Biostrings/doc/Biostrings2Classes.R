@@ -1,5 +1,4 @@
 ### R code from vignette source 'Biostrings2Classes.Rnw'
-### Encoding: UTF-8
 
 ###################################################
 ### code chunk number 1: a1

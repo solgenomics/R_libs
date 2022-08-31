@@ -1,15 +1,15 @@
-InstInnovation          Innovation and Institutional Ownership
-Investment              US Investment Data
-NeweyWest               Newey-West HAC Covariance Matrix Estimation
-PetersenCL              Petersen's Simulated Data for Assessing
-                        Clustered Standard Errors
-PublicSchools           US Expenditures for Public Schools
 bread                   Bread for Sandwiches
 estfun                  Extract Empirical Estimating Functions
+InstInnovation          Innovation and Institutional Ownership
+Investment              US Investment Data
 isoacf                  Isotonic Autocorrelation Function
 kweights                Kernel Weights
 lrvar                   Long-Run Variance of the Mean
 meat                    A Simple Meat Matrix Estimator
+NeweyWest               Newey-West HAC Covariance Matrix Estimation
+PetersenCL              Petersen's Simulated Data for Assessing
+                        Clustered Standard Errors
+PublicSchools           US Expenditures for Public Schools
 sandwich                Making Sandwiches with Bread and Meat
 vcovBS                  (Clustered) Bootstrap Covariance Matrix
                         Estimation

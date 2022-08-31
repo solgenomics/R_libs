@@ -1,5 +1,5 @@
 as.data.frame,Seqinfo-method	Seqinfo-class
-available.species	loadTaxonomyDb
+as.data.frame.Seqinfo	Seqinfo-class
 bsgenomeName	GenomeDescription-class
 bsgenomeName,GenomeDescription-method	GenomeDescription-class
 checkCompatibleSeqinfo	Seqinfo-class
@@ -9,10 +9,10 @@ coerce,data.frame,Seqinfo-method	Seqinfo-class
 coerce,DataFrame,Seqinfo-method	Seqinfo-class
 commonName	GenomeDescription-class
 commonName,GenomeDescription-method	GenomeDescription-class
+DEFAULT_CIRC_SEQS	GenomeInfoDb-internals
 dropSeqlevels	seqlevels-wrappers
 extractSeqlevels	seqlevelsStyle
 extractSeqlevelsByGroup	seqlevelsStyle
-fetchExtendedChromInfoFromUCSC	fetchExtendedChromInfoFromUCSC
 genome	seqinfo
 genome,ANY-method	seqinfo
 genome,Seqinfo-method	Seqinfo-class
@@ -23,6 +23,9 @@ genomeBuilds	mapGenomeBuilds
 GenomeDescription	GenomeDescription-class
 GenomeDescription-class	GenomeDescription-class
 genomeStyles	seqlevelsStyle
+getChromInfoFromEnsembl	getChromInfoFromEnsembl
+getChromInfoFromNCBI	getChromInfoFromNCBI
+getChromInfoFromUCSC	getChromInfoFromUCSC
 intersect,Seqinfo,Seqinfo-method	Seqinfo-class
 isCircular	seqinfo
 isCircular,ANY-method	seqinfo
@@ -52,6 +55,8 @@ provider,GenomeDescription-method	GenomeDescription-class
 providerVersion	GenomeDescription-class
 providerVersion,GenomeDescription-method	GenomeDescription-class
 rankSeqlevels	rankSeqlevels
+registered_NCBI_assemblies	getChromInfoFromNCBI
+registered_UCSC_genomes	getChromInfoFromUCSC
 releaseDate	GenomeDescription-class
 releaseDate,GenomeDescription-method	GenomeDescription-class
 releaseName	GenomeDescription-class
@@ -84,9 +89,11 @@ seqlevelsInUse,Vector-method	seqinfo
 seqlevelsStyle	seqlevelsStyle
 seqlevelsStyle,ANY-method	seqlevelsStyle
 seqlevelsStyle,character-method	seqlevelsStyle
+seqlevelsStyle,Seqinfo-method	seqlevelsStyle
 seqlevelsStyle<-	seqlevelsStyle
 seqlevelsStyle<-,ANY-method	seqlevelsStyle
 seqlevelsStyle<-,character-method	seqlevelsStyle
+seqlevelsStyle<-,Seqinfo-method	seqlevelsStyle
 seqnames	seqinfo
 seqnames,GenomeDescription-method	GenomeDescription-class
 seqnames,Seqinfo-method	Seqinfo-class

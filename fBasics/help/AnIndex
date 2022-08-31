@@ -1,10 +1,9 @@
 fBasics-package	00fBasics-package
-.HedgeFund1	data-examples
-.HedgeFund2	data-examples
 acfPlot	plot-acfPlot
 adTest	test-normalityTests
 akimaInterp	stats-interpAkima
 akimaInterpp	stats-interpAkima
+as.timeSeries	fBasics-reexports
 baseMethods	baseMethods
 basicStats	stats-basicStats
 Boxcar	utils-Heaviside
@@ -50,6 +49,7 @@ dssd	dist-ssd
 fBasics	00fBasics-package
 fBasics-deprecated	fBasics-deprecated
 fBasicsData	data-examples
+fBasics_reexports	fBasics-reexports
 fDISTFIT	dist-DistributionFits
 fDISTFIT-class	dist-DistributionFits
 fHTEST	test-fHTEST
@@ -132,6 +132,7 @@ krigeInterp	stats-interpKrige
 kron	matrix-kron
 ks2Test	test-ks2Test
 ksnormTest	test-normalityTests
+kurtosis	fBasics-reexports
 lacfPlot	plot-acfPlot
 lcg	utils-randLCG
 lillieTest	test-normalityTests
@@ -259,6 +260,7 @@ shapiroTest	test-normalityTests
 show,fDISTFIT-method	dist-DistributionFits
 show,fHTEST-method	test-fHTEST
 Sign	utils-Heaviside
+skewness	fBasics-reexports
 snig	dist-snig
 snigFit	dist-snigFit
 spearmanTest	test-correlationTest

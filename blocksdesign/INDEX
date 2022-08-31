@@ -1,13 +1,13 @@
 A_bound                 Efficiency bounds
-GraecoLatin             Graeco-Latin squares
-HCF                     Finds hcf of any set of positive integers
-MOLS                    Prime power MOLS from finite fields
 blocks                  Block designs for unstructured treatment sets
 blocksdesign-package    Blocks design package
 design                  General block and treatment designs.
 durban                  Durban example data design
 fraction                Optimum treatment set from a candidate set of
                         treatments
+GraecoLatin             Graeco-Latin squares
+HCF                     Finds hcf of any set of positive integers
 isPrime                 Prime number test
 isPrimePower            Finds a prime power solution for N, if
                         available.
+MOLS                    Prime power MOLS from finite fields

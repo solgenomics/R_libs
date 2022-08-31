@@ -13,4 +13,4 @@ Packaged: 2021-06-06 01:48:13 UTC; felipe
 Depends: R (>= 2.10)
 Repository: CRAN
 Date/Publication: 2021-06-06 04:30:02 UTC
-Built: R 3.6.3; ; 2022-02-15 16:44:26 UTC; unix
+Built: R 4.2.0; ; 2022-08-30 20:05:52 UTC; unix

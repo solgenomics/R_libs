@@ -99,13 +99,13 @@ plot.valstat            Simulation-standardised plot and print of
 plotcluster             Discriminant projection plot.
 prediction.strength     Prediction strength for estimating number of
                         clusters
-rFace                   "Face-shaped" clustered benchmark datasets
 randcmatrix             Random partition matrix
 randconf                Generate a sample indicator vector
 randomclustersim        Simulation of validity indexes based on random
                         clusterings
 regmix                  Mixture Model ML for Clusterwise Linear
                         Regression
+rFace                   "Face-shaped" clustered benchmark datasets
 ridgeline               Ridgeline computation
 ridgeline.diagnosis     Ridgeline plots, ratios and unimodality
 simmatrix               Extracting intersections between clusters from

@@ -77,19 +77,6 @@ plantgr <- GRanges(c(1:5,"MT","Pltd"), IRanges(1:7,width=5))
 keepStandardChromosomes(plantgr, species="Arabidopsis thaliana",
                                  pruning.mode="coarse")
 
-## ----genome-description-class, message=FALSE-------------------------------
-library(BSgenome.Celegans.UCSC.ce2)
-class(Celegans)
-is(Celegans, "GenomeDescription")
-provider(Celegans)
-seqinfo(Celegans)
-gendesc <- as(Celegans, "GenomeDescription")
-class(gendesc)
-gendesc
-provider(gendesc)
-seqinfo(gendesc)
-bsgenomeName(gendesc)
-
 ## ----Seqinfo-egs-----------------------------------------------------------
 ## Note that all the arguments (except 'genome') must have the
 ## same length. 'genome' can be of length 1, whatever the lengths

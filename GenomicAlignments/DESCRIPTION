@@ -5,16 +5,21 @@ Description: Provides efficient containers for storing and manipulating
 	to a reference genome). This includes read counting, computing the
 	coverage, junction detection, and working with the nucleotide content
 	of the alignments.
-Version: 1.22.1
+biocViews: Infrastructure, DataImport, Genetics, Sequencing, RNASeq,
+        SNP, Coverage, Alignment, ImmunoOncology
+URL: https://bioconductor.org/packages/GenomicAlignments
+Video: https://www.youtube.com/watch?v=2KqBSbkfhRo ,
+        https://www.youtube.com/watch?v=3PK_jx44QTs
+BugReports: https://github.com/Bioconductor/GenomicAlignments/issues
+Version: 1.32.1
+License: Artistic-2.0
 Encoding: UTF-8
 Author: Hervé Pagès, Valerie Obenchain, Martin Morgan
 Maintainer: Bioconductor Package Maintainer <maintainer@bioconductor.org>
-biocViews: ImmunoOncology, Genetics, Infrastructure, DataImport,
-        Sequencing, RNASeq, SNP, Coverage, Alignment
-Depends: R (>= 3.5.0), methods, BiocGenerics (>= 0.15.3), S4Vectors (>=
-        0.23.19), IRanges (>= 2.15.12), GenomeInfoDb (>= 1.13.1),
-        GenomicRanges (>= 1.37.2), SummarizedExperiment (>= 1.9.13),
-        Biostrings (>= 2.47.6), Rsamtools (>= 1.31.2)
+Depends: R (>= 4.0.0), methods, BiocGenerics (>= 0.37.0), S4Vectors (>=
+        0.27.12), IRanges (>= 2.23.9), GenomeInfoDb (>= 1.13.1),
+        GenomicRanges (>= 1.41.5), SummarizedExperiment (>= 1.9.13),
+        Biostrings (>= 2.55.7), Rsamtools (>= 1.31.2)
 Imports: methods, utils, stats, BiocGenerics, S4Vectors, IRanges,
         GenomicRanges, Biostrings, Rsamtools, BiocParallel
 LinkingTo: S4Vectors, IRanges
@@ -24,7 +29,6 @@ Suggests: ShortRead, rtracklayer, BSgenome, GenomicFeatures,
         TxDb.Dmelanogaster.UCSC.dm3.ensGene,
         BSgenome.Dmelanogaster.UCSC.dm3, BSgenome.Hsapiens.UCSC.hg19,
         DESeq2, edgeR, RUnit, BiocStyle
-License: Artistic-2.0
 Collate: utils.R cigar-utils.R GAlignments-class.R
         GAlignmentPairs-class.R GAlignmentsList-class.R
         GappedReads-class.R OverlapEncodings-class.R
@@ -34,13 +38,11 @@ Collate: utils.R cigar-utils.R GAlignments-class.R
         findOverlaps-methods.R coordinate-mapping-methods.R
         encodeOverlaps-methods.R findCompatibleOverlaps-methods.R
         summarizeOverlaps-methods.R findSpliceOverlaps-methods.R zzz.R
-Video: https://www.youtube.com/watch?v=2KqBSbkfhRo ,
-        https://www.youtube.com/watch?v=3PK_jx44QTs
 git_url: https://git.bioconductor.org/packages/GenomicAlignments
-git_branch: RELEASE_3_10
-git_last_commit: 6db98e3
-git_last_commit_date: 2019-11-12
-Date/Publication: 2019-11-12
+git_branch: RELEASE_3_15
+git_last_commit: 2553580
+git_last_commit_date: 2022-07-21
+Date/Publication: 2022-07-24
 NeedsCompilation: yes
-Packaged: 2019-11-13 01:44:12 UTC; biocbuild
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2022-02-24 20:47:58 UTC; unix
+Packaged: 2022-07-24 20:33:45 UTC; biocbuild
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-08-30 22:15:33 UTC; unix

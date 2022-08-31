@@ -83,7 +83,7 @@ tapply(dfr[, trait.est], eval(parse(text = lf.expr)), mean)
 
 ### {{i+1}}.2.1. Checking assumptions
 
-As it was stated in section 1, it is supposed that the error has a normal distribution with the same variance for all the combinations among the levels of the factors. The following plots help to evaluate this assumptions:
+As it was stated in section 1, it is supposed that the error has a normal distribution with the same variance for all the combinations among the levels of the factors. The following plots help to evaluate these assumptions:
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 10}
 

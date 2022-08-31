@@ -140,7 +140,7 @@ as_scalar_redirect<3>::apply(const Glue< Glue<T1, T2, glue_times>, T3, glue_time
   const strip_inv    <T2>            strip1(X.A.B);
   const strip_diagmat<T2_stripped_1> strip2(strip1.M);
   
-  const bool tmp2_do_inv     = strip1.do_inv;
+  const bool tmp2_do_inv_gen = strip1.do_inv_gen && arma_config::optimise_invexpr;
   const bool tmp2_do_diagmat = strip2.do_diagmat;
   
   if(tmp2_do_diagmat == false)
@@ -187,7 +187,7 @@ as_scalar_redirect<3>::apply(const Glue< Glue<T1, T2, glue_times>, T3, glue_time
     
     if(B_is_vec)
       {
-      if(tmp2_do_inv)
+      if(tmp2_do_inv_gen)
         {
         return val * op_dotext::direct_rowvec_invdiagvec_colvec(A.mem, B, C.mem);
         }
@@ -198,7 +198,7 @@ as_scalar_redirect<3>::apply(const Glue< Glue<T1, T2, glue_times>, T3, glue_time
       }
     else
       {
-      if(tmp2_do_inv)
+      if(tmp2_do_inv_gen)
         {
         return val * op_dotext::direct_rowvec_invdiagmat_colvec(A.mem, B, C.mem);
         }
@@ -326,40 +326,6 @@ as_scalar(const Base<typename T1::elem_type,T1>& X)
   
   return (Proxy<T1>::use_at) ? P.at(0,0) : P[0];
   }
-
-
-template<typename T1>
-arma_warn_unused
-inline
-typename T1::elem_type
-as_scalar(const Gen<T1, gen_randu>& X)
-  {
-  arma_extra_debug_sigprint();
-  
-  typedef typename T1::elem_type eT;
-  
-  arma_debug_check( ((X.n_rows != 1) || (X.n_cols != 1)), "as_scalar(): expression must evaluate to exactly one element" );
-  
-  return eT(arma_rng::randu<eT>());
-  }
-
-
-
-template<typename T1>
-arma_warn_unused
-inline
-typename T1::elem_type
-as_scalar(const Gen<T1, gen_randn>& X)
-  {
-  arma_extra_debug_sigprint();
-  
-  typedef typename T1::elem_type eT;
-  
-  arma_debug_check( ((X.n_rows != 1) || (X.n_cols != 1)), "as_scalar(): expression must evaluate to exactly one element" );
-  
-  return eT(arma_rng::randn<eT>());
-  }
-
 
 
 template<typename T1>

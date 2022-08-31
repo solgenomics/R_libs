@@ -1,3 +1,103 @@
+CHANGES IN VERSION 1.26.0
+-------------------------
+
+DEPRECATED AND DEFUNCT
+
+    o readKallisto() is now defunct after being deprecated in BioC 3.12.
+
+
+CHANGES IN VERSION 1.24.0
+-------------------------
+
+NEW FEATURES
+
+    o Add 'checkDimnames' argument to SummarizedExperiment() constructor
+      function
+
+    o Add showAsCell() method for SummarizedExperiment objects.
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o Check the assay dimnames at SummarizedExperiment construction time:
+      The SummarizedExperiment() constructor function now raises an error
+      if one of the supplied assays has rownames and/or colnames that don't
+      match those of the SummarizedExperiment object to construct.
+
+
+CHANGES IN VERSION 1.22.0
+-------------------------
+
+NEW FEATURES
+
+    o Add combineRows() and combineCols() methods for SummarizedExperiment
+      objects and derivatives. These are more flexible versions of rbind()
+      and cbind() that don't require the objects to combine to have the same
+      columns or rows. Contributed by Aaron Lun.
+
+
+CHANGES IN VERSION 1.20.0
+-------------------------
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o SummarizedExperiment now depends on the MatrixGenerics package.
+
+    o DelayedArray was moved from Depends to Imports.
+
+DEPRECATED AND DEFUNCT
+
+    o Deprecated readKallisto().
+
+BUG FIXES
+
+    o Avoid triggering copies of the assays in assays() getter.
+
+    o Fix long-standing bug in dim() method for Assays objects.
+
+    o Fix assays(x) <- SimpleList(). Before that fix this operation was turning
+      SummarizedExperiment object (or derivative) 'x' into an invalid object.
+
+
+CHANGES IN VERSION 1.18.0
+-------------------------
+
+NEW FEATURES
+
+    o SummarizedExperiment objects with assays of > 4 dimensions are now
+      fully supported.
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o By default the assays() and assay() setters now reject inconsistent
+      dimnames.
+      By default the dimnames on the supplied assay(s) must be identical to
+      the dimnames on the SummarizedExperiment object. The user now must use
+      'withDimnames=FALSE' if it's not the case or they get an error.
+      This is for symmetry with the behavior of the assays() and assay()
+      getters (see issue #35). Unfortunately this change is likely to break
+      existing code but at least the fix is easy.
+
+    o dimnames() now returns NULL instead of list(NULL, NULL) on a
+      SummarizedExperiment object with no dimnames. This is consistent
+      with matrix objects.
+
+    o Swap positions of arguments '...' and 'withDimnames' in assays()
+      setter and getter. So now it's:
+    
+          assays(x, withDimnames=TRUE, ...)
+          assays(x, withDimnames=TRUE, ...) <- value
+
+    o Add 'withDimnames' argument to the assay() getter/setter. So now it's:
+    
+          assay(x, i, withDimnames=TRUE, ...)
+          assay(x, i, withDimnames=TRUE, ...) <- value
+    
+      Note that before this change, the user was able to explicitly set
+      'withDimnames' when calling assay() but since this was not a formal
+      argument it was forwarded to assays() via the ellipsis. Having it as
+      a formal argument makes it easier to discover and allows tab completion.
+
+
 CHANGES IN VERSION 1.16.0
 -------------------------
 

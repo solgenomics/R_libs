@@ -46,9 +46,9 @@ names                   get or set worksheet names
 openXL                  Open a Microsoft Excel file (xls/xlsx) or an
                         openxlsx Workbook
 openxlsx                xlsx reading, writing and editing.
+openxlsx_options        openxlsx Options
 openxlsxFontSizeLookupTable
                         Font Size Lookup tables
-openxlsx_options        openxlsx Options
 pageBreak               add a page break to a worksheet
 pageSetup               Set page margins, orientation and print scaling
 protectWorkbook         Protect a workbook from modifications
@@ -72,9 +72,9 @@ setHeaderFooter         Set document headers and footers
 setLastModifiedBy       Add another author to the meta data of the
                         file.
 setRowHeights           Set worksheet row heights
+sheets                  Returns names of worksheets.
 sheetVisibility         Get/set worksheet visible state
 sheetVisible            Get worksheet visible state.
-sheets                  Returns names of worksheets.
 showGridLines           Set worksheet gridlines to show or hide.
 temp_xlsx               helper function to create tempory directory for
                         testing purpose

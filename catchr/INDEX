@@ -2,8 +2,8 @@ args_and_kwargs         Separate dots into Python-esque '*args' and
                         '**kwargs'
 beep_with               Play short sounds
 catch_expr              Catch conditions
-catchr-DSL              The language of catchr
 catchr_opts             Pass in catchr-specific options
+catchr-DSL              The language of catchr
 collecting-conditions   Collect conditions, without halting processes
 default-catchr-options
                         Default catchr-specific options

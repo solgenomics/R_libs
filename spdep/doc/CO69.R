@@ -1,52 +1,46 @@
-## ----setup, include=FALSE------------------------------------------------
+## ----setup, include=FALSE-----------------------------------------------------
 knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
-## ----echo=TRUE,eval=TRUE,results='hide'----------------------------------
+## ----echo=TRUE,eval=TRUE,results='hide'---------------------------------------
 library(spdep)
-if (require(rgdal, quietly=TRUE)) {
-  eire <- readOGR(system.file("shapes/eire.shp", package="spData")[1])
-} else {
-  require(maptools, quietly=TRUE)
-  eire <- readShapeSpatial(system.file("shapes/eire.shp", package="spData")[1])
-}
+eire <- as(sf::st_read(system.file("shapes/eire.shp", package="spData")[1]), "Spatial")
 row.names(eire) <- as.character(eire$names)
 proj4string(eire) <- CRS("+proj=utm +zone=30 +ellps=airy +units=km")
 
-## ----echo=TRUE,eval=TRUE-------------------------------------------------
+## ----echo=TRUE,eval=TRUE------------------------------------------------------
 class(eire)
 names(eire)
 
-## ----echo=TRUE,eval=TRUE-------------------------------------------------
+## ----echo=TRUE,eval=TRUE------------------------------------------------------
 fn <- system.file("etc/misc/geary_eire.txt", package="spdep")[1]
 ge <- read.table(fn, header=TRUE)
 names(ge)
 
-## ----echo=TRUE,eval=TRUE-------------------------------------------------
+## ----echo=TRUE,eval=TRUE------------------------------------------------------
 row.names(ge) <- as.character(ge$county)
 all.equal(row.names(ge), row.names(eire))
-library(maptools)
-eire_ge <- spCbind(eire, ge)
+eire_ge <- cbind(eire, ge)
 
-## ----echo=TRUE,eval=TRUE-------------------------------------------------
+## ----echo=TRUE,eval=TRUE------------------------------------------------------
 eire_ge1 <- eire_ge[!(row.names(eire_ge) %in% "Dublin"),]
 length(row.names(eire_ge1))
 
-## ----echo=TRUE,eval=TRUE-------------------------------------------------
+## ----echo=TRUE,eval=TRUE------------------------------------------------------
 skewness <- function(z) {z <- scale(z, scale=FALSE); ((sum(z^3)/length(z))^2)/((sum(z^2)/length(z))^3)}
 kurtosis <- function(z) {z <- scale(z, scale=FALSE); (sum(z^4)/length(z))/((sum(z^2)/length(z))^2)}
 
-## ----echo=TRUE,eval=TRUE-------------------------------------------------
+## ----echo=TRUE,eval=TRUE------------------------------------------------------
 print(sapply(as(eire_ge1, "data.frame")[13:24], skewness), digits=3)
 print(sapply(as(eire_ge1, "data.frame")[13:24], kurtosis), digits=4)
 print(sapply(as(eire_ge1, "data.frame")[c(13,16,18,19)], function(x) skewness(log(x))), digits=3)
 print(sapply(as(eire_ge1, "data.frame")[c(13,16,18,19)], function(x) kurtosis(log(x))), digits=4)
 
-## ----echo=TRUE,eval=TRUE-------------------------------------------------
+## ----echo=TRUE,eval=TRUE------------------------------------------------------
 fn <- system.file("etc/misc/unstand_sn.txt", package="spdep")[1]
 unstand <- read.table(fn, header=TRUE)
 summary(unstand)
 
-## ----echo=TRUE,eval=TRUE-------------------------------------------------
+## ----echo=TRUE,eval=TRUE------------------------------------------------------
 class(unstand) <- c("spatial.neighbour", class(unstand))
 of <- ordered(unstand$from)
 attr(unstand, "region.id") <- levels(of)
@@ -54,24 +48,24 @@ unstand$from <- as.integer(of)
 unstand$to <- as.integer(ordered(unstand$to))
 attr(unstand, "n") <- length(unique(unstand$from))
 
-## ----echo=TRUE,eval=TRUE-------------------------------------------------
+## ----echo=TRUE,eval=TRUE------------------------------------------------------
 lw_unstand <- sn2listw(unstand)
 lw_unstand$style <- "B"
 lw_unstand
 
-## ----echo=TRUE,eval=TRUE-------------------------------------------------
+## ----echo=TRUE,eval=TRUE------------------------------------------------------
 nb <- poly2nb(eire_ge1)
 nb
 
-## ----echo=TRUE,eval=TRUE-------------------------------------------------
+## ----echo=TRUE,eval=TRUE------------------------------------------------------
 xx <- diffnb(nb, lw_unstand$neighbours, verbose=TRUE)
 
-## ----echo=TRUE,eval=FALSE,results='hide'---------------------------------
+## ----echo=TRUE,eval=FALSE,results='hide'--------------------------------------
 #  plot(eire_ge1, border="grey60")
 #  plot(nb, coordinates(eire_ge1), add=TRUE, pch=".", lwd=2)
 #  plot(xx, coordinates(eire_ge1), add=TRUE, pch=".", lwd=2, col=3)
 
-## ----eval=TRUE,echo=FALSE, fig.cap="County boundaries and contiguities"----
+## ----eval=TRUE,echo=FALSE, fig.cap="County boundaries and contiguities"-------
 par(mfrow=c(1,2))
 plot(eire_ge1, border="grey40")
 title(xlab="25 Irish counties")
@@ -83,19 +77,23 @@ plot(xx, coordinates(eire_ge1), add=TRUE, pch=".", lwd=2, col=3)
 legend("topleft", legend=c("Contiguous", "Ferry"), lwd=2, lty=1, col=c(1,3), bty="n", cex=0.7)
 par(mfrow=c(1,1))
 
-## ----echo=FALSE,eval=TRUE------------------------------------------------
-load(system.file("etc/misc/raw_grass_borders.RData", package="spdep")[1])
+## ----echo=FALSE,eval=TRUE-----------------------------------------------------
+load(system.file("etc/misc/raw_grass_borders_new.RData", package="spdep")[1])
 
-## ----echo=TRUE,eval=FALSE,results='hide'---------------------------------
-#  library(maptools)
-#  SG <- Sobj_SpatialGrid(eire_ge1)$SG
-#  library(spgrass6)
-#  grass_home <- "/home/rsb/topics/grass/g64/grass-6.4.0svn"
+## ----echo=TRUE,eval=FALSE,results='hide'--------------------------------------
+#  library(terra)
+#  v_eire_ge1 <-vect(eire_ge1)
+#  SG <- rasterize(v_eire_ge1, rast(nrows=70, ncols=50, extent=ext(v_eire_ge1)), field="county")
+#  library(rgrass7)
+#  grass_home <- "/home/rsb/topics/grass/g820/grass82"
 #  initGRASS(grass_home, home=tempdir(), SG=SG, override=TRUE)
-#  writeVECT6(eire_ge1, "eire", v.in.ogr_flags=c("o", "overwrite"))
+#  write_VECT(v_eire_ge1, "eire", flags=c("o", "overwrite"))
 #  res <- vect2neigh("eire", ID="serlet")
 
-## ----echo=TRUE,eval=TRUE-------------------------------------------------
+## ----echo=TRUE,eval=TRUE------------------------------------------------------
+res$length <- res$length*1000
+attr(res, "external") <- attr(res, "external")*1000
+attr(res, "total") <- attr(res, "total")*1000
 grass_borders <- sn2listw(res)
 raw_borders <- grass_borders$weights
 int_tot <- attr(res, "total") - attr(res, "external")
@@ -106,7 +104,7 @@ combo_km <- lapply(1:length(inv_dlist), function(i) inv_dlist[[i]]*prop_borders[
 combo_km_lw <- nb2listw(grass_borders$neighbours, glist=combo_km, style="B")
 summary(combo_km_lw)
 
-## ----echo=TRUE,eval=TRUE-------------------------------------------------
+## ----echo=TRUE,eval=TRUE------------------------------------------------------
 red_lw_unstand <- lw_unstand
 Clare <- which(attr(lw_unstand, "region.id") == "C")
 Kerry <- which(attr(lw_unstand, "region.id") == "H")
@@ -119,7 +117,7 @@ red_lw_unstand$weights[[Kerry]] <- red_lw_unstand$weights[[Kerry]][-Clare_in_Ker
 summary(red_lw_unstand)
 cor(unlist(red_lw_unstand$weights), unlist(combo_km_lw$weights))
 
-## ----echo=TRUE,eval=TRUE-------------------------------------------------
+## ----echo=TRUE,eval=TRUE------------------------------------------------------
 flatten <- function(x, digits=3, statistic="I") {
   res <- c(format(x$estimate, digits=digits),
     format(x$statistic, digits=digits),
@@ -133,7 +131,7 @@ flatten <- function(x, digits=3, statistic="I") {
 `original weights` <- moran.test(eire_ge1$ocattlepacre, red_lw_unstand)
 print(rbind(flatten(`reconstructed weights`), flatten(`original weights`)), quote=FALSE)
 
-## ----echo=TRUE,eval=TRUE-------------------------------------------------
+## ----echo=TRUE,eval=TRUE------------------------------------------------------
 eire_ge1$ln_pagval2_10 <- log(eire_ge1$pagval2_10)
 eire_ge1$ln_cowspacre <- log(eire_ge1$cowspacre)
 eire_ge1$ln_pigspacre <- log(eire_ge1$pigspacre)
@@ -147,7 +145,7 @@ nb_B
 lw_std <- nb2listw(lw_unstand$neighbours, glist=lw_unstand$weights, style="W")
 lw_std
 
-## ----echo=TRUE,eval=TRUE-------------------------------------------------
+## ----echo=TRUE,eval=TRUE------------------------------------------------------
 system.time({
 MoranN <- lapply(vars, function(x) moran.test(eire_ge1[[x]], listw=nb_B, randomisation=FALSE))
 MoranR <- lapply(vars, function(x) moran.test(eire_ge1[[x]], listw=nb_B, randomisation=TRUE))
@@ -296,18 +294,21 @@ oores <- res - ores[,c(1,3,5)]
 apply(oores, 2, mad)
 all((res >= alpha_0.05) == (ores[,c(1,3,5)] >= alpha_0.05))
 
-## ----echo=TRUE,eval=TRUE----------------------------------------------------------------
+## ---- echo=FALSE,eval=TRUE--------------------------------------------------------------
+run <- require("spatialreg", quiet=TRUE) && packageVersion("spatialreg") >= "1.2"
+
+## ----echo=TRUE,eval=run-----------------------------------------------------------------
 vars_scaled <- lapply(vars, function(x) scale(eire_ge1[[x]], scale=FALSE))
 nb_W <- nb2listw(lw_unstand$neighbours, style="W")
-pre <- spdep:::preAple(0, listw=nb_W)
-MoranAPLE <- sapply(vars_scaled, function(x) spdep:::inAple(x, pre))
-pre <- spdep:::preAple(0, listw=lw_std, override_similarity_check=TRUE)
-Prop_stdAPLE <- sapply(vars_scaled, function(x) spdep:::inAple(x, pre))
+pre <- spatialreg:::preAple(0, listw=nb_W)
+MoranAPLE <- sapply(vars_scaled, function(x) spatialreg:::inAple(x, pre))
+pre <- spatialreg:::preAple(0, listw=lw_std, override_similarity_check=TRUE)
+Prop_stdAPLE <- sapply(vars_scaled, function(x) spatialreg:::inAple(x, pre))
 res <- cbind(MoranAPLE, Prop_stdAPLE)
 colnames(res) <- c("APLE W", "APLE Gstd")
 rownames(res) <- vars
 
-## ----echo=TRUE,eval=TRUE----------------------------------------------------------------
+## ----echo=TRUE,eval=run-----------------------------------------------------------------
 print(formatC(res, format="f", digits=4), quote=FALSE)
 
 ## ----results='asis',eval=TRUE,echo=FALSE, fig.cap="Three contrasted spatial weights definitions"----

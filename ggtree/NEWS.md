@@ -2,6 +2,15 @@
 
 # TODO LIST
 
+
++ TreeAndLeaf layout: <https://www.bioconductor.org/packages/TreeAndLeaf>
++ `phylogeography`
+  - <https://stackoverflow.com/questions/68668788/phylogeography-how-to-combine-phylogenetic-tree-and-geographic-map-and-create>
++ `phylomorphospace`
+  - <https://github.com/YuLab-SMU/ggtree/issues/370>
+  - <https://github.com/wabarr/ggphylomorpho>
++ visualize support values obtained from different methods
+  - <https://github.com/YuLab-SMU/ggtree/issues/451>
 + `height` parameter to `collapse()`
   - <https://github.com/YuLab-SMU/ggtree/issues/409#issuecomment-944034311>
 + rewrite `revts` to `scale_revts`
@@ -11,17 +20,38 @@
   - <https://www.rdocumentation.org/packages/phytools/versions/0.7-70/topics/cophylo> 
 + `fortify` method for `phyloseq` object should return a tidy data.frame
   - maybe we can defined another object (inherited from treedata?) and provide converter for `phyloseq`
-+ update ggtree man files
 + The `daylight` algorithm is quite slow compare to `ggraph` and needs to  be optimized
   - <https://github.com/thomasp85/ggraph/commit/14de66f1225336179b4598cb42a4beda95682211>
 
 -->
 
+# ggtree 3.3.3
+
++ `geom_striplab()` that supports `aes()` mapping (2022-04-22, Fri, #493)
++ `to.bottom` parameter introduced in `geom_hilight()` to allow the highlight layer was added into the lowest layer stack (2022-04-22, Fri, #492)
+
+# ggtree 3.3.2
+
++ mv `identify()` method to 'ggfun' (2022-04-01, Fri)
++ update `identify.gg()` to support 'ggplot' object and `+xlim()` 
++ update man files (2022-03-23, Wed, #489)
+
+# ggtree 3.3.1
+  
++ use graph layouts to visualize tree (2021-12-10, Fri, #460, #461)
+  - igraph layout 
+  - graphlayouts: <https://cran.r-project.org/web/packages/graphlayouts/index.html>
++ `scale_color_subtree` and `scale_colour_subtree` to color subtree via taxa group information (e.g., cutree, or kmeans) (2021-12-01, Wed)
++ set `na.value = 'white'` in `msaplot()` (2021-10-29, Fri)
+
+# ggtree 3.2.0
+
++ Bioconductor 3.14 release
 
 # ggtree 3.1.6
 
 + `geom_cladelab` now supports extend parameter as in `geom_cladelabel` (2021-10-14, Thu, @xiangpin, #446)
-+ `geom_hilight` supports fill linear gradient colour and round rect background (2021-10-11, Mon; @xiangpin, #444)
++ `geom_hilight` supports fill linear gradient colour and round rect background (2021-10-11, Mon; @xiangpin, #449, #444)
 + work with negative edge lengths (`hclust` may generate negative tree heights) (2021-09-29, Wed; @xiangpin, #441, #445)
 
 # ggtree 3.1.5

@@ -13,7 +13,6 @@ class:TxDb	TxDb-class
 columns,TxDb-method	select-methods
 coordinate-mapping	coordinate-mapping-methods
 coverageByTranscript	coverageByTranscript
-DEFAULT_CIRC_SEQS	DEFAULT_CIRC_SEQS
 disjointExons	disjointExons
 disjointExons,TxDb-method	disjointExons
 distance,GenomicRanges,TxDb-method	nearest-methods
@@ -24,6 +23,7 @@ exonsBy	transcriptsBy
 exonsBy,TxDb-method	transcriptsBy
 exonsByOverlaps	transcriptsByOverlaps
 exonsByOverlaps,TxDb-method	transcriptsByOverlaps
+extendExonsIntoIntrons	extendExonsIntoIntrons
 extractTranscriptSeqs	extractTranscriptSeqs
 extractTranscriptSeqs,ANY-method	extractTranscriptSeqs
 extractTranscriptSeqs,DNAString-method	extractTranscriptSeqs
@@ -40,7 +40,6 @@ fiveUTRsByTranscript,TxDb-method	transcriptsBy
 genes	transcripts
 genes,TxDb-method	transcripts
 getChromInfoFromBiomart	makeTxDbFromBiomart
-getChromInfoFromUCSC	makeTxDbFromUCSC
 getPromoterSeq	getPromoterSeq-methods
 getPromoterSeq,GRanges-method	getPromoterSeq-methods
 getPromoterSeq,GRangesList-method	getPromoterSeq-methods
@@ -93,13 +92,15 @@ pmapToTranscripts,GenomicRanges,GRangesList-method	coordinate-mapping-methods
 pmapToTranscripts,GRangesList,GRangesList-method	coordinate-mapping-methods
 promoters	transcripts
 promoters,TxDb-method	transcripts
+proteinToGenome	proteinToGenome
+proteinToGenome,ANY-method	proteinToGenome
+proteinToGenome,GRangesList-method	proteinToGenome
 select,TxDb-method	select-methods
 select-methods	select-methods
 seqinfo,TxDb-method	TxDb-class
 seqlevels0,TxDb-method	TxDb-class
 seqlevels<-,TxDb-method	TxDb-class
 show,TxDb-method	TxDb-class
-species,TxDb-method	TxDb-class
 supportedMiRBaseBuildValues	makeTxDbPackage
 supportedUCSCFeatureDbTables	makeFeatureDbFromUCSC
 supportedUCSCFeatureDbTracks	makeFeatureDbFromUCSC

@@ -1,3 +1,148 @@
+CHANGES IN VERSION 1.30
+-----------------------
+
+USER VISIBLE CHANGES
+
+    o (v 1.29.1) Report first remote error in its entirety.
+    https://github.com/Bioconductor/BiocParallel/issues/165
+
+    o (v 1.29.4) Add bpresult() (extract result vector from return value
+    of tryCatch(bplapply(...))) and allow direct use of tryCatch(bplapply(...))
+    return value as arugment to bplapply(BPREDO= ...). Closes #157
+
+    o (v 1.29.8) The default timeout for worker computation changes
+    from 30 days to .Machine$integer.max (no timeout), allowing for
+    performance improvements when not set.
+
+    o (v 1.29.11) The timeout for establishing a socket connection is
+    set to getOption("timeout") (default 60 seconds).
+
+    o (v 1.29.15) Check for and report failed attempts to open SnowParam
+    ports.
+
+    o (v 1.29.18) add bpfallback= option to control use of `lapply()`
+    (fallback) when 0 or 1 workers are available.
+
+    o (v 1.29.19) add bpexportvariables= option to automatically
+    export global variables, or variables found in packages on the
+    search path, in user-provided `FUN=` functions.
+
+BUG FIXES
+
+    o (v 1.29.2) Fix regression in use of debug() with SerialParam.
+    https://github.com/Bioconductor/BiocParallel/issues/128
+
+    o (v 1.29.3) Fix regression in progress bar display with bplapply().
+    https://github.com/Bioconductor/BiocParallel/issues/172
+
+    o (v 1.29.5) Fix default seed generation when user has non-default
+    generator. https://github.com/Bioconductor/BiocParallel/pull/176
+
+    o (v 1.29.9) Fix validity when workers, specified as character(),
+    are more numerous than (non-zero) tasks.
+    https://github.com/Bioconductor/BiocParallel/pull/181
+
+    o (v 1.30.1) suppress package startup messages on workers
+    https://github.com/Bioconductor/BiocParallel/issues/198
+
+    o (v 1.30.1) coerce timeout to integer (typically from numeric)
+    https://github.com/Bioconductor/BiocParallel/issues/200
+
+    o (v 1.30.2) resetting bpRNGseed() after bpstart() is reproducible
+    https://github.com/Bioconductor/BiocParallel/pull/204
+
+CHANGES IN VERSION 1.28
+-----------------------
+
+USER VISIBLE CHANGES
+
+    o (v 1.27.3) Setting `progressbar = TRUE` for SnowParam() or
+    MulticoreParam() changes the default value of `tasks` from 0 to
+    `.Machine$integer.max`, so that progress on each element of `X` is
+    reported.
+
+    o (v 1.27.3) `tasks` greater than `length(X)` are set to
+    `length(X)`. Thus `.Machine$integer.max`, for instance, assures
+    that each element of `X` is a separate task.
+
+    o (v 1.27.5) Use of random numbers is robust to the distribution
+    of jobs across tasks for SerialParam(), SnowParam(), and
+    MulticoreParam(), for both bplapply() and bpiterate(), using the
+    RNGseed= argument to each *Param(). The change is NOT backward
+    compatible -- users wishing to exactly reproduce earlier results
+    should use a previous version of the package.
+
+    o (v 1.27.8) Standardize SerialParam() construct to enable setting
+    additional fields. Standardize coercion of other BiocParallelParam types
+    (e.g., SnowParam(), MulticoreParam()) to SerialParam() with
+    as(., "SerialParam").
+
+    o (v. 1.27.9) By defualt, do _not_ only run garbage collection
+    after every call to FUN(), except under MulticoreParam(). R's
+    garbage collection algorithm only fails to do well when forked
+    processes (i.e., MulticoreParam) assume that they are the only
+    consumers of process memory.
+
+    o (v 1.27.11) Developer-oriented functions bploop.*() arguments changed.
+
+    o (v 1.27.12) Ignore set.seed() and never increment the global random
+    number stream. This reverts a side-effect of behavior introduced in v.
+    1.27.5 to behavior more consistent with version 1.26.
+
+    o (v 1.27.16) Better BPREDO support for previously started BPPARAM, and
+    'transient' BPPARAM without RNGseed.
+
+BUG FIXES
+
+    o (v 1.27.10) Typo in coercion to SerialParam when only a single worker
+    specified. https://github.com/Bioconductor/BiocParallel/issues/151
+
+CHANGES IN VERSION 1.26
+-----------------------
+
+USER VISIBLE CHANGES
+
+    o (v 1.25.2) bpvalidate() gains an argument to control warning /
+    error / silent signaling, and returns a 'BPValidate' object.
+
+BUG FIXES
+
+    o (v 1.26.1) bptry(bplapply(X, ...)) returns a list of length X,
+    appropriately annotated, when SerialParam(stop.on.error =
+    TRUE). See https://github.com/Bioconductor/BiocParallel/issues/142
+
+CHANGES IN VERSION 1.24
+-----------------------
+
+BUG FIXES
+
+    o (v.1.23.1) bpvalidate() detects variables defined in parent
+    environments; warns on use of global variables.
+
+    o (v.1.23.2) bplapply() runs gc() after each evaluation of `FUN()`, so
+    that workers do not accumulate excessive memory allocations (memory
+    on a per-process basis is not excessive, but cluster-wise could be). See
+    https://github.com/Bioconductor/BiocParallel/pull/124
+
+    o (v.1.24.1) Add 'topLevelEnvironment' to list of blocked global variable
+    exports to address performance regression introduced by testthat 3.0. See
+    https://github.com/Bioconductor/BiocParallel/issues/127
+
+CHANGES IN VERSION 1.22
+-----------------------
+
+USER VISIBLE CHANGES
+
+    o (v 1.20.2) don't advance random number stream when used 'internally'.
+    This behavior alters reproducibility of existing scripts relying
+    (probably implicitly) on the advancing stream.
+    https://github.com/Bioconductor/BiocParallel/issues/110
+
+BUG FIXES
+
+    o (v 1.20.1) bplapply(), bpmapply(), bpvec() propagate names on arguments
+    more correctly, https://github.com/Bioconductor/BiocParallel/issues/108
+
 CHANGES IN VERSION 1.20
 -----------------------
 
@@ -5,9 +150,6 @@ BUG FIXES
 
     o (v 1.19.2) Improve efficiency of MulticoreParam() when state
     does not persist across calls to bplapply().
-
-    o (v 1.20.1) bplapply(), bpmapply(), bpvec() propagate names on arguments
-    more correctly, https://github.com/Bioconductor/BiocParallel/issues/108
 
 CHANGES IN VERSION 1.18
 -----------------------

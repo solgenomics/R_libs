@@ -1,6 +1,6 @@
 Type: Package
 Package: fontawesome
-Version: 0.2.2
+Version: 0.3.0
 Title: Easily Work with 'Font Awesome' Icons
 Description: Easily and flexibly insert 'Font Awesome' icons into 'R Markdown'
     documents and 'Shiny' apps. These icons can be inserted into HTML content
@@ -18,16 +18,19 @@ Authors@R: c(
     person("RStudio", role = c("cph", "fnd"))
     )
 License: MIT + file LICENSE
-URL: https://github.com/rstudio/fontawesome
+URL: https://github.com/rstudio/fontawesome,
+        https://rstudio.github.io/fontawesome/
 BugReports: https://github.com/rstudio/fontawesome/issues
 Encoding: UTF-8
 ByteCompile: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1
 Depends: R (>= 3.3.0)
 Imports: rlang (>= 0.4.10), htmltools (>= 0.5.1.1)
-Suggests: covr, knitr, testthat, rsvg
+Suggests: covr, dplyr (>= 1.0.8), knitr (>= 1.31), testthat (>= 3.0.0),
+        rsvg
+Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2021-07-02 18:33:03 UTC; rich
+Packaged: 2022-07-20 14:07:38 UTC; rich
 Author: Richard Iannone [aut, cre] (<https://orcid.org/0000-0003-3925-190X>),
   Christophe Dervieux [ctb] (<https://orcid.org/0000-0003-4474-2498>),
   Winston Chang [ctb],
@@ -35,5 +38,5 @@ Author: Richard Iannone [aut, cre] (<https://orcid.org/0000-0003-3925-190X>),
   RStudio [cph, fnd]
 Maintainer: Richard Iannone <rich@rstudio.com>
 Repository: CRAN
-Date/Publication: 2021-07-02 18:50:02 UTC
-Built: R 3.6.3; ; 2022-02-15 16:55:21 UTC; unix
+Date/Publication: 2022-07-20 14:50:02 UTC
+Built: R 4.2.0; ; 2022-08-30 19:40:39 UTC; unix

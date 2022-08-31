@@ -8,7 +8,7 @@ library(DelayedArray)
 library(HDF5Array)
 library(SummarizedExperiment)
 library(airway)
-library(pryr)
+library(lobstr)
 
 ## ----airway-------------------------------------------------------------------
 library(airway)
@@ -22,19 +22,19 @@ head(m, n=4)
 tail(m, n=4)
 sum(m != 0) / length(m)
 
-## ----object_size--------------------------------------------------------------
-library(pryr)  # for object_size()
-object_size(m)
+## ----obj_size-----------------------------------------------------------------
+library(lobstr)  # for obj_size()
+obj_size(m)
 
 library(Matrix)
-object_size(as(m, "dgCMatrix"))
+obj_size(as(m, "dgCMatrix"))
 
 library(DelayedArray)
-object_size(as(m, "RleMatrix"))
-object_size(as(t(m), "RleMatrix"))
+obj_size(as(m, "RleMatrix"))
+obj_size(as(t(m), "RleMatrix"))
 
 library(HDF5Array)
-object_size(as(m, "HDF5Matrix"))
+obj_size(as(m, "HDF5Matrix"))
 
 ## ----M------------------------------------------------------------------------
 M <- as(m, "HDF5Matrix")
@@ -111,5 +111,6 @@ setAutoBlockSize(1e6)
 colSums(M)
 
 ## ----cleanup, include=FALSE---------------------------------------------------
+setHDF5DumpFile()
 unlink("~/mydata", recursive=TRUE, force=TRUE)
 

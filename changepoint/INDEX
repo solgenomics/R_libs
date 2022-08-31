@@ -1,12 +1,5 @@
 BINSEG                  Binary Segmentation - Only intended for
                         developer use.
-HC1                     G+C Content in Human Chromosome 1
-Lai2005fig3             Normalized glioblastoma profile for chromosome
-                        13
-Lai2005fig4             Normalized glioblastoma profile for an excerpt
-                        of chromosome 7, the EGFR locus.
-PELT                    PELT (Pruned Exact Linear Time) - Only intended
-                        for developer use.
 changepoint-package     Methods for Changepoint Detection
 class_input             Input all required arguments into cpt classes -
                         Only intended for developer use.
@@ -17,8 +10,15 @@ decision                Decision Function - Only intended for developer
                         use.
 ftse100                 FTSE 100 Daily Returns: 2nd April 1984 - 13th
                         September 2012
+HC1                     G+C Content in Human Chromosome 1
+Lai2005fig3             Normalized glioblastoma profile for chromosome
+                        13
+Lai2005fig4             Normalized glioblastoma profile for an excerpt
+                        of chromosome 7, the EGFR locus.
 ncpts                   Generic Function - ncpts
 nseg                    Generic Function - nseg
+PELT                    PELT (Pruned Exact Linear Time) - Only intended
+                        for developer use.
 penalty_decision        Penalty Decision Function - Only intended for
                         developer use.
 seg.len                 Generic Function - seg.len

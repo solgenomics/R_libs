@@ -30,4 +30,4 @@ URL: https://github.com/bethatkinson/rpart,
 BugReports: https://github.com/bethatkinson/rpart/issues
 Packaged: 2022-01-24 19:17:40 UTC; atkinson
 Date/Publication: 2022-01-24 20:12:45 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2022-02-15 16:35:23 UTC; unix
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-08-30 19:17:52 UTC; unix

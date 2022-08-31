@@ -1,5 +1,5 @@
 Package: biomaRt
-Version: 2.42.1
+Version: 2.52.0
 Title: Interface to BioMart databases (i.e. Ensembl)
 Authors@R: c(person("Steffen", "Durinck", role = c("aut"), 
             email = "biomartdev@gmail.com"), 
@@ -8,11 +8,12 @@ Authors@R: c(person("Steffen", "Durinck", role = c("aut"),
         person("Francois", "Pepin", role="ctb"),
         person(given = "Vince S", family = "Buffalo", role="ctb"),
         person("Mike", "Smith", role=c("ctb", "cre"), 
-            email = "grimbough@gmail.com"))
+            email = "grimbough@gmail.com",
+            comment = c(ORCID = "0000-0002-7800-3848")))
 Depends: methods
-Imports: utils, XML, AnnotationDbi, progress, stringr, httr, openssl,
-        BiocFileCache, rappdirs
-Suggests: annotate, BiocStyle, knitr, rmarkdown, testthat
+Imports: utils, XML (>= 3.99-0.7), AnnotationDbi, progress, stringr,
+        httr, digest, BiocFileCache, rappdirs, xml2
+Suggests: BiocStyle, knitr, rmarkdown, testthat, mockery
 VignetteBuilder: knitr
 biocViews: Annotation
 Description: In recent years a wealth of biological data has become available
@@ -31,17 +32,20 @@ License: Artistic-2.0
 LazyLoad: yes
 NeedsCompilation: no
 Encoding: UTF-8
+RoxygenNote: 7.1.1
+Collate: biomaRtClasses.R methods-Mart.R biomaRt.R caching.R ensembl.R
+        ensembl_wrappers.R ensembl_ssl_settings.R utilityFunctions.R
 git_url: https://git.bioconductor.org/packages/biomaRt
-git_branch: RELEASE_3_10
-git_last_commit: 381229c
-git_last_commit_date: 2020-03-26
-Date/Publication: 2020-03-26
-Packaged: 2020-03-26 23:24:20 UTC; biocbuild
+git_branch: RELEASE_3_15
+git_last_commit: cf4932a
+git_last_commit_date: 2022-04-26
+Date/Publication: 2022-04-26
+Packaged: 2022-04-26 20:07:32 UTC; biocbuild
 Author: Steffen Durinck [aut],
   Wolfgang Huber [aut],
   Sean Davis [ctb],
   Francois Pepin [ctb],
   Vince S Buffalo [ctb],
-  Mike Smith [ctb, cre]
+  Mike Smith [ctb, cre] (<https://orcid.org/0000-0002-7800-3848>)
 Maintainer: Mike Smith <grimbough@gmail.com>
-Built: R 3.6.3; ; 2022-02-24 20:46:28 UTC; unix
+Built: R 4.2.0; ; 2022-08-30 22:15:58 UTC; unix

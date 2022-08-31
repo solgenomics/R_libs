@@ -75,13 +75,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-IMPORTANT NOTE: Starting with Bioconductor 2.14, the
-\Rfunction{forgeBSgenomeDataPkg} function doesn't handle masks anymore
-i.e. now it produces a \term{BSgenome data package} that contains only
-the bare sequences. A new function \Rfunction{forgeMaskedBSgenomeDataPkg}
-has been added to forge a \term{BSgenome data package} with masked
-sequences. This vignette has been updated to reflect these changes.
-
 This vignette describes the process of forging a \term{BSgenome data package}.
 It is intended for Bioconductor users who want to make a new \term{BSgenome
 data package}, not for regular users of these packages.
@@ -128,9 +121,12 @@ on the Bioconductor website if you need to install or update the
 \Rpackage{Biostrings} or \Rpackage{BSgenome} packages.
 
 Questions, comments or bug reports about this vignette or about the
-BSgenomeForge functions are welcome. Please address them to the author
-(\code{hpages@fredhutch.org}) or post them on the Bioconductor support
-site \footnote{\url{https://support.bioconductor.org/}}.
+BSgenomeForge functions are welcome. Please use the Bioconductor support
+site \footnote{\url{https://support.bioconductor.org/}} if you have
+questions or need help about forging a \term{BSgenome data package},
+or about anything related to the \Rpackage{BSgenome} package. For bug
+reports or feature requests, please open an issue on GitHub at
+\url{https://github.com/Bioconductor/BSgenome/issues}.
 
 In the next section (``How to forge a BSgenome data package with bare
 sequences''), we describe how to forge a \term{BSgenome data package}
@@ -318,25 +314,22 @@ sub-subsection of this subsection for an example of a \term{seed file}.
       the \textit{List of UCSC genome releases} table
       \footnote{\url{http://genome.ucsc.edu/FAQ/FAQreleases\#release1}}.
 
-\item \code{provider}: The provider of the \term{sequence data files} e.g.
-      \code{UCSC}, \code{NCBI}, \code{BDGP}, \code{FlyBase}, etc...
-      Should preferably match part 3 of the package name (field \code{Package}).
-
-\item \code{provider\_version}: The provider-side version of the genome.
+\item \code{genome}: The name of the genome. Typically the name of an NCBI
+      assembly (e.g. \code{GRCh38.p12}, \code{WBcel235}, \code{TAIR10.1},
+      \code{ARS-UCD1.2}, etc...) or UCSC genome (e.g. \code{hg38},
+      \code{bosTau9}, \code{galGal6}, \code{ce11}, etc...).
       Should preferably match part 4 of the package name (field \code{Package}).
       For the packages built by the Bioconductor project from a UCSC genome,
       this field corresponds to the \code{UCSC VERSION} field of the
       \textit{List of UCSC genome releases} table.
 
+\item \code{provider}: The provider of the \term{sequence data files} e.g.
+      \code{UCSC}, \code{NCBI}, \code{BDGP}, \code{FlyBase}, etc...
+      Should preferably match part 3 of the package name (field \code{Package}).
+
 \item \code{release\_date}: When this assembly of the genome was released.
       For the packages built by the Bioconductor project from a UCSC genome,
       this field corresponds to the \code{RELEASE DATE} field of the
-      \textit{List of UCSC genome releases} table.
-
-\item \code{release\_name}: The release name or build number of this assembly
-      of the genome.
-      For the packages built by the Bioconductor project from a UCSC genome,
-      this field corresponds to the \code{RELEASE NAME} field of the
       \textit{List of UCSC genome releases} table.
 
 \item \code{source\_url}: The permanent URL where the \term{sequence data
@@ -368,13 +361,14 @@ sub-subsection of this subsection for an example of a \term{seed file}.
       E.g. \code{paste("chr", c(1:20, "X", "M", "Un", paste(c(1:20, "X", "Un"),
       "\_random", sep="")), sep="")}.
 
-\item \code{circ\_seqs}: [OPTIONAL] An {\R} expression returning the names of
-      the circular sequences (in a character vector). If the \code{seqnames}
-      field is specified, then \code{circ\_seqs} must be a subset of it.
-      E.g. \code{"chrM"} for rn4 or \code{c("chrM", "2micron")} for the sacCer2
-      genome (Yeast) from UCSC.
-      The default value for \code{circ\_seqs} is \code{NULL} (no circular
-      sequence).
+\item \code{circ\_seqs}: Not needed if your NCBI assembly or UCSC genome is
+      registered in the \Rpackage{GenomeInfoDb} package.
+      An {\R} expression returning the names of the circular sequences (in a
+      character vector). If the \code{seqnames} field is specified, then
+      \code{circ\_seqs} must be a subset of it. E.g. \code{"chrM"} for rn4
+      or \code{c("chrM", "2micron")} for the sacCer2 genome (Yeast) from UCSC.
+      If the assembly or genome has no circular sequence, set \code{circ\_seqs}
+      to \code{character(0)}.
 
 \item \code{mseqnames}: [OPTIONAL] An {\R} expression returning the names of
       the multiple sequences to forge (in a character vector).

@@ -1,11 +1,12 @@
 epi.2by2                Summary measures for count data presented in a
                         2 by 2 table
-epi.RtoBUGS             R to WinBUGS data conversion
-epi.SClip               Lip cancer in Scotland 1975 - 1980
 epi.about               The library epiR: summary information
 epi.asc                 Write matrix to an ASCII raster file
 epi.betabuster          An R version of Wes Johnson and Chun-Lung Su's
                         Betabuster
+epi.blcm.paras          Number of parameters to be inferred and number
+                        of informative priors required for a Bayesian
+                        latent class model
 epi.bohning             Bohning's test for overdispersion of Poisson
                         data
 epi.ccc                 Concordance correlation coefficient
@@ -53,9 +54,14 @@ epi.occc                Overall concordance correlation coefficient
 epi.offset              Create offset vector
 epi.pooled              Estimate herd test characteristics when pooled
                         sampling is used
-epi.popsize             Estimate population size
+epi.popsize             Estimate population size on the basis of
+                        capture-recapture sampling
 epi.prcc                Partial rank correlation coefficients
-epi.prev                Estimate true prevalence
+epi.prev                Estimate true prevalence and the expected
+                        number of false positives
+epi.psi                 Proportional similarity index
+epi.RtoBUGS             R to WinBUGS data conversion
+epi.SClip               Lip cancer in Scotland 1975 - 1980
 epi.smd                 Fixed-effects meta-analysis of continuous
                         outcomes using the standardised mean difference
                         method
@@ -86,6 +92,10 @@ epi.sscompc             Sample size, power and minimum detectable
 epi.sscomps             Sample size, power and minimum detectable
                         hazard when comparing time to event
 epi.ssdetect            Sample size to detect an event
+epi.ssdxsesp            Sample size to estimate the sensitivity or
+                        specificity of a diagnostic test
+epi.ssdxtest            Sample size to validate a diagnostic test in
+                        the absence of a gold standard
 epi.ssequb              Sample size for a parallel equivalence trial,
                         binary outcome
 epi.ssequc              Sample size for a parallel equivalence trial,
@@ -107,6 +117,85 @@ epi.sssupb              Sample size for a parallel superiority trial,
 epi.sssupc              Sample size for a parallel superiority trial,
                         continuous outcome
 epi.ssxsectn            Sample size, power or minimum detectable
-                        prevalence ratio for a cross-sectional study
+                        prevalence ratio or odds ratio for a
+                        cross-sectional study
 epi.tests               Sensitivity, specificity and predictive value
                         of a diagnostic test
+rsu.adjrisk             Adjusted risk values
+rsu.dxtest              Sensitivity and specificity of diagnostic tests
+                        interpreted in series or parallel
+rsu.epinf               Effective probability of disease
+rsu.pfree.equ           Equilibrium probability of disease freedom
+                        assuming representative or risk based sampling
+rsu.pfree.rs            Calculate the probability of freedom for given
+                        population sensitivity and probability of
+                        introduction
+rsu.pstar               Design prevalence back calculation
+rsu.sep                 Probability that the prevalence of disease in a
+                        population is less than or equal to a specified
+                        design prevalence
+rsu.sep.cens            Surveillance system sensitivity assuming data
+                        from a population census
+rsu.sep.pass            Surveillance system sensitivity assuming
+                        passive surveillance and representative
+                        sampling within clusters
+rsu.sep.rb              Surveillance system sensitivity assuming
+                        risk-based sampling and varying unit
+                        sensitivity
+rsu.sep.rb1rf           Surveillance system sensitivity assuming
+                        risk-based sampling on one risk factor
+rsu.sep.rb2rf           Surveillance system sensitivity assuming
+                        risk-based sampling on two risk factors
+rsu.sep.rb2st           Surveillance system sensitivity assuming risk
+                        based, two-stage sampling
+rsu.sep.rbvarse         Surveillance system sensitivity assuming risk
+                        based sampling and varying unit sensitivity
+rsu.sep.rs              Surveillance system sensitivity assuming
+                        representative sampling
+rsu.sep.rs2st           Surveillance system sensitivity assuming
+                        representative two-stage sampling
+rsu.sep.rsfreecalc      Surveillance system sensitivity for detection
+                        of disease assuming representative sampling and
+                        imperfect test sensitivity and specificity.
+rsu.sep.rsmult          Surveillance system sensitivity by combining
+                        multiple surveillance components
+rsu.sep.rspool          Surveillance system sensitivity assuming
+                        representative sampling, imperfect pooled
+                        sensitivity and perfect pooled specificity
+rsu.sep.rsvarse         Surveillance system sensitivity assuming
+                        representative sampling and varying unit
+                        sensitivity
+rsu.spp.rs              Surveillance system specificity assuming
+                        representative sampling
+rsu.sspfree.rs          Sample size to achieve a desired probability of
+                        disease freedom assuming representative
+                        sampling
+rsu.sssep.rb2st1rf      Sample size to achieve a desired surveillance
+                        system sensitivity assuming risk-based 2-stage
+                        sampling on one risk factor at the cluster
+                        level
+rsu.sssep.rb2st2rf      Sample size to achieve a desired surveillance
+                        system sensitivity assuming risk-based 2-stage
+                        sampling on two risk factors at either the
+                        cluster level, unit level, or both
+rsu.sssep.rbmrg         Sample size to achieve a desired surveillance
+                        system sensitivity assuming risk-based sampling
+                        and multiple sensitivity values within risk
+                        groups
+rsu.sssep.rbsrg         Sample size to achieve a desired surveillance
+                        system sensitivity assuming risk-based sampling
+                        and a single sensitivity value for each risk
+                        group
+rsu.sssep.rs            Sample size to achieve a desired surveillance
+                        system sensitivity assuming representative
+                        sampling
+rsu.sssep.rs2st         Sample size to achieve a desired surveillance
+                        system sensitivity assuming two-stage sampling
+rsu.sssep.rsfreecalc    Sample size to achieve a desired surveillance
+                        system sensitivity to detect disease at a
+                        specified design prevalence assuming
+                        representative sampling, imperfect unit
+                        sensitivity and specificity
+rsu.sssep.rspool        Sample size to achieve a desired surveillance
+                        system sensitivity using pooled samples
+                        assuming representative sampling

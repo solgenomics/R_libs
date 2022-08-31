@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head><title>R: S4 generic functions used in Bioconductor</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> S4 generic functions used in Bioconductor
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;BiocGenerics&rsquo; version 0.32.0</h2>
+</div><h2>Documentation for package &lsquo;BiocGenerics&rsquo; version 0.42.0</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 </ul>
@@ -61,7 +62,9 @@
 <tr><td style="width: 25%;"><a href="append.html">append</a></td>
 <td>Append elements to a vector-like object</td></tr>
 <tr><td style="width: 25%;"><a href="as.data.frame.html">as.data.frame</a></td>
-<td>Coerce an object into a data frame</td></tr>
+<td>Coerce to a data frame</td></tr>
+<tr><td style="width: 25%;"><a href="as.list.html">as.list</a></td>
+<td>Coerce to a list</td></tr>
 <tr><td style="width: 25%;"><a href="as.vector.html">as.vector</a></td>
 <td>Coerce an object into a vector</td></tr>
 <tr><td style="width: 25%;"><a href="S3-classes-as-S4-classes.html">AsIs-class</a></td>
@@ -92,22 +95,8 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="cbind.html">cbind</a></td>
 <td>Combine objects by rows or columns</td></tr>
-<tr><td style="width: 25%;"><a href="S3-classes-as-S4-classes.html">characterORconnection-class</a></td>
+<tr><td style="width: 25%;"><a href="S3-classes-as-S4-classes.html">character_OR_connection-class</a></td>
 <td>S3 classes as S4 classes</td></tr>
-<tr><td style="width: 25%;"><a href="clusterApply.html">clusterApply</a></td>
-<td>Apply operations using clusters</td></tr>
-<tr><td style="width: 25%;"><a href="clusterApply.html">clusterApplyLB</a></td>
-<td>Apply operations using clusters</td></tr>
-<tr><td style="width: 25%;"><a href="clusterApply.html">clusterCall</a></td>
-<td>Apply operations using clusters</td></tr>
-<tr><td style="width: 25%;"><a href="clusterApply.html">clusterEvalQ</a></td>
-<td>Apply operations using clusters</td></tr>
-<tr><td style="width: 25%;"><a href="clusterApply.html">clusterExport</a></td>
-<td>Apply operations using clusters</td></tr>
-<tr><td style="width: 25%;"><a href="clusterApply.html">clusterMap</a></td>
-<td>Apply operations using clusters</td></tr>
-<tr><td style="width: 25%;"><a href="clusterApply.html">clusterSplit</a></td>
-<td>Apply operations using clusters</td></tr>
 <tr><td style="width: 25%;"><a href="colSums.html">colMeans</a></td>
 <td>Form Row and Column Sums and Means</td></tr>
 <tr><td style="width: 25%;"><a href="row_colnames.html">colnames</a></td>
@@ -146,7 +135,7 @@
 <tr><td style="width: 25%;"><a href="dge.html">design&lt;-</a></td>
 <td>Accessors and generic functions used in the context of count datasets</td></tr>
 <tr><td style="width: 25%;"><a href="dims.html">dims</a></td>
-<td>Get the dimensions of all elements in a list-like object</td></tr>
+<td>Get the dimensions of each element of a list-like object</td></tr>
 <tr><td style="width: 25%;"><a href="path.html">dirname</a></td>
 <td>Accessing the path of an object</td></tr>
 <tr><td style="width: 25%;"><a href="path.html">dirname-method</a></td>
@@ -268,12 +257,16 @@
 <td>The number of rows/columns of an array-like object</td></tr>
 <tr><td style="width: 25%;"><a href="nrow.html">ncol</a></td>
 <td>The number of rows/columns of an array-like object</td></tr>
+<tr><td style="width: 25%;"><a href="dims.html">ncols</a></td>
+<td>Get the dimensions of each element of a list-like object</td></tr>
 <tr><td style="width: 25%;"><a href="normalize.html">normalize</a></td>
 <td>Normalize an object</td></tr>
 <tr><td style="width: 25%;"><a href="nrow.html">NROW</a></td>
 <td>The number of rows/columns of an array-like object</td></tr>
 <tr><td style="width: 25%;"><a href="nrow.html">nrow</a></td>
 <td>The number of rows/columns of an array-like object</td></tr>
+<tr><td style="width: 25%;"><a href="dims.html">nrows</a></td>
+<td>Get the dimensions of each element of a list-like object</td></tr>
 </table>
 
 <h2><a name="O">-- O --</a></h2>
@@ -294,20 +287,6 @@
 <h2><a name="P">-- P --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="clusterApply.html">parApply</a></td>
-<td>Apply operations using clusters</td></tr>
-<tr><td style="width: 25%;"><a href="clusterApply.html">parCapply</a></td>
-<td>Apply operations using clusters</td></tr>
-<tr><td style="width: 25%;"><a href="clusterApply.html">parLapply</a></td>
-<td>Apply operations using clusters</td></tr>
-<tr><td style="width: 25%;"><a href="clusterApply.html">parLapplyLB</a></td>
-<td>Apply operations using clusters</td></tr>
-<tr><td style="width: 25%;"><a href="clusterApply.html">parRapply</a></td>
-<td>Apply operations using clusters</td></tr>
-<tr><td style="width: 25%;"><a href="clusterApply.html">parSapply</a></td>
-<td>Apply operations using clusters</td></tr>
-<tr><td style="width: 25%;"><a href="clusterApply.html">parSapplyLB</a></td>
-<td>Apply operations using clusters</td></tr>
 <tr><td style="width: 25%;"><a href="paste.html">paste</a></td>
 <td>Concatenate strings</td></tr>
 <tr><td style="width: 25%;"><a href="path.html">path</a></td>
@@ -412,7 +391,7 @@
 
 <table width="100%">
 <tr><td style="width: 25%;"><a href="t.html">t</a></td>
-<td>Matrix Transponse</td></tr>
+<td>Matrix Transpose</td></tr>
 <tr><td style="width: 25%;"><a href="table.html">table</a></td>
 <td>Cross tabulation and table creation</td></tr>
 <tr><td style="width: 25%;"><a href="tapply.html">tapply</a></td>
@@ -469,11 +448,11 @@
 <tr><td style="width: 25%;"><a href="weights.html">weights</a></td>
 <td>Extract model weights</td></tr>
 <tr><td style="width: 25%;"><a href="which.html">which</a></td>
-<td>Subscript generators</td></tr>
-<tr><td style="width: 25%;"><a href="which.html">which.max</a></td>
-<td>Subscript generators</td></tr>
-<tr><td style="width: 25%;"><a href="which.html">which.min</a></td>
-<td>Subscript generators</td></tr>
+<td>Which values in an object are considered TRUE?</td></tr>
+<tr><td style="width: 25%;"><a href="which.min.html">which.max</a></td>
+<td>What's the index of the first min or max value in an object?</td></tr>
+<tr><td style="width: 25%;"><a href="which.min.html">which.min</a></td>
+<td>What's the index of the first min or max value in an object?</td></tr>
 <tr><td style="width: 25%;"><a href="start.html">width</a></td>
 <td>The start(), end(), width(), and pos() generic getters and setters</td></tr>
 <tr><td style="width: 25%;"><a href="start.html">width&lt;-</a></td>
@@ -493,4 +472,4 @@
 <tr><td style="width: 25%;"><a href="match.html">%in%</a></td>
 <td>Value matching</td></tr>
 </table>
-</body></html>
+</div></body></html>

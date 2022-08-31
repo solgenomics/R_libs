@@ -1,14 +1,13 @@
-GCD                     GCD and LCM for Polynomials
-Math.polynomial         Math Group Methods for Polynomials
-Ops.polynomial          Arithmetic Ops Group Methods for Polynomials
-Summary.polynomial      Summary Group Methods for Polynomials
 as.function.polynomial
                         Coerce a Polynomial to a Function
 change.origin           Change Origin for a Polynomial
 deriv.polynomial        Differentiate a Polynomial
+GCD                     GCD and LCM for Polynomials
 integral.polynomial     Integrate a Polynomial
 lines.polynomial        Lines Method for Polynomials
+Math.polynomial         Math Group Methods for Polynomials
 monic                   Monic Polynomials
+Ops.polynomial          Arithmetic Ops Group Methods for Polynomials
 plot.polynomial         Plot Method for Polynomials
 points.polynomial       Points Method for Polynomials
 poly.calc               Calculate Polynomials from Zeros or Values
@@ -18,3 +17,4 @@ polynomial              Polynomials
 predict.polynomial      Evaluate a Polynomial
 solve.polynomial        Zeros of a Polynomial
 summary.polynomial      Summary of a Polynomial
+Summary.polynomial      Summary Group Methods for Polynomials

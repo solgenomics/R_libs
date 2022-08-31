@@ -1,8 +1,3 @@
-EastAuClimate           Climate of the East Coast of Australia
-SeatacWeather           Daily Rainfall and Temperature at the
-                        Seattle-Tacoma Airport
-USAge                   US national population estimates
-USCancerRates           Rate of Death Due to Cancer in US Counties
 ancestry                Modal ancestry by County according to US 2000
                         Census
 as.layer                Overlay panels of Trellis plots on same or
@@ -15,6 +10,7 @@ custom.theme            Create a lattice theme based on specified
                         colors
 dendrogramGrob          Create a Grob Representing a Dendrogram
 doubleYScale            Draw two plot series with different y scales
+EastAuClimate           Climate of the East Coast of Australia
 ecdfplot                Trellis Displays of Empirical CDF
 ggplot2like.theme       A ggplot2-like theme for Lattice
 gvhd10                  Flow cytometry data from five samples from a
@@ -54,8 +50,12 @@ postdoc                 Reasons for Taking First Postdoctoral
 resizePanels            Resize panels to match data scales
 rootogram               Trellis Displays of Tukey's Hanging Rootograms
 scale.components        Custom lattice axis scales
+SeatacWeather           Daily Rainfall and Temperature at the
+                        Seattle-Tacoma Airport
 segplot                 Plot segments using the Trellis framework
 theEconomist.theme      Generate plots with style like The Economist.
 tileplot                Plot a spatial mosaic from irregular 2D points
+USAge                   US national population estimates
+USCancerRates           Rate of Death Due to Cancer in US Counties
 useOuterStrips          Put Strips on the Boundary of a Lattice Display
 xyplot.stl              Display stl fits with Lattice

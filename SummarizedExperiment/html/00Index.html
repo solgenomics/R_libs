@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head><title>R: SummarizedExperiment container</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> SummarizedExperiment container
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;SummarizedExperiment&rsquo; version 1.16.1</h2>
+</div><h2>Documentation for package &lsquo;SummarizedExperiment&rsquo; version 1.26.1</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -28,6 +29,7 @@
 <a href="#E">E</a>
 <a href="#F">F</a>
 <a href="#G">G</a>
+<a href="#H">H</a>
 <a href="#I">I</a>
 <a href="#K">K</a>
 <a href="#L">L</a>
@@ -39,6 +41,7 @@
 <a href="#S">S</a>
 <a href="#T">T</a>
 <a href="#U">U</a>
+<a href="#V">V</a>
 <a href="#W">W</a>
 <a href="#misc">misc</a>
 </p>
@@ -83,6 +86,10 @@
 <td>Assays objects</td></tr>
 <tr><td style="width: 25%;"><a href="Assays-class.html">AssaysInEnv-class</a></td>
 <td>Assays objects</td></tr>
+<tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">Assays_OR_NULL</a></td>
+<td>SummarizedExperiment objects</td></tr>
+<tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">Assays_OR_NULL-class</a></td>
+<td>SummarizedExperiment objects</td></tr>
 </table>
 
 <h2><a name="C">-- C --</a></h2>
@@ -96,6 +103,8 @@
 <td>Assays objects</td></tr>
 <tr><td style="width: 25%;"><a href="Assays-class.html">class:AssaysInEnv</a></td>
 <td>Assays objects</td></tr>
+<tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">class:Assays_OR_NULL</a></td>
+<td>SummarizedExperiment objects</td></tr>
 <tr><td style="width: 25%;"><a href="RangedSummarizedExperiment-class.html">class:RangedSummarizedExperiment</a></td>
 <td>RangedSummarizedExperiment objects</td></tr>
 <tr><td style="width: 25%;"><a href="Assays-class.html">class:ShallowData</a></td>
@@ -120,6 +129,16 @@
 <td>SummarizedExperiment objects</td></tr>
 <tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">colData&lt;--method</a></td>
 <td>SummarizedExperiment objects</td></tr>
+<tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">colnames-method</a></td>
+<td>SummarizedExperiment objects</td></tr>
+<tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">combineCols</a></td>
+<td>SummarizedExperiment objects</td></tr>
+<tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">combineCols-method</a></td>
+<td>SummarizedExperiment objects</td></tr>
+<tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">combineRows</a></td>
+<td>SummarizedExperiment objects</td></tr>
+<tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">combineRows-method</a></td>
+<td>SummarizedExperiment objects</td></tr>
 <tr><td style="width: 25%;"><a href="RangedSummarizedExperiment-class.html">Compare-method</a></td>
 <td>RangedSummarizedExperiment objects</td></tr>
 <tr><td style="width: 25%;"><a href="coverage-methods.html">coverage</a></td>
@@ -135,12 +154,6 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="Assays-class.html">dim-method</a></td>
 <td>Assays objects</td></tr>
-<tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">dim-method</a></td>
-<td>SummarizedExperiment objects</td></tr>
-<tr><td style="width: 25%;"><a href="RangedSummarizedExperiment-class.html">dimnames-method</a></td>
-<td>RangedSummarizedExperiment objects</td></tr>
-<tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">dimnames-method</a></td>
-<td>SummarizedExperiment objects</td></tr>
 <tr><td style="width: 25%;"><a href="RangedSummarizedExperiment-class.html">dimnames&lt;--method</a></td>
 <td>RangedSummarizedExperiment objects</td></tr>
 <tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">dimnames&lt;--method</a></td>
@@ -172,8 +185,6 @@
 <td>RangedSummarizedExperiment objects</td></tr>
 <tr><td style="width: 25%;"><a href="RangedSummarizedExperiment-class.html">end&lt;--method</a></td>
 <td>RangedSummarizedExperiment objects</td></tr>
-<tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">extractROWS-method</a></td>
-<td>SummarizedExperiment objects</td></tr>
 </table>
 
 <h2><a name="F">-- F --</a></h2>
@@ -204,6 +215,13 @@
 <td>Assays objects</td></tr>
 <tr><td style="width: 25%;"><a href="RangedSummarizedExperiment-class.html">granges-method</a></td>
 <td>RangedSummarizedExperiment objects</td></tr>
+</table>
+
+<h2><a name="H">-- H --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">horizontal_slot_names-method</a></td>
+<td>SummarizedExperiment objects</td></tr>
 </table>
 
 <h2><a name="I">-- I --</a></h2>
@@ -273,12 +291,16 @@
 <td>Intra range transformations of a RangedSummarizedExperiment object</td></tr>
 <tr><td style="width: 25%;"><a href="intra-range-methods.html">narrow-method</a></td>
 <td>Intra range transformations of a RangedSummarizedExperiment object</td></tr>
+<tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">ncol-method</a></td>
+<td>SummarizedExperiment objects</td></tr>
 <tr><td style="width: 25%;"><a href="nearest-methods.html">nearest</a></td>
 <td>Finding the nearest range neighbor in RangedSummarizedExperiment objects</td></tr>
 <tr><td style="width: 25%;"><a href="nearest-methods.html">nearest-method</a></td>
 <td>Finding the nearest range neighbor in RangedSummarizedExperiment objects</td></tr>
 <tr><td style="width: 25%;"><a href="nearest-methods.html">nearest-methods</a></td>
 <td>Finding the nearest range neighbor in RangedSummarizedExperiment objects</td></tr>
+<tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">nrow-method</a></td>
+<td>SummarizedExperiment objects</td></tr>
 </table>
 
 <h2><a name="O">-- O --</a></h2>
@@ -291,6 +313,10 @@
 <h2><a name="P">-- P --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="RangedSummarizedExperiment-class.html">parallel_slot_names-method</a></td>
+<td>RangedSummarizedExperiment objects</td></tr>
+<tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">parallel_slot_names-method</a></td>
+<td>SummarizedExperiment objects</td></tr>
 <tr><td style="width: 25%;"><a href="RangedSummarizedExperiment-class.html">pcompare-method</a></td>
 <td>RangedSummarizedExperiment objects</td></tr>
 <tr><td style="width: 25%;"><a href="nearest-methods.html">precede</a></td>
@@ -328,8 +354,6 @@
 <td>Input kallisto or kallisto bootstrap results.</td></tr>
 <tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">realize-method</a></td>
 <td>SummarizedExperiment objects</td></tr>
-<tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">replaceROWS-method</a></td>
-<td>SummarizedExperiment objects</td></tr>
 <tr><td style="width: 25%;"><a href="intra-range-methods.html">resize</a></td>
 <td>Intra range transformations of a RangedSummarizedExperiment object</td></tr>
 <tr><td style="width: 25%;"><a href="intra-range-methods.html">resize-method</a></td>
@@ -345,6 +369,8 @@
 <tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">rowData&lt;-</a></td>
 <td>SummarizedExperiment objects</td></tr>
 <tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">rowData&lt;--method</a></td>
+<td>SummarizedExperiment objects</td></tr>
+<tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">rownames-method</a></td>
 <td>SummarizedExperiment objects</td></tr>
 <tr><td style="width: 25%;"><a href="RangedSummarizedExperiment-class.html">rowRanges</a></td>
 <td>RangedSummarizedExperiment objects</td></tr>
@@ -380,6 +406,8 @@
 <tr><td style="width: 25%;"><a href="intra-range-methods.html">shift-method</a></td>
 <td>Intra range transformations of a RangedSummarizedExperiment object</td></tr>
 <tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">show-method</a></td>
+<td>SummarizedExperiment objects</td></tr>
+<tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">showAsCell-method</a></td>
 <td>SummarizedExperiment objects</td></tr>
 <tr><td style="width: 25%;"><a href="Assays-class.html">SimpleAssays</a></td>
 <td>Assays objects</td></tr>
@@ -425,6 +453,13 @@
 <td>SummarizedExperiment objects</td></tr>
 </table>
 
+<h2><a name="V">-- V --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">vertical_slot_names-method</a></td>
+<td>SummarizedExperiment objects</td></tr>
+</table>
+
 <h2><a name="W">-- W --</a></h2>
 
 <table width="100%">
@@ -454,4 +489,4 @@
 <tr><td style="width: 25%;"><a href="SummarizedExperiment-class.html">[[&lt;--method</a></td>
 <td>SummarizedExperiment objects</td></tr>
 </table>
-</body></html>
+</div></body></html>

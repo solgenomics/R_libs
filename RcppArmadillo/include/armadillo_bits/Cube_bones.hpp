@@ -208,6 +208,7 @@ class Cube : public BaseCube< eT, Cube<eT> >
   template<typename T1> inline void insert_rows(const uword row_num, const BaseCube<eT,T1>& X);
   template<typename T1> inline void insert_cols(const uword col_num, const BaseCube<eT,T1>& X);
   template<typename T1> inline void insert_slices(const uword slice_num, const BaseCube<eT,T1>& X);
+  template<typename T1> inline void insert_slices(const uword slice_num, const     Base<eT,T1>& X);
   
   
   template<typename gen_type> inline             Cube(const GenCube<eT, gen_type>& X);
@@ -271,6 +272,11 @@ class Cube : public BaseCube< eT, Cube<eT> >
   arma_inline arma_warn_unused       eT& operator() (const uword i);
   arma_inline arma_warn_unused const eT& operator() (const uword i) const;
   
+  #if defined(__cpp_multidimensional_subscript)
+  arma_inline arma_warn_unused       eT& operator[] (const uword in_row, const uword in_col, const uword in_slice);
+  arma_inline arma_warn_unused const eT& operator[] (const uword in_row, const uword in_col, const uword in_slice) const;
+  #endif
+  
   arma_inline arma_warn_unused       eT& at         (const uword in_row, const uword in_col, const uword in_slice);
   arma_inline arma_warn_unused const eT& at         (const uword in_row, const uword in_col, const uword in_slice) const;
   
@@ -286,8 +292,9 @@ class Cube : public BaseCube< eT, Cube<eT> >
        inline arma_warn_unused bool is_finite() const;
   arma_inline arma_warn_unused bool is_empty()  const;
   
-  inline arma_warn_unused bool has_inf() const;
-  inline arma_warn_unused bool has_nan() const;
+  inline arma_warn_unused bool has_inf()       const;
+  inline arma_warn_unused bool has_nan()       const;
+  inline arma_warn_unused bool has_nonfinite() const;
   
   arma_inline arma_warn_unused bool in_range(const uword i) const;
   arma_inline arma_warn_unused bool in_range(const span& x) const;
@@ -441,7 +448,7 @@ class Cube : public BaseCube< eT, Cube<eT> >
   
   public:
   
-  #ifdef ARMA_EXTRA_CUBE_PROTO
+  #if defined(ARMA_EXTRA_CUBE_PROTO)
     #include ARMA_INCFILE_WRAP(ARMA_EXTRA_CUBE_PROTO)
   #endif
   };
@@ -489,6 +496,11 @@ class Cube<eT>::fixed : public Cube<eT>
   
   arma_inline arma_warn_unused       eT& operator() (const uword i);
   arma_inline arma_warn_unused const eT& operator() (const uword i) const;
+  
+  #if defined(__cpp_multidimensional_subscript)
+  arma_inline arma_warn_unused       eT& operator[] (const uword in_row, const uword in_col, const uword in_slice);
+  arma_inline arma_warn_unused const eT& operator[] (const uword in_row, const uword in_col, const uword in_slice) const;
+  #endif
   
   arma_inline arma_warn_unused       eT& at         (const uword in_row, const uword in_col, const uword in_slice);
   arma_inline arma_warn_unused const eT& at         (const uword in_row, const uword in_col, const uword in_slice) const;

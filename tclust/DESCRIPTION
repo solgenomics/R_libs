@@ -1,7 +1,6 @@
 Package: tclust
-Version: 1.4-2
-Date: 2020-09-28
-VersionNote: Released 1.4-1 on 2018-05-24 on CRAN
+Version: 1.5-1
+VersionNote: Released 1.4-2 on 2020-09-28 on CRAN
 Title: Robust Trimmed Clustering
 Author: Agustin Mayo Iscar, Luis Angel Garcia Escudero, Heinrich Fritz
 Maintainer: Valentin Todorov <valentin.todorov@chello.at>
@@ -11,6 +10,6 @@ Suggests: mclust, cluster, mvtnorm, sn
 License: GPL-3
 Repository: CRAN
 NeedsCompilation: yes
-Packaged: 2020-09-29 12:03:43 UTC; valen
-Date/Publication: 2020-09-29 12:40:02 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2022-02-15 16:36:07 UTC; unix
+Packaged: 2022-04-26 21:47:55 UTC; valen
+Date/Publication: 2022-04-26 23:40:02 UTC
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-08-30 19:19:36 UTC; unix

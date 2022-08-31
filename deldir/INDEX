@@ -22,7 +22,7 @@ tileInfo                Extract information from a tile list.
 tilePerim               Calculate tile perimeters.
 toyPattern              A toy marked point pattern object, with 59
                         points.
-triMat                  Produce matrix of triangle vertex indices.
 triang.list             Create a list of Delaunay triangles
+triMat                  Produce matrix of triangle vertex indices.
 volTriPoints            Solute plume concentration data set.
 which.tile              Determine the tile containing a given point.

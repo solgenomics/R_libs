@@ -1,29 +1,27 @@
 Abortion                Attitude Towards Abortion
-Environment             Attitude to the Environment
-GoF.gpcm                Goodness of Fit for Rasch Models
-LSAT                    The Law School Admission Test (LSAT), Section
-                        VI
-Mobility                Women's Mobility
-Science                 Attitude to Science and Technology
-WIRS                    Workplace Industrial Relation Survey Data
 anova.gpcm              Anova method for fitted IRT models
 biserial.cor            Point-Biserial Correlation
 coef.gpcm               Extract Estimated Loadings
 cronbach.alpha          Cronbach's alpha
 descript                Descriptive Statistics
+Environment             Attitude to the Environment
 factor.scores           Factor Scores - Ability Estimates
 fitted.gpcm             Fitted Values for IRT model
 gh                      Gauss-Hermite Quadrature Points
+GoF.gpcm                Goodness of Fit for Rasch Models
 gpcm                    Generalized Partial Credit Model - Polytomous
                         IRT
 grm                     Graded Response Model - Polytomous IRT
 information             Area under the Test or Item Information Curves
 item.fit                Item-Fit Statistics and P-values
+LSAT                    The Law School Admission Test (LSAT), Section
+                        VI
 ltm                     Latent Trait Model - Latent Variable Model for
                         Binary Data
 ltm-package             Latent Trait Models for Item Response Theory
                         Analyses
 margins                 Fit of the model on the margins
+Mobility                Women's Mobility
 mult.choice             Multiple Choice Items to Binary Responses
 person.fit              Person-Fit Statistics and P-values
 plot.descript           Descriptive Statistics Plot method
@@ -35,9 +33,11 @@ rcor.test               Pairwise Associations between Items using a
 residuals.gpcm          Residuals for IRT models
 rmvlogis                Generate Random Responses Patterns under
                         Dichotomous and Polytomous IRT models
+Science                 Attitude to Science and Technology
 summary.gpcm            Summary method for fitted IRT models
 testEquatingData        Prepares Data for Test Equating
 tpm                     Birnbaum's Three Parameter Model
 unidimTest              Unidimensionality Check using Modified Parallel
                         Analysis
 vcov.gpcm               vcov method for fitted IRT models
+WIRS                    Workplace Industrial Relation Survey Data

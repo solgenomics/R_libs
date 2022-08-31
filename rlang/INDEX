@@ -11,12 +11,12 @@ as_string               Cast symbol to string
 bare-type-predicates    Bare type predicates
 box                     Box a value
 bytes-class             Human readable memory sizes
-call2                   Create a call
 call_args               Extract arguments from a call
 call_inspect            Inspect a call
 call_match              Match supplied arguments to function definition
 call_modify             Modify the arguments of a call
 call_name               Extract function name or namespace of a call
+call2                   Create a call
 caller_arg              Find the caller argument for error messages
 catch_cnd               Catch a condition
 check_dots_empty        Check that dots are empty
@@ -39,7 +39,7 @@ env                     Create a new environment
 env_bind                Bind symbols to objects in an environment
 env_browse              Browse environments
 env_cache               Cache a value in an environment
-env_clone               Clone an environment
+env_clone               Clone or coalesce an environment
 env_depth               Depth of an environment chain
 env_get                 Get an object in an environment
 env_has                 Does an environment have or see bindings?

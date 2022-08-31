@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2021-12-18" />
+<meta name="date" content="2022-05-24" />
 
 <title>Cryptographic Hashing in R</title>
 
@@ -255,6 +255,7 @@ if (window.hljs) {
 
 
 
+
 <style type="text/css">
 .main-container {
   max-width: 940px;
@@ -275,6 +276,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -359,27 +363,35 @@ pre code {
 
 
 <h1 class="title toc-ignore">Cryptographic Hashing in R</h1>
-<h4 class="date">2021-12-18</h4>
+<h4 class="date">2022-05-24</h4>
 
 </div>
 
 
-<p>The functions <code>sha1</code>, <code>sha256</code>, <code>sha512</code>, <code>md4</code>, <code>md5</code> and <code>ripemd160</code> bind to the respective <a href="https://www.openssl.org/docs/man1.1.1/man1/openssl-dgst.html">digest functions</a> in OpenSSL’s libcrypto. Both binary and string inputs are supported and the output type will match the input type.</p>
+<p>The functions <code>sha1</code>, <code>sha256</code>,
+<code>sha512</code>, <code>md4</code>, <code>md5</code> and
+<code>ripemd160</code> bind to the respective <a href="https://www.openssl.org/docs/man1.1.1/man1/openssl-dgst.html">digest
+functions</a> in OpenSSL’s libcrypto. Both binary and string inputs are
+supported and the output type will match the input type.</p>
 <pre class="r"><code>md5(&quot;foo&quot;)</code></pre>
 <pre><code>[1] &quot;acbd18db4cc2f85cedef654fccc4a4d8&quot;</code></pre>
 <pre class="r"><code>md5(charToRaw(&quot;foo&quot;))</code></pre>
 <pre><code>md5 ac:bd:18:db:4c:c2:f8:5c:ed:ef:65:4f:cc:c4:a4:d8 </code></pre>
-<p>Functions are fully vectorized for the case of character vectors: a vector with n strings will return n hashes.</p>
+<p>Functions are fully vectorized for the case of character vectors: a
+vector with n strings will return n hashes.</p>
 <pre class="r"><code># Vectorized for strings
 md5(c(&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;))</code></pre>
 <pre><code>[1] &quot;acbd18db4cc2f85cedef654fccc4a4d8&quot; &quot;37b51d194a7513e45b56f6524f2d51f2&quot;
 [3] &quot;73feffa4b7f6bb68e44cf984c85f6e88&quot;</code></pre>
-<p>Besides character and raw vectors we can pass a connection object (e.g. a file, socket or url). In this case the function will stream-hash the binary contents of the connection.</p>
+<p>Besides character and raw vectors we can pass a connection object
+(e.g. a file, socket or url). In this case the function will stream-hash
+the binary contents of the connection.</p>
 <pre class="r"><code># Stream-hash a file
 myfile &lt;- system.file(&quot;CITATION&quot;)
 md5(file(myfile))</code></pre>
 <pre><code>md5 16:a3:1a:bf:39:26:86:31:f2:0e:14:78:bf:64:d6:59 </code></pre>
-<p>Same for URLs. The hash of the <a href="https://cran.r-project.org/bin/windows/base/old/4.0.0/R-4.0.0-win.exe"><code>R-installer.exe</code></a> below should match the one in <a href="https://cran.r-project.org/bin/windows/base/old/4.0.0/md5sum.txt"><code>md5sum.txt</code></a></p>
+<p>Same for URLs. The hash of the <a href="https://cran.r-project.org/bin/windows/base/old/4.0.0/R-4.0.0-win.exe"><code>R-installer.exe</code></a>
+below should match the one in <a href="https://cran.r-project.org/bin/windows/base/old/4.0.0/md5sum.txt"><code>md5sum.txt</code></a></p>
 <pre class="r"><code># Stream-hash from a network connection
 as.character(md5(url(&quot;https://cran.r-project.org/bin/windows/base/old/4.0.0/R-4.0.0-win.exe&quot;)))
 
@@ -387,7 +399,9 @@ as.character(md5(url(&quot;https://cran.r-project.org/bin/windows/base/old/4.0.0
 readLines(&#39;https://cran.r-project.org/bin/windows/base/old/4.0.0/md5sum.txt&#39;)</code></pre>
 <div id="compare-to-digest" class="section level2">
 <h2>Compare to digest</h2>
-<p>Similar functionality is also available in the <strong>digest</strong> package, but with a slightly different interface:</p>
+<p>Similar functionality is also available in the
+<strong>digest</strong> package, but with a slightly different
+interface:</p>
 <pre class="r"><code># Compare to digest
 library(digest)</code></pre>
 <pre><code>
@@ -399,9 +413,9 @@ Attaching package: &#39;digest&#39;</code></pre>
 <pre><code>[1] &quot;acbd18db4cc2f85cedef654fccc4a4d8&quot;</code></pre>
 <pre class="r"><code># Other way around
 digest(cars, skip = 0)</code></pre>
-<pre><code>[1] &quot;d230feee281879f565668b902fab4ea8&quot;</code></pre>
+<pre><code>[1] &quot;c7e952113ffd407840f08b4b48c6f3f7&quot;</code></pre>
 <pre class="r"><code>md5(serialize(cars, NULL))</code></pre>
-<pre><code>md5 17:b8:df:49:c5:82:5d:09:b6:6c:21:4c:a9:db:ae:1a </code></pre>
+<pre><code>md5 6e:68:fb:38:aa:72:2b:69:30:f9:31:a3:30:1a:40:40 </code></pre>
 </div>
 
 

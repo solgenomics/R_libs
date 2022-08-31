@@ -33,4 +33,4 @@ NeedsCompilation: no
 Packaged: 2021-04-07 17:40:07 UTC; rodney
 Repository: CRAN
 Date/Publication: 2021-04-07 18:20:06 UTC
-Built: R 3.6.3; ; 2022-01-20 16:38:56 UTC; unix
+Built: R 4.2.0; ; 2022-08-30 19:39:46 UTC; unix

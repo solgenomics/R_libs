@@ -1,12 +1,14 @@
 Package: fBasics
 Title: Rmetrics - Markets and Basic Statistics
-Date: 2017-11-12
-Version: 3042.89.1
-Author: Diethelm Wuertz [aut],
-	Tobias Setz [cre],
-	Yohan Chalabi [ctb]
-	Martin Maechler [ctb]
-Maintainer: Tobias Setz <tobias.setz@live.com>
+Date: 2022-09-08
+Version: 4021.92
+Authors@R: c(person("Diethelm", "Wuertz", role="aut", comment = "original code")
+	   , person("Tobias", "Setz", role = c("aut"), email = "tobias.setz@live.com")
+	   , person("Yohan", "Chalabi", role = "aut")
+	   , person("Martin","Maechler", role="ctb", email="maechler@stat.math.ethz.ch", comment = c(ORCID = "0000-0002-8685-9910"))
+	   , person("CRAN Team", role = "ctb")
+	   , person(given = c("Georgi", "N."), family = "Boshnakov", 
+                    role = c("cre", "ctb"), email = "georgi.boshnakov@manchester.ac.uk") )
 Description: Provides a collection of functions to 
     explore and to investigate basic properties of financial returns 
     and related quantities.
@@ -14,17 +16,26 @@ Description: Provides a collection of functions to
     and the investigation of distributional properties, including
     parameter estimation and hypothesis testing. Even more there are
     several utility functions for data handling and management.
-Depends: R (>= 2.15.1), timeDate, timeSeries
-Imports: stats, grDevices, graphics, methods, utils, MASS, spatial,
-        gss, stabledist
-ImportsNote: akima not in Imports because of non-GPL licence.
-Suggests: akima, RUnit, tcltk
+Depends: R (>= 2.15.1)
+Imports: timeDate, timeSeries, stats, grDevices, graphics, methods,
+        utils, MASS, spatial, gss, stabledist
+Suggests: interp, RUnit, tcltk
 LazyData: yes
 License: GPL (>= 2)
 Encoding: UTF-8
-URL: https://www.rmetrics.org
+URL:
+        https://r-forge.r-project.org/scm/viewvc.php/pkg/fBasics/?root=rmetrics
+        )devel), https://www.rmetrics.org
+BugReports: https://r-forge.r-project.org/projects/rmetrics
 NeedsCompilation: yes
-Packaged: 2020-03-07 10:25:14 UTC; hornik
+Packaged: 2022-08-08 07:07:38 UTC; georgi
+Author: Diethelm Wuertz [aut] (original code),
+  Tobias Setz [aut],
+  Yohan Chalabi [aut],
+  Martin Maechler [ctb] (<https://orcid.org/0000-0002-8685-9910>),
+  CRAN Team [ctb],
+  Georgi N. Boshnakov [cre, ctb]
+Maintainer: Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>
 Repository: CRAN
-Date/Publication: 2020-03-07 11:06:10 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-03-24 19:53:38 UTC; unix
+Date/Publication: 2022-08-08 11:40:12 UTC
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-08-30 19:40:07 UTC; unix

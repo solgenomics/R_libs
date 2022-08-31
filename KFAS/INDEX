@@ -1,12 +1,3 @@
-GlobalTemp              Two series of average global temperature
-                        deviations for years 1880-1987
-KFAS                    KFAS: Functions for Exponential Family State
-                        Space Models
-KFS                     Kalman Filter and Smoother with Exact Diffuse
-                        Initialization for Exponential Family State
-                        Space Models
-SSMarima                Create a State Space Model Object of Class
-                        SSModel
 [<-.SSModel             Extract or Replace Parts of a State Space Model
 alcohol                 Alcohol related deaths in Finland 1969-2013
 approxSSM               Linear Gaussian Approximation for Exponential
@@ -20,10 +11,17 @@ fitSSM                  Maximum Likelihood Estimation of a State Space
                         Model
 fitted.SSModel          Smoothed Estimates or One-step-ahead
                         Predictions of Fitted Values
+GlobalTemp              Two series of average global temperature
+                        deviations for years 1880-1987
 hatvalues.KFS           Extract Hat Values from KFS Output
 importanceSSM           Importance Sampling of Exponential Family State
                         Space Model
 is.SSModel              Test whether object is a valid 'SSModel' object
+KFAS                    KFAS: Functions for Exponential Family State
+                        Space Models
+KFS                     Kalman Filter and Smoother with Exact Diffuse
+                        Initialization for Exponential Family State
+                        Space Models
 ldl                     LDL Decomposition of a Matrix
 logLik.SSModel          Log-likelihood of the State Space Model.
 mvInnovations           Multivariate Innovations
@@ -39,5 +37,7 @@ sexratio                Number of males and females born in Finland
 signal                  Extracting the Partial Signal Of a State Space
                         Model
 simulateSSM             Simulation of a Gaussian State Space Model
+SSMarima                Create a State Space Model Object of Class
+                        SSModel
 transformSSM            Transform Multivariate State Space Model for
                         Sequential Processing

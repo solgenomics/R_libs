@@ -1,7 +1,7 @@
 Package: DBI
 Title: R Database Interface
-Version: 1.1.2
-Date: 2021-12-19
+Version: 1.1.3
+Date: 2022-06-18
 Authors@R: c(
     person("R Special Interest Group on Databases (R-SIG-DB)", role = "aut"),
     person("Hadley", "Wickham", role = "aut"),
@@ -25,11 +25,12 @@ Config/autostyle/scope: line_breaks
 Config/autostyle/strict: false
 Config/Needs/check: r-dbi/DBItest
 Encoding: UTF-8
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Config/Needs/website: r-dbi/DBItest, AzureKusto, bigrquery,
         DatabaseConnector, dittodb, duckdb, implyr, lazysf, odbc, pool,
-        RAthena, RClickhouse, RH2, RJDBC, RMariaDB, RMySQL, RPostgres,
-        RPostgreSQL, RPresto, RSQLite, sergeant, sparklyr
+        RAthena, IMSMWU/RClickhouse, RH2, RJDBC, RMariaDB, RMySQL,
+        RPostgres, RPostgreSQL, RPresto, RSQLite, sergeant, sparklyr,
+        withr
 Collate: 'DBIObject.R' 'DBIDriver.R' 'Id.R' 'DBIConnection.R' 'ANSI.R'
         'DBI-package.R' 'DBIConnector.R' 'DBIResult.R' 'SQL.R'
         'SQLKeywords.R' 'SQLKeywords_DBIObject.R'
@@ -85,12 +86,12 @@ Collate: 'DBIObject.R' 'DBIDriver.R' 'Id.R' 'DBIConnection.R' 'ANSI.R'
         'sqlParseVariables_DBIConnection.R' 'summary.R'
         'summary_DBIObject.R' 'transactions.R'
 NeedsCompilation: no
-Packaged: 2021-12-19 20:43:28 UTC; kirill
+Packaged: 2022-06-18 01:24:38 UTC; kirill
 Author: R Special Interest Group on Databases (R-SIG-DB) [aut],
   Hadley Wickham [aut],
   Kirill Müller [aut, cre] (<https://orcid.org/0000-0002-1416-3412>),
   R Consortium [fnd]
 Maintainer: Kirill Müller <krlmlr+r@mailbox.org>
 Repository: CRAN
-Date/Publication: 2021-12-20 08:32:06 UTC
-Built: R 3.6.3; ; 2022-02-15 16:26:18 UTC; unix
+Date/Publication: 2022-06-18 07:10:15 UTC
+Built: R 4.2.0; ; 2022-08-30 19:09:38 UTC; unix

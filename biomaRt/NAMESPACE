@@ -5,18 +5,28 @@ importFrom(utils, edit, head, read.table)
 importFrom(AnnotationDbi, keys, columns, keytypes, select)
 importFrom(progress, progress_bar)
 importFrom(stringr, str_extract_all, str_match, str_replace)
-importFrom(httr, POST, content, content_type, timeout, set_cookies, stop_for_status, status_code)
-importFrom(openssl, md5)
-importFrom(BiocFileCache, bfcnew, bfcadd, bfcquery, bfcinfo, removebfc)
+importFrom(httr, POST, GET, content, content_type, timeout, set_cookies, 
+           stop_for_status, status_code, with_config, config, set_config)
+importFrom(digest, digest)
+importFrom(BiocFileCache, bfcnew, bfcadd, bfcquery, bfcinfo, removebfc, bfcremove)
 importFrom(rappdirs, user_cache_dir)
+importFrom(xml2, read_html)
 
 export(listMarts, getGene, getSequence, exportFASTA, useMart, listDatasets, 
-       useDataset, listEnsembl, useEnsembl, listAttributes, listFilters, 
-       getBM, getXML,getLDS, attributePages, filterOptions,filterType, 
+       useDataset,  listAttributes, listFilters, 
+       getBM, getLDS, attributePages, filterOptions,filterType, 
        getBMlist, NP2009code, keys, columns, keytypes, select,
-       listEnsemblArchives, searchAttributes, searchDatasets, searchFilters,
-       listFilterValues, searchFilterValues,
-       biomartCacheClear, biomartCacheInfo)
+       searchAttributes, searchDatasets, searchFilters)
+       
+export(biomartCacheClear, biomartCacheInfo)
+
+export(listFilterValues, searchFilterValues, listFilterOptions, searchFilterOptions)
+
+export(useEnsembl, listEnsembl)
+
+export(useEnsemblGenomes, listEnsemblGenomes)
+
+export(listEnsemblArchives)
 
 exportClasses(Mart)
 

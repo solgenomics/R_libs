@@ -1,6 +1,6 @@
+available               Discover packages available for installation.
 BiocManager-pkg         Install or update Bioconductor, CRAN, or GitHub
                         packages
-available               Discover packages available for installation.
 install                 Install or update Bioconductor, CRAN, and
                         GitHub packages
 repositories            Display current Bioconductor and CRAN

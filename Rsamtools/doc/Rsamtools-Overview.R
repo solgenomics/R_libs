@@ -117,15 +117,32 @@ cvg
 
 
 ###################################################
-### code chunk number 15: caffeine-kegg
+### code chunk number 15: keggrest (eval = FALSE)
 ###################################################
-library(KEGG.db)
-kid <- revmap(KEGGPATHID2NAME)[["Caffeine metabolism"]]
-egid <- KEGGPATHID2EXTID[[sprintf("hsa%s", kid)]]
+## ## uses KEGGREST, dplyr, and tibble packages
+## org <- "hsa"
+## 
+## caffeine_pathway <-
+##     KEGGREST::keggList("pathway", org) %>%
+##     tibble::enframe(name = "pathway_id", value = "pathway") %>%
+##     dplyr::filter(startsWith(.data$pathway, "Caffeine metabolism"))
+## 
+## egid <-
+##     KEGGREST::keggLink(org, "pathway") %>%
+##     tibble::enframe(name = "pathway_id", value = "gene_id") %>%
+##     dplyr::left_join(x = caffeine_pathway, by = "pathway_id") %>%
+##     dplyr::mutate(gene_id = sub("hsa:", "", gene_id)) %>%
+##     pull(gene_id)
 
 
 ###################################################
-### code chunk number 16: txdb-transcripts
+### code chunk number 16: caffeine-kegg
+###################################################
+egid <- c("10", "1544", "1548", "1549", "7498", "9")
+
+
+###################################################
+### code chunk number 17: txdb-transcripts
 ###################################################
 library(TxDb.Hsapiens.UCSC.hg18.knownGene)
 bamRanges <- transcripts(TxDb.Hsapiens.UCSC.hg18.knownGene, 
@@ -135,15 +152,17 @@ seqlevels(bamRanges) <-                 # translate seqlevels
 lvls <- seqlevels(bamRanges)            # drop unused levels
 seqlevels(bamRanges) <- lvls[lvls %in% as.character(seqnames(bamRanges))]
 
+bamRanges
+
 
 ###################################################
-### code chunk number 17: bamRanges-genome
+### code chunk number 18: bamRanges-genome
 ###################################################
 unique(genome(bamRanges))
 
 
 ###################################################
-### code chunk number 18: BamViews-parts
+### code chunk number 19: BamViews-parts
 ###################################################
 slxMaq09 <- local({
     fl <- system.file("extdata", "slxMaq09_urls.txt", 
@@ -153,7 +172,7 @@ slxMaq09 <- local({
 
 
 ###################################################
-### code chunk number 19: BamViews-construct
+### code chunk number 20: BamViews-construct
 ###################################################
 bamExperiment <- 
     list(description="Caffeine metabolism views on 1000 genomes samples",
@@ -163,36 +182,44 @@ bv <- BamViews(slxMaq09, bamRanges=bamRanges,
 metadata(bamSamples(bv)) <- 
     list(description="Solexa/MAQ samples, August 2009",
          created="Thu Mar 25 14:08:42 2010")
+bv
 
 
 ###################################################
-### code chunk number 20: BamViews-query
+### code chunk number 21: BamViews-query
 ###################################################
 bamExperiment(bv)
 
 
 ###################################################
-### code chunk number 21: bamIndicies (eval = FALSE)
+### code chunk number 22: bamIndicies (eval = FALSE)
 ###################################################
 ## bamIndexDir <- tempfile()
 ## indexFiles <- paste(bamPaths(bv), "bai", sep=".")
 ## dir.create(bamIndexDir)
-## idxFiles <- mapply(download.file, indexFiles,
-##                    file.path(bamIndexDir, basename(indexFiles)) ,
-##                    MoreArgs=list(method="curl"))
+## bv <- BamViews(
+##     slxMaq09,
+##     file.path(bamIndexDir, basename(indexFiles)), # index file location
+##     bamRanges=bamRanges,
+##     bamExperiment=bamExperiment
+## )
+## 
+## idxFiles <- mapply(
+##     download.file, indexFiles,
+##     bamIndicies(bv),
+##     MoreArgs=list(method="curl")
+## )
 
 
 ###################################################
-### code chunk number 22: readGAlignments (eval = FALSE)
+### code chunk number 23: readGAlignments (eval = FALSE)
 ###################################################
 ## library(GenomicAlignments)
-## library(parallel)
-## options(srapply_fapply="parallel", mc.cores=detectCores())
 ## olaps <- readGAlignments(bv)
 
 
 ###################################################
-### code chunk number 23: olaps
+### code chunk number 24: olaps
 ###################################################
 library(GenomicAlignments)
 load(system.file("extdata", "olaps.Rda", package="Rsamtools"))
@@ -201,13 +228,13 @@ head(olaps[[1]])
 
 
 ###################################################
-### code chunk number 24: read-lengths
+### code chunk number 25: read-lengths
 ###################################################
 head(t(sapply(olaps, function(elt) range(qwidth(elt)))))
 
 
 ###################################################
-### code chunk number 25: focal
+### code chunk number 26: focal
 ###################################################
 rng <- bamRanges(bv)[1]
 strand(rng) <- "*"
@@ -217,7 +244,7 @@ head(olap1[[24]])
 
 
 ###################################################
-### code chunk number 26: olap-cvg
+### code chunk number 27: olap-cvg
 ###################################################
 minw <- min(sapply(olap1, function(elt) min(start(elt))))
 maxw <- max(sapply(olap1, function(elt) max(end(elt))))
@@ -228,7 +255,7 @@ cvg[[1]]
 
 
 ###################################################
-### code chunk number 27: olap-cvg-as-m
+### code chunk number 28: olap-cvg-as-m
 ###################################################
 m <- matrix(unlist(lapply(cvg, lapply, as.vector)),
             ncol=length(cvg))
@@ -237,14 +264,14 @@ summary(colSums(m))
 
 
 ###################################################
-### code chunk number 28: sessionInfo
+### code chunk number 29: sessionInfo
 ###################################################
 packageDescription("Rsamtools")
 sessionInfo()
 
 
 ###################################################
-### code chunk number 29: bam-avail (eval = FALSE)
+### code chunk number 30: bam-avail (eval = FALSE)
 ###################################################
 ## library(RCurl)
 ## ftpBase <- 
@@ -258,7 +285,7 @@ sessionInfo()
 
 
 ###################################################
-### code chunk number 30: bam-index (eval = FALSE)
+### code chunk number 31: bam-index (eval = FALSE)
 ###################################################
 ## urls <- urls[sapply(urls0, length) != 0]
 ## fls0 <- unlist(unname(urls0))
@@ -267,7 +294,7 @@ sessionInfo()
 
 
 ###################################################
-### code chunk number 31: slxMaq09 (eval = FALSE)
+### code chunk number 32: slxMaq09 (eval = FALSE)
 ###################################################
 ## urls1 <- 
 ##     Filter(function(x) length(x) != 0,
@@ -279,7 +306,7 @@ sessionInfo()
 
 
 ###################################################
-### code chunk number 32: bamIndicies (eval = FALSE)
+### code chunk number 33: bamIndicies (eval = FALSE)
 ###################################################
 ## bamIndexDir <- tempfile()
 ## dir.create(bamIndexDir)

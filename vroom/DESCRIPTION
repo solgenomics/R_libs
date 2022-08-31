@@ -68,4 +68,4 @@ Author: Jim Hester [aut] (<https://orcid.org/0000-0002-2739-7082>),
 Maintainer: Jennifer Bryan <jenny@rstudio.com>
 Repository: CRAN
 Date/Publication: 2021-11-30 14:20:06 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2022-02-15 17:04:31 UTC; unix
+Built: R 4.2.0; x86_64-pc-linux-gnu; 2022-08-30 19:59:08 UTC; unix

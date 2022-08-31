@@ -16,6 +16,7 @@ delete.attr.gdsn        Delete attribute(s)
 delete.gdsn             Delete a GDS node
 diagnosis.gds           Diagnose the GDS file
 digest.gdsn             create hash function digests
+exist.gdsn              Return whether the path exists or not
 gds.class               the class of GDS file
 gdsfmt-package          R Interface to CoreArray Genomic Data Structure
                         (GDS) files
@@ -25,6 +26,7 @@ getfile.gdsn            Output a file from a stream container
 getfolder.gdsn          Get the folder
 index.gdsn              Get the specified node
 is.element.gdsn         whether the elements are in a set
+is.sparse.gdsn          whether a sparse array or not
 lasterr.gds             Return the last error message
 ls.gdsn                 Return the names of child nodes
 moveto.gdsn             Relocate a GDS node

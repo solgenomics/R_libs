@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head><title>R: Estimated Marginal Means, aka Least-Squares Means</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> Estimated Marginal Means, aka Least-Squares Means
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;emmeans&rsquo; version 1.7.2</h2>
+</div><h2>Documentation for package &lsquo;emmeans&rsquo; version 1.8.0</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -55,8 +56,8 @@
 <h2><a name="A">-- A --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="add_grouping.html">add_grouping</a></td>
-<td>Add a grouping factor</td></tr>
+<tr><td style="width: 25%;"><a href="manip-factors.html">add_grouping</a></td>
+<td>Manipulate factors in a reference grid</td></tr>
 <tr><td style="width: 25%;"><a href="summary.emmGrid.html">as.data.frame.emmGrid</a></td>
 <td>Summaries, predictions, intervals, and tests for 'emmGrid' objects</td></tr>
 <tr><td style="width: 25%;"><a href="as.emmGrid.html">as.emmGrid</a></td>
@@ -71,7 +72,11 @@
 <td>Convert to and from 'emmGrid' objects</td></tr>
 <tr><td style="width: 25%;"><a href="mcmc-support.html">as.mcmc.emmGrid</a></td>
 <td>Support for MCMC-based estimation</td></tr>
+<tr><td style="width: 25%;"><a href="mcmc-support.html">as.mcmc.emm_list</a></td>
+<td>Support for MCMC-based estimation</td></tr>
 <tr><td style="width: 25%;"><a href="mcmc-support.html">as.mcmc.list.emmGrid</a></td>
+<td>Support for MCMC-based estimation</td></tr>
+<tr><td style="width: 25%;"><a href="mcmc-support.html">as.mcmc.list.emm_list</a></td>
 <td>Support for MCMC-based estimation</td></tr>
 <tr><td style="width: 25%;"><a href="auto.noise.html">auto.noise</a></td>
 <td>Auto Pollution Filter Noise</td></tr>
@@ -86,8 +91,14 @@
 <td>Compact letter displays</td></tr>
 <tr><td style="width: 25%;"><a href="contrast.html">coef.emmGrid</a></td>
 <td>Contrasts and linear functions of EMMs</td></tr>
+<tr><td style="width: 25%;"><a href="emm_list-object.html">coef.emm_list</a></td>
+<td>The 'emm_list' class</td></tr>
+<tr><td style="width: 25%;"><a href="manip-factors.html">comb_facs</a></td>
+<td>Manipulate factors in a reference grid</td></tr>
 <tr><td style="width: 25%;"><a href="summary.emmGrid.html">confint.emmGrid</a></td>
 <td>Summaries, predictions, intervals, and tests for 'emmGrid' objects</td></tr>
+<tr><td style="width: 25%;"><a href="emm_list-object.html">confint.emm_list</a></td>
+<td>The 'emm_list' class</td></tr>
 <tr><td style="width: 25%;"><a href="emmc-functions.html">consec.emmc</a></td>
 <td>Contrast families</td></tr>
 <tr><td style="width: 25%;"><a href="contrast.html">contrast</a></td>
@@ -96,6 +107,8 @@
 <td>Contrast families</td></tr>
 <tr><td style="width: 25%;"><a href="contrast.html">contrast.emmGrid</a></td>
 <td>Contrasts and linear functions of EMMs</td></tr>
+<tr><td style="width: 25%;"><a href="emm_list-object.html">contrast.emm_list</a></td>
+<td>The 'emm_list' class</td></tr>
 </table>
 
 <h2><a name="D">-- D --</a></h2>
@@ -184,6 +197,8 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="emmc-functions.html">identity.emmc</a></td>
 <td>Contrast families</td></tr>
+<tr><td style="width: 25%;"><a href="emm_list-object.html">I_bet</a></td>
+<td>The 'emm_list' class</td></tr>
 </table>
 
 <h2><a name="J">-- J --</a></h2>
@@ -219,6 +234,8 @@
 <td>Response-transformation extensions</td></tr>
 <tr><td style="width: 25%;"><a href="mcmc-support.html">mcmc-support</a></td>
 <td>Support for MCMC-based estimation</td></tr>
+<tr><td style="width: 25%;"><a href="joint_tests.html">meanint</a></td>
+<td>Compute joint tests of the terms in a model</td></tr>
 <tr><td style="width: 25%;"><a href="emmc-functions.html">mean_chg.emmc</a></td>
 <td>Contrast families</td></tr>
 <tr><td style="width: 25%;"><a href="MOats.html">MOats</a></td>
@@ -252,30 +269,26 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="contrast.html">pairs.emmGrid</a></td>
 <td>Contrasts and linear functions of EMMs</td></tr>
+<tr><td style="width: 25%;"><a href="emm_list-object.html">pairs.emm_list</a></td>
+<td>The 'emm_list' class</td></tr>
 <tr><td style="width: 25%;"><a href="emmc-functions.html">pairwise.emmc</a></td>
 <td>Contrast families</td></tr>
 <tr><td style="width: 25%;"><a href="pigs.html">pigs</a></td>
 <td>Effects of dietary protein on free plasma leucine concentration in pigs</td></tr>
 <tr><td style="width: 25%;"><a href="plot.html">plot.emmGrid</a></td>
 <td>Plot an 'emmGrid' or 'summary_emm' object</td></tr>
+<tr><td style="width: 25%;"><a href="emm_list-object.html">plot.emm_list</a></td>
+<td>The 'emm_list' class</td></tr>
 <tr><td style="width: 25%;"><a href="plot.html">plot.summary_emm</a></td>
 <td>Plot an 'emmGrid' or 'summary_emm' object</td></tr>
-<tr><td style="width: 25%;"><a href="wrappers.html">pmm</a></td>
-<td>Wrappers for alternative naming of EMMs</td></tr>
-<tr><td style="width: 25%;"><a href="wrappers.html">pmmeans</a></td>
-<td>Wrappers for alternative naming of EMMs</td></tr>
-<tr><td style="width: 25%;"><a href="wrappers.html">pmmip</a></td>
-<td>Wrappers for alternative naming of EMMs</td></tr>
-<tr><td style="width: 25%;"><a href="wrappers.html">pmmobj</a></td>
-<td>Wrappers for alternative naming of EMMs</td></tr>
-<tr><td style="width: 25%;"><a href="wrappers.html">pmtrends</a></td>
-<td>Wrappers for alternative naming of EMMs</td></tr>
 <tr><td style="width: 25%;"><a href="emmc-functions.html">poly.emmc</a></td>
 <td>Contrast families</td></tr>
 <tr><td style="width: 25%;"><a href="summary.emmGrid.html">predict.emmGrid</a></td>
 <td>Summaries, predictions, intervals, and tests for 'emmGrid' objects</td></tr>
 <tr><td style="width: 25%;"><a href="emmGrid-methods.html">print.emmGrid</a></td>
 <td>Miscellaneous methods for 'emmGrid' objects</td></tr>
+<tr><td style="width: 25%;"><a href="emm_list-object.html">print.emm_list</a></td>
+<td>The 'emm_list' class</td></tr>
 <tr><td style="width: 25%;"><a href="xtable.emmGrid.html">print.xtable_emm</a></td>
 <td>Using 'xtable' for EMMs</td></tr>
 <tr><td style="width: 25%;"><a href="pwpm.html">pwpm</a></td>
@@ -313,12 +326,20 @@
 <h2><a name="S">-- S --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="manip-factors.html">split_fac</a></td>
+<td>Manipulate factors in a reference grid</td></tr>
 <tr><td style="width: 25%;"><a href="emmGrid-methods.html">str.emmGrid</a></td>
 <td>Miscellaneous methods for 'emmGrid' objects</td></tr>
+<tr><td style="width: 25%;"><a href="emm_list-object.html">str.emm_list</a></td>
+<td>The 'emm_list' class</td></tr>
 <tr><td style="width: 25%;"><a href="rbind.emmGrid.html">subset.emmGrid</a></td>
 <td>Combine or subset 'emmGrid' objects</td></tr>
 <tr><td style="width: 25%;"><a href="summary.emmGrid.html">summary.emmGrid</a></td>
 <td>Summaries, predictions, intervals, and tests for 'emmGrid' objects</td></tr>
+<tr><td style="width: 25%;"><a href="emm_list-object.html">summary.emm_list</a></td>
+<td>The 'emm_list' class</td></tr>
+<tr><td style="width: 25%;"><a href="joint_tests.html">symmint</a></td>
+<td>Compute joint tests of the terms in a model</td></tr>
 </table>
 
 <h2><a name="T">-- T --</a></h2>
@@ -328,6 +349,8 @@
 <td>Summaries, predictions, intervals, and tests for 'emmGrid' objects</td></tr>
 <tr><td style="width: 25%;"><a href="summary.emmGrid.html">test.emmGrid</a></td>
 <td>Summaries, predictions, intervals, and tests for 'emmGrid' objects</td></tr>
+<tr><td style="width: 25%;"><a href="emm_list-object.html">test.emm_list</a></td>
+<td>The 'emm_list' class</td></tr>
 <tr><td style="width: 25%;"><a href="emmc-functions.html">trt.vs.ctrl.emmc</a></td>
 <td>Contrast families</td></tr>
 <tr><td style="width: 25%;"><a href="emmc-functions.html">trt.vs.ctrl1.emmc</a></td>
@@ -388,4 +411,4 @@
 <tr><td style="width: 25%;"><a href="summary.emmGrid.html">[.summary_emm</a></td>
 <td>Summaries, predictions, intervals, and tests for 'emmGrid' objects</td></tr>
 </table>
-</body></html>
+</div></body></html>

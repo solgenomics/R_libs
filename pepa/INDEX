@@ -1,7 +1,7 @@
-PBIB.test.mod           A modified version of Analysis of the Partially
-                        Balanced Incomplete Block Design
 order.group.mod         A modified version of order.group of agricolae
                         package
+PBIB.test.mod           A modified version of Analysis of the Partially
+                        Balanced Incomplete Block Design
 pty                     Pepa tells you
 pty.aovmet              Pepa tells you about a MET with a RCBD
 pty.elston              Pepa tells you about the Elston index
@@ -10,7 +10,6 @@ pvsf1                   Voting for selection criteria
 pvsf2                   Voting for best clones at flowering
 pvsf3                   Voting for best clones at harvest
 pvsf6                   Organoleptic scores at mother trial
-pvsf7                   Organoleptic scores at baby trials
 pvsf9                   Voting for best clones at post-harvest
 pvssg                   PVS summary global
 repo.a01d               Automatic report for an alpha (0,1) design

@@ -17,6 +17,7 @@ delete.attr.gdsn	delete.attr.gdsn
 delete.gdsn	delete.gdsn
 diagnosis.gds	diagnosis.gds
 digest.gdsn	digest.gdsn
+exist.gdsn	exist.gdsn
 gds.class	gds.class
 gdsfmt	gdsfmt-package
 gdsn.class	gdsn.class
@@ -25,6 +26,7 @@ getfile.gdsn	getfile.gdsn
 getfolder.gdsn	getfolder.gdsn
 index.gdsn	index.gdsn
 is.element.gdsn	is.element.gdsn
+is.sparse.gdsn	is.sparse.gdsn
 lasterr.gds	lasterr.gds
 ls.gdsn	ls.gdsn
 moveto.gdsn	moveto.gdsn

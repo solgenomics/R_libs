@@ -1,6 +1,5 @@
 a01data	a01data
 aj.w	aj.w
-alpha01data	a01data
 ammi	ammi
 ammi.gxe	ammi.gxe
 aov.f	aov.f
@@ -8,8 +7,10 @@ aov.lxt	aov.lxt
 aov.met	aov.met
 aov.rcbd	aov.rcbd
 asc	asc
-cdt	cdt
-check.data	check.data
+cdt.pt	cdt.pt
+cdt.sp	cdt.sp
+check.data.pt	check.data.pt
+check.data.sp	check.data.sp
 check.freq	check.freq
 check.names.pt	check.names.pt
 check.names.sp	check.names.sp
@@ -23,7 +24,8 @@ ck.lxt	ck.lxt
 ck.pos	ck.pos
 ck.rcbd	ck.rcbd
 ck.w	ck.w
-clean.data	clean.data
+clean.data.pt	clean.data.pt
+clean.data.sp	clean.data.sp
 cr.a01d	cr.a01d
 cr.abd	cr.abd
 cr.crd	cr.crd
@@ -57,8 +59,11 @@ rts1	rts1
 rts2	rts2
 rts3	rts3
 rts4	rts4
-setna	setna
-setzero	setzero
+setna.pt	setna.pt
+setna.sp	setna.sp
+setzero.pt	setzero.pt
+setzero.sp	setzero.sp
 spg	spg
+spt2co	spt2co
 ssg1to3	ssg1to3
 tai	tai
