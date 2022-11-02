@@ -2,5 +2,6 @@ calculateMAF            calculates minimum allele frequency (MAF)
 combineGenoData         combine genotype data
 convertToNumeric        convert to numeric
 filterGenoData          filters genotype dataset
+genoDataFilter          A package for genotype data preprocessing
 rawGenoData             Sample genotype dataset
 roundAlleleDosage       rounds decimals
