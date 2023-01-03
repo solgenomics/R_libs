@@ -20,6 +20,8 @@ getModelSummary         fits model and returns the model output summary
 getNumericCols          removes non-numeric columns from a data frame
 mergeVariables          merges variables from 2 or more data files.
 models                  fits linear mixed model
+phenoAnalysis           A package for phenotypic data analysis of data
+                        set generated in the brAPI style
 runAnova                fits model and returns the model output summary
 sortTraitData           sorts trait data by design factors for further
                         analysis
