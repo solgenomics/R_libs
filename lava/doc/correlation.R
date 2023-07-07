@@ -14,11 +14,10 @@ plot(m0, layoutType="circo")
 
 ## ----load, results="hide",message=FALSE,warning=FALSE-------------------------
 library('lava')
-library('magrittr')
 
 ## ----m0-----------------------------------------------------------------------
-m0 <- lvm() %>%
-  covariance(y1 ~ y2, value='r') %>%
+m0 <- lvm() |>
+  covariance(y1 ~ y2, value='r') |>
   regression(y1 + y2 ~ x)
 
 ## ----coef---------------------------------------------------------------------
@@ -38,8 +37,8 @@ cens1 <- function(threshold,type='right') {
   }
 }
 
-m0 %<>%
-  transform(s1 ~ y1, cens1(-2, 'left')) %>%
+m0 <- 
+  transform(m0, s1 ~ y1, cens1(-2, 'left')) |>
   transform(s2 ~ y2, cens1(2,  'right'))
 
 ## ----sim2---------------------------------------------------------------------
@@ -47,8 +46,8 @@ d <- sim(m0, 500, p=c(r=0.9), seed=1)
 head(d)
 
 ## ----est1---------------------------------------------------------------------
-m <- lvm() %>%
-     regression(y1 + y2 ~ x) %>%
+m <- lvm() |>
+     regression(y1 + y2 ~ x) |>
      covariance(y1 ~ y2)
 
 e <- estimate(m, data=d)
@@ -64,12 +63,12 @@ correlation(e)
 estimate(e, function(p) atanh(p['y1~~y2']/(p['y1~~y1']*p['y2~~y2'])^.5), back.transform=tanh)
 
 ## ----constraints--------------------------------------------------------------
-m2 <- m %>%
-    parameter(~ l1 + l2 + z) %>%
-    variance(~ y1 + y2, value=c('v1','v2')) %>%
-    covariance(y1 ~ y2, value='c') %>%
-    constrain(v1 ~ l1, fun=exp) %>%
-    constrain(v2 ~ l2, fun=exp) %>%
+m2 <- m |>
+    parameter(~ l1 + l2 + z) |>
+    variance(~ y1 + y2, value=c('v1','v2')) |>
+    covariance(y1 ~ y2, value='c') |>
+    constrain(v1 ~ l1, fun=exp) |>
+    constrain(v2 ~ l2, fun=exp) |>
     constrain(c ~ z+l1+l2, fun=function(x) tanh(x[1])*sqrt(exp(x[2])*exp(x[3])))
 
 ## ----estconstraints-----------------------------------------------------------
@@ -80,8 +79,8 @@ e2
 estimate(e2, 'z', back.transform=tanh)
 
 ## ----constraints2-------------------------------------------------------------
-m2 <- lvm() %>%
-  regression(y1 + y2 ~ x) %>%
+m2 <- lvm() |>
+  regression(y1 + y2 ~ x) |>
   covariance(y1 ~ y2, constrain=TRUE, rname='z')
 
 e2 <- estimate(m2, data=d)
@@ -102,8 +101,8 @@ b
 quantile(tanh(b$coef[,'z']), c(.025,.975))
 
 ## ----cache=TRUE, eval=mets----------------------------------------------------
-m3 <- lvm() %>%
-  regression(y1 + s2 ~ x) %>%
+m3 <- lvm() |>
+  regression(y1 + s2 ~ x) |>
   covariance(y1 ~ s2, constrain=TRUE, rname='z')
 
 e3 <- estimate(m3, d)
@@ -115,8 +114,8 @@ e3
 estimate(e3, 'z', back.transform=tanh)
 
 ## ----cache=TRUE, eval=mets----------------------------------------------------
-m3b <- lvm() %>%
-  regression(s1 + s2 ~ x) %>%
+m3b <- lvm() |>
+  regression(s1 + s2 ~ x) |>
   covariance(s1 ~ s2, constrain=TRUE, rname='z')
 
 e3b <- estimate(m3b, d)

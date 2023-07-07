@@ -23,8 +23,10 @@ gs4_fodder	gs4_fodder
 gs4_formula	gs4_formula
 gs4_get	gs4_get
 gs4_has_token	gs4_has_token
-gs4_oauth_app	gs4_auth_configure
+gs4_oauth_app	gs4_oauth_app
+gs4_oauth_client	gs4_auth_configure
 gs4_random	gs4_random
+gs4_scopes	gs4_scopes
 gs4_token	gs4_token
 gs4_user	gs4_user
 local_gs4_quiet	googlesheets4-configuration

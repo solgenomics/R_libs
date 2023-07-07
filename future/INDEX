@@ -18,10 +18,11 @@ cluster                 Create a cluster future whose value will be
 clusterExportSticky     Export globals to the sticky-globals
                         environment of the cluster nodes
 future                  Create a future
+future.options          Options used for futures
 futureOf                Get the future of a future variable
-futureSessionInfo       Get session information specific to the future
-                        framework
 futures                 Get all futures in a container
+futureSessionInfo       Get future-specific session information and
+                        validate current backend
 multicore               Create a multicore future whose value will be
                         resolved asynchronously in a forked parallel
                         process
@@ -31,13 +32,10 @@ multisession            Create a multisession future whose value will
 nbrOfWorkers            Get the number of workers available
 plan                    Plan how to resolve a future
 re-exports              Functions Moved to 'parallelly'
-remote                  Create a remote future whose value will be
-                        resolved asynchronously in a remote process
 resolve                 Resolve one or more futures synchronously
 resolved                Check whether a future is resolved or not
 sequential              Create a sequential future whose value will be
                         in the current R session
-signalConditions        Signals Captured Conditions
 tweak                   Tweak a future function by adjusting its
                         default arguments
 value                   The value of a future or the values of all

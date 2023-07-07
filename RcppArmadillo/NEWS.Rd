@@ -3,6 +3,279 @@
 \newcommand{\ghpr}{\href{https://github.com/RcppCore/RcppArmadillo/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/RcppCore/RcppArmadillo/issues/#1}{##1}}
 
+\section{Changes in RcppArmadillo version 0.12.4.1.0 (2023-06-17)}{
+  \itemize{
+    \item Upgraded to Armadillo release 12.4.1 (Cortisol Profusion Redux)
+    \itemize{
+      \item fix bug in \code{SpMat::shed_cols()}
+      \item functions such as \code{.is_finite()} and \code{find_nonfinite()}
+      will now emit a runtime warning when compiled in fast math mode; such
+      compilation mode disables detection of non-finite values
+    }
+    \item Accommodate upcoming change in package \pkg{Matrix} (Mikael Jagan
+    in \ghpr{417} addressing \ghit{415})
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.12.4.0.0 (2023-05-26)}{
+  \itemize{
+    \item Upgraded to Armadillo release 12.4.0 (Cortisol Profusion Redux)
+    \itemize{
+      \item Added \code{norm2est()} for finding fast estimates of matrix
+      2-norm (spectral norm)
+      \item Added \code{vecnorm()} for obtaining the vector norm of each row
+      or column of a matrix
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.12.2.0.0 (2023-04-04)}{
+  \itemize{
+    \item Upgraded to Armadillo release 12.2.0 (Cortisol Profusion Deluxe)
+    \itemize{
+      \item more efficient use of FFTW3 by \code{fft()} and \code{ifft()}
+      \item faster in-place element-wise multiplication of sparse matrices by
+      dense matrices
+      \item added spsolve_factoriser class to allow reuse of sparse matrix
+      factorisation for solving systems of linear equations
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.12.0.1.0 (2023-02-20)}{
+  \itemize{
+    \item Upgraded to Armadillo release 12.0.1 (Cortisol Profusion)
+    \itemize{
+      \item faster \code{fft()} and \code{ifft()} via optional use of FFTW3
+      \item faster \code{min()} and \code{max()}
+      \item faster \code{index_min()} and \code{index_max()}
+      \item added \code{.col_as_mat()} and \code{.row_as_mat()} which return
+      matrix representation of cube column and cube row
+      \item added \code{csv_opts::strict} option to loading CSV files to
+      interpret missing values as NaN
+      \item added \code{check_for_zeros} option to form 4 of sparse matrix batch constructors
+      \item \code{inv()} and \code{inv_sympd()} with options
+      \code{inv_opts::no_ugly} or \code{inv_opts::allow_approx} now use a scaled
+      threshold similar to \code{pinv()}
+      \item \code{set_cout_stream()} and \code{set_cerr_stream()} are now
+      no-ops; instead use the options \code{ARMA_WARN_LEVEL}, or
+      \code{ARMA_COUT_STREAM}, or \code{ARMA_CERR_STREAM}
+      \item fix regression (mis-compilation) in \code{shift()} function
+      (reported by us in \ghit{409})
+    }
+    \item The include directory order is now more robust (Kevin Ushey in
+    \ghpr{407} addressing \ghit{406})
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.4.4.0 (2023-02-09)}{
+  \itemize{
+    \item Upgraded to Armadillo release 11.4.4 (Ship of Theseus)
+    \itemize{
+      \item extended \code{pow()} with various forms of element-wise power operations
+      \item added \code{find_nan()} to find indices of NaN elements
+      \item faster handling of compound expressions by \code{sum()}
+    }
+    \item The package no longer sets a compilation standard, or progagates on
+    in the generated packages as R ensures C++11 on all non-ancient versions
+    \item The CITATION file was updated to the current format
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.4.3.1 (2023-01-14)}{
+  \itemize{
+    \item The \code{#define ARMA_IGNORE_DEPRECATED_MARKER} remains active
+    to suppress the (upstream) deprecation warnings, see \ghit{391} and
+    \ghit{402} for details.
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.4.3.0 (2022-12-28) (GitHub Only)}{
+  \itemize{
+    \item Upgraded to Armadillo release 11.4.3 (Ship of Theseus)
+    \itemize{
+      \item fix corner case in \code{pinv()} when processing symmetric matrices
+    }
+    \item Protect the undefine of \code{NDEBUG} behind additional opt-in define
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.4.2.1 (2022-11-08)}{
+  \itemize{
+    \item Upgraded to Armadillo release 11.4.2 (Ship of Theseus)
+    \itemize{
+      \item more robust handling of corner cases in multi-threaded contexts
+    }
+    \item Internal header organisation with new sub-directories while
+    providing full compatibility via existing paths (\ghpr{395} \ghpr{396})
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.4.1.0 (2022-10-10) (GitHub Only)}{
+  \itemize{
+    \item Upgraded to Armadillo release 11.4.1 (Ship of Theseus)
+    \itemize{
+      \item fix data race in \code{Cube::slice()}
+      \item workarounds for false warnings emitted by GCC 12 when
+      compiling with \code{FORTIFY_SOURCE} enabled (already in
+      RcppArmadillo 0.11.4.0.1 too)
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.4.0.1 (2022-10-01)}{
+  \itemize{
+    \item Upgraded to Armadillo release 11.4.0 (Ship of Theseus)
+    \itemize{
+      \item faster handling of compound expressions by \code{sum()}
+      \item extended \code{pow()} with various forms of element-wise power operations
+      \item added \code{find_nan()} to find indices of NaN elements
+    }
+    \item Also applied fixes to avoid g++-12 warnings affecting just a
+    handful of CRAN packages.
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.2.4.0 (2022-09-09)}{
+  \itemize{
+    \item Upgraded to Armadillo release 11.2.4 (Classic Roast)
+    \itemize{
+      \item fix handling of \code{std::move()} involving matrices
+      constructed with auxiliary memory
+    }
+    \item In the \code{fastLm()} examples, use \code{arma::dot()} to
+    compute to the inner product (as proposed by Conrad), plus small edits
+    \item Support optional \code{#define} named \code{RCPPARMADILLO_FORCE_DEPRECATE}
+    to suppress use of \code{ARMA_IGNORE_DEPRECATED_MARKER} permitting
+    use and development under deprecation
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.2.3.1 (2022-08-16)}{
+  \itemize{
+    \item Accomodate upcoming \pkg{Matrix} 1.4-2 deprecation for
+    conversion (Dirk in \ghpr{387})
+    \item CRAN release with small upstream changes in Armadillo
+    11.2.{1,2,3} made since the last CRAN release 0.11.2.0.0
+    (Dirk in \ghpr{383}, \ghpr{384} and \ghpr{386})
+    \item Undefine \code{arma_deprecated} warning as it affects a number
+    of CRAN packages which will likely need a small transition
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.2.3.0 (2022-07-12) (GitHub Only)}{
+  \itemize{
+    \item Upgraded to Armadillo release 11.2.3 (Classic Roast)
+    \itemize{
+      \item fix \code{Cube::insert_slices()} to accept \code{Cube::slice()} as input
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.2.2.0 (2022-07-04) (GitHub Only)}{
+  \itemize{
+    \item Upgraded to Armadillo release 11.2.2 (Classic Roast)
+    \itemize{
+      \item fix incorrect and/or slow convergence in single-threaded
+      versions of \code{kmeans()}, \code{gmm_diag::learn()},
+      \code{gmm_full::learn()}
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.2.1.0 (2022-06-28) (GitHub Only)}{
+  \itemize{
+    \item Upgraded to Armadillo release 11.2.1 (Classic Roast)
+    \itemize{
+      \item old style matrix initialisation via the \code{<<} operator
+      will now emit a compile-time deprecation warning
+      \item use of the old and inactive \code{ARMA_DONT_PRINT_ERRORS}
+      option will now emit a compile-time deprecation warning
+      \item the option \code{ARMA_WARN_LEVEL} can be used instead
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.2.0.0 (2022-06-10)}{
+  \itemize{
+    \item Upgraded to Armadillo release 11.2 (Classic Roast)
+    \itemize{
+      \item faster handling of sparse submatrix column views by
+      \code{norm()}, \code{accu()}, \code{nonzeros() }
+      \item extended \code{randu()} and \code{randn()} to allow
+      specification of distribution parameters
+      \item internal refactoring, leading to faster compilation times
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.1.1.0 (2022-05-15)}{
+  \itemize{
+    \item Upgraded to Armadillo release 11.1.1 (Angry Kitchen Appliance)
+    \itemize{
+      \item added \code{inv_opts::no_ugly} option to \code{inv()} and
+      \code{inv_sympd()} to disallow inverses of poorly conditioned matrices
+      \item more efficient handling of rank-deficient matrices via
+      \code{inv_opts::allow_approx} option in \code{inv()} and \code{inv_sympd()}
+      \item better detection of rank deficient matrices by \code{solve()}
+      \item faster handling of symmetric and diagonal matrices by \code{cond()}
+    }
+    \item The \code{configure} script again propagates the'found' case again,
+    thanks to Justin Silverman for the heads-up and suggested fix (Dirk
+    and Justin in \ghpr{376} and \ghpr{377} fixing \ghit{375}).
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.0.1.0 (2022-04-14)}{
+  \itemize{
+    \item Upgraded to Armadillo release 11.0.1 (Creme Brulee)
+    \itemize{
+      \item fix miscompilation of \code{inv()} and \code{inv_sympd()}
+      functions when using \code{inv_opts::allow_approx} and
+      \code{inv_opts::tiny} options
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.11.0.0.0 (2022-04-04)}{
+  \itemize{
+    \item Upgraded to Armadillo release 11.0.0 (Creme Brulee)
+    \itemize{
+      \item added variants of \code{inv()} and \code{inv_sympd()} that
+      provide rcond (reciprocal condition number)
+      \item expanded \code{inv()} and \code{inv_sympd()} with options
+      \code{inv_opts::tiny} and \code{inv_opts::allow_approx}
+      \item stricter handling of singular matrices by \code{inv()} and
+      \code{inv_sympd()}
+      \item stricter handling of non-sympd matrices by \code{inv()} and
+      \code{inv_sympd()}
+      \item stricter handling of non-finitie matrices by \code{pinv()}
+      \item more robust handling of rank deficient matrices by
+      \code{solve()}
+      \item faster handling of diagonal matrices by \code{rcond()}
+      \item changed \code{eigs_sym()} and \code{eigs_gen()} to use
+      higher quality RNG
+      \item \code{quantile()} and \code{median()} will now throw an
+      exception if given matrices/vectors have NaN elements
+      \item workaround for yet another bug in Intel MKL
+    }
+    \item Until May 2022, protect correction to Field behavior via
+    define of \code{RCPP_ARMADILLO_FIX_Field}
+    \item If a LAPACK installation with missing complex routines is
+    found (as e.g. Ubuntu using 3.9.0) then the LAPACK unit test is
+    skipped.
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.10.8.2.0 (2022-02-01)}{
+  \itemize{
+    \item Upgraded to Armadillo release 10.8.2 (Realm Raider)
+    \itemize{
+      \item fix potential speed regression in \code{pinv()} and \code{rank()}
+    }
+  }
+}
+
 \section{Changes in RcppArmadillo version 0.10.8.1.0 (2022-01-23)}{
   \itemize{
     \item Upgraded to Armadillo release 10.8.1 (Realm Raider)

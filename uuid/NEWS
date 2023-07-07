@@ -1,9 +1,34 @@
  NEWS for uuid
 ---------------
 
-1.0-3
+1.1-0	2022-04-19
+    o	added UUIDparse() and UUIDvalidate() functions
+
+    o	added an internal representation of UUIDs as
+	class "UUID" which represents a vector of 128-bit
+	elements interpreted as UUIDs. This also allows seamless
+	conversion between textual representation, raw vectors and
+	UUID objects.
+
+
+1.0-5	2022-04-19
+    o	update to upstream util-linux version e928e8ed6
+
+    o	add LinkingTo includes in the source tree. This fixes issues
+	on Windows where the headers were not copied since configure
+	is not run on Windows. The headers can be updated using
+	src/update-inst.sh script in the source tree.
+
+
+1.0-4	2022-03-15
+    o	Windows: use dynamic buffer when querying DLLs to
+	avoid "Too many DLLs" error.
+
+
+1.0-3	2021-11-01
     o	guard flock() with HAVE_FLOCK for platforms that
 	don't have it
+
 
 1.0-2	2021-10-25
     o	silence benign sendfile warning from upstream

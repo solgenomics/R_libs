@@ -35,3 +35,5 @@ separate.dtplyr_step    Separate a character column into multiple
 slice.dtplyr_step       Subset rows using their positions
 summarise.dtplyr_step   Summarise each group to one row
 transmute.dtplyr_step   Create new columns, dropping old
+unite.dtplyr_step       Unite multiple columns into one by pasting
+                        strings together.

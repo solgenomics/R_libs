@@ -1,0 +1,38 @@
+import(methods)
+importFrom(stats, rbinom, runif, uniroot)
+importFrom(utils, savehistory)
+importFrom(graphics, plot)
+importFrom(Rdpack, reprompt)
+
+exportMethods(
+    pad
+    # todo: is it necessary to export also methods for "pad<-"?
+)
+exportClassPattern("objectPad")
+
+export(
+    isargunnamed,
+    isNA,
+    mintersect,
+    missing_arg,
+    myouter,
+    nposargs,
+    pad,
+    "pad<-",
+    padcheck,
+    parse_text,
+    raw_history,
+    shiftleft,
+    shiftright,
+    sim_complex,
+    sim_numbers,
+    sim_real,
+    cdf2quantile,
+    plotpdf,
+    adjacencyOfClasses,
+    pseudoInverse,
+    rpoly
+)
+
+
+

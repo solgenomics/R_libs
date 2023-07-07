@@ -1,3 +1,47 @@
+# pkgbuild 1.4.2
+
+* Running `bootstrap.R` now works with `pkgbuild_process`, so it also works
+  from pak (https://github.com/r-lib/pak/issues/508).
+
+# pkgbuild 1.4.1
+
+* New `Config/build/extra-sources` `DESCRIPTION` option to make pkgbuild aware
+  of extra source files to consider in `needs_compile()`.
+
+* New `Config/build/bootstrap` `DESCRIPTION` option. Set it to `TRUE` to run
+  `Rscript bootstrap.R` in the package root prior to building the source
+  package (#157, @paleolimbot).
+
+* pkgbuild now supports Rtools43.
+
+* pkgbuild now always _appends_ its extra compiler flags to the ones that
+  already exist in the system and/or user `Makevars` files (#156).
+
+# pkgbuild 1.4.0
+
+* pkgbuild can now avoid copying large package directories when building a
+  source package. See the `PKG_BUILD_COPY_METHOD` environment variable in
+  `?build` or the package README (#59).
+
+  This is currently an experimental feature, and feedback is
+  appreciated.
+
+* `R CMD build` warnings can now be turned into errors, by setting the
+  `pkg.build_stop_for_warnings` option to `TRUE` or by setting the
+  `PKG_BUILD_STOP_FOR_WARNINGS` environment variable to `true` (#114).
+
+* `need_compile()` now knows about Rust source code files, i.e. `Cargo.toml`
+  and `*.rs` (#115).
+
+* Now `pkgbuild::build()` will not clean up `inst/doc` by default if the
+  `Config/build/clean-inst-doc` entry in `DESCRIPTION` is set to `FALSE` (#128).
+
+* New `PKG_BUILD_COLOR_DIAGNOSTICS` environment variable to opt out from
+  colored compiler output (#141).
+
+* pkgbuild now works with a full XCode installation if the XCode Command
+  Line Tools are not installed, on macOS, in RStudio (#103).
+
 # pkgbuild 1.3.1
 
 * Accept Rtools40 for R 4.2, it works well, as long as the PATH includes
@@ -25,7 +69,7 @@
 
 * Gábor Csárdi is now the maintainer.
 
-* `build_setup_source` now considerers both command-line build arguments, as
+* `build_setup_source` now considers both command-line build arguments, as
   well as parameters `vignettes` or `manual` when conditionally executing
   flag-dependent behaviors (@dgkf, #120)
 
@@ -129,6 +173,3 @@
   is run inside of `R CMD check`.
 
 * First argument of all functions is now `path` rather than `pkg`.
-
-
-

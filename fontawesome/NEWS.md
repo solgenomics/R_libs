@@ -1,3 +1,31 @@
+# fontawesome 0.5.1
+
+* Updated icon set to that of Font Awesome 6.4.0. (#109)
+
+# fontawesome 0.5.0
+
+* Updated icon set to that of Font Awesome 6.2.1. (#102)
+
+* Closed #101: added the `vertical_align` argument `fa()` to control vertical alignment of icons. (#103)
+
+* Closed #99 and #100: reinstated missing '.woff2' files. (#102)
+
+# fontawesome 0.4.0
+
+* Updated icon set to that of Font Awesome 6.2.0. (#96)
+
+* It's now possible to reference icons by several of their previous names. For example the old icon names `"contact-card"` and `"vcard"` will map to the current name of `"address-card"`. (#96)
+
+* There is now a `prefer_type` argument (default: `"regular"`) that allows you to register a choice between a solid- or regular-type icon should both be available for a specific short name. (#96)
+
+# fontawesome 0.3.0
+
+* Closed #80: Updated icon set to that of Font Awesome 6.1. (#85)
+
+* Closed #68: full icon names (e.g., `"fab fa-r-project"`) are now properly parsed and verified in the `fa_i()` function. (#77) 
+
+* Closed #66 and #73: CSS length values (supplied to the `height` or `width` options of the `fa()` function) are now correctly handled when they contain decimals. (#74) 
+
 # fontawesome 0.2.2
 
 * .ttf font files (and associated CSS) have been added back to the pared down selection of included webfonts (includes .woff and .ttf); this was to re-enable compatibility with the webshot package in Windows. (#61)

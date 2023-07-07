@@ -1,4 +1,5 @@
-/*! shiny 1.7.0 | (c) 2012-2021 RStudio, PBC. | License: GPL-3 | file LICENSE */
+/*! shiny 1.7.4.1 | (c) 2012-2023 RStudio, PBC. | License: GPL-3 | file LICENSE */
+"use strict";
 (function() {
   var __create = Object.create;
   var __defProp = Object.defineProperty;
@@ -6,29 +7,27 @@
   var __getOwnPropNames = Object.getOwnPropertyNames;
   var __getProtoOf = Object.getPrototypeOf;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
-  var __markAsModule = function(target) {
-    return __defProp(target, "__esModule", { value: true });
-  };
   var __commonJS = function(cb, mod) {
     return function __require() {
-      return mod || (0, cb[Object.keys(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+      return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
     };
   };
-  var __reExport = function(target, module, desc) {
-    if (module && typeof module === "object" || typeof module === "function")
-      for (var keys2 = __getOwnPropNames(module), i = 0, n = keys2.length, key; i < n; i++) {
+  var __copyProps = function(to, from2, except, desc) {
+    if (from2 && typeof from2 === "object" || typeof from2 === "function")
+      for (var keys2 = __getOwnPropNames(from2), i = 0, n = keys2.length, key; i < n; i++) {
         key = keys2[i];
-        if (!__hasOwnProp.call(target, key) && key !== "default")
-          __defProp(target, key, { get: function(k) {
-            return module[k];
-          }.bind(null, key), enumerable: !(desc = __getOwnPropDesc(module, key)) || desc.enumerable });
+        if (!__hasOwnProp.call(to, key) && key !== except)
+          __defProp(to, key, { get: function(k) {
+            return from2[k];
+          }.bind(null, key), enumerable: !(desc = __getOwnPropDesc(from2, key)) || desc.enumerable });
       }
-    return target;
+    return to;
   };
-  var __toModule = function(module) {
-    return __reExport(__markAsModule(__defProp(module != null ? __create(__getProtoOf(module)) : {}, "default", module && module.__esModule && "default" in module ? { get: function() {
-      return module.default;
-    }, enumerable: true } : { value: module, enumerable: true })), module);
+  var __toESM = function(mod, isNodeMode, target) {
+    return target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+      isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+      mod
+    );
   };
 
   // globals:jquery
@@ -214,10 +213,10 @@
   // node_modules/core-js/internals/ie8-dom-define.js
   var require_ie8_dom_define = __commonJS({
     "node_modules/core-js/internals/ie8-dom-define.js": function(exports, module) {
-      var DESCRIPTORS6 = require_descriptors();
+      var DESCRIPTORS7 = require_descriptors();
       var fails11 = require_fails();
       var createElement = require_document_create_element();
-      module.exports = !DESCRIPTORS6 && !fails11(function() {
+      module.exports = !DESCRIPTORS7 && !fails11(function() {
         return Object.defineProperty(createElement("div"), "a", {
           get: function() {
             return 7;
@@ -230,16 +229,16 @@
   // node_modules/core-js/internals/object-get-own-property-descriptor.js
   var require_object_get_own_property_descriptor = __commonJS({
     "node_modules/core-js/internals/object-get-own-property-descriptor.js": function(exports) {
-      var DESCRIPTORS6 = require_descriptors();
+      var DESCRIPTORS7 = require_descriptors();
       var propertyIsEnumerableModule2 = require_object_property_is_enumerable();
       var createPropertyDescriptor2 = require_create_property_descriptor();
-      var toIndexedObject5 = require_to_indexed_object();
+      var toIndexedObject6 = require_to_indexed_object();
       var toPrimitive3 = require_to_primitive();
       var has5 = require_has();
       var IE8_DOM_DEFINE = require_ie8_dom_define();
       var $getOwnPropertyDescriptor2 = Object.getOwnPropertyDescriptor;
-      exports.f = DESCRIPTORS6 ? $getOwnPropertyDescriptor2 : function getOwnPropertyDescriptor4(O, P) {
-        O = toIndexedObject5(O);
+      exports.f = DESCRIPTORS7 ? $getOwnPropertyDescriptor2 : function getOwnPropertyDescriptor4(O, P) {
+        O = toIndexedObject6(O);
         P = toPrimitive3(P, true);
         if (IE8_DOM_DEFINE)
           try {
@@ -268,12 +267,12 @@
   // node_modules/core-js/internals/object-define-property.js
   var require_object_define_property = __commonJS({
     "node_modules/core-js/internals/object-define-property.js": function(exports) {
-      var DESCRIPTORS6 = require_descriptors();
+      var DESCRIPTORS7 = require_descriptors();
       var IE8_DOM_DEFINE = require_ie8_dom_define();
       var anObject10 = require_an_object();
       var toPrimitive3 = require_to_primitive();
       var $defineProperty2 = Object.defineProperty;
-      exports.f = DESCRIPTORS6 ? $defineProperty2 : function defineProperty5(O, P, Attributes) {
+      exports.f = DESCRIPTORS7 ? $defineProperty2 : function defineProperty5(O, P, Attributes) {
         anObject10(O);
         P = toPrimitive3(P, true);
         anObject10(Attributes);
@@ -294,10 +293,10 @@
   // node_modules/core-js/internals/create-non-enumerable-property.js
   var require_create_non_enumerable_property = __commonJS({
     "node_modules/core-js/internals/create-non-enumerable-property.js": function(exports, module) {
-      var DESCRIPTORS6 = require_descriptors();
+      var DESCRIPTORS7 = require_descriptors();
       var definePropertyModule2 = require_object_define_property();
       var createPropertyDescriptor2 = require_create_property_descriptor();
-      module.exports = DESCRIPTORS6 ? function(object, key, value) {
+      module.exports = DESCRIPTORS7 ? function(object, key, value) {
         return definePropertyModule2.f(object, key, createPropertyDescriptor2(1, value));
       } : function(object, key, value) {
         object[key] = value;
@@ -594,12 +593,12 @@
   // node_modules/core-js/internals/array-includes.js
   var require_array_includes = __commonJS({
     "node_modules/core-js/internals/array-includes.js": function(exports, module) {
-      var toIndexedObject5 = require_to_indexed_object();
+      var toIndexedObject6 = require_to_indexed_object();
       var toLength8 = require_to_length();
       var toAbsoluteIndex4 = require_to_absolute_index();
       var createMethod = function(IS_INCLUDES) {
         return function($this, el, fromIndex) {
-          var O = toIndexedObject5($this);
+          var O = toIndexedObject6($this);
           var length = toLength8(O.length);
           var index = toAbsoluteIndex4(fromIndex, length);
           var value;
@@ -628,11 +627,11 @@
   var require_object_keys_internal = __commonJS({
     "node_modules/core-js/internals/object-keys-internal.js": function(exports, module) {
       var has5 = require_has();
-      var toIndexedObject5 = require_to_indexed_object();
+      var toIndexedObject6 = require_to_indexed_object();
       var indexOf2 = require_array_includes().indexOf;
       var hiddenKeys2 = require_hidden_keys();
       module.exports = function(object, names) {
-        var O = toIndexedObject5(object);
+        var O = toIndexedObject6(object);
         var i = 0;
         var result = [];
         var key;
@@ -688,7 +687,7 @@
       var getOwnPropertyNamesModule2 = require_object_get_own_property_names();
       var getOwnPropertySymbolsModule2 = require_object_get_own_property_symbols();
       var anObject10 = require_an_object();
-      module.exports = getBuiltIn3("Reflect", "ownKeys") || function ownKeys(it) {
+      module.exports = getBuiltIn3("Reflect", "ownKeys") || function ownKeys4(it) {
         var keys2 = getOwnPropertyNamesModule2.f(anObject10(it));
         var getOwnPropertySymbols3 = getOwnPropertySymbolsModule2.f;
         return getOwnPropertySymbols3 ? keys2.concat(getOwnPropertySymbols3(it)) : keys2;
@@ -700,13 +699,13 @@
   var require_copy_constructor_properties = __commonJS({
     "node_modules/core-js/internals/copy-constructor-properties.js": function(exports, module) {
       var has5 = require_has();
-      var ownKeys = require_own_keys();
-      var getOwnPropertyDescriptorModule3 = require_object_get_own_property_descriptor();
+      var ownKeys4 = require_own_keys();
+      var getOwnPropertyDescriptorModule4 = require_object_get_own_property_descriptor();
       var definePropertyModule2 = require_object_define_property();
       module.exports = function(target, source) {
-        var keys2 = ownKeys(source);
+        var keys2 = ownKeys4(source);
         var defineProperty5 = definePropertyModule2.f;
-        var getOwnPropertyDescriptor4 = getOwnPropertyDescriptorModule3.f;
+        var getOwnPropertyDescriptor4 = getOwnPropertyDescriptorModule4.f;
         for (var i = 0; i < keys2.length; i++) {
           var key = keys2[i];
           if (!has5(target, key))
@@ -1141,11 +1140,15 @@
           var stringMethod = methods[0];
           var regexMethod = methods[1];
           redefine5(String.prototype, KEY, stringMethod);
-          redefine5(RegExpPrototype2, SYMBOL2, length == 2 ? function(string, arg) {
-            return regexMethod.call(string, this, arg);
-          } : function(string) {
-            return regexMethod.call(string, this);
-          });
+          redefine5(
+            RegExpPrototype2,
+            SYMBOL2,
+            length == 2 ? function(string, arg) {
+              return regexMethod.call(string, this, arg);
+            } : function(string) {
+              return regexMethod.call(string, this);
+            }
+          );
         }
         if (sham)
           createNonEnumerableProperty4(RegExpPrototype2[SYMBOL2], "sham", true);
@@ -1406,31 +1409,6 @@
     }
   });
 
-  // node_modules/core-js/internals/object-keys.js
-  var require_object_keys = __commonJS({
-    "node_modules/core-js/internals/object-keys.js": function(exports, module) {
-      var internalObjectKeys = require_object_keys_internal();
-      var enumBugKeys = require_enum_bug_keys();
-      module.exports = Object.keys || function keys2(O) {
-        return internalObjectKeys(O, enumBugKeys);
-      };
-    }
-  });
-
-  // node_modules/core-js/internals/is-regexp.js
-  var require_is_regexp = __commonJS({
-    "node_modules/core-js/internals/is-regexp.js": function(exports, module) {
-      var isObject7 = require_is_object();
-      var classof2 = require_classof_raw();
-      var wellKnownSymbol5 = require_well_known_symbol();
-      var MATCH = wellKnownSymbol5("match");
-      module.exports = function(it) {
-        var isRegExp2;
-        return isObject7(it) && ((isRegExp2 = it[MATCH]) !== void 0 ? !!isRegExp2 : classof2(it) == "RegExp");
-      };
-    }
-  });
-
   // node_modules/core-js/internals/a-function.js
   var require_a_function = __commonJS({
     "node_modules/core-js/internals/a-function.js": function(exports, module) {
@@ -1439,21 +1417,6 @@
           throw TypeError(String(it) + " is not a function");
         }
         return it;
-      };
-    }
-  });
-
-  // node_modules/core-js/internals/species-constructor.js
-  var require_species_constructor = __commonJS({
-    "node_modules/core-js/internals/species-constructor.js": function(exports, module) {
-      var anObject10 = require_an_object();
-      var aFunction2 = require_a_function();
-      var wellKnownSymbol5 = require_well_known_symbol();
-      var SPECIES2 = wellKnownSymbol5("species");
-      module.exports = function(O, defaultConstructor) {
-        var C = anObject10(O).constructor;
-        var S;
-        return C === void 0 || (S = anObject10(C)[SPECIES2]) == void 0 ? defaultConstructor : aFunction2(S);
       };
     }
   });
@@ -1560,14 +1523,106 @@
     }
   });
 
+  // node_modules/core-js/internals/array-for-each.js
+  var require_array_for_each = __commonJS({
+    "node_modules/core-js/internals/array-for-each.js": function(exports, module) {
+      "use strict";
+      var $forEach2 = require_array_iteration().forEach;
+      var arrayMethodIsStrict5 = require_array_method_is_strict();
+      var STRICT_METHOD5 = arrayMethodIsStrict5("forEach");
+      module.exports = !STRICT_METHOD5 ? function forEach3(callbackfn) {
+        return $forEach2(this, callbackfn, arguments.length > 1 ? arguments[1] : void 0);
+      } : [].forEach;
+    }
+  });
+
+  // node_modules/core-js/internals/dom-iterables.js
+  var require_dom_iterables = __commonJS({
+    "node_modules/core-js/internals/dom-iterables.js": function(exports, module) {
+      module.exports = {
+        CSSRuleList: 0,
+        CSSStyleDeclaration: 0,
+        CSSValueList: 0,
+        ClientRectList: 0,
+        DOMRectList: 0,
+        DOMStringList: 0,
+        DOMTokenList: 1,
+        DataTransferItemList: 0,
+        FileList: 0,
+        HTMLAllCollection: 0,
+        HTMLCollection: 0,
+        HTMLFormElement: 0,
+        HTMLSelectElement: 0,
+        MediaList: 0,
+        MimeTypeArray: 0,
+        NamedNodeMap: 0,
+        NodeList: 1,
+        PaintRequestList: 0,
+        Plugin: 0,
+        PluginArray: 0,
+        SVGLengthList: 0,
+        SVGNumberList: 0,
+        SVGPathSegList: 0,
+        SVGPointList: 0,
+        SVGStringList: 0,
+        SVGTransformList: 0,
+        SourceBufferList: 0,
+        StyleSheetList: 0,
+        TextTrackCueList: 0,
+        TextTrackList: 0,
+        TouchList: 0
+      };
+    }
+  });
+
+  // node_modules/core-js/internals/object-keys.js
+  var require_object_keys = __commonJS({
+    "node_modules/core-js/internals/object-keys.js": function(exports, module) {
+      var internalObjectKeys = require_object_keys_internal();
+      var enumBugKeys = require_enum_bug_keys();
+      module.exports = Object.keys || function keys2(O) {
+        return internalObjectKeys(O, enumBugKeys);
+      };
+    }
+  });
+
+  // node_modules/core-js/internals/is-regexp.js
+  var require_is_regexp = __commonJS({
+    "node_modules/core-js/internals/is-regexp.js": function(exports, module) {
+      var isObject7 = require_is_object();
+      var classof2 = require_classof_raw();
+      var wellKnownSymbol5 = require_well_known_symbol();
+      var MATCH = wellKnownSymbol5("match");
+      module.exports = function(it) {
+        var isRegExp2;
+        return isObject7(it) && ((isRegExp2 = it[MATCH]) !== void 0 ? !!isRegExp2 : classof2(it) == "RegExp");
+      };
+    }
+  });
+
+  // node_modules/core-js/internals/species-constructor.js
+  var require_species_constructor = __commonJS({
+    "node_modules/core-js/internals/species-constructor.js": function(exports, module) {
+      var anObject10 = require_an_object();
+      var aFunction2 = require_a_function();
+      var wellKnownSymbol5 = require_well_known_symbol();
+      var SPECIES2 = wellKnownSymbol5("species");
+      module.exports = function(O, defaultConstructor) {
+        var C = anObject10(O).constructor;
+        var S;
+        return C === void 0 || (S = anObject10(C)[SPECIES2]) == void 0 ? defaultConstructor : aFunction2(S);
+      };
+    }
+  });
+
   // node_modules/core-js/internals/object-define-properties.js
   var require_object_define_properties = __commonJS({
     "node_modules/core-js/internals/object-define-properties.js": function(exports, module) {
-      var DESCRIPTORS6 = require_descriptors();
+      var DESCRIPTORS7 = require_descriptors();
       var definePropertyModule2 = require_object_define_property();
       var anObject10 = require_an_object();
       var objectKeys2 = require_object_keys();
-      module.exports = DESCRIPTORS6 ? Object.defineProperties : function defineProperties2(O, Properties) {
+      module.exports = DESCRIPTORS7 ? Object.defineProperties : function defineProperties2(O, Properties) {
         anObject10(O);
         var keys2 = objectKeys2(Properties);
         var length = keys2.length;
@@ -1783,7 +1838,7 @@
   // node_modules/core-js/internals/object-get-own-property-names-external.js
   var require_object_get_own_property_names_external = __commonJS({
     "node_modules/core-js/internals/object-get-own-property-names-external.js": function(exports, module) {
-      var toIndexedObject5 = require_to_indexed_object();
+      var toIndexedObject6 = require_to_indexed_object();
       var $getOwnPropertyNames2 = require_object_get_own_property_names().f;
       var toString2 = {}.toString;
       var windowNames = typeof window == "object" && window && Object.getOwnPropertyNames ? Object.getOwnPropertyNames(window) : [];
@@ -1795,7 +1850,7 @@
         }
       };
       module.exports.f = function getOwnPropertyNames3(it) {
-        return windowNames && toString2.call(it) == "[object Window]" ? getWindowNames(it) : $getOwnPropertyNames2(toIndexedObject5(it));
+        return windowNames && toString2.call(it) == "[object Window]" ? getWindowNames(it) : $getOwnPropertyNames2(toIndexedObject6(it));
       };
     }
   });
@@ -1950,7 +2005,7 @@
                 return new IteratorConstructor(this, KIND);
               };
             case VALUES:
-              return function values() {
+              return function values2() {
                 return new IteratorConstructor(this, KIND);
               };
             case ENTRIES:
@@ -1986,7 +2041,7 @@
         }
         if (DEFAULT == VALUES && nativeIterator && nativeIterator.name !== VALUES) {
           INCORRECT_VALUES_NAME = true;
-          defaultIterator = function values() {
+          defaultIterator = function values2() {
             return nativeIterator.call(this);
           };
         }
@@ -2018,7 +2073,7 @@
   var require_es_array_iterator = __commonJS({
     "node_modules/core-js/modules/es.array.iterator.js": function(exports, module) {
       "use strict";
-      var toIndexedObject5 = require_to_indexed_object();
+      var toIndexedObject6 = require_to_indexed_object();
       var addToUnscopables2 = require_add_to_unscopables();
       var Iterators = require_iterators();
       var InternalStateModule3 = require_internal_state();
@@ -2029,7 +2084,7 @@
       module.exports = defineIterator2(Array, "Array", function(iterated, kind) {
         setInternalState3(this, {
           type: ARRAY_ITERATOR,
-          target: toIndexedObject5(iterated),
+          target: toIndexedObject6(iterated),
           index: 0,
           kind: kind
         });
@@ -2052,45 +2107,6 @@
       addToUnscopables2("keys");
       addToUnscopables2("values");
       addToUnscopables2("entries");
-    }
-  });
-
-  // node_modules/core-js/internals/dom-iterables.js
-  var require_dom_iterables = __commonJS({
-    "node_modules/core-js/internals/dom-iterables.js": function(exports, module) {
-      module.exports = {
-        CSSRuleList: 0,
-        CSSStyleDeclaration: 0,
-        CSSValueList: 0,
-        ClientRectList: 0,
-        DOMRectList: 0,
-        DOMStringList: 0,
-        DOMTokenList: 1,
-        DataTransferItemList: 0,
-        FileList: 0,
-        HTMLAllCollection: 0,
-        HTMLCollection: 0,
-        HTMLFormElement: 0,
-        HTMLSelectElement: 0,
-        MediaList: 0,
-        MimeTypeArray: 0,
-        NamedNodeMap: 0,
-        NodeList: 1,
-        PaintRequestList: 0,
-        Plugin: 0,
-        PluginArray: 0,
-        SVGLengthList: 0,
-        SVGNumberList: 0,
-        SVGPathSegList: 0,
-        SVGPointList: 0,
-        SVGStringList: 0,
-        SVGTransformList: 0,
-        SourceBufferList: 0,
-        StyleSheetList: 0,
-        TextTrackCueList: 0,
-        TextTrackList: 0,
-        TouchList: 0
-      };
     }
   });
 
@@ -2118,46 +2134,6 @@
         if (setPrototypeOf2 && typeof (NewTarget = dummy.constructor) == "function" && NewTarget !== Wrapper && isObject7(NewTargetPrototype = NewTarget.prototype) && NewTargetPrototype !== Wrapper.prototype)
           setPrototypeOf2($this, NewTargetPrototype);
         return $this;
-      };
-    }
-  });
-
-  // node_modules/core-js/internals/same-value.js
-  var require_same_value = __commonJS({
-    "node_modules/core-js/internals/same-value.js": function(exports, module) {
-      module.exports = Object.is || function is(x, y) {
-        return x === y ? x !== 0 || 1 / x === 1 / y : x != x && y != y;
-      };
-    }
-  });
-
-  // node_modules/core-js/internals/object-to-array.js
-  var require_object_to_array = __commonJS({
-    "node_modules/core-js/internals/object-to-array.js": function(exports, module) {
-      var DESCRIPTORS6 = require_descriptors();
-      var objectKeys2 = require_object_keys();
-      var toIndexedObject5 = require_to_indexed_object();
-      var propertyIsEnumerable2 = require_object_property_is_enumerable().f;
-      var createMethod = function(TO_ENTRIES) {
-        return function(it) {
-          var O = toIndexedObject5(it);
-          var keys2 = objectKeys2(O);
-          var length = keys2.length;
-          var i = 0;
-          var result = [];
-          var key;
-          while (length > i) {
-            key = keys2[i++];
-            if (!DESCRIPTORS6 || propertyIsEnumerable2.call(O, key)) {
-              result.push(TO_ENTRIES ? [key, O[key]] : O[key]);
-            }
-          }
-          return result;
-        };
-      };
-      module.exports = {
-        entries: createMethod(true),
-        values: createMethod(false)
       };
     }
   });
@@ -2227,7 +2203,7 @@
       var callWithSafeIterationClosing = require_call_with_safe_iteration_closing();
       var isArrayIteratorMethod = require_is_array_iterator_method();
       var toLength8 = require_to_length();
-      var createProperty4 = require_create_property();
+      var createProperty5 = require_create_property();
       var getIteratorMethod = require_get_iterator_method();
       module.exports = function from2(arrayLike) {
         var O = toObject6(arrayLike);
@@ -2246,14 +2222,14 @@
           result = new C();
           for (; !(step = next2.call(iterator)).done; index++) {
             value = mapping ? callWithSafeIterationClosing(iterator, mapfn, [step.value, index], true) : step.value;
-            createProperty4(result, index, value);
+            createProperty5(result, index, value);
           }
         } else {
           length = toLength8(O.length);
           result = new C(length);
           for (; length > index; index++) {
             value = mapping ? mapfn(O[index], index) : O[index];
-            createProperty4(result, index, value);
+            createProperty5(result, index, value);
           }
         }
         result.length = index;
@@ -2305,6 +2281,46 @@
         } catch (error) {
         }
         return ITERATION_SUPPORT;
+      };
+    }
+  });
+
+  // node_modules/core-js/internals/same-value.js
+  var require_same_value = __commonJS({
+    "node_modules/core-js/internals/same-value.js": function(exports, module) {
+      module.exports = Object.is || function is(x, y) {
+        return x === y ? x !== 0 || 1 / x === 1 / y : x != x && y != y;
+      };
+    }
+  });
+
+  // node_modules/core-js/internals/object-to-array.js
+  var require_object_to_array = __commonJS({
+    "node_modules/core-js/internals/object-to-array.js": function(exports, module) {
+      var DESCRIPTORS7 = require_descriptors();
+      var objectKeys2 = require_object_keys();
+      var toIndexedObject6 = require_to_indexed_object();
+      var propertyIsEnumerable2 = require_object_property_is_enumerable().f;
+      var createMethod = function(TO_ENTRIES) {
+        return function(it) {
+          var O = toIndexedObject6(it);
+          var keys2 = objectKeys2(O);
+          var length = keys2.length;
+          var i = 0;
+          var result = [];
+          var key;
+          while (length > i) {
+            key = keys2[i++];
+            if (!DESCRIPTORS7 || propertyIsEnumerable2.call(O, key)) {
+              result.push(TO_ENTRIES ? [key, O[key]] : O[key]);
+            }
+          }
+          return result;
+        };
+      };
+      module.exports = {
+        entries: createMethod(true),
+        values: createMethod(false)
       };
     }
   });
@@ -2474,7 +2490,7 @@
     "node_modules/core-js/internals/array-buffer.js": function(exports, module) {
       "use strict";
       var global8 = require_global();
-      var DESCRIPTORS6 = require_descriptors();
+      var DESCRIPTORS7 = require_descriptors();
       var NATIVE_ARRAY_BUFFER2 = require_array_buffer_native();
       var createNonEnumerableProperty4 = require_create_non_enumerable_property();
       var redefineAll = require_redefine_all();
@@ -2558,7 +2574,7 @@
             bytes: arrayFill.call(new Array(byteLength), 0),
             byteLength: byteLength
           });
-          if (!DESCRIPTORS6)
+          if (!DESCRIPTORS7)
             this.byteLength = byteLength;
         };
         $DataView = function DataView3(buffer, byteOffset, byteLength) {
@@ -2576,13 +2592,13 @@
             byteLength: byteLength,
             byteOffset: offset
           });
-          if (!DESCRIPTORS6) {
+          if (!DESCRIPTORS7) {
             this.buffer = buffer;
             this.byteLength = byteLength;
             this.byteOffset = offset;
           }
         };
-        if (DESCRIPTORS6) {
+        if (DESCRIPTORS7) {
           addGetter($ArrayBuffer, "byteLength");
           addGetter($DataView, "buffer");
           addGetter($DataView, "byteLength");
@@ -2702,12 +2718,12 @@
       var getBuiltIn3 = require_get_built_in();
       var definePropertyModule2 = require_object_define_property();
       var wellKnownSymbol5 = require_well_known_symbol();
-      var DESCRIPTORS6 = require_descriptors();
+      var DESCRIPTORS7 = require_descriptors();
       var SPECIES2 = wellKnownSymbol5("species");
       module.exports = function(CONSTRUCTOR_NAME) {
         var Constructor = getBuiltIn3(CONSTRUCTOR_NAME);
         var defineProperty5 = definePropertyModule2.f;
-        if (DESCRIPTORS6 && Constructor && !Constructor[SPECIES2]) {
+        if (DESCRIPTORS7 && Constructor && !Constructor[SPECIES2]) {
           defineProperty5(Constructor, SPECIES2, {
             configurable: true,
             get: function() {
@@ -2769,21 +2785,8 @@
     }
   });
 
-  // node_modules/core-js/internals/array-for-each.js
-  var require_array_for_each = __commonJS({
-    "node_modules/core-js/internals/array-for-each.js": function(exports, module) {
-      "use strict";
-      var $forEach2 = require_array_iteration().forEach;
-      var arrayMethodIsStrict4 = require_array_method_is_strict();
-      var STRICT_METHOD4 = arrayMethodIsStrict4("forEach");
-      module.exports = !STRICT_METHOD4 ? function forEach3(callbackfn) {
-        return $forEach2(this, callbackfn, arguments.length > 1 ? arguments[1] : void 0);
-      } : [].forEach;
-    }
-  });
-
   // srcts/src/initialize/disableForm.ts
-  var import_jquery = __toModule(require_jquery());
+  var import_jquery = __toESM(require_jquery());
   function disableFormSubmission() {
     (0, import_jquery.default)(document).on("submit", "form:not([action])", function(e) {
       e.preventDefault();
@@ -2791,7 +2794,7 @@
   }
 
   // srcts/src/initialize/history.ts
-  var import_jquery2 = __toModule(require_jquery());
+  var import_jquery2 = __toESM(require_jquery());
   function trackHistory() {
     var origPushState = window.history.pushState;
     window.history.pushState = function() {
@@ -2805,7 +2808,6 @@
   }
 
   // node_modules/core-js/modules/es.array.index-of.js
-  "use strict";
   var $3 = require_export();
   var $indexOf = require_array_includes().indexOf;
   var arrayMethodIsStrict = require_array_method_is_strict();
@@ -2826,7 +2828,7 @@
   });
 
   // srcts/src/initialize/browser.ts
-  var import_jquery3 = __toModule(require_jquery());
+  var import_jquery3 = __toESM(require_jquery());
 
   // srcts/src/utils/browser.ts
   var isQtVal = false;
@@ -2896,7 +2898,7 @@
   }
 
   // srcts/src/shiny/index.ts
-  var import_jquery43 = __toModule(require_jquery());
+  var import_jquery40 = __toESM(require_jquery());
 
   // node_modules/core-js/modules/es.function.name.js
   var DESCRIPTORS = require_descriptors();
@@ -2919,10 +2921,9 @@
   }
 
   // srcts/src/utils/index.ts
-  var import_es_regexp_exec = __toModule(require_es_regexp_exec());
+  var import_es_regexp_exec = __toESM(require_es_regexp_exec());
 
   // node_modules/core-js/modules/es.string.replace.js
-  "use strict";
   var fixRegExpWellKnownSymbolLogic = require_fix_regexp_well_known_symbol_logic();
   var anObject = require_an_object();
   var toLength = require_to_length();
@@ -3011,7 +3012,6 @@
   }
 
   // node_modules/core-js/modules/es.regexp.to-string.js
-  "use strict";
   var redefine2 = require_redefine();
   var anObject2 = require_an_object();
   var fails = require_fails();
@@ -3041,7 +3041,6 @@
   });
 
   // node_modules/core-js/modules/es.number.to-precision.js
-  "use strict";
   var $7 = require_export();
   var fails2 = require_fails();
   var thisNumberValue = require_this_number_value();
@@ -3058,7 +3057,6 @@
   });
 
   // node_modules/core-js/modules/es.array.concat.js
-  "use strict";
   var $8 = require_export();
   var fails3 = require_fails();
   var isArray = require_is_array();
@@ -3113,7 +3111,6 @@
   });
 
   // node_modules/core-js/modules/es.array.slice.js
-  "use strict";
   var $9 = require_export();
   var isObject2 = require_is_object();
   var isArray2 = require_is_array();
@@ -3157,7 +3154,6 @@
   });
 
   // node_modules/core-js/modules/es.array.splice.js
-  "use strict";
   var $10 = require_export();
   var toAbsoluteIndex2 = require_to_absolute_index();
   var toInteger2 = require_to_integer();
@@ -3226,22 +3222,47 @@
     }
   });
 
-  // node_modules/core-js/modules/es.object.keys.js
+  // node_modules/core-js/modules/es.array.for-each.js
   var $11 = require_export();
+  var forEach = require_array_for_each();
+  $11({ target: "Array", proto: true, forced: [].forEach != forEach }, {
+    forEach: forEach
+  });
+
+  // node_modules/core-js/modules/web.dom-collections.for-each.js
+  var global2 = require_global();
+  var DOMIterables = require_dom_iterables();
+  var forEach2 = require_array_for_each();
+  var createNonEnumerableProperty = require_create_non_enumerable_property();
+  for (COLLECTION_NAME in DOMIterables) {
+    Collection = global2[COLLECTION_NAME];
+    CollectionPrototype = Collection && Collection.prototype;
+    if (CollectionPrototype && CollectionPrototype.forEach !== forEach2)
+      try {
+        createNonEnumerableProperty(CollectionPrototype, "forEach", forEach2);
+      } catch (error) {
+        CollectionPrototype.forEach = forEach2;
+      }
+  }
+  var Collection;
+  var CollectionPrototype;
+  var COLLECTION_NAME;
+
+  // node_modules/core-js/modules/es.object.keys.js
+  var $12 = require_export();
   var toObject3 = require_to_object();
   var nativeKeys = require_object_keys();
   var fails4 = require_fails();
   var FAILS_ON_PRIMITIVES = fails4(function() {
     nativeKeys(1);
   });
-  $11({ target: "Object", stat: true, forced: FAILS_ON_PRIMITIVES }, {
+  $12({ target: "Object", stat: true, forced: FAILS_ON_PRIMITIVES }, {
     keys: function keys(it) {
       return nativeKeys(toObject3(it));
     }
   });
 
   // node_modules/core-js/modules/es.string.split.js
-  "use strict";
   var fixRegExpWellKnownSymbolLogic2 = require_fix_regexp_well_known_symbol_logic();
   var isRegExp = require_is_regexp();
   var anObject3 = require_an_object();
@@ -3350,35 +3371,24 @@
   }, UNSUPPORTED_Y);
 
   // srcts/src/utils/index.ts
-  var import_jquery5 = __toModule(require_jquery());
+  var import_jquery4 = __toESM(require_jquery());
 
   // srcts/src/window/pixelRatio.ts
   function windowDevicePixelRatio() {
     return window.devicePixelRatio;
   }
 
-  // srcts/src/utils/blob.ts
-  var import_jquery4 = __toModule(require_jquery());
-  var blobBuilderClass;
-  function setBlobBuilder(blobBuilderClass_) {
-    blobBuilderClass = blobBuilderClass_;
-    return;
-  }
-  function makeBlob(parts) {
-    try {
-      return new Blob(parts);
-    } catch (e) {
-      var blobBuilder = new blobBuilderClass();
-      import_jquery4.default.each(parts, function(i, part) {
-        blobBuilder.append(part);
-      });
-      return blobBuilder.getBlob();
-    }
-  }
-
   // srcts/src/utils/object.ts
-  function hasOwnProperty(x, y) {
-    return Object.prototype.hasOwnProperty.call(x, y);
+  function hasOwnProperty(obj, prop) {
+    return Object.prototype.hasOwnProperty.call(obj, prop);
+  }
+  function hasDefinedProperty(obj, prop) {
+    return Object.prototype.hasOwnProperty.call(obj, prop) && obj[prop] !== void 0;
+  }
+  function ifUndefined(value, alternate) {
+    if (value === void 0)
+      return alternate;
+    return value;
   }
 
   // srcts/src/utils/index.ts
@@ -3412,10 +3422,11 @@
   }
   function getStyle(el, styleProp) {
     var x = void 0;
-    if (el.currentStyle)
+    if ("currentStyle" in el) {
       x = el.currentStyle[styleProp];
-    else if (window.getComputedStyle) {
-      var style = document.defaultView.getComputedStyle(el, null);
+    } else {
+      var _document, _document$defaultView;
+      var style = (_document = document) === null || _document === void 0 ? void 0 : (_document$defaultView = _document.defaultView) === null || _document$defaultView === void 0 ? void 0 : _document$defaultView.getComputedStyle(el, null);
       if (style)
         x = style.getPropertyValue(styleProp);
     }
@@ -3451,9 +3462,10 @@
   function makeResizeFilter(el, func) {
     var lastSize = {};
     return function() {
+      var rect = el.getBoundingClientRect();
       var size = {
-        w: el.offsetWidth,
-        h: el.offsetHeight
+        w: rect.width,
+        h: rect.height
       };
       if (size.w === 0 && size.h === 0)
         return;
@@ -3491,12 +3503,12 @@
     return [value];
   }
   function mergeSort(list, sortfunc) {
-    function merge(sortfunc2, a, b) {
+    function merge(a, b) {
       var ia = 0;
       var ib = 0;
       var sorted = [];
       while (ia < a.length && ib < b.length) {
-        if (sortfunc2(a[ia], b[ib]) <= 0) {
+        if (sortfunc(a[ia], b[ib]) <= 0) {
           sorted.push(a[ia++]);
         } else {
           sorted.push(b[ib++]);
@@ -3515,7 +3527,7 @@
       for (var i = 0; i < list.length; i += chunkSize * 2) {
         var listA = list.slice(i, i + chunkSize);
         var listB = list.slice(i + chunkSize, i + chunkSize * 2);
-        var merged = merge(sortfunc, listA, listB);
+        var merged = merge(listA, listB);
         var args = [i, merged.length];
         Array.prototype.push.apply(args, merged);
         Array.prototype.splice.apply(list, args);
@@ -3523,22 +3535,23 @@
     }
     return list;
   }
-  var $escape = function $escape2(val) {
+  function $escape(val) {
+    if (typeof val === "undefined")
+      return val;
     return val.replace(/([!"#$%&'()*+,./:;<=>?@[\\\]^`{|}~])/g, "\\$1");
-  };
+  }
   function mapValues(obj, f) {
     var newObj = {};
-    for (var _key in obj) {
-      if (hasOwnProperty(obj, _key))
-        newObj[_key] = f(obj[_key], _key, obj);
-    }
+    Object.keys(obj).forEach(function(key) {
+      newObj[key] = f(obj[key], key, obj);
+    });
     return newObj;
   }
   function isnan(x) {
     return typeof x === "number" && isNaN(x);
   }
   function _equal(x, y) {
-    if (import_jquery5.default.type(x) === "object" && import_jquery5.default.type(y) === "object") {
+    if (import_jquery4.default.type(x) === "object" && import_jquery4.default.type(y) === "object") {
       var xo = x;
       var yo = y;
       if (Object.keys(xo).length !== Object.keys(yo).length)
@@ -3548,7 +3561,7 @@
           return false;
       }
       return true;
-    } else if (import_jquery5.default.type(x) === "array" && import_jquery5.default.type(y) === "array") {
+    } else if (import_jquery4.default.type(x) === "array" && import_jquery4.default.type(y) === "array") {
       var xa = x;
       var ya = y;
       if (xa.length !== ya.length)
@@ -3576,17 +3589,17 @@
       return (ver + "").replace(/-/, ".").replace(/(\.0)+[^.]*$/, "").split(".");
     }
     function cmpVersion(a2, b2) {
-      a2 = versionParts(a2);
-      b2 = versionParts(b2);
-      var len = Math.min(a2.length, b2.length);
+      var aParts = versionParts(a2);
+      var bParts = versionParts(b2);
+      var len = Math.min(aParts.length, bParts.length);
       var cmp;
       for (var i = 0; i < len; i++) {
-        cmp = parseInt(a2[i], 10) - parseInt(b2[i], 10);
+        cmp = parseInt(aParts[i], 10) - parseInt(bParts[i], 10);
         if (cmp !== 0) {
           return cmp;
         }
       }
-      return a2.length - b2.length;
+      return aParts.length - bParts.length;
     }
     var diff = cmpVersion(a, b);
     if (op === "==")
@@ -3633,9 +3646,6 @@
   }
   function isBS3() {
     return !window.bootstrap;
-  }
-  function toLowerCase(str) {
-    return str.toLowerCase();
   }
 
   // srcts/src/bindings/registry.ts
@@ -3762,12 +3772,12 @@
     }, {
       key: "getId",
       value: function getId(el) {
-        return el["data-input-id"] || el.id;
+        return el.getAttribute("data-input-id") || el.id;
       }
     }, {
       key: "getType",
       value: function getType(el) {
-        return false;
+        return null;
         el;
       }
     }, {
@@ -3821,7 +3831,6 @@
   }();
 
   // node_modules/core-js/modules/es.array.find.js
-  "use strict";
   var $14 = require_export();
   var $find = require_array_iteration().find;
   var addToUnscopables = require_add_to_unscopables();
@@ -3913,9 +3922,8 @@
   });
 
   // node_modules/core-js/modules/es.symbol.js
-  "use strict";
   var $18 = require_export();
-  var global2 = require_global();
+  var global3 = require_global();
   var getBuiltIn2 = require_get_built_in();
   var IS_PURE = require_is_pure();
   var DESCRIPTORS2 = require_descriptors();
@@ -3938,7 +3946,7 @@
   var getOwnPropertyDescriptorModule = require_object_get_own_property_descriptor();
   var definePropertyModule = require_object_define_property();
   var propertyIsEnumerableModule = require_object_property_is_enumerable();
-  var createNonEnumerableProperty = require_create_non_enumerable_property();
+  var createNonEnumerableProperty2 = require_create_non_enumerable_property();
   var redefine3 = require_redefine();
   var shared = require_shared();
   var sharedKey = require_shared_key();
@@ -3957,7 +3965,7 @@
   var setInternalState = InternalStateModule.set;
   var getInternalState = InternalStateModule.getterFor(SYMBOL);
   var ObjectPrototype = Object[PROTOTYPE];
-  var $Symbol = global2.Symbol;
+  var $Symbol = global3.Symbol;
   var $stringify = getBuiltIn2("JSON", "stringify");
   var nativeGetOwnPropertyDescriptor = getOwnPropertyDescriptorModule.f;
   var nativeDefineProperty = definePropertyModule.f;
@@ -3968,7 +3976,7 @@
   var StringToSymbolRegistry = shared("string-to-symbol-registry");
   var SymbolToStringRegistry = shared("symbol-to-string-registry");
   var WellKnownSymbolsStore = shared("wks");
-  var QObject = global2.QObject;
+  var QObject = global3.QObject;
   var USE_SETTER = !QObject || !QObject[PROTOTYPE] || !QObject[PROTOTYPE].findChild;
   var setSymbolDescriptor = DESCRIPTORS2 && fails7(function() {
     return nativeObjectCreate(nativeDefineProperty({}, "a", {
@@ -4190,21 +4198,20 @@
   }
   var FORCED_JSON_STRINGIFY;
   if (!$Symbol[PROTOTYPE][TO_PRIMITIVE]) {
-    createNonEnumerableProperty($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
+    createNonEnumerableProperty2($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
   }
   setToStringTag($Symbol, SYMBOL);
   hiddenKeys[HIDDEN] = true;
 
   // node_modules/core-js/modules/es.symbol.description.js
-  "use strict";
   var $19 = require_export();
   var DESCRIPTORS3 = require_descriptors();
-  var global3 = require_global();
+  var global4 = require_global();
   var has2 = require_has();
   var isObject5 = require_is_object();
   var defineProperty3 = require_object_define_property().f;
   var copyConstructorProperties = require_copy_constructor_properties();
-  var NativeSymbol = global3.Symbol;
+  var NativeSymbol = global4.Symbol;
   if (DESCRIPTORS3 && typeof NativeSymbol == "function" && (!("description" in NativeSymbol.prototype) || NativeSymbol().description !== void 0)) {
     EmptyStringDescriptionStore = {};
     SymbolWrapper = function Symbol2() {
@@ -4247,10 +4254,9 @@
   defineWellKnownSymbol2("iterator");
 
   // srcts/src/bindings/input/checkbox.ts
-  var import_es_array_iterator = __toModule(require_es_array_iterator());
+  var import_es_array_iterator = __toESM(require_es_array_iterator());
 
   // node_modules/core-js/modules/es.string.iterator.js
-  "use strict";
   var charAt = require_string_multibyte().charAt;
   var InternalStateModule2 = require_internal_state();
   var defineIterator = require_define_iterator();
@@ -4276,32 +4282,32 @@
   });
 
   // node_modules/core-js/modules/web.dom-collections.iterator.js
-  var global4 = require_global();
-  var DOMIterables = require_dom_iterables();
+  var global5 = require_global();
+  var DOMIterables2 = require_dom_iterables();
   var ArrayIteratorMethods = require_es_array_iterator();
-  var createNonEnumerableProperty2 = require_create_non_enumerable_property();
+  var createNonEnumerableProperty3 = require_create_non_enumerable_property();
   var wellKnownSymbol4 = require_well_known_symbol();
   var ITERATOR = wellKnownSymbol4("iterator");
   var TO_STRING_TAG = wellKnownSymbol4("toStringTag");
   var ArrayValues = ArrayIteratorMethods.values;
-  for (var COLLECTION_NAME in DOMIterables) {
-    Collection = global4[COLLECTION_NAME];
+  for (COLLECTION_NAME in DOMIterables2) {
+    Collection = global5[COLLECTION_NAME];
     CollectionPrototype = Collection && Collection.prototype;
     if (CollectionPrototype) {
       if (CollectionPrototype[ITERATOR] !== ArrayValues)
         try {
-          createNonEnumerableProperty2(CollectionPrototype, ITERATOR, ArrayValues);
+          createNonEnumerableProperty3(CollectionPrototype, ITERATOR, ArrayValues);
         } catch (error) {
           CollectionPrototype[ITERATOR] = ArrayValues;
         }
       if (!CollectionPrototype[TO_STRING_TAG]) {
-        createNonEnumerableProperty2(CollectionPrototype, TO_STRING_TAG, COLLECTION_NAME);
+        createNonEnumerableProperty3(CollectionPrototype, TO_STRING_TAG, COLLECTION_NAME);
       }
-      if (DOMIterables[COLLECTION_NAME])
+      if (DOMIterables2[COLLECTION_NAME])
         for (METHOD_NAME in ArrayIteratorMethods) {
           if (CollectionPrototype[METHOD_NAME] !== ArrayIteratorMethods[METHOD_NAME])
             try {
-              createNonEnumerableProperty2(CollectionPrototype, METHOD_NAME, ArrayIteratorMethods[METHOD_NAME]);
+              createNonEnumerableProperty3(CollectionPrototype, METHOD_NAME, ArrayIteratorMethods[METHOD_NAME]);
             } catch (error) {
               CollectionPrototype[METHOD_NAME] = ArrayIteratorMethods[METHOD_NAME];
             }
@@ -4311,17 +4317,18 @@
   var Collection;
   var CollectionPrototype;
   var METHOD_NAME;
+  var COLLECTION_NAME;
 
   // srcts/src/bindings/input/checkbox.ts
-  var import_jquery6 = __toModule(require_jquery());
+  var import_jquery5 = __toESM(require_jquery());
   function _typeof(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof = function _typeof27(obj2) {
+      _typeof = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof = function _typeof27(obj2) {
+      _typeof = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -4358,7 +4365,7 @@
       _setPrototypeOf(subClass, superClass);
   }
   function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -4405,7 +4412,7 @@
     }
   }
   function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf(o);
@@ -4420,7 +4427,7 @@
     _createClass3(CheckboxInputBinding2, [{
       key: "find",
       value: function find2(scope) {
-        return (0, import_jquery6.default)(scope).find('input[type="checkbox"]');
+        return (0, import_jquery5.default)(scope).find('input[type="checkbox"]');
       }
     }, {
       key: "getValue",
@@ -4435,38 +4442,39 @@
     }, {
       key: "subscribe",
       value: function subscribe(el, callback) {
-        (0, import_jquery6.default)(el).on("change.checkboxInputBinding", function() {
+        (0, import_jquery5.default)(el).on("change.checkboxInputBinding", function() {
           callback(true);
         });
       }
     }, {
       key: "unsubscribe",
       value: function unsubscribe(el) {
-        (0, import_jquery6.default)(el).off(".checkboxInputBinding");
+        (0, import_jquery5.default)(el).off(".checkboxInputBinding");
       }
     }, {
       key: "getState",
       value: function getState(el) {
         return {
-          label: (0, import_jquery6.default)(el).parent().find("span").text(),
+          label: (0, import_jquery5.default)(el).parent().find("span").text(),
           value: el.checked
         };
       }
     }, {
       key: "receiveMessage",
       value: function receiveMessage(el, data) {
-        if (hasOwnProperty(data, "value"))
+        if (hasDefinedProperty(data, "value")) {
           el.checked = data.value;
-        if (hasOwnProperty(data, "label"))
-          (0, import_jquery6.default)(el).parent().find("span").text(data.label);
-        (0, import_jquery6.default)(el).trigger("change");
+        }
+        if (hasDefinedProperty(data, "label")) {
+          (0, import_jquery5.default)(el).parent().find("span").text(data.label);
+        }
+        (0, import_jquery5.default)(el).trigger("change");
       }
     }]);
     return CheckboxInputBinding2;
   }(InputBinding);
 
   // node_modules/core-js/modules/es.string.trim.js
-  "use strict";
   var $21 = require_export();
   var $trim = require_string_trim().trim;
   var forcedStringTrimMethod = require_string_trim_forced();
@@ -4477,16 +4485,16 @@
   });
 
   // srcts/src/bindings/input/checkboxgroup.ts
-  var import_es_array_iterator2 = __toModule(require_es_array_iterator());
-  var import_jquery7 = __toModule(require_jquery());
+  var import_es_array_iterator2 = __toESM(require_es_array_iterator());
+  var import_jquery6 = __toESM(require_jquery());
   function _typeof2(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof2 = function _typeof27(obj2) {
+      _typeof2 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof2 = function _typeof27(obj2) {
+      _typeof2 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -4523,7 +4531,7 @@
       _setPrototypeOf2(subClass, superClass);
   }
   function _setPrototypeOf2(o, p) {
-    _setPrototypeOf2 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf2 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -4570,17 +4578,18 @@
     }
   }
   function _getPrototypeOf2(o) {
-    _getPrototypeOf2 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf2 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf2(o);
   }
   function getLabelNode(el) {
-    return (0, import_jquery7.default)(el).find('label[for="' + $escape(el.id) + '"]');
+    return (0, import_jquery6.default)(el).find('label[for="' + $escape(el.id) + '"]');
   }
   function getLabel(obj) {
-    if (obj.parentNode.tagName === "LABEL") {
-      return (0, import_jquery7.default)(obj.parentNode).find("span").text().trim();
+    var parentNode = obj.parentNode;
+    if (parentNode.tagName === "LABEL") {
+      return (0, import_jquery6.default)(parentNode).find("span").text().trim();
     }
     return null;
   }
@@ -4594,34 +4603,36 @@
     _createClass4(CheckboxGroupInputBinding2, [{
       key: "find",
       value: function find2(scope) {
-        return (0, import_jquery7.default)(scope).find(".shiny-input-checkboxgroup");
+        return (0, import_jquery6.default)(scope).find(".shiny-input-checkboxgroup");
       }
     }, {
       key: "getValue",
       value: function getValue(el) {
-        var $objs = (0, import_jquery7.default)('input:checkbox[name="' + $escape(el.id) + '"]:checked');
-        var values = new Array($objs.length);
+        var $objs = (0, import_jquery6.default)('input:checkbox[name="' + $escape(el.id) + '"]:checked');
+        var values2 = new Array($objs.length);
         for (var i = 0; i < $objs.length; i++) {
-          values[i] = $objs[i].value;
+          values2[i] = $objs[i].value;
         }
-        return values;
+        return values2;
       }
     }, {
       key: "setValue",
       value: function setValue(el, value) {
-        (0, import_jquery7.default)('input:checkbox[name="' + $escape(el.id) + '"]').prop("checked", false);
+        var _value;
+        value = (_value = value) !== null && _value !== void 0 ? _value : [];
+        (0, import_jquery6.default)('input:checkbox[name="' + $escape(el.id) + '"]').prop("checked", false);
         if (value instanceof Array) {
           for (var i = 0; i < value.length; i++) {
-            (0, import_jquery7.default)('input:checkbox[name="' + $escape(el.id) + '"][value="' + $escape(value[i]) + '"]').prop("checked", true);
+            (0, import_jquery6.default)('input:checkbox[name="' + $escape(el.id) + '"][value="' + $escape(value[i]) + '"]').prop("checked", true);
           }
         } else {
-          (0, import_jquery7.default)('input:checkbox[name="' + $escape(el.id) + '"][value="' + $escape(value) + '"]').prop("checked", true);
+          (0, import_jquery6.default)('input:checkbox[name="' + $escape(el.id) + '"][value="' + $escape(value) + '"]').prop("checked", true);
         }
       }
     }, {
       key: "getState",
       value: function getState(el) {
-        var $objs = (0, import_jquery7.default)('input:checkbox[name="' + $escape(el.id) + '"]');
+        var $objs = (0, import_jquery6.default)('input:checkbox[name="' + $escape(el.id) + '"]');
         var options = new Array($objs.length);
         for (var i = 0; i < options.length; i++) {
           options[i] = {
@@ -4638,37 +4649,37 @@
     }, {
       key: "receiveMessage",
       value: function receiveMessage(el, data) {
-        var $el = (0, import_jquery7.default)(el);
-        if (hasOwnProperty(data, "options")) {
+        var $el = (0, import_jquery6.default)(el);
+        if (hasDefinedProperty(data, "options")) {
           $el.find("div.shiny-options-group").remove();
           $el.find("label.checkbox").remove();
           $el.append(data.options);
         }
-        if (hasOwnProperty(data, "value"))
+        if (hasDefinedProperty(data, "value")) {
           this.setValue(el, data.value);
+        }
         updateLabel(data.label, getLabelNode(el));
-        (0, import_jquery7.default)(el).trigger("change");
+        (0, import_jquery6.default)(el).trigger("change");
       }
     }, {
       key: "subscribe",
       value: function subscribe(el, callback) {
-        (0, import_jquery7.default)(el).on("change.checkboxGroupInputBinding", function() {
+        (0, import_jquery6.default)(el).on("change.checkboxGroupInputBinding", function() {
           callback(false);
         });
       }
     }, {
       key: "unsubscribe",
       value: function unsubscribe(el) {
-        (0, import_jquery7.default)(el).off(".checkboxGroupInputBinding");
+        (0, import_jquery6.default)(el).off(".checkboxGroupInputBinding");
       }
     }]);
     return CheckboxGroupInputBinding2;
   }(InputBinding);
 
   // node_modules/core-js/modules/es.number.constructor.js
-  "use strict";
   var DESCRIPTORS4 = require_descriptors();
-  var global5 = require_global();
+  var global6 = require_global();
   var isForced = require_is_forced();
   var redefine4 = require_redefine();
   var has3 = require_has();
@@ -4682,7 +4693,7 @@
   var defineProperty4 = require_object_define_property().f;
   var trim2 = require_string_trim().trim;
   var NUMBER = "Number";
-  var NativeNumber = global5[NUMBER];
+  var NativeNumber = global6[NUMBER];
   var NumberPrototype = NativeNumber.prototype;
   var BROKEN_CLASSOF = classof(create3(NumberPrototype)) == NUMBER;
   var toNumber = function(argument) {
@@ -4737,7 +4748,7 @@
     }
     NumberWrapper.prototype = NumberPrototype;
     NumberPrototype.constructor = NumberWrapper;
-    redefine4(global5, NUMBER, NumberWrapper);
+    redefine4(global6, NUMBER, NumberWrapper);
   }
   var NumberWrapper;
   var keys2;
@@ -4745,8 +4756,8 @@
   var key;
 
   // srcts/src/bindings/input/number.ts
-  var import_es_array_iterator4 = __toModule(require_es_array_iterator());
-  var import_jquery9 = __toModule(require_jquery());
+  var import_es_array_iterator4 = __toESM(require_es_array_iterator());
+  var import_jquery8 = __toESM(require_jquery());
 
   // node_modules/core-js/modules/es.reflect.get.js
   var $23 = require_export();
@@ -4786,16 +4797,16 @@
   });
 
   // srcts/src/bindings/input/text.ts
-  var import_es_array_iterator3 = __toModule(require_es_array_iterator());
-  var import_jquery8 = __toModule(require_jquery());
+  var import_es_array_iterator3 = __toESM(require_es_array_iterator());
+  var import_jquery7 = __toESM(require_jquery());
   function _typeof3(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof3 = function _typeof27(obj2) {
+      _typeof3 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof3 = function _typeof27(obj2) {
+      _typeof3 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -4857,7 +4868,7 @@
       _setPrototypeOf3(subClass, superClass);
   }
   function _setPrototypeOf3(o, p) {
-    _setPrototypeOf3 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf3 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -4904,13 +4915,13 @@
     }
   }
   function _getPrototypeOf3(o) {
-    _getPrototypeOf3 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf3 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf3(o);
   }
   function getLabelNode2(el) {
-    return (0, import_jquery8.default)(el).parent().find('label[for="' + $escape(el.id) + '"]');
+    return (0, import_jquery7.default)(el).parent().find('label[for="' + $escape(el.id) + '"]');
   }
   var TextInputBindingBase = /* @__PURE__ */ function(_InputBinding) {
     _inherits3(TextInputBindingBase2, _InputBinding);
@@ -4922,7 +4933,7 @@
     _createClass5(TextInputBindingBase2, [{
       key: "find",
       value: function find2(scope) {
-        var $inputs = (0, import_jquery8.default)(scope).find('input[type="text"], input[type="search"], input[type="url"], input[type="email"]');
+        var $inputs = (0, import_jquery7.default)(scope).find('input[type="text"], input[type="search"], input[type="url"], input[type="email"]');
         return $inputs.not('input[type="text"][id$="-selectized"]');
       }
     }, {
@@ -4946,17 +4957,23 @@
     }, {
       key: "subscribe",
       value: function subscribe(el, callback) {
-        (0, import_jquery8.default)(el).on("keyup.textInputBinding input.textInputBinding", function() {
-          callback(true);
-        });
-        (0, import_jquery8.default)(el).on("change.textInputBinding", function() {
-          callback(false);
-        });
+        (0, import_jquery7.default)(el).on(
+          "keyup.textInputBinding input.textInputBinding",
+          function() {
+            callback(true);
+          }
+        );
+        (0, import_jquery7.default)(el).on(
+          "change.textInputBinding",
+          function() {
+            callback(false);
+          }
+        );
       }
     }, {
       key: "unsubscribe",
       value: function unsubscribe(el) {
-        (0, import_jquery8.default)(el).off(".textInputBinding");
+        (0, import_jquery7.default)(el).off(".textInputBinding");
       }
     }, {
       key: "receiveMessage",
@@ -5012,12 +5029,12 @@
     }, {
       key: "receiveMessage",
       value: function receiveMessage(el, data) {
-        if (hasOwnProperty(data, "value"))
+        if (hasDefinedProperty(data, "value"))
           this.setValue(el, data.value);
         updateLabel(data.label, getLabelNode2(el));
-        if (hasOwnProperty(data, "placeholder"))
+        if (hasDefinedProperty(data, "placeholder"))
           el.placeholder = data.placeholder;
-        (0, import_jquery8.default)(el).trigger("change");
+        (0, import_jquery7.default)(el).trigger("change");
       }
     }]);
     return TextInputBinding2;
@@ -5027,11 +5044,11 @@
   function _typeof4(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof4 = function _typeof27(obj2) {
+      _typeof4 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof4 = function _typeof27(obj2) {
+      _typeof4 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -5068,7 +5085,7 @@
       _setPrototypeOf4(subClass, superClass);
   }
   function _setPrototypeOf4(o, p) {
-    _setPrototypeOf4 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf4 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -5115,13 +5132,13 @@
     }
   }
   function _getPrototypeOf4(o) {
-    _getPrototypeOf4 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf4 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf4(o);
   }
   function getLabelNode3(el) {
-    return (0, import_jquery9.default)(el).parent().find('label[for="' + $escape(el.id) + '"]');
+    return (0, import_jquery8.default)(el).parent().find('label[for="' + $escape(el.id) + '"]');
   }
   var NumberInputBinding = /* @__PURE__ */ function(_TextInputBindingBase) {
     _inherits4(NumberInputBinding2, _TextInputBindingBase);
@@ -5133,12 +5150,12 @@
     _createClass6(NumberInputBinding2, [{
       key: "find",
       value: function find2(scope) {
-        return (0, import_jquery9.default)(scope).find('input[type="number"]');
+        return (0, import_jquery8.default)(scope).find('input[type="number"]');
       }
     }, {
       key: "getValue",
       value: function getValue(el) {
-        var numberVal = (0, import_jquery9.default)(el).val();
+        var numberVal = (0, import_jquery8.default)(el).val();
         if (typeof numberVal == "string") {
           if (/^\s*$/.test(numberVal))
             return null;
@@ -5163,16 +5180,17 @@
     }, {
       key: "receiveMessage",
       value: function receiveMessage(el, data) {
-        if (hasOwnProperty(data, "value"))
-          el.value = data.value;
-        if (hasOwnProperty(data, "min"))
-          el.min = data.min;
-        if (hasOwnProperty(data, "max"))
-          el.max = data.max;
-        if (hasOwnProperty(data, "step"))
-          el.step = data.step;
+        var _data$value, _data$min, _data$max, _data$step;
+        if (hasDefinedProperty(data, "value"))
+          el.value = (_data$value = data.value) !== null && _data$value !== void 0 ? _data$value : "";
+        if (hasDefinedProperty(data, "min"))
+          el.min = (_data$min = data.min) !== null && _data$min !== void 0 ? _data$min : "";
+        if (hasDefinedProperty(data, "max"))
+          el.max = (_data$max = data.max) !== null && _data$max !== void 0 ? _data$max : "";
+        if (hasDefinedProperty(data, "step"))
+          el.step = (_data$step = data.step) !== null && _data$step !== void 0 ? _data$step : "";
         updateLabel(data.label, getLabelNode3(el));
-        (0, import_jquery9.default)(el).trigger("change");
+        (0, import_jquery8.default)(el).trigger("change");
       }
     }, {
       key: "getState",
@@ -5190,16 +5208,16 @@
   }(TextInputBindingBase);
 
   // srcts/src/bindings/input/password.ts
-  var import_es_array_iterator5 = __toModule(require_es_array_iterator());
-  var import_jquery10 = __toModule(require_jquery());
+  var import_es_array_iterator5 = __toESM(require_es_array_iterator());
+  var import_jquery9 = __toESM(require_jquery());
   function _typeof5(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof5 = function _typeof27(obj2) {
+      _typeof5 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof5 = function _typeof27(obj2) {
+      _typeof5 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -5236,7 +5254,7 @@
       _setPrototypeOf5(subClass, superClass);
   }
   function _setPrototypeOf5(o, p) {
-    _setPrototypeOf5 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf5 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -5283,7 +5301,7 @@
     }
   }
   function _getPrototypeOf5(o) {
-    _getPrototypeOf5 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf5 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf5(o);
@@ -5298,7 +5316,7 @@
     _createClass7(PasswordInputBinding2, [{
       key: "find",
       value: function find2(scope) {
-        return (0, import_jquery10.default)(scope).find('input[type="password"]');
+        return (0, import_jquery9.default)(scope).find('input[type="password"]');
       }
     }, {
       key: "getType",
@@ -5311,16 +5329,16 @@
   }(TextInputBinding);
 
   // srcts/src/bindings/input/textarea.ts
-  var import_es_array_iterator6 = __toModule(require_es_array_iterator());
-  var import_jquery11 = __toModule(require_jquery());
+  var import_es_array_iterator6 = __toESM(require_es_array_iterator());
+  var import_jquery10 = __toESM(require_jquery());
   function _typeof6(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof6 = function _typeof27(obj2) {
+      _typeof6 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof6 = function _typeof27(obj2) {
+      _typeof6 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -5357,7 +5375,7 @@
       _setPrototypeOf6(subClass, superClass);
   }
   function _setPrototypeOf6(o, p) {
-    _setPrototypeOf6 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf6 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -5404,7 +5422,7 @@
     }
   }
   function _getPrototypeOf6(o) {
-    _getPrototypeOf6 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf6 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf6(o);
@@ -5419,23 +5437,23 @@
     _createClass8(TextareaInputBinding2, [{
       key: "find",
       value: function find2(scope) {
-        return (0, import_jquery11.default)(scope).find("textarea");
+        return (0, import_jquery10.default)(scope).find("textarea");
       }
     }]);
     return TextareaInputBinding2;
   }(TextInputBinding);
 
   // srcts/src/bindings/input/radio.ts
-  var import_es_array_iterator7 = __toModule(require_es_array_iterator());
-  var import_jquery12 = __toModule(require_jquery());
+  var import_es_array_iterator7 = __toESM(require_es_array_iterator());
+  var import_jquery11 = __toESM(require_jquery());
   function _typeof7(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof7 = function _typeof27(obj2) {
+      _typeof7 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof7 = function _typeof27(obj2) {
+      _typeof7 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -5472,7 +5490,7 @@
       _setPrototypeOf7(subClass, superClass);
   }
   function _setPrototypeOf7(o, p) {
-    _setPrototypeOf7 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf7 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -5519,17 +5537,18 @@
     }
   }
   function _getPrototypeOf7(o) {
-    _getPrototypeOf7 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf7 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf7(o);
   }
   function getLabelNode4(el) {
-    return (0, import_jquery12.default)(el).parent().find('label[for="' + $escape(el.id) + '"]');
+    return (0, import_jquery11.default)(el).parent().find('label[for="' + $escape(el.id) + '"]');
   }
   function getLabel2(obj) {
-    if (obj.parentNode.tagName === "LABEL") {
-      return (0, import_jquery12.default)(obj.parentNode).find("span").text().trim();
+    var parentNode = obj.parentNode;
+    if (parentNode.tagName === "LABEL") {
+      return (0, import_jquery11.default)(parentNode).find("span").text().trim();
     }
     return null;
   }
@@ -5543,12 +5562,12 @@
     _createClass9(RadioInputBinding2, [{
       key: "find",
       value: function find2(scope) {
-        return (0, import_jquery12.default)(scope).find(".shiny-input-radiogroup");
+        return (0, import_jquery11.default)(scope).find(".shiny-input-radiogroup");
       }
     }, {
       key: "getValue",
       value: function getValue(el) {
-        var checkedItems = (0, import_jquery12.default)('input:radio[name="' + $escape(el.id) + '"]:checked');
+        var checkedItems = (0, import_jquery11.default)('input:radio[name="' + $escape(el.id) + '"]:checked');
         if (checkedItems.length === 0) {
           return null;
         }
@@ -5557,16 +5576,16 @@
     }, {
       key: "setValue",
       value: function setValue(el, value) {
-        if (import_jquery12.default.isArray(value) && value.length === 0) {
-          (0, import_jquery12.default)('input:radio[name="' + $escape(el.id) + '"]').prop("checked", false);
+        if (Array.isArray(value) && value.length === 0) {
+          (0, import_jquery11.default)('input:radio[name="' + $escape(el.id) + '"]').prop("checked", false);
         } else {
-          (0, import_jquery12.default)('input:radio[name="' + $escape(el.id) + '"][value="' + $escape(value) + '"]').prop("checked", true);
+          (0, import_jquery11.default)('input:radio[name="' + $escape(el.id) + '"][value="' + $escape(value) + '"]').prop("checked", true);
         }
       }
     }, {
       key: "getState",
       value: function getState(el) {
-        var $objs = (0, import_jquery12.default)('input:radio[name="' + $escape(el.id) + '"]');
+        var $objs = (0, import_jquery11.default)('input:radio[name="' + $escape(el.id) + '"]');
         var options = new Array($objs.length);
         for (var i = 0; i < options.length; i++) {
           options[i] = {
@@ -5583,44 +5602,45 @@
     }, {
       key: "receiveMessage",
       value: function receiveMessage(el, data) {
-        var $el = (0, import_jquery12.default)(el);
-        if (hasOwnProperty(data, "options")) {
+        var $el = (0, import_jquery11.default)(el);
+        if (hasDefinedProperty(data, "options")) {
           $el.find("div.shiny-options-group").remove();
           $el.find("label.radio").remove();
           $el.append(data.options);
         }
-        if (hasOwnProperty(data, "value"))
+        if (hasDefinedProperty(data, "value")) {
           this.setValue(el, data.value);
+        }
         updateLabel(data.label, getLabelNode4(el));
-        (0, import_jquery12.default)(el).trigger("change");
+        (0, import_jquery11.default)(el).trigger("change");
       }
     }, {
       key: "subscribe",
       value: function subscribe(el, callback) {
-        (0, import_jquery12.default)(el).on("change.radioInputBinding", function() {
+        (0, import_jquery11.default)(el).on("change.radioInputBinding", function() {
           callback(false);
         });
       }
     }, {
       key: "unsubscribe",
       value: function unsubscribe(el) {
-        (0, import_jquery12.default)(el).off(".radioInputBinding");
+        (0, import_jquery11.default)(el).off(".radioInputBinding");
       }
     }]);
     return RadioInputBinding2;
   }(InputBinding);
 
   // srcts/src/bindings/input/date.ts
-  var import_es_array_iterator8 = __toModule(require_es_array_iterator());
-  var import_jquery13 = __toModule(require_jquery());
+  var import_es_array_iterator8 = __toESM(require_es_array_iterator());
+  var import_jquery12 = __toESM(require_jquery());
   function _typeof8(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof8 = function _typeof27(obj2) {
+      _typeof8 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof8 = function _typeof27(obj2) {
+      _typeof8 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -5657,7 +5677,7 @@
       _setPrototypeOf8(subClass, superClass);
   }
   function _setPrototypeOf8(o, p) {
-    _setPrototypeOf8 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf8 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -5704,7 +5724,7 @@
     }
   }
   function _getPrototypeOf8(o) {
-    _getPrototypeOf8 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf8 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf8(o);
@@ -5719,7 +5739,7 @@
     _createClass10(DateInputBindingBase2, [{
       key: "find",
       value: function find2(scope) {
-        return (0, import_jquery13.default)(scope).find(".shiny-date-input");
+        return (0, import_jquery12.default)(scope).find(".shiny-date-input");
       }
     }, {
       key: "getType",
@@ -5730,17 +5750,23 @@
     }, {
       key: "subscribe",
       value: function subscribe(el, callback) {
-        (0, import_jquery13.default)(el).on("keyup.dateInputBinding input.dateInputBinding", function() {
-          callback(true);
-        });
-        (0, import_jquery13.default)(el).on("changeDate.dateInputBinding change.dateInputBinding", function() {
-          callback(false);
-        });
+        (0, import_jquery12.default)(el).on(
+          "keyup.dateInputBinding input.dateInputBinding",
+          function() {
+            callback(true);
+          }
+        );
+        (0, import_jquery12.default)(el).on(
+          "changeDate.dateInputBinding change.dateInputBinding",
+          function() {
+            callback(false);
+          }
+        );
       }
     }, {
       key: "unsubscribe",
       value: function unsubscribe(el) {
-        (0, import_jquery13.default)(el).off(".dateInputBinding");
+        (0, import_jquery12.default)(el).off(".dateInputBinding");
       }
     }, {
       key: "getRatePolicy",
@@ -5760,7 +5786,7 @@
     }, {
       key: "initialize",
       value: function initialize(el) {
-        var $input = (0, import_jquery13.default)(el).find("input");
+        var $input = (0, import_jquery12.default)(el).find("input");
         var date = $input.data("initial-date");
         if (date === void 0 || date === null) {
           date = this._floorDateTime(this._dateAsUTC(new Date()));
@@ -5776,7 +5802,7 @@
     }, {
       key: "_getLabelNode",
       value: function _getLabelNode(el) {
-        return (0, import_jquery13.default)(el).find('label[for="' + $escape(el.id) + '"]');
+        return (0, import_jquery12.default)(el).find('label[for="' + $escape(el.id) + '"]');
       }
     }, {
       key: "_formatToString",
@@ -5792,10 +5818,8 @@
     }, {
       key: "_setMin",
       value: function _setMin(el, date) {
-        if (date === void 0)
-          return;
         if (date === null) {
-          (0, import_jquery13.default)(el).bsDatepicker("setStartDate", null);
+          (0, import_jquery12.default)(el).bsDatepicker("setStartDate", null);
           return;
         }
         var parsedDate = this._newDate(date);
@@ -5804,21 +5828,19 @@
         date = parsedDate;
         if (isNaN(date.valueOf()))
           return;
-        var curValue = (0, import_jquery13.default)(el).bsDatepicker("getUTCDate");
-        (0, import_jquery13.default)(el).bsDatepicker("setStartDate", this._utcDateAsLocal(date));
+        var curValue = (0, import_jquery12.default)(el).bsDatepicker("getUTCDate");
+        (0, import_jquery12.default)(el).bsDatepicker("setStartDate", this._utcDateAsLocal(date));
         if (date && curValue && date.getTime() > curValue.getTime()) {
-          (0, import_jquery13.default)(el).bsDatepicker("clearDates");
+          (0, import_jquery12.default)(el).bsDatepicker("clearDates");
         } else {
-          (0, import_jquery13.default)(el).bsDatepicker("setUTCDate", curValue);
+          (0, import_jquery12.default)(el).bsDatepicker("setUTCDate", curValue);
         }
       }
     }, {
       key: "_setMax",
       value: function _setMax(el, date) {
-        if (date === void 0)
-          return;
         if (date === null) {
-          (0, import_jquery13.default)(el).bsDatepicker("setEndDate", null);
+          (0, import_jquery12.default)(el).bsDatepicker("setEndDate", null);
           return;
         }
         var parsedDate = this._newDate(date);
@@ -5827,12 +5849,12 @@
         date = parsedDate;
         if (isNaN(date.valueOf()))
           return;
-        var curValue = (0, import_jquery13.default)(el).bsDatepicker("getUTCDate");
-        (0, import_jquery13.default)(el).bsDatepicker("setEndDate", this._utcDateAsLocal(date));
+        var curValue = (0, import_jquery12.default)(el).bsDatepicker("getUTCDate");
+        (0, import_jquery12.default)(el).bsDatepicker("setEndDate", this._utcDateAsLocal(date));
         if (date && curValue && date.getTime() < curValue.getTime()) {
-          (0, import_jquery13.default)(el).bsDatepicker("clearDates");
+          (0, import_jquery12.default)(el).bsDatepicker("clearDates");
         } else {
-          (0, import_jquery13.default)(el).bsDatepicker("setUTCDate", curValue);
+          (0, import_jquery12.default)(el).bsDatepicker("setUTCDate", curValue);
         }
       }
     }, {
@@ -5877,14 +5899,14 @@
     _createClass10(DateInputBinding2, [{
       key: "getValue",
       value: function getValue(el) {
-        var date = (0, import_jquery13.default)(el).find("input").bsDatepicker("getUTCDate");
+        var date = (0, import_jquery12.default)(el).find("input").bsDatepicker("getUTCDate");
         return formatDateUTC(date);
       }
     }, {
       key: "setValue",
       value: function setValue(el, value) {
         if (value === null) {
-          (0, import_jquery13.default)(el).find("input").val("").bsDatepicker("update");
+          (0, import_jquery12.default)(el).find("input").val("").bsDatepicker("update");
           return;
         }
         var date = this._newDate(value);
@@ -5893,12 +5915,12 @@
         }
         if (isNaN(date.valueOf()))
           return;
-        (0, import_jquery13.default)(el).find("input").bsDatepicker("setUTCDate", date);
+        (0, import_jquery12.default)(el).find("input").bsDatepicker("setUTCDate", date);
       }
     }, {
       key: "getState",
       value: function getState(el) {
-        var $el = (0, import_jquery13.default)(el);
+        var $el = (0, import_jquery12.default)(el);
         var $input = $el.find("input");
         var min4 = $input.data("datepicker").startDate;
         var max4 = $input.data("datepicker").endDate;
@@ -5926,32 +5948,32 @@
     }, {
       key: "receiveMessage",
       value: function receiveMessage(el, data) {
-        var $input = (0, import_jquery13.default)(el).find("input");
+        var $input = (0, import_jquery12.default)(el).find("input");
         updateLabel(data.label, this._getLabelNode(el));
-        if (hasOwnProperty(data, "min"))
+        if (hasDefinedProperty(data, "min"))
           this._setMin($input[0], data.min);
-        if (hasOwnProperty(data, "max"))
+        if (hasDefinedProperty(data, "max"))
           this._setMax($input[0], data.max);
-        if (hasOwnProperty(data, "value"))
+        if (hasDefinedProperty(data, "value"))
           this.setValue(el, data.value);
-        (0, import_jquery13.default)(el).trigger("change");
+        (0, import_jquery12.default)(el).trigger("change");
       }
     }]);
     return DateInputBinding2;
   }(DateInputBindingBase);
 
   // srcts/src/bindings/input/slider.ts
-  var import_es_regexp_exec2 = __toModule(require_es_regexp_exec());
-  var import_es_array_iterator9 = __toModule(require_es_array_iterator());
-  var import_jquery14 = __toModule(require_jquery());
+  var import_es_regexp_exec2 = __toESM(require_es_regexp_exec());
+  var import_es_array_iterator9 = __toESM(require_es_array_iterator());
+  var import_jquery13 = __toESM(require_jquery());
   function _typeof9(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof9 = function _typeof27(obj2) {
+      _typeof9 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof9 = function _typeof27(obj2) {
+      _typeof9 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -5988,7 +6010,7 @@
       _setPrototypeOf9(subClass, superClass);
   }
   function _setPrototypeOf9(o, p) {
-    _setPrototypeOf9 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf9 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -6035,7 +6057,7 @@
     }
   }
   function _getPrototypeOf9(o) {
-    _getPrototypeOf9 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf9 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf9(o);
@@ -6070,10 +6092,10 @@
     return prettify;
   }
   function getLabelNode5(el) {
-    return (0, import_jquery14.default)(el).parent().find('label[for="' + $escape(el.id) + '"]');
+    return (0, import_jquery13.default)(el).parent().find('label[for="' + $escape(el.id) + '"]');
   }
   function numValues(el) {
-    if ((0, import_jquery14.default)(el).data("ionRangeSlider").options.type === "double")
+    if ((0, import_jquery13.default)(el).data("ionRangeSlider").options.type === "double")
       return 2;
     else
       return 1;
@@ -6088,27 +6110,27 @@
     _createClass11(SliderInputBinding2, [{
       key: "find",
       value: function find2(scope) {
-        if (!import_jquery14.default.fn.ionRangeSlider) {
-          return (0, import_jquery14.default)();
+        if (!import_jquery13.default.fn.ionRangeSlider) {
+          return (0, import_jquery13.default)();
         }
-        return (0, import_jquery14.default)(scope).find("input.js-range-slider");
+        return (0, import_jquery13.default)(scope).find("input.js-range-slider");
       }
     }, {
       key: "getType",
       value: function getType(el) {
-        var dataType = (0, import_jquery14.default)(el).data("data-type");
+        var dataType = (0, import_jquery13.default)(el).data("data-type");
         if (dataType === "date")
           return "shiny.date";
         else if (dataType === "datetime")
           return "shiny.datetime";
         else
-          return false;
+          return null;
       }
     }, {
       key: "getValue",
       value: function getValue(el) {
-        var $el = (0, import_jquery14.default)(el);
-        var result = (0, import_jquery14.default)(el).data("ionRangeSlider").result;
+        var $el = (0, import_jquery13.default)(el);
+        var result = (0, import_jquery13.default)(el).data("ionRangeSlider").result;
         var convert;
         var dataType = $el.data("data-type");
         if (dataType === "date") {
@@ -6133,7 +6155,7 @@
     }, {
       key: "setValue",
       value: function setValue(el, value) {
-        var $el = (0, import_jquery14.default)(el);
+        var $el = (0, import_jquery13.default)(el);
         var slider = $el.data("ionRangeSlider");
         $el.data("immediate", true);
         try {
@@ -6155,33 +6177,36 @@
     }, {
       key: "subscribe",
       value: function subscribe(el, callback) {
-        (0, import_jquery14.default)(el).on("change.sliderInputBinding", function() {
-          callback(!(0, import_jquery14.default)(el).data("immediate") && !(0, import_jquery14.default)(el).data("animating"));
+        (0, import_jquery13.default)(el).on("change.sliderInputBinding", function() {
+          callback(!(0, import_jquery13.default)(el).data("immediate") && !(0, import_jquery13.default)(el).data("animating"));
         });
       }
     }, {
       key: "unsubscribe",
       value: function unsubscribe(el) {
-        (0, import_jquery14.default)(el).off(".sliderInputBinding");
+        (0, import_jquery13.default)(el).off(".sliderInputBinding");
       }
     }, {
       key: "receiveMessage",
       value: function receiveMessage(el, data) {
-        var $el = (0, import_jquery14.default)(el);
+        var $el = (0, import_jquery13.default)(el);
         var slider = $el.data("ionRangeSlider");
         var msg = {};
-        if (hasOwnProperty(data, "value")) {
+        if (hasDefinedProperty(data, "value")) {
           if (numValues(el) === 2 && data.value instanceof Array) {
             msg.from = data.value[0];
             msg.to = data.value[1];
           } else {
+            if (Array.isArray(data.value)) {
+              throw "Slider only contains a single value and cannot be updated with an array";
+            }
             msg.from = data.value;
           }
         }
         var sliderFeatures = ["min", "max", "step"];
         for (var i = 0; i < sliderFeatures.length; i++) {
           var feats = sliderFeatures[i];
-          if (hasOwnProperty(data, feats)) {
+          if (hasDefinedProperty(data, feats)) {
             msg[feats] = data[feats];
           }
         }
@@ -6189,7 +6214,7 @@
         var domElements = ["data-type", "time-format", "timezone"];
         for (var _i = 0; _i < domElements.length; _i++) {
           var elem = domElements[_i];
-          if (hasOwnProperty(data, elem)) {
+          if (hasDefinedProperty(data, elem)) {
             $el.data(elem, data[elem]);
           }
         }
@@ -6222,7 +6247,7 @@
     }, {
       key: "initialize",
       value: function initialize(el) {
-        var $el = (0, import_jquery14.default)(el);
+        var $el = (0, import_jquery13.default)(el);
         var dataType = $el.data("data-type");
         var timeFormat = $el.data("time-format");
         var timezone = $el.data("timezone");
@@ -6246,10 +6271,10 @@
     else
       return "";
   }
-  (0, import_jquery14.default)(document).on("click", ".slider-animate-button", function(evt) {
+  (0, import_jquery13.default)(document).on("click", ".slider-animate-button", function(evt) {
     evt.preventDefault();
-    var self2 = (0, import_jquery14.default)(this);
-    var target = (0, import_jquery14.default)("#" + $escape(self2.attr("data-target-id")));
+    var self2 = (0, import_jquery13.default)(this);
+    var target = (0, import_jquery13.default)("#" + $escape(self2.attr("data-target-id")));
     var startLabel = "Play";
     var stopLabel = "Pause";
     var loop = self2.attr("data-loop") !== void 0 && !/^\s*false\s*$/i.test(self2.attr("data-loop"));
@@ -6327,16 +6352,16 @@
   });
 
   // srcts/src/bindings/input/daterange.ts
-  var import_es_array_iterator10 = __toModule(require_es_array_iterator());
-  var import_jquery15 = __toModule(require_jquery());
+  var import_es_array_iterator10 = __toESM(require_es_array_iterator());
+  var import_jquery14 = __toESM(require_jquery());
   function _typeof10(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof10 = function _typeof27(obj2) {
+      _typeof10 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof10 = function _typeof27(obj2) {
+      _typeof10 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -6373,7 +6398,7 @@
       _setPrototypeOf10(subClass, superClass);
   }
   function _setPrototypeOf10(o, p) {
-    _setPrototypeOf10 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf10 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -6420,13 +6445,13 @@
     }
   }
   function _getPrototypeOf10(o) {
-    _getPrototypeOf10 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf10 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf10(o);
   }
   function getLabelNode6(el) {
-    return (0, import_jquery15.default)(el).find('label[for="' + $escape(el.id) + '"]');
+    return (0, import_jquery14.default)(el).find('label[for="' + $escape(el.id) + '"]');
   }
   var DateRangeInputBinding = /* @__PURE__ */ function(_DateInputBindingBase) {
     _inherits10(DateRangeInputBinding2, _DateInputBindingBase);
@@ -6438,12 +6463,12 @@
     _createClass12(DateRangeInputBinding2, [{
       key: "find",
       value: function find2(scope) {
-        return (0, import_jquery15.default)(scope).find(".shiny-date-range-input");
+        return (0, import_jquery14.default)(scope).find(".shiny-date-range-input");
       }
     }, {
       key: "getValue",
       value: function getValue(el) {
-        var $inputs = (0, import_jquery15.default)(el).find("input");
+        var $inputs = (0, import_jquery14.default)(el).find("input");
         var start = $inputs.eq(0).bsDatepicker("getUTCDate");
         var end = $inputs.eq(1).bsDatepicker("getUTCDate");
         return [formatDateUTC(start), formatDateUTC(end)];
@@ -6454,7 +6479,7 @@
         if (!(value instanceof Object)) {
           return;
         }
-        var $inputs = (0, import_jquery15.default)(el).find("input");
+        var $inputs = (0, import_jquery14.default)(el).find("input");
         if (value.start !== void 0) {
           if (value.start === null) {
             $inputs.eq(0).val("").bsDatepicker("update");
@@ -6475,7 +6500,7 @@
     }, {
       key: "getState",
       value: function getState(el) {
-        var $el = (0, import_jquery15.default)(el);
+        var $el = (0, import_jquery14.default)(el);
         var $inputs = $el.find("input");
         var $startinput = $inputs.eq(0);
         var $endinput = $inputs.eq(1);
@@ -6505,27 +6530,28 @@
     }, {
       key: "receiveMessage",
       value: function receiveMessage(el, data) {
-        var $el = (0, import_jquery15.default)(el);
+        var $el = (0, import_jquery14.default)(el);
         var $inputs = $el.find("input");
         var $startinput = $inputs.eq(0);
         var $endinput = $inputs.eq(1);
         updateLabel(data.label, getLabelNode6(el));
-        if (hasOwnProperty(data, "min")) {
+        if (hasDefinedProperty(data, "min")) {
           this._setMin($startinput[0], data.min);
           this._setMin($endinput[0], data.min);
         }
-        if (hasOwnProperty(data, "max")) {
+        if (hasDefinedProperty(data, "max")) {
           this._setMax($startinput[0], data.max);
           this._setMax($endinput[0], data.max);
         }
-        if (hasOwnProperty(data, "value"))
+        if (hasDefinedProperty(data, "value")) {
           this.setValue(el, data.value);
+        }
         $el.trigger("change");
       }
     }, {
       key: "initialize",
       value: function initialize(el) {
-        var $el = (0, import_jquery15.default)(el);
+        var $el = (0, import_jquery14.default)(el);
         var $inputs = $el.find("input");
         var $startinput = $inputs.eq(0);
         var $endinput = $inputs.eq(1);
@@ -6547,25 +6573,31 @@
     }, {
       key: "subscribe",
       value: function subscribe(el, callback) {
-        (0, import_jquery15.default)(el).on("keyup.dateRangeInputBinding input.dateRangeInputBinding", function() {
-          callback(true);
-        });
-        (0, import_jquery15.default)(el).on("changeDate.dateRangeInputBinding change.dateRangeInputBinding", function() {
-          callback(false);
-        });
+        (0, import_jquery14.default)(el).on(
+          "keyup.dateRangeInputBinding input.dateRangeInputBinding",
+          function() {
+            callback(true);
+          }
+        );
+        (0, import_jquery14.default)(el).on(
+          "changeDate.dateRangeInputBinding change.dateRangeInputBinding",
+          function() {
+            callback(false);
+          }
+        );
       }
     }, {
       key: "unsubscribe",
       value: function unsubscribe(el) {
-        (0, import_jquery15.default)(el).off(".dateRangeInputBinding");
+        (0, import_jquery14.default)(el).off(".dateRangeInputBinding");
       }
     }]);
     return DateRangeInputBinding2;
   }(DateInputBindingBase);
 
   // srcts/src/bindings/input/selectInput.ts
-  var import_es_array_iterator11 = __toModule(require_es_array_iterator());
-  var import_jquery16 = __toModule(require_jquery());
+  var import_es_array_iterator11 = __toESM(require_es_array_iterator());
+  var import_jquery15 = __toESM(require_jquery());
 
   // srcts/src/utils/eval.ts
   var indirectEval = eval;
@@ -6574,11 +6606,11 @@
   function _typeof11(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof11 = function _typeof27(obj2) {
+      _typeof11 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof11 = function _typeof27(obj2) {
+      _typeof11 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -6615,7 +6647,7 @@
       _setPrototypeOf11(subClass, superClass);
   }
   function _setPrototypeOf11(o, p) {
-    _setPrototypeOf11 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf11 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -6662,7 +6694,7 @@
     }
   }
   function _getPrototypeOf11(o) {
-    _getPrototypeOf11 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf11 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf11(o);
@@ -6672,10 +6704,10 @@
     if (isSelectize(el)) {
       escapedId += "-selectized";
     }
-    return (0, import_jquery16.default)(el).parent().parent().find('label[for="' + escapedId + '"]');
+    return (0, import_jquery15.default)(el).parent().parent().find('label[for="' + escapedId + '"]');
   }
   function isSelectize(el) {
-    var config = (0, import_jquery16.default)(el).parent().find('script[data-for="' + $escape(el.id) + '"]');
+    var config = (0, import_jquery15.default)(el).parent().find('script[data-for="' + $escape(el.id) + '"]');
     return config.length > 0;
   }
   var SelectInputBinding = /* @__PURE__ */ function(_InputBinding) {
@@ -6688,12 +6720,12 @@
     _createClass13(SelectInputBinding2, [{
       key: "find",
       value: function find2(scope) {
-        return (0, import_jquery16.default)(scope).find("select");
+        return (0, import_jquery15.default)(scope).find("select");
       }
     }, {
       key: "getType",
       value: function getType(el) {
-        var $el = (0, import_jquery16.default)(el);
+        var $el = (0, import_jquery15.default)(el);
         if (!$el.hasClass("symbol")) {
           return null;
         }
@@ -6711,18 +6743,16 @@
     }, {
       key: "getValue",
       value: function getValue(el) {
-        return (0, import_jquery16.default)(el).val();
+        return (0, import_jquery15.default)(el).val();
       }
     }, {
       key: "setValue",
       value: function setValue(el, value) {
         if (!isSelectize(el)) {
-          (0, import_jquery16.default)(el).val(value);
+          (0, import_jquery15.default)(el).val(value);
         } else {
           var selectize = this._selectize(el);
-          if (selectize) {
-            selectize.setValue(value);
-          }
+          selectize === null || selectize === void 0 ? void 0 : selectize.setValue(value);
         }
       }
     }, {
@@ -6744,26 +6774,24 @@
     }, {
       key: "receiveMessage",
       value: function receiveMessage(el, data) {
-        var $el = (0, import_jquery16.default)(el);
-        var selectize;
-        if (hasOwnProperty(data, "options")) {
-          selectize = this._selectize(el);
-          if (selectize)
-            selectize.destroy();
+        var $el = (0, import_jquery15.default)(el);
+        if (hasDefinedProperty(data, "options")) {
+          var selectize = this._selectize(el);
+          selectize === null || selectize === void 0 ? void 0 : selectize.destroy();
           $el.empty().append(data.options);
           this._selectize(el);
         }
-        if (hasOwnProperty(data, "config")) {
+        if (hasDefinedProperty(data, "config")) {
           $el.parent().find('script[data-for="' + $escape(el.id) + '"]').replaceWith(data.config);
           this._selectize(el, true);
         }
-        if (hasOwnProperty(data, "url")) {
-          selectize = this._selectize(el);
-          selectize.clearOptions();
+        if (hasDefinedProperty(data, "url")) {
+          var _selectize2 = this._selectize(el);
+          _selectize2.clearOptions();
           var loaded = false;
-          selectize.settings.load = function(query, callback) {
-            var settings = selectize.settings;
-            import_jquery16.default.ajax({
+          _selectize2.settings.load = function(query, callback) {
+            var settings = _selectize2.settings;
+            import_jquery15.default.ajax({
               url: data.url,
               data: {
                 query: query,
@@ -6777,49 +6805,52 @@
                 callback();
               },
               success: function success(res) {
-                import_jquery16.default.each(res, function(index, elem) {
+                import_jquery15.default.each(res, function(index, elem) {
                   var optgroupId = elem[settings.optgroupField || "optgroup"];
                   var optgroup = {};
                   optgroup[settings.optgroupLabelField || "label"] = optgroupId;
                   optgroup[settings.optgroupValueField || "value"] = optgroupId;
-                  selectize.addOptionGroup(optgroupId, optgroup);
+                  _selectize2.addOptionGroup(optgroupId, optgroup);
                 });
                 callback(res);
                 if (!loaded) {
-                  if (hasOwnProperty(data, "value")) {
-                    selectize.setValue(data.value);
+                  if (hasDefinedProperty(data, "value")) {
+                    _selectize2.setValue(data.value);
                   } else if (settings.maxItems === 1) {
-                    selectize.setValue(res[0].value);
+                    _selectize2.setValue(res[0].value);
                   }
                 }
                 loaded = true;
               }
             });
           };
-          selectize.load(function(callback) {
-            selectize.settings.load.apply(selectize, ["", callback]);
+          _selectize2.load(function(callback) {
+            _selectize2.settings.load.apply(_selectize2, ["", callback]);
           });
-        } else if (hasOwnProperty(data, "value")) {
+        } else if (hasDefinedProperty(data, "value")) {
           this.setValue(el, data.value);
         }
         updateLabel(data.label, getLabelNode7(el));
-        (0, import_jquery16.default)(el).trigger("change");
+        (0, import_jquery15.default)(el).trigger("change");
       }
     }, {
       key: "subscribe",
       value: function subscribe(el, callback) {
         var _this = this;
-        (0, import_jquery16.default)(el).on("change.selectInputBinding", function() {
-          if (el.nonempty && _this.getValue(el) === "") {
-            return;
+        (0, import_jquery15.default)(el).on(
+          "change.selectInputBinding",
+          function() {
+            if (el.nonempty && _this.getValue(el) === "") {
+              return;
+            }
+            callback(false);
           }
-          callback(false);
-        });
+        );
       }
     }, {
       key: "unsubscribe",
       value: function unsubscribe(el) {
-        (0, import_jquery16.default)(el).off(".selectInputBinding");
+        (0, import_jquery15.default)(el).off(".selectInputBinding");
       }
     }, {
       key: "initialize",
@@ -6830,42 +6861,43 @@
       key: "_selectize",
       value: function _selectize(el) {
         var update = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : false;
-        if (!import_jquery16.default.fn.selectize)
+        if (!import_jquery15.default.fn.selectize)
           return void 0;
-        var $el = (0, import_jquery16.default)(el);
+        var $el = (0, import_jquery15.default)(el);
         var config = $el.parent().find('script[data-for="' + $escape(el.id) + '"]');
         if (config.length === 0)
           return void 0;
-        var options = import_jquery16.default.extend({
+        var options = import_jquery15.default.extend({
           labelField: "label",
           valueField: "value",
           searchField: ["label"]
         }, JSON.parse(config.html()));
         if (typeof config.data("nonempty") !== "undefined") {
           el.nonempty = true;
-          options = import_jquery16.default.extend(options, {
+          options = import_jquery15.default.extend(options, {
             onItemRemove: function onItemRemove(value) {
               if (this.getValue() === "")
-                (0, import_jquery16.default)("select#" + $escape(el.id)).empty().append((0, import_jquery16.default)("<option/>", {
+                (0, import_jquery15.default)("select#" + $escape(el.id)).empty().append((0, import_jquery15.default)("<option/>", {
                   value: value,
                   selected: true
                 })).trigger("change");
             },
             onDropdownClose: function onDropdownClose() {
-              if (this.getValue() === "")
-                this.setValue((0, import_jquery16.default)("select#" + $escape(el.id)).val());
+              if (this.getValue() === "") {
+                this.setValue((0, import_jquery15.default)("select#" + $escape(el.id)).val());
+              }
             }
           });
         } else {
           el.nonempty = false;
         }
         if (config.data("eval") instanceof Array)
-          import_jquery16.default.each(config.data("eval"), function(i, x) {
+          import_jquery15.default.each(config.data("eval"), function(i, x) {
             options[x] = indirectEval("(" + options[x] + ")");
           });
         var control = $el.selectize(options)[0].selectize;
         if (update) {
-          var settings = import_jquery16.default.extend(control.settings, options);
+          var settings = import_jquery15.default.extend(control.settings, options);
           control.destroy();
           control = $el.selectize(settings)[0].selectize;
         }
@@ -6876,16 +6908,16 @@
   }(InputBinding);
 
   // srcts/src/bindings/input/actionbutton.ts
-  var import_es_array_iterator12 = __toModule(require_es_array_iterator());
-  var import_jquery17 = __toModule(require_jquery());
+  var import_es_array_iterator12 = __toESM(require_es_array_iterator());
+  var import_jquery16 = __toESM(require_jquery());
   function _typeof12(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof12 = function _typeof27(obj2) {
+      _typeof12 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof12 = function _typeof27(obj2) {
+      _typeof12 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -6922,7 +6954,7 @@
       _setPrototypeOf12(subClass, superClass);
   }
   function _setPrototypeOf12(o, p) {
-    _setPrototypeOf12 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf12 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -6969,7 +7001,7 @@
     }
   }
   function _getPrototypeOf12(o) {
-    _getPrototypeOf12 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf12 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf12(o);
@@ -6984,17 +7016,17 @@
     _createClass14(ActionButtonInputBinding2, [{
       key: "find",
       value: function find2(scope) {
-        return (0, import_jquery17.default)(scope).find(".action-button");
+        return (0, import_jquery16.default)(scope).find(".action-button");
       }
     }, {
       key: "getValue",
       value: function getValue(el) {
-        return (0, import_jquery17.default)(el).data("val") || 0;
+        return (0, import_jquery16.default)(el).data("val") || 0;
       }
     }, {
       key: "setValue",
       value: function setValue(el, value) {
-        (0, import_jquery17.default)(el).data("val", value);
+        (0, import_jquery16.default)(el).data("val", value);
       }
     }, {
       key: "getType",
@@ -7005,12 +7037,15 @@
     }, {
       key: "subscribe",
       value: function subscribe(el, callback) {
-        (0, import_jquery17.default)(el).on("click.actionButtonInputBinding", function() {
-          var $el = (0, import_jquery17.default)(this);
-          var val = $el.data("val") || 0;
-          $el.data("val", val + 1);
-          callback(false);
-        });
+        (0, import_jquery16.default)(el).on(
+          "click.actionButtonInputBinding",
+          function() {
+            var $el = (0, import_jquery16.default)(this);
+            var val = $el.data("val") || 0;
+            $el.data("val", val + 1);
+            callback(false);
+          }
+        );
       }
     }, {
       key: "getState",
@@ -7022,47 +7057,47 @@
     }, {
       key: "receiveMessage",
       value: function receiveMessage(el, data) {
-        var $el = (0, import_jquery17.default)(el);
+        var $el = (0, import_jquery16.default)(el);
         var label = $el.text();
         var icon = "";
         if ($el.find("i[class]").length > 0) {
           var iconHtml = $el.find("i[class]")[0];
           if (iconHtml === $el.children()[0]) {
-            icon = (0, import_jquery17.default)(iconHtml).prop("outerHTML");
+            icon = (0, import_jquery16.default)(iconHtml).prop("outerHTML");
           }
         }
-        if (hasOwnProperty(data, "label"))
+        if (hasDefinedProperty(data, "label")) {
           label = data.label;
-        if (hasOwnProperty(data, "icon")) {
-          icon = data.icon;
-          if (icon.length === 0)
-            icon = "";
+        }
+        if (hasDefinedProperty(data, "icon")) {
+          var _data$icon;
+          icon = Array.isArray(data.icon) ? "" : (_data$icon = data.icon) !== null && _data$icon !== void 0 ? _data$icon : "";
         }
         $el.html(icon + " " + label);
       }
     }, {
       key: "unsubscribe",
       value: function unsubscribe(el) {
-        (0, import_jquery17.default)(el).off(".actionButtonInputBinding");
+        (0, import_jquery16.default)(el).off(".actionButtonInputBinding");
       }
     }]);
     return ActionButtonInputBinding2;
   }(InputBinding);
-  (0, import_jquery17.default)(document).on("click", "a.action-button", function(e) {
+  (0, import_jquery16.default)(document).on("click", "a.action-button", function(e) {
     e.preventDefault();
   });
 
   // srcts/src/bindings/input/tabinput.ts
-  var import_es_array_iterator13 = __toModule(require_es_array_iterator());
-  var import_jquery18 = __toModule(require_jquery());
+  var import_es_array_iterator13 = __toESM(require_es_array_iterator());
+  var import_jquery17 = __toESM(require_jquery());
   function _typeof13(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof13 = function _typeof27(obj2) {
+      _typeof13 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof13 = function _typeof27(obj2) {
+      _typeof13 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -7099,7 +7134,7 @@
       _setPrototypeOf13(subClass, superClass);
   }
   function _setPrototypeOf13(o, p) {
-    _setPrototypeOf13 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf13 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -7146,7 +7181,7 @@
     }
   }
   function _getPrototypeOf13(o) {
-    _getPrototypeOf13 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf13 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf13(o);
@@ -7164,12 +7199,12 @@
     _createClass15(BootstrapTabInputBinding2, [{
       key: "find",
       value: function find2(scope) {
-        return (0, import_jquery18.default)(scope).find("ul.nav.shiny-tab-input");
+        return (0, import_jquery17.default)(scope).find("ul.nav.shiny-tab-input");
       }
     }, {
       key: "getValue",
       value: function getValue(el) {
-        var anchor = isBS3() ? (0, import_jquery18.default)(el).find("li:not(.dropdown).active > a") : (0, import_jquery18.default)(el).find(".nav-link:not(.dropdown-toggle).active, .dropdown-menu .dropdown-item.active");
+        var anchor = isBS3() ? (0, import_jquery17.default)(el).find("li:not(.dropdown).active > a") : (0, import_jquery17.default)(el).find(".nav-link:not(.dropdown-toggle).active, .dropdown-menu .dropdown-item.active");
         if (anchor.length === 1)
           return getTabName(anchor);
         return null;
@@ -7179,10 +7214,10 @@
       value: function setValue(el, value) {
         var success = false;
         if (value) {
-          var anchors = isBS3() ? (0, import_jquery18.default)(el).find("li:not(.dropdown) > a") : (0, import_jquery18.default)(el).find(".nav-link:not(.dropdown-toggle), .dropdown-menu .dropdown-item");
+          var anchors = isBS3() ? (0, import_jquery17.default)(el).find("li:not(.dropdown) > a") : (0, import_jquery17.default)(el).find(".nav-link:not(.dropdown-toggle), .dropdown-menu .dropdown-item");
           anchors.each(function() {
-            if (getTabName((0, import_jquery18.default)(this)) === value) {
-              (0, import_jquery18.default)(this).tab("show");
+            if (getTabName((0, import_jquery17.default)(this)) === value) {
+              (0, import_jquery17.default)(this).tab("show");
               success = true;
               return false;
             }
@@ -7190,7 +7225,7 @@
           });
         }
         if (!success) {
-          (0, import_jquery18.default)(el).trigger("change");
+          (0, import_jquery17.default)(el).trigger("change");
         }
       }
     }, {
@@ -7203,94 +7238,113 @@
     }, {
       key: "receiveMessage",
       value: function receiveMessage(el, data) {
-        if (hasOwnProperty(data, "value"))
+        if (hasDefinedProperty(data, "value"))
           this.setValue(el, data.value);
-        (0, import_jquery18.default)(el).trigger("change");
+        (0, import_jquery17.default)(el).trigger("change");
       }
     }, {
       key: "subscribe",
       value: function subscribe(el, callback) {
-        (0, import_jquery18.default)(el).on("change shown.bootstrapTabInputBinding shown.bs.tab.bootstrapTabInputBinding", function() {
-          callback(false);
-        });
+        (0, import_jquery17.default)(el).on(
+          "change shown.bootstrapTabInputBinding shown.bs.tab.bootstrapTabInputBinding",
+          function() {
+            callback(false);
+          }
+        );
       }
     }, {
       key: "unsubscribe",
       value: function unsubscribe(el) {
-        (0, import_jquery18.default)(el).off(".bootstrapTabInputBinding");
+        (0, import_jquery17.default)(el).off(".bootstrapTabInputBinding");
       }
     }]);
     return BootstrapTabInputBinding2;
   }(InputBinding);
 
   // srcts/src/bindings/input/fileinput.ts
-  var import_es_array_iterator15 = __toModule(require_es_array_iterator());
-  var import_jquery21 = __toModule(require_jquery());
+  var import_es_array_iterator15 = __toESM(require_es_array_iterator());
+  var import_jquery20 = __toESM(require_jquery());
+
+  // node_modules/core-js/modules/es.array.from.js
+  var $36 = require_export();
+  var from = require_array_from();
+  var checkCorrectnessOfIteration = require_check_correctness_of_iteration();
+  var INCORRECT_ITERATION = !checkCorrectnessOfIteration(function(iterable) {
+    Array.from(iterable);
+  });
+  $36({ target: "Array", stat: true, forced: INCORRECT_ITERATION }, {
+    from: from
+  });
 
   // node_modules/core-js/modules/es.array.map.js
-  "use strict";
-  var $36 = require_export();
+  var $37 = require_export();
   var $map = require_array_iteration().map;
   var arrayMethodHasSpeciesSupport4 = require_array_method_has_species_support();
   var HAS_SPECIES_SUPPORT3 = arrayMethodHasSpeciesSupport4("map");
-  $36({ target: "Array", proto: true, forced: !HAS_SPECIES_SUPPORT3 }, {
+  $37({ target: "Array", proto: true, forced: !HAS_SPECIES_SUPPORT3 }, {
     map: function map(callbackfn) {
       return $map(this, callbackfn, arguments.length > 1 ? arguments[1] : void 0);
     }
   });
 
   // srcts/src/file/fileProcessor.ts
-  var import_es_array_iterator14 = __toModule(require_es_array_iterator());
-  var import_jquery20 = __toModule(require_jquery());
+  var import_es_array_iterator14 = __toESM(require_es_array_iterator());
+  var import_jquery19 = __toESM(require_jquery());
 
   // srcts/src/events/inputChanged.ts
-  var import_jquery19 = __toModule(require_jquery());
+  var import_jquery18 = __toESM(require_jquery());
   function triggerFileInputChanged(name, value, binding, el, inputType, onEl) {
-    var evt = import_jquery19.default.Event("shiny:inputchanged");
+    var evt = import_jquery18.default.Event("shiny:inputchanged");
     evt.name = name;
     evt.value = value;
     evt.binding = binding;
     evt.el = el;
     evt.inputType = inputType;
-    (0, import_jquery19.default)(onEl).trigger(evt);
+    (0, import_jquery18.default)(onEl).trigger(evt);
     return evt;
   }
 
   // srcts/src/shiny/initedMethods.ts
-  var fullShinyObj = null;
+  var fullShinyObj;
   function setShinyObj(shiny) {
     fullShinyObj = shiny;
   }
+  function validateShinyHasBeenSet() {
+    if (typeof fullShinyObj === "undefined") {
+      throw "Shiny has not finish initialization yet. Please wait for the 'shiny-initialized' event.";
+    }
+    return fullShinyObj;
+  }
   function shinySetInputValue(name, value, opts) {
-    fullShinyObj.setInputValue(name, value, opts);
+    validateShinyHasBeenSet().setInputValue(name, value, opts);
   }
   function shinyShinyApp() {
-    return fullShinyObj.shinyapp;
+    return validateShinyHasBeenSet().shinyapp;
   }
   function setShinyUser(user) {
-    fullShinyObj.user = user;
+    validateShinyHasBeenSet().user = user;
   }
   function shinyForgetLastInputValue(name) {
-    fullShinyObj.forgetLastInputValue(name);
+    validateShinyHasBeenSet().forgetLastInputValue(name);
   }
   function shinyBindAll(scope) {
-    fullShinyObj.bindAll(scope);
+    validateShinyHasBeenSet().bindAll(scope);
   }
   function shinyUnbindAll(scope) {
     var includeSelf = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : false;
-    fullShinyObj.unbindAll(scope, includeSelf);
+    validateShinyHasBeenSet().unbindAll(scope, includeSelf);
   }
   function shinyInitializeInputs(scope) {
-    fullShinyObj.initializeInputs(scope);
+    validateShinyHasBeenSet().initializeInputs(scope);
   }
   function shinyAppBindOutput(id, binding) {
-    fullShinyObj.shinyapp.bindOutput(id, binding);
+    shinyShinyApp().bindOutput(id, binding);
   }
   function shinyAppUnbindOutput(id, binding) {
-    return fullShinyObj.shinyapp.unbindOutput(id, binding);
+    return shinyShinyApp().unbindOutput(id, binding);
   }
   function getShinyOnCustomMessage() {
-    return fullShinyObj.oncustommessage;
+    return validateShinyHasBeenSet().oncustommessage;
   }
   var fileInputBinding;
   function getFileInputBinding() {
@@ -7300,18 +7354,18 @@
     fileInputBinding = fileInputBinding_;
   }
   function getShinyCreateWebsocket() {
-    return fullShinyObj.createSocket;
+    return validateShinyHasBeenSet().createSocket;
   }
 
   // srcts/src/file/fileProcessor.ts
   function _typeof14(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof14 = function _typeof27(obj2) {
+      _typeof14 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof14 = function _typeof27(obj2) {
+      _typeof14 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -7326,7 +7380,7 @@
       _setPrototypeOf14(subClass, superClass);
   }
   function _setPrototypeOf14(o, p) {
-    _setPrototypeOf14 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf14 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -7373,7 +7427,7 @@
     }
   }
   function _getPrototypeOf14(o) {
-    _getPrototypeOf14 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf14 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf14(o);
@@ -7416,7 +7470,7 @@
       _defineProperty3(this, "fileIndex", -1);
       _defineProperty3(this, "aborted", false);
       _defineProperty3(this, "completed", false);
-      this.files = files;
+      this.files = Array.from(files);
       if (exec$run) {
         this.$run();
       }
@@ -7519,16 +7573,15 @@
         this.onProgress(null, 0);
         this.totalBytes = 0;
         this.progressBytes = 0;
-        import_jquery20.default.each(files, function(i, file) {
+        import_jquery19.default.each(files, function(i, file) {
           _this3.totalBytes += file.size;
         });
-        var fileInfo = import_jquery20.default.map(files, function(file, i) {
+        var fileInfo = import_jquery19.default.map(files, function(file) {
           return {
             name: file.name,
             size: file.size,
             type: file.type
           };
-          i;
         });
         this.makeRequest("uploadInit", [fileInfo], function(response) {
           _this3.jobId = response.jobId;
@@ -7543,11 +7596,13 @@
       value: function onFile(file, cont) {
         var _this4 = this;
         this.onProgress(file, 0);
-        import_jquery20.default.ajax(this.uploadUrl, {
+        import_jquery19.default.ajax(this.uploadUrl, {
           type: "POST",
           cache: false,
           xhr: function xhr() {
-            var xhrVal = import_jquery20.default.ajaxSettings.xhr();
+            if (typeof import_jquery19.default.ajaxSettings.xhr !== "function")
+              throw "jQuery's XHR is not a function";
+            var xhrVal = import_jquery19.default.ajaxSettings.xhr();
             if (xhrVal.upload) {
               xhrVal.upload.onprogress = function(e) {
                 if (e.lengthComputable) {
@@ -7574,7 +7629,7 @@
       key: "onComplete",
       value: function onComplete() {
         var _this5 = this;
-        var fileInfo = import_jquery20.default.map(this.files, function(file, i) {
+        var fileInfo = import_jquery19.default.map(this.files, function(file, i) {
           return {
             name: file.name,
             size: file.size,
@@ -7587,7 +7642,7 @@
           _this5.$setActive(false);
           _this5.onProgress(null, 1);
           _this5.$bar().text("Upload complete");
-          (0, import_jquery20.default)(evt.el).val("");
+          (0, import_jquery19.default)(evt.el).val("");
         }, function(error) {
           _this5.onError(error);
         }, void 0);
@@ -7613,12 +7668,12 @@
     }, {
       key: "$container",
       value: function $container() {
-        return (0, import_jquery20.default)("#" + $escape(this.id) + "_progress.shiny-file-input-progress");
+        return (0, import_jquery19.default)("#" + $escape(this.id) + "_progress.shiny-file-input-progress");
       }
     }, {
       key: "$bar",
       value: function $bar() {
-        return (0, import_jquery20.default)("#" + $escape(this.id) + "_progress.shiny-file-input-progress .progress-bar");
+        return (0, import_jquery19.default)("#" + $escape(this.id) + "_progress.shiny-file-input-progress .progress-bar");
       }
     }, {
       key: "$setVisible",
@@ -7647,11 +7702,11 @@
   function _typeof15(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof15 = function _typeof27(obj2) {
+      _typeof15 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof15 = function _typeof27(obj2) {
+      _typeof15 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -7688,7 +7743,7 @@
       _setPrototypeOf15(subClass, superClass);
   }
   function _setPrototypeOf15(o, p) {
-    _setPrototypeOf15 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf15 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -7735,7 +7790,7 @@
     }
   }
   function _getPrototypeOf15(o) {
-    _getPrototypeOf15 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf15 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf15(o);
@@ -7743,10 +7798,10 @@
   var zoneActive = "shiny-file-input-active";
   var zoneOver = "shiny-file-input-over";
   function zoneOf(el) {
-    return (0, import_jquery21.default)(el).closest("div.input-group");
+    return (0, import_jquery20.default)(el).closest("div.input-group");
   }
   function enableDraghover(el) {
-    var $el = (0, import_jquery21.default)(el);
+    var $el = (0, import_jquery20.default)(el);
     var childCounter = 0;
     $el.on({
       "dragenter.draghover": function dragenterDraghover(e) {
@@ -7774,10 +7829,10 @@
     return $el;
   }
   function disableDraghover(el) {
-    return (0, import_jquery21.default)(el).off(".draghover");
+    return (0, import_jquery20.default)(el).off(".draghover");
   }
   function enableDocumentEvents() {
-    var $doc = (0, import_jquery21.default)("html");
+    var $doc = (0, import_jquery20.default)("html");
     enableDraghover($doc).on({
       "draghover:enter.draghover": function draghoverEnterDraghover() {
         zoneOf($fileInputs).addClass(zoneActive);
@@ -7791,7 +7846,7 @@
     });
   }
   function disableDocumentEvents() {
-    var $doc = (0, import_jquery21.default)("html");
+    var $doc = (0, import_jquery20.default)("html");
     $doc.off(".draghover");
     disableDraghover($doc);
   }
@@ -7806,7 +7861,8 @@
     return true;
   }
   function handleDrop(e, el) {
-    var files = e.originalEvent.dataTransfer.files, $el = (0, import_jquery21.default)(el);
+    var _e$originalEvent, _e$originalEvent$data;
+    var files = (_e$originalEvent = e.originalEvent) === null || _e$originalEvent === void 0 ? void 0 : (_e$originalEvent$data = _e$originalEvent.dataTransfer) === null || _e$originalEvent$data === void 0 ? void 0 : _e$originalEvent$data.files, $el = (0, import_jquery20.default)(el);
     if (files === void 0 || files === null) {
       console.log("Dropping files is not supported on this browser. (no FileList)");
     } else if (!canSetFiles(files)) {
@@ -7814,7 +7870,7 @@
       uploadDroppedFilesIE10Plus(el, files);
     } else {
       $el.val("");
-      el.files = e.originalEvent.dataTransfer.files;
+      el.files = files;
       $el.trigger("change");
     }
   }
@@ -7833,13 +7889,13 @@
     $el.removeAttr("data-restore");
   }
   function uploadDroppedFilesIE10Plus(el, files) {
-    var $el = (0, import_jquery21.default)(el);
+    var $el = (0, import_jquery20.default)(el);
     abortCurrentUpload($el);
     setFileText($el, files);
     $el.data("currentUploader", new FileUploader(shinyShinyApp(), fileInputBindingGetId(el), files, el));
   }
   function uploadFiles(evt) {
-    var $el = (0, import_jquery21.default)(evt.target);
+    var $el = (0, import_jquery20.default)(evt.target);
     abortCurrentUpload($el);
     var files = evt.target.files;
     var id = fileInputBindingGetId(evt.target);
@@ -7848,7 +7904,7 @@
     setFileText($el, files);
     $el.data("currentUploader", new FileUploader(shinyShinyApp(), id, files, evt.target));
   }
-  var $fileInputs = (0, import_jquery21.default)();
+  var $fileInputs = (0, import_jquery20.default)();
   function fileInputBindingGetId(el) {
     return InputBinding.prototype.getId.call(this, el) || el.name;
   }
@@ -7862,7 +7918,7 @@
     _createClass17(FileInputBinding2, [{
       key: "find",
       value: function find2(scope) {
-        return (0, import_jquery21.default)(scope).find('input[type="file"]');
+        return (0, import_jquery20.default)(scope).find('input[type="file"]');
       }
     }, {
       key: "getId",
@@ -7872,16 +7928,16 @@
     }, {
       key: "getValue",
       value: function getValue(el) {
-        var data = (0, import_jquery21.default)(el).attr("data-restore");
+        var data = (0, import_jquery20.default)(el).attr("data-restore");
         if (data) {
           var dataParsed = JSON.parse(data);
-          var $fileText = (0, import_jquery21.default)(el).closest("div.input-group").find("input[type=text]");
+          var $fileText = (0, import_jquery20.default)(el).closest("div.input-group").find("input[type=text]");
           if (dataParsed.name.length === 1) {
             $fileText.val(dataParsed.name[0]);
           } else {
             $fileText.val(dataParsed.name.length + " files");
           }
-          var $progress = (0, import_jquery21.default)(el).closest("div.form-group").find(".progress");
+          var $progress = (0, import_jquery20.default)(el).closest("div.form-group").find(".progress");
           var $bar = $progress.find(".progress-bar");
           $progress.removeClass("active");
           $bar.width("100%");
@@ -7907,7 +7963,7 @@
       key: "subscribe",
       value: function subscribe(el, callback) {
         callback;
-        (0, import_jquery21.default)(el).on("change.fileInputBinding", uploadFiles);
+        (0, import_jquery20.default)(el).on("change.fileInputBinding", uploadFiles);
         if ($fileInputs.length === 0)
           enableDocumentEvents();
         $fileInputs = $fileInputs.add(el);
@@ -7930,7 +7986,7 @@
     }, {
       key: "unsubscribe",
       value: function unsubscribe(el) {
-        var $el = (0, import_jquery21.default)(el), $zone = zoneOf(el);
+        var $el = (0, import_jquery20.default)(el), $zone = zoneOf(el);
         $zone.removeClass(zoneOver).removeClass(zoneActive);
         disableDraghover($zone);
         $el.off(".fileInputBinding");
@@ -7968,27 +8024,26 @@
   }
 
   // srcts/src/bindings/output/text.ts
-  var import_es_array_iterator16 = __toModule(require_es_array_iterator());
-  var import_jquery23 = __toModule(require_jquery());
+  var import_es_array_iterator16 = __toESM(require_es_array_iterator());
+  var import_jquery22 = __toESM(require_jquery());
 
   // node_modules/core-js/modules/es.array.join.js
-  "use strict";
-  var $40 = require_export();
+  var $41 = require_export();
   var IndexedObject = require_indexed_object();
   var toIndexedObject4 = require_to_indexed_object();
   var arrayMethodIsStrict2 = require_array_method_is_strict();
   var nativeJoin = [].join;
   var ES3_STRINGS = IndexedObject != Object;
   var STRICT_METHOD2 = arrayMethodIsStrict2("join", ",");
-  $40({ target: "Array", proto: true, forced: ES3_STRINGS || !STRICT_METHOD2 }, {
+  $41({ target: "Array", proto: true, forced: ES3_STRINGS || !STRICT_METHOD2 }, {
     join: function join(separator) {
       return nativeJoin.call(toIndexedObject4(this), separator === void 0 ? "," : separator);
     }
   });
 
   // srcts/src/bindings/output/outputBinding.ts
-  var import_es_regexp_exec3 = __toModule(require_es_regexp_exec());
-  var import_jquery22 = __toModule(require_jquery());
+  var import_es_regexp_exec3 = __toESM(require_es_regexp_exec());
+  var import_jquery21 = __toESM(require_jquery());
   function _classCallCheck18(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -8040,7 +8095,7 @@
     }, {
       key: "getId",
       value: function getId(el) {
-        return el["data-input-id"] || el.id;
+        return el.getAttribute("data-input-id") || el.id;
       }
     }, {
       key: "onValueChange",
@@ -8058,21 +8113,21 @@
       value: function renderError(el, err) {
         this.clearError(el);
         if (err.message === "") {
-          (0, import_jquery22.default)(el).empty();
+          (0, import_jquery21.default)(el).empty();
           return;
         }
         var errClass = "shiny-output-error";
         if (err.type !== null) {
-          errClass = errClass + " " + import_jquery22.default.map(asArray(err.type), function(type) {
+          errClass = errClass + " " + import_jquery21.default.map(asArray(err.type), function(type) {
             return errClass + "-" + type;
           }).join(" ");
         }
-        (0, import_jquery22.default)(el).addClass(errClass).text(err.message);
+        (0, import_jquery21.default)(el).addClass(errClass).text(err.message);
       }
     }, {
       key: "clearError",
       value: function clearError(el) {
-        (0, import_jquery22.default)(el).attr("class", function(i, c) {
+        (0, import_jquery21.default)(el).attr("class", function(i, c) {
           return c.replace(/(^|\s)shiny-output-error\S*/g, "");
         });
       }
@@ -8081,9 +8136,9 @@
       value: function showProgress(el, show3) {
         var recalcClass = "recalculating";
         if (show3)
-          (0, import_jquery22.default)(el).addClass(recalcClass);
+          (0, import_jquery21.default)(el).addClass(recalcClass);
         else
-          (0, import_jquery22.default)(el).removeClass(recalcClass);
+          (0, import_jquery21.default)(el).removeClass(recalcClass);
       }
     }]);
     return OutputBinding2;
@@ -8093,11 +8148,11 @@
   function _typeof16(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof16 = function _typeof27(obj2) {
+      _typeof16 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof16 = function _typeof27(obj2) {
+      _typeof16 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -8134,7 +8189,7 @@
       _setPrototypeOf16(subClass, superClass);
   }
   function _setPrototypeOf16(o, p) {
-    _setPrototypeOf16 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf16 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -8181,7 +8236,7 @@
     }
   }
   function _getPrototypeOf16(o) {
-    _getPrototypeOf16 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf16 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf16(o);
@@ -8196,28 +8251,28 @@
     _createClass19(TextOutputBinding2, [{
       key: "find",
       value: function find2(scope) {
-        return (0, import_jquery23.default)(scope).find(".shiny-text-output");
+        return (0, import_jquery22.default)(scope).find(".shiny-text-output");
       }
     }, {
       key: "renderValue",
       value: function renderValue(el, data) {
-        (0, import_jquery23.default)(el).text(data);
+        (0, import_jquery22.default)(el).text(data);
       }
     }]);
     return TextOutputBinding2;
   }(OutputBinding);
 
   // srcts/src/bindings/output/downloadlink.ts
-  var import_es_array_iterator17 = __toModule(require_es_array_iterator());
-  var import_jquery24 = __toModule(require_jquery());
+  var import_es_array_iterator17 = __toESM(require_es_array_iterator());
+  var import_jquery23 = __toESM(require_jquery());
   function _typeof17(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof17 = function _typeof27(obj2) {
+      _typeof17 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof17 = function _typeof27(obj2) {
+      _typeof17 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -8254,7 +8309,7 @@
       _setPrototypeOf17(subClass, superClass);
   }
   function _setPrototypeOf17(o, p) {
-    _setPrototypeOf17 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf17 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -8301,7 +8356,7 @@
     }
   }
   function _getPrototypeOf17(o) {
-    _getPrototypeOf17 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf17 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf17(o);
@@ -8316,29 +8371,28 @@
     _createClass20(DownloadLinkOutputBinding2, [{
       key: "find",
       value: function find2(scope) {
-        return (0, import_jquery24.default)(scope).find("a.shiny-download-link");
+        return (0, import_jquery23.default)(scope).find("a.shiny-download-link");
       }
     }, {
       key: "renderValue",
       value: function renderValue(el, data) {
-        (0, import_jquery24.default)(el).attr("href", data);
+        (0, import_jquery23.default)(el).attr("href", data);
       }
     }]);
     return DownloadLinkOutputBinding2;
   }(OutputBinding);
-  (0, import_jquery24.default)(document).on("click.shinyDownloadLink", "a.shiny-download-link", function(e) {
+  (0, import_jquery23.default)(document).on("click.shinyDownloadLink", "a.shiny-download-link", function(e) {
     e;
-    var evt = jQuery.Event("shiny:filedownload");
+    var evt = import_jquery23.default.Event("shiny:filedownload");
     evt.name = this.id;
     evt.href = this.href;
-    (0, import_jquery24.default)(document).trigger(evt);
+    (0, import_jquery23.default)(document).trigger(evt);
   });
 
   // srcts/src/bindings/output/datatable.ts
-  var import_es_regexp_exec4 = __toModule(require_es_regexp_exec());
+  var import_es_regexp_exec4 = __toESM(require_es_regexp_exec());
 
   // node_modules/core-js/modules/es.string.search.js
-  "use strict";
   var fixRegExpWellKnownSymbolLogic3 = require_fix_regexp_well_known_symbol_logic();
   var anObject7 = require_an_object();
   var requireObjectCoercible3 = require_require_object_coercible();
@@ -8369,8 +8423,8 @@
   });
 
   // srcts/src/bindings/output/datatable.ts
-  var import_es_array_iterator18 = __toModule(require_es_array_iterator());
-  var import_jquery25 = __toModule(require_jquery());
+  var import_es_array_iterator18 = __toESM(require_es_array_iterator());
+  var import_jquery24 = __toESM(require_jquery());
 
   // srcts/src/time/debounce.ts
   function _classCallCheck21(instance, Constructor) {
@@ -8459,7 +8513,11 @@
     }, {
       key: "$invoke",
       value: function $invoke() {
-        this.func.apply(this.target, this.args);
+        if (this.args && this.args.length > 0) {
+          this.func.apply(this.target, this.args);
+        } else {
+          this.func.apply(this.target);
+        }
         this.args = null;
       }
     }]);
@@ -8467,8 +8525,7 @@
   }();
   function debounce(threshold, func) {
     var timerId = null;
-    return function() {
-      var _this2 = this;
+    return function thisFunc() {
       for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
         args[_key3] = arguments[_key3];
       }
@@ -8480,7 +8537,7 @@
         if (timerId === null)
           return;
         timerId = null;
-        func.apply(_this2, args);
+        func.apply(thisFunc, args);
       }, threshold);
     };
   }
@@ -8592,21 +8649,12 @@
     _createClass23(Throttler2, [{
       key: "normalCall",
       value: function normalCall() {
-        var _this = this;
         for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
           args[_key] = arguments[_key];
         }
         this.args = args;
         if (this.timerId === null) {
           this.$invoke();
-          this.timerId = setTimeout(function() {
-            var _this$normalCall;
-            if (_this.timerId === null)
-              return;
-            _this.$clearTimer();
-            if (args.length > 0)
-              (_this$normalCall = _this.normalCall).apply.apply(_this$normalCall, [_this].concat(args));
-          }, this.delayMs);
         }
       }
     }, {
@@ -8622,7 +8670,7 @@
     }, {
       key: "isPending",
       value: function isPending() {
-        return this.timerId !== null;
+        return this.args !== null;
       }
     }, {
       key: "$clearTimer",
@@ -8635,8 +8683,20 @@
     }, {
       key: "$invoke",
       value: function $invoke() {
+        var _this = this;
+        if (this.args === null) {
+          return;
+        }
         this.func.apply(this.target, this.args);
         this.args = null;
+        this.timerId = setTimeout(function() {
+          if (_this.timerId === null)
+            return;
+          _this.$clearTimer();
+          if (_this.isPending()) {
+            _this.$invoke();
+          }
+        }, this.delayMs);
       }
     }]);
     return Throttler2;
@@ -8646,11 +8706,11 @@
   function _typeof18(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof18 = function _typeof27(obj2) {
+      _typeof18 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof18 = function _typeof27(obj2) {
+      _typeof18 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -8687,7 +8747,7 @@
       _setPrototypeOf18(subClass, superClass);
   }
   function _setPrototypeOf18(o, p) {
-    _setPrototypeOf18 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf18 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -8734,7 +8794,7 @@
     }
   }
   function _getPrototypeOf18(o) {
-    _getPrototypeOf18 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf18 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf18(o);
@@ -8749,7 +8809,7 @@
     _createClass24(DatatableOutputBinding2, [{
       key: "find",
       value: function find2(scope) {
-        return (0, import_jquery25.default)(scope).find(".shiny-datatable-output");
+        return (0, import_jquery24.default)(scope).find(".shiny-datatable-output");
       }
     }, {
       key: "onValueError",
@@ -8760,29 +8820,31 @@
     }, {
       key: "renderValue",
       value: function renderValue(el, _data) {
-        var $el = (0, import_jquery25.default)(el).empty();
+        var _data$options$searchi, _data$options, _data$options2, _data$options2$search;
+        var $el = (0, import_jquery24.default)(el).empty();
         if (!_data || !_data.colnames)
           return;
-        var colnames = import_jquery25.default.makeArray(_data.colnames);
-        var header = import_jquery25.default.map(colnames, function(x) {
+        var colnames = import_jquery24.default.makeArray(_data.colnames);
+        var header = import_jquery24.default.map(colnames, function(x) {
           return "<th>" + x + "</th>";
         }).join("");
         header = "<thead><tr>" + header + "</tr></thead>";
         var footer = "";
-        if (_data.options === null || _data.options.searching !== false) {
-          footer = import_jquery25.default.map(colnames, function(x) {
+        if ((_data$options$searchi = (_data$options = _data.options) === null || _data$options === void 0 ? void 0 : _data$options.searching) !== null && _data$options$searchi !== void 0 ? _data$options$searchi : true) {
+          footer = import_jquery24.default.map(colnames, function(x) {
             return '<th><input type="text" placeholder="' + escapeHTML(x.replace(/(<([^>]+)>)/gi, "")) + '" /></th>';
           }).join("");
           footer = "<tfoot>" + footer + "</tfoot>";
         }
         var content = '<table class="table table-striped table-hover">' + header + footer + "</table>";
         $el.append(content);
-        if (_data.evalOptions)
-          import_jquery25.default.each(_data.evalOptions, function(i, x) {
+        if (_data.evalOptions) {
+          import_jquery24.default.each(_data.evalOptions, function(i, x) {
             _data.options[x] = indirectEval("(" + _data.options[x] + ")");
           });
-        var searchCI = _data.options === null || typeof _data.options.search === "undefined" || _data.options.search.caseInsensitive !== false;
-        var oTable = (0, import_jquery25.default)(el).children("table").DataTable(import_jquery25.default.extend({
+        }
+        var searchCI = ((_data$options2 = _data.options) === null || _data$options2 === void 0 ? void 0 : (_data$options2$search = _data$options2.search) === null || _data$options2$search === void 0 ? void 0 : _data$options2$search.caseInsensitive) !== false;
+        var oTable = (0, import_jquery24.default)(el).children("table").DataTable(import_jquery24.default.extend({
           processing: true,
           serverSide: true,
           order: [],
@@ -8792,6 +8854,7 @@
             url: _data.action,
             type: "POST",
             data: function data(d) {
+              d.search || (d.search = {});
               d.search.caseInsensitive = searchCI;
               d.escape = _data.escape;
             }
@@ -8807,7 +8870,7 @@
         }));
         var searchInputs = $el.find("tfoot input");
         if (searchInputs.length > 0) {
-          import_jquery25.default.each(oTable.settings()[0].aoColumns, function(i, x) {
+          import_jquery24.default.each(oTable.settings()[0].aoColumns, function(i, x) {
             if (!x.bSearchable)
               searchInputs.eq(i).hide();
           });
@@ -8822,37 +8885,22 @@
   }(OutputBinding);
 
   // srcts/src/bindings/output/html.ts
-  var import_es_array_iterator20 = __toModule(require_es_array_iterator());
-  var import_jquery28 = __toModule(require_jquery());
-
-  // srcts/src/shiny/render.ts
-  var import_es_regexp_exec6 = __toModule(require_es_regexp_exec());
+  var import_es_array_iterator20 = __toESM(require_es_array_iterator());
+  var import_jquery27 = __toESM(require_jquery());
 
   // node_modules/core-js/modules/es.object.entries.js
-  var $45 = require_export();
+  var $46 = require_export();
   var $entries = require_object_to_array().entries;
-  $45({ target: "Object", stat: true }, {
+  $46({ target: "Object", stat: true }, {
     entries: function entries(O) {
       return $entries(O);
     }
   });
 
   // srcts/src/shiny/render.ts
-  var import_es_array_iterator19 = __toModule(require_es_array_iterator());
-
-  // node_modules/core-js/modules/es.array.from.js
-  var $46 = require_export();
-  var from = require_array_from();
-  var checkCorrectnessOfIteration = require_check_correctness_of_iteration();
-  var INCORRECT_ITERATION = !checkCorrectnessOfIteration(function(iterable) {
-    Array.from(iterable);
-  });
-  $46({ target: "Array", stat: true, forced: INCORRECT_ITERATION }, {
-    from: from
-  });
-
-  // srcts/src/shiny/render.ts
-  var import_jquery27 = __toModule(require_jquery());
+  var import_es_regexp_exec6 = __toESM(require_es_regexp_exec());
+  var import_es_array_iterator19 = __toESM(require_es_array_iterator());
+  var import_jquery26 = __toESM(require_jquery());
 
   // srcts/src/shiny/sendImageSize.ts
   function _classCallCheck25(instance, Constructor) {
@@ -8911,8 +8959,8 @@
   var sendImageSizeFns = new SendImageSize();
 
   // srcts/src/shiny/singletons.ts
-  var import_es_regexp_exec5 = __toModule(require_es_regexp_exec());
-  var import_jquery26 = __toModule(require_jquery());
+  var import_es_regexp_exec5 = __toESM(require_es_regexp_exec());
+  var import_jquery25 = __toESM(require_jquery());
   var reSingleton = /<!--(SHINY.SINGLETON\[([\w]+)\])-->([\s\S]*?)<!--\/\1-->/;
   var reHead = /<head(?:\s[^>]*)?>([\s\S]*?)<\/head>/;
   var knownSingletons = {};
@@ -8920,23 +8968,29 @@
     var processed = processHtml(html);
     addToHead(processed.head);
     register(processed.singletons);
-    if (where === "replace") {
-      (0, import_jquery26.default)(el).html(processed.html);
-    } else {
-      var elElements;
-      if (el instanceof HTMLElement) {
-        elElements = [el];
-      } else {
-        elElements = el.toArray();
-      }
-      import_jquery26.default.each(elElements, function(i, el2) {
-        el2.insertAdjacentHTML(toLowerCase(where), processed.html);
-      });
+    switch (where.toLowerCase()) {
+      case "replace":
+        (0, import_jquery25.default)(el).html(processed.html);
+        break;
+      case "beforebegin":
+        (0, import_jquery25.default)(el).before(processed.html);
+        break;
+      case "afterbegin":
+        (0, import_jquery25.default)(el).prepend(processed.html);
+        break;
+      case "beforeend":
+        (0, import_jquery25.default)(el).append(processed.html);
+        break;
+      case "afterend":
+        (0, import_jquery25.default)(el).after(processed.html);
+        break;
+      default:
+        throw new Error("Unknown where position: " + where);
     }
     return processed;
   }
   function register(s) {
-    import_jquery26.default.extend(knownSingletons, s);
+    import_jquery25.default.extend(knownSingletons, s);
   }
   function registerNames(s) {
     if (typeof s === "string") {
@@ -8949,8 +9003,8 @@
   }
   function addToHead(head) {
     if (head.length > 0) {
-      var tempDiv = (0, import_jquery26.default)("<div>" + head + "</div>").get(0);
-      var $head = (0, import_jquery26.default)("head");
+      var tempDiv = (0, import_jquery25.default)("<div>" + head + "</div>").get(0);
+      var $head = (0, import_jquery25.default)("head");
       while (tempDiv.hasChildNodes()) {
         $head.append(tempDiv.firstChild);
       }
@@ -9052,11 +9106,11 @@
   function _typeof19(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof19 = function _typeof27(obj2) {
+      _typeof19 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof19 = function _typeof27(obj2) {
+      _typeof19 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -9064,9 +9118,7 @@
   }
   function renderDependencies(dependencies) {
     if (dependencies) {
-      import_jquery27.default.each(dependencies, function(i, dep) {
-        renderDependency(dep);
-      });
+      dependencies.forEach(renderDependency);
     }
   }
   function renderContent(el, content) {
@@ -9074,7 +9126,7 @@
     if (where === "replace") {
       shinyUnbindAll(el);
     }
-    var html;
+    var html = "";
     var dependencies = [];
     if (content === null) {
       html = "";
@@ -9090,7 +9142,7 @@
       shinyInitializeInputs(el);
       shinyBindAll(el);
     } else {
-      var $parent = (0, import_jquery27.default)(el).parent();
+      var $parent = (0, import_jquery26.default)(el).parent();
       if ($parent.length > 0) {
         scope = $parent;
         if (where === "beforeBegin" || where === "afterEnd") {
@@ -9123,138 +9175,218 @@
     }
     return htmlDependencies[names[idx]] === dep.version;
   }
-  function renderDependency(dep) {
-    var restyle = needsRestyle(dep);
-    if (hasOwnProperty(htmlDependencies, dep.name) && !restyle)
+  function renderDependency(dep_) {
+    var dep = normalizeHtmlDependency(dep_);
+    var stylesheetLinks = dep.stylesheet.map(function(x) {
+      if (!hasDefinedProperty(x, "rel"))
+        x.rel = "stylesheet";
+      if (!hasDefinedProperty(x, "type"))
+        x.type = "text/css";
+      var link = document.createElement("link");
+      Object.entries(x).forEach(function(_ref) {
+        var _ref2 = _slicedToArray(_ref, 2), attr = _ref2[0], val = _ref2[1];
+        if (attr === "href") {
+          val = encodeURI(val);
+        }
+        link.setAttribute(attr, val ? val : "");
+      });
+      return link;
+    });
+    if (needsRestyle(dep)) {
+      addStylesheetsAndRestyle(stylesheetLinks);
+      return true;
+    }
+    if (hasDefinedProperty(htmlDependencies, dep.name))
       return false;
     registerDependency(dep.name, dep.version);
-    var href = dep.src.href;
-    var $head = (0, import_jquery27.default)("head").first();
-    if (dep.meta && !restyle) {
-      var metas = import_jquery27.default.map(asArray(dep.meta), function(obj, idx) {
-        var name = Object.keys(obj)[0];
-        return (0, import_jquery27.default)("<meta>").attr("name", name).attr("content", obj[name]);
-        idx;
-      });
-      $head.append(metas);
-    }
-    if (dep.stylesheet) {
-      var links = import_jquery27.default.map(asArray(dep.stylesheet), function(stylesheet) {
-        return (0, import_jquery27.default)("<link rel='stylesheet' type='text/css'>").attr("href", href + "/" + encodeURI(stylesheet));
-      });
-      if (!restyle) {
-        $head.append(links);
-      } else {
-        var refreshStyle = function refreshStyle2(href2, oldSheet) {
-          var xhr = new XMLHttpRequest();
-          xhr.open("GET", href2);
-          xhr.onload = function() {
-            var id = "shiny_restyle_" + href2.split("?restyle")[0].replace(/\W/g, "_");
-            var oldStyle = $head.find("style#" + id);
-            var newStyle = (0, import_jquery27.default)("<style>").attr("id", id).html(xhr.responseText);
-            $head.append(newStyle);
-            oldStyle.remove();
-            removeSheet(oldSheet);
-            sendImageSizeFns.transitioned();
-          };
-          xhr.send();
-        };
-        var findSheet = function findSheet2(href2) {
-          for (var i = 0; i < document.styleSheets.length; i++) {
-            var sheet = document.styleSheets[i];
-            if (typeof sheet.href === "string" && sheet.href.indexOf(href2) > -1) {
-              return sheet;
-            }
-          }
-          return null;
-        };
-        var removeSheet = function removeSheet2(sheet) {
-          if (!sheet)
-            return;
-          sheet.disabled = true;
-          if (isIE())
-            sheet.cssText = "";
-          (0, import_jquery27.default)(sheet.ownerNode).remove();
-        };
-        import_jquery27.default.map(links, function(link) {
-          var oldSheet = findSheet(link.attr("href"));
-          var href2 = link.attr("href") + "?restyle=" + new Date().getTime();
-          if (isIE()) {
-            refreshStyle(href2, oldSheet);
-          } else {
-            link.attr("href", href2);
-            link.attr("onload", function() {
-              var $dummyEl = (0, import_jquery27.default)("<div>").css("transition", "0.1s all").css("position", "absolute").css("top", "-1000px").css("left", "0");
-              $dummyEl.one("transitionend", function() {
-                $dummyEl.remove();
-                removeSheet(oldSheet);
-                sendImageSizeFns.transitioned();
-              });
-              (0, import_jquery27.default)(document.body).append($dummyEl);
-              var color = "#" + Math.floor(Math.random() * 16777215).toString(16);
-              setTimeout(function() {
-                return $dummyEl.css("color", color);
-              }, 10);
-            });
-            $head.append(link);
-          }
-        });
+    var $head = (0, import_jquery26.default)("head").first();
+    dep.meta.forEach(function(x) {
+      var meta = document.createElement("meta");
+      for (var _i2 = 0, _Object$entries = Object.entries(x); _i2 < _Object$entries.length; _i2++) {
+        var _Object$entries$_i = _slicedToArray(_Object$entries[_i2], 2), attr = _Object$entries$_i[0], val = _Object$entries$_i[1];
+        meta.setAttribute(attr, val);
       }
+      $head.append(meta);
+    });
+    if (stylesheetLinks.length !== 0) {
+      $head.append(stylesheetLinks);
     }
-    if (dep.script && !restyle) {
-      var scriptsAttrs = asArray(dep.script);
-      var scripts = import_jquery27.default.map(scriptsAttrs, function(x) {
-        var script = document.createElement("script");
-        if (typeof x === "string") {
-          x = {
-            src: x
-          };
+    dep.script.forEach(function(x) {
+      var script = document.createElement("script");
+      Object.entries(x).forEach(function(_ref3) {
+        var _ref4 = _slicedToArray(_ref3, 2), attr = _ref4[0], val = _ref4[1];
+        if (attr === "src") {
+          val = encodeURI(val);
         }
-        for (var _i = 0, _Object$entries = Object.entries(x); _i < _Object$entries.length; _i++) {
-          var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2), attr = _Object$entries$_i[0], val = _Object$entries$_i[1];
-          if (attr === "src") {
-            val = href + "/" + encodeURI(val);
-          }
-          script.setAttribute(attr, val ? val : "");
-        }
-        return script;
+        script.setAttribute(attr, val ? val : "");
       });
-      $head.append(scripts);
-    }
-    if (dep.attachment && !restyle) {
-      var attachments = dep.attachment;
-      if (typeof attachments === "string")
-        attachments = [attachments];
-      if (Array.isArray(attachments)) {
-        var tmp = {};
-        import_jquery27.default.each(attachments, function(index, attachment) {
-          var key = index + 1 + "";
-          tmp[key] = attachment;
-        });
-        attachments = tmp;
-      }
-      var attach = import_jquery27.default.map(attachments, function(attachment, key) {
-        return (0, import_jquery27.default)("<link rel='attachment'>").attr("id", dep.name + "-" + key + "-attachment").attr("href", href + "/" + encodeURI(attachment));
-      });
-      $head.append(attach);
-    }
-    if (dep.head && !restyle) {
-      var $newHead = (0, import_jquery27.default)("<head></head>");
+      $head.append(script);
+    });
+    dep.attachment.forEach(function(x) {
+      var link = (0, import_jquery26.default)("<link rel='attachment'>").attr("id", dep.name + "-" + x.key + "-attachment").attr("href", encodeURI(x.href));
+      $head.append(link);
+    });
+    if (dep.head) {
+      var $newHead = (0, import_jquery26.default)("<head></head>");
       $newHead.html(dep.head);
       $head.append($newHead.children());
     }
     return true;
+  }
+  function addStylesheetsAndRestyle(links) {
+    var $head = (0, import_jquery26.default)("head").first();
+    var refreshStyle = function refreshStyle2(href, oldSheet) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", href);
+      xhr.onload = function() {
+        var id = "shiny_restyle_" + href.split("?restyle")[0].replace(/\W/g, "_");
+        var oldStyle = $head.find("style#" + id);
+        var newStyle = (0, import_jquery26.default)("<style>").attr("id", id).html(xhr.responseText);
+        $head.append(newStyle);
+        oldStyle.remove();
+        removeSheet(oldSheet);
+        sendImageSizeFns.transitioned();
+      };
+      xhr.send();
+    };
+    var findSheet = function findSheet2(href) {
+      if (!href)
+        return null;
+      for (var i = 0; i < document.styleSheets.length; i++) {
+        var sheet = document.styleSheets[i];
+        if (typeof sheet.href === "string" && sheet.href.indexOf(href) > -1) {
+          return sheet;
+        }
+      }
+      return null;
+    };
+    var removeSheet = function removeSheet2(sheet) {
+      if (!sheet)
+        return;
+      sheet.disabled = true;
+      if (isIE())
+        sheet.cssText = "";
+      if (sheet.ownerNode instanceof Element) {
+        (0, import_jquery26.default)(sheet.ownerNode).remove();
+      }
+    };
+    links.map(function(link) {
+      var $link = (0, import_jquery26.default)(link);
+      var oldSheet = findSheet($link.attr("href"));
+      var href = $link.attr("href") + "?restyle=" + new Date().getTime();
+      if (isIE()) {
+        refreshStyle(href, oldSheet);
+      } else {
+        $link.attr("href", href);
+        $link.attr("onload", function() {
+          var $dummyEl = (0, import_jquery26.default)("<div>").css("transition", "0.1s all").css("position", "absolute").css("top", "-1000px").css("left", "0");
+          $dummyEl.one("transitionend", function() {
+            $dummyEl.remove();
+            removeSheet(oldSheet);
+            sendImageSizeFns.transitioned();
+          });
+          (0, import_jquery26.default)(document.body).append($dummyEl);
+          var color = "#" + Math.floor(Math.random() * 16777215).toString(16);
+          setTimeout(function() {
+            return $dummyEl.css("color", color);
+          }, 10);
+        });
+        $head.append(link);
+      }
+    });
+  }
+  function normalizeHtmlDependency(dep) {
+    var _dep$src;
+    var hrefPrefix = (_dep$src = dep.src) === null || _dep$src === void 0 ? void 0 : _dep$src.href;
+    var result = {
+      name: dep.name,
+      version: dep.version,
+      restyle: dep.restyle,
+      meta: [],
+      stylesheet: [],
+      script: [],
+      attachment: [],
+      head: dep.head
+    };
+    if (dep.meta) {
+      if (Array.isArray(dep.meta)) {
+        result.meta = dep.meta;
+      } else {
+        result.meta = Object.entries(dep.meta).map(function(_ref5) {
+          var _ref6 = _slicedToArray(_ref5, 2), attr = _ref6[0], val = _ref6[1];
+          return {
+            name: attr,
+            content: val
+          };
+        });
+      }
+    }
+    result.stylesheet = asArray(dep.stylesheet).map(function(s) {
+      if (typeof s === "string") {
+        s = {
+          href: s
+        };
+      }
+      if (hrefPrefix) {
+        s.href = hrefPrefix + "/" + s.href;
+      }
+      return s;
+    });
+    result.script = asArray(dep.script).map(function(s) {
+      if (typeof s === "string") {
+        s = {
+          src: s
+        };
+      }
+      if (hrefPrefix) {
+        s.src = hrefPrefix + "/" + s.src;
+      }
+      return s;
+    });
+    var attachments = dep.attachment;
+    if (!attachments)
+      attachments = [];
+    if (typeof attachments === "string")
+      attachments = [attachments];
+    if (Array.isArray(attachments)) {
+      var tmp = attachments;
+      attachments = tmp.map(function(attachment, index) {
+        if (typeof attachment === "string") {
+          return {
+            key: (index + 1).toString(),
+            href: attachment
+          };
+        } else {
+          return attachment;
+        }
+      });
+    } else {
+      attachments = Object.entries(attachments).map(function(_ref7) {
+        var _ref8 = _slicedToArray(_ref7, 2), attr = _ref8[0], val = _ref8[1];
+        return {
+          key: attr,
+          href: val
+        };
+      });
+    }
+    result.attachment = attachments.map(function(s) {
+      if (hrefPrefix) {
+        s.href = hrefPrefix + "/" + s.href;
+      }
+      return s;
+    });
+    return result;
   }
 
   // srcts/src/bindings/output/html.ts
   function _typeof20(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof20 = function _typeof27(obj2) {
+      _typeof20 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof20 = function _typeof27(obj2) {
+      _typeof20 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -9291,7 +9423,7 @@
       _setPrototypeOf19(subClass, superClass);
   }
   function _setPrototypeOf19(o, p) {
-    _setPrototypeOf19 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf19 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -9338,7 +9470,7 @@
     }
   }
   function _getPrototypeOf19(o) {
-    _getPrototypeOf19 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf19 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf19(o);
@@ -9353,7 +9485,7 @@
     _createClass26(HtmlOutputBinding2, [{
       key: "find",
       value: function find2(scope) {
-        return (0, import_jquery28.default)(scope).find(".shiny-html-output");
+        return (0, import_jquery27.default)(scope).find(".shiny-html-output");
       }
     }, {
       key: "onValueError",
@@ -9371,7 +9503,6 @@
   }(OutputBinding);
 
   // node_modules/core-js/modules/es.array.filter.js
-  "use strict";
   var $50 = require_export();
   var $filter = require_array_iteration().filter;
   var arrayMethodHasSpeciesSupport5 = require_array_method_has_species_support();
@@ -9383,14 +9514,58 @@
   });
 
   // srcts/src/bindings/output/image.ts
-  var import_es_array_iterator21 = __toModule(require_es_array_iterator());
-  var import_jquery33 = __toModule(require_jquery());
+  var import_es_array_iterator21 = __toESM(require_es_array_iterator());
+  var import_jquery32 = __toESM(require_jquery());
+
+  // node_modules/core-js/modules/es.array.some.js
+  var $51 = require_export();
+  var $some = require_array_iteration().some;
+  var arrayMethodIsStrict3 = require_array_method_is_strict();
+  var STRICT_METHOD3 = arrayMethodIsStrict3("some");
+  $51({ target: "Array", proto: true, forced: !STRICT_METHOD3 }, {
+    some: function some(callbackfn) {
+      return $some(this, callbackfn, arguments.length > 1 ? arguments[1] : void 0);
+    }
+  });
+
+  // node_modules/core-js/modules/es.object.values.js
+  var $52 = require_export();
+  var $values = require_object_to_array().values;
+  $52({ target: "Object", stat: true }, {
+    values: function values(O) {
+      return $values(O);
+    }
+  });
+
+  // node_modules/core-js/modules/es.object.get-own-property-descriptors.js
+  var $53 = require_export();
+  var DESCRIPTORS6 = require_descriptors();
+  var ownKeys = require_own_keys();
+  var toIndexedObject5 = require_to_indexed_object();
+  var getOwnPropertyDescriptorModule3 = require_object_get_own_property_descriptor();
+  var createProperty4 = require_create_property();
+  $53({ target: "Object", stat: true, sham: !DESCRIPTORS6 }, {
+    getOwnPropertyDescriptors: function getOwnPropertyDescriptors(object) {
+      var O = toIndexedObject5(object);
+      var getOwnPropertyDescriptor4 = getOwnPropertyDescriptorModule3.f;
+      var keys2 = ownKeys(O);
+      var result = {};
+      var index = 0;
+      var key, descriptor;
+      while (keys2.length > index) {
+        descriptor = getOwnPropertyDescriptor4(O, key = keys2[index++]);
+        if (descriptor !== void 0)
+          createProperty4(result, key, descriptor);
+      }
+      return result;
+    }
+  });
 
   // srcts/src/imageutils/createBrush.ts
-  var import_jquery30 = __toModule(require_jquery());
+  var import_jquery29 = __toESM(require_jquery());
 
   // srcts/src/imageutils/initCoordmap.ts
-  var import_jquery29 = __toModule(require_jquery());
+  var import_jquery28 = __toESM(require_jquery());
 
   // srcts/src/imageutils/initPanelScales.ts
   function mapLinear(x, domainMin, domainMax, rangeMin, rangeMax) {
@@ -9424,14 +9599,15 @@
       }
     };
   }
-  function addScaleFuns(panel) {
+  function addScaleFuns(panel_) {
+    var panel = panel_;
     var d = panel.domain;
     var r = panel.range;
     var xlog = panel.log && panel.log.x ? panel.log.x : null;
     var ylog = panel.log && panel.log.y ? panel.log.y : null;
     var xscaler = scaler1D(d.left, d.right, r.left, r.right, xlog);
     var yscaler = scaler1D(d.bottom, d.top, r.bottom, r.top, ylog);
-    panel.scaleDataToImg = function(val, clip) {
+    function scaleDataToImg(val, clip) {
       return mapValues(val, function(value, key) {
         var prefix = key.substring(0, 1);
         if (prefix === "x") {
@@ -9441,7 +9617,8 @@
         }
         return null;
       });
-    };
+    }
+    panel.scaleDataToImg = scaleDataToImg;
     function scaleImgToData(val, clip) {
       return mapValues(val, function(value, key) {
         var prefix = key.substring(0, 1);
@@ -9470,12 +9647,12 @@
         newOffset.y = bounds.top;
       return newOffset;
     };
+    return panel;
   }
   function initPanelScales(panels) {
-    for (var i = 0; i < panels.length; i++) {
-      var panel = panels[i];
-      addScaleFuns(panel);
-    }
+    return panels.map(function(panel) {
+      return addScaleFuns(panel);
+    });
   }
 
   // srcts/src/imageutils/initCoordmap.ts
@@ -9510,25 +9687,25 @@
     };
   }
   function initCoordmap($el, coordmap_) {
-    var coordmap = coordmap_;
     var $img = $el.find("img");
     var img = $img[0];
-    if (coordmap.panels.length === 0) {
+    if (coordmap_.panels.length === 0) {
       var bounds = {
         top: 0,
         left: 0,
         right: img.clientWidth - 1,
         bottom: img.clientHeight - 1
       };
-      coordmap.panels[0] = {
+      coordmap_.panels[0] = {
         domain: bounds,
         range: bounds,
         mapping: {}
       };
     }
+    var coordmap = coordmap_;
     coordmap.dims.height = coordmap.dims.height || img.naturalHeight;
     coordmap.dims.width = coordmap.dims.width || img.naturalWidth;
-    initPanelScales(coordmap.panels);
+    coordmap.panels = initPanelScales(coordmap_.panels);
     coordmap.mouseOffsetCss = function(mouseEvent) {
       var imgOrigin = findOrigin($img);
       return {
@@ -9656,13 +9833,13 @@
         var coordsImg = coordmap.scaleCssToImg(coordsCss);
         var coordsData = panel.scaleImgToData(coordsImg);
         var coords = {
-          x: coordsData.x,
-          y: coordsData.y,
+          x: coordsData === null || coordsData === void 0 ? void 0 : coordsData.x,
+          y: coordsData === null || coordsData === void 0 ? void 0 : coordsData.y,
           coords_css: coordsCss,
           coords_img: coordsImg,
           img_css_ratio: coordmap.cssToImgScalingRatio()
         };
-        import_jquery29.default.extend(coords, panel.panel_vars);
+        import_jquery28.default.extend(coords, panel.panel_vars);
         coords.mapping = panel.mapping;
         coords.domain = panel.domain;
         coords.range = panel.range;
@@ -9705,6 +9882,44 @@
   }
 
   // srcts/src/imageutils/createBrush.ts
+  function ownKeys2(object, enumerableOnly) {
+    var keys2 = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) {
+        symbols = symbols.filter(function(sym) {
+          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+        });
+      }
+      keys2.push.apply(keys2, symbols);
+    }
+    return keys2;
+  }
+  function _objectSpread(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+      if (i % 2) {
+        ownKeys2(Object(source), true).forEach(function(key) {
+          _defineProperty9(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys2(Object(source)).forEach(function(key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
+    }
+    return target;
+  }
+  function _defineProperty9(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
   function createBrush($el, opts, coordmap, expandPixels) {
     var resizeExpand = 10;
     var el = $el[0];
@@ -9778,10 +9993,8 @@
     }
     function onResize() {
       var boundsDataVal = boundsData();
-      for (var val in boundsDataVal) {
-        if (isnan(boundsDataVal[val]))
-          return;
-      }
+      if (Object.values(boundsDataVal).some(isnan))
+        return;
       boundsData(boundsDataVal);
       updateDiv();
     }
@@ -9823,7 +10036,7 @@
     }
     function boundsCss(boxCss) {
       if (boxCss === void 0) {
-        return import_jquery30.default.extend({}, state.boundsCss);
+        return _objectSpread({}, state.boundsCss);
       }
       var minCss = {
         x: boxCss.xmin,
@@ -9861,8 +10074,8 @@
         ymin: minCss.y,
         ymax: maxCss.y
       };
-      var minData = state.panel.scaleImgToData(cssToImg(minCss));
-      var maxData = state.panel.scaleImgToData(cssToImg(maxCss));
+      var minData = panel.scaleImgToData(cssToImg(minCss));
+      var maxData = panel.scaleImgToData(cssToImg(maxCss));
       state.boundsData = findBox(minData, maxData);
       state.boundsData = mapValues(state.boundsData, function(val) {
         return roundSignif(val, 14);
@@ -9872,8 +10085,8 @@
       return void 0;
     }
     function boundsData(boxData) {
-      if (boxData === void 0) {
-        return import_jquery30.default.extend({}, state.boundsData);
+      if (typeof boxData === "undefined") {
+        return _objectSpread({}, state.boundsData);
       }
       var boxCss = imgToCss(state.panel.scaleDataToImg(boxData));
       boxCss = mapValues(boxCss, function(val) {
@@ -9893,7 +10106,7 @@
     function addDiv() {
       if ($div)
         $div.remove();
-      $div = (0, import_jquery30.default)(document.createElement("div")).attr("id", el.id + "_brush").css({
+      $div = (0, import_jquery29.default)(document.createElement("div")).attr("id", el.id + "_brush").css({
         "background-color": opts.brushFill,
         opacity: opts.brushOpacity,
         "pointer-events": "none",
@@ -9916,10 +10129,12 @@
         });
       }
       $el.append($div);
-      $div.offset({
-        x: 0,
-        y: 0
-      }).width(0).outerHeight(0);
+      $div.offset(
+        {
+          x: 0,
+          y: 0
+        }
+      ).width(0).outerHeight(0);
     }
     function updateDiv() {
       var imgOffsetCss = findOrigin($el.find("img"));
@@ -9965,7 +10180,7 @@
     }
     function startDragging() {
       state.dragging = true;
-      state.changeStartBounds = import_jquery30.default.extend({}, state.boundsCss);
+      state.changeStartBounds = _objectSpread({}, state.boundsCss);
     }
     function dragTo(offsetCss) {
       var dx = offsetCss.x - state.down.x;
@@ -9978,7 +10193,8 @@
         ymax: start.ymax + dy
       };
       if (opts.brushClip) {
-        var panelBoundsImg = state.panel.range;
+        var panel = state.panel;
+        var panelBoundsImg = panel.range;
         var newBoundsImg = cssToImg(newBoundsCss);
         var xvalsImg = [newBoundsImg.xmin, newBoundsImg.xmax];
         var yvalsImg = [newBoundsImg.ymin, newBoundsImg.ymax];
@@ -10002,7 +10218,7 @@
     }
     function startResizing() {
       state.resizing = true;
-      state.changeStartBounds = import_jquery30.default.extend({}, state.boundsCss);
+      state.changeStartBounds = _objectSpread({}, state.boundsCss);
       state.resizeSides = whichResizeSides(state.down);
     }
     function resizeTo(offsetCss) {
@@ -10012,7 +10228,8 @@
       };
       var dImg = cssToImg(dCss);
       var bImg = cssToImg(state.changeStartBounds);
-      var panelBoundsImg = state.panel.range;
+      var panel = state.panel;
+      var panelBoundsImg = panel.range;
       if (state.resizeSides.left) {
         var xminImg = shiftToRange(bImg.xmin + dImg.x, panelBoundsImg.left, bImg.xmax)[0];
         bImg.xmin = xminImg;
@@ -10061,12 +10278,12 @@
   }
 
   // srcts/src/imageutils/createClickInfo.ts
-  var import_jquery31 = __toModule(require_jquery());
+  var import_jquery30 = __toESM(require_jquery());
   function createClickInfo($el, dblclickId, dblclickDelay) {
-    var clickTimer = null;
+    var clickTimer = void 0;
     var pendingE = null;
     function triggerEvent(newEventType, e) {
-      var e2 = import_jquery31.default.Event(newEventType, {
+      var e2 = import_jquery30.default.Event(newEventType, {
         which: e.which,
         pageX: e.pageX,
         pageY: e.pageY
@@ -10081,7 +10298,7 @@
     }
     function scheduleMousedown2(e) {
       pendingE = e;
-      clickTimer = setTimeout(function() {
+      clickTimer = window.setTimeout(function() {
         triggerPendingMousedown2();
       }, dblclickDelay);
     }
@@ -10116,7 +10333,7 @@
   }
 
   // srcts/src/imageutils/createHandlers.ts
-  var import_jquery32 = __toModule(require_jquery());
+  var import_jquery31 = __toESM(require_jquery());
   function createClickHandler(inputId, clip, coordmap) {
     var clickInfoSender = coordmap.mouseCoordinateSender(inputId, clip);
     return {
@@ -10182,7 +10399,7 @@
         return;
       }
       var panel = brush.getPanel();
-      import_jquery32.default.extend(coords, panel.panel_vars);
+      import_jquery31.default.extend(coords, panel.panel_vars);
       coords.coords_css = brush.boundsCss();
       coords.coords_img = coordmap.scaleCssToImg(coords.coords_css);
       coords.img_css_ratio = coordmap.cssToImgScalingRatio();
@@ -10218,15 +10435,15 @@
       brush.down(offsetCss);
       if (brush.isInResizeArea(offsetCss)) {
         brush.startResizing(offsetCss);
-        (0, import_jquery32.default)(document).on("mousemove.image_brush", mousemoveResizing).on("mouseup.image_brush", mouseupResizing);
+        (0, import_jquery31.default)(document).on("mousemove.image_brush", mousemoveResizing).on("mouseup.image_brush", mouseupResizing);
       } else if (brush.isInsideBrush(offsetCss)) {
         brush.startDragging(offsetCss);
         setCursorStyle("grabbing");
-        (0, import_jquery32.default)(document).on("mousemove.image_brush", mousemoveDragging).on("mouseup.image_brush", mouseupDragging);
+        (0, import_jquery31.default)(document).on("mousemove.image_brush", mousemoveDragging).on("mouseup.image_brush", mouseupDragging);
       } else {
         var panel = coordmap.getPanelCss(offsetCss, expandPixels);
         brush.startBrushing(panel.clipImg(coordmap.scaleCssToImg(offsetCss)));
-        (0, import_jquery32.default)(document).on("mousemove.image_brush", mousemoveBrushing).on("mouseup.image_brush", mouseupBrushing);
+        (0, import_jquery31.default)(document).on("mousemove.image_brush", mousemoveBrushing).on("mouseup.image_brush", mouseupBrushing);
       }
     }
     function mousemove(e) {
@@ -10267,7 +10484,7 @@
     function mouseupBrushing(e) {
       if (e.which !== 1)
         return;
-      (0, import_jquery32.default)(document).off("mousemove.image_brush").off("mouseup.image_brush");
+      (0, import_jquery31.default)(document).off("mousemove.image_brush").off("mouseup.image_brush");
       brush.up(coordmap.mouseOffsetCss(e));
       brush.stopBrushing();
       setCursorStyle("crosshair");
@@ -10282,7 +10499,7 @@
     function mouseupDragging(e) {
       if (e.which !== 1)
         return;
-      (0, import_jquery32.default)(document).off("mousemove.image_brush").off("mouseup.image_brush");
+      (0, import_jquery31.default)(document).off("mousemove.image_brush").off("mouseup.image_brush");
       brush.up(coordmap.mouseOffsetCss(e));
       brush.stopDragging();
       setCursorStyle("grabbable");
@@ -10292,7 +10509,7 @@
     function mouseupResizing(e) {
       if (e.which !== 1)
         return;
-      (0, import_jquery32.default)(document).off("mousemove.image_brush").off("mouseup.image_brush");
+      (0, import_jquery31.default)(document).off("mousemove.image_brush").off("mouseup.image_brush");
       brush.up(coordmap.mouseOffsetCss(e));
       brush.stopResizing();
       if (brushInfoSender.isPending())
@@ -10341,11 +10558,11 @@
   function _typeof21(obj) {
     "@babel/helpers - typeof";
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof21 = function _typeof27(obj2) {
+      _typeof21 = function _typeof22(obj2) {
         return typeof obj2;
       };
     } else {
-      _typeof21 = function _typeof27(obj2) {
+      _typeof21 = function _typeof22(obj2) {
         return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
       };
     }
@@ -10382,7 +10599,7 @@
       _setPrototypeOf20(subClass, superClass);
   }
   function _setPrototypeOf20(o, p) {
-    _setPrototypeOf20 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
+    _setPrototypeOf20 = Object.setPrototypeOf || function _setPrototypeOf21(o2, p2) {
       o2.__proto__ = p2;
       return o2;
     };
@@ -10429,7 +10646,7 @@
     }
   }
   function _getPrototypeOf20(o) {
-    _getPrototypeOf20 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
+    _getPrototypeOf20 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf21(o2) {
       return o2.__proto__ || Object.getPrototypeOf(o2);
     };
     return _getPrototypeOf20(o);
@@ -10444,19 +10661,19 @@
     _createClass27(ImageOutputBinding2, [{
       key: "find",
       value: function find2(scope) {
-        return (0, import_jquery33.default)(scope).find(".shiny-image-output, .shiny-plot-output");
+        return (0, import_jquery32.default)(scope).find(".shiny-image-output, .shiny-plot-output");
       }
     }, {
       key: "renderValue",
       value: function renderValue(el, data) {
         var outputId = this.getId(el);
-        var $el = (0, import_jquery33.default)(el);
+        var $el = (0, import_jquery32.default)(el);
         var img;
         var $img = $el.find("img");
         if ($img.length === 0) {
           img = document.createElement("img");
           $el.append(img);
-          $img = (0, import_jquery33.default)(img);
+          $img = (0, import_jquery32.default)(img);
         } else {
           img = $img[0];
           $img.trigger("reset");
@@ -10464,11 +10681,6 @@
         if (!data) {
           $el.empty();
           return;
-        }
-        function ifUndefined(value, alternate) {
-          if (value === void 0)
-            return alternate;
-          return value;
         }
         var opts = {
           clickId: $el.data("click-id"),
@@ -10498,7 +10710,7 @@
         if (opts.brushStroke === "auto") {
           opts.brushStroke = getStyle($el[0], "color");
         }
-        import_jquery33.default.each(data, function(key, value) {
+        import_jquery32.default.each(data, function(key, value) {
           if (value === null || key === "coordmap") {
             return;
           }
@@ -10572,13 +10784,13 @@
     }, {
       key: "renderError",
       value: function renderError(el, err) {
-        (0, import_jquery33.default)(el).find("img").trigger("reset");
+        (0, import_jquery32.default)(el).find("img").trigger("reset");
         OutputBinding.prototype.renderError.call(this, el, err);
       }
     }, {
       key: "clearError",
       value: function clearError(el) {
-        (0, import_jquery33.default)(el).contents().filter(function() {
+        (0, import_jquery32.default)(el).contents().filter(function() {
           return !(this instanceof HTMLElement && (this.tagName === "IMG" || this.id === el.id + "_brush"));
         }).remove();
         OutputBinding.prototype.clearError.call(this, el);
@@ -10586,7 +10798,7 @@
     }, {
       key: "resize",
       value: function resize(el, width, height) {
-        (0, import_jquery33.default)(el).find("img").trigger("resize");
+        (0, import_jquery32.default)(el).find("img").trigger("resize");
         return;
         width;
         height;
@@ -10619,10 +10831,9 @@
   }
 
   // srcts/src/shiny/notifications.ts
-  var import_es_regexp_exec7 = __toModule(require_es_regexp_exec());
+  var import_es_regexp_exec7 = __toESM(require_es_regexp_exec());
 
   // node_modules/core-js/modules/es.string.match.js
-  "use strict";
   var fixRegExpWellKnownSymbolLogic4 = require_fix_regexp_well_known_symbol_logic();
   var anObject8 = require_an_object();
   var toLength6 = require_to_length();
@@ -10662,26 +10873,31 @@
   });
 
   // srcts/src/shiny/notifications.ts
-  var import_jquery34 = __toModule(require_jquery());
+  var import_jquery33 = __toESM(require_jquery());
   var fadeDuration = 250;
   function show() {
+    var _$notificationInit;
     var _ref = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {}, _ref$html = _ref.html, html = _ref$html === void 0 ? "" : _ref$html, _ref$action = _ref.action, action = _ref$action === void 0 ? "" : _ref$action, _ref$deps = _ref.deps, deps = _ref$deps === void 0 ? [] : _ref$deps, _ref$duration = _ref.duration, duration = _ref$duration === void 0 ? 5e3 : _ref$duration, _ref$id = _ref.id, id = _ref$id === void 0 ? null : _ref$id, _ref$closeButton = _ref.closeButton, closeButton = _ref$closeButton === void 0 ? true : _ref$closeButton, _ref$type = _ref.type, type = _ref$type === void 0 ? null : _ref$type;
     if (!id)
       id = randomId();
     createPanel();
-    var $notification = get2(id);
-    if ($notification.length === 0)
-      $notification = create4(id);
+    var $notificationInit = get2(id);
+    if (((_$notificationInit = $notificationInit) === null || _$notificationInit === void 0 ? void 0 : _$notificationInit.length) === 0)
+      $notificationInit = create4(id);
+    var $notification = $notificationInit;
     var newHtml = '<div class="shiny-notification-content-text">'.concat(html, "</div>") + '<div class="shiny-notification-content-action">'.concat(action, "</div>");
     var $content = $notification.find(".shiny-notification-content");
     renderContent($content, {
       html: newHtml,
       deps: deps
     });
-    var classes = $notification.attr("class").split(/\s+/).filter(function(cls) {
-      return cls.match(/^shiny-notification-/);
-    }).join(" ");
-    $notification.removeClass(classes);
+    var classes = $notification === null || $notification === void 0 ? void 0 : $notification.attr("class");
+    if (classes) {
+      var classVal = classes.split(/\s+/).filter(function(cls) {
+        return cls.match(/^shiny-notification-/);
+      }).join(" ");
+      $notification.removeClass(classVal);
+    }
     if (type && type !== "default")
       $notification.addClass("shiny-notification-" + type);
     var $close = $notification.find(".shiny-notification-close");
@@ -10697,9 +10913,10 @@
     return id;
   }
   function remove(id) {
-    get2(id).fadeOut(fadeDuration, function() {
+    var _get2;
+    (_get2 = get2(id)) === null || _get2 === void 0 ? void 0 : _get2.fadeOut(fadeDuration, function() {
       shinyUnbindAll(this);
-      (0, import_jquery34.default)(this).remove();
+      (0, import_jquery33.default)(this).remove();
       if (ids().length === 0) {
         getPanel().remove();
       }
@@ -10716,19 +10933,20 @@
     }).get();
   }
   function getPanel() {
-    return (0, import_jquery34.default)("#shiny-notification-panel");
+    return (0, import_jquery33.default)("#shiny-notification-panel");
   }
   function createPanel() {
     var $panel = getPanel();
     if ($panel.length > 0)
       return $panel;
-    (0, import_jquery34.default)(document.body).append('<div id="shiny-notification-panel">');
+    (0, import_jquery33.default)(document.body).append('<div id="shiny-notification-panel">');
     return $panel;
   }
   function create4(id) {
+    var _$notification;
     var $notification = get2(id);
-    if ($notification.length === 0) {
-      $notification = (0, import_jquery34.default)('<div id="shiny-notification-'.concat(id, '" class="shiny-notification">') + '<div class="shiny-notification-close">&times;</div><div class="shiny-notification-content"></div></div>');
+    if (((_$notification = $notification) === null || _$notification === void 0 ? void 0 : _$notification.length) === 0) {
+      $notification = (0, import_jquery33.default)('<div id="shiny-notification-'.concat(id, '" class="shiny-notification">') + '<div class="shiny-notification-close">&times;</div><div class="shiny-notification-content"></div></div>');
       $notification.find(".shiny-notification-close").on("click", function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -10739,38 +10957,39 @@
     return $notification;
   }
   function addRemovalCallback(id, delay) {
+    var _get2;
     clearRemovalCallback(id);
     var removalCallback = setTimeout(function() {
       remove(id);
     }, delay);
-    get2(id).data("removalCallback", removalCallback);
+    (_get2 = get2(id)) === null || _get2 === void 0 ? void 0 : _get2.data("removalCallback", removalCallback);
   }
   function clearRemovalCallback(id) {
     var $notification = get2(id);
-    var oldRemovalCallback = $notification.data("removalCallback");
+    var oldRemovalCallback = $notification === null || $notification === void 0 ? void 0 : $notification.data("removalCallback");
     if (oldRemovalCallback) {
       clearTimeout(oldRemovalCallback);
     }
   }
 
   // srcts/src/shiny/modal.ts
-  var import_jquery35 = __toModule(require_jquery());
+  var import_jquery34 = __toESM(require_jquery());
   function show2() {
     var _ref = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {}, _ref$html = _ref.html, html = _ref$html === void 0 ? "" : _ref$html, _ref$deps = _ref.deps, deps = _ref$deps === void 0 ? [] : _ref$deps;
-    (0, import_jquery35.default)(".modal-backdrop").remove();
-    var $modal = (0, import_jquery35.default)("#shiny-modal-wrapper");
+    (0, import_jquery34.default)(".modal-backdrop").remove();
+    var $modal = (0, import_jquery34.default)("#shiny-modal-wrapper");
     if ($modal.length === 0) {
-      $modal = (0, import_jquery35.default)('<div id="shiny-modal-wrapper"></div>');
-      (0, import_jquery35.default)(document.body).append($modal);
+      $modal = (0, import_jquery34.default)('<div id="shiny-modal-wrapper"></div>');
+      (0, import_jquery34.default)(document.body).append($modal);
       $modal.on("hidden.bs.modal", function(e) {
-        if (e.target === (0, import_jquery35.default)("#shiny-modal")[0]) {
+        if (e.target === (0, import_jquery34.default)("#shiny-modal")[0]) {
           shinyUnbindAll($modal);
           $modal.remove();
         }
       });
     }
     $modal.on("keydown.shinymodal", function(e) {
-      if ((0, import_jquery35.default)("#shiny-modal").data("keyboard") === false)
+      if ((0, import_jquery34.default)("#shiny-modal").data("keyboard") === false)
         return;
       if (e.keyCode === 27) {
         e.stopPropagation();
@@ -10783,7 +11002,7 @@
     });
   }
   function remove2() {
-    var $modal = (0, import_jquery35.default)("#shiny-modal-wrapper");
+    var $modal = (0, import_jquery34.default)("#shiny-modal-wrapper");
     $modal.off("keydown.shinymodal");
     if ($modal.find(".modal").length > 0) {
       $modal.find(".modal").modal("hide");
@@ -10794,9 +11013,9 @@
   }
 
   // srcts/src/shiny/reconnectDialog.ts
-  var import_jquery36 = __toModule(require_jquery());
+  var import_jquery35 = __toESM(require_jquery());
   function updateTime(reconnectTime) {
-    var $time = (0, import_jquery36.default)("#shiny-reconnect-time");
+    var $time = (0, import_jquery35.default)("#shiny-reconnect-time");
     if ($time.length === 0)
       return;
     var seconds = Math.floor((reconnectTime - new Date().getTime()) / 1e3);
@@ -10811,7 +11030,7 @@
   }
   function showReconnectDialog(delay) {
     var reconnectTime = new Date().getTime() + delay;
-    if ((0, import_jquery36.default)("#shiny-reconnect-text").length > 0)
+    if ((0, import_jquery35.default)("#shiny-reconnect-text").length > 0)
       return;
     var html = '<span id="shiny-reconnect-text">Attempting to reconnect</span><span id="shiny-reconnect-time"></span>';
     var action = '<a id="shiny-reconnect-now" href="#" onclick="Shiny.shinyapp.reconnect();">Try now</a>';
@@ -10830,14 +11049,10 @@
   }
 
   // srcts/src/shiny/init.ts
-  var import_es_regexp_exec10 = __toModule(require_es_regexp_exec());
-  var import_jquery42 = __toModule(require_jquery());
+  var import_es_regexp_exec10 = __toESM(require_es_regexp_exec());
+  var import_jquery39 = __toESM(require_jquery());
 
   // srcts/src/inputPolicies/inputBatchSender.ts
-  var import_es_array_iterator22 = __toModule(require_es_array_iterator());
-  var import_jquery37 = __toModule(require_jquery());
-
-  // srcts/src/inputPolicies/inputPolicy.ts
   function _classCallCheck28(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -10860,7 +11075,7 @@
       _defineProperties28(Constructor, staticProps);
     return Constructor;
   }
-  function _defineProperty9(obj, key, value) {
+  function _defineProperty10(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
     } else {
@@ -10868,37 +11083,63 @@
     }
     return obj;
   }
-  var InputPolicy = /* @__PURE__ */ function() {
-    function InputPolicy2() {
-      _classCallCheck28(this, InputPolicy2);
-      _defineProperty9(this, "target", void 0);
+  var InputBatchSender = /* @__PURE__ */ function() {
+    function InputBatchSender2(shinyapp) {
+      _classCallCheck28(this, InputBatchSender2);
+      _defineProperty10(this, "target", void 0);
+      _defineProperty10(this, "shinyapp", void 0);
+      _defineProperty10(this, "timerId", null);
+      _defineProperty10(this, "pendingData", {});
+      _defineProperty10(this, "reentrant", false);
+      _defineProperty10(this, "lastChanceCallback", []);
+      this.shinyapp = shinyapp;
     }
-    _createClass28(InputPolicy2, [{
+    _createClass28(InputBatchSender2, [{
       key: "setInput",
-      value: function setInput(name, value, opts) {
-        throw "not implemented";
-        name;
-        value;
-        opts;
+      value: function setInput(nameType, value, opts) {
+        this.pendingData[nameType] = value;
+        if (!this.reentrant) {
+          if (opts.priority === "event") {
+            this._sendNow();
+          } else if (!this.timerId) {
+            this.timerId = setTimeout(this._sendNow.bind(this), 0);
+          }
+        }
+      }
+    }, {
+      key: "_sendNow",
+      value: function _sendNow() {
+        if (this.reentrant) {
+          console.trace("Unexpected reentrancy in InputBatchSender!");
+        }
+        this.reentrant = true;
+        try {
+          this.timerId = null;
+          this.lastChanceCallback.forEach(function(callback) {
+            return callback();
+          });
+          var currentData = this.pendingData;
+          this.pendingData = {};
+          this.shinyapp.sendInput(currentData);
+        } finally {
+          this.reentrant = false;
+        }
       }
     }]);
-    return InputPolicy2;
+    return InputBatchSender2;
   }();
 
-  // srcts/src/inputPolicies/inputBatchSender.ts
-  function _typeof22(obj) {
-    "@babel/helpers - typeof";
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof22 = function _typeof27(obj2) {
-        return typeof obj2;
-      };
-    } else {
-      _typeof22 = function _typeof27(obj2) {
-        return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
-      };
-    }
-    return _typeof22(obj);
+  // srcts/src/inputPolicies/splitInputNameType.ts
+  var import_es_regexp_exec8 = __toESM(require_es_regexp_exec());
+  function splitInputNameType(nameType) {
+    var name2 = nameType.split(":");
+    return {
+      name: name2[0],
+      inputType: name2.length > 1 ? name2[1] : ""
+    };
   }
+
+  // srcts/src/inputPolicies/inputNoResendDecorator.ts
   function _classCallCheck29(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -10921,68 +11162,7 @@
       _defineProperties29(Constructor, staticProps);
     return Constructor;
   }
-  function _inherits21(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
-    if (superClass)
-      _setPrototypeOf21(subClass, superClass);
-  }
-  function _setPrototypeOf21(o, p) {
-    _setPrototypeOf21 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
-      o2.__proto__ = p2;
-      return o2;
-    };
-    return _setPrototypeOf21(o, p);
-  }
-  function _createSuper21(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct21();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf21(Derived), result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf21(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn21(this, result);
-    };
-  }
-  function _possibleConstructorReturn21(self2, call) {
-    if (call && (_typeof22(call) === "object" || typeof call === "function")) {
-      return call;
-    }
-    return _assertThisInitialized21(self2);
-  }
-  function _assertThisInitialized21(self2) {
-    if (self2 === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-    return self2;
-  }
-  function _isNativeReflectConstruct21() {
-    if (typeof Reflect === "undefined" || !Reflect.construct)
-      return false;
-    if (Reflect.construct.sham)
-      return false;
-    if (typeof Proxy === "function")
-      return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-      }));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-  function _getPrototypeOf21(o) {
-    _getPrototypeOf21 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
-      return o2.__proto__ || Object.getPrototypeOf(o2);
-    };
-    return _getPrototypeOf21(o);
-  }
-  function _defineProperty10(obj, key, value) {
+  function _defineProperty11(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
     } else {
@@ -10990,83 +11170,56 @@
     }
     return obj;
   }
-  var InputBatchSender = /* @__PURE__ */ function(_InputPolicy) {
-    _inherits21(InputBatchSender2, _InputPolicy);
-    var _super = _createSuper21(InputBatchSender2);
-    function InputBatchSender2(shinyapp) {
-      var _this;
-      _classCallCheck29(this, InputBatchSender2);
-      _this = _super.call(this);
-      _defineProperty10(_assertThisInitialized21(_this), "shinyapp", void 0);
-      _defineProperty10(_assertThisInitialized21(_this), "timerId", null);
-      _defineProperty10(_assertThisInitialized21(_this), "pendingData", {});
-      _defineProperty10(_assertThisInitialized21(_this), "reentrant", false);
-      _defineProperty10(_assertThisInitialized21(_this), "lastChanceCallback", []);
-      _this.shinyapp = shinyapp;
-      return _this;
+  var InputNoResendDecorator = /* @__PURE__ */ function() {
+    function InputNoResendDecorator2(target) {
+      var initialValues = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+      _classCallCheck29(this, InputNoResendDecorator2);
+      _defineProperty11(this, "target", void 0);
+      _defineProperty11(this, "lastSentValues", {});
+      this.target = target;
+      this.reset(initialValues);
     }
-    _createClass29(InputBatchSender2, [{
+    _createClass29(InputNoResendDecorator2, [{
       key: "setInput",
       value: function setInput(nameType, value, opts) {
-        this.pendingData[nameType] = value;
-        if (!this.reentrant) {
-          if (opts.priority === "event") {
-            this._sendNow();
-          } else if (!this.timerId) {
-            this.timerId = setTimeout(this._sendNow.bind(this), 0);
-          }
+        var _splitInputNameType = splitInputNameType(nameType), inputName = _splitInputNameType.name, inputType = _splitInputNameType.inputType;
+        var jsonValue = JSON.stringify(value);
+        if (opts.priority !== "event" && this.lastSentValues[inputName] && this.lastSentValues[inputName].jsonValue === jsonValue && this.lastSentValues[inputName].inputType === inputType) {
+          return;
         }
+        this.lastSentValues[inputName] = {
+          jsonValue: jsonValue,
+          inputType: inputType
+        };
+        this.target.setInput(nameType, value, opts);
       }
     }, {
-      key: "_sendNow",
-      value: function _sendNow() {
-        if (this.reentrant) {
-          console.trace("Unexpected reentrancy in InputBatchSender!");
+      key: "reset",
+      value: function reset() {
+        var values2 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
+        var cacheValues = {};
+        for (var inputName in values2) {
+          if (hasDefinedProperty(values2, inputName)) {
+            var _splitInputNameType2 = splitInputNameType(inputName), name = _splitInputNameType2.name, inputType = _splitInputNameType2.inputType;
+            cacheValues[name] = {
+              jsonValue: JSON.stringify(values2[inputName]),
+              inputType: inputType
+            };
+          }
         }
-        this.reentrant = true;
-        try {
-          this.timerId = null;
-          import_jquery37.default.each(this.lastChanceCallback, function(i, callback) {
-            callback();
-          });
-          var currentData = this.pendingData;
-          this.pendingData = {};
-          this.shinyapp.sendInput(currentData);
-        } finally {
-          this.reentrant = false;
-        }
+        this.lastSentValues = cacheValues;
+      }
+    }, {
+      key: "forget",
+      value: function forget(name) {
+        delete this.lastSentValues[name];
       }
     }]);
-    return InputBatchSender2;
-  }(InputPolicy);
+    return InputNoResendDecorator2;
+  }();
 
-  // srcts/src/inputPolicies/inputNoResendDecorator.ts
-  var import_es_array_iterator23 = __toModule(require_es_array_iterator());
-
-  // srcts/src/inputPolicies/splitInputNameType.ts
-  var import_es_regexp_exec8 = __toModule(require_es_regexp_exec());
-  function splitInputNameType(nameType) {
-    var name2 = nameType.split(":");
-    return {
-      name: name2[0],
-      inputType: name2.length > 1 ? name2[1] : ""
-    };
-  }
-
-  // srcts/src/inputPolicies/inputNoResendDecorator.ts
-  function _typeof23(obj) {
-    "@babel/helpers - typeof";
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof23 = function _typeof27(obj2) {
-        return typeof obj2;
-      };
-    } else {
-      _typeof23 = function _typeof27(obj2) {
-        return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
-      };
-    }
-    return _typeof23(obj);
-  }
+  // srcts/src/inputPolicies/inputEventDecorator.ts
+  var import_jquery36 = __toESM(require_jquery());
   function _classCallCheck30(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -11089,68 +11242,7 @@
       _defineProperties30(Constructor, staticProps);
     return Constructor;
   }
-  function _inherits22(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
-    if (superClass)
-      _setPrototypeOf22(subClass, superClass);
-  }
-  function _setPrototypeOf22(o, p) {
-    _setPrototypeOf22 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
-      o2.__proto__ = p2;
-      return o2;
-    };
-    return _setPrototypeOf22(o, p);
-  }
-  function _createSuper22(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct22();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf22(Derived), result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf22(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn22(this, result);
-    };
-  }
-  function _possibleConstructorReturn22(self2, call) {
-    if (call && (_typeof23(call) === "object" || typeof call === "function")) {
-      return call;
-    }
-    return _assertThisInitialized22(self2);
-  }
-  function _assertThisInitialized22(self2) {
-    if (self2 === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-    return self2;
-  }
-  function _isNativeReflectConstruct22() {
-    if (typeof Reflect === "undefined" || !Reflect.construct)
-      return false;
-    if (Reflect.construct.sham)
-      return false;
-    if (typeof Proxy === "function")
-      return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-      }));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-  function _getPrototypeOf22(o) {
-    _getPrototypeOf22 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
-      return o2.__proto__ || Object.getPrototypeOf(o2);
-    };
-    return _getPrototypeOf22(o);
-  }
-  function _defineProperty11(obj, key, value) {
+  function _defineProperty12(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
     } else {
@@ -11158,74 +11250,38 @@
     }
     return obj;
   }
-  var InputNoResendDecorator = /* @__PURE__ */ function(_InputPolicy) {
-    _inherits22(InputNoResendDecorator2, _InputPolicy);
-    var _super = _createSuper22(InputNoResendDecorator2);
-    function InputNoResendDecorator2(target) {
-      var _this;
-      var initialValues = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
-      _classCallCheck30(this, InputNoResendDecorator2);
-      _this = _super.call(this);
-      _defineProperty11(_assertThisInitialized22(_this), "lastSentValues", void 0);
-      _this.target = target;
-      _this.reset(initialValues);
-      return _this;
+  var InputEventDecorator = /* @__PURE__ */ function() {
+    function InputEventDecorator2(target) {
+      _classCallCheck30(this, InputEventDecorator2);
+      _defineProperty12(this, "target", void 0);
+      this.target = target;
     }
-    _createClass30(InputNoResendDecorator2, [{
+    _createClass30(InputEventDecorator2, [{
       key: "setInput",
       value: function setInput(nameType, value, opts) {
-        var _splitInputNameType = splitInputNameType(nameType), inputName = _splitInputNameType.name, inputType = _splitInputNameType.inputType;
-        var jsonValue = JSON.stringify(value);
-        if (opts.priority !== "event" && this.lastSentValues[inputName] && this.lastSentValues[inputName].jsonValue === jsonValue && this.lastSentValues[inputName].inputType === inputType) {
-          return;
+        var evt = import_jquery36.default.Event("shiny:inputchanged");
+        var input = splitInputNameType(nameType);
+        evt.name = input.name;
+        evt.inputType = input.inputType;
+        evt.value = value;
+        evt.binding = opts.binding || null;
+        evt.el = opts.el || null;
+        evt.priority = opts.priority;
+        (0, import_jquery36.default)(opts.el || window.document).trigger(evt);
+        if (!evt.isDefaultPrevented()) {
+          var name = evt.name;
+          if (evt.inputType !== "")
+            name += ":" + evt.inputType;
+          this.target.setInput(name, evt.value, {
+            priority: opts.priority
+          });
         }
-        this.lastSentValues[inputName] = {
-          jsonValue: jsonValue,
-          inputType: inputType
-        };
-        this.target.setInput(nameType, value, opts);
-      }
-    }, {
-      key: "reset",
-      value: function reset() {
-        var values = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
-        var cacheValues = {};
-        for (var inputName in values) {
-          if (hasOwnProperty(values, inputName)) {
-            var _splitInputNameType2 = splitInputNameType(inputName), name = _splitInputNameType2.name, inputType = _splitInputNameType2.inputType;
-            cacheValues[name] = {
-              jsonValue: JSON.stringify(values[inputName]),
-              inputType: inputType
-            };
-          }
-        }
-        this.lastSentValues = cacheValues;
-      }
-    }, {
-      key: "forget",
-      value: function forget(name) {
-        delete this.lastSentValues[name];
       }
     }]);
-    return InputNoResendDecorator2;
-  }(InputPolicy);
+    return InputEventDecorator2;
+  }();
 
-  // srcts/src/inputPolicies/inputEventDecorator.ts
-  var import_es_array_iterator24 = __toModule(require_es_array_iterator());
-  var import_jquery38 = __toModule(require_jquery());
-  function _typeof24(obj) {
-    "@babel/helpers - typeof";
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof24 = function _typeof27(obj2) {
-        return typeof obj2;
-      };
-    } else {
-      _typeof24 = function _typeof27(obj2) {
-        return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
-      };
-    }
-    return _typeof24(obj);
-  }
+  // srcts/src/inputPolicies/inputRateDecorator.ts
   function _classCallCheck31(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -11248,201 +11304,7 @@
       _defineProperties31(Constructor, staticProps);
     return Constructor;
   }
-  function _inherits23(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
-    if (superClass)
-      _setPrototypeOf23(subClass, superClass);
-  }
-  function _setPrototypeOf23(o, p) {
-    _setPrototypeOf23 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
-      o2.__proto__ = p2;
-      return o2;
-    };
-    return _setPrototypeOf23(o, p);
-  }
-  function _createSuper23(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct23();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf23(Derived), result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf23(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn23(this, result);
-    };
-  }
-  function _possibleConstructorReturn23(self2, call) {
-    if (call && (_typeof24(call) === "object" || typeof call === "function")) {
-      return call;
-    }
-    return _assertThisInitialized23(self2);
-  }
-  function _assertThisInitialized23(self2) {
-    if (self2 === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-    return self2;
-  }
-  function _isNativeReflectConstruct23() {
-    if (typeof Reflect === "undefined" || !Reflect.construct)
-      return false;
-    if (Reflect.construct.sham)
-      return false;
-    if (typeof Proxy === "function")
-      return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-      }));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-  function _getPrototypeOf23(o) {
-    _getPrototypeOf23 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
-      return o2.__proto__ || Object.getPrototypeOf(o2);
-    };
-    return _getPrototypeOf23(o);
-  }
-  var InputEventDecorator = /* @__PURE__ */ function(_InputPolicy) {
-    _inherits23(InputEventDecorator2, _InputPolicy);
-    var _super = _createSuper23(InputEventDecorator2);
-    function InputEventDecorator2(target) {
-      var _this;
-      _classCallCheck31(this, InputEventDecorator2);
-      _this = _super.call(this);
-      _this.target = target;
-      return _this;
-    }
-    _createClass31(InputEventDecorator2, [{
-      key: "setInput",
-      value: function setInput(nameType, value, opts) {
-        var evt = jQuery.Event("shiny:inputchanged");
-        var input = splitInputNameType(nameType);
-        evt.name = input.name;
-        evt.inputType = input.inputType;
-        evt.value = value;
-        evt.binding = opts.binding;
-        evt.el = opts.el;
-        evt.priority = opts.priority;
-        (0, import_jquery38.default)(opts.el).trigger(evt);
-        if (!evt.isDefaultPrevented()) {
-          var name = evt.name;
-          if (evt.inputType !== "")
-            name += ":" + evt.inputType;
-          this.target.setInput(name, evt.value, {
-            priority: opts.priority
-          });
-        }
-      }
-    }]);
-    return InputEventDecorator2;
-  }(InputPolicy);
-
-  // srcts/src/inputPolicies/inputRateDecorator.ts
-  var import_es_array_iterator25 = __toModule(require_es_array_iterator());
-  function _typeof25(obj) {
-    "@babel/helpers - typeof";
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof25 = function _typeof27(obj2) {
-        return typeof obj2;
-      };
-    } else {
-      _typeof25 = function _typeof27(obj2) {
-        return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
-      };
-    }
-    return _typeof25(obj);
-  }
-  function _classCallCheck32(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-  function _defineProperties32(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor)
-        descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-  function _createClass32(Constructor, protoProps, staticProps) {
-    if (protoProps)
-      _defineProperties32(Constructor.prototype, protoProps);
-    if (staticProps)
-      _defineProperties32(Constructor, staticProps);
-    return Constructor;
-  }
-  function _inherits24(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
-    if (superClass)
-      _setPrototypeOf24(subClass, superClass);
-  }
-  function _setPrototypeOf24(o, p) {
-    _setPrototypeOf24 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
-      o2.__proto__ = p2;
-      return o2;
-    };
-    return _setPrototypeOf24(o, p);
-  }
-  function _createSuper24(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct24();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf24(Derived), result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf24(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn24(this, result);
-    };
-  }
-  function _possibleConstructorReturn24(self2, call) {
-    if (call && (_typeof25(call) === "object" || typeof call === "function")) {
-      return call;
-    }
-    return _assertThisInitialized24(self2);
-  }
-  function _assertThisInitialized24(self2) {
-    if (self2 === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-    return self2;
-  }
-  function _isNativeReflectConstruct24() {
-    if (typeof Reflect === "undefined" || !Reflect.construct)
-      return false;
-    if (Reflect.construct.sham)
-      return false;
-    if (typeof Proxy === "function")
-      return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-      }));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-  function _getPrototypeOf24(o) {
-    _getPrototypeOf24 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
-      return o2.__proto__ || Object.getPrototypeOf(o2);
-    };
-    return _getPrototypeOf24(o);
-  }
-  function _defineProperty12(obj, key, value) {
+  function _defineProperty13(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
     } else {
@@ -11450,18 +11312,14 @@
     }
     return obj;
   }
-  var InputRateDecorator = /* @__PURE__ */ function(_InputPolicy) {
-    _inherits24(InputRateDecorator2, _InputPolicy);
-    var _super = _createSuper24(InputRateDecorator2);
+  var InputRateDecorator = /* @__PURE__ */ function() {
     function InputRateDecorator2(target) {
-      var _this;
-      _classCallCheck32(this, InputRateDecorator2);
-      _this = _super.call(this);
-      _defineProperty12(_assertThisInitialized24(_this), "inputRatePolicies", {});
-      _this.target = target;
-      return _this;
+      _classCallCheck31(this, InputRateDecorator2);
+      _defineProperty13(this, "target", void 0);
+      _defineProperty13(this, "inputRatePolicies", {});
+      this.target = target;
     }
-    _createClass32(InputRateDecorator2, [{
+    _createClass31(InputRateDecorator2, [{
       key: "setInput",
       value: function setInput(nameType, value, opts) {
         var _splitInputNameType = splitInputNameType(nameType), inputName = _splitInputNameType.name;
@@ -11496,23 +11354,72 @@
       }
     }]);
     return InputRateDecorator2;
-  }(InputPolicy);
+  }();
 
   // srcts/src/inputPolicies/inputDeferDecorator.ts
-  var import_es_array_iterator26 = __toModule(require_es_array_iterator());
-  function _typeof26(obj) {
-    "@babel/helpers - typeof";
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof26 = function _typeof27(obj2) {
-        return typeof obj2;
-      };
-    } else {
-      _typeof26 = function _typeof27(obj2) {
-        return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
-      };
+  function _classCallCheck32(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
     }
-    return _typeof26(obj);
   }
+  function _defineProperties32(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor)
+        descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  function _createClass32(Constructor, protoProps, staticProps) {
+    if (protoProps)
+      _defineProperties32(Constructor.prototype, protoProps);
+    if (staticProps)
+      _defineProperties32(Constructor, staticProps);
+    return Constructor;
+  }
+  function _defineProperty14(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  var InputDeferDecorator = /* @__PURE__ */ function() {
+    function InputDeferDecorator2(target) {
+      _classCallCheck32(this, InputDeferDecorator2);
+      _defineProperty14(this, "pendingInput", {});
+      _defineProperty14(this, "target", void 0);
+      this.target = target;
+    }
+    _createClass32(InputDeferDecorator2, [{
+      key: "setInput",
+      value: function setInput(nameType, value, opts) {
+        if (/^\./.test(nameType))
+          this.target.setInput(nameType, value, opts);
+        else
+          this.pendingInput[nameType] = {
+            value: value,
+            opts: opts
+          };
+      }
+    }, {
+      key: "submit",
+      value: function submit() {
+        for (var nameType in this.pendingInput) {
+          if (hasDefinedProperty(this.pendingInput, nameType)) {
+            var _this$pendingInput$na = this.pendingInput[nameType], value = _this$pendingInput$na.value, opts = _this$pendingInput$na.opts;
+            this.target.setInput(nameType, value, opts);
+          }
+        }
+      }
+    }]);
+    return InputDeferDecorator2;
+  }();
+
+  // srcts/src/inputPolicies/inputValidateDecorator.ts
   function _classCallCheck33(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -11535,119 +11442,37 @@
       _defineProperties33(Constructor, staticProps);
     return Constructor;
   }
-  function _inherits25(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function");
+  function ownKeys3(object, enumerableOnly) {
+    var keys2 = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) {
+        symbols = symbols.filter(function(sym) {
+          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+        });
+      }
+      keys2.push.apply(keys2, symbols);
     }
-    subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
-    if (superClass)
-      _setPrototypeOf25(subClass, superClass);
+    return keys2;
   }
-  function _setPrototypeOf25(o, p) {
-    _setPrototypeOf25 = Object.setPrototypeOf || function _setPrototypeOf26(o2, p2) {
-      o2.__proto__ = p2;
-      return o2;
-    };
-    return _setPrototypeOf25(o, p);
-  }
-  function _createSuper25(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct25();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf25(Derived), result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf25(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
+  function _objectSpread2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+      if (i % 2) {
+        ownKeys3(Object(source), true).forEach(function(key) {
+          _defineProperty15(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
       } else {
-        result = Super.apply(this, arguments);
+        ownKeys3(Object(source)).forEach(function(key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
       }
-      return _possibleConstructorReturn25(this, result);
-    };
-  }
-  function _possibleConstructorReturn25(self2, call) {
-    if (call && (_typeof26(call) === "object" || typeof call === "function")) {
-      return call;
     }
-    return _assertThisInitialized25(self2);
+    return target;
   }
-  function _assertThisInitialized25(self2) {
-    if (self2 === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-    return self2;
-  }
-  function _isNativeReflectConstruct25() {
-    if (typeof Reflect === "undefined" || !Reflect.construct)
-      return false;
-    if (Reflect.construct.sham)
-      return false;
-    if (typeof Proxy === "function")
-      return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-      }));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-  function _getPrototypeOf25(o) {
-    _getPrototypeOf25 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf26(o2) {
-      return o2.__proto__ || Object.getPrototypeOf(o2);
-    };
-    return _getPrototypeOf25(o);
-  }
-  function _defineProperty13(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
-    } else {
-      obj[key] = value;
-    }
-    return obj;
-  }
-  var InputDeferDecorator = /* @__PURE__ */ function(_InputPolicy) {
-    _inherits25(InputDeferDecorator2, _InputPolicy);
-    var _super = _createSuper25(InputDeferDecorator2);
-    function InputDeferDecorator2(target) {
-      var _this;
-      _classCallCheck33(this, InputDeferDecorator2);
-      _this = _super.call(this);
-      _defineProperty13(_assertThisInitialized25(_this), "pendingInput", {});
-      _this.target = target;
-      return _this;
-    }
-    _createClass33(InputDeferDecorator2, [{
-      key: "setInput",
-      value: function setInput(nameType, value, opts) {
-        if (/^\./.test(nameType))
-          this.target.setInput(nameType, value, opts);
-        else
-          this.pendingInput[nameType] = {
-            value: value,
-            opts: opts
-          };
-      }
-    }, {
-      key: "submit",
-      value: function submit() {
-        for (var nameType in this.pendingInput) {
-          if (hasOwnProperty(this.pendingInput, nameType)) {
-            var _this$pendingInput$na = this.pendingInput[nameType], value = _this$pendingInput$na.value, opts = _this$pendingInput$na.opts;
-            this.target.setInput(nameType, value, opts);
-          }
-        }
-      }
-    }]);
-    return InputDeferDecorator2;
-  }(InputPolicy);
-
-  // srcts/src/inputPolicies/inputValidateDecorator.ts
-  var import_jquery39 = __toModule(require_jquery());
-  function _classCallCheck34(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-  function _defineProperty14(obj, key, value) {
+  function _defineProperty15(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
     } else {
@@ -11656,40 +11481,43 @@
     return obj;
   }
   function addDefaultInputOpts(opts) {
-    var newOpts = import_jquery39.default.extend({
-      priority: "immediate",
-      binding: null,
-      el: null
+    var newOpts = _objectSpread2({
+      priority: "immediate"
     }, opts);
-    if (newOpts && typeof newOpts.priority !== "undefined") {
-      switch (newOpts.priority) {
-        case "deferred":
-        case "immediate":
-        case "event":
-          break;
-        default:
-          throw new Error("Unexpected input value mode: '" + newOpts.priority + "'");
-      }
+    switch (newOpts.priority) {
+      case "deferred":
+      case "immediate":
+      case "event":
+        break;
+      default:
+        throw new Error("Unexpected input value mode: '" + newOpts.priority + "'");
     }
     return newOpts;
   }
-  var InputValidateDecorator = function InputValidateDecorator2(target) {
-    _classCallCheck34(this, InputValidateDecorator2);
-    _defineProperty14(this, "target", void 0);
-    _defineProperty14(this, "setInput", function(nameType, value, opts) {
-      if (!nameType)
-        throw "Can't set input with empty name.";
-      var newOpts = addDefaultInputOpts(opts);
-      this.target.setInput(nameType, value, newOpts);
-    });
-    this.target = target;
-  };
+  var InputValidateDecorator = /* @__PURE__ */ function() {
+    function InputValidateDecorator2(target) {
+      _classCallCheck33(this, InputValidateDecorator2);
+      _defineProperty15(this, "target", void 0);
+      this.target = target;
+    }
+    _createClass33(InputValidateDecorator2, [{
+      key: "setInput",
+      value: function setInput(nameType, value) {
+        var opts = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
+        if (!nameType)
+          throw "Can't set input with empty name.";
+        var newOpts = addDefaultInputOpts(opts);
+        this.target.setInput(nameType, value, newOpts);
+      }
+    }]);
+    return InputValidateDecorator2;
+  }();
 
   // srcts/src/shiny/bind.ts
-  var import_jquery40 = __toModule(require_jquery());
+  var import_jquery37 = __toESM(require_jquery());
 
   // srcts/src/bindings/outputAdapter.ts
-  function _classCallCheck35(instance, Constructor) {
+  function _classCallCheck34(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
@@ -11711,7 +11539,7 @@
       _defineProperties34(Constructor, staticProps);
     return Constructor;
   }
-  function _defineProperty15(obj, key, value) {
+  function _defineProperty16(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
     } else {
@@ -11721,9 +11549,9 @@
   }
   var OutputBindingAdapter = /* @__PURE__ */ function() {
     function OutputBindingAdapter2(el, binding) {
-      _classCallCheck35(this, OutputBindingAdapter2);
-      _defineProperty15(this, "el", void 0);
-      _defineProperty15(this, "binding", void 0);
+      _classCallCheck34(this, OutputBindingAdapter2);
+      _defineProperty16(this, "el", void 0);
+      _defineProperty16(this, "binding", void 0);
       this.el = el;
       this.binding = binding;
       if (binding.resize) {
@@ -11808,8 +11636,8 @@
           };
         }();
         binding.subscribe(el, thisCallback);
-        (0, import_jquery40.default)(el).data("shiny-input-binding", binding);
-        (0, import_jquery40.default)(el).addClass("shiny-bound-input");
+        (0, import_jquery37.default)(el).data("shiny-input-binding", binding);
+        (0, import_jquery37.default)(el).addClass("shiny-bound-input");
         var ratePolicy = binding.getRatePolicy(el);
         if (ratePolicy !== null) {
           inputsRate.setRatePolicy(effectiveId, ratePolicy.policy, ratePolicy.delay);
@@ -11818,7 +11646,7 @@
           binding: binding,
           node: el
         };
-        (0, import_jquery40.default)(el).trigger({
+        (0, import_jquery37.default)(el).trigger({
           type: "shiny:bound",
           binding: binding,
           bindingType: "input"
@@ -11838,7 +11666,7 @@
   function bindOutputs(_ref) {
     var sendOutputHiddenState = _ref.sendOutputHiddenState, maybeAddThemeObserver = _ref.maybeAddThemeObserver, outputBindings = _ref.outputBindings;
     var scope = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : document.documentElement;
-    var $scope = (0, import_jquery40.default)(scope);
+    var $scope = (0, import_jquery37.default)(scope);
     var bindings = outputBindings.getBindings();
     for (var i = 0; i < bindings.length; i++) {
       var binding = bindings[i].binding;
@@ -11848,9 +11676,9 @@
         var id = binding.getId(_el);
         if (!id)
           continue;
-        if (!import_jquery40.default.contains(document.documentElement, _el))
+        if (!import_jquery37.default.contains(document.documentElement, _el))
           continue;
-        var $el = (0, import_jquery40.default)(_el);
+        var $el = (0, import_jquery37.default)(_el);
         if ($el.hasClass("shiny-bound-output")) {
           continue;
         }
@@ -11874,20 +11702,20 @@
   function unbindInputs() {
     var scope = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : document.documentElement;
     var includeSelf = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : false;
-    var inputs = (0, import_jquery40.default)(scope).find(".shiny-bound-input").toArray();
-    if (includeSelf && (0, import_jquery40.default)(scope).hasClass("shiny-bound-input")) {
+    var inputs = (0, import_jquery37.default)(scope).find(".shiny-bound-input").toArray();
+    if (includeSelf && (0, import_jquery37.default)(scope).hasClass("shiny-bound-input")) {
       inputs.push(scope);
     }
     for (var i = 0; i < inputs.length; i++) {
       var _el2 = inputs[i];
-      var binding = (0, import_jquery40.default)(_el2).data("shiny-input-binding");
+      var binding = (0, import_jquery37.default)(_el2).data("shiny-input-binding");
       if (!binding)
         continue;
       var id = binding.getId(_el2);
-      (0, import_jquery40.default)(_el2).removeClass("shiny-bound-input");
+      (0, import_jquery37.default)(_el2).removeClass("shiny-bound-input");
       delete boundInputs[id];
       binding.unsubscribe(_el2);
-      (0, import_jquery40.default)(_el2).trigger({
+      (0, import_jquery37.default)(_el2).trigger({
         type: "shiny:unbound",
         binding: binding,
         bindingType: "input"
@@ -11898,12 +11726,12 @@
     var sendOutputHiddenState = _ref2.sendOutputHiddenState;
     var scope = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : document.documentElement;
     var includeSelf = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : false;
-    var outputs = (0, import_jquery40.default)(scope).find(".shiny-bound-output").toArray();
-    if (includeSelf && (0, import_jquery40.default)(scope).hasClass("shiny-bound-output")) {
+    var outputs = (0, import_jquery37.default)(scope).find(".shiny-bound-output").toArray();
+    if (includeSelf && (0, import_jquery37.default)(scope).hasClass("shiny-bound-output")) {
       outputs.push(scope);
     }
     for (var i = 0; i < outputs.length; i++) {
-      var $el = (0, import_jquery40.default)(outputs[i]);
+      var $el = (0, import_jquery37.default)(outputs[i]);
       var bindingAdapter = $el.data("shiny-output-binding");
       if (!bindingAdapter)
         continue;
@@ -11932,29 +11760,27 @@
   function bindAll(shinyCtx, scope) {
     var currentInputItems = _bindAll(shinyCtx, scope);
     var inputs = shinyCtx.inputs;
-    import_jquery40.default.each(currentInputItems, function(name, item) {
+    import_jquery37.default.each(currentInputItems, function(name, item) {
       inputs.setInput(name, item.value, item.opts);
     });
     shinyCtx.initDeferredIframes();
   }
 
   // node_modules/core-js/modules/es.array-buffer.constructor.js
-  "use strict";
-  var $63 = require_export();
-  var global6 = require_global();
+  var $64 = require_export();
+  var global7 = require_global();
   var arrayBufferModule = require_array_buffer();
   var setSpecies = require_set_species();
   var ARRAY_BUFFER = "ArrayBuffer";
   var ArrayBuffer2 = arrayBufferModule[ARRAY_BUFFER];
-  var NativeArrayBuffer = global6[ARRAY_BUFFER];
-  $63({ global: true, forced: NativeArrayBuffer !== ArrayBuffer2 }, {
+  var NativeArrayBuffer = global7[ARRAY_BUFFER];
+  $64({ global: true, forced: NativeArrayBuffer !== ArrayBuffer2 }, {
     ArrayBuffer: ArrayBuffer2
   });
   setSpecies(ARRAY_BUFFER);
 
   // node_modules/core-js/modules/es.array-buffer.slice.js
-  "use strict";
-  var $64 = require_export();
+  var $65 = require_export();
   var fails10 = require_fails();
   var ArrayBufferModule = require_array_buffer();
   var anObject9 = require_an_object();
@@ -11967,7 +11793,7 @@
   var INCORRECT_SLICE = fails10(function() {
     return !new ArrayBuffer3(2).slice(1, void 0).byteLength;
   });
-  $64({ target: "ArrayBuffer", proto: true, unsafe: true, forced: INCORRECT_SLICE }, {
+  $65({ target: "ArrayBuffer", proto: true, unsafe: true, forced: INCORRECT_SLICE }, {
     slice: function slice2(start, end) {
       if (nativeArrayBufferSlice !== void 0 && end === void 0) {
         return nativeArrayBufferSlice.call(anObject9(this), start);
@@ -11987,60 +11813,31 @@
   });
 
   // node_modules/core-js/modules/es.data-view.js
-  var $65 = require_export();
+  var $66 = require_export();
   var ArrayBufferModule2 = require_array_buffer();
   var NATIVE_ARRAY_BUFFER = require_array_buffer_native();
-  $65({ global: true, forced: !NATIVE_ARRAY_BUFFER }, {
+  $66({ global: true, forced: !NATIVE_ARRAY_BUFFER }, {
     DataView: ArrayBufferModule2.DataView
   });
 
   // node_modules/core-js/modules/es.array.reduce.js
-  "use strict";
-  var $66 = require_export();
+  var $67 = require_export();
   var $reduce = require_array_reduce().left;
-  var arrayMethodIsStrict3 = require_array_method_is_strict();
+  var arrayMethodIsStrict4 = require_array_method_is_strict();
   var CHROME_VERSION = require_engine_v8_version();
   var IS_NODE = require_engine_is_node();
-  var STRICT_METHOD3 = arrayMethodIsStrict3("reduce");
+  var STRICT_METHOD4 = arrayMethodIsStrict4("reduce");
   var CHROME_BUG = !IS_NODE && CHROME_VERSION > 79 && CHROME_VERSION < 83;
-  $66({ target: "Array", proto: true, forced: !STRICT_METHOD3 || CHROME_BUG }, {
+  $67({ target: "Array", proto: true, forced: !STRICT_METHOD4 || CHROME_BUG }, {
     reduce: function reduce(callbackfn) {
       return $reduce(this, callbackfn, arguments.length, arguments.length > 1 ? arguments[1] : void 0);
     }
   });
 
   // srcts/src/shiny/shinyapp.ts
-  var import_es_regexp_exec9 = __toModule(require_es_regexp_exec());
-
-  // node_modules/core-js/modules/es.array.for-each.js
-  "use strict";
-  var $67 = require_export();
-  var forEach = require_array_for_each();
-  $67({ target: "Array", proto: true, forced: [].forEach != forEach }, {
-    forEach: forEach
-  });
-
-  // node_modules/core-js/modules/web.dom-collections.for-each.js
-  var global7 = require_global();
-  var DOMIterables2 = require_dom_iterables();
-  var forEach2 = require_array_for_each();
-  var createNonEnumerableProperty3 = require_create_non_enumerable_property();
-  for (var COLLECTION_NAME in DOMIterables2) {
-    Collection = global7[COLLECTION_NAME];
-    CollectionPrototype = Collection && Collection.prototype;
-    if (CollectionPrototype && CollectionPrototype.forEach !== forEach2)
-      try {
-        createNonEnumerableProperty3(CollectionPrototype, "forEach", forEach2);
-      } catch (error) {
-        CollectionPrototype.forEach = forEach2;
-      }
-  }
-  var Collection;
-  var CollectionPrototype;
-
-  // srcts/src/shiny/shinyapp.ts
-  var import_jquery41 = __toModule(require_jquery());
-  function _classCallCheck36(instance, Constructor) {
+  var import_es_regexp_exec9 = __toESM(require_es_regexp_exec());
+  var import_jquery38 = __toESM(require_jquery());
+  function _classCallCheck35(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
@@ -12062,7 +11859,7 @@
       _defineProperties35(Constructor, staticProps);
     return Constructor;
   }
-  function _defineProperty16(obj, key, value) {
+  function _defineProperty17(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
     } else {
@@ -12106,21 +11903,21 @@
   }
   var ShinyApp = /* @__PURE__ */ function() {
     function ShinyApp2() {
-      _classCallCheck36(this, ShinyApp2);
-      _defineProperty16(this, "$socket", null);
-      _defineProperty16(this, "config", null);
-      _defineProperty16(this, "$inputValues", {});
-      _defineProperty16(this, "$initialInput", void 0);
-      _defineProperty16(this, "$bindings", {});
-      _defineProperty16(this, "$values", {});
-      _defineProperty16(this, "$errors", {});
-      _defineProperty16(this, "$conditionals", {});
-      _defineProperty16(this, "$pendingMessages", []);
-      _defineProperty16(this, "$activeRequests", {});
-      _defineProperty16(this, "$nextRequestId", 0);
-      _defineProperty16(this, "$allowReconnect", false);
-      _defineProperty16(this, "scheduledReconnect", null);
-      _defineProperty16(this, "reconnectDelay", function() {
+      _classCallCheck35(this, ShinyApp2);
+      _defineProperty17(this, "$socket", null);
+      _defineProperty17(this, "config", null);
+      _defineProperty17(this, "$inputValues", {});
+      _defineProperty17(this, "$initialInput", null);
+      _defineProperty17(this, "$bindings", {});
+      _defineProperty17(this, "$values", {});
+      _defineProperty17(this, "$errors", {});
+      _defineProperty17(this, "$conditionals", {});
+      _defineProperty17(this, "$pendingMessages", []);
+      _defineProperty17(this, "$activeRequests", {});
+      _defineProperty17(this, "$nextRequestId", 0);
+      _defineProperty17(this, "$allowReconnect", false);
+      _defineProperty17(this, "scheduledReconnect", void 0);
+      _defineProperty17(this, "reconnectDelay", function() {
         var attempts = 0;
         var delays = [1500, 1500, 2500, 2500, 5500, 5500, 10500];
         return {
@@ -12137,12 +11934,12 @@
           }
         };
       }());
-      _defineProperty16(this, "progressHandlers", {
+      _defineProperty17(this, "progressHandlers", {
         binding: function binding(message) {
           var key = message.id;
           var binding2 = this.$bindings[key];
           if (binding2) {
-            (0, import_jquery41.default)(binding2.el).trigger({
+            (0, import_jquery38.default)(binding2.el).trigger({
               type: "shiny:outputinvalidated",
               binding: binding2,
               name: key
@@ -12159,25 +11956,27 @@
               duration: null
             });
           } else if (message.style === "old") {
-            var $container = (0, import_jquery41.default)(".shiny-progress-container");
+            var $container = (0, import_jquery38.default)(".shiny-progress-container");
             if ($container.length === 0) {
-              $container = (0, import_jquery41.default)('<div class="shiny-progress-container"></div>');
-              (0, import_jquery41.default)(document.body).append($container);
+              $container = (0, import_jquery38.default)('<div class="shiny-progress-container"></div>');
+              (0, import_jquery38.default)(document.body).append($container);
             }
-            var depth = (0, import_jquery41.default)(".shiny-progress.open").length;
-            var $progress = (0, import_jquery41.default)('<div class="shiny-progress open"><div class="progress active"><div class="progress-bar bar"></div></div><div class="progress-text"><span class="progress-message">message</span><span class="progress-detail"></span></div></div>');
+            var depth = (0, import_jquery38.default)(".shiny-progress.open").length;
+            var $progress = (0, import_jquery38.default)('<div class="shiny-progress open"><div class="progress active"><div class="progress-bar bar"></div></div><div class="progress-text"><span class="progress-message">message</span><span class="progress-detail"></span></div></div>');
             $progress.attr("id", message.id);
             $container.append($progress);
             var $progressBar = $progress.find(".progress");
-            $progressBar.css("top", depth * $progressBar.height() + "px");
-            var $progressText = $progress.find(".progress-text");
-            $progressText.css("top", 3 * $progressBar.height() + depth * $progressText.outerHeight() + "px");
-            $progress.hide();
+            if ($progressBar) {
+              $progressBar.css("top", depth * $progressBar.height() + "px");
+              var $progressText = $progress.find(".progress-text");
+              $progressText.css("top", 3 * $progressBar.height() + depth * $progressText.outerHeight() + "px");
+              $progress.hide();
+            }
           }
         },
         update: function update(message) {
           if (message.style === "notification") {
-            var $progress = (0, import_jquery41.default)("#shiny-progress-" + message.id);
+            var $progress = (0, import_jquery38.default)("#shiny-progress-" + message.id);
             if ($progress.length === 0)
               return;
             if (typeof message.message !== "undefined") {
@@ -12191,7 +11990,7 @@
               $progress.find(".progress-bar").width(message.value * 100 + "%");
             }
           } else if (message.style === "old") {
-            var _$progress = (0, import_jquery41.default)("#" + message.id + ".shiny-progress");
+            var _$progress = (0, import_jquery38.default)("#" + message.id + ".shiny-progress");
             if (typeof message.message !== "undefined") {
               _$progress.find(".progress-message").text(message.message);
             }
@@ -12209,13 +12008,13 @@
           if (message.style === "notification") {
             remove(message.id);
           } else if (message.style === "old") {
-            var $progress = (0, import_jquery41.default)("#" + message.id + ".shiny-progress");
+            var $progress = (0, import_jquery38.default)("#" + message.id + ".shiny-progress");
             $progress.removeClass("open");
             $progress.fadeOut({
               complete: function complete() {
                 $progress.remove();
-                if ((0, import_jquery41.default)(".shiny-progress").length === 0)
-                  (0, import_jquery41.default)(".shiny-progress-container").remove();
+                if ((0, import_jquery38.default)(".shiny-progress").length === 0)
+                  (0, import_jquery38.default)(".shiny-progress-container").remove();
               }
             });
           }
@@ -12230,7 +12029,7 @@
           throw "Connect was already called on this application object";
         this.$socket = this.createSocket();
         this.$initialInput = initialInput;
-        import_jquery41.default.extend(this.$inputValues, initialInput);
+        import_jquery38.default.extend(this.$inputValues, initialInput);
         this.$updateConditionals();
       }
     }, {
@@ -12245,7 +12044,7 @@
         if (this.isConnected())
           throw "Attempted to reconnect, but already connected.";
         this.$socket = this.createSocket();
-        this.$initialInput = import_jquery41.default.extend({}, this.$inputValues);
+        this.$initialInput = import_jquery38.default.extend({}, this.$inputValues);
         this.$updateConditionals();
       }
     }, {
@@ -12274,7 +12073,7 @@
         var hasOpened = false;
         socket.onopen = function() {
           hasOpened = true;
-          (0, import_jquery41.default)(document).trigger({
+          (0, import_jquery38.default)(document).trigger({
             type: "shiny:connected",
             socket: socket
           });
@@ -12293,7 +12092,7 @@
         };
         socket.onclose = function() {
           if (hasOpened) {
-            (0, import_jquery41.default)(document).trigger({
+            (0, import_jquery38.default)(document).trigger({
               type: "shiny:disconnected",
               socket: socket
             });
@@ -12306,13 +12105,13 @@
       }
     }, {
       key: "sendInput",
-      value: function sendInput(values) {
+      value: function sendInput(values2) {
         var msg = JSON.stringify({
           method: "update",
-          data: values
+          data: values2
         });
         this.$sendMsg(msg);
-        import_jquery41.default.extend(this.$inputValues, values);
+        import_jquery38.default.extend(this.$inputValues, values2);
         this.$updateConditionals();
       }
     }, {
@@ -12331,16 +12130,16 @@
       key: "$scheduleReconnect",
       value: function $scheduleReconnect(delay) {
         var _this2 = this;
-        this.scheduledReconnect = setTimeout(function() {
+        this.scheduledReconnect = window.setTimeout(function() {
           _this2.reconnect();
         }, delay);
       }
     }, {
       key: "onDisconnected",
       value: function onDisconnected() {
-        var $overlay = (0, import_jquery41.default)("#shiny-disconnected-overlay");
+        var $overlay = (0, import_jquery38.default)("#shiny-disconnected-overlay");
         if ($overlay.length === 0) {
-          (0, import_jquery41.default)(document.body).append('<div id="shiny-disconnected-overlay"></div>');
+          (0, import_jquery38.default)(document.body).append('<div id="shiny-disconnected-overlay"></div>');
         }
         if (this.$allowReconnect === true && this.$socket.allowReconnect === true || this.$allowReconnect === "force") {
           var delay = this.reconnectDelay.next();
@@ -12351,7 +12150,7 @@
     }, {
       key: "onConnected",
       value: function onConnected() {
-        (0, import_jquery41.default)("#shiny-disconnected-overlay").remove();
+        (0, import_jquery38.default)("#shiny-disconnected-overlay").remove();
         hideReconnectDialog();
         this.reconnectDelay.reset();
       }
@@ -12381,7 +12180,7 @@
           };
           var payload = [];
           payload.push(uint32ToBuf(16908802));
-          var jsonBuf = makeBlob([msg]);
+          var jsonBuf = new Blob([msg]);
           payload.push(uint32ToBuf(jsonBuf.size));
           payload.push(jsonBuf);
           for (var i = 0; i < blobs.length; i++) {
@@ -12389,7 +12188,7 @@
             payload.push(uint32ToBuf(_blob.byteLength || _blob.size || 0));
             payload.push(_blob);
           }
-          var blob = makeBlob(payload);
+          var blob = new Blob(payload);
           msg = blob;
         }
         this.$sendMsg(msg);
@@ -12411,11 +12210,11 @@
         this.$errors[name] = error;
         delete this.$values[name];
         var binding = this.$bindings[name];
-        var evt = jQuery.Event("shiny:error");
+        var evt = import_jquery38.default.Event("shiny:error");
         evt.name = name;
         evt.error = error;
         evt.binding = binding;
-        (0, import_jquery41.default)(binding ? binding.el : document).trigger(evt);
+        (0, import_jquery38.default)(binding ? binding.el : document).trigger(evt);
         if (!evt.isDefaultPrevented() && binding && binding.onValueError) {
           binding.onValueError(evt.error);
         }
@@ -12424,17 +12223,17 @@
       key: "receiveOutput",
       value: function receiveOutput(name, value) {
         var binding = this.$bindings[name];
-        var evt = jQuery.Event("shiny:value");
+        var evt = import_jquery38.default.Event("shiny:value");
         evt.name = name;
         evt.value = value;
         evt.binding = binding;
         if (this.$values[name] === value) {
-          (0, import_jquery41.default)(binding ? binding.el : document).trigger(evt);
+          (0, import_jquery38.default)(binding ? binding.el : document).trigger(evt);
           return void 0;
         }
         this.$values[name] = value;
         delete this.$errors[name];
-        (0, import_jquery41.default)(binding ? binding.el : document).trigger(evt);
+        (0, import_jquery38.default)(binding ? binding.el : document).trigger(evt);
         if (!evt.isDefaultPrevented() && binding) {
           binding.onValueChange(evt.value);
         }
@@ -12470,9 +12269,9 @@
         return Object.keys(scopeComponent).filter(function(k) {
           return k.indexOf(nsPrefix) === 0;
         }).map(function(k) {
-          return _defineProperty16({}, k.substring(nsPrefix.length), scopeComponent[k]);
+          return _defineProperty17({}, k.substring(nsPrefix.length), scopeComponent[k]);
         }).reduce(function(obj, pair) {
-          return import_jquery41.default.extend(obj, pair);
+          return import_jquery38.default.extend(obj, pair);
         }, {});
       }
     }, {
@@ -12489,7 +12288,7 @@
     }, {
       key: "$updateConditionals",
       value: function $updateConditionals() {
-        (0, import_jquery41.default)(document).trigger({
+        (0, import_jquery38.default)(document).trigger({
           type: "shiny:conditional"
         });
         var inputs = {};
@@ -12503,9 +12302,9 @@
           input: inputs,
           output: this.$values
         };
-        var conditionals = (0, import_jquery41.default)(document).find("[data-display-if]");
+        var conditionals = (0, import_jquery38.default)(document).find("[data-display-if]");
         for (var i = 0; i < conditionals.length; i++) {
-          var el = (0, import_jquery41.default)(conditionals[i]);
+          var el = (0, import_jquery38.default)(conditionals[i]);
           var condFunc = el.data("data-display-if-func");
           if (!condFunc) {
             var condExpr = el.attr("data-display-if");
@@ -12547,9 +12346,9 @@
           msgObj.custom = {};
           msgObj.custom[type] = data;
         }
-        var evt = jQuery.Event("shiny:message");
+        var evt = import_jquery38.default.Event("shiny:message");
         evt.message = msgObj;
-        (0, import_jquery41.default)(document).trigger(evt);
+        (0, import_jquery38.default)(document).trigger(evt);
         if (evt.isDefaultPrevented())
           return;
         this._sendMessagesToHandlers(evt.message, messageHandlers, messageHandlerOrder);
@@ -12588,16 +12387,16 @@
         });
         addMessageHandler("inputMessages", function(message) {
           for (var i = 0; i < message.length; i++) {
-            var $obj = (0, import_jquery41.default)(".shiny-bound-input#" + $escape(message[i].id));
+            var $obj = (0, import_jquery38.default)(".shiny-bound-input#" + $escape(message[i].id));
             var inputBinding = $obj.data("shiny-input-binding");
             if ($obj.length > 0) {
               if (!$obj.attr("aria-live"))
                 $obj.attr("aria-live", "polite");
               var el = $obj[0];
-              var evt = jQuery.Event("shiny:updateinput");
+              var evt = import_jquery38.default.Event("shiny:updateinput");
               evt.message = message[i].message;
               evt.binding = inputBinding;
-              (0, import_jquery41.default)(el).trigger(evt);
+              (0, import_jquery38.default)(el).trigger(evt);
               if (!evt.isDefaultPrevented())
                 inputBinding.receiveMessage(el, evt.message);
             }
@@ -12614,9 +12413,9 @@
         });
         addMessageHandler("progress", function(message) {
           if (message.type && message.message) {
-            var handler = _this3.progressHandlers[message.type];
+            var handler = this.progressHandlers[message.type];
             if (handler)
-              handler.call(_this3, message.message);
+              handler.call(this, message.message);
           }
         });
         addMessageHandler("notification", function(message) {
@@ -12670,23 +12469,25 @@
           };
           if (message.user)
             setShinyUser(message.user);
-          (0, import_jquery41.default)(document).trigger("shiny:sessioninitialized");
+          (0, import_jquery38.default)(document).trigger("shiny:sessioninitialized");
         });
         addMessageHandler("busy", function(message) {
           if (message === "busy") {
-            (0, import_jquery41.default)(document.documentElement).addClass("shiny-busy");
-            (0, import_jquery41.default)(document).trigger("shiny:busy");
+            (0, import_jquery38.default)(document.documentElement).addClass("shiny-busy");
+            (0, import_jquery38.default)(document).trigger("shiny:busy");
           } else if (message === "idle") {
-            (0, import_jquery41.default)(document.documentElement).removeClass("shiny-busy");
-            (0, import_jquery41.default)(document).trigger("shiny:idle");
+            (0, import_jquery38.default)(document.documentElement).removeClass("shiny-busy");
+            (0, import_jquery38.default)(document).trigger("shiny:idle");
           }
         });
         addMessageHandler("recalculating", function(message) {
           if (hasOwnProperty(message, "name") && hasOwnProperty(message, "status")) {
             var binding = _this3.$bindings[message.name];
-            (0, import_jquery41.default)(binding ? binding.el : null).trigger({
-              type: "shiny:" + message.status
-            });
+            if (binding) {
+              (0, import_jquery38.default)(binding.el).trigger("shiny:" + message.status);
+            } else {
+              (0, import_jquery38.default)().trigger("shiny:" + message.status);
+            }
           }
         });
         addMessageHandler("reload", function(message) {
@@ -12695,10 +12496,10 @@
           message;
         });
         addMessageHandler("shiny-insert-ui", function(message) {
-          var targets = (0, import_jquery41.default)(message.selector);
+          var targets = (0, import_jquery38.default)(message.selector);
           if (targets.length === 0) {
             console.warn('The selector you chose ("' + message.selector + '") could not be found in the DOM.');
-            renderHtml2(message.content.html, (0, import_jquery41.default)([]).get(0), message.content.deps);
+            renderHtml2(message.content.html, (0, import_jquery38.default)([]), message.content.deps);
           } else {
             targets.each(function(i, target) {
               renderContent(target, message.content, message.where);
@@ -12707,10 +12508,10 @@
           }
         });
         addMessageHandler("shiny-remove-ui", function(message) {
-          var els = (0, import_jquery41.default)(message.selector);
+          var els = (0, import_jquery38.default)(message.selector);
           els.each(function(i, el) {
             shinyUnbindAll(el, true);
-            (0, import_jquery41.default)(el).remove();
+            (0, import_jquery38.default)(el).remove();
             return message.multiple;
           });
         });
@@ -12720,14 +12521,14 @@
           }
         });
         function getTabset(id) {
-          var $tabset = (0, import_jquery41.default)("#" + $escape(id));
+          var $tabset = (0, import_jquery38.default)("#" + $escape(id));
           if ($tabset.length === 0)
             throw "There is no tabsetPanel (or navbarPage or navlistPanel) with id equal to '" + id + "'";
           return $tabset;
         }
         function getTabContent($tabset) {
           var tabsetId = $tabset.attr("data-tabsetid");
-          var $tabContent = (0, import_jquery41.default)("div.tab-content[data-tabsetid='" + $escape(tabsetId) + "']");
+          var $tabContent = (0, import_jquery38.default)("div.tab-content[data-tabsetid='" + $escape(tabsetId) + "']");
           return $tabContent;
         }
         function getTargetTabs($tabset, $tabContent, target) {
@@ -12744,12 +12545,12 @@
             var dropdownId = $dropdownTabset.attr("data-tabsetid");
             var $dropdownLiTags = $dropdownTabset.find("a[data-toggle='tab']").parent("li");
             $dropdownLiTags.each(function(i, el) {
-              $liTags.push((0, import_jquery41.default)(el));
+              $liTags.push((0, import_jquery38.default)(el));
             });
             var selector = "div.tab-pane[id^='tab-" + $escape(dropdownId) + "']";
             var $dropdownDivs = $tabContent.find(selector);
             $dropdownDivs.each(function(i, el) {
-              $divTags.push((0, import_jquery41.default)(el));
+              $divTags.push((0, import_jquery38.default)(el));
             });
           } else {
             $divTags.push($tabContent.find("div" + dataValue));
@@ -12765,14 +12566,13 @@
           var $tabset = $parentTabset;
           var $tabContent = getTabContent($tabset);
           var tabsetId = $parentTabset.attr("data-tabsetid");
-          var $divTag = (0, import_jquery41.default)(message.divTag.html);
-          var $liTag = (0, import_jquery41.default)(message.liTag.html);
+          var $divTag = (0, import_jquery38.default)(message.divTag.html);
+          var $liTag = (0, import_jquery38.default)(message.liTag.html);
           var $aTag = $liTag.find("> a");
-          var target = null;
           var $targetLiTag = null;
           if (message.target !== null) {
-            target = getTargetTabs($tabset, $tabContent, message.target);
-            $targetLiTag = target.$liTag;
+            var targetInfo = getTargetTabs($tabset, $tabContent, message.target);
+            $targetLiTag = targetInfo.$liTag;
           }
           var dropdown = getDropdown();
           if (dropdown !== null) {
@@ -12805,10 +12605,14 @@
             html: $liTag.html(),
             deps: message.liTag.deps
           });
-          renderContent($tabContent[0], {
-            html: "",
-            deps: message.divTag.deps
-          }, "beforeend");
+          renderContent(
+            $tabContent[0],
+            {
+              html: "",
+              deps: message.divTag.deps
+            },
+            "beforeend"
+          );
           $divTag.get().forEach(function(el) {
             $tabContent[0].appendChild(el);
             renderContent(el, el.innerHTML || el.textContent);
@@ -12819,7 +12623,7 @@
           function getTabIndex($tabset2, tabsetId2) {
             var existingTabIds = [0];
             $tabset2.find("> li").each(function() {
-              var $tab = (0, import_jquery41.default)(this).find("> a[data-toggle='tab']");
+              var $tab = (0, import_jquery38.default)(this).find("> a[data-toggle='tab']");
               if ($tab.length > 0) {
                 var href = $tab.attr("href").replace(/.*(?=#[^\s]+$)/, "");
                 var _index = href.replace("#tab-" + tabsetId2 + "-", "");
@@ -12830,7 +12634,7 @@
           }
           function getDropdown() {
             if (message.menuName !== null) {
-              var $dropdownATag = (0, import_jquery41.default)("a.dropdown-toggle[data-value='" + $escape(message.menuName) + "']");
+              var $dropdownATag = (0, import_jquery38.default)("a.dropdown-toggle[data-value='" + $escape(message.menuName) + "']");
               if ($dropdownATag.length === 0) {
                 throw "There is no navbarMenu with menuName equal to '" + message.menuName + "'";
               }
@@ -12840,7 +12644,7 @@
                 $tabset: $dropdownTabset,
                 id: dropdownId
               };
-            } else if (message.target !== null) {
+            } else if (message.target !== null && $targetLiTag !== null) {
               var $uncleTabset = $targetLiTag.parent("ul");
               if ($uncleTabset.hasClass("dropdown-menu")) {
                 var uncleId = $uncleTabset.attr("data-tabsetid");
@@ -12857,7 +12661,7 @@
           var inputBinding = $tabset.data("shiny-input-binding");
           if (!inputBinding.getValue($tabset)) {
             var destTabValue = getFirstTab($tabset);
-            var evt = jQuery.Event("shiny:updateinput");
+            var evt = import_jquery38.default.Event("shiny:updateinput");
             evt.binding = inputBinding;
             $tabset.trigger(evt);
             inputBinding.setValue($tabset[0], destTabValue);
@@ -12868,15 +12672,15 @@
         }
         function tabApplyFunction(target, func) {
           var liTags = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : false;
-          import_jquery41.default.each(target, function(key, el) {
+          import_jquery38.default.each(target, function(key, el) {
             if (key === "$liTag") {
               func(el);
             } else if (key === "$divTags") {
-              import_jquery41.default.each(el, function(i, div) {
+              import_jquery38.default.each(el, function(i, div) {
                 func(div);
               });
             } else if (liTags && key === "$liTags") {
-              import_jquery41.default.each(el, function(i, div) {
+              import_jquery38.default.each(el, function(i, div) {
                 func(div);
               });
             }
@@ -12934,7 +12738,7 @@
           if (window.location.hash !== oldHash)
             what = "hash";
           if (what === "hash")
-            (0, import_jquery41.default)(document).trigger("hashchange");
+            (0, import_jquery38.default)(document).trigger("hashchange");
         });
         addMessageHandler("resetBrush", function(message) {
           resetBrush(message.brushId);
@@ -12967,10 +12771,10 @@
     var inputsRate = new InputRateDecorator(inputsEvent);
     var inputsDefer = new InputDeferDecorator(inputsEvent);
     var target;
-    if ((0, import_jquery42.default)('input[type="submit"], button[type="submit"]').length > 0) {
+    if ((0, import_jquery39.default)('input[type="submit"], button[type="submit"]').length > 0) {
       target = inputsDefer;
-      (0, import_jquery42.default)('input[type="submit"], button[type="submit"]').each(function() {
-        (0, import_jquery42.default)(this).click(function(event) {
+      (0, import_jquery39.default)('input[type="submit"], button[type="submit"]').each(function() {
+        (0, import_jquery39.default)(this).click(function(event) {
           event.preventDefault();
           inputsDefer.submit();
         });
@@ -12979,7 +12783,8 @@
       target = inputsRate;
     }
     var inputs = new InputValidateDecorator(target);
-    windowShiny3.setInputValue = windowShiny3.onInputChange = function(name, value, opts) {
+    windowShiny3.setInputValue = windowShiny3.onInputChange = function(name, value) {
+      var opts = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
       var newOpts = addDefaultInputOpts(opts);
       inputs.setInput(name, value, newOpts);
     };
@@ -13014,7 +12819,7 @@
         var inputObjects = binding.find(scope);
         if (inputObjects) {
           for (var j = 0; j < inputObjects.length; j++) {
-            var $inputObjectJ = (0, import_jquery42.default)(inputObjects[j]);
+            var $inputObjectJ = (0, import_jquery39.default)(inputObjects[j]);
             if (!$inputObjectJ.data("_shiny_initialized")) {
               $inputObjectJ.data("_shiny_initialized", true);
               binding.initialize(inputObjects[j]);
@@ -13025,7 +12830,7 @@
     }
     windowShiny3.initializeInputs = initializeInputs;
     function getIdFromEl(el) {
-      var $el = (0, import_jquery42.default)(el);
+      var $el = (0, import_jquery39.default)(el);
       var bindingAdapter = $el.data("shiny-output-binding");
       if (!bindingAdapter)
         return null;
@@ -13036,11 +12841,11 @@
     var initialValues = mapValues(_bindAll(shinyBindCtx(), document.documentElement), function(x) {
       return x.value;
     });
-    (0, import_jquery42.default)(".shiny-image-output, .shiny-plot-output, .shiny-report-size").each(function() {
-      var id = getIdFromEl(this);
-      if (this.offsetWidth !== 0 || this.offsetHeight !== 0) {
-        initialValues[".clientdata_output_" + id + "_width"] = this.offsetWidth;
-        initialValues[".clientdata_output_" + id + "_height"] = this.offsetHeight;
+    (0, import_jquery39.default)(".shiny-image-output, .shiny-plot-output, .shiny-report-size").each(function() {
+      var id = getIdFromEl(this), rect = this.getBoundingClientRect();
+      if (rect.width !== 0 || rect.height !== 0) {
+        initialValues[".clientdata_output_" + id + "_width"] = rect.width;
+        initialValues[".clientdata_output_" + id + "_height"] = rect.height;
       }
     });
     function getComputedBgColor(el) {
@@ -13048,6 +12853,8 @@
         return null;
       }
       var bgColor = getStyle(el, "background-color");
+      if (!bgColor)
+        return bgColor;
       var m = bgColor.match(/^rgba\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*\)$/);
       if (bgColor === "transparent" || m && parseFloat(m[4]) === 0) {
         var bgImage = getStyle(el, "background-image");
@@ -13063,11 +12870,11 @@
       var fontFamily = getStyle(el, "font-family");
       var fontSize = getStyle(el, "font-size");
       return {
-        families: fontFamily.replace(/"/g, "").split(", "),
+        families: fontFamily === null || fontFamily === void 0 ? void 0 : fontFamily.replace(/"/g, "").split(", "),
         size: fontSize
       };
     }
-    (0, import_jquery42.default)(".shiny-image-output, .shiny-plot-output, .shiny-report-theme").each(function() {
+    (0, import_jquery39.default)(".shiny-image-output, .shiny-plot-output, .shiny-report-theme").each(function() {
       var el = this;
       var id = getIdFromEl(el);
       initialValues[".clientdata_output_" + id + "_bg"] = getComputedBgColor(el);
@@ -13085,7 +12892,7 @@
       if (!reportTheme) {
         return;
       }
-      var $el = (0, import_jquery42.default)(el);
+      var $el = (0, import_jquery39.default)(el);
       if ($el.data("shiny-theme-observer")) {
         return;
       }
@@ -13113,18 +12920,18 @@
       inputs.setInput(".clientdata_output_" + id + "_font", getComputedFont(el));
     }
     function doSendImageSize() {
-      (0, import_jquery42.default)(".shiny-image-output, .shiny-plot-output, .shiny-report-size").each(function() {
-        var id = getIdFromEl(this);
-        if (this.offsetWidth !== 0 || this.offsetHeight !== 0) {
-          inputs.setInput(".clientdata_output_" + id + "_width", this.offsetWidth);
-          inputs.setInput(".clientdata_output_" + id + "_height", this.offsetHeight);
+      (0, import_jquery39.default)(".shiny-image-output, .shiny-plot-output, .shiny-report-size").each(function() {
+        var id = getIdFromEl(this), rect = this.getBoundingClientRect();
+        if (rect.width !== 0 || rect.height !== 0) {
+          inputs.setInput(".clientdata_output_" + id + "_width", rect.width);
+          inputs.setInput(".clientdata_output_" + id + "_height", rect.height);
         }
       });
-      (0, import_jquery42.default)(".shiny-image-output, .shiny-plot-output, .shiny-report-theme").each(function() {
+      (0, import_jquery39.default)(".shiny-image-output, .shiny-plot-output, .shiny-report-theme").each(function() {
         doSendTheme(this);
       });
-      (0, import_jquery42.default)(".shiny-bound-output").each(function() {
-        var $this = (0, import_jquery42.default)(this), binding = $this.data("shiny-output-binding");
+      (0, import_jquery39.default)(".shiny-bound-output").each(function() {
+        var $this = (0, import_jquery39.default)(this), binding = $this.data("shiny-output-binding");
         $this.trigger({
           type: "shiny:visualchange",
           visible: !isHidden(this),
@@ -13144,7 +12951,7 @@
       }
     }
     var lastKnownVisibleOutputs = {};
-    (0, import_jquery42.default)(".shiny-bound-output").each(function() {
+    (0, import_jquery39.default)(".shiny-bound-output").each(function() {
       var id = getIdFromEl(this);
       if (isHidden(this)) {
         initialValues[".clientdata_output_" + id + "_hidden"] = true;
@@ -13155,7 +12962,7 @@
     });
     function doSendOutputHiddenState() {
       var visibleOutputs = {};
-      (0, import_jquery42.default)(".shiny-bound-output").each(function() {
+      (0, import_jquery39.default)(".shiny-bound-output").each(function() {
         var id = getIdFromEl(this);
         delete lastKnownVisibleOutputs[id];
         var hidden = isHidden(this), evt = {
@@ -13168,12 +12975,12 @@
           visibleOutputs[id] = true;
           inputs.setInput(".clientdata_output_" + id + "_hidden", false);
         }
-        var $this = (0, import_jquery42.default)(this);
+        var $this = (0, import_jquery39.default)(this);
         evt.binding = $this.data("shiny-output-binding");
         $this.trigger(evt);
       });
       for (var name in lastKnownVisibleOutputs) {
-        if (hasOwnProperty(lastKnownVisibleOutputs, name))
+        if (hasDefinedProperty(lastKnownVisibleOutputs, name))
           inputs.setInput(".clientdata_output_" + name + "_hidden", true);
       }
       lastKnownVisibleOutputs = visibleOutputs;
@@ -13190,26 +12997,27 @@
       for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
         args[_key - 2] = arguments[_key];
       }
-      namespace = namespace.split(".");
+      var namespaceArr = namespace.split(".");
       return function(e) {
-        var eventNamespace = e.namespace.split(".");
-        for (var i = 0; i < namespace.length; i++) {
-          if (eventNamespace.indexOf(namespace[i]) === -1)
+        var _e$namespace$split, _e$namespace;
+        var eventNamespace = (_e$namespace$split = (_e$namespace = e.namespace) === null || _e$namespace === void 0 ? void 0 : _e$namespace.split(".")) !== null && _e$namespace$split !== void 0 ? _e$namespace$split : [];
+        for (var i = 0; i < namespaceArr.length; i++) {
+          if (eventNamespace.indexOf(namespaceArr[i]) === -1)
             return;
         }
-        handler.apply(this, [namespace, handler].concat(args));
+        handler.apply(this, [namespaceArr, handler].concat(args));
       };
     }
-    (0, import_jquery42.default)(window).resize(debounce(500, sendImageSizeFns.regular));
+    (0, import_jquery39.default)(window).resize(debounce(500, sendImageSizeFns.regular));
     var bs3classes = ["modal", "dropdown", "tab", "tooltip", "popover", "collapse"];
-    import_jquery42.default.each(bs3classes, function(idx, classname) {
-      (0, import_jquery42.default)(document.body).on("shown.bs." + classname + ".sendImageSize", "*", filterEventsByNamespace("bs", sendImageSizeFns.regular));
-      (0, import_jquery42.default)(document.body).on("shown.bs." + classname + ".sendOutputHiddenState hidden.bs." + classname + ".sendOutputHiddenState", "*", filterEventsByNamespace("bs", sendOutputHiddenState));
+    import_jquery39.default.each(bs3classes, function(idx, classname) {
+      (0, import_jquery39.default)(document.body).on("shown.bs." + classname + ".sendImageSize", "*", filterEventsByNamespace("bs", sendImageSizeFns.regular));
+      (0, import_jquery39.default)(document.body).on("shown.bs." + classname + ".sendOutputHiddenState hidden.bs." + classname + ".sendOutputHiddenState", "*", filterEventsByNamespace("bs", sendOutputHiddenState));
     });
-    (0, import_jquery42.default)(document.body).on("shown.sendImageSize", "*", sendImageSizeFns.regular);
-    (0, import_jquery42.default)(document.body).on("shown.sendOutputHiddenState hidden.sendOutputHiddenState", "*", sendOutputHiddenState);
+    (0, import_jquery39.default)(document.body).on("shown.sendImageSize", "*", sendImageSizeFns.regular);
+    (0, import_jquery39.default)(document.body).on("shown.sendOutputHiddenState hidden.sendOutputHiddenState", "*", sendOutputHiddenState);
     initialValues[".clientdata_pixelratio"] = pixelRatio();
-    (0, import_jquery42.default)(window).resize(function() {
+    (0, import_jquery39.default)(window).resize(function() {
       inputs.setInput(".clientdata_pixelratio", pixelRatio());
     });
     initialValues[".clientdata_url_protocol"] = window.location.protocol;
@@ -13217,27 +13025,27 @@
     initialValues[".clientdata_url_port"] = window.location.port;
     initialValues[".clientdata_url_pathname"] = window.location.pathname;
     initialValues[".clientdata_url_search"] = window.location.search;
-    (0, import_jquery42.default)(window).on("pushstate", function(e) {
+    (0, import_jquery39.default)(window).on("pushstate", function(e) {
       inputs.setInput(".clientdata_url_search", window.location.search);
       return;
       e;
     });
-    (0, import_jquery42.default)(window).on("popstate", function(e) {
+    (0, import_jquery39.default)(window).on("popstate", function(e) {
       inputs.setInput(".clientdata_url_search", window.location.search);
       return;
       e;
     });
     initialValues[".clientdata_url_hash_initial"] = window.location.hash;
     initialValues[".clientdata_url_hash"] = window.location.hash;
-    (0, import_jquery42.default)(window).on("hashchange", function(e) {
+    (0, import_jquery39.default)(window).on("hashchange", function(e) {
       inputs.setInput(".clientdata_url_hash", window.location.hash);
       return;
       e;
     });
-    var singletonText = initialValues[".clientdata_singletons"] = (0, import_jquery42.default)('script[type="application/shiny-singletons"]').text();
+    var singletonText = initialValues[".clientdata_singletons"] = (0, import_jquery39.default)('script[type="application/shiny-singletons"]').text();
     registerNames(singletonText.split(/,/));
-    var dependencyText = (0, import_jquery42.default)('script[type="application/html-dependencies"]').text();
-    import_jquery42.default.each(dependencyText.split(/;/), function(i, depStr) {
+    var dependencyText = (0, import_jquery39.default)('script[type="application/html-dependencies"]').text();
+    import_jquery39.default.each(dependencyText.split(/;/), function(i, depStr) {
       var match = /\s*^(.+)\[(.+)\]\s*$/.exec(depStr);
       if (match) {
         registerDependency(match[1], match[2]);
@@ -13245,7 +13053,7 @@
     });
     inputsNoResend.reset(initialValues);
     shinyapp.connect(initialValues);
-    (0, import_jquery42.default)(document).one("shiny:connected", function() {
+    (0, import_jquery39.default)(document).one("shiny:connected", function() {
       initDeferredIframes();
     });
   }
@@ -13253,8 +13061,8 @@
     if (!window.Shiny || !window.Shiny.shinyapp || !window.Shiny.shinyapp.isConnected()) {
       return;
     }
-    (0, import_jquery42.default)(".shiny-frame-deferred").each(function(i, el) {
-      var $el = (0, import_jquery42.default)(el);
+    (0, import_jquery39.default)(".shiny-frame-deferred").each(function(i, el) {
+      var $el = (0, import_jquery39.default)(el);
       $el.removeClass("shiny-frame-deferred");
       $el.attr("src", $el.attr("data-deferred-src"));
       $el.attr("data-deferred-src", null);
@@ -13265,7 +13073,7 @@
   var windowShiny2;
   function setShiny(windowShiny_) {
     windowShiny2 = windowShiny_;
-    windowShiny2.version = "1.7.0";
+    windowShiny2.version = "1.7.4.1";
     var _initInputBindings = initInputBindings(), inputBindings = _initInputBindings.inputBindings, fileInputBinding2 = _initInputBindings.fileInputBinding;
     var _initOutputBindings = initOutputBindings(), outputBindings = _initOutputBindings.outputBindings;
     setFileInputBinding(fileInputBinding2);
@@ -13290,17 +13098,11 @@
     windowShiny2.renderDependencies = renderDependencies;
     windowShiny2.renderContent = renderContent;
     windowShiny2.renderHtml = renderHtml2;
-    (0, import_jquery43.default)(function() {
+    (0, import_jquery40.default)(function() {
       setTimeout(function() {
         initShiny(windowShiny2);
       }, 1);
     });
-  }
-
-  // srcts/src/window/blobBuilder.ts
-  function windowBlobBuilder() {
-    var blob = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder;
-    return blob;
   }
 
   // srcts/src/window/userAgent.ts
@@ -13309,21 +13111,24 @@
   }
 
   // srcts/src/shiny/reactlog.ts
-  var import_jquery44 = __toModule(require_jquery());
+  var import_jquery41 = __toESM(require_jquery());
+  function shinyAppConfig() {
+    return shinyShinyApp().config;
+  }
   function initReactlog() {
-    (0, import_jquery44.default)(document).on("keydown", function(e) {
+    (0, import_jquery41.default)(document).on("keydown", function(e) {
       if (e.which !== 114 || !e.ctrlKey && !e.metaKey || e.shiftKey || e.altKey)
         return;
-      var url = "reactlog?w=" + window.escape(shinyShinyApp().config.workerId) + "&s=" + window.escape(shinyShinyApp().config.sessionId);
+      var url = "reactlog?w=" + window.escape(shinyAppConfig().workerId) + "&s=" + window.escape(shinyAppConfig().sessionId);
       window.open(url);
       e.preventDefault();
     });
-    (0, import_jquery44.default)(document).on("keydown", function(e) {
+    (0, import_jquery41.default)(document).on("keydown", function(e) {
       if (!(e.which === 115 && (e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey || e.which === 114 && (e.ctrlKey || e.metaKey) && e.shiftKey && !e.altKey)) {
         return;
       }
-      var url = "reactlog/mark?w=" + window.escape(shinyShinyApp().config.workerId) + "&s=" + window.escape(shinyShinyApp().config.sessionId);
-      import_jquery44.default.get(url, function(result) {
+      var url = "reactlog/mark?w=" + window.escape(shinyAppConfig().workerId) + "&s=" + window.escape(shinyAppConfig().sessionId);
+      import_jquery41.default.get(url, function(result) {
         if (result !== "marked")
           return;
         var html = '<span id="shiny-reactlog-mark-text">Marked time point in reactlog</span>';
@@ -13345,7 +13150,6 @@
     determineBrowserInfo();
     trackHistory();
     disableFormSubmission();
-    setBlobBuilder(windowBlobBuilder());
     initReactlog();
   }
 

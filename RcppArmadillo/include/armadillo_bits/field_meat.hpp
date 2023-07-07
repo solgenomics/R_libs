@@ -205,7 +205,7 @@ inline
 void
 field<oT>::set_size(const uword n_elem_in)
   {
-  arma_extra_debug_sigprint(arma_str::format("n_elem_in = %d") % n_elem_in);
+  arma_extra_debug_sigprint(arma_str::format("n_elem_in = %u") % n_elem_in);
   
   init(n_elem_in, 1);
   }
@@ -218,7 +218,7 @@ inline
 void
 field<oT>::set_size(const uword n_rows_in, const uword n_cols_in)
   {
-  arma_extra_debug_sigprint(arma_str::format("n_rows_in = %d, n_cols_in = %d") % n_rows_in % n_cols_in);
+  arma_extra_debug_sigprint(arma_str::format("n_rows_in = %u, n_cols_in = %u") % n_rows_in % n_cols_in);
   
   init(n_rows_in, n_cols_in);
   }
@@ -231,7 +231,7 @@ inline
 void
 field<oT>::set_size(const uword n_rows_in, const uword n_cols_in, const uword n_slices_in)
   {
-  arma_extra_debug_sigprint(arma_str::format("n_rows_in = %d, n_cols_in = %d, n_slices_in = %d") % n_rows_in % n_cols_in % n_slices_in);
+  arma_extra_debug_sigprint(arma_str::format("n_rows_in = %u, n_cols_in = %u, n_slices_in = %u") % n_rows_in % n_cols_in % n_slices_in);
   
   init(n_rows_in, n_cols_in, n_slices_in);
   }
@@ -427,6 +427,8 @@ field<oT>::operator=(field<oT>&& X)
   {
   arma_extra_debug_sigprint(arma_str::format("this = %x   X = %x") % this % &X);
   
+  if(this == &X)  { return *this; }
+  
   reset();
   
   access::rw(n_rows  ) = X.n_rows;
@@ -472,7 +474,6 @@ field<oT>::copy_size(const field<oT2>& x)
 //! linear element accessor (treats the field as a vector); no bounds check
 template<typename oT>
 arma_inline
-arma_warn_unused
 oT&
 field<oT>::operator[] (const uword i)
   {
@@ -484,7 +485,6 @@ field<oT>::operator[] (const uword i)
 //! linear element accessor (treats the field as a vector); no bounds check
 template<typename oT>
 arma_inline
-arma_warn_unused
 const oT&
 field<oT>::operator[] (const uword i) const
   {
@@ -496,7 +496,6 @@ field<oT>::operator[] (const uword i) const
 //! linear element accessor (treats the field as a vector); no bounds check
 template<typename oT>
 arma_inline
-arma_warn_unused
 oT&
 field<oT>::at(const uword i)
   {
@@ -508,7 +507,6 @@ field<oT>::at(const uword i)
 //! linear element accessor (treats the field as a vector); no bounds check
 template<typename oT>
 arma_inline
-arma_warn_unused
 const oT&
 field<oT>::at(const uword i) const
   {
@@ -520,7 +518,6 @@ field<oT>::at(const uword i) const
 //! linear element accessor (treats the field as a vector); bounds checking not done when ARMA_NO_DEBUG is defined
 template<typename oT>
 arma_inline
-arma_warn_unused
 oT&
 field<oT>::operator() (const uword i)
   {
@@ -534,7 +531,6 @@ field<oT>::operator() (const uword i)
 //! linear element accessor (treats the field as a vector); bounds checking not done when ARMA_NO_DEBUG is defined
 template<typename oT>
 arma_inline
-arma_warn_unused
 const oT&
 field<oT>::operator() (const uword i) const
   {
@@ -548,7 +544,6 @@ field<oT>::operator() (const uword i) const
 //! element accessor; bounds checking not done when ARMA_NO_DEBUG is defined
 template<typename oT>
 arma_inline
-arma_warn_unused
 oT&
 field<oT>::operator() (const uword in_row, const uword in_col)
   {
@@ -562,7 +557,6 @@ field<oT>::operator() (const uword in_row, const uword in_col)
 //! element accessor; bounds checking not done when ARMA_NO_DEBUG is defined
 template<typename oT>
 arma_inline
-arma_warn_unused
 const oT&
 field<oT>::operator() (const uword in_row, const uword in_col) const
   {
@@ -576,7 +570,6 @@ field<oT>::operator() (const uword in_row, const uword in_col) const
 //! element accessor; bounds checking not done when ARMA_NO_DEBUG is defined
 template<typename oT>
 arma_inline
-arma_warn_unused
 oT&
 field<oT>::operator() (const uword in_row, const uword in_col, const uword in_slice)
   {
@@ -590,7 +583,6 @@ field<oT>::operator() (const uword in_row, const uword in_col, const uword in_sl
 //! element accessor; bounds checking not done when ARMA_NO_DEBUG is defined
 template<typename oT>
 arma_inline
-arma_warn_unused
 const oT&
 field<oT>::operator() (const uword in_row, const uword in_col, const uword in_slice) const
   {
@@ -601,10 +593,35 @@ field<oT>::operator() (const uword in_row, const uword in_col, const uword in_sl
 
 
 
+#if defined(__cpp_multidimensional_subscript)
+  
+  //! element accessor; no bounds check
+  template<typename oT>
+  arma_inline
+    oT&
+  field<oT>::operator[] (const uword in_row, const uword in_col)
+    {
+    return (*mem[in_row + in_col*n_rows]);
+    }
+  
+  
+  
+  //! element accessor; no bounds check
+  template<typename oT>
+  arma_inline
+    const oT&
+  field<oT>::operator[] (const uword in_row, const uword in_col) const
+    {
+    return (*mem[in_row + in_col*n_rows]);
+    }
+  
+#endif
+
+
+
 //! element accessor; no bounds check
 template<typename oT>
 arma_inline
-arma_warn_unused
 oT&
 field<oT>::at(const uword in_row, const uword in_col)
   {
@@ -616,7 +633,6 @@ field<oT>::at(const uword in_row, const uword in_col)
 //! element accessor; no bounds check
 template<typename oT>
 arma_inline
-arma_warn_unused
 const oT&
 field<oT>::at(const uword in_row, const uword in_col) const
   {
@@ -625,10 +641,35 @@ field<oT>::at(const uword in_row, const uword in_col) const
 
 
 
+#if defined(__cpp_multidimensional_subscript)
+  
+  //! element accessor; no bounds check
+  template<typename oT>
+  arma_inline
+    oT&
+  field<oT>::operator[] (const uword in_row, const uword in_col, const uword in_slice)
+    {
+    return (*mem[in_row + in_col*n_rows + in_slice*(n_rows*n_cols)]);
+    }
+  
+  
+  
+  //! element accessor; no bounds check
+  template<typename oT>
+  arma_inline
+    const oT&
+  field<oT>::operator[] (const uword in_row, const uword in_col, const uword in_slice) const
+    {
+    return (*mem[in_row + in_col*n_rows + in_slice*(n_rows*n_cols)]);
+    }
+  
+#endif
+
+
+
 //! element accessor; no bounds check
 template<typename oT>
 arma_inline
-arma_warn_unused
 oT&
 field<oT>::at(const uword in_row, const uword in_col, const uword in_slice)
   {
@@ -640,7 +681,6 @@ field<oT>::at(const uword in_row, const uword in_col, const uword in_slice)
 //! element accessor; no bounds check
 template<typename oT>
 arma_inline
-arma_warn_unused
 const oT&
 field<oT>::at(const uword in_row, const uword in_col, const uword in_slice) const
   {
@@ -651,7 +691,6 @@ field<oT>::at(const uword in_row, const uword in_col, const uword in_slice) cons
 
 template<typename oT>
 arma_inline
-arma_warn_unused
 oT&
 field<oT>::front()
   {
@@ -664,7 +703,6 @@ field<oT>::front()
 
 template<typename oT>
 arma_inline
-arma_warn_unused
 const oT&
 field<oT>::front() const
   {
@@ -677,7 +715,6 @@ field<oT>::front() const
 
 template<typename oT>
 arma_inline
-arma_warn_unused
 oT&
 field<oT>::back()
   {
@@ -690,7 +727,6 @@ field<oT>::back()
 
 template<typename oT>
 arma_inline
-arma_warn_unused
 const oT&
 field<oT>::back() const
   {
@@ -702,7 +738,6 @@ field<oT>::back() const
 
 
 template<typename oT>
-arma_cold
 inline
 field_injector< field<oT> >
 field<oT>::operator<<(const oT& val)
@@ -713,7 +748,6 @@ field<oT>::operator<<(const oT& val)
 
 
 template<typename oT>
-arma_cold
 inline
 field_injector< field<oT> >
 field<oT>::operator<<(const injector_end_of_row<>& x)
@@ -1427,7 +1461,6 @@ field<oT>::operator()(const uword in_row1, const uword in_col1, const uword in_s
 //! has been defined.
 
 template<typename oT>
-arma_cold
 inline
 void
 field<oT>::print(const std::string extra_text) const
@@ -1458,7 +1491,6 @@ field<oT>::print(const std::string extra_text) const
 //! has been defined.
 
 template<typename oT>
-arma_cold
 inline
 void
 field<oT>::print(std::ostream& user_stream, const std::string extra_text) const
@@ -1565,7 +1597,6 @@ field<oT>::is_empty() const
 //! returns true if the given index is currently in range
 template<typename oT>
 arma_inline
-arma_warn_unused
 bool
 field<oT>::in_range(const uword i) const
   {
@@ -1577,7 +1608,6 @@ field<oT>::in_range(const uword i) const
 //! returns true if the given start and end indices are currently in range
 template<typename oT>
 arma_inline
-arma_warn_unused
 bool
 field<oT>::in_range(const span& x) const
   {
@@ -1601,7 +1631,6 @@ field<oT>::in_range(const span& x) const
 //! returns true if the given location is currently in range
 template<typename oT>
 arma_inline
-arma_warn_unused
 bool
 field<oT>::in_range(const uword in_row, const uword in_col) const
   {
@@ -1612,7 +1641,6 @@ field<oT>::in_range(const uword in_row, const uword in_col) const
 
 template<typename oT>
 arma_inline
-arma_warn_unused
 bool
 field<oT>::in_range(const span& row_span, const uword in_col) const
   {
@@ -1635,7 +1663,6 @@ field<oT>::in_range(const span& row_span, const uword in_col) const
 
 template<typename oT>
 arma_inline
-arma_warn_unused
 bool
 field<oT>::in_range(const uword in_row, const span& col_span) const
   {
@@ -1658,7 +1685,6 @@ field<oT>::in_range(const uword in_row, const span& col_span) const
 
 template<typename oT>
 arma_inline
-arma_warn_unused
 bool
 field<oT>::in_range(const span& row_span, const span& col_span) const
   {
@@ -1680,7 +1706,6 @@ field<oT>::in_range(const span& row_span, const span& col_span) const
 
 template<typename oT>
 arma_inline
-arma_warn_unused
 bool
 field<oT>::in_range(const uword in_row, const uword in_col, const SizeMat& s) const
   {
@@ -1701,7 +1726,6 @@ field<oT>::in_range(const uword in_row, const uword in_col, const SizeMat& s) co
 
 template<typename oT>
 arma_inline
-arma_warn_unused
 bool
 field<oT>::in_range(const uword in_row, const uword in_col, const uword in_slice) const
   {
@@ -1712,7 +1736,6 @@ field<oT>::in_range(const uword in_row, const uword in_col, const uword in_slice
 
 template<typename oT>
 arma_inline
-arma_warn_unused
 bool
 field<oT>::in_range(const span& row_span, const span& col_span, const span& slice_span) const
   {
@@ -1738,7 +1761,6 @@ field<oT>::in_range(const span& row_span, const span& col_span, const span& slic
 
 template<typename oT>
 arma_inline
-arma_warn_unused
 bool
 field<oT>::in_range(const uword in_row, const uword in_col, const uword in_slice, const SizeCube& s) const
   {
@@ -1760,7 +1782,6 @@ field<oT>::in_range(const uword in_row, const uword in_col, const uword in_slice
 
 template<typename oT>
 inline
-arma_cold
 bool
 field<oT>::save(const std::string name, const file_type type) const
   {
@@ -1778,7 +1799,7 @@ field<oT>::save(const std::string name, const file_type type) const
       }
     else
       {
-      arma_debug_warn_level(3, "field::save(): couldn't write; file: ", name);
+      arma_debug_warn_level(3, "field::save(): write failed; file: ", name);
       }
     }
   
@@ -1789,7 +1810,6 @@ field<oT>::save(const std::string name, const file_type type) const
 
 template<typename oT>
 inline
-arma_cold
 bool
 field<oT>::save(std::ostream& os, const file_type type) const
   {
@@ -1807,7 +1827,7 @@ field<oT>::save(std::ostream& os, const file_type type) const
       }
     else
       {
-      arma_debug_warn_level(3, "field::save(): couldn't write to stream");
+      arma_debug_warn_level(3, "field::save(): stream write failed");
       }
     }
   
@@ -1818,7 +1838,6 @@ field<oT>::save(std::ostream& os, const file_type type) const
 
 template<typename oT>
 inline
-arma_cold
 bool
 field<oT>::load(const std::string name, const file_type type)
   {
@@ -1836,7 +1855,7 @@ field<oT>::load(const std::string name, const file_type type)
       }
     else
       {
-      arma_debug_warn_level(3, "field::load(): couldn't read; file: ", name);
+      arma_debug_warn_level(3, "field::load(): read failed; file: ", name);
       }
     }
   
@@ -1849,7 +1868,6 @@ field<oT>::load(const std::string name, const file_type type)
 
 template<typename oT>
 inline
-arma_cold
 bool
 field<oT>::load(std::istream& is, const file_type type)
   {
@@ -1866,7 +1884,7 @@ field<oT>::load(std::istream& is, const file_type type)
       }
     else
       {
-      arma_debug_warn_level(3, "field::load(): couldn't read from stream");
+      arma_debug_warn_level(3, "field::load(): stream read failed");
       }
     }
   
@@ -1879,7 +1897,6 @@ field<oT>::load(std::istream& is, const file_type type)
 
 template<typename oT>
 inline
-arma_cold
 bool
 field<oT>::quiet_save(const std::string name, const file_type type) const
   {
@@ -1892,7 +1909,6 @@ field<oT>::quiet_save(const std::string name, const file_type type) const
 
 template<typename oT>
 inline
-arma_cold
 bool
 field<oT>::quiet_save(std::ostream& os, const file_type type) const
   {
@@ -1905,7 +1921,6 @@ field<oT>::quiet_save(std::ostream& os, const file_type type) const
 
 template<typename oT>
 inline
-arma_cold
 bool
 field<oT>::quiet_load(const std::string name, const file_type type)
   {
@@ -1918,7 +1933,6 @@ field<oT>::quiet_load(const std::string name, const file_type type)
 
 template<typename oT>
 inline
-arma_cold
 bool
 field<oT>::quiet_load(std::istream& is, const file_type type)
   {
@@ -1984,7 +1998,7 @@ inline
 void
 field<oT>::init(const uword n_rows_in, const uword n_cols_in, const uword n_slices_in)
   {
-  arma_extra_debug_sigprint( arma_str::format("n_rows_in = %d, n_cols_in = %d, n_slices_in = %d") % n_rows_in % n_cols_in % n_slices_in );
+  arma_extra_debug_sigprint( arma_str::format("n_rows_in = %u, n_cols_in = %u, n_slices_in = %u") % n_rows_in % n_cols_in % n_slices_in );
   
   #if defined(ARMA_64BIT_WORD)
     const char* error_message = "field::init(): requested size is too large";
@@ -2045,7 +2059,7 @@ inline
 void
 field<oT>::delete_objects()
   {
-  arma_extra_debug_sigprint( arma_str::format("n_elem = %d") % n_elem );
+  arma_extra_debug_sigprint( arma_str::format("n_elem = %u") % n_elem );
   
   for(uword i=0; i<n_elem; ++i)
     {
@@ -2064,7 +2078,7 @@ inline
 void
 field<oT>::create_objects()
   {
-  arma_extra_debug_sigprint( arma_str::format("n_elem = %d") % n_elem );
+  arma_extra_debug_sigprint( arma_str::format("n_elem = %u") % n_elem );
   
   for(uword i=0; i<n_elem; ++i)  { mem[i] = new oT; }
   }
@@ -2960,7 +2974,7 @@ field_aux::load(field< std::string >& x, std::istream& is, const file_type type,
 
 
 
-#ifdef ARMA_EXTRA_FIELD_MEAT
+#if defined(ARMA_EXTRA_FIELD_MEAT)
   #include ARMA_INCFILE_WRAP(ARMA_EXTRA_FIELD_MEAT)
 #endif
 

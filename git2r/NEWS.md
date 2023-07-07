@@ -1,3 +1,31 @@
+# git2r 0.32.0 (2023-04-12)
+
+## CHANGES
+
+* Updated the bundled libgit2 source code to version 1.6.3.
+
+* Fix build failure of bundled libgit2 when structure for nanosecond
+  type is mssing.
+
+# git2r 0.31.0 (2023-01-26)
+
+## CHANGES
+
+* Removed unused macro 'AC_PROG_CC' from the build configuration
+  script.
+
+# git2r 0.30.1 (2022-03-15)
+
+## CHANGES
+
+* Added the build configuration script ('src/Makevars.ucrt') for
+  Windows UCRT. Thanks to Tomas Kalibera for providing the patch.
+
+* Added documentation about line endings in the diff
+  function. Different operating systems handle line endings
+  differently and to avoid problems in diffs, Git can be configured to
+  handle these differences in line endings
+
 # git2r 0.29.0 (2021-11-18)
 
 ## CHANGES

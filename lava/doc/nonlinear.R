@@ -80,9 +80,9 @@ m2d <- nonlinear(m2, type="spline", knots=kn2, eta2~eta1)
 ## To save time building the vignettes on CRAN, we cache time consuming computations
 if (fullVignette) {
   fit.cv$fit <- NULL
-  saveRDS(fit.cv, "nonlinear_fitcv.rds")
+  saveRDS(fit.cv, "data/nonlinear_fitcv.rds")
 } else {
-  fit.cv <- readRDS("nonlinear_fitcv.rds")
+  fit.cv <- readRDS("data/nonlinear_fitcv.rds")
 }
 
 ## -----------------------------------------------------------------------------
@@ -114,9 +114,9 @@ legend("bottomright",
 ## ----results="hide", echo=FALSE-----------------------------------------------
 ## To save time building the vignettes on CRAN, we cache time consuming computations
 if (fullVignette) {
-  saveRDS(summary(selmod), "nonlinear_selmod.rds")
+  saveRDS(summary(selmod), "data/nonlinear_selmod.rds")
 } else {
-  selmod <- readRDS("nonlinear_selmod.rds")
+  selmod <- readRDS("data/nonlinear_selmod.rds")
 }
 
 ## -----------------------------------------------------------------------------
@@ -159,9 +159,9 @@ regression(m1,x1~eta1) <- 1 ## Factor loading fixed to 1
 ## ----results="hide", echo=FALSE-----------------------------------------------
 ## To save time building the vignettes on CRAN, we cache time consuming computations
 if (fullVignette) {
-  saveRDS(em0, "nonlinear_em0.rds")
+  saveRDS(em0, "data/nonlinear_em0.rds")
 } else {
-  em0 <- readRDS("nonlinear_em0.rds")
+  em0 <- readRDS("data/nonlinear_em0.rds")
 }
 
 ## -----------------------------------------------------------------------------

@@ -1,24 +1,56 @@
-Revision history for the R/qtl package
-----------------------------------------------------------------------
-copyright (c) 2001-2021, Karl W Broman
-<https://rqtl.org>
+# Revision history for the R/qtl package
 
-    The R/qtl package is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public License,
-    version 3, as published by the Free Software Foundation.
+## Version 1.60, 2023-04-18
 
-    This program is distributed in the hope that it will be useful,
-    but without any warranty; without even the implied warranty of
-    merchantability or fitness for a particular purpose.  See the GNU
-    General Public License for more details.
+### Minor changes
 
-    A copy of the GNU General Public License, version 3, is available
-    at https://www.r-project.org/Licenses/GPL-3
-----------------------------------------------------------------------
+- In the CITATION file, change from `citEntry()` to `bibentry()`.
 
-## Verison 1.50, 2021-10-06
+### Bug fixes
 
-## New features
+- Fixed bug in addint() and addcovarint(): when X chr QTL and missing
+  phenotypes, would halt with error because cross wasn't getting
+  subset. (Issue #101)
+
+
+## Version 1.58, 2022-12-22
+
+### Minor changes
+
+- In compiled code, replace calls to `sprintf()` with calls to
+  `snprintf()`, to avoid warnings on CRAN.
+
+
+## Version 1.54, 2022-12-01
+
+### Minor changes
+
+- `locateXO()` and `countXO()` are now working for cross type BCsFt
+  (by treating it as an F2 intercross).
+
+### Bug fixes
+
+- Fixed a bug in `summary.cross()` re `&` vs `&&`.
+
+- Fix bug in `read.cross.bcsft()` so that in `read.cross()` you can
+  use `crosstype="bcsft"`
+
+
+## Version 1.52, 2022-07-09
+
+### Minor changes
+
+- `checkAlleles()` checks that the recombination fractions in the
+  cross object are not only LOD scores (such as from `markerlrt()`);
+  if they are, it re-runs `est.rf()`.
+
+- In `sim.ril()`, changed an instance of `if(class(x)=="X")` to
+  `if(inherits(x, "X"))`
+
+
+## Version 1.50, 2021-10-06
+
+### New features
 
 - `cim()` now includes an `addcovar` argument for including additional
   covariates in the model.
@@ -2533,7 +2565,7 @@ copyright (c) 2001-2021, Karl W Broman
 - The degrees of freedom are added as attributes in the output from
   scanone and scantwo, including the case of permutations.
 
-## Minor changes:
+### Minor changes:
 
 - In read.cross, the symbol "#" is no longer treated as a comment
   character by default.  The default is to use comment.char=""; that
@@ -2814,7 +2846,7 @@ copyright (c) 2001-2021, Karl W Broman
   multiple phenotypes; only results for a single phenotype are used by
   these functions, and "lodcolumn" indicates which one.
 
-## Minor changes:
+### Minor changes:
 
 - Modified summary.cross() to give a warning if there are markers at
   precisely the same position.  Added a function jittermap() to assist

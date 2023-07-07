@@ -1,6 +1,7 @@
 a	builder
 as.tags	as.tags
 attachDependencies	htmlDependencies
+bindFillRole	bindFillRole
 br	builder
 browsable	browsable
 builder	builder

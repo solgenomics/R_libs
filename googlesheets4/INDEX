@@ -14,6 +14,7 @@ gs4_formula             Class for Google Sheets formulas
 gs4_get                 Get Sheet metadata
 gs4_has_token           Is there a token on hand?
 gs4_random              Generate a random Sheet name
+gs4_scopes              Produce scopes specific to the Sheets API
 gs4_token               Produce configured token
 gs4_user                Get info on current user
 range_autofit           Auto-fit columns or rows to the data

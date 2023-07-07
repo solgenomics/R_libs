@@ -8,7 +8,12 @@ vignette: >
 ---
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(eval = FALSE)
+knitr::opts_chunk$set(
+  eval = FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
+styler::cache_deactivate()
 ```
 
 # Overview
@@ -22,8 +27,7 @@ call(
 )
 ```
 
-Until styler 1.1.1.9002 (with `strict = TRUE`, e.g. as in
-`styler::style_file(..., strict = TRUE)`), this was formatted as follows:
+Until styler 1.1.1.9002 (with `strict = TRUE`, e.g. as in `styler::style_file(..., strict = TRUE)`), this was formatted as follows:
 
 ```{r}
 call(
@@ -32,20 +36,15 @@ call(
 )
 ```
 
-because no alignment detection was built in.^[With `strict = FALSE`, the spacing
-would have been kept, however, `strict = FALSE` has a number of other
-implications because it is in general less invasive. For example, it would not
-add braces and line breaks to "if (TRUE) return()".]
+because no alignment detection was built in.[^1]
 
-styler >= 1.1.1.9003 detects aforementioned alignment for function calls. This
-vignette describes how aligned code is defined in styler and gives some examples
-so users can format their aligned code to match the definition styler uses to
-ensure their code is not unintentionally reformatted.
+[^1]: With `strict = FALSE`, the spacing would have been kept, however, `strict = FALSE` has a number of other implications because it is in general less invasive. For example, it would not add braces and line breaks to "if (TRUE) return()".
+
+styler \>= 1.1.1.9003 detects aforementioned alignment for function calls. This vignette describes how aligned code is defined in styler and gives some examples so users can format their aligned code to match the definition styler uses to ensure their code is not unintentionally reformatted.
 
 ## Examples
 
-These typical examples match *styler*'s definition of alignment. Note the 
-spacing around operators and commas.
+These typical examples match *styler*'s definition of alignment. Note the spacing around operators and commas.
 
 ```{r}
 tibble::tribble(
@@ -60,7 +59,7 @@ tibble::tribble(
   "long string", "shrt" # columns can overlap ('~' above ',')
 )
 
-# right-aligned after = 
+# right-aligned after =
 purrr::map(x, fun, # arguments on same line as opening brace are not considered
   arg2 =       2,
   ar   = f(k, x)
@@ -75,12 +74,7 @@ purrr::map(x, fun, # arguments on same line as opening brace are not considered
 
 # Details
 
-An important definition used in the remainder is the one of a **column**. All
-arguments of a function call that have the same position but are placed on
-different lines form a column. The below call shows a call with two columns and
-two rows. Columns separate arguments of the function call, so the separator is
-the comma. The first row is named because all arguments are named, the second is
-unnamed:
+An important definition used in the remainder is the one of a **column**. All arguments of a function call that have the same position but are placed on different lines form a column. The below call shows a call with two columns and two rows. Columns separate arguments of the function call, so the separator is the comma. The first row is named because all arguments are named, the second is unnamed:
 
 ```{r}
 call(
@@ -90,13 +84,11 @@ call(
 )
 ```
 
-**For alignment detection, the first column is omitted if not all arguments 
-in that column are named**
+**For alignment detection, the first column is omitted if not all arguments in that column are named**
 
 ## Function calls
 
-Below, we try to explain in an intuitive way how your code should look like to
-be recognized as aligned.
+Below, we try to explain in an intuitive way how your code should look like to be recognized as aligned.
 
 Make commas match position vertically and align everything right before commas:
 
@@ -122,11 +114,9 @@ gell(
   p = 2,   g = gg(x),  n = 3 * 3, #
   31,    fds =    -1, gz = f / 3,
 )
-
 ```
 
-... or match position of `=` vertically and align everything after this operator
-left
+... or match position of `=` vertically and align everything after this operator left
 
 ```{r}
 # all arguments of first column named -> must left align values after `=`,
@@ -154,7 +144,6 @@ gell(
 )
 ```
 
-
 ... or match the start of the token after `,`
 
 ```{r}
@@ -163,7 +152,7 @@ call(
   y = "hhjkjkbew", x = 3
 )
 
-tribble(
+tibble::tribble(
   ~x,        ~y,
   "another", 1:3,
   "b",       1211234

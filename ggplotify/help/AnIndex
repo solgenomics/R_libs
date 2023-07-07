@@ -6,6 +6,7 @@ as.grob.eulergram	as-grob
 as.grob.expression	as-grob
 as.grob.formula	as-grob
 as.grob.function	as-grob
+as.grob.gglist	as-grob
 as.grob.ggplot	as-grob
 as.grob.grob	as-grob
 as.grob.Heatmap	as-grob

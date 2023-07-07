@@ -1,5 +1,5 @@
-aSAH                    Subarachnoid hemorrhage data
 are.paired              Are two ROC curves paired?
+aSAH                    Subarachnoid hemorrhage data
 auc                     Compute the area under the ROC curve
 ci                      Compute the confidence interval of a ROC curve
 ci.auc                  Compute the confidence interval of the AUC
@@ -18,12 +18,12 @@ groupGeneric            pROC Group Generic Functions
 has.partial.auc         Does the ROC curve have a partial AUC?
 lines.roc               Add a ROC line to a ROC plot
 multiclass.roc          Multi-class AUC
-pROC-package            pROC
 plot.ci                 Plot confidence intervals
 plot.roc                Plot a ROC curve
 power.roc.test          Sample size and power computation for ROC
                         curves
 print.roc               Print a ROC curve object
+pROC-package            pROC
 roc                     Build a ROC curve
 roc.test                Compare two ROC curves
 smooth                  Smooth a ROC curve

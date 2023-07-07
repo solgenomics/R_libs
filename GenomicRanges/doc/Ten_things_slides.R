@@ -1,5 +1,4 @@
 ### R code from vignette source 'Ten_things_slides.Rnw'
-### Encoding: UTF-8
 
 ###################################################
 ### code chunk number 1: setup
@@ -29,14 +28,14 @@ y <- GRanges(c("chr2:150-151", "chr1:1-10", "chr2:2000-3000"),
 
 
 ###################################################
-### code chunk number 2: inner_outer_mcols
+### code chunk number 2: inner_outer_mcols1
 ###################################################
 mcols(grl)$id <- paste0("ID", seq_along(grl))
 grl
 
 
 ###################################################
-### code chunk number 3: inner_outer_mcols
+### code chunk number 3: inner_outer_mcols2
 ###################################################
 mcols(grl)  # outer mcols
 mcols(unlist(grl, use.names=FALSE))  # inner mcols

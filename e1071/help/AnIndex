@@ -1,5 +1,6 @@
 allShortestPaths	shortestPaths
 bclust	bclust
+best.gknn	tune.wrapper
 best.nnet	tune.wrapper
 best.randomForest	tune.wrapper
 best.rpart	tune.wrapper
@@ -84,6 +85,7 @@ svm.default	svm
 svm.formula	svm
 tune	tune
 tune.control	tune.control
+tune.gknn	tune.wrapper
 tune.knn	tune.wrapper
 tune.nnet	tune.wrapper
 tune.randomForest	tune.wrapper

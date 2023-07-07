@@ -1,0 +1,12 @@
+aperm2                  Generalized permutation of the dimensions of an
+                        array
+array selection         Manipulation of array selections
+ArrayGrid-class         ArrayGrid and ArrayViewport objects
+bind-arrays             Bind arrays along their rows or columns
+is_sparse               Check for sparse representation
+read_block              Read array blocks
+rowsum                  Compute column/row sums of a matrix-like
+                        object, for groups of rows/columns
+type                    Get the type of the elements of an array-like
+                        object
+write_block             Write array blocks

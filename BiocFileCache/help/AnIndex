@@ -31,6 +31,7 @@ bfcneedsupdate,missing-method	BiocFileCache-class
 bfcnew	BiocFileCache-class
 bfcnew,BiocFileCache-method	BiocFileCache-class
 bfcnew,missing-method	BiocFileCache-class
+BFCOption	BFCOption
 bfcpath	BiocFileCache-class
 bfcpath,BiocFileCacheBase-method	BiocFileCache-class
 bfcpath,missing-method	BiocFileCache-class
@@ -65,6 +66,7 @@ cleanbfc,missing-method	BiocFileCache-class
 exportbfc	BiocFileCache-class
 exportbfc,BiocFileCacheBase-method	BiocFileCache-class
 exportbfc,missing-method	BiocFileCache-class
+getBFCOption	BFCOption
 importbfc	BiocFileCache-class
 importbfc,character-method	BiocFileCache-class
 length,BiocFileCacheBase-method	BiocFileCache-class
@@ -74,6 +76,7 @@ makeCachedActiveBinding	makeCachedActiveBinding
 removebfc	BiocFileCache-class
 removebfc,BiocFileCache-method	BiocFileCache-class
 removebfc,missing-method	BiocFileCache-class
+setBFCOption	BFCOption
 show,BiocFileCacheBase-method	BiocFileCache-class
 [,BiocFileCache,character,missing-method	BiocFileCache-class
 [,BiocFileCache,missing,missing-method	BiocFileCache-class

@@ -1,3 +1,65 @@
+# s2 (development version)
+
+* Updated more tests to pass on a forthcoming waldo package update (#237).
+
+# s2 1.1.3
+
+* Made a test less strict to pass tests on Alpine Linux (#218, #220).
+* Updated tests to pass on forthcoming waldo package update (@hadley, #226).
+* Updated vendored file modifications to suppress a multi-line comment
+  warning on gcc (#214, #227).
+
+# s2 1.1.2
+
+- Fixed test for `as.data.frame()` for `s2_cell()` to comply with new wk
+  version and the latest release of R (#207).
+- Fix unary union of an empty multipolygon (#208).
+- Added `#include <cstdint>` to an Abseil header to fix compilation with
+  gcc13 (#209, #210).
+- Update internal Abseil to 20220623.1 LTS (#213).
+
+# s2 1.1.1
+
+- Fix new CRAN check warnings (#202, #203).
+
+# s2 1.1.0
+
+- Fix for s2 build on Windows with R <= 3.6.x (#142)
+- Fix for s2 build on MacOS with multiple openssl versions (#142, #145, #146)
+- Fix for s2 build on 32-bit openssl (#143, #147)
+- Added `s2_convex_hull()` and `s2_convex_hull_agg()` (@spiry34, #150,
+  #151, #163).
+- Added `max_distance` argument to `s2_closest_edges()`, making
+  distance-constrained k-nearest neighbours possible (#125, #156, #162).
+- Added a spherical `s2_point_on_surface()` implementation for polygons
+  (@kylebutts, #152, #161)
+- Added a `s2_cell_union()` vector class to represent cell coverings and
+  operators to generate them from an s2 geography vector (e.g.,
+  `s2_covering_cell_ids()`). Cell unions are useful as compact representations
+  of spherical geometry and can be used like a bounding box to determine
+  a possible intersection with one or more geographies (#85, #94, #164).
+- Refactored the simple features compatability layer into a standalone
+  code base for potential future use in a Python adaptation (#165).
+- Migrate input and output to non-deprecated wk package handlers and writers
+  (#101, #165, #168).
+- Make `s2_union_agg()` more efficient using a recursive merge strategy
+  (#103, #165).
+- Fix package build on Raspberry Pi (#169, #171).
+- Fix warning on clang14 when compiling with `-O0` (#167, #172).
+- Added `s2_prepared_dwithin()` and fixed `s2_dwithin_matrix()` such that it
+  efficiently uses the index (#157, #174).
+- Updated `s2_lnglat()` and `s2_point()` to use `wk::xy()` (a record-style
+  vctr) to represent point coordinates. This is much faster than the previous
+  representation which relied on `list()` of external pointers (#181, #159).
+- Added arguments `planar` and `tessellate_tol_m` to `s2_as_text()`,
+  `s2_as_binary()`. Use `planar = TRUE` and set `tessellate_tol_m` to the
+  maximum error for your use-case to automatically subdivide edges to
+  preserve or "straight" lines in Plate carree projection on import (#182).
+- Added arguments `planar` and `tessellate_tol_m` to `s2_geog_from_text()`, and
+  `s2_geog_from_wkb()`. Use `planar = TRUE` and set `tessellate_tol_m` to the
+  maximum error for your use-case to automatically subdivide edges to
+  ensure or "straight" lines in Plate carree projection on export (#182).
+
 # s2 1.0.7
 
 - Update the internal copy of s2geometry to use updated Abseil,
@@ -21,7 +83,7 @@
   indexing system to R users (#85, #114).
 * Added `s2_closest_edges()` to make k-nearest neighbours calculation
   possible on the sphere (#111, #112).
-* Added `s2_interpolate()`, `s2_interpolate_normalized()`, 
+* Added `s2_interpolate()`, `s2_interpolate_normalized()`,
   `s2_project()`, and `s2_project_normalized()` to provide linear
   referencing support on the sphere (#96, #110).
 * Fixed import of empty points from WKB (#109).
@@ -71,10 +133,10 @@
   throughout the package (#69).
 * Added `s2_bounds_cap()` and `s2_bounds_rect()` to compute bounding areas
   using geographic coordinates (@edzer, #63).
-* `s2_*_matrix()` predicates now efficiently use indexing to compute the 
+* `s2_*_matrix()` predicates now efficiently use indexing to compute the
   results of many predicate comparisons (#61).
 
 # s2 1.0.0
 
-This version is a complete rewrite of the former s2 CRAN package, entirely 
+This version is a complete rewrite of the former s2 CRAN package, entirely
 backwards incompatible with previous versions.

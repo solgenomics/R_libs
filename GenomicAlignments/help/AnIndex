@@ -180,9 +180,9 @@ njunc,GAlignmentsList-method	GAlignmentsList-class
 order,GAlignments-method	GAlignments-class
 OverlapEncodings	OverlapEncodings-class
 OverlapEncodings-class	OverlapEncodings-class
-parallelSlotNames,GAlignmentPairs-method	GAlignmentPairs-class
-parallelSlotNames,GAlignments-method	GAlignments-class
-parallelSlotNames,OverlapEncodings-method	OverlapEncodings-class
+parallel_slot_names,GAlignmentPairs-method	GAlignmentPairs-class
+parallel_slot_names,GAlignments-method	GAlignments-class
+parallel_slot_names,OverlapEncodings-method	OverlapEncodings-class
 pcompare,GAlignments,GAlignments-method	GAlignments-class
 pileLettersAt	pileLettersAt
 pintersect	setops-methods
@@ -296,6 +296,7 @@ summarizeOverlaps-methods	summarizeOverlaps-methods
 Union	summarizeOverlaps-methods
 unlist,GAlignmentPairs-method	GAlignmentPairs-class
 update,GAlignments-method	GAlignments-class
+updateObject,GAlignmentPairs-method	GAlignmentPairs-class
 updateObject,GAlignments-method	GAlignments-class
 validCigar	cigar-utils
 width,GAlignments-method	GAlignments-class

@@ -1,0 +1,19 @@
+adjacencyOfClasses      Adjacency graph of classes in packages
+cdf2quantile            Calculate a quantile from a distribution
+                        function
+isargunnamed            Is an element of a list named?
+isNA                    Check if an object is NA
+mintersect              Set intersection of arbitrary number of
+                        arguments
+missing_arg             Check if an element of a pairlist is missing
+myouter                 Functions for some basic operations
+nposargs                Function to count the number of positional
+                        arguments used in a call
+parse_text              Parse expressions residing in character vectors
+plotpdf                 Plot a probability denstity function
+pseudoInverse           Compute a pseudo-inverse matrix
+raw_history             Get the command history
+rpoly                   Polynomials with real coefficients
+sim_complex             Simulate real or complex numbers using polar
+                        form
+sim_numbers             Simulation based on polar form specifications

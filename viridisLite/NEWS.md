@@ -1,3 +1,28 @@
+# viridisLite 0.4.2
+
+## New features
+
+* N/A.
+
+## Minor improvements and fixes
+
+* Fix CITATION issues. 
+* Fix check issues. 
+
+---
+
+# viridisLite 0.4.1
+
+## New features
+
+* N/A.
+
+## Minor improvements and fixes
+
+* Fix CRAN check warnings with R-devel. 
+
+---
+
 # viridisLite 0.4.0
 
 ## New features

@@ -1,27 +1,28 @@
-DLLfunc                 Evaluates a Derivative Function Represented in
-                        a DLL
-DLLres                  Evaluates a Residual Derivative Function
-                        Represented in a DLL
-SCOC                    A Sediment Model of Oxygen Consumption
 aquaphy                 A Physiological Model of Unbalanced Algal
                         Growth
 ccl4data                Closed Chamber Study of CCl4 Metabolism by
                         Rats.
 ccl4model               The CCl4 Inhalation Model
+checkDLL                Check shared library (DLL/.so) of a compiled
+                        model.
 cleanEventTimes         Find Nearest Event for Each Time Step and Clean
                         Time Steps to Avoid Doubles
 daspk                   Solver for Differential Algebraic Equations
                         (DAE)
+dede                    General Solver for Delay Differential
+                        Equations.
 deSolve-package         General Solvers for Initial Value Problems of
                         Ordinary Differential Equations (ODE), Partial
                         Differential Equations (PDE), Differential
                         Algebraic Equations (DAE) and delay
                         differential equations (DDE).
-dede                    General Solver for Delay Differential
-                        Equations.
 diagnostics             Print Diagnostic Characteristics of Solvers
 diagnostics.deSolve     Print Diagnostic Characteristics of ODE and DAE
                         Solvers
+DLLfunc                 Evaluates a Derivative Function Represented in
+                        a DLL
+DLLres                  Evaluates a Residual Derivative Function
+                        Represented in a DLL
 events                  Implementing Events and Roots in Differential
                         Equation Models.
 forcings                Passing Forcing Functions to Models Written in
@@ -56,6 +57,7 @@ rk4                     Solve System of ODE (Ordinary Differential
                         Runge-Kutta 4th Order Integration.
 rkMethod                Collection of Parameter Sets (Butcher Arrays)
                         for the Runge-Kutta Family of ODE Solvers
+SCOC                    A Sediment Model of Oxygen Consumption
 timelags                Time Lagged Values of State Variables and
                         Derivatives.
 vode                    Solver for Ordinary Differential Equations

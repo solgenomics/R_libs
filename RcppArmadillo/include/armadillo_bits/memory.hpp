@@ -24,7 +24,7 @@ class memory
   {
   public:
   
-  template<typename eT> inline arma_malloc static eT* acquire(const uword n_elem);
+  template<typename eT> arma_malloc inline static eT* acquire(const uword n_elem);
   
   template<typename eT> arma_inline static void release(eT* mem);
   
@@ -36,8 +36,8 @@ class memory
 
 
 template<typename eT>
-inline
 arma_malloc
+inline
 eT*
 memory::acquire(const uword n_elem)
   {
@@ -77,6 +77,8 @@ memory::acquire(const uword n_elem)
     }
   #elif defined(_MSC_VER)
     {
+    // Windoze is too primitive to handle C++17 std::aligned_alloc()
+    
     //out_memptr = (eT *) malloc(sizeof(eT)*n_elem);
     //out_memptr = (eT *) _aligned_malloc( sizeof(eT)*n_elem, 16 );  // lives in malloc.h
     
@@ -179,6 +181,9 @@ memory::mark_as_aligned(eT*& mem)
     arma_ignore(mem);
     }
   #endif
+  
+  // TODO: look into C++20 std::assume_aligned()
+  // TODO: https://en.cppreference.com/w/cpp/memory/assume_aligned
   
   // TODO: MSVC?  __assume( (mem & 0x0F) == 0 );
   //

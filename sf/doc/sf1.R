@@ -1,4 +1,6 @@
 ## ---- echo=FALSE, include=FALSE-----------------------------------------------
+knitr::opts_chunk$set(fig.height = 4.5)
+knitr::opts_chunk$set(fig.width = 6)
 knitr::opts_chunk$set(collapse = TRUE)
 if (file.exists("nc.shp"))
 	file.remove("nc.shp", "nc.dbf", "nc.shx")
@@ -163,6 +165,7 @@ st_layers(system.file("osm/overpass.osm", package="sf"), do_count = TRUE)
 #  unzip("biketrails.zip")
 #  u_kmz <- "http://coagisweb.cabq.gov/datadownload/BikePaths.kmz"
 #  download.file(u_kmz, "BikePaths.kmz")
+#  
 #  # Read file formats
 #  biketrails_shp <- st_read("biketrails.shp")
 #  if(Sys.info()[1] == "Linux") # may not work if not Linux
@@ -170,27 +173,6 @@ st_layers(system.file("osm/overpass.osm", package="sf"), do_count = TRUE)
 #  u_kml = "http://www.northeastraces.com/oxonraces.com/nearme/safe/6.kml"
 #  download.file(u_kml, "bikeraces.kml")
 #  bikraces <- st_read("bikeraces.kml")
-
-## ---- echo=TRUE, eval=FALSE---------------------------------------------------
-#  shp_read_sp <- function() rgdal::readOGR(dsn = ".", layer = "biketrails")
-#  shp_read_sf <- function() st_read("biketrails.shp")
-#  if(Sys.info()[1] == "Linux") {
-#    kmz_read_sp <- function() rgdal::readOGR(dsn = "BikePaths.kmz")
-#    kmz_read_sf <- function() st_read("BikePaths.kmz")
-#  } else {
-#      kmz_read_sp <- function() message("NA")
-#      kmz_read_sf <- function() message("NA")
-#  }
-#  kml_read_sp <- function() rgdal::readOGR("bikeraces.kml")
-#  kml_read_sf <- function() st_read("bikeraces.kml")
-#  microbenchmark::microbenchmark(shp_read_sp(), shp_read_sf(),
-#                                 kmz_read_sp(), kmz_read_sf(),
-#                                 kml_read_sp(), kml_read_sf(), times = 10)
-
-## ---- echo=FALSE--------------------------------------------------------------
-# Tidy up
-files_to_remove <- list.files(pattern = "[B-b]ike")
-if(length(files_to_remove) > 0) file.remove(files_to_remove)
 
 ## -----------------------------------------------------------------------------
 nc.web_mercator <- st_transform(nc, 3857)
@@ -200,9 +182,11 @@ st_geometry(nc.web_mercator)[[4]][[2]][[1]][1:3,]
 showMethods("coerce", classes = "sf")
 methods(st_as_sf)
 methods(st_as_sfc)
+
 # anticipate that sp::CRS will expand proj4strings:
 p4s <- "+proj=longlat +datum=NAD27 +no_defs +ellps=clrk66 +nadgrids=@conus,@alaska,@ntv2_0.gsb,@ntv1_can.dat"
 st_crs(nc) <- p4s
+
 # anticipate geometry column name changes:
 names(nc)[15] = "geometry"
 attr(nc, "sf_column") = "geometry"

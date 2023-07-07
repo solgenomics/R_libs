@@ -13,6 +13,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   eval = as.logical(Sys.getenv("CPP11_EVAL", "false"))
 )
+library(cpp11)
 ```
 
 *This content is adapted (with permission) from the [Rcpp chapter](https://adv-r.hadley.nz/rcpp.html) of Hadley Wickham's book Advanced R.*
@@ -74,7 +75,7 @@ library(cpp11)
 You'll also need a working C++ compiler.
 To get it:
 
-* On Windows, install [Rtools](https://CRAN.R-project.org/bin/windows/Rtools/).
+* On Windows, install [Rtools](https://cran.r-project.org/bin/windows/Rtools/).
 * On Mac, install Xcode from the app store.
 * On Linux, `sudo apt-get install r-base-dev` or similar.
 
@@ -226,7 +227,7 @@ The C++ version is similar, but:
   Similar in-place operators are `-=`, `*=`, and `/=`.
 
 This is a good example of where C++ is much more efficient than R.
-As shown by the following microbenchmark, `sumC()` is competitive with the built-in (and highly optimised) `sum()`, while `sumR()` is several orders of magnitude slower.
+As shown by the following microbenchmark, `sum_cpp()` is competitive with the built-in (and highly optimised) `sum()`, while `sum_r()` is several orders of magnitude slower.
 
 ```{r sum-bench}
 x <- runif(1e3)
@@ -526,7 +527,9 @@ doubles attribs() {
 
 ## Missing values {#na}
 If you're working with missing values, you need to know two things:
+
 * How R's missing values behave in C++'s scalars (e.g., `double`).
+
 * How to get and set missing values in vectors (e.g., `doubles`).
 
 ### Scalars
@@ -1104,7 +1107,6 @@ Then add the following to your `DESCRIPTION` file:
 
     ```
     LinkingTo: cpp11
-    SystemRequirements: C++11
     ```
 
 and add the following [roxygen](https://roxygen2.r-lib.org/) directive somewhere in your package's R files. (A common location is `R/pkgname-package.R`)

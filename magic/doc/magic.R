@@ -1,31 +1,31 @@
 ### R code from vignette source 'magic.Rnw'
 
 ###################################################
-### code chunk number 1: magic.Rnw:102-102
+### code chunk number 1: magic.Rnw:101-101
 ###################################################
 
 
 
 ###################################################
-### code chunk number 2: magic.Rnw:103-104
+### code chunk number 2: magic.Rnw:102-103
 ###################################################
 require(magic)
 
 
 ###################################################
-### code chunk number 3: magic.Rnw:110-111
+### code chunk number 3: magic.Rnw:109-110
 ###################################################
  magic(3) 
 
 
 ###################################################
-### code chunk number 4: magic.Rnw:124-125
+### code chunk number 4: magic.Rnw:123-124
 ###################################################
 magicplot(magic.2np1(3))
 
 
 ###################################################
-### code chunk number 5: magic.Rnw:177-199
+### code chunk number 5: magic.Rnw:175-197
 ###################################################
 shadedsquare <- function(m=2){
   n <- 4*m
@@ -52,7 +52,7 @@ for(i in 1:8){
 
 
 ###################################################
-### code chunk number 6: magic.Rnw:208-218
+### code chunk number 6: magic.Rnw:206-216
 ###################################################
 shadedsquare()
 for(i in 1:8){

@@ -67,7 +67,7 @@ plots points within an RGL window.  It is similar to the classic
 but works in 3 dimensions.
 
 For example
-```{r}
+```{r "plot3d()"}
 with(iris, plot3d(Sepal.Length, Sepal.Width, Petal.Length, 
                   type="s", col=as.numeric(Species)))
 ```
@@ -102,7 +102,8 @@ for details.  For example, the `MASS` package estimates
 Gamma parameters using maximum likelihood in a 
 `r linkfn("fitdistr", text="?MASS::fitdistr", pkg="MASS")` example.
 Here we show the log likelihood surface. 
-```{r persp3d, fig.height=3, fig.width=6, fig.keep="last"}
+```{r "persp3d()", fig.height=3, fig.width=6, fig.keep="last", eval=requireNamespace("MASS",quietly=TRUE)}
+# This example requires the MASS package
 library(MASS)
 # from the fitdistr example
 set.seed(123)
@@ -209,26 +210,77 @@ Function                             | Description
 `r indexfns("setAxisCallbacks")`:    | set user-defined axis annotations
 
 For example, to plot three random triangles, one could use
-```{r fig.width=3, fig.height=3}
+```{r "triangles3d()", fig.width=3, fig.height=3}
 triangles3d(cbind(x=rnorm(9), y=rnorm(9), z=rnorm(9)), col = "green")
 decorate3d()
 bg3d("lightgray")
 aspect3d(1,1,1)
 ```
 
-Besides the `*3d` functions mentioned above, there are even lower-level
+Besides the `*3d` functions mentioned above, there are 
+deprecated
 functions 
-`r indexfns(c("rgl.primitive", "rgl.points", "rgl.linestrips", "rgl.lines", "rgl.triangles",
-"rgl.quads", "rgl.texts", "rgl.abclines", "rgl.planes", "rgl.bg",
-"rgl.clipplanes", "rgl.bbox", "rgl.spheres", "rgl.sprites", "rgl.surface"))`.  
-You should avoid using these functions, which do not
-work well with the higher level `*3d` functions.  See the 
+`r deprecated(c("rgl.abclines", "rgl.bbox", "rgl.bg",
+"rgl.clipplanes", "rgl.lines", 
+"rgl.linestrips", "rgl.planes", "rgl.points",
+"rgl.primitive", 
+"rgl.quads", "rgl.setAxisCallback",
+"rgl.spheres", "rgl.sprites", "rgl.surface",
+"rgl.texts", 
+"rgl.triangles"))`. 
+You should avoid using all of these functions, which do not
+work properly with the `*3d` functions and will
+soon be removed from `rgl`.  See the 
 `r linkfn("r3d", text="?r3d", pkg="rgl")` help
-topic for details.  The functions 
-`r indexfns(c("rgl.setAxisCallback", "rgl.getAxisCallback"))`
-provide low-level support for `r linkfn("setAxisCallbacks")`.
+topic for details.  
+
+The function
+`r indexfns(c("rgl.getAxisCallback"))`
+provides low-level support for `r linkfn("setAxisCallbacks")`.
 
 ## Controlling the Look of the Scene
+
+### Camera angle
+
+By default when you open a new plot with `r linkfn("open3d")`:
+
+* The x axis goes from left to right.
+* The y axis goes from near the camera to far away.
+* The z axis goes from down to up.
+
+You can change the camera angle simply by dragging the picture with
+the mouse.
+
+To set the camera angle programmatically, use `r indexfns("view3d")`. 
+This uses polar coordinates:
+
+* `theta` sets the rotation around the vertical axis, in degrees. 
+* `phi` sets the "vertical" rotation around the horizontal axis, 
+  from -90 to 90 degrees.
+  
+The default angle is roughly `theta = 0, phi = -70`. Starting from
+this position:
+
+* As you increase `theta`, the graph will spin anticlockwise from your
+  point of view.
+* As you increase `phi` to 0, you start to look down at the scene
+  from the top. If you increase `phi` above 0, you continue over and 
+  start to see the graph from the "back" (and upside down).
+
+You can also use `r indexfns("observer3d")` to change the camera 
+location using `x,y,z` coordinates. In particular, increasing
+the `z` coordinate lets you zoom out, and decreasing it zooms you in.
+
+One useful approach is to use the mouse to find a nice viewing angle.
+You can then save it using `par3d("userMatrix")` and restore
+the same view later:
+
+```{r, eval = FALSE}
+myview <- par3d("userMatrix")
+# ... later ...
+par3d(userMatrix = myview)
+```
+
 
 ### Lighting
 
@@ -248,9 +300,8 @@ depends on the angle between the surface and the light,
 while the `specular` component also takes the viewer's
 position into account.
 
-The `r indexfns("rgl.light")` function is a lower-level
-function with different defaults; users should normally
-use `r linkfn("light3d")`.
+The deprecated `r deprecated("rgl.light")` function should
+no longer be used; use `r linkfn("light3d")` instead.
 
 ### Materials
 
@@ -260,9 +311,11 @@ that affect how light reflects from them (or is emitted by them).
 These are mainly controlled by the `r indexfns("material3d")` function,
 or by arguments to other functions that are passed to it.
 
-The material properties that can be set by calls to `material3d` are
+The material properties that are recognized in calls to `material3d` are
 described in detail in the 
-`r linkfn("material3d", text="?material3d", pkg="rgl")` help page.
+`r linkfn("material3d", text="?material3d", pkg="rgl")` help page, and listed in the `r indexfns("rgl.material.names")`
+variable.  All of them can be set except the ones in 
+`r indexfns("rgl.material.readonly")`.
 Here we give an overview.
 
 Property  | Default | Meaning 
@@ -282,11 +335,11 @@ lwd       | 1       | width of lines in pixels
 
 Other properties include 
 "texmipmap", "texmagfilter", "texminfilter", "texenvmap", "fog", 
-"point\_antialias", "line\_antialias", "depth\_mask", "depth\_test", "polygon_offset", "margin", "floating" and "tag"; 
+"point\_antialias", "line\_antialias", "depth\_mask", "depth\_test", "polygon_offset", "margin", "floating", "tag" and "blend"; 
 see `r linkfn("material3d", "the help page", pkg = "rgl")` for details.
 
-There is also an `r indexfns("rgl.material")` function that works
-at a lower level; users should normally avoid it.
+There is also a deprecated `r deprecated("rgl.material")` function that works
+at a lower level; users should avoid it.
 
 ### Textures
 
@@ -305,8 +358,8 @@ Functions which specify primitives (`r linkfn("triangles3d")`, etc.) accept an o
 locations within the bitmap in columns with one row per vertex.
 The coordinates are `(0,0)` for the lower left, and `(1,1)`
 for the upper right.  If values outside this range are given,
-the image repeats, i.e. `(1.1, 1.1)` would specify the same
-point in the image as `(0.1, 0.1)`.
+the image repeats, i.e. `(1.1, 1.2)` would specify the same
+point in the image as `(0.1, 0.2)`.
 
 Other functions such as `r linkfn("surface3d")` that take
 matrices for each vertex coordinate accept texture coordinates
@@ -317,33 +370,40 @@ following code displays four copies of a 2D plot on a quad,
 because the texture coordinates run from 0 to 2 in both
 `s` and `t`:
 
-```{r}
+```{r Texture}
 filename <- tempfile(fileext = ".png")
 png(filename = filename)
 plot(rnorm(1000), rnorm(1000))
 dev.off()
 open3d()
 xyz <- cbind(c(0,1,1,0), 0, c(0,0,1,1))
-quads3d(xyz, texture = filename, texcoords = xyz[,c(1, 3)]*2, col = "white", specular = "black")
+quads3d(xyz, texture = filename, texcoords = xyz[,c(1, 3)]*2, 
+        col = "white", specular = "black")
 ```
 
 Some other notes:
 
- - The color in the figure above was specified to be white.  By default,
-the colors in the bitmap will modify the colour of the
-quad.  If `col` is black (a common default), you won't see anything.
- - On the other hand, you usually don't want specular 
+ - The color in `quads3d()` above was specified to be white.  By default,
+the colors in the bitmap will modify the color of the
+surface.  If `col` is black (a common default), you won't see anything,
+so a warning may be issued.  
+ - You usually don't want specular 
  reflections (which show up as glare).  Setting `specular`
  to black prevents those.
- - How the bitmap is handled is controlled by the material
+ - The material property `"texmode"` allows texture colors to
+be used differently.  The default is `"modulate"`, where the texture
+values combine multiplicatively with the underlying values.
+ - Another aspect of how the bitmap is handled is controlled
+ by the material
  property `"textype"`.  The default is `"rgb"`, which 
- takes the red-green-blue colours from the bitmap and
- uses them to modify the corresponding colours in the polygon.  Other possibilities for `"textype"` are described
+ takes the red-green-blue colors from the bitmap and
+ uses them to modify the corresponding colors in the polygon.  
+ - Other possibilities for `"textype"` and `"texmode"` are described
  in `r linkfn("material3d", "the material3d help page", pkg = "rgl")`.
  - The other `"tex*"` material properties control how 
  the interpolation within the image is done.
  - Modern `OpenGL` supports 1- and 3-dimensional textures;
- these are not supported in `rgl`.
+ these are not currently supported in `rgl`.
  
 ### Fonts
 
@@ -363,7 +423,9 @@ requires the `extrafont` package to be installed.
 The `r indexfns("par3d")` function, modelled after the classic
 graphics `r linkfn("par", pkg="graphics")` function, sets or reads 
 a variety of different `rgl` internal
-parameters.  Some parameters are completely read-only; others are
+parameters, listed in the `r indexfns("rgl.par3d.names")`
+variable.  All of them can be set except the ones in 
+`r indexfns("rgl.par3d.readonly")`.  Some parameters are completely read-only; others are
 fixed at the time the window is opened, and others may be changed 
 at any time.
 
@@ -379,7 +441,7 @@ FOV         |       | Field of view, in degrees.  Zero means isometric perspecti
 ignoreExtent |      | Should `rgl` ignore the size of new objects when computing the bounding box?
 skipRedraw   |      | Should `rgl` suppress updates to the display? 
 maxClipPlanes | read-only | How many clip planes can be defined?
-modelMatrix | read-only | The OpenGL ModelView matrix; partly set by `r indexfns("view3d")` or the obsolete `r indexfns("rgl.viewpoint")`
+modelMatrix | read-only | The OpenGL ModelView matrix; partly set by `r indexfns("view3d")`
 projMatrix  | read-only | The OpenGL Projection matrix
 bbox        | read-only | Current bounding-box of the scene
 viewport    |       | Dimensions in pixels of the scene within the window
@@ -389,6 +451,9 @@ mouseMode   |       | What the mouse buttons do.  See `r linkfn("mouseMode", '<c
 observer    | read-only | The position of the observer; set by `r indexfns("observer3d")`
 scale       |           | Rescaling for each coordinate; see `r linkfn("aspect3d")`
 zoom        |           | Magnification of the scene
+
+The deprecated `r deprecated("rgl.viewpoint")` function
+should not be used.
 
 ### Default settings
 
@@ -412,14 +477,14 @@ described below.  We start with functions to generate them.
 ### Specific solids
 
 These functions generate specific shapes.  Optional arguments allow
-attributes such as colour or transformations to be specified.
+attributes such as color or transformations to be specified.
 
 Function                             | Description
 ------------------------------------ | -----------
 `r indexfns(c("tetrahedron3d", "cube3d", "octahedron3d", "dodecahedron3d", "icosahedron3d"))`: | Platonic solids
 `r indexfns(c("cuboctahedron3d", "oh3d"))`:             | other solids
 
-```{r}
+```{r Solids}
 cols <- rainbow(7)
 layout3d(matrix(1:16, 4,4), heights=c(1,3,1,3))
 text3d(0,0,0,"tetrahedron3d"); next3d()
@@ -455,7 +520,7 @@ Function                             | Description
 `r indexfns("ellipse3d")`:  | generate an ellipsoid in various ways
 `r indexfns("mesh3d")`:      | generate a shape from indexed vertices
 `r indexfns("shapelist3d")`: | generate a shape by combining other shapes
-`as.mesh3d`:                 | a generic function; see below
+`r linkfn("as.mesh3d")`:   | a generic function; see below
 
 A related function is `r indexfns("triangulate")`, which takes a
 two dimensional polygon and divides it up into triangles using the 
@@ -512,9 +577,10 @@ normals      | (optional) A matrix of the same shape as vb, containing normal ve
 texcoords    | (optional) A 2 by n matrix of texture coordinates corresponding to each vertex.
 values       | (optional) A vector of length n holding values at each vertex
 meshColor    | (optional) A text value indicating how colors and texture coordinates should be interpreted.
+tags         | (optional) A vector added by some functions (e.g. `r linkfn("clipMesh3d")`) to relate output parts to input parts.
 
 
-### Contouring shapes
+### Contouring and clipping shapes
 
 These functions compute and plot contours of functions
 on surfaces, or clip objects along a contour of a function.
@@ -597,7 +663,7 @@ output, but maybe only after low level modifications to it are
 complete.  For example, this code block prints both
 triangles and spheres in a single plot at the end:
 
-```{r}
+```{r Autoprint}
 xyz <- matrix(rnorm(27), ncol = 3)
 triangles3d(xyz, col = rainbow(9))
 spheres3d(xyz, col = rainbow(9), radius = 0.1)
@@ -685,11 +751,8 @@ you run out of memory if your scenes are really big.
 ### Older methods
 
 The original way to insert an `rgl` scene in a document was to use
-the `r indexfns("writeWebGL")` function to write HTML code to insert in a document. 
-Later, `Sweave` and `knitr` hooks were added.  These are no longer maintained, and it is recommended that
-you update old documents to use the newer methods.  See
-the `r linkfn("writeWebGL")`, `r linkfn("rgl.Sweave")` and `r linkfn("hook_rgl")` help
-topics for details on these if you must use them.  If you are
+the deprecated `r deprecated("writeWebGL")` function to write HTML code to insert in a document. 
+Later, `Sweave` and `knitr` hooks were added.  These are no longer supported, and you should update old documents to use the newer methods.  If you are
 reading documents that suggest using those methods, let the
 author know they need updating!
   
@@ -734,13 +797,14 @@ Function                     | Description
 `r indexfns("identify3d")`:   | like the classic graphics `r linkfn("identify", pkg="graphics")` function
 `r indexfns("select3d")`:     | returns a function that tests whether a coordinate was selected
 `r indexfns("selectpoints3d")`: | selects from specific objects
+`r indexfns("hover3d")`:      | displays "hover" info about points
 
 `r indexfns("selectionFunction3d")` produces the selection
 function from information about the projection and mouse
 selection region; it is used internally in the 
 functions above.
 
-The `r indexfns("rgl.select3d")` function is an obsolete version of
+The deprecated `r deprecated("rgl.select3d")` function is an obsolete version of
 `select3d`, and `r indexfns("rgl.select")` is a low-level support
 function.
 
@@ -789,7 +853,6 @@ Function    | Description
 ----------- | -------------
 `r indexfns("scene3d")`:    | Save a scene to an R variable, which can be saved and reloaded
 `r indexfns("rglwidget")`: | Prints as HTML and Javascript to display a scene in a web browser.  (See also [User Interaction in WebGL](WebGL.html).)
-`r linkfn("writeWebGL")`: | Deprecated.
 `r indexfns("writeASY")`:   | Write files for Asymptote
 `r indexfns("writePLY")`:   | Write PLY files (commonly used in 3D printing)
 `r indexfns(c("readOBJ", "writeOBJ"))`:   | Read or write OBJ files (commonly used in 3D graphics)
@@ -856,7 +919,7 @@ in `knitr`, use the
 chunk option `webgl=TRUE`; we recommend the explicit use of
 `rglwidget`.)  This approach also
 allows display of `rgl` scenes in
-[RStudio](https://www.rstudio.com/).  Besides 
+[RStudio](https://posit.co/).  Besides 
 `rgl` scenes, various controls for them can
 be displayed, and there are a few utility functions
 that can be useful:
@@ -895,20 +958,11 @@ More details are given in the vignette
 [User Interaction in WebGL](WebGL.html).
 The functions `r indexfns(c("lowlevel", "highlevel", "rglId"))` are also for internal use,
 marking function results for automatic
-printing.  Finally, the experimental function
+printing.  Finally, the function
 `r indexfns("setUserShaders")` allows you to
-use hand-written shaders in WebGL.
-
-The older approach uses the `r linkfn("writeWebGL")` function to export a scene 
-to HTML and Javascript code.  
-These functions write HTML and Javascript for working with the 
-exported scene:  `r indexfns("propertySlider")`,
-`r indexfns("clipplaneSlider")`, `r indexfns("subsetSlider")`,
-`r indexfns("toggleButton")`, `r indexfns("propertySetter")`,
-`r indexfns("subsetSetter")`, `r indexfns("ageSetter")`, 
-`r indexfns("par3dinterpSetter")`, 
-`r indexfns("vertexSetter")`, `r indexfns("matrixSetter")`.
-Use the newer functions instead.
+use hand-written shaders in WebGL, and 
+`r indexfns("getShaders")` allows you to see what
+shader would be used.
 
 ### Working with the scene
 
@@ -922,13 +976,21 @@ and are mainly intended for internal use.
 Function                             | Description
 ------------------------------------ | -----------
 `r indexfns("open3d")`:               | open a new window
-`r indexfns(c("close3d", "rgl.close"))`:              | close the current window
-`r indexfns(c("cur3d", "rgl.cur"))`:                | id of the active device
-`r indexfns(c("set3d", "rgl.set"))`:                | set a particular device to be active
-`r indexfns(c("pop3d", "rgl.pop"))`:     | delete objects from the scene
-`r indexfns(c("clear3d", "rgl.clear"))`:            | delete all objects of certain classes
-`r indexfns(c("ids3d", "rgl.ids"))`:              | ids, types and tags of current objects
+`r indexfns("close3d")`:              | close the current window
+`r indexfns("cur3d")`:                | id of the active device
+`r indexfns("set3d")`:                | set a particular device to be active
+`r indexfns("pop3d")`:     | delete objects from the scene
+`r indexfns(c("clear3d"))`:            | delete all objects of certain classes
+`r indexfns("ids3d")`:              | ids, types and tags of current objects
 `r indexfns("tagged3d")`:                         | find tags or objects with tags
+
+Some of these functions have alternate names for
+back compatibility:  
+`r deprecated(c("rgl.cur", "rgl.ids", "rgl.pop"))`. 
+Either name will work,
+but the `*3d` version is recommended for new code.
+Some have deprecated versions:
+`r deprecated(c("rgl.clear", "rgl.set"))`.  Those should not be called.
 
 These functions are mainly intended for programming, and 
 have no corresponding `*3d` counterparts:
@@ -946,8 +1008,8 @@ extract coordinates in a form suitable for passing to
 `r linkfn("triangles3d")`.  Currently a method is provided for
 `r linkfn("rglId")` objects.
 
-In addition to these, there are some other related functions which
-should rarely be called by users: `r indexfns(c("rgl.init", "rgl.open", "rgl.quit"))`.  
+In addition to these, there are some deprecated functions which
+should not be called: `r deprecated(c("rgl.init", "rgl.open", "rgl.close", "rgl.quit"))`.  
 
 
 ### Working with 3-D vectors
@@ -984,13 +1046,14 @@ display it in `lattice` or base graphics.
 The `r indexfns("rglToLattice")` and `r indexfns("rglToBase")` functions support this.
 
 For example, we first display the volcano data in `rgl`:
-```{r echo = 2:3}
+```{r fig.alt="Volcano in rgl", echo = 2:3}
 close3d()
 persp3d(volcano, col = "green")
 ```
 This display is interactive, but we can reproduce the initial view using the
 `lattice` `r linkfn("wireframe", pkg = "lattice")` or base graphics `r linkfn("persp", pkg = "graphics")` functions:
-```{r}
+```{r eval=requireNamespace("orientlib", quietly = TRUE) && requireNamespace("lattice", quietly = TRUE), fig.alt=paste0("Volcano in ", c("lattice", "base"), "graphics.")}
+# Only evaluated if the lattice & orientlib packages are installed
 lattice::wireframe(volcano, col = "green", 
 		   screen = rglToLattice())
 angles <- rglToBase()
@@ -1028,16 +1091,19 @@ package.  To help in development of this code, the
 `r indexfns("makeDependency")` function was written.
 It may be useful in other packages that include Javascript.
 
-### Other functions
+### Other functions and objects
 
-This section is for miscellaneous functions that don't
-fall in any of the other categories in this document.
+This section is for miscellaneous functions and objects 
+that don't fall in any of the other categories in this document.
 
 The `r indexfns("setGraphicsDelay")` function is designed
 to work around what appears to be a bug on macOS:  if
 a standard plot window is opened too quickly after an `rgl`
 window, R can crash.  This function inserts a one second 
 delay when it appears to be needed.
+
+The `r indexfns("gltfTypes")` vector contains
+constants used in OpenGL and glTF.
 
 ## Warning:  Work in Progress!
 
@@ -1046,7 +1112,7 @@ package are not described, or do not have examples.  There may
 even be functions that are missed completely, if the following
 list is not empty:
 ```{r echo=FALSE}
-setdiff(ls("package:rgl"), documentedfns)
+setdiff(ls("package:rgl"), c(documentedfns, deprecatedfns))
 ```
 
 ## Index of Functions

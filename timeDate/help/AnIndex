@@ -245,8 +245,10 @@ Galapagos	timeDate-DaylightSavingTime
 Gambier	timeDate-DaylightSavingTime
 Gaza	timeDate-DaylightSavingTime
 GBBankHoliday	holiday-Dates
+GBEarlyMayBankHoliday	holiday-Dates
 GBMayDay	holiday-Dates
 GBMilleniumDay	holiday-Dates
+GBSpringBankHoliday	holiday-Dates
 GBSummerBankHoliday	holiday-Dates
 getDataPart,timeDate-method	timeDate
 getRmetricsOption	options-RmetricsOptions
@@ -452,6 +454,7 @@ Monrovia	timeDate-DaylightSavingTime
 Monterrey	timeDate-DaylightSavingTime
 Montevideo	timeDate-DaylightSavingTime
 monthlyRolling	calendar-periods
+months	calendar-julian
 months,timeDate-method	calendar-julian
 Monticello	timeDate-DaylightSavingTime
 Montreal	timeDate-DaylightSavingTime
@@ -629,6 +632,7 @@ timeDate,Date-method	timeDate
 timeDate,missing-method	timeDate
 timeDate,numeric-method	timeDate
 timeDate,POSIXt-method	timeDate
+timeDate,timeDate,ANY-method	timeDate
 timeDate,timeDate-method	timeDate
 timeDate-class	class-timeDate
 timeDateMathOps	methods-mathOps
@@ -667,6 +671,7 @@ USGoodFriday	holiday-Dates
 Ushuaia	timeDate-DaylightSavingTime
 USInaugurationDay	holiday-Dates
 USIndependenceDay	holiday-Dates
+USJuneteenthNationalIndependenceDay	holiday-Dates
 USLaborDay	holiday-Dates
 USLincolnsBirthday	holiday-Dates
 USMemorialDay	holiday-Dates

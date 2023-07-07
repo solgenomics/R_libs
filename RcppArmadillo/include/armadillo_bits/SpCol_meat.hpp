@@ -204,7 +204,6 @@ SpCol<eT>::SpCol
 
 template<typename eT>
 inline
-arma_warn_unused
 const SpOp<SpCol<eT>,spop_htrans>
 SpCol<eT>::t() const
   {
@@ -215,7 +214,6 @@ SpCol<eT>::t() const
 
 template<typename eT>
 inline
-arma_warn_unused
 const SpOp<SpCol<eT>,spop_htrans>
 SpCol<eT>::ht() const
   {
@@ -226,7 +224,6 @@ SpCol<eT>::ht() const
 
 template<typename eT>
 inline
-arma_warn_unused
 const SpOp<SpCol<eT>,spop_strans>
 SpCol<eT>::st() const
   {
@@ -426,7 +423,7 @@ SpCol<eT>::end_row(const uword row_num) const
 
 
 
-#ifdef ARMA_EXTRA_SPCOL_MEAT
+#if defined(ARMA_EXTRA_SPCOL_MEAT)
   #include ARMA_INCFILE_WRAP(ARMA_EXTRA_SPCOL_MEAT)
 #endif
 

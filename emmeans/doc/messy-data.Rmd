@@ -21,6 +21,7 @@ knitr::opts_chunk$set(fig.width = 4.5, class.output = "ro")
   2. [Mediating covariates](#mediators) 
   3. [Mediating factors and weights](#weights)
   3. [Nuisance factors](#nuisance)
+  3. [Counterfactuals and G-Computation](#counterfact)
   4. [Sub-models](#submodels)
   5. [Nested fixed effects](#nesting)
      a. [Avoiding mis-identified nesting](#nest-trap)
@@ -81,8 +82,8 @@ of this study that cannot be overcome without collecting additional data. Our
 choices for further analysis are to focus only on Black and White populations;
 or to focus only on age group 3. For example (the latter):
 ```{r}
-summary(emmeans(nutr.lm, pairwise ~ group | race, at = list(age = "3")), 
-    by = NULL)
+emmeans(nutr.lm, pairwise ~ group | race, at = list(age = "3")) |>
+    summary(by = NULL)
 ```
  (We used trickery with providing a `by` variable, and then taking it
 away, to make the output more compact.) Evidently, the training program has been
@@ -113,7 +114,7 @@ framing.glm <- glm(cong_mesg ~ age + income + educ + emo + gender * factor(treat
 The conventional way to handle covariates like `emo` is to set them at their
 means and use those means for purposes of predictions and EMMs. These adjusted 
 means are shown in the following plot. 
-```{r}
+```{r fig.alt = "Two panels, each showing a decreasing trend with educ except they increase again with educ=Coll+. In the male panel, the curve for treat 1 is higher than that for treat 2, while the reverse is true in the female panel"}
 emmip(framing.glm, treat ~ educ | gender, type = "response") 
 ```
 
@@ -131,7 +132,7 @@ techniques), we should not pretend that `emo` can be set independently of
 `treat` as was done to obtain the EMMs shown above. Instead, let `emo` depend on
 `treat` and the other predictors -- easily done using `cov.reduce` -- and we 
 obtain an entirely different impression:
-```{r}
+```{r fig.alt = "Similar to previous figure but now the curves flatten out with >HS about the same as Coll+. For the maile panel, we still have the trace for treat 1 higher than for treat 0; but in the female panel, they are about the same as each other, and a bit lower than treat 0 for males. To see these results in numerical form, call emmeans() with the same arguments *except* replace the second argument with ~treat*educ|gender"}
 emmip(framing.glm, treat ~ educ | gender, type = "response", 
     cov.reduce = emo ~ treat*gender + age + educ + income)
 ```
@@ -197,7 +198,7 @@ weighting applied one factor at a time; the following two would yield the same
 results: 
 ```{r eval = FALSE} 
 emmeans(model, "A", weights = "outer") 
-emmeans(emmeans(model, c("A", "B"), weights = "prop"),  weights = "prop") 
+emmeans(model, c("A", "B"), weights = "prop") |>  emmeans(weights = "prop") 
 ```
 
 
@@ -213,8 +214,8 @@ non-estimable cases.)
 Here is a comparison of predictions for `nutr.lm` defined [above](#issues),
 using different weighting schemes:
 ```{r message = FALSE}
-sapply(c("equal", "prop", "outer", "cells", "flat"), function(w)
-    predict(emmeans(nutr.lm, ~ race, weights = w)))
+sapply(c("equal", "prop", "outer", "cells", "flat"), \(w)
+    emmeans(nutr.lm, ~ race, weights = w) |> predict())
 ```
 In the other hand, if we do `group * race` EMMs, only one factor (`age`) is
 averaged over; thus, the results for `"prop"` and `"outer"` weights will be
@@ -334,6 +335,61 @@ to loose to guard against some users getting into a tight situation.
 [Back to Contents](#contents)
 
 
+## Counterfactuals and G-Computation {#counterfact}
+<!-- @index Counterfactuals; Causal inference; G-Computation; -->
+G-computation is a method for model-based causal inference originated by JM Robins
+(*Mathematical Modelling*, 1986), and we want to remove confounding of treatment effects due to time-varying covariates and such.
+The idea is that, under certain assumptions, we can use the model to predict 
+*every* subject's response to each treatment -- not just the treatment they 
+received. To do this, we make several copies of the whole dataset, substituting
+the actual treatment(s) with each of the possible treatment levels; these
+provide us with *counterfactual* predictions. We then average those predictions
+over each copy of the dataset. Typically, this averaging is done on the response 
+scale; that is the interesting case because on the link scale, everything is linear
+and we can obtain basically the same results using ordinary `emmeans()` computations
+with proportional weights.
+
+An additional consideration is that when we average each of the counterfactual
+datasets, we are trying to represent the entire covariate distribution, rather
+than conditioning on the cases in the dataset. So it is a good idea to broaden
+the covariance estimate using, say, a sandwich estimate.
+
+This kind of computation has just a little bit in common with nuisance variables,
+in that the net result is that we can sweep several predictors out of the 
+reference grid just by averaging them away. For this to make sense, the predictors
+averaged-away will have been observed *before* treatment so that their effects are 
+separate from the treatment effects.
+
+The implementation of this in **emmeans** is via the `counterfactuals` argument
+in `ref_grid()` (but usually passed from `emmeans()`). We simply specify the
+factor(s) we want to keep. This creates an index variable `.obs.no.` to keep
+track of the observations in the dataset, and then the reference grid (before
+averaging) consists of every observation of the dataset in combination with the
+`counterfactuals` combinations.
+
+##### {#neuralgia}
+<!-- @index `vcov.`; Sandwich estimators;
+    Examples!`neuralgia`!`counterfactuals` -->
+As an example, consider the `neuralgia` data, where we have a binary response,
+pain, a treatment of interest (two active treatments and placebo), and
+pre-treatment predictors of sex, age, and duration of the condition. 
+We will include the `vcovHC()` covariance estimate in the **sandwich** package.
+```{r}
+neuralgia.glm <- glm(Pain ~ Sex + Age + Duration + Treatment,
+                     data = neuralgia, family = binomial)
+emmeans(neuralgia.glm, "Treatment", counterfactuals = "Treatment",
+        vcov. = sandwich::vcovHC)
+```
+Note that the results are already on the response (probability) scale,
+which is the default. Let's compare this with what we get without using counterfactuals (i.e., predicting at each covariate average):
+```{r}
+emmeans(neuralgia.glm, "Treatment", weights = "prop", type = "response")
+```
+These results are markedly different; the counterfactual method produces
+smaller differences between each of the active treatments and placebo.
+
+[Back to Contents](#contents)
+
 
 ## Sub-models {#submodels}
 <!-- @index `submodel`; Models!Constrained 
@@ -346,8 +402,8 @@ with a `submodel` specification so as to impose such a constraint. For illustrat
 return again to the nutrition example, and consider the analysis of `group`
 and `race` as before, after removing interactions involving `age`:
 ```{r}
-summary(emmeans(nutr.lm, pairwise ~ group | race, submodel = ~ age + group*race), 
-        by = NULL)
+emmeans(nutr.lm, pairwise ~ group | race, submodel = ~ age + group*race) |> 
+        summary(by = NULL)
 ```
 If you like, you may confirm that we would obtain exactly the same
 estimates if we had fitted that sub-model to the data, except we continue
@@ -441,19 +497,19 @@ variable.
 It can be very helpful to take advantage of special features of **ggplot2** when
 graphing results with nested factors. For example, the default plot for the `cows` example
 is not ideal:
-```{r, fig.width = 5.5}
+```{r, fig.width = 5.5, fig.alt = "A panel for each route. This interaction plot has a lot of empty space because all 5 drugs are represented in each panel, and the x axis labels all overlap"}
 emmip(cows.rg, ~ drug | route)
 ```
 
 We can instead remove `route` from the call and instead handle it with **ggplot2**
 code to use separate *x* scales:
-```{r, fig.width = 5.5}
+```{r, fig.width = 5.5, fig.alt = "This plot shows the same means as the previous one, but each panel shows only the drugs that are nested in each route"}
 require(ggplot2)
 emmip(cows.rg, ~ drug) + facet_wrap(~ route, scales = "free_x")
 ```
 
 Similarly with `plot.emmGrid()`:
-```{r, fig.height = 2.5, fig.width = 5.5}
+```{r, fig.height = 2.5, fig.width = 5.5, fig.alt = "side-by-side CIs and PIs for drugs in each route. Again, with free_y scaling, each panel contains only the drugs involved"}
 plot(drug.emm, PIs = TRUE) + 
     facet_wrap(~ route, nrow = 2, scales = "free_y")
 ```

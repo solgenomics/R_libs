@@ -1,7 +1,8 @@
 Package: viridis
 Type: Package
 Title: Colorblind-Friendly Color Maps for R
-Version: 0.6.2
+Version: 0.6.3
+Date: 2023-05-02
 Authors@R: c(
       person("Simon", "Garnier", email = "garnier@njit.edu", role = c("aut", "cre")),
       person("Noam", "Ross", email = "noam.ross@gmail.com", role = c("ctb", "cph")),
@@ -22,18 +23,18 @@ Description: Color maps designed to improve graph readability for readers with
 License: MIT + file LICENSE
 Encoding: UTF-8
 Depends: R (>= 2.10), viridisLite (>= 0.4.0)
-Imports: stats, ggplot2 (>= 1.0.1), gridExtra
+Imports: ggplot2 (>= 1.0.1), gridExtra
 Suggests: hexbin (>= 1.27.0), scales, MASS, knitr, dichromat,
-        colorspace, raster, rasterVis, httr, mapproj, vdiffr, svglite
-        (>= 1.2.0), testthat, covr, rmarkdown, rgdal, maps
+        colorspace, httr, mapproj, vdiffr, svglite (>= 1.2.0),
+        testthat, covr, rmarkdown, maps, terra
 LazyData: true
 VignetteBuilder: knitr
 URL: https://sjmgarnier.github.io/viridis/,
         https://github.com/sjmgarnier/viridis/
 BugReports: https://github.com/sjmgarnier/viridis/issues
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 NeedsCompilation: no
-Packaged: 2021-10-13 12:03:30 UTC; simon
+Packaged: 2023-05-02 21:45:03 UTC; simon
 Author: Simon Garnier [aut, cre],
   Noam Ross [ctb, cph],
   Bob Rudis [ctb, cph],
@@ -41,5 +42,5 @@ Author: Simon Garnier [aut, cre],
   Antônio Pedro Camargo [ctb, cph],
   Cédric Scherer [ctb, cph]
 Repository: CRAN
-Date/Publication: 2021-10-13 20:50:02 UTC
-Built: R 3.6.3; ; 2022-02-15 16:36:21 UTC; unix
+Date/Publication: 2023-05-03 00:20:02 UTC
+Built: R 4.3.0; ; 2023-07-07 03:49:18 UTC; unix

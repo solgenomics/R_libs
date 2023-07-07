@@ -24,7 +24,12 @@ params:
   author: "no data"
 ---
 
-```{r echo = FALSE}
+```{r global_options, include = FALSE}
+library(knitr)
+opts_chunk$set(echo = FALSE, comment = NA)
+```
+
+```{r}
 ## Data
 
 dfr <- params$dfr
@@ -84,14 +89,14 @@ For the graphs below, the following abbreviations are used:
 
 A principal components analysis is shown to see the associations among the genotypes and the attributes, first with all the panelists together and then with panelists opinions differentiated by gender.
 
-```{r echo = FALSE, fig.height = 6, fig.width = 6}
+```{r fig.height = 6, fig.width = 6}
 princip <- prcomp(adg, center = TRUE, scale. = TRUE)
 summary(princip)
 factoextra::fviz_pca(princip, repel = TRUE,
                      title = "Biplot of genotypes and attributes")
 ```
 
-```{r echo = FALSE, fig.height = 6, fig.width = 6}
+```{r fig.height = 6, fig.width = 6}
 princip <- prcomp(ads, center = TRUE, scale. = TRUE)
 summary(princip)
 factoextra::fviz_pca(princip, repel = TRUE,
@@ -102,18 +107,18 @@ factoextra::fviz_pca(princip, repel = TRUE,
 
 ## 3.1. Analysis for appearance
 
-```{r echo = FALSE}
+```{r}
 friedman.t('Appe', 'INSTN', 'PanelNo', dfr)
 ```
 
 ## 3.2. Analysis for taste
 
-```{r echo = FALSE}
+```{r}
 friedman.t('Tast', 'INSTN', 'PanelNo', dfr)
 ```
 
 ## 3.3. Analysis for texture
 
-```{r echo = FALSE}
+```{r}
 friedman.t('Text', 'INSTN', 'PanelNo', dfr)
 ```

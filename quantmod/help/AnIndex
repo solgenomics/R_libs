@@ -1,4 +1,6 @@
 quantmod-package	quantmod-package
+.chart.theme	chartTheme
+.chob	chartSeries
 .quantmodEnv	internal-quantmod
 Ad	OHLC.Transformations
 addADX	addADX
@@ -109,6 +111,7 @@ getFX	getFX
 getMetals	getMetals
 getModelData	getModelData
 getOptionChain	getOptionChain
+getOptionChain.orats	getOptionChain.orats
 getPrice	OHLC.Transformations
 getQuote	getQuote
 getSplits	getSplits
@@ -137,6 +140,7 @@ has.Ask	has
 has.Bid	has
 has.Cl	has
 has.Hi	has
+has.HL	has
 has.HLC	has
 has.Lo	has
 has.OHLC	has
@@ -148,9 +152,11 @@ has.Trade	has
 has.Vo	has
 Hi	OHLC.Transformations
 HiCl	OHLC.Transformations
+HL	OHLC.Transformations
 HLC	OHLC.Transformations
 importDefaults	Defaults
 is.BBO	has
+is.HL	has
 is.HLC	has
 is.OHLC	has
 is.OHLCV	has

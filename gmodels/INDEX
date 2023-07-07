@@ -1,7 +1,7 @@
-CrossTable              Cross Tabulation with Tests for Factor
-                        Independence
 ci                      Compute Confidence Intervals
 coefFrame               Return model parameters in a data frame
+CrossTable              Cross Tabulation with Tests for Factor
+                        Independence
 estimable               Contrasts and estimable linear functions of
                         model coefficients
 fast.prcomp             Efficient computation of principal components

@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head><title>R: Utilities for Working with Google APIs</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> Utilities for Working with Google APIs
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,16 +12,17 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;gargle&rsquo; version 1.2.0</h2>
+</div><h2>Documentation for package &lsquo;gargle&rsquo; version 1.5.1</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
+<li><a href="../NEWS">Package NEWS</a>.</li>
 </ul>
 
 <h2>Help Pages</h2>
 
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="AuthState-class.html">AuthState</a></td>
 <td>Authorization state</td></tr>
 <tr><td style="width: 25%;"><a href="AuthState-class.html">AuthState-class</a></td>
@@ -32,7 +34,7 @@
 <tr><td style="width: 25%;"><a href="credentials_external_account.html">credentials_external_account</a></td>
 <td>Get a token for an external account</td></tr>
 <tr><td style="width: 25%;"><a href="credentials_gce.html">credentials_gce</a></td>
-<td>Get a token for Google Compute Engine</td></tr>
+<td>Get a token from the Google metadata server</td></tr>
 <tr><td style="width: 25%;"><a href="credentials_service_account.html">credentials_service_account</a></td>
 <td>Load a service account token</td></tr>
 <tr><td style="width: 25%;"><a href="credentials_user_oauth2.html">credentials_user_oauth2</a></td>
@@ -44,6 +46,8 @@
 <tr><td style="width: 25%;"><a href="cred_funs.html">cred_funs_clear</a></td>
 <td>Credential function registry</td></tr>
 <tr><td style="width: 25%;"><a href="cred_funs.html">cred_funs_list</a></td>
+<td>Credential function registry</td></tr>
+<tr><td style="width: 25%;"><a href="cred_funs.html">cred_funs_list_default</a></td>
 <td>Credential function registry</td></tr>
 <tr><td style="width: 25%;"><a href="cred_funs.html">cred_funs_set</a></td>
 <td>Credential function registry</td></tr>
@@ -57,6 +61,12 @@
 <td>Process a Google API response</td></tr>
 <tr><td style="width: 25%;"><a href="gargle_options.html">gargle_oauth_cache</a></td>
 <td>Options consulted by gargle</td></tr>
+<tr><td style="width: 25%;"><a href="gargle_oauth_client_from_json.html">gargle_oauth_client</a></td>
+<td>Create an OAuth client for Google</td></tr>
+<tr><td style="width: 25%;"><a href="gargle_oauth_client_from_json.html">gargle_oauth_client_from_json</a></td>
+<td>Create an OAuth client for Google</td></tr>
+<tr><td style="width: 25%;"><a href="gargle_options.html">gargle_oauth_client_type</a></td>
+<td>Options consulted by gargle</td></tr>
 <tr><td style="width: 25%;"><a href="gargle_options.html">gargle_oauth_email</a></td>
 <td>Options consulted by gargle</td></tr>
 <tr><td style="width: 25%;"><a href="gargle_oauth_sitrep.html">gargle_oauth_sitrep</a></td>
@@ -65,14 +75,18 @@
 <td>Options consulted by gargle</td></tr>
 <tr><td style="width: 25%;"><a href="gargle_options.html">gargle_options</a></td>
 <td>Options consulted by gargle</td></tr>
+<tr><td style="width: 25%;"><a href="gargle_secret.html">gargle_secret</a></td>
+<td>Encrypt/decrypt JSON or an R object</td></tr>
 <tr><td style="width: 25%;"><a href="gargle_options.html">gargle_verbosity</a></td>
 <td>Options consulted by gargle</td></tr>
+<tr><td style="width: 25%;"><a href="gce_instance_service_accounts.html">gce_instance_service_accounts</a></td>
+<td>List all service accounts available on this GCE instance</td></tr>
 <tr><td style="width: 25%;"><a href="init_AuthState.html">init_AuthState</a></td>
 <td>Create an AuthState</td></tr>
+<tr><td style="width: 25%;"><a href="cred_funs.html">local_cred_funs</a></td>
+<td>Credential function registry</td></tr>
 <tr><td style="width: 25%;"><a href="gargle_options.html">local_gargle_verbosity</a></td>
 <td>Options consulted by gargle</td></tr>
-<tr><td style="width: 25%;"><a href="oauth_app_from_json.html">oauth_app_from_json</a></td>
-<td>Create an OAuth app from JSON</td></tr>
 <tr><td style="width: 25%;"><a href="request_develop.html">request_build</a></td>
 <td>Build a Google API request</td></tr>
 <tr><td style="width: 25%;"><a href="request_develop.html">request_develop</a></td>
@@ -85,6 +99,18 @@
 <td>Process a Google API response</td></tr>
 <tr><td style="width: 25%;"><a href="response_process.html">response_process</a></td>
 <td>Process a Google API response</td></tr>
+<tr><td style="width: 25%;"><a href="gargle_secret.html">secret_decrypt_json</a></td>
+<td>Encrypt/decrypt JSON or an R object</td></tr>
+<tr><td style="width: 25%;"><a href="gargle_secret.html">secret_encrypt_json</a></td>
+<td>Encrypt/decrypt JSON or an R object</td></tr>
+<tr><td style="width: 25%;"><a href="gargle_secret.html">secret_has_key</a></td>
+<td>Encrypt/decrypt JSON or an R object</td></tr>
+<tr><td style="width: 25%;"><a href="gargle_secret.html">secret_make_key</a></td>
+<td>Encrypt/decrypt JSON or an R object</td></tr>
+<tr><td style="width: 25%;"><a href="gargle_secret.html">secret_read_rds</a></td>
+<td>Encrypt/decrypt JSON or an R object</td></tr>
+<tr><td style="width: 25%;"><a href="gargle_secret.html">secret_write_rds</a></td>
+<td>Encrypt/decrypt JSON or an R object</td></tr>
 <tr><td style="width: 25%;"><a href="token-info.html">token-info</a></td>
 <td>Get info from a token</td></tr>
 <tr><td style="width: 25%;"><a href="token-info.html">token_email</a></td>
@@ -95,7 +121,9 @@
 <td>Get info from a token</td></tr>
 <tr><td style="width: 25%;"><a href="token-info.html">token_userinfo</a></td>
 <td>Get info from a token</td></tr>
+<tr><td style="width: 25%;"><a href="cred_funs.html">with_cred_funs</a></td>
+<td>Credential function registry</td></tr>
 <tr><td style="width: 25%;"><a href="gargle_options.html">with_gargle_verbosity</a></td>
 <td>Options consulted by gargle</td></tr>
 </table>
-</body></html>
+</div></body></html>

@@ -1,12 +1,3 @@
-EventHistory.frame      Event history frame
-Hist                    Create an event history response variable
-List2Matrix             Reduce list to a matrix or data.frame with
-                        names as new columns
-PercentAxis             Percentage-labeled axis.
-SimCompRisk             Simulate competing risks data
-SimSurv                 Simulate survival data
-SmartControl            Function to facilitate the control of arguments
-                        passed to subroutines.
 atRisk                  Drawing numbers of subjects at-risk of
                         experiencing an event below Kaplan-Meier and
                         Aalen-Johansen plots.
@@ -17,10 +8,14 @@ confInt                 Add point-wise confidence limits to the graphs
                         of Kaplan-Meier and Aalen-Johansen estimates.
 crModel                 Competing risks model for simulation
 dimColor                Dim a given color to a specified density
+EventHistory.frame      Event history frame
 getEvent                Extract a column from an event history object.
 getStates               States of a multi-state model
+Hist                    Create an event history response variable
 jackknife               Compute jackknife pseudo values.
 leaveOneOut             Compute jackknife pseudo values.
+List2Matrix             Reduce list to a matrix or data.frame with
+                        names as new columns
 markTime                Marking product-limit plots at the censored
                         times.
 meanNeighbors           Helper function to obtain running means for
@@ -29,6 +24,7 @@ model.design            Extract a design matrix and specials from a
                         model.frame
 neighborhood            Nearest neighborhoods for kernel smoothing
 parseSpecialNames       Parse special terms
+PercentAxis             Percentage-labeled axis.
 plot.Hist               Box-arrow diagrams for multi-state models.
 plot.prodlim            Plotting event probabilities over time
 plotCompetingRiskModel
@@ -46,7 +42,11 @@ redist                  Calculation of Efron's re-distribution to the
                         right algorithm to obtain the Kaplan-Meier
                         estimate.
 row.match               Identifying rows in a matrix or data.frame
+SimCompRisk             Simulate competing risks data
+SimSurv                 Simulate survival data
 sindex                  Index for evaluation of step functions.
+SmartControl            Function to facilitate the control of arguments
+                        passed to subroutines.
 stopTime                Stop the time of an event history object
 strip.terms             Strip special functions from terms
 summary.Hist            Summary of event histories

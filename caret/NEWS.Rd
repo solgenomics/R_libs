@@ -3,6 +3,34 @@
 \newcommand{\cpkg}{\href{https://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 \newcommand{\issue}{\href{https://github.com/topepo/caret/issues/#1}{(issue #1)}}
 
+\section{Changes in version 6.0-94}{
+  \itemize{
+   \item Bug fix in how some S3 signatures were designed (for R-devel).
+   \item Adrián Panella fixed a bug with `method = "svmRadial" that occured when the SVM probability model failed \issue{1327}
+   \item Theodore Pak fixed a bug in glmnet prediction when sparse matrices are used \issue{1315}
+      \item Carlos Cinelli fixed two bugs (one for GAMs and another for ranger models) where an error would occur when using \code{trainControl(method = "none")} \issue{1307} \issue{1308}
+   }
+}
+
+\section{Changes in version 6.0-93}{
+  \itemize{
+   \item CRAN required changes for legacy S typedef Sint.
+   \item Xabriel J. Collazo Mojica added check for class probabilities when PR curves are requested \issue{1274}.
+   }
+}
+
+\section{Changes in version 6.0-92}{
+  \itemize{
+   \item Small maintenance release with required C changes for R 4.2.
+   }
+}
+
+\section{Changes in version 6.0-91}{
+  \itemize{
+   \item Small maintenance release with required changes for R 4.2.
+   }
+}
+
 \section{Changes in version 6.0-90}{
   \itemize{
    \item A \code{ptype} element was added to \code{train} objects that records the trianing set predictor columns and their types using a zero-row slice.
@@ -223,7 +251,7 @@
 		\item A bug in \code{bdk} and \code{xyf} models was fixed where the appropriate number of parameter combinations are tested during random search.
 		\item A bug in \code{rfe} was fixed related to neural networks found by david-machinelearning \issue{485}
 		\item Neural networks via stochastic gradient descent (\code{method = "mlpSGD"}) was adapted for classification and a variable importance calculation was added.
-		\item \href{https://www.h2o.ai/}{h2o} versions of glmnet and gradient boosting machines were added with methods \code{"glmnet\_h2o"} and \code{"gbm\_h2o"}. These methods are not currently optimized.  \issue{283}
+		\item  \href{https://h2o.ai/}{h2o} versions of glmnet and gradient boosting machines were added with methods \code{"glmnet\_h2o"} and \code{"gbm\_h2o"}. These methods are not currently optimized.  \issue{283}
 		\item The fuzzy rule-based models (\code{WM}, \code{SLAVE}, \code{SBC}, \code{HYFIS}, \code{GFS.THRIFT}, \code{GFS.LT.RS}, \code{GFS.GCCL}, \code{GFS.FR.MOGUL}, \code{FS.HGD}, \code{FRBCS.W}, \code{FRBCS.CHI}, \code{FIR.DM}, \code{FH.GBML}, \code{DENFIS}, and \code{ANFIS}) were modified so that the user can pass in the predictor ranges using the \code{range.data} argument to those functions. \issue{498}
 		\item A variable importance method was added for boosted generalized linear models \issue{493}
 		\item \code{preProcess} now has an option to filter out highly correlated predictors.

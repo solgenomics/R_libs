@@ -1,3 +1,81 @@
+# CHANGES IN xfun VERSION 0.39
+
+- Fixed a bug that `protect_math()` fails to protect the starting `$$` that has leading white spaces.
+
+- Added a function `strip_html()` to remove HTML tags and comments from text.
+
+- The function `alnum_id()` will remove HTML tags and comments from text (using `strip_html()`) before converting it to an ID string.
+
+- Added a function `env_option()` to retrieve an option value from `options()`. If the option does not exist there, check the environment variables. This provides a way for users to set an option via either `options()` or an environment variable.
+
+# CHANGES IN xfun VERSION 0.38
+
+- Added an object `download_cache`, which is a list of methods to download a URL, cache the result, retrieve the result from the cache, and clear the cache.
+
+- Added an argument `default` to `url_filename()` to provide a default filename when it cannot be determined from the URL.
+
+- Added a function `yaml_load()` to read YAML data when the **yaml** package is not available. It only supports a limited number of data types and is supposed to be used as a fallback method. See the help page `?xfun::yaml_load` for details.
+
+- Added a function `yaml_body()` to split a document into YAML metadata and the body.
+
+- `is_arm64()` also supports Linux now (thanks, @eitsupi, #74).
+
+- `is_blank()` returns a logical vector of the same length as the input vector now, indicating if each element of the input is blank. Previously it returns a logical scalar indicating whether *all* elements are blank. If you want the old behavior, you can use `all(is_blank())`.
+
+# CHANGES IN xfun VERSION 0.37
+
+- Added a function `is_arm64()` to test the CPU type (thanks, @AlbanSagouis, #72).
+
+- Started deprecating `xfun::isFALSE()` in favor of `base::isFALSE()` for R >= 3.5.0 (thanks, @mmaechler, #66); `isFALSE()` will eventually be removed from **xfun** when we do not need to support R < 3.5.0.
+
+# CHANGES IN xfun VERSION 0.36
+
+- Added a new argument `resolve_symlink` to `normalize_path()` to get the absolute paths of symlinks without resolving them (with `resolve_symlink = FALSE`).
+
+# CHANGES IN xfun VERSION 0.35
+
+- Added a new argument `token` to `protect_math()` to optionally include a token around math expressions.
+
+- `base64_uri()` relies less on the **mime** package now. For some common file extensions (e.g., `.jpg`/`.png`), this function knows their MIME types.
+
+- `stringsAsStrings()` has been removed from this package.
+
+# CHANGES IN xfun VERSION 0.34
+
+- Added a new function `alnum_id()` to generate ID strings from a character vector.
+
+- The function `stringsAsStrings()` has been deprecated.
+
+# CHANGES IN xfun VERSION 0.33
+
+- Reverted the change for #68: the characters `-+!_#` are no longer accepted by default in filename extensions, since they are relatively rare and caused a breakage in rstudio/bookdown#1369. If you wish to allow for these characters, you may use the new `extra` argument in `file_ext()` and related functions, e.g., `xfun::file_ext(x, extra = '-+!_#')`.
+
+- The function `stringsAsStrings()` will be deprecated in a future release of **xfun**, because the global option `stringsAsFactors = FALSE` has become the default in base R since 4.0.0.
+
+# CHANGES IN xfun VERSION 0.32
+
+- Added a function `shrink_images()` to shrink images to a maximum width using the **magick** package (thanks, @apreshill, rstudio/blogdown#614).
+
+- Added a function `tinify_dir()` as a wrapper of `tinify()` to compress images under a directory.
+
+- `file_ext()` supports more file extensions now, such as `.c++`, `.FB2K-COMPONENT`, and so on (thanks, @tentacles-from-outer-space, #68).
+
+- Fixed the issue that `xfun::base_pkgs()` could hang R (thanks, @mmaechler, #66).
+
+- The `...` argument in `dir_create()` was not passed to `dir.create()`.
+
+# CHANGES IN xfun VERSION 0.31
+
+- `github_releases(use_jsonlite = FALSE)` supports R versions below 4.1.0 now.
+
+- `session_info()` silently drops empty package names now (thanks, @phargarten2, #65).
+
+# CHANGES IN xfun VERSION 0.30
+
+- Added a new function `is_blank()` (previously existed in **knitr**) to test if all elements of a character vector are blank (white spaces or empty strings).
+
+- Added a new argument `error = TRUE` to `existing_files()`.
+
 # CHANGES IN xfun VERSION 0.29
 
 - `github_releases()` can fetch all releases (tags) of a Github repo now.

@@ -1,5 +1,4 @@
 ### R code from vignette source 'GenomeSearching.Rnw'
-### Encoding: UTF-8
 
 ###################################################
 ### code chunk number 1: b1
@@ -19,11 +18,9 @@ class(genome)
 ###################################################
 ### code chunk number 3: b3
 ###################################################
-organism(genome)
-provider(genome)
-providerVersion(genome)
+metadata(genome)
 seqnames(genome)
-mseqnames(genome)
+seqinfo(genome)
 
 
 ###################################################
@@ -124,7 +121,7 @@ runAnalysis1 <- function(dict0, outfile="")
     genome <- BSgenome.Celegans.UCSC.ce2
     seqnames <- seqnames(genome)
     seqnames_in1string <- paste(seqnames, collapse=", ")
-    cat("Target:", providerVersion(genome),
+    cat("Target:", metadata(genome)$genome,
         "chromosomes", seqnames_in1string, "\n")
     append <- FALSE
     for (seqname in seqnames) {
@@ -352,7 +349,7 @@ alphabetFrequency(gaps(chr2))
 runOneStrandAnalysis <- function(dict0, bsgenome, seqnames, strand,
                                  outfile="", append=FALSE)
 {
-    cat("\nTarget: strand", strand, "of", providerVersion(bsgenome),
+    cat("\nTarget: strand", strand, "of", metadata(bsgenome)$genome,
         "chromosomes", paste(seqnames, collapse=", "), "\n")
     if (strand == "-")
         dict0 <- reverseComplement(dict0)

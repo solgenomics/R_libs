@@ -1,3 +1,12 @@
+# desc 1.4.2
+
+* The `description$write()` method, and thus all `desc_*()` functions work
+  correctly now on R 4.3.x for packages that declare a non-UTF-8 encoding.
+
+# desc 1.4.1
+
+* The `$coerce_authors_at_r()` method now does a much better job at setting
+  the authors' roles (#114, @dpprdan).
 
 # desc 1.4.0
 

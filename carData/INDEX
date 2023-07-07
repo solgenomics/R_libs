@@ -1,17 +1,17 @@
-AMSsurvey               American Math Society Survey Data
 Adler                   Experimenter Expectations
+AMSsurvey               American Math Society Survey Data
 Angell                  Moral Integration of American Cities
 Anscombe                U. S. State Public-School Expenditures
 Arrests                 Arrests for Marijuana Possession
-BEPS                    British Election Panel Study
 Baumann                 Methods of Teaching Reading Comprehension
+BEPS                    British Election Panel Study
 Bfox                    Canadian Women's Labour-Force Participation
 Blackmore               Exercise Histories of Eating-Disordered and
                         Control Subjects
 Burt                    Fraudulent Data on IQs of Twins Raised Apart
+CanPop                  Canadian Population Data
 CES11                   2011 Canadian National Election Study, With
                         Attitude Toward Abortion
-CanPop                  Canadian Population Data
 Chile                   Voting Intentions in the 1988 Chilean
                         Plebiscite
 Chirot                  The 1907 Romanian Peasant Rebellion
@@ -24,11 +24,11 @@ Ericksen                The 1980 U.S. Census Undercount
 Florida                 Florida County Voting
 Freedman                Crowding and Crime in U. S. Metropolitan Areas
 Friendly                Format Effects on Recall
+Ginzberg                Data on Depression
+Greene                  Refugee Appeals
 GSSvocab                Data from the General Social Survey (GSS) from
                         the National Opinion Research Center of the
                         University of Chicago.
-Ginzberg                Data on Depression
-Greene                  Refugee Appeals
 Guyer                   Anonymity and Cooperation
 Hartnagel               Canadian Crime-Rates Time Series
 Highway1                Highway Accidents
@@ -53,9 +53,9 @@ Prestige                Prestige of Canadian Occupations
 Quartet                 Four Regression Datasets
 Robey                   Fertility and Contraception
 Rossi                   Rossi et al.'s Criminal Recidivism Data
-SLID                    Survey of Labour and Income Dynamics
 Sahlins                 Agricultural Production in Mazulu Village
 Salaries                Salaries for Professors
+SLID                    Survey of Labour and Income Dynamics
 Soils                   Soil Compositions of Physical and Chemical
                         Characteristics
 States                  Education and Related Statistics for the U.S.
@@ -67,9 +67,9 @@ UN                      National Statistics from the United Nations,
 UN98                    United Nations Social Indicators Data 1998]
 USPop                   Population of the United States
 Vocab                   Vocabulary and Education
-WVS                     World Values Surveys
 WeightLoss              Weight Loss Data
 Wells                   Well Switching in Bangladesh
 Womenlf                 Canadian Women's Labour-Force Participation
 Wong                    Post-Coma Recovery of IQ
 Wool                    Wool data
+WVS                     World Values Surveys

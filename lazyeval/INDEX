@@ -1,6 +1,6 @@
+as_name                 Coerce an object to a name or call.
 as.lazy                 Convert an object to a lazy expression or lazy
                         dots.
-as_name                 Coerce an object to a name or call.
 ast_                    Display a call (or expression) as a tree.
 call_modify             Modify the arguments of a call.
 call_new                Create a call by "hand"

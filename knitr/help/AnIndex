@@ -6,6 +6,7 @@ asis_output	asis_output
 cache_engines	cache_engines
 clean_cache	clean_cache
 combine_words	combine_words
+convert_chunk_header	convert_chunk_header
 current_input	current_input
 dep_auto	dep_auto
 dep_prev	dep_prev
@@ -84,6 +85,7 @@ opts_template	opts_template
 pandoc	pandoc
 pandoc_from	output_type
 pandoc_to	output_type
+partition_chunk	partition_chunk
 pat_asciidoc	pat_fun
 pat_brew	pat_fun
 pat_html	pat_fun
@@ -112,6 +114,7 @@ render_rst	output_hooks
 render_sweave	output_hooks
 render_textile	output_hooks
 restore_raw_output	raw_output
+rnw2pdf	rnw2pdf
 rocco	rocco
 rst2pdf	rst2pdf
 set_alias	set_alias

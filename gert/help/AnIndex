@@ -1,3 +1,5 @@
+gert-package	gert-package
+gert	gert-package
 git_add	git_commit
 git_ahead_behind	git_rebase
 git_archive	git_archive

@@ -1,15 +1,4 @@
 AAbin                   Amino Acid Sequences
-CADM.global             Congruence among distance matrices
-DNAbin                  Manipulate DNA Sequences in Bit-Level Format
-DNAbin2indel            Recode Blocks of Indels
-FastME                  Tree Estimation Based on the Minimum Evolution
-                        Algorithm
-Initialize.corPhyl      Initialize a 'corPhyl' Structure Object
-LTT                     Theoretical Lineage-Through Time Plots
-MPR                     Most Parsimonious Reconstruction
-Moran.I                 Moran's I Autocorrelation Index
-SDM                     Construction of Consensus Distance Matrix With
-                        SDM
 ace                     Ancestral Character Estimation
 add.scale.bar           Add a Scale Bar to a Phylogeny Plot
 additive                Incomplete Distance Matrix Filling
@@ -46,6 +35,7 @@ birthdeath              Estimation of Speciation and Extinction Rates
 boot.phylo              Tree Bipartition and Bootstrapping Phylogenies
 branching.times         Branching Times of a Phylogenetic Tree
 c.phylo                 Building Lists of Trees
+CADM.global             Congruence among distance matrices
 carnivora               Carnivora body sizes and life history traits
 checkAlignment          Check DNA Alignments
 checkLabel              Checking Labels
@@ -97,18 +87,23 @@ diversi.time            Analysis of Diversification with Survival
                         Models
 diversity.contrast.test
                         Diversity Contrast Test
+DNAbin                  Manipulate DNA Sequences in Bit-Level Format
+DNAbin2indel            Recode Blocks of Indels
 dnds                    dN/dS Ratio
 drop.tip                Remove Tips in a Phylogenetic Tree
 edges                   Draw Additional Edges on a Plotted Tree
 evonet                  Evolutionary Networks
 ewLasso                 Incomplete distances and edge weights of
                         unrooted topology
+FastME                  Tree Estimation Based on the Minimum Evolution
+                        Algorithm
 gammaStat               Gamma-Statistic of Pybus and Harvey
 getAnnotationsGenBank   Read Annotations from GenBank
 hivtree                 Phylogenetic Tree of 193 HIV-1 Sequences
 howmanytrees            Calculate Numbers of Phylogenetic Trees
 identify.phylo          Graphical Identification of Nodes and Tips
 image.DNAbin            Plot of DNA Sequence Alignement
+Initialize.corPhyl      Initialize a 'corPhyl' Structure Object
 is.binary               Test for Binary Tree
 is.compatible           Check Compatibility of Splits
 is.monophyletic         Is Group Monophyletic
@@ -118,6 +113,7 @@ label2table             Label Management
 ladderize               Ladderize a Tree
 latag2n                 Leading and Trailing Alignment Gaps to N
 lmorigin                Multiple regression through the origin
+LTT                     Theoretical Lineage-Through Time Plots
 ltt.plot                Lineages Through Time Plot
 makeLabel               Label Management
 makeNodeLabel           Makes Node Labels
@@ -131,6 +127,8 @@ mcconwaysims.test       McConway-Sims Test of Homogeneous
 mcmc.popsize            Reversible Jump MCMC to Infer Demographic
                         History
 mixedFontLabel          Mixed Font Labels for Plotting
+Moran.I                 Moran's I Autocorrelation Index
+MPR                     Most Parsimonious Reconstruction
 mrca                    Find Most Recent Common Ancestors Between Pairs
 mst                     Minimum Spanning Tree
 multi2di                Collapse and Resolve Multichotomies
@@ -157,12 +155,9 @@ plot.varcomp            Plot Variance Components
 plotTreeTime            Plot Tree With Time Axis
 print.phylo             Compact Display of a Phylogeny
 rDNAbin                 Random DNA Sequences
-rTraitCont              Continuous Character Simulation
-rTraitDisc              Discrete Character Simulation
-rTraitMult              Multivariate Character Simulation
-read.GenBank            Read DNA Sequences from GenBank via Internet
 read.caic               Read Tree File in CAIC Format
 read.dna                Read DNA Sequences in a File
+read.GenBank            Read DNA Sequences from GenBank via Internet
 read.gff                Read GFF Files
 read.nexus              Read Tree File in Nexus Format
 read.nexus.data         Read Character Data In NEXUS Format
@@ -175,8 +170,13 @@ rlineage                Tree Simulation Under the Time-Dependent
                         Birth-Death Models
 root                    Roots Phylogenetic Trees
 rotate                  Swapping Sister Clades
+rTraitCont              Continuous Character Simulation
+rTraitDisc              Discrete Character Simulation
+rTraitMult              Multivariate Character Simulation
 rtree                   Generate Random Trees
 rtt                     Root a Tree by Root-to-Tip Regression
+SDM                     Construction of Consensus Distance Matrix With
+                        SDM
 seg.sites               Find Segregating Sites in DNA Sequences
 skyline                 Skyline Plot Estimate of Effective Population
                         Size
@@ -197,8 +197,8 @@ triangMtd               Tree Reconstruction Based on the Triangles
                         Method
 unique.multiPhylo       Revomes Duplicate Trees
 updateLabel             Update Labels
-varCompPhylip           Variance Components with Orthonormal Contrasts
 varcomp                 Compute Variance Component Estimates
+varCompPhylip           Variance Components with Orthonormal Contrasts
 vcv                     Phylogenetic Variance-covariance or Correlation
                         Matrix
 vcv2phylo               Variance-Covariance Matrix to Tree

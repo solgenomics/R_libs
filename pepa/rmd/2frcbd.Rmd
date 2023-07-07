@@ -22,14 +22,18 @@ params:
   rep: "no data"
   dfr: "no data"
   maxp: "no data"
+  pe: "no data"
   title: "no data"
   subtitle: "no data"
   author: "no data"
 ---
 
-```{r echo = FALSE}
+```{r global_options, include = FALSE}
 library(knitr)
+opts_chunk$set(echo = FALSE, comment = NA)
+```
 
+```{r}
 # Pass arguments
 
 traits <- params$traits
@@ -37,6 +41,7 @@ factors <- params$factors
 rep <- params$rep
 dfr <- params$dfr
 maxp <- params$maxp
+pe <- params$pe
 
 # Check factors structure
 

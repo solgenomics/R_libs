@@ -1,12 +1,3 @@
-DBI-package             DBI: R Database Interface
-DBIConnection-class     DBIConnection class
-DBIConnector-class      DBIConnector class
-DBIDriver-class         DBIDriver class
-DBIObject-class         DBIObject class
-DBIResult-class         DBIResult class
-Id-class                Refer to a table nested in a hierarchy (e.g.
-                        within a schema)
-SQL                     SQL quoting
 dbAppendTable           Insert rows into a table
 dbBegin                 Begin/commit/rollback SQL transactions
 dbBind                  Bind values to a parameterized/prepared
@@ -31,6 +22,12 @@ dbGetRowCount           The number of rows fetched so far
 dbGetRowsAffected       The number of rows affected
 dbGetStatement          Get the statement associated with a result set
 dbHasCompleted          Completion status
+DBI-package             DBI: R Database Interface
+DBIConnection-class     DBIConnection class
+DBIConnector-class      DBIConnector class
+DBIDriver-class         DBIDriver class
+DBIObject-class         DBIObject class
+DBIResult-class         DBIResult class
 dbIsReadOnly            Is this DBMS object read only?
 dbIsValid               Is this DBMS object still valid?
 dbListFields            List field names of a remote table
@@ -47,8 +44,11 @@ dbSendStatement         Execute a data manipulation statement on a
 dbUnquoteIdentifier     Unquote identifiers
 dbWithTransaction       Self-contained SQL transactions
 dbWriteTable            Copy data frames to database tables
+Id-class                Refer to a table nested in a hierarchy (e.g.
+                        within a schema)
 rownames                Convert row names back and forth between
                         columns
+SQL                     SQL quoting
 sqlAppendTable          Compose query to insert rows into a table
 sqlCreateTable          Compose query to create a simple table
 sqlData                 Convert a data frame into form suitable for

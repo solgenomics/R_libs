@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head><title>R: Adrian Dusa's Miscellaneous</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> Adrian Dusa's Miscellaneous
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;admisc&rsquo; version 0.24</h2>
+</div><h2>Documentation for package &lsquo;admisc&rsquo; version 0.33</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 </ul>
@@ -19,10 +20,8 @@
 <h2>Help Pages</h2>
 
 
-<table width="100%">
-<tr><td style="width: 25%;"><a href="admisc.package.html">admisc-package</a></td>
-<td>Adrian Dusa's Miscellaneous</td></tr>
-<tr><td style="width: 25%;"><a href="admisc.package.html">admisc</a></td>
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="admisc_package.html">admisc</a></td>
 <td>Adrian Dusa's Miscellaneous</td></tr>
 <tr><td style="width: 25%;"><a href="equality.html">aeqb</a></td>
 <td>Check difference and / or (in)equality of numbers</td></tr>
@@ -66,15 +65,17 @@
 <td>Tildae operations</td></tr>
 <tr><td style="width: 25%;"><a href="hclr.html">hclr</a></td>
 <td>Colors from the HCL spectrum</td></tr>
+<tr><td style="width: 25%;"><a href="inside.html">inside</a></td>
+<td>Evaluate an Expression in a Data Environment</td></tr>
+<tr><td style="width: 25%;"><a href="inside.html">inside.list</a></td>
+<td>Evaluate an Expression in a Data Environment</td></tr>
 <tr><td style="width: 25%;"><a href="brackets.html">insideBrackets</a></td>
 <td>Extract information from a multi-value SOP/DNF expression</td></tr>
 <tr><td style="width: 25%;"><a href="intersection.html">intersection</a></td>
 <td>Intersect expressions</td></tr>
 <tr><td style="width: 25%;"><a href="negate.html">invert</a></td>
 <td>Negate Boolean expressions</td></tr>
-<tr><td style="width: 25%;"><a href="rdaFunctions.html">list.rda</a></td>
-<td>Load and list objects from an .rda file</td></tr>
-<tr><td style="width: 25%;"><a href="rdaFunctions.html">list.rdata</a></td>
+<tr><td style="width: 25%;"><a href="rdaFunctions.html">listRDA</a></td>
 <td>Load and list objects from an .rda file</td></tr>
 <tr><td style="width: 25%;"><a href="SOPexpression.html">mvSOP</a></td>
 <td>Functions to interpret and manupulate a SOP/DNF expression</td></tr>
@@ -82,9 +83,9 @@
 <td>Negate Boolean expressions</td></tr>
 <tr><td style="width: 25%;"><a href="tildae.html">notilde</a></td>
 <td>Tildae operations</td></tr>
-<tr><td style="width: 25%;"><a href="rdaFunctions.html">obj.rda</a></td>
-<td>Load and list objects from an .rda file</td></tr>
-<tr><td style="width: 25%;"><a href="rdaFunctions.html">obj.rdata</a></td>
+<tr><td style="width: 25%;"><a href="numdec.html">numdec</a></td>
+<td>Count number of decimals</td></tr>
+<tr><td style="width: 25%;"><a href="rdaFunctions.html">objRDA</a></td>
 <td>Load and list objects from an .rda file</td></tr>
 <tr><td style="width: 25%;"><a href="brackets.html">outsideBrackets</a></td>
 <td>Extract information from a multi-value SOP/DNF expression</td></tr>
@@ -100,6 +101,14 @@
 <td>Replace text in a string</td></tr>
 <tr><td style="width: 25%;"><a href="brackets.html">roundBrackets</a></td>
 <td>Extract information from a multi-value SOP/DNF expression</td></tr>
+<tr><td style="width: 25%;"><a href="clipboard.html">scan.clipboard</a></td>
+<td>Cross platform scan/write clipboard</td></tr>
+<tr><td style="width: 25%;"><a href="dimnames.html">setColnames</a></td>
+<td>Set matrix row or column names</td></tr>
+<tr><td style="width: 25%;"><a href="dimnames.html">setDimnames</a></td>
+<td>Set matrix row or column names</td></tr>
+<tr><td style="width: 25%;"><a href="dimnames.html">setRownames</a></td>
+<td>Set matrix row or column names</td></tr>
 <tr><td style="width: 25%;"><a href="SOPexpression.html">simplify</a></td>
 <td>Functions to interpret and manupulate a SOP/DNF expression</td></tr>
 <tr><td style="width: 25%;"><a href="SOPexpression.html">sop</a></td>
@@ -114,7 +123,11 @@
 <td>Try functions to capture warnings, errors and messages.</td></tr>
 <tr><td style="width: 25%;"><a href="using.html">using</a></td>
 <td>Evaluate an expression in a data environment</td></tr>
+<tr><td style="width: 25%;"><a href="using.html">using.data.frame</a></td>
+<td>Evaluate an expression in a data environment</td></tr>
 <tr><td style="width: 25%;"><a href="numerics.html">wholeNumeric</a></td>
 <td>Numeric vectors</td></tr>
+<tr><td style="width: 25%;"><a href="clipboard.html">write.clipboard</a></td>
+<td>Cross platform scan/write clipboard</td></tr>
 </table>
-</body></html>
+</div></body></html>

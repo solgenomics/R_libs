@@ -1,11 +1,13 @@
-is_s3_generic           Determine if a function is an S3 generic or S3
-                        method.
 load                    Load package code
 namespace_roclet        Roclet: make 'NAMESPACE'
-object_format           Default format for data
-rd_roclet               Roclet: make Rd files.
-roclet_find             Create a roclet from a string.
+rd_roclet               Roclet: make Rd files
 roxygenize              Process a package with the Rd, namespace and
-                        collate roclets.
+                        collate roclets
+tags-index-crossref     Tags for indexing and cross-references
+tags-namespace          Tags for managing the 'NAMESPACE'
+tags-rd                 Tags for documenting functions
+tags-rd-formatting      Tags related to markdown support
+tags-rd-other           Tags for documenting datasets and classes
+tags-reuse              Tags that help you reuse documentation
 update_collate          Update Collate field in DESCRIPTION
-vignette_roclet         Re-build outdated vignettes.
+vignette_roclet         Re-build outdated vignettes

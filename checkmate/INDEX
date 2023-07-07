@@ -1,10 +1,10 @@
 %??%                    Coalesce operator
-AssertCollection        Collect multiple assertions
 allMissing              Check if an object contains missing values
 anyInfinite             Check if an object contains infinite values
 anyNaN                  Check if an object contains NaN values
 asInteger               Convert an argument to an integer
 assert                  Combine multiple checks into one assertion
+AssertCollection        Collect multiple assertions
 checkAccess             Check file system access rights
 checkArray              Check if an argument is an array
 checkAtomic             Check that an argument is an atomic vector
@@ -26,8 +26,8 @@ checkDisjunct           Check if an argument is disjunct from a given
 checkDouble             Check that an argument is a vector of type
                         double
 checkEnvironment        Check if an argument is an environment
-checkFALSE              Check if an argument is FALSE
 checkFactor             Check if an argument is a factor
+checkFALSE              Check if an argument is FALSE
 checkFileExists         Check existence and access rights of files
 checkFlag               Check if an argument is a flag
 checkFormula            Check if an argument is a formula
@@ -39,6 +39,7 @@ checkIntegerish         Check if an object is an integerish vector
 checkList               Check if an argument is a list
 checkLogical            Check if an argument is a vector of type
                         logical
+checkmate-package       checkmate: Fast and Versatile Argument Checks
 checkMatrix             Check if an argument is a matrix
 checkMultiClass         Check the class membership of an argument
 checkNamed              Check if an argument is named
@@ -48,21 +49,22 @@ checkNumber             Check if an argument is a single numeric value
 checkNumeric            Check that an argument is a vector of type
                         numeric
 checkOS                 Check the operating system
-checkPOSIXct            Check that an argument is a date/time object in
-                        POSIXct format
 checkPathForOutput      Check if a path is suited for creating an
                         output file
-checkR6                 Check if an argument is a R6 class
+checkPermutation        Check if the arguments are permutations of each
+                        other.
+checkPOSIXct            Check that an argument is a date/time object in
+                        POSIXct format
+checkR6                 Check if an argument is an R6 class
 checkRaw                Check if an argument is a raw vector
 checkScalar             Check if an argument is a single atomic value
 checkScalarNA           Check if an argument is a single missing value
 checkSetEqual           Check if an argument is equal to a given set
 checkString             Check if an argument is a string
 checkSubset             Check if an argument is a subset of a given set
-checkTRUE               Check if an argument is TRUE
 checkTibble             Check if an argument is a tibble
+checkTRUE               Check if an argument is TRUE
 checkVector             Check if an argument is a vector
-checkmate-package       checkmate: Fast and Versatile Argument Checks
 makeAssertion           Turn a Check into an Assertion
 makeExpectation         Turn a Check into an Expectation
 makeTest                Turn a Check into a Test

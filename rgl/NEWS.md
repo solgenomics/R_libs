@@ -1,3 +1,366 @@
+# rgl 1.2.1
+
+## Major changes
+
+* Support for non-PNG textures has been added.  Currently 
+supported:  JPEG files and any other object
+for which `grDevices::as.raster()` works, e.g. matrices.
+(Fixes issue #196.)
+
+## Minor changes
+
+* Support for "alt" text has been added to `rglwidget()`.
+Full support in R Markdown or `knitr` requires a `knitr` update
+to version 1.42.12 or newer.
+* Some of the tests have been relaxed slightly so they 
+shouldn't trigger errors on the M1Mac test platform.
+* Internally, the C++ code has dropped the use of the internally
+defined `String` type, settling on `std::string` instead.
+* `subdivision3d()`, `clipMesh3d()` and related functions now
+(optionally) record the original faces associated with each new one
+in a `mesh$tags` addition to the output.
+
+## Bug fixes
+
+* The `Makevars.win` file was being produced incorrectly on
+older Windows versions.
+* `rgl.window2user()` did not work correctly when multiple panes
+were showing.  This caused `arrow3d()` to fail in some panes
+(issue #354).
+* `selectpoints3d()` had a typo which was revealed by 
+warnings in recent R versions.
+* `getShaders()` was broken in 1.1.3.
+* `arc3d()` can now handle "arcs" that are straight lines along
+a radius (issue #357).
+* Spheres did not show textures correctly (issue #360).
+* `hover3d()` failed to display default labels in R (issue #362).
+* `shade3d()` didn't handle meshes with a mix of triangles and
+quads properly when `meshColor == "faces"`.
+* `subdivision3d()` and related functions now handle colors
+properly.
+* `addNormals()` sometimes gave `NaN` values due to rounding
+error (issue #372).
+* `arc3d()` sometimes missed plotting the last segment of the arc (issue #369).
+* `R_NO_REMAP` has been defined and header includes have been
+rearranged to prevent conflict between R internals and C++17
+library.  (Thanks to Prof. B. D. Ripley and G. Csardi for 
+suggested fixes.)
+
+
+# rgl 1.1.3
+
+## Major changes
+
+* A new function `hover3d()` has been added to display
+"hover hints":  labels next to points when the mouse 
+passes near them.
+* A new material property `"texmode"` has been added
+to control how textures are applied.  The default is `"modulate"`,
+consistent with previous versions.  If set to `"replace"`,
+the texture is displayed without any lighting effects or dependence
+on the original color of the surface.
+* Many of the demos have been moved to a new vignette called 
+`demos`.
+* `rgl` now uses the `glad` loader which will eventually allow
+access to newer OpenGL functions in systems that support them.
+
+## Minor changes
+
+* The `texenvmap = TRUE` material property is now supported
+in WebGL.
+* The method of including shader source code
+has changed to work around a limitation in Jupyter.
+* The default C++ standard is now accepted, rather
+than requiring C++11.  On R versions prior to R 4.2.0
+C++11 is still requested.
+
+## Bug fixes
+
+* The `as.mesh3d.rglId()` and `as.triangles3d.rglId()` methods
+and the `selectpoints3d()`, `writeOBJ()`, `writePLY()` 
+and `writeSTL()`
+functions did not handle indices
+in the objects they were processing (issue #293).
+* Transparent planes were not always drawn properly
+in WebGL (issue #300).
+* `view3d()` now returns a `lowlevel()` result so that 
+it will be handled properly in WebGL vignettes with 
+auto printing.
+* If `transform3d()` or `rotate3d()` changed the orientation
+of a `mesh3d` object with normals, the normals ended up
+with the wrong sign. (Reported by Stephane Laurent.)
+* `scene3d()` (and hence `rglwidget()`) did not save
+the normals for unlit objects.  When the objects were
+also indexed, this prevented proper calculation of 
+front and back.  This is fixed, and a warning is
+issued if normals are not provided when needed.
+* It was possible to call `glVersion` before OpenGL was
+initialized; this resulted in a segfault with the new
+`glad` loader, and may have been the cause of some older crashes
+as well.  This has been fixed.
+* `readOBJ()` did not handle comments properly.
+* Sprites consisting only of line segments (as used
+for example by `pch3d()`) caused rendering to fail in
+`rglwidget()` (issue #316).
+* Headers have been cleaned up to fix problems
+identified by Rtools43.
+
+# rgl 1.0.1
+
+## Major changes
+
+* The long promised deprecations of the `rgl.*` functions
+have happened.  Now deprecated: `rgl.abclines`,
+`rgl.bbox`, `rgl.bg`, `rgl.clear`, `rgl.clipplanes`,
+`rgl.close`, `rgl.light`, `rgl.lines`,
+`rgl.linestrips`, `rgl.material`,  `rgl.open`,
+`rgl.planes`, `rgl.points`, `rgl.quads`,
+`rgl.select3d`, `rgl.set`, `rgl.setAxisCallback`,
+`rgl.sprites`, `rgl.surface`, `rgl.texts`,
+`rgl.triangles`, and `rgl.viewpoint`.
+* A vignette "Deprecating the `rgl.*` interface"
+has been added.
+* Also deprecated: `elementId2Prefix`, `writeWebGL`
+
+## Minor changes
+
+* Since `rgl.material` is deprecated and no
+longer contains the list of material types in its
+argument list, `rgl.material.names` and `rgl.material.readonly` have been
+added.  
+* Similarly, `rgl.par3d.names` and `rgl.par3d.readonly`
+contain lists of properties that may be set or queried
+in `par3d()`.
+* The flexibility improvements for `surface3d()` in
+0.111.6 were incomplete.
+* Argument `flip` has been added to `surface3d()` to allow
+front and back to be switched.
+
+# rgl 0.111.6
+
+## Minor changes
+
+* Added a panning example to the help page for `setUserCallbacks()`.
+* Replaced all calls to `sprintf` from C/C++ code with calls to
+`snprintf`.
+* `surface3d` and `rgl.surface` are now more flexible,
+allowing any of the 3 coordinates to be a vector or matrix
+as long as at least one is a matrix.
+* `material3d` can now specify an `id` to query properties
+for individual objects.
+* Since `rgl.material` is soon to be deprecated and no
+longer contain the list of material types in its
+argument list, `rgl.material.names` and `rgl.material.readonly` have been
+added.  
+* Similarly, `rgl.par3d.names` and `rgl.par3d.readonly`
+contain lists of properties that may be set or queried
+in `par3d()`.
+* Made some examples conditional on interactive use
+to save time on CRAN.
+
+## Bug fixes
+
+* Default mouse modes used when a window is opened by an `rgl.*`
+call (which is not recommended!) now match
+the defaults in `rgl::r3dDefaults`.
+* Missing values could cause `surface3d()` to segfault.
+* The C source code for `gl2psGetFileFormat` missed declaring
+a prototype.
+
+# rgl 0.110.2
+
+## Major changes
+
+* Material property `"blend"` has been added, to allow
+various kinds of blending for semi-transparent objects
+(issue #245).
+
+## Minor changes
+
+* The `Buffer` object now handles reading of sparse
+accessors.
+* Low level drawing of primitives has been made more
+memory efficient.  This is only likely to make a 
+noticeable change with very large objects, where R
+was running out of memory because of unnecessary
+duplication. (Related to issue #260.)
+* Recycling of x, y and z vectors in several functions
+is more consistent.
+* The `polygon3d()` function now chooses coordinates
+automatically, as `triangulate()` does (PR #262.)
+* The `mtext3d()` and related functions such as
+`title3d()` now accept language objects
+other than expressions, as `plotmath3d()` always has 
+(issue #273).
+
+## Bug fixes
+
+* The bounding box could be calculated incorrectly
+if data all had large values (issue #250).
+* Shiny displays failed to load the shaders (issue #249).
+* `transform3d()` failed due to missing argument (issue #253).
+* `readOBJ()` is now more flexible in what kinds of
+separators it will accept. (issue #258).
+* Failure to initialize could cause a segfault.
+* On non-macOS platforms, gray-scale textures failed
+to display, with a message about an invalid enumerant.
+* The third coordinate for `adj` that was added in 0.108.3
+was not rendered properly in `rglwidget()` displays of
+text.  This sometimes caused text to disappear when it
+was near the far limit of the display (issue #269).
+* The X11 error fix in 0.109.6 could result in R
+freezing in `Rcmdr`.
+* Low level drawing functions are now more consistent
+about returning an invisible `NULL` if asked to plot zero
+items, rather than raising an error or crashing (issue #274).
+* Calling `axis3d()` with no ticks or labels no longer triggers
+an error, it now silently returns `NULL`.
+
+# rgl  0.109.6
+
+## Minor changes
+
+* `rglwidget()` displays now act on "pointer" events, 
+not just "mouse" events, so they should be more usable 
+on touch screens and tablets (PR #240).
+
+## Bug fixes
+
+* Plotting `scene3d()` objects didn't handle suppressed
+axes properly, drawing the default axis instead (issue
+#241).
+* On some systems using X11, `rgl` would segfault when
+the "fixed" font was not found.
+* X11 errors could cause R to abort.
+
+# rgl  0.109.2
+
+## Major changes
+
+* Changes to support glTF animation:
+  - Handling of `embedding = "modify"` for the model matrix
+    has changed.  Now the centering step is only done for
+    `embedding = "replace"`.  In addition, various bugs
+    have been fixed.
+  - If a subscene has no lights defined, the lights from the parent
+    are used.
+  - `plot.rglscene()` now ends with the root subscene as
+    current.  It also allows specification of `open3d()`
+    parameters in a list.
+  - The `MATn` types in `Buffer` are returned as arrays with
+    dim `c(n, n, count)`.
+  - The `plot3d.rglscene` method now passes `...` to `open3d()`.
+  - The `setUserShaders()` function now allows arrays of 4x4 matrices as "uniforms", and allows additional textures to be specified.
+* `sprites3d()` now has the option of
+`rotating = TRUE`, to allow 3D sprites to rotate with
+the scene.
+* Added `getShaders()` function to get shaders used in WebGL.
+* Now detects if `rgl` is running within `reprex::reprex()`
+and if so arranges that a screenshot will be included in the
+output.
+* Added default shaders to be used in `rglwidget()`, rather than
+constructing them on the fly.  This incompatibly affects the use
+of lights and clipping planes with user shaders:  their data 
+is now stored in arrays rather than multiple numbered variables.
+
+## Minor changes
+
+* Now that `pkgdown` 2.0.0 has been released, a number 
+of internal workarounds to support the development version
+have been removed.
+* Added `as.mesh3d()` methods for `"rglsubscene"` and `"rglscene"`.
+* `open3d()` now handles `useNULL` and `silent` arguments
+passed in `params`.
+* Controls passed to `playwidget()` may now include a 
+component specifying HTML dependencies.
+* Added `rglwidgetClass.readAccessor()` method to let other
+code use the buffering.
+* Changed the internal organization of bounding box calculations.
+* All functions that produce meshes now accept 
+material properties.  Newly modified to do so using the `...`
+argument:  `cylinder3d()`, and `getBoundary3d()`.
+* Updated the system requirements and installation instructions.
+* Solid bounding box decorations now try harder to display 3 faces (issue #206).
+* Now that `webshot2` is on CRAN, instructions for
+installing it from Github have been removed.
+* Sometimes `webshot2` snapshots are very slow, so
+the default for the `webshot` argument to `snapshot3d()`
+now depends on the `RGL_USE_WEBSHOT` environment
+variable, using `TRUE` if it is unset. (Reported by Prof. B. D. Ripley.)
+* If the Chrome browser is not found, `snapshot3d(webshot = TRUE)` now issues a warning and 
+reverts to using `rgl.snapshot()`. 
+* Buffers now use "normalized integers" to store
+color or texture coordinate values that lie between 0
+and 1 when it saves some space.
+* At the request of CRAN, the `akima` package is no
+longer suggested.
+  
+## Bug fixes
+
+* `as.mesh3d.rglobject()` didn't handle objects with indices
+properly.
+* In WebGL, the front vs back calculation sometimes
+got the wrong result (issue #164).
+* `pop3d(tag = x)` did not always find the objects with `tag == x` if they were not in the current subscene.
+* The default values for `front` and `back` in `rgl.material`
+and `material3d` are now `"filled"`, as documented in some
+places.
+* The `fog` setting wasn't handled properly by `bg3d()`.
+* Numerous cases of partial argument matching were fixed
+(suggestion of Henrik Bengtsson in issue #170.)
+* Argument `col` is accepted as a synonym for `color` in `material3d()` and `rgl.material()`.
+* `planes3d()` objects were not displayed consistently 
+in `rgl` windows and WebGL displays, because the bounding
+boxes were not computed consistently (issue #169).
+* Some initialization wasn't done properly in Shiny apps,
+so they failed after a redraw (issue #173).
+* Buffers are now optional, as they don't work with 
+Shiny scene changes (also issue #173).
+* The NULL device would sometimes miscalculate the
+bounding box.
+* `selectpoints3d(closest = TRUE)` selected too many points
+when multiple objects were in the scene.
+* Clearing nested subscenes could cause a segfault and crash.
+* In `knitr` and `rmarkdown`, blank plots could be shown
+when `par3d(skipRedraw=TRUE)` was set (issue #188).
+* Objects drawn with `sprites3d()` weren't lit correctly
+in WebGL (issue #189).
+* Objects with textures were sometimes drawn more than once, both
+before the texture loaded and after.  This was most noticeable for
+objects with user textures.
+* Axis mode `"pretty"` got lost when scenes were redrawn.
+* Tick labels were sometimes lost in WebGL displays and
+`snapshot3d()` results (issue #197).
+* The new material properties from 0.107.10 and 0.108.3
+were not handled properly by `plotmath3d()`.
+* `rglMouse()` did not set the default value of the drop-down
+selector properly (issue #213).
+* `merge.mesh3d()`, used by `filledContour3d()`, didn't handle
+colors properly (issue #212).
+* `bg3d(sphere = TRUE)` has been fixed (issue #207).
+* Textures were not appearing on spheres, and front-back
+differences weren't being rendered (issue #217).
+* When "knitting" within RStudio under R 4.2.0 on
+Windows, `rgl` scenes didn't appear (reported by
+Dieter Menne.) A workaround has been added.
+* In `rglwidget()`, axis labels were not always
+displayed, and did not move with solid bounding box
+decorations properly (issue #206).
+* On some systems, `lines3d()` using both missing values
+and transparency did not draw properly (issue #234,
+originally reported by Gaspar Jekely).
+* The `rglShared()` example failed when `crosstalk`
+was uninstalled.
+
+
+# rgl  0.108.3.2
+
+## Bug fixes
+
+* Changes introduced in 0.100.50 lacked checks; these caused 
+segfaults in Windows with R 4.2.0 and RStudio (issue #208).
+* A typo caused problems loading fonts on some systems.
+
 # rgl  0.108.3
 
 ## Major changes
@@ -28,7 +391,7 @@ location), `5` (in front of it), and `6` (behind it) in
 * `crosstalk` is now a Suggested package, rather than
 a required one.
 * The `Makevars.ucrt` file has been modified with
-contributions from Tomas Kalibera to work with his winutf8
+contributions from Tomas Kalibera to work with his `winutf8`
 build of R.
 * `bgplot3d()` no longer pauses for each page when running
 examples.
@@ -52,7 +415,7 @@ for installing the devel version have been removed.
   installation.  (Suggestion of Simon Urbanek and Prof. Brian Ripley.)
 * `shade3d()`, `wire3d()` and `dots3d()` overrode
   `"front"` and `"back"` material settings in mesh objects.
-* rglwidget() handling of bounding box decorations had
+* `rglwidget()` handling of bounding box decorations had
   several bugs.
 * `rgl` could not find routines in the DLL on some Windows
 installs (Issue 148.)

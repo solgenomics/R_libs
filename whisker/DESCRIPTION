@@ -6,12 +6,12 @@ Type: Package
 LazyLoad: yes
 Author: Edwin de Jonge
 Description: Implements 'Mustache' logicless templating.
-Version: 0.4
-URL: http://github.com/edwindj/whisker
+Version: 0.4.1
+URL: https://github.com/edwindj/whisker
 Suggests: markdown
 RoxygenNote: 6.1.1
 NeedsCompilation: no
-Packaged: 2019-08-28 07:26:51 UTC; edwin
+Packaged: 2022-12-05 15:15:55 UTC; hornik
 Repository: CRAN
-Date/Publication: 2019-08-28 08:50:02 UTC
-Built: R 3.6.3; ; 2020-03-24 19:50:44 UTC; unix
+Date/Publication: 2022-12-05 15:33:50 UTC
+Built: R 4.3.0; ; 2023-07-07 02:31:47 UTC; unix

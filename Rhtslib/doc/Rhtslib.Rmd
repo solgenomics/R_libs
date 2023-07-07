@@ -1,10 +1,10 @@
 ---
 title: "Motivation and use of _Rhtslib_"
 author: "Nathaniel Hayden, Martin Morgan"
-date: "Compiled `r doc_date()`;  Modified 9 Oct 2019"
+date: "Compiled `r doc_date()`;  Modified 30 April 2022"
 package: "`r pkg_ver('Rhtslib')`"
 abstract: >
-  This package provides version 1.7 of the 'HTSlib' C library for
+  This package provides version 1.15.1 of the 'HTSlib' C library for
   high-throughput sequence analysis. The package is primarily useful
   to developers of other R packages who wish to make use of
   HTSlib. Motivation and instructions for use of this package are in
@@ -86,10 +86,10 @@ in `r Biocpkg("Rhtslib")`, you must include a `src/Makevars` file.
 
 Create a `src/Makevars` file with the following lines
 
-    RHTSLIB_LIBS=$(shell echo 'Rhtslib::pkgconfig("PKG_LIBS")'|\
-        "${R_HOME}/bin/R" --vanilla --slave)
-    RHTSLIB_CPPFLAGS=$(shell echo 'Rhtslib::pkgconfig("PKG_CPPFLAGS")'|\
-        "${R_HOME}/bin/R" --vanilla --slave)
+    RHTSLIB_LIBS=$(shell "${R_HOME}/bin${R_ARCH_BIN}/Rscript" -e \
+        'Rhtslib::pkgconfig("PKG_LIBS")')
+    RHTSLIB_CPPFLAGS=$(shell "${R_HOME}/bin${R_ARCH_BIN}/Rscript" -e \
+        'Rhtslib::pkgconfig("PKG_CPPFLAGS")')
 
     PKG_LIBS=$(RHTSLIB_LIBS)
     PKG_CPPFLAGS=$(RHTSLIB_CPPFLAGS)

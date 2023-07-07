@@ -1,3 +1,81 @@
+# dtplyr 1.3.1
+
+* Fix for failing R CMD check.
+
+* `dtplyr` no longer directly depends on `crayon`.
+
+# dtplyr 1.3.0
+
+## Breaking changes
+
+* dplyr and tidyr verbs no longer dispatch to dtplyr translations when used
+  directly on data.table objects. `lazy_dt()` must now explicitly be called by
+  the user (#312).
+
+## New features
+
+* `across()` output can now be used as a data frame (#341).
+
+* `.by`/`by` has been implemented for `mutate()`, `summarise()`, `filter()`,
+  and the `slice()` family (#399).
+
+* New translations for `add_count()`, `pick()` (#341), and `unite()`.
+
+* `min_rank()`, `dense_rank()`, `percent_rank()`, & `cume_dist()` are now mapped
+  to their `data.table` equivalents (#396).
+
+## Performance improvements
+
+* `arrange()` now utilizes `setorder()` when possible for improved performance 
+  (#364).
+
+* `select()` now drops columns by reference when possible for improved 
+  performance (#367).
+
+* `slice()` uses an intermediate variable to reduce computation time of row 
+  selection (#377).
+
+## Minor improvements and bug fixes
+
+* dtplyr no longer directly depends on `ellipsis`.
+
+* Chained operations properly prevent modify-by-reference (#210).
+
+* `across()`, `if_any()`, and `if_all()` evaluate the `.cols` argument
+  in the environment from which the function was called.
+ 
+* `count()` properly handles grouping variables (#356).
+
+* `desc()` now supports use of `.data` pronoun inside in `arrange()` (#346).
+
+* `full_join()` now produces output with correctly named columns when a 
+  non-default value for `suffix` is supplied. Previously the `suffix` argument 
+  was ignored (#382).
+
+* `if_any()` and `if_all()` now work without specifying the `.fns` argument 
+  (@mgirlich, #325) and for a list of functions specified in the 
+  (@mgirlich, #335).
+
+* `pivot_wider()`'s `names_glue` now works even when `names_from` contains 
+  `NA`s (#394).
+
+* In `semi_join()` the `y` table is again coerced to a lazy table if 
+  `copy = TRUE` (@mgirlich, #322).
+
+* `mutate()` can now use `.keep`.
+
+* `mutate()`/`summarize()` correctly translates anonymous functions (#362).
+
+* `mutate()`/`transmute()` now supports `glue::glue()` and `stringr::str_glue()` 
+   without specifying  `.envir`.
+
+* `where()` now clearly errors because dtplyr doesn't support selection 
+  by predicate (#271).
+
+# dtplyr 1.2.2
+
+* Hot patch release to resolve R CMD check failures.
+
 # dtplyr 1.2.1
 
 * Fix for upcoming rlang release.

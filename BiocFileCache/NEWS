@@ -1,8 +1,81 @@
+CHANGES IN VERSION 2.7
+----------------------
+
+USER VISIBLE CHANGE
+
+    o (2.7.1) Remove rappdirs officially from package after deprecating
+    functionality and moving to using default R tools caching location.
+
+BUG FIX
+
+    o (2.7.2) Fix mismatch of arguments from function to generic for bfcupdate
+
+CHANGES IN VERSION 2.5
+----------------------
+
+ENHANCEMENT
+
+    o (2.5.2) Add option to override unique identifer when adding files to the
+    cache. This will allow exact match of original file name.
+
+BUG FIX
+
+    o (2.5.1) ERROR if interactively decide not to removebfc
+
+CHANGES IN VERSION 2.3
+----------------------
+
+ENHANCEMENT
+
+    o (2.3.4) Add instructions for a shared cache across multiple users of a system
+    o (2.3.2) Add direct SQL calls for certain retrieval functions to speed up
+    access time. This will speed up the bfcquery function as well as any
+    function tha utilized the underlying .sql_get_field, .get_all_rids or
+    .get_all_web_rids.
+    o (2.3.1) Add @LTLA solution for making bfcrpath thread safe
+
+CHANGES IN VERSION 2.1
+----------------------
+
+MAJOR UPDATES
+
+    o (2.1.1) Change caching location warning/deprecation to an ERROR in
+    preparation for removal of dependency next release.
+
+CHANGES IN VERSION 1.99
+----------------------
+
+MAJOR UPDATES
+
+    o (1.99.0) The default caching location has changed. Instead of
+    rappdirs::user_cache_dir using tools::R_user_dir. To avoid conflicting
+    caches, a user will have to manage an old cache location before
+    proceeding. Information for handling an old cache location is provided in
+    the vignette.
+    o (1.99.0) Another major change, a default caching location is automatically
+    created in a non interactive session instead of using a temporary
+    location. In an interactive session, a user is still prompted for
+    permission.
+    o (1.99.0) An enviornment variable may be set system wide or user wide to
+    control the default caching location: BFC_CACHE. Note: do not use R
+    variables or command line export to set this variable. It must be set system
+    wide or user wide for reproducibility in future R sessions or else it must
+    be specified upon ever usage. It must be set before calling
+    library(BiocFileCache) to take effect.
+    o (1.99.0) Fixes partial argument matching error in SQL function SQLExecute
+    o (1.15.1) Added file locking for thread-safe SQL operations. Thanks for the PR @LTLA
+
+BUG FIX
+
+    o (1.99.6) cleanbfc() incorrect format string; see
+    https://github.com/Bioconductor/BiocFileCache/issues/31
+
 CHANGES IN VERSION 1.11
 ----------------------
 
 BUG FIX
 
+    o (1.11.5) Update dplyr functions for dplyr_1.0.0 release 
     o (1.11.2) Fixes run of examples. Different result manual vs interactive so
     have conditional that will allow complete example if run by user rather than
     run automatically through the checks. 
@@ -13,6 +86,8 @@ NEW FEATURES
     ActiveBinding call. Avoids callback function executing data retrieval
     everytime.
 
+    o (1.11.3) Only asks for / reports use of temporary cache once per
+    session. https://github.com/Bioconductor/TENxBrainData/issues/7
 
 CHANGES IN VERSION 1.7
 ----------------------

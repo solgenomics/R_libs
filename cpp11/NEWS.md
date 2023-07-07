@@ -1,3 +1,33 @@
+# cpp11 0.4.4
+
+* Davis Vaughan is now the maintainer. 
+
+* `as_doubles()` and `as_integers()` now propagate missing values correctly
+   (#265, #319).
+
+* Fixed a performance issue related to nested `unwind_protect()` calls (#298).
+
+* Minor performance improvements to the cpp11 protect code. (@kevinushey)
+
+* Silenced an unknown attribute warning specific to the Intel compiler
+  (r-lib/systemfonts#98).
+
+* `cpp_register()` gains an argument `extension=` governing the file extension of
+  the `src/cpp11` file. By default it's `.cpp`, but `.cc` is now supported 
+  as well (#292, @MichaelChirico)
+
+# cpp11 0.4.3
+
+* Modernized the GitHub Actions workflows and updated some internal tests to
+  better align with changes in those workflows and the latest version of R
+  (#279).
+
+* `cpp_source()` errors on non-existent file (#261). 
+
+* `cpp_register()` is quiet by default when R is non interactive (#289).
+
+* updated test to adapt to changes in R 4.2.1 (#290).
+
 # cpp11 0.4.2
 
 * Romain François is now the maintainer.

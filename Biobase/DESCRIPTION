@@ -1,15 +1,30 @@
 Package: Biobase
 Title: Biobase: Base functions for Bioconductor
-Version: 2.46.0
-Author: R. Gentleman, V. Carey, M. Morgan, S. Falcon
 Description: Functions that are needed by many other packages or which
         replace R functions.
-Suggests: tools, tkWidgets, ALL, RUnit, golubEsets
+biocViews: Infrastructure
+URL: https://bioconductor.org/packages/Biobase
+BugReports: https://github.com/Bioconductor/Biobase/issues
+Version: 2.60.0
+License: Artistic-2.0
+Authors@R: c(
+    person("R.", "Gentleman", role="aut"),
+    person("V.", "Carey", role = "aut"),
+    person("M.", "Morgan", role="aut"),
+    person("S.", "Falcon", role="aut"),
+    person("Haleema", "Khan",
+        role = "ctb",
+        comment = "'esApply' and 'BiobaseDevelopment' vignette translation from Sweave to Rmarkdown / HTML"
+    ),
+    person("Bioconductor Package Maintainer",
+        role = "cre",
+        email = "maintainer@bioconductor.org"
+    ))
+Suggests: tools, tkWidgets, ALL, RUnit, golubEsets, BiocStyle, knitr
 Depends: R (>= 2.10), BiocGenerics (>= 0.27.1), utils
 Imports: methods
-Maintainer: Bioconductor Package Maintainer
- <maintainer@bioconductor.org>
-License: Artistic-2.0
+VignetteBuilder: knitr
+LazyLoad: yes
 Collate: tools.R strings.R environment.R vignettes.R packages.R
         AllGenerics.R VersionsClass.R VersionedClasses.R
         methods-VersionsNull.R methods-VersionedClass.R DataClasses.R
@@ -19,13 +34,19 @@ Collate: tools.R strings.R environment.R vignettes.R packages.R
         methods-ExpressionSet.R methods-MultiSet.R methods-SnpSet.R
         methods-NChannelSet.R anyMissing.R rowOp-methods.R
         updateObjectTo.R methods-ScalarObject.R zzz.R
-LazyLoad: yes
-biocViews: Infrastructure
 git_url: https://git.bioconductor.org/packages/Biobase
-git_branch: RELEASE_3_10
-git_last_commit: 153c5c6
-git_last_commit_date: 2019-10-29
-Date/Publication: 2019-10-29
+git_branch: RELEASE_3_17
+git_last_commit: 8dc10d2
+git_last_commit_date: 2023-04-25
+Date/Publication: 2023-04-25
 NeedsCompilation: yes
-Packaged: 2019-10-29 23:33:05 UTC; biocbuild
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2022-02-24 20:44:00 UTC; unix
+Packaged: 2023-04-25 20:18:46 UTC; biocbuild
+Author: R. Gentleman [aut],
+  V. Carey [aut],
+  M. Morgan [aut],
+  S. Falcon [aut],
+  Haleema Khan [ctb] ('esApply' and 'BiobaseDevelopment' vignette
+    translation from Sweave to Rmarkdown / HTML),
+  Bioconductor Package Maintainer [cre]
+Maintainer: Bioconductor Package Maintainer <maintainer@bioconductor.org>
+Built: R 4.3.0; x86_64-pc-linux-gnu; 2023-07-07 13:00:18 UTC; unix

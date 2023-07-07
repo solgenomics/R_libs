@@ -1,12 +1,6 @@
-Args                    Describe Function Arguments
-ConvertMedUnits         Convert medical measurements between
-                        International Standard (SI) and US
-                        'Conventional' Units.
-MedUnits                Table of conversions between Intertional
-                        Standard (SI) and US 'Conventional' Units for
-                        common medical measurements.
 aggregate.table         Defunct Functions in Package 'gdata'
 ans                     Value of Last Evaluated Expression
+Args                    Describe Function Arguments
 bindData                Bind two data frames into a multivariate data
                         frame
 case                    Map elements of a vector according to the
@@ -16,15 +10,16 @@ cbindX                  Column-bind objects with different number of
 centerText              Center Text Strings
 combine                 Combine R Objects With a Column Labeling the
                         Source
+ConvertMedUnits         Convert medical measurements between
+                        International Standard (SI) and US
+                        'Conventional' Units.
 drop.levels             Drop unused factor levels
 duplicated2             Determine Duplicate Elements
-elem                    Display Information about Elements in a Given
-                        Object
 env                     Describe All Loaded Environments
 first                   Return first or last element of an object
 frameApply              Subset analysis on data frames
-gdata-package           Various R programming tools for data
-                        manipulation
+gdata-package           Various R Programming Tools for Data
+                        Manipulation
 getYear                 Get date/time parts from date and time objects
 humanReadable           Print Byte Size in Human Readable Format
 installXLSXsupport      Install perl modules needed for read.xls to
@@ -38,9 +33,12 @@ ll                      Describe Objects or Elements
 ls.funs                 List function objects
 mapLevels               Mapping levels
 matchcols               Select columns names matching certain critera
+MedUnits                Table of conversions between Intertional
+                        Standard (SI) and US 'Conventional' Units for
+                        common medical measurements.
 mv                      Rename an Object
-nPairs                  Number of variable pairs
 nobs                    Compute the Number of Non-missing Observations
+nPairs                  Number of variable pairs
 object.size             Report the Space Allocated for Objects
 read.xls                Read Excel files
 rename.vars             Remove or rename variables in a dataframe
@@ -57,7 +55,8 @@ trimSum                 Trim a vector such that the last/first value
 unknownToNA             Change unknown values to NA and vice versa
 unmatrix                Convert a matrix into a vector, with
                         appropriate names
-update.list             Update the elements of a list
+update.list             Update the elements of a list, or rows of a
+                        dataframe
 upperTriangle           Extract or replace the upper/lower triangular
                         portion of a matrix
 wideByFactor            Create multivariate data by a given factor

@@ -8,9 +8,9 @@ hvc2mnsl                Converts a hue, chroma and value to a Munsell
                         colour
 lighter                 Make a munsell colour lighter
 mnsl                    Converts a Munsell colour to hex
+mnsl_hues               Munsell hues
 mnsl2hvc                Converts a Munsell colour to a hue, chroma and
                         value triplet
-mnsl_hues               Munsell hues
 munsell                 Munsell colour system.
 pbgyr                   Change the hue of a munsell colour
 plot_closest            Plot closest Munsell colour to an sRGB colour

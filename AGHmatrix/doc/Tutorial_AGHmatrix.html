@@ -12,29 +12,42 @@
 
 <meta name="author" content="Rodrigo Amadeu" />
 
-<meta name="date" content="2021-09-14" />
+<meta name="date" content="2023-04-03" />
 
 <title>AGHmatrix Tutorial</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
 
 
 <style type="text/css">
-  code {
-    white-space: pre;
-  }
-  .sourceCode {
-    overflow: visible;
-  }
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
@@ -52,55 +65,54 @@ pre > code.sourceCode { white-space: pre-wrap; }
 pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
-  { counter-reset: source-line 0; }
+{ counter-reset: source-line 0; }
 pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
+{ position: relative; left: -4em; counter-increment: source-line; }
 pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
 div.sourceCode
-  {   }
+{ }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
 </style>
 <script>
 // apply pandoc div.sourceCode style to pre.sourceCode instead
@@ -109,13 +121,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -127,7 +146,187 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
 
 
 
@@ -141,26 +340,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <h1 class="title toc-ignore">AGHmatrix Tutorial</h1>
 <h4 class="author">Rodrigo Amadeu</h4>
-<h4 class="date">2021-09-14</h4>
+<h4 class="date">2023-04-03</h4>
 
 
 
 <div id="contact" class="section level2">
 <h2>Contact</h2>
 <p>Rodrigo R Amadeu<br />
-rramadeu at ufl dot com<br />
 rramadeu at gmail dot com<br />
-Horticultural Sciences Department<br />
-University of Florida<br />
 <a href="https://rramadeu.github.io" class="uri">https://rramadeu.github.io</a></p>
 </div>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
-<p>AGHmatrix software is an R-package to build relationship matrices using pedigree (A matrix) and/or molecular markers (G matrix) with the possibility to build a combined matrix of Pedigree corrected by Molecular (H matrix). The package works with diploid and autopolyploid data.</p>
+<p>AGHmatrix software is an R-package to build relationship matrices
+using pedigree (A matrix) and/or molecular markers (G matrix) with the
+possibility to build a combined matrix of Pedigree corrected by
+Molecular (H matrix). The package works with diploid and autopolyploid
+data.</p>
 </div>
 <div id="matrices-computation-implemented-in-the-aghmatrix" class="section level2">
 <h2>Matrices computation implemented in the <code>AGHmatrix</code></h2>
-<p>Currently the package computes the following 17 different relationship matrices:</p>
+<p>Currently the package computes the following 17 different
+relationship matrices:</p>
 <div id="pedigree-based-relationship-matrix-a-matrix" class="section level3">
 <h3>Pedigree-based relationship matrix (A matrix)</h3>
 <table>
@@ -208,14 +409,15 @@ University of Florida<br />
 </tr>
 <tr class="even">
 <td><strong>Polyploid</strong></td>
-<td>Slater (2016), VanRaden (2021)</td>
+<td>Slater (2016), de Bem Oliveira (2019)</td>
 <td>Slater (2016), Endelman (2018)</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div id="combined-pedigree-and-molecular-based-relationship-matrix-h-matrix" class="section level3">
-<h3>Combined pedigree and molecular-based relationship matrix (H matrix)</h3>
+<h3>Combined pedigree and molecular-based relationship matrix (H
+matrix)</h3>
 <table>
 <thead>
 <tr class="header">
@@ -228,13 +430,19 @@ University of Florida<br />
 </tr>
 </tbody>
 </table>
-<p>Additionally there is a beta implementation to compute A matrix when parentage is not deterministic as in a polycross design. See <code>?AmatrixPolycross</code>.</p>
+<p>Additionally there is a beta implementation to compute A matrix when
+parentage is not deterministic as in a polycross design. See
+<code>?AmatrixPolycross</code>.</p>
 </div>
 </div>
 <div id="citation" class="section level2">
 <h2>Citation</h2>
 <p>To cite this R package:</p>
-<p>Amadeu, RR, C Cellon, JW Olmstead, AAF Garcia, MFR Resende, and PR Munoz. 2016. AGHmatrix: R package to construct relationship matrices for autotetraploid and diploid species: a blueberry example. <em>The Plant Genome</em> 9(3).</p>
+<p>Amadeu, RR, C Cellon, JW Olmstead, AAF Garcia, MFR Resende, and PR
+Munoz. 2016. AGHmatrix: R package to construct relationship matrices for
+autotetraploid and diploid species: a blueberry example. <em>The Plant
+Genome</em> 9(3). <a href="http://dx.doi.org/10.3835/plantgenome2016.01.0009">doi:
+10.3835/plantgenome2016.01.0009</a></p>
 </div>
 <div id="installing-and-loading" class="section level2">
 <h2>Installing and loading</h2>
@@ -251,7 +459,20 @@ University of Florida<br />
 </div>
 <div id="relationship-matrices-using-pedigree-data---a-matrix" class="section level2">
 <h2>Relationship matrices using pedigree data - A matrix</h2>
-<p><code>Amatrix</code> process the pedigree and build the A-matrix related to that given pedigree. The matrix is built based in the recursive method presented in Mrode (2014) and described by Henderson (1976). This method is expanded for higher ploidies (n-ploidy) as detailed in Kerr et al. (2012). After loading the package you have to load your data file into the software. To do this, you can use the function <code>read.data()</code> or <code>read.csv()</code> for example. Your data should be available in R as a <code>data.frame</code> structure in the following order: column 1 must be the individual/genotype names (id), columns 2 and 3 must be the parent names. For the algorithm, it does not matter who is the mother and who is the father (so, no sex column). There is a pedigree data example (<code>ped.mrode</code>) that can be used to look at the structure and order the data.</p>
+<p><code>Amatrix</code> process the pedigree and build the A-matrix
+related to that given pedigree. The matrix is built based in the
+recursive method presented in Mrode (2014) and described by Henderson
+(1976). This method is expanded for higher ploidies (n-ploidy) as
+detailed in Kerr et al. (2012). After loading the package you have to
+load your data file into the software. To do this, you can use the
+function <code>read.data()</code> or <code>read.csv()</code> for
+example. Your data should be available in R as a <code>data.frame</code>
+structure in the following order: column 1 must be the
+individual/genotype names (id), columns 2 and 3 must be the parent
+names. For the algorithm, it does not matter who is the mother and who
+is the father (so, no sex column). There is a pedigree data example
+(<code>ped.mrode</code>) that can be used to look at the structure and
+order the data.</p>
 <p>To load <code>ped.mrode</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(ped.mrode)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ped.mrode</span>
@@ -267,8 +488,25 @@ University of Florida<br />
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ Ind : Factor w/ 6 levels &quot;Anc1&quot;,&quot;Anc2&quot;,..: 1 2 3 4 5 6</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ Par1: Factor w/ 4 levels &quot;0&quot;,&quot;Anc1&quot;,&quot;Var2&quot;,..: 1 1 2 2 3 4</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ Par2: Factor w/ 3 levels &quot;0&quot;,&quot;Anc2&quot;,&quot;Var1&quot;: 1 1 2 1 3 2</span></span></code></pre></div>
-<p>The example <code>ped.mrode</code> has 3 columns, column 1 contains the names of the individual/genotypes, column 2 contains the names of the first parent, column 3 contains the names of the second parental (example from Table 2.1 of Mrode 2014). There is no header template, and the unknown value must be equal 0. Your data has to be in the same format of <code>ped.mrode</code>.</p>
-<p>Internally the algorithm first pre-process the pedigree: the individuals are numerated <span class="math inline">\(1\)</span> to <span class="math inline">\(n\)</span>. Then, it is verified whether the genotypes in the pedigree are in chronological order (i.e. if the parents of a given individual are located before to this individual in the pedigree data set). If this order is not followed, the algorithm performs the necessary changes to correct them in a iterative way. After this pre-processing, the matrix computation proceeds as in Henderson (1976) for diploid - for additive or dominance relationship - and as in Kerr et al. (2012) for autotetraploids - for additive relationship. For autotetraploids, there is the option to include double-reduction fraction. For diploids there is the option to compute the dominant relationship matrix (Cockerham, 1954).</p>
+<p>The example <code>ped.mrode</code> has 3 columns, column 1 contains
+the names of the individual/genotypes, column 2 contains the names of
+the first parent, column 3 contains the names of the second parental
+(example from Table 2.1 of Mrode 2014). There is no header template, and
+the unknown value must be equal 0. Your data has to be in the same
+format of <code>ped.mrode</code>.</p>
+<p>Internally the algorithm first pre-process the pedigree: the
+individuals are numerated <span class="math inline">\(1\)</span> to
+<span class="math inline">\(n\)</span>. Then, it is verified whether the
+genotypes in the pedigree are in chronological order (i.e. if the
+parents of a given individual are located before to this individual in
+the pedigree data set). If this order is not followed, the algorithm
+performs the necessary changes to correct them in a iterative way. After
+this pre-processing, the matrix computation proceeds as in Henderson
+(1976) for diploid - for additive or dominance relationship - and as in
+Kerr et al. (2012) for autotetraploids - for additive relationship. For
+autotetraploids, there is the option to include double-reduction
+fraction. For diploids there is the option to compute the dominant
+relationship matrix (Cockerham, 1954).</p>
 <p>It follows some usage examples with the <code>ped.mrode</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing additive relationship matrix for diploids (Henderson 1976):</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Amatrix</span>(ped.mrode, <span class="at">ploidy=</span><span class="dv">2</span>)</span>
@@ -298,8 +536,21 @@ University of Florida<br />
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>?Amatrix</span></code></pre></div>
 </div>
 <div id="diploid-g-matrix-relationship-matrices-using-the-molecular-data" class="section level2">
-<h2>Diploid G matrix: relationship matrices using the molecular data</h2>
-<p><code>Gmatrix</code> handles the molecular-marker matrix and builds the relationship matrix. Molecular markers data should be organized in a matrix format (individuals in rows and markers in columns) coded as 0, 1, 2 and missing data value (numeric or <code>NA</code>). Import your molecular marker data into <code>R</code> with the function <code>read.table()</code> or <code>read.csv()</code> and convert to a matrix format with the function <code>as.matrix()</code>. The function <code>Gmatrix</code> can be used to construct the additive relationship either as proposed by Yang et al. (2010) or the proposed by VanRaden (2008). The function can also construct the dominance relationship matrix either as proposed by Su et al. (2012) or as proposed by Vitezica et al. (2013). As an example, here we build the four matrices using real data from Resende et al. (2012).</p>
+<h2>Diploid G matrix: relationship matrices using the molecular
+data</h2>
+<p><code>Gmatrix</code> handles the molecular-marker matrix and builds
+the relationship matrix. Molecular markers data should be organized in a
+matrix format (individuals in rows and markers in columns) coded as 0,
+1, 2 and missing data value (numeric or <code>NA</code>). Import your
+molecular marker data into <code>R</code> with the function
+<code>read.table()</code> or <code>read.csv()</code> and convert to a
+matrix format with the function <code>as.matrix()</code>. The function
+<code>Gmatrix</code> can be used to construct the additive relationship
+either as proposed by Yang et al. (2010) or the proposed by VanRaden
+(2008). The function can also construct the dominance relationship
+matrix either as proposed by Su et al. (2012) or as proposed by Vitezica
+et al. (2013). As an example, here we build the four matrices using real
+data from Resende et al. (2012).</p>
 <p>To load <code>snp.pine</code> and to check its structure:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(snp.pine)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>snp.pine[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
@@ -320,8 +571,13 @@ University of Florida<br />
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  - attr(*, &quot;dimnames&quot;)=List of 2</span></span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ..$ : chr [1:926] &quot;1087120&quot; &quot;1085618&quot; &quot;1091040&quot; &quot;1091686&quot; ...</span></span>
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ..$ : chr [1:4853] &quot;0-10024-01-114&quot; &quot;0-10037-01-257&quot; &quot;0-10040-02-394&quot; &quot;0-10040-02-41&quot; ...</span></span></code></pre></div>
-<p>In this dataset, we have 926 individuals with 4853 markers and the missing data value is <code>-9</code>.</p>
-<p>It follows some examples with the <code>snp.pine</code> data where the unknown value (<code>missingValue</code>) is <code>-9</code>. Here we set minimum allele frequency to <code>0.05</code>, so markers with minor allele frequency lower than 0.05 are removed from the dataset prior to the G matrix construction.</p>
+<p>In this dataset, we have 926 individuals with 4853 markers and the
+missing data value is <code>-9</code>.</p>
+<p>It follows some examples with the <code>snp.pine</code> data where
+the unknown value (<code>missingValue</code>) is <code>-9</code>. Here
+we set minimum allele frequency to <code>0.05</code>, so markers with
+minor allele frequency lower than 0.05 are removed from the dataset
+prior to the G matrix construction.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the additive relationship matrix based on VanRaden 2008</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>G_VanRadenPine <span class="ot">&lt;-</span> <span class="fu">Gmatrix</span>(<span class="at">SNPmatrix=</span>snp.pine, <span class="at">missingValue=</span><span class="sc">-</span><span class="dv">9</span>, </span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">maf=</span><span class="fl">0.05</span>, <span class="at">method=</span><span class="st">&quot;VanRaden&quot;</span>)</span>
@@ -341,9 +597,34 @@ University of Florida<br />
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>?Gmatrix</span></code></pre></div>
 </div>
 <div id="autopolyploid-g-matrix-relationship-matrices-using-the-molecular-data" class="section level2">
-<h2>Autopolyploid G matrix: relationship matrices using the molecular data</h2>
-<p>Molecular markers data should be organized in a matrix format (individual in rows and markers in columns) coded according to the dosage level: 0, 1, 2, …, ploidy level, and missing data value (numeric user-defined or <code>NA</code>). As an example, an autotetraploid should be coded as 0, 1, 2, 3, 4, and a missing data value. In autopolyploids, the function <code>Gmatrix</code> can be used to construct: i) the additive relationship based on VanRaden (2008) and extended by Ashraf (2016); ii) the full-autopolyploid including additive and non-additive model as equations 8 and 9 in Slater et al. (2016); iii) the pseudo-diploid model as equations 5, 6, and 7 Slater et al. (2016). iv) the digenic-dominant model based on Endelman et al. (2018). As an example, here we build the matrices using data from Endelman et al. (2018) (<code>snp.sol</code>). There is also an option to build weighted relationship matrices as in Liu et al. (2020).</p>
-<p>The argument <code>ploidy.correction</code> defines the denominator of the formula for the <code>VanRaden</code> method. If <code>ploidy.correction=TRUE</code>, it uses the parametric correction as <span class="math inline">\(\sum_i p f_i(1-f_i)\)</span>, where <span class="math inline">\(p\)</span> is the ploidy level and <span class="math inline">\(f_i\)</span> is the minor allele frequency of the <span class="math inline">\(i_th\)</span> marker. If <code>ploidy.correction=FALSE</code>, it uses the sampling variance correction as <span class="math inline">\(\sum_i \frac{1}{p} s^2(m_i)\)</span>, where <span class="math inline">\(s^2(m_i)\)</span> is the sampling variance of the <span class="math inline">\(i_th\)</span> marker. Both corrections are equivalent when sampling size goes to the infinity. The default is to use the sampling variance as the correction (i.e., <code>ploidy.correction=FALSE</code>).</p>
+<h2>Autopolyploid G matrix: relationship matrices using the molecular
+data</h2>
+<p>Molecular markers data should be organized in a matrix format
+(individual in rows and markers in columns) coded according to the
+dosage level: 0, 1, 2, …, ploidy level, and missing data value (numeric
+user-defined or <code>NA</code>). As an example, an autotetraploid
+should be coded as 0, 1, 2, 3, 4, and a missing data value. In
+autopolyploids, the function <code>Gmatrix</code> can be used to
+construct: i) the additive relationship based on VanRaden (2008) and
+extended by Ashraf (2016); ii) the full-autopolyploid including additive
+and non-additive model as equations 8 and 9 in Slater et al. (2016);
+iii) the pseudo-diploid model as equations 5, 6, and 7 Slater et
+al. (2016). iv) the digenic-dominant model based on Endelman et
+al. (2018). As an example, here we build the matrices using data from
+Endelman et al. (2018) (<code>snp.sol</code>). There is also an option
+to build weighted relationship matrices as in Liu et al. (2020).</p>
+<p>The argument <code>ploidy.correction</code> defines the denominator
+of the formula for the <code>VanRaden</code> method. If
+<code>ploidy.correction=TRUE</code>, it uses the parametric correction
+as <span class="math inline">\(\sum_i p f_i(1-f_i)\)</span>, where <span class="math inline">\(p\)</span> is the ploidy level and <span class="math inline">\(f_i\)</span> is the minor allele frequency of the
+<span class="math inline">\(i_th\)</span> marker. If
+<code>ploidy.correction=FALSE</code>, it uses the sampling variance
+correction as <span class="math inline">\(\sum_i \frac{1}{p}
+s^2(m_i)\)</span>, where <span class="math inline">\(s^2(m_i)\)</span>
+is the sampling variance of the <span class="math inline">\(i_th\)</span> marker. Both corrections are
+equivalent when sampling size goes to the infinity. The default is to
+use the sampling variance as the correction (i.e.,
+<code>ploidy.correction=FALSE</code>).</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Loading the data</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(snp.sol)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(snp.sol)</span>
@@ -370,8 +651,17 @@ University of Florida<br />
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>?Gmatrix</span></code></pre></div>
 </div>
 <div id="ratio-non-dosage-g-matrix-relationship-matrices-using-the-molecular-data-without-dosage-calling" class="section level2">
-<h2>Ratio (non-dosage) G matrix: relationship matrices using the molecular data without dosage calling</h2>
-<p>Molecular markers data should be organized in a matrix format (individual in rows and markers in columns) coded according to a fraction that represents its molecular information, this can be any number between 0 to 1. Such ratio can represent the count of alternative alleles over the read depth for each individual-marker combination (GBS-like technique). It can be the signal of the alternative allele over the sum of the signals of the alternative and reference alleles (GCMS-like technique). It can also be used for family-pool genotypes.</p>
+<h2>Ratio (non-dosage) G matrix: relationship matrices using the
+molecular data without dosage calling</h2>
+<p>Molecular markers data should be organized in a matrix format
+(individual in rows and markers in columns) coded according to a
+fraction that represents its molecular information, this can be any
+number between 0 to 1. Such ratio can represent the count of alternative
+alleles over the read depth for each individual-marker combination
+(GBS-like technique). It can be the signal of the alternative allele
+over the sum of the signals of the alternative and reference alleles
+(GCMS-like technique). It can also be used for family-pool
+genotypes.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Loading the data</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AGHmatrix)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(snp.sol) </span>
@@ -397,7 +687,16 @@ University of Florida<br />
 </div>
 <div id="combined-relationship-matrix---h-matrix" class="section level2">
 <h2>Combined relationship matrix - H matrix</h2>
-<p>H matrix is the relationship matrix using combined information from the pedigree and genomic relationship matrices. First, you need to compute the matrices separated and then use them as input to build the combined H matrix. Two methods are implemented: <code>Munoz</code> shrinks the G matrix towards the A matrix scaling the molecular relatadness by each relationship classes; <code>Martini</code> is a modified version from Legarra et al. 2009 where combines A and G matrix using scaling factors. As an example, here we build the matrices using data from Endelman et al. (2018) (<code>ped.sol</code> and <code>snp.sol</code>).</p>
+<p>H matrix is the relationship matrix using combined information from
+the pedigree and genomic relationship matrices. First, you need to
+compute the matrices separated and then use them as input to build the
+combined H matrix. Two methods are implemented: <code>Munoz</code>
+shrinks the G matrix towards the A matrix scaling the molecular
+relatadness by each relationship classes; <code>Martini</code> is a
+modified version from Legarra et al. 2009 where combines A and G matrix
+using scaling factors. As an example, here we build the matrices using
+data from Endelman et al. (2018) (<code>ped.sol</code> and
+<code>snp.sol</code>).</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(ped.sol)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(snp.sol)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -418,7 +717,11 @@ University of Florida<br />
 </div>
 <div id="covariance-matrices-due-to-epistatic-terms" class="section level2">
 <h2>Covariance matrices due to epistatic terms</h2>
-<p>Here we present how to compute the epistasis relationship matrices using Hadamard products (i.e. cell-by-cell product), denoted by <code>*</code>. For more information please see Munoz et al. (2014). In this example we are using the molecular-based relationship matrices. First, build the additive and dominance matrices:</p>
+<p>Here we present how to compute the epistasis relationship matrices
+using Hadamard products (i.e. cell-by-cell product), denoted by
+<code>*</code>. For more information please see Munoz et al. (2014). In
+this example we are using the molecular-based relationship matrices.
+First, build the additive and dominance matrices:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(snp.pine)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">Gmatrix</span>(<span class="at">SNPmatrix=</span>snp.pine, <span class="at">method=</span><span class="st">&quot;VanRaden&quot;</span>, <span class="at">missingValue=</span><span class="sc">-</span><span class="dv">9</span>, <span class="at">maf=</span><span class="fl">0.05</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">Gmatrix</span>(<span class="at">SNPmatrix=</span>snp.pine, <span class="at">method=</span><span class="st">&quot;Vitezica&quot;</span>, <span class="at">missingValue=</span><span class="sc">-</span><span class="dv">9</span>,<span class="at">maf=</span><span class="fl">0.05</span>)</span></code></pre></div>
@@ -441,8 +744,21 @@ University of Florida<br />
 <p>And so on…</p>
 </div>
 <div id="exporting-your-matrix-as-three-columns-and-sparse-format-asreml---csv-format" class="section level2">
-<h2>Exporting your matrix as three columns and sparse format (ASReml - csv format)</h2>
-<p>That is the lower diagonal matrix formatted in three columns in .csv format (other ASCII extension could be used as well). In order to do this, we need to build a matrix, its inverse, and export it using <code>formatmatrix</code> function. ASReml can invert the relationship matrix as well, probably more efficiently than R for large matrices (i.e. <code>solve()</code> function), so no need to invert the matrix in R if matrix is large. This function has as options: <code>round.by</code>, which let you decide the number of decimals you want; <code>exclude.0</code>, if <code>TRUE</code>, remove all the zeros from your data (i.e., transforms into sparse); and, name that defines the name to be used in the exported file. Use the default if not sure what parameter use in these function. Here an example using <code>ped.mrode</code> data:</p>
+<h2>Exporting your matrix as three columns and sparse format (ASReml -
+csv format)</h2>
+<p>That is the lower diagonal matrix formatted in three columns in .csv
+format (other ASCII extension could be used as well). In order to do
+this, we need to build a matrix, its inverse, and export it using
+<code>formatmatrix</code> function. ASReml can invert the relationship
+matrix as well, probably more efficiently than R for large matrices
+(i.e. <code>solve()</code> function), so no need to invert the matrix in
+R if matrix is large. This function has as options:
+<code>round.by</code>, which let you decide the number of decimals you
+want; <code>exclude.0</code>, if <code>TRUE</code>, remove all the zeros
+from your data (i.e., transforms into sparse); and, name that defines
+the name to be used in the exported file. Use the default if not sure
+what parameter use in these function. Here an example using
+<code>ped.mrode</code> data:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Loading the data example</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(ped.mrode)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -457,9 +773,30 @@ University of Florida<br />
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="fu">formatmatrix</span>(Ainv, <span class="at">round.by=</span><span class="dv">12</span>, <span class="at">exclude.0=</span><span class="cn">TRUE</span>, <span class="at">name=</span><span class="st">&quot;Ainv&quot;</span>)</span></code></pre></div>
 </div>
 <div id="relationship-matrices-using-pedigree-data-for-polycrosses---a-matrix-beta" class="section level2">
-<h2>Relationship matrices using pedigree data for polycrosses - A matrix (beta)</h2>
-<p>Creates an additive relationship matrix A based on a non-deterministic pedigree with 4+ columns where each column represents a possible parent. This function was built with the following designs in mind. 1) A mating design where you have equally possible parents. For example, a generation of insects derived from the mating of three insects in a cage. All the insects in this generation will have the same expected relatedness with all the possible parents (1/3). If there are only two parents in the cage, the function assumes no-inbreeding and the pedigree is deterministic (the individual is offspring of the cross between the two parents). Another example, a population of 10 open-pollinated plants where you harvest the seeds without tracking the mother. 2) When <code>fixedParent</code> is TRUE: a mating design where you know one parent and might know the other possible parents. For example, a polycross design where you have seeds harvested from a mother plant and possible polén donors.</p>
-<p>The following pedigree has the id of the individual followed by possible parents. The possible parents are filled from left to right, in the <code>pedigree</code> data frame: id 1,2,3,4 have unknown parents and are assumed unrelated; id 5 has three possible parents (1,2,3); id 6 has three possible parents (2,3,4); id 7 has two parents (deterministic case here, the parents are 3 and 4); id 8 has four possible parents (5,6,7,1).</p>
+<h2>Relationship matrices using pedigree data for polycrosses - A matrix
+(beta)</h2>
+<p>Creates an additive relationship matrix A based on a
+non-deterministic pedigree with 4+ columns where each column represents
+a possible parent. This function was built with the following designs in
+mind. 1) A mating design where you have equally possible parents. For
+example, a generation of insects derived from the mating of three
+insects in a cage. All the insects in this generation will have the same
+expected relatedness with all the possible parents (1/3). If there are
+only two parents in the cage, the function assumes no-inbreeding and the
+pedigree is deterministic (the individual is offspring of the cross
+between the two parents). Another example, a population of 10
+open-pollinated plants where you harvest the seeds without tracking the
+mother. 2) When <code>fixedParent</code> is TRUE: a mating design where
+you know one parent and might know the other possible parents. For
+example, a polycross design where you have seeds harvested from a mother
+plant and possible polén donors.</p>
+<p>The following pedigree has the id of the individual followed by
+possible parents. The possible parents are filled from left to right, in
+the <code>pedigree</code> data frame: id 1,2,3,4 have unknown parents
+and are assumed unrelated; id 5 has three possible parents (1,2,3); id 6
+has three possible parents (2,3,4); id 7 has two parents (deterministic
+case here, the parents are 3 and 4); id 8 has four possible parents
+(5,6,7,1).</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pedigree <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">id=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">parent1 =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>),</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">parent2 =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">6</span>),</span>
@@ -483,7 +820,7 @@ University of Florida<br />
 <span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Your data was chronologically organized with success. </span></span>
 <span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Your data was chronologically organized with success. </span></span>
 <span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Constructing matrix A using ploidy = 2 </span></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Completed! Time = 3.333333e-05  minutes</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Completed! Time = 0.0003333333  minutes</span></span>
 <span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           1         2         3         4         5         6         7</span></span>
 <span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1.0000000 0.0000000 0.0000000 0.0000000 0.3333333 0.0000000 0.0000000</span></span>
 <span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 0.0000000 1.0000000 0.0000000 0.0000000 0.3333333 0.3333333 0.0000000</span></span>
@@ -502,13 +839,22 @@ University of Florida<br />
 <span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 0.3888889</span></span>
 <span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 0.3750000</span></span>
 <span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8 1.0879630</span></span></code></pre></div>
-<p>If <code>fixedParent=TRUE</code>, the above pedigree will be interpreted with the possible parents are filled from left to right after the known parent, in the <code>pedigree</code> data frame: id 1,2,3,4 have unknown parents and are assumed unrelated; id 5 is offspring of parent 1 in a deterministic way and two other possible parents (2,3); id 6 is offspring of parent 2 in a deterministic way and two other possible parents (3,4); id 7 has two parents (deterministic case here, the parents are 3 and 4); as before; id 8 is offspring of parent 5 in a deterministic way and has three other possible parents (6,7,1).</p>
+<p>If <code>fixedParent=TRUE</code>, the above pedigree will be
+interpreted with the possible parents are filled from left to right
+after the known parent, in the <code>pedigree</code> data frame: id
+1,2,3,4 have unknown parents and are assumed unrelated; id 5 is
+offspring of parent 1 in a deterministic way and two other possible
+parents (2,3); id 6 is offspring of parent 2 in a deterministic way and
+two other possible parents (3,4); id 7 has two parents (deterministic
+case here, the parents are 3 and 4); as before; id 8 is offspring of
+parent 5 in a deterministic way and has three other possible parents
+(6,7,1).</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AmatrixPolyCross</span>(pedigree,<span class="at">fixedParent=</span><span class="cn">TRUE</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Your data was chronologically organized with success. </span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Your data was chronologically organized with success. </span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Your data was chronologically organized with success. </span></span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Your data was chronologically organized with success. </span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Completed! Time = 1.666667e-05  minutes</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Completed! Time = 0  minutes</span></span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           1         2    3     4         5         6         7         8</span></span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1.0000000 0.0000000 0.00 0.000 0.5000000 0.0000000 0.0000000 0.4166667</span></span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 0.0000000 1.0000000 0.00 0.000 0.2500000 0.5000000 0.0000000 0.2083333</span></span>
@@ -521,61 +867,103 @@ University of Florida<br />
 </div>
 <div id="amatrix-benchmark" class="section level2">
 <h2>Amatrix() benchmark</h2>
-<p>It follows a small memory and computational time profiling for the <code>Amatrix()</code> function. The required RAM was computed based on the peak of the process for different pedigree sizes (based on /usr/bin/time -v output). The time profiling was done using AMD Milan 2.95GHz, so it might be an underestimated value when compared with lower speed processors. Numerator relationship matrices for pedigrees with less than 20,000 rows can built with low-specs user-end machines (&lt;8GB RAM) using our package.</p>
-<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<p>It follows a small memory and computational time profiling for the
+<code>Amatrix()</code> function. The required RAM was computed based on
+the peak of the process for different pedigree sizes (based on
+/usr/bin/time -v output). The time profiling was done using AMD Milan
+2.95GHz, so it might be an underestimated value when compared with lower
+speed processors. Numerator relationship matrices for pedigrees with
+less than 20,000 rows can built with low-specs user-end machines
+(&lt;8GB RAM) using our package.</p>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
 </div>
 <div id="bibliography" class="section level2">
 <h2>Bibliography</h2>
-<p>Amadeu, RR, et al. 2016 AGHmatrix: R package to construct relationship matrices for autotetraploid and diploid species: a blueberry example. The Plant Genome 9, 4.</p>
-<p>Ashraf, BH, et al.. 2016 Estimating genomic heritabilities at the level of family-pool samples of perennial ryegrass using genotyping-by-sequencing. Theoretical and Applied Genetics 129, 45-52.</p>
-<p>Cockerham, CC. 1954. An extension of the concept of partitioning hereditary variance for analysis of covariances among relatives when epistasis is present. Genetics 39, 859–882</p>
-<p>Endelman, JB, et al. 2018. Genetic variance partitioning and genome-wide prediction with allele dosage information in autotetraploid potato. Genetics 209, 77-87.</p>
-<p>Hamilton, MG, et al. 2017 Computation of the inverse additive relationship matrix for autopolyploid and multiple-ploidy populations. Theoretical and Applied Genetics 131, 851-890.</p>
-<p>Henderson, C. 1976 A simple method for computing the inverse of a numerator relationship matrix used in prediction of breeding values. Biometrics 32, 69–83.</p>
-<p>Kerr, RJ, et al., 2012 Use of the numerator relation ship matrix in genetic analysis of autopolyploid species. Theoretical and Applied Genetics 124, 1271–1282.</p>
-<p>Legarra, A, et al. 2009 A relationship matrix including full pedigree and genomic information. Journal of Dairy Science 92, 4656–4663.</p>
-<p>Liu, A, et al. 2020. Weighted single-step genomic best linear unbiased prediction integrating variants selected from sequencing data by association and bioinformatics analyses. Genet Sel Evol 52, 48.</p>
-<p>Martini, JW, et al., 2018, The effect of the H<span class="math inline">\(^{1}\)</span> scaling factors <span class="math inline">\(\tau\)</span> and <span class="math inline">\(\omega\)</span> on the structure of H in the single-step procedure. Genetics Selection Evolution 50(1), 16.</p>
-<p>Mrode, RA. 2014 <em>Linear models for the prediction of animal breeding values</em>. Cabi. 3rd ed.</p>
-<p>Munoz, PR, et al., 2014 Unraveling additive from nonadditive effects using genomic relationship matrices. Genetics 198, 1759–1768.</p>
-<p>R Core Team, 2016 <em>R</em>: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing, Vienna, Austria.</p>
-<p>Resende, MF, et al., 2012 Accuracy of genomic selection methods in a standard data set of loblolly pine (<em>Pinus taeda</em> l.). Genetics 190, 1503–1510.</p>
-<p>Slater, AT, et al. 2014 Improving the analysis of low heritability complex traits for enhanced genetic gain in potato. Theoretical and applied genetics 127, 809–820.</p>
-<p>Slater, AT, et al. 2016 Improving genetic gain with genomic selection in autotetraploid potato. The Plant Genome 9.</p>
-<p>Su, G, et al. 2012 Estimating additive and non-additive genetic variances and predicting genetic merits using genome-wide dense single nucleotide polymorphism markers. PloS one 7, e45293.</p>
-<p>VanRaden, P. 2008 Efficient methods to compute genomic predictions. Journal of dairy science 91, 4414–4423.</p>
-<p>Vitezica, ZG, et al. 2013 On the additive and dominant variance and covariance of individuals within the genomic selection scope. Genetics 195, 1223–1230.</p>
-<p>Yang, J, et al. 2010 Common snps explain a large proportion of the heritability for human height. Nature genetics 42, 565–569.</p>
+<p>Amadeu, RR, et al. 2016 AGHmatrix: R package to construct
+relationship matrices for autotetraploid and diploid species: a
+blueberry example. The Plant Genome 9, 4. <a href="https://doi.org/10.3835/plantgenome2016.01.0009" class="uri">https://doi.org/10.3835/plantgenome2016.01.0009</a></p>
+<p>Ashraf, BH, et al. 2016. Estimating genomic heritabilities at the
+level of family-pool samples of perennial ryegrass using
+genotyping-by-sequencing. Theoretical and Applied Genetics 129, 45-52.
+<a href="https://doi.org/0.1007/s00122-015-2607-9" class="uri">https://doi.org/0.1007/s00122-015-2607-9</a></p>
+<p>Cockerham, CC. 1954 An extension of the concept of partitioning
+hereditary variance for analysis of covariances among relatives when
+epistasis is present. Genetics 39, 859–882</p>
+<p>de Bem Oliveira, I, et al. 2019 Genomic prediction of
+autotetraploids; influence of relationship matrices, allele dosage, and
+continuous genotyping calls in phenotype prediction. G3: Genes, Genomes,
+Genetics, 9(4), pp.1189-1198.</p>
+<p>Endelman, JB, et al. 2018 Genetic variance partitioning and
+genome-wide prediction with allele dosage information in autotetraploid
+potato. Genetics 209, 77-87. <a href="https://doi.org/10.1534/genetics.118.300685" class="uri">https://doi.org/10.1534/genetics.118.300685</a></p>
+<p>Hamilton, MG, et al. 2017 Computation of the inverse additive
+relationship matrix for autopolyploid and multiple-ploidy populations.
+Theoretical and Applied Genetics 131, 851-890. <a href="https://doi.org/10.1007/s00122-017-3041-y" class="uri">https://doi.org/10.1007/s00122-017-3041-y</a></p>
+<p>Henderson, C. 1976 A simple method for computing the inverse of a
+numerator relationship matrix used in prediction of breeding values.
+Biometrics 32, 69–83. <a href="https://doi.org/10.2307/2529339" class="uri">https://doi.org/10.2307/2529339</a></p>
+<p>Kerr, RJ, et al., 2012 Use of the numerator relation ship matrix in
+genetic analysis of autopolyploid species. Theoretical and Applied
+Genetics 124, 1271–1282. <a href="https://doi.org/10.1007/s00122-012-1785-y" class="uri">https://doi.org/10.1007/s00122-012-1785-y</a></p>
+<p>Legarra, A, et al. 2009 A relationship matrix including full pedigree
+and genomic information. Journal of Dairy Science 92, 4656–4663.</p>
+<p>Liu, A, et al. 2020. Weighted single-step genomic best linear
+unbiased prediction integrating variants selected from sequencing data
+by association and bioinformatics analyses. Genet Sel Evol 52, 48.</p>
+<p>Martini, JW, et al. 2018, The effect of the H<span class="math inline">\(^{1}\)</span> scaling factors <span class="math inline">\(\tau\)</span> and <span class="math inline">\(\omega\)</span> on the structure of H in the
+single-step procedure. Genetics Selection Evolution 50(1), 16. <a href="https://doi.org/10.1186/s12711-018-0386-x" class="uri">https://doi.org/10.1186/s12711-018-0386-x</a></p>
+<p>Mrode, RA. 2014 <em>Linear models for the prediction of animal
+breeding values</em>. Cabi. 3rd ed.</p>
+<p>Munoz, PR, et al., 2014 Unraveling additive from nonadditive effects
+using genomic relationship matrices. Genetics 198, 1759–1768. <a href="https://doi.org/10.1534/genetics.114.171322" class="uri">https://doi.org/10.1534/genetics.114.171322</a></p>
+<p>R Core Team, 2016 <em>R</em>: A Language and Environment for
+Statistical Computing. R Foundation for Statistical Computing, Vienna,
+Austria.</p>
+<p>Resende, MF, et al. 2012 Accuracy of genomic selection methods in a
+standard data set of loblolly pine (<em>Pinus taeda</em> l.). Genetics
+190, 1503–1510. <a href="https://doi.org/10.1534/genetics.111.137026" class="uri">https://doi.org/10.1534/genetics.111.137026</a></p>
+<p>Slater, AT, et al. 2014 Improving the analysis of low heritability
+complex traits for enhanced genetic gain in potato. Theoretical and
+applied genetics 127, 809–820. <a href="https://doi.org/10.1007/s00122-013-2258-7" class="uri">https://doi.org/10.1007/s00122-013-2258-7</a></p>
+<p>Slater, AT, et al. 2016 Improving genetic gain with genomic selection
+in autotetraploid potato. The Plant Genome 9. <a href="https://doi.org/10.3835/plantgenome2016.02.0021" class="uri">https://doi.org/10.3835/plantgenome2016.02.0021</a></p>
+<p>Su, G, et al. 2012 Estimating additive and non-additive genetic
+variances and predicting genetic merits using genome-wide dense single
+nucleotide polymorphism markers. PloS one 7, e45293. <a href="https://doi.org/10.1371/journal.pone.0045293" class="uri">https://doi.org/10.1371/journal.pone.0045293</a></p>
+<p>VanRaden, P. 2008 Efficient methods to compute genomic predictions.
+Journal of dairy science 91, 4414–4423. <a href="https://doi.org/10.3168/jds.2007-0980" class="uri">https://doi.org/10.3168/jds.2007-0980</a></p>
+<p>Vitezica, ZG, et al. 2013 On the additive and dominant variance and
+covariance of individuals within the genomic selection scope. Genetics
+195, 1223–1230. <a href="https://doi.org/10.1534/genetics.113.155176" class="uri">https://doi.org/10.1534/genetics.113.155176</a></p>
+<p>Yang, J, et al. 2010 Common snps explain a large proportion of the
+heritability for human height. Nature genetics 42, 565–569. <a href="https://doi.org/10.1038/ng.608" class="uri">https://doi.org/10.1038/ng.608</a></p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; R version 4.1.0 (2021-05-18)</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Running under: Ubuntu 20.04.2 LTS</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; R version 4.2.3 (2023-03-15 ucrt)</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Running under: Windows 10 x64 (build 19044)</span></span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Matrix products: default</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; locale:</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              </span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=C              </span></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   </span></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 </span></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </span></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       </span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; locale:</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] LC_COLLATE=C                          </span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] LC_CTYPE=English_United States.utf8   </span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3] LC_MONETARY=English_United States.utf8</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] LC_NUMERIC=C                          </span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5] LC_TIME=English_United States.utf8    </span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attached base packages:</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attached base packages:</span></span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; other attached packages:</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] AGHmatrix_2.1.0 rmarkdown_2.21  knitr_1.42     </span></span>
 <span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; other attached packages:</span></span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] AGHmatrix_2.0.4 rmarkdown_2.8   knitr_1.33     </span></span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] codetools_0.2-18  lattice_0.20-44   zoo_1.8-9         digest_0.6.27    </span></span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [5] grid_4.1.0        R6_2.5.0          jsonlite_1.7.2    magrittr_2.0.1   </span></span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [9] evaluate_0.14     highr_0.9         rlang_0.4.11      stringi_1.6.2    </span></span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [13] jquerylib_0.1.4   Matrix_1.3-4      bslib_0.2.5.1     tools_4.1.0      </span></span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [17] stringr_1.4.0     xfun_0.23         yaml_2.2.1        compiler_4.1.0   </span></span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [21] htmltools_0.5.1.1 sass_0.4.0</span></span></code></pre></div>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] codetools_0.2-19 lattice_0.20-45  zoo_1.8-11       digest_0.6.31   </span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [5] grid_4.2.3       R6_2.5.1         jsonlite_1.8.4   evaluate_0.20   </span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [9] highr_0.10       cachem_1.0.7     rlang_1.1.0      cli_3.6.1       </span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [13] rstudioapi_0.14  jquerylib_0.1.4  Matrix_1.5-3     bslib_0.4.2     </span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [17] tools_4.2.3      xfun_0.38        yaml_2.3.7       fastmap_1.1.1   </span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [21] compiler_4.2.3   htmltools_0.5.5  sass_0.4.5</span></span></code></pre></div>
 </div>
 
 

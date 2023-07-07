@@ -1,26 +1,24 @@
-DistributionFits        Parameter Fit of a Distribution
-Heaviside               Haviside and Related Functions
-Ids                     Set and Retrieve Column/Row Names
-NormalityTests          Normality Tests
-acfPlot                 Autocorrelation Function Plots
+acfPlot                 Autocorrelation function plots
 akimaInterp             Bivariate Spline Interpolation
-baseMethods             Generic Functions Extensions
-basicStats              Basic Time Series Statistics
-boxPlot                 Time Series Box Plots
-characterTable          Table of Characters
-colVec                  Column and Row Vectors
-colorLocator            Color Selection
-colorPalette            Color Palettes
-colorTable              Table of Colors
-correlationTest         Correlation Tests
-decor                   Decor Functions
+baseMethods             Generic functions extensions
+basicStats              Basic time series statistics
+boxPlot                 Time series box plots
+characterTable          Table of characters
+colorLocator            Color selection
+colorPalette            Color palettes
+colorTable              Table of colors
+colVec                  Column and row vectors
+correlationTest         Correlation tests
+decor                   Functions for decorating plots
 dght                    Generalized Hyperbolic Student-t
-distCheck               Distribution Check
-fBasics-deprecated      Deprecated Functions in Package fBasics
-fBasics-package         Portfolio Modelling, Optimization and
-                        Backtesting
-fBasicsData             fBsiscs Data Sets
-fHTEST                  Tests Class Representation and Utilities
+distCheck               Distribution check
+DistributionFits        Parametric fit of a distribution
+fBasics-deprecated      Deprecated functions in package fBasics
+fBasics-package         Portfolio modelling, optimization and
+                        backtesting
+fBasicsData             fBasics data sets
+fDISTFIT-class          Class '"fDISTFIT"'
+fHTEST-class            Class '"fHTEST"'
 getS4                   General S4 Class Extractor Functions
 gh                      Generalized Hyperbolic Distribution
 ghFit                   GH Distribution Fit
@@ -28,7 +26,7 @@ ghMode                  Generalized Hyperbolic Mode
 ghMoments               Generalized Hyperbolic Distribution Moments
 ghRobMoments            Robust Moments for the GH
 ghSlider                Generalized Hyperbolic Distribution Slider
-ghtFit                  GHT Distribution Fit
+ghtFit                  GHT distribution fit
 ghtMode                 Generalized Hyperbolic Student-t Mode
 ghtMoments              Generalized Hyperbolic Student-t Moments
 ghtRobMoments           Robust Moments for the GHT
@@ -36,27 +34,27 @@ gld                     Generalized Lambda Distribution
 gldFit                  GH Distribution Fit
 gldMode                 Generalized Lambda Distribution Mode
 gldRobMoments           Robust Moments for the GLD
-gridVector              Grid Vector Coordinates
-hilbert                 Hilbert Matrix
-histPlot                Histogram and Density Plots
-hyp                     Hyperbolic Distribution
-hypFit                  Fit of a Hyperbolic Distribution
-hypMode                 Hyperbolic Mode
-hypMoments              Hyperbolic Distribution Moments
-hypRobMoments           Robust Moments for the HYP
-hypSlider               Hyperbolic Distribution Slider
+gridVector              Grid vector coordinates
+Heaviside               Heaviside and related functions
+hilbert                 Hilbert matrix
+histPlot                Histogram and density plots
+hyp                     Hyperbolic distribution
+hypFit                  Fit a Hyperbolic distribution
+hypMode                 Hyperbolic mode
+hypMoments              Hyperbolic distribution moments
+hypRobMoments           Robust moments for the HYP
+hypSlider               Hyperbolic distribution slider
+Ids                     Set and retrieve column/row names
 interactivePlot         Interactive Plot Utility
-inv                     The Inverse of a Matrix
+inv                     The inverse of a matrix
 krigeInterp             Bivariate Krige Interpolation
-kron                    Kronecker Product
-ks2Test                 Two Sample Kolmogorov-Smirnov Test
-lcg                     Generator for Portable Random Innovations
+kron                    Kronecker product
+ks2Test                 Two sample Kolmogorov-Smirnov test
+lcg                     Generator for Portable random innovations
 linearInterp            Bivariate Linear Interpolation
-listDescription         Description File Listing
-listFunctions           Functions Listing
-listIndex               Index File Listing
-locationTest            Two Sample Location Tests
-maxdd                   Drawdown Statistics
+listFunctions           List exported functions in a package
+locationTest            Two sample location tests
+maxdd                   Drawdown statistics
 nig                     Normal Inverse Gaussian Distribution
 nigFit                  Fit of a Normal Inverse Gaussian Distribution
 nigMode                 Normal Inverse Gaussian Mode
@@ -64,36 +62,37 @@ nigMoments              Moments for the Normal Inverse Gaussian
 nigRobMoments           Robust Moments for the NIG
 nigShapeTriangle        NIG Shape Triangle
 nigSlider               nigerbolic Distribution Slider
-norm2                   Matrix Norm
-normRobMoments          Robust Moments for the NORM
-pascal                  Pascal Matrix
-pdl                     Polynomial Distributed Lags
-positiveDefinite        Positive Definite Matrixes
-print                   Print Control
-qqnormPlot              Quantile-Quantile Plots
-returnSeriesGUI         Return Series Plots
-rk                      The Rank of a Matrix
-rowStats                Row Statistics
-sampleLMoments          Sample L-Moments
-sampleRobMoments        Robust Moments for the GLD
-scaleTest               Two Sample Scale Tests
-scalinglawPlot          Scaling Law Bahaviour
-seriesPlot              Financial Time Series Plots
+norm2                   Matrix norm
+NormalityTests          Tests for normality
+normRobMoments          Robust moments for the Normal distribution
+pascal                  Pascal matrix
+pdl                     Polynomial distributed lags
+positiveDefinite        Positive definite matrices
+print.control           Print control
+qqnormPlot              Quantile-Quantile plots
+returnSeriesGUI         Return series plots
+rk                      The rank of a matrix
+rowStats                Row statistics
+sampleLMoments          Sample L-moments
+sampleRobMoments        Robust moments for the GLD
+scaleTest               Two sample scale tests
+scalinglawPlot          Scaling law behaviour
+seriesPlot              Financial time series plots
 sgh                     Standardized Generalized Hyperbolic
                         Distribution
-sghFit                  Standardized GH Distribution Fit
+sghFit                  Standardized GH distribution fit
 sght                    Standardized generalized hyperbolic Student-t
                         Distribution
 snig                    Standardized Normal Inverse Gaussian
                         Distribution
-snigFit                 Fit of a Stndardized NIG Distribution
+snigFit                 Fit of a Standardized NIG Distribution
 ssd                     Spline Smoothed Distribution
-ssdFit                  Fit Density Using Smoothing Splines
+ssdFit                  Fit density using smoothing splines
 stableSlider            Slider GUI for Stable Distribution
-symbolTable             Table of Symbols
-tr                      Trace of a Matrix
-triang                  Upper and Lower Triangular Matrixes
+symbolTable             Table of symbols
+tr                      Trace of a matrix
+triang                  Upper and lower triangular matrices
 tsHessian               Two sided approximated Hessian
-tslag                   Lagged or Leading Vector/Matrix
-varianceTest            Two Sample Variance Tests
-vec                     Stacking Vectors and Matrixes
+tslag                   Lagged or leading vector/matrix
+varianceTest            Two sample variance tests
+vec                     Stacking vectors and matrices

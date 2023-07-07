@@ -1,3 +1,35 @@
+# version 0.8-2
+
+* Names are preserved when doing unit conversions; #305 @billdenney
+
+* Identical units will always divide (`/`) and allow integer division (`%/%`).
+  And, inverse units will always be able to multiply; #310 @billdenney
+
+* Compare units via `ud_compare()`, fixing inconsistent results for aliases
+  and symbols; #339, #346, #347
+
+* Fix `units<-()` to treat an empty unit the same as `NULL`; #332
+
+* New `as.data.frame()` method for `mixed_units`; #309
+
+* Use short paths for database loading on Windows to fix UTF-16 issues; #342
+
+* Add example in the docs about reversing a ggplot2 units scale; #343
+
+* Force storage mode to double; #344 addressing #324
+
+* Fix units in transformed axis; #323
+
+* Consider unitless as radians in trigonometric functions; #328
+
+# version 0.8-1
+
+* fix `%/%` and `%%` if arguments have different units; #313
+
+* fix multiplier parsing for `exp(log(x))` operations; #321
+
+* fix specification of secondary axes with `scale_units`; #326
+
 # version 0.8-0
 
 * enhance unit mapping for newly installed units; #290

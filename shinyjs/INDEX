@@ -14,9 +14,9 @@ onevent                 Run R code when an event is triggered on an
 refresh                 Refresh the page
 removeEvent             Remove an event that was added to an element
 reset                   Reset input elements to their original values
-runExample              Run shinyjs examples
 runcode                 Construct to let you run arbitrary R code live
                         in a Shiny app
+runExample              Run shinyjs examples
 runjs                   Run JavaScript code
 shinyjs                 shinyjs
 showLog                 Print any JavaScript console.log messages in

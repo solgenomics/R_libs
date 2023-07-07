@@ -1,4 +1,4 @@
-importFrom("utils", "read.csv", "write.csv", "write.table", "capture.output", "installed.packages", "packageDescription", "remove.packages")
+importFrom("utils", "read.csv", "write.csv", "write.table", "capture.output", "installed.packages", "packageDescription", "compareVersion", "remove.packages", "tail")
 importFrom("stats", "na.omit", "dist", "relevel")
 importFrom("methods", "is")
 importFrom("grDevices", "hcl")
@@ -11,6 +11,7 @@ export(
     agteb,
     aeqb,
     aneqb,
+    anyTagged,
     asNumeric,
         curlyBrackets,
         insideBrackets,
@@ -39,19 +40,22 @@ export(
     hasTag,
     hclr,
     intersection,
+    inside,
     invert,
-    list.rda,
-    list.rdata,
+    listRDA,
     makeTag,
+    padLeft,
+    padRight,
+    padBoth,
     permutations,
     asSOP,
     possibleNumeric,
     prettyString,
     prettyTable,
     deMorgan,
-    obj.rda,
-    obj.rdata,
+    objRDA,
     negate,
+    numdec,
     recode,
         hastilde,
         notilde,
@@ -60,6 +64,10 @@ export(
     recreate,
     reload,
     replaceText,
+    scan.clipboard,
+    setColnames,
+    setDimnames,
+    setRownames,
     simplify,
     sop,
     splitstr,
@@ -74,6 +82,7 @@ export(
     validateNames,
     verify,
     wholeNumeric,
+    write.clipboard,
     writePrimeimp,
     unlockEnvironment,
     
@@ -96,7 +105,14 @@ S3method(print, "admisc_intersection")
 S3method(print, "admisc_translate")
 S3method(print, "admisc_deMorgan")
 S3method(print, "admisc_simplify")
-S3method(print, "admisc_using")
+S3method(print, "admisc_fobject")
 
 S3method(recode, default)
 S3method(recode, declared)
+S3method(asNumeric, default)
+S3method(asNumeric, factor)
+S3method(asNumeric, declared)
+S3method(inside, data.frame)
+S3method(inside, list)
+S3method(using, default)
+S3method(using, data.frame)

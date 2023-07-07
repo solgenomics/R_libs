@@ -2,6 +2,7 @@ import(methods)
 importFrom(utils, read.table, available.packages, contrib.url,
                   installed.packages, str)
 importFrom(stats, setNames)
+importFrom(matrixStats, rowAlls)
 
 import(BiocGenerics)
 import(S4Vectors)
@@ -72,13 +73,13 @@ exportMethods(
 
     ## Methods for generics defined in the GenomeInfoDb package:
     seqinfo, "seqinfo<-", seqnames, "seqnames<-",
-    commonName, provider, providerVersion, releaseDate, releaseName,
+    commonName, provider, providerVersion, releaseDate,
 
     ## Methods for generics defined in the GenomicRanges package:
     granges,
 
     ## Methods for generics defined in the Biostrings package:
-    getSeq,
+    getSeq, extractAt,
     seqtype, alphabetFrequency, hasOnlyBaseLetters,
     uniqueLetters, letterFrequency,
     oligonucleotideFrequency, nucleotideFrequencyAt,
@@ -99,7 +100,7 @@ export(
     saveAsOnDiskLongTable_old, saveRowidsForOnDiskLongTable_old,
     OnDiskLongTable_old,
     getBatchesFromOnDiskLongTable_old,
-    getRowsByIndexFromOnDiskLongTable_old, getRowsByIdFromOnDiskLongTable_old,
+    getRowsByIndexFromOnDiskLongTable_old,
 
     ## OnDiskLongTable-class.R:
     OnDiskLongTable, writeOnDiskLongTable, writeOnDiskLongTableRowids,
@@ -108,6 +109,9 @@ export(
     getBatchesByOverlapsFromOnDiskLongTable,
     getRowsFromOnDiskLongTable,
     getRowsByIdFromOnDiskLongTable,
+
+    ## ODLT_SNPlocs-class.R:
+    inferRefAndAltAlleles,
 
     ## OldFashionSNPlocs-class.R:
     newSNPlocs,
@@ -135,7 +139,8 @@ export(
     writeBSgenomeToTwobit,
 
     ## BSgenomeForge.R:
-    forgeSeqlengthsFile,
+    forgeSeqlengthsRdsFile,
+    forgeSeqlengthsRdaFile,
     forgeSeqFiles,
     forgeMasksFiles
 )
@@ -147,18 +152,15 @@ export(
 
 export(
     ## OnDiskLongTable_old-class.R:
-    breakpoints, blocksizes, rowids,
+    breakpoints, blocksizes,
 
     ## OnDiskLongTable-class.R:
     batchsizes, spatialIndex,
 
     ## SNPlocs-class.R:
-    referenceGenome, compatibleGenomes,
+    releaseName, referenceGenome, compatibleGenomes,
     snpcount, snplocs,
     snpsBySeqname, snpsByOverlaps, snpsById,
-
-    ## OldFashionSNPlocs-class.R:
-    snpid2loc, snpid2alleles, snpid2grange,
 
     ## InjectSNPsHandler-class.R:
     SNPlocs_pkgname,
@@ -178,12 +180,11 @@ export(
 
 ### Exactly the same list as above.
 exportMethods(
-    breakpoints, blocksizes, rowids,
+    breakpoints, blocksizes,
     batchsizes, spatialIndex,
-    referenceGenome, compatibleGenomes,
+    releaseName, referenceGenome, compatibleGenomes,
     snpcount, snplocs,
     snpsBySeqname, snpsByOverlaps, snpsById,
-    snpid2loc, snpid2alleles, snpid2grange,
     SNPlocs_pkgname,
     sourceUrl,
     mseqnames,

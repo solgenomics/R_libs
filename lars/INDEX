@@ -1,0 +1,10 @@
+cv.lars                 Computes K-fold cross-validated error curve for
+                        lars
+diabetes                Blood and other measurements in diabetics
+lars                    Fits Least Angle Regression, Lasso and
+                        Infinitesimal Forward Stagewise regression
+                        models
+plot.lars               Plot method for lars objects
+predict.lars            Make predictions or extract coefficients from a
+                        fitted lars model
+summary.lars            Summary method for lars objects

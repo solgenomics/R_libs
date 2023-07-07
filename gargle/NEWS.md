@@ -1,3 +1,206 @@
+# gargle 1.5.1
+
+* Completed some overlooked, unfinished work around the OAuth "app" to "client"
+  transition that affected out-of-bound auth (#263, #264).
+  
+* The `secret_*()` functions are more discoverable via documentation.
+
+# gargle 1.5.0
+
+* gargle's existing unexported `secret_*()` functions are deprecated, in favor
+  of new, exported `secret_*()` functions that are built on or inlined from
+  httr2. The `vignette("managing-tokens-securely")` is updated to reflect the
+  new, recommended strategy for encrypting secrets.
+  - `secret_encrypt_json()` / `secret_decrypt_json()` are new gargle-specific
+    functions.
+  - `secret_write_rds()` / `secret_read_rds()`, `secret_make_key()`, and
+    `secret_had_key()` are basically copies of their httr2 counterparts.
+  - Legacy functions to move away from: `secret_pw_name()`, `secret_pw_gen()`,
+    `secret_pw_exists()`, `secret_pw_get()`, `secret_can_decypt()`,
+    `secret_read()`, `secret_write()`.
+  - The new approach makes it much easier to use gargle functions to encrypt and
+    decrypt credentials in a project that is *not* necessarily an R package.
+
+* The transition from OAuth "app" to OAuth "client" is fully enacted now. This
+  process tarted in v1.3.0, when the `"gargle_oauth_client"` class was
+  introduced, to support the new pseudo-OOB auth flow. The deprecations are
+  implemented to preserve backwards compatibility for some time. In this
+  release, function, argument, and field names are all updated to the "client"
+  terminology:
+  
+  - `init_AuthState(client =)` instead of `init_AuthState(app =)`
+  - `AuthState$client` instead of `AuthState$app`
+  - `AuthState$set_client()` instead of `AuthState$set_app()`
+  - `gargle2.0_token(client =)` instead of `gargle2.0_token(app =)` 
+  - `credentials_user_oauth2(client =)` instead of
+    `credentials_user_oauth2(app =)`
+    
+  A new `vignette("oauth-client-not-app")` explains how a wrapper package should
+  adapt.
+
+* When the `"gargle_verbosity"` option is set to `"debug"`, there are more debugging messages around user credentials. Specifically, more information is available on the email, OAuth client, and scopes, with the goal of better understanding why a cached token is (or is not) being used.
+
+* `check_is_service_account()` is a new function for use in wrapper packages to throw a more informative error when a user provides JSON for an OAuth client to an argument that is expecting JSON for a service account.
+
+* `response_process()` has improved handling of responses that represent an HTTP error with HTML content (as opposed to the expected and preferred JSON) (#254).
+
+* `response_process(call = caller_env())` is a new argument that is passed along to various helpers, which can improve error reporting for user-facing functions that call `response_process()` (#255).
+
+# gargle 1.4.0
+
+## Google Compute Engine
+
+* `credentials_gce(scopes = NULL)` is now equivalent to `credentials_gce(scopes = "https://www.googleapis.com/auth/cloud-platform")`, i.e. there's an even stronger current towards the recommended "cloud-platform" scope.
+
+* `credentials_gce(scopes =)` now includes those `scopes` in its request to the metadata server for an access token (#216). Note that the scopes for a GCE access token are generally pre-determined for the instance and its associated service account at creation/launch time and these requested `scopes` will have no effect. But this seems to do no harm and it is possible that there are contexts where this is useful.
+
+* `credentials_gce()` now emits considerably more information when the `"gargle_verbosity"` option is set to `"debug"`. For example, it reports mismatches between requested scopes and instance scopes and between requested scopes and the access token's actual scopes.
+
+* `credentials_gce()` stores the actual scopes of the received access token, which can differ from the requested scopes. This is also noted when the `"gargle_verbosity"` option is set to `"debug"`.
+
+* The `GceToken` R6 class gains a better `$print()` method that is more similar to gargle's treatment of tokens obtained with other flows.
+
+## Behaviour in a cloud/server context
+
+* gargle is better able to detect when it's running on Posit Workbench or RStudio Server, e.g., in a subprocess.
+
+* `gargle_oauth_client_type()` is a new function that returns either "installed"
+or "web".
+It returns the value of the new global option by the same name (`"gargle_oauth_client_type"`), if defined.
+If the option is not defined, returns "web" on RStudio Server, Posit Workbench, Posit Cloud, or Google Colaboratory and "installed" otherwise.
+In the context of out-of-band (OOB) auth, an "installed" client type leads to the conventional OOB flow (only available for GCP projects in testing mode) and a "web" client leads to the new pseudo-OOB flow.
+The option and accessor have been added to cover contexts other than those mentioned above where it is helpful to request a "web" client.
+
+* `credentials_user_oauth2()` now works in Google Colaboratory (#140).
+
+## Everything else
+
+* gargle now elicits user input via `readline()`, instead of via `utils::menu()`, which is favorable for interacting with the user in a Jupyter notebook (#242).
+
+* The roxygen templating functions that wrapper packages can use to generate standardized documentation around auth have been updated to reflect gargle's pivot from OAuth "app" to "client".
+Changes of note:
+
+  - `PREFIX_auth_configure_description()` crosslinks to `PREFIX_oauth_client()`
+    now, not `PREFIX_oauth_app()`. So this assumes the package has indeed
+    introduced the `PREFIX_oauth_client()` function (and, presumably, has
+    deprecated `PREFIX_oauth_app()`).
+  - `PREFIX_auth_configure_params()` gains `client` argument.
+  - `PREFIX_auth_configure_params()` deprecates the `app` argument and uses a
+    lifecycle badge. It is assumed that the badge SVG is present, which can be
+    achieved with `usethis::use_lifecycle()`.
+  - `PREFIX_auth_configure_params()` crosslinks to
+    `gargle::gargle_oauth_client_from_json()`. The wrapper package therefore
+    needs to state a minimum version for gargle, e.g. `gargle (>= 1.3.0)` (or
+    higher).
+
+* `credentials_byo_oauth2()` works now for (variations of) service account tokens, as intended, not just for user tokens (#250). It also emits more information about scopes when the `"gargle_verbosity"` option is set to `"debug"`.
+
+# gargle 1.3.0
+
+## (Partial) deprecation out-of-band (OOB) auth flow
+
+On February 16, 2022, Google announced the gradual deprecation of the out-of-band (OOB) OAuth flow.
+OOB **still works** if the OAuth client is associated with a GCP project that is in testing mode and this is not going away.
+But OOB is no longer supported for projects in production mode.
+To be more accurate, some production-mode projects have gotten an extension to permit the use of OOB auth for a bit longer, but that's just a temporary reprieve.
+
+The typical user who will (eventually) be impacted is:
+
+* Using R via RStudio Server, Posit Workbench, or Posit Cloud.
+* Using tidyverse packages such as googledrive, googlesheets4, or bigrquery.
+* Relying on the built-in OAuth client. Importantly, this client is associated
+  with a GCP project that is in production mode.
+
+The phased deprecation of OOB is nearly complete and we expect conventional OOB to stop working with the built-in tidyverse OAuth client on February 1, 2023, at the latest.
+
+**In preparation for this, gargle has gained support for a new flow, which we call pseudo-OOB (in contrast to conventional OOB)**.
+The pseudo-OOB flow is triggered when `use_oob = TRUE` (an existing convention in gargle and gargle-using packages) and the configured OAuth client is of "Web application" type.
+The gargle/googledrive/googlesheets4/bigrquery packages should now default to a "Web application" client on RStudio Server, Posit Workbench and Posit Cloud, leading the user through the pseudo-OOB flow.
+Other than needing to re-auth once, affected users should still find that things "just work".
+
+Read the `vignette("auth-from-web")` for more.
+
+## gargle-specific notion of OAuth client
+
+`gargle_oauth_client()` is a new constructor for an S3 class by the same name.
+There are two motivations:
+
+  - To adjust to Google's deprecation of conventional OOB and to support
+    gargle's new pseudo-OOB flow, it is helpful for gargle to know whether an
+    OAuth client ID is of type "Web application" or "Desktop app". That means we
+    need a Google- and gargle-specific notion of an OAuth client, so we can
+    introduce a `type` field.
+  - A transition from httr to httr2 is on the horizon, so it makes sense to
+    look more toward `httr2:oauth_client()` than to `httr::oauth_app()`.
+    gargle's vocabulary is generally shifting towards "client" and away from
+    "app".
+  
+`oauth_app_from_json()` has therefore been (soft) deprecated, in favor of a new function `gargle_oauth_client_from_json()`, which is the preferred way to instantiate an OAuth client, since the downloaded JSON conveys the client type and redirect URI(s).
+As a bridging measure, `gargle_oauth_client` currently inherits from httr's `oauth_app`, but this probably won't be true in the long-term.
+
+`gargle_client(type =)` replaces `gargle_app()`.
+
+## Google Compute Engine and Google Kubernetes Engine
+
+`credentials_gce()` no longer asks the user about initiating an OAuth cache, which is not relevant to that flow (#221).
+
+`gce_instance_service_accounts()` is a newly exported utility that exposes the service accounts available from the metadata server for the current instance (#234).
+
+The global option `"gargle.gce.timeout"` is newly documented in `credentials_gce()`.
+This controls the timeout, in seconds, for requests to the metadata server.
+The default value (or strategy) for setting this should often suffice, but the option exists for those with an empirical need to increase the timeout (#186, #195).
+
+`vignette("non-interactive-auth")` has a new section "Workload Identity on Google Kubernetes Engine (GKE)" that explains how gargle supports the use of workload identity for applications running on GKE. This is the recommended method of auth in R code running on GKE that needs to access other Google Cloud services, such as the BigQuery API (#197, #223, @MarkEdmondson1234).
+
+## Credential function registry
+
+It's gotten a bit easier to work with the credential registry.
+The primary motivation is that, for example, on Google Compute Engine, you might
+actually want to suppress auth with the default service account and auth as a
+normal user instead.
+This is especially likely to come up with gmailr / the Gmail API.
+
+* The credential-fetcher `credentials_byo_oauth2()` has been moved to the very
+  beginning of the default registry. The logic is that a user who has specified
+  a non-`NULL` value of `token` must mean business and does not want automagic
+  auth methods like ADC or GCE to be tried before using their `token`
+  (#187, #225).
+
+* The `...` in `cred_funs_all()` are now
+  [dynamic dots](https://rlang.r-lib.org/reference/dyn-dots.html) (#224).
+
+* Every registered credential function must have a unique name now.
+  This is newly enforced by `cred_funs_add()` and `cred_funs_set()` (#224).
+  
+* `cred_funs_list_default()` is a new function that returns gargle's default
+  list of credential functions (#226).
+  
+* `cred_funs_add(cred_fun = NULL)` is now available to remove a credential
+  function from the registry (#224).
+  
+* `with_cred_funs()` and `local_cred_funs()` are new helpers for making narrowly
+  scoped changes to the registry (#226).
+  
+* The `ls` argument of `cred_funs_set()` has been renamed to `funs` (#226).
+  
+* In general, credential registry functions now return the current registry,
+  invisibly (#224).
+
+# gargle 1.2.1
+
+* Help files below `man/` have been re-generated, so that they give rise to valid HTML5. (This is the impetus for this release, to keep the package safely on CRAN.)
+
+* We have switched to newer oauth2.googleapis.com-based OAuth2 URIs, moving away from the accounts.google.com and googleapis.com/oauth2 equivalents.
+
+* `credentials_gce()` no longer validates the requested scopes against instance scopes.
+In practice, it's easy for this check to be more of a nuisance than a help (#161, #185 @craigcitro).
+
+* `request_retry()` retries for an expanded set of HTTP codes: 408, 429, 500, 502, 503. Previously, retries were limited to 429 (#169).
+
+## Dependency changes
+
+* The minimum versions of rlang and testthat have been bumped. The motivation is to exploit and adapt to the changes to the display of error messages.
+
 # gargle 1.2.0
 
 ## Workload identity federation
@@ -196,7 +399,7 @@ mockr is new in Suggests, since `testthat::use_mock()` is superseded.
 
 # gargle 0.2.0
 
-* All built-in API credentials have been rotated and are stored internally in a way that reinforces appropriate use. There is a new [Privacy policy](https://www.tidyverse.org/google_privacy_policy/) as well as a [policy for authors of packages or other applications](https://www.tidyverse.org/google_privacy_policy/#policies-for-authors-of-packages-or-other-applications). This is related to a process to get the gargle project [verified](https://support.google.com/cloud/answer/7454865?hl=en), which affects the OAuth2 capabilities and the consent screen.
+* All built-in API credentials have been rotated and are stored internally in a way that reinforces appropriate use. There is a new [Privacy policy](https://www.tidyverse.org/google_privacy_policy/) as well as a [policy for authors of packages or other applications](https://www.tidyverse.org/google_privacy_policy/#policies-for-authors-of-packages-or-other-applications). This is related to a process to get the gargle project verified, which affects the OAuth2 capabilities and the consent screen.
 
 * New vignette on "How to get your own API credentials", to help other package authors or users obtain their own API key or OAuth client ID and secret.
 

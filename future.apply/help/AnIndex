@@ -15,5 +15,4 @@ future_sapply	future_lapply
 future_tapply	future_lapply
 future_vapply	future_lapply
 makeChunks	makeChunks
-make_rng_seeds	make_rng_seeds
 R_FUTURE_APPLY_DEBUG	future.apply.options

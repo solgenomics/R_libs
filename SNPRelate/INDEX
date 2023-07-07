@@ -1,6 +1,3 @@
-SNPGDSFileClass         SNPGDSFileClass
-SNPRelate-package       Parallel Computing Toolset for Genome-Wide
-                        Association Studies
 hapmap_geno             SNP genotypes of HapMap samples
 snpgdsAdmixPlot         Plot Ancestry Proportions
 snpgdsAdmixProp         Estimate ancestral proportions from the
@@ -18,14 +15,15 @@ snpgdsDrawTree          Draw a dendrogram
 snpgdsEIGMIX            Eigen-analysis on SNP genotype data
 snpgdsErrMsg            Get the last error information
 snpgdsExampleFileName   Example GDS file
+SNPGDSFileClass         SNPGDSFileClass
 snpgdsFst               F-statistics (fixation indices)
 snpgdsGDS2BED           Conversion from GDS to PLINK BED
 snpgdsGDS2Eigen         Conversion from GDS to Eigen (EIGENSTRAT)
 snpgdsGDS2PED           Conversion from GDS to PED
 snpgdsGEN2GDS           Conversion from Oxford GEN format to GDS
+snpgdsGetGeno           To get a genotype matrix
 snpgdsGRM               Genetic Relationship Matrix (GRM) for SNP
                         genotype data
-snpgdsGetGeno           To get a genotype matrix
 snpgdsHCluster          Hierarchical cluster analysis
 snpgdsHWE               Statistical test of Hardy-Weinberg Equilibrium
 snpgdsIBDKING           KING method of moment for the
@@ -50,20 +48,23 @@ snpgdsMergeGRM          Merge Multiple Genetic Relationship Matrices
                         (GRM)
 snpgdsOpen              Open a SNP GDS File
 snpgdsOption            Option settings: chromosome coding, etc
-snpgdsPCA               Principal Component Analysis (PCA) on SNP
-                        genotype data
-snpgdsPCACorr           PC-correlated SNPs in principal component
-                        analysis
-snpgdsPCASNPLoading     SNP loadings in principal component analysis
-snpgdsPCASampLoading    Project individuals onto existing principal
-                        component axes
-snpgdsPED2GDS           Conversion from PLINK PED to GDS
 snpgdsPairIBD           Calculate Identity-By-Descent (IBD)
                         Coefficients
 snpgdsPairIBDMLELogLik
                         Log likelihood for MLE method in the
                         Identity-By-Descent (IBD) Analysis
 snpgdsPairScore         Genotype Score for Pairs of Individuals
+snpgdsPCA               Principal Component Analysis (PCA) on SNP
+                        genotype data
+snpgdsPCACorr           PC-correlated SNPs in principal component
+                        analysis
+snpgdsPCASampLoading    Project individuals onto existing principal
+                        component axes
+snpgdsPCASNPLoading     SNP loadings in principal component analysis
+snpgdsPED2GDS           Conversion from PLINK PED to GDS
+snpgdsSampMissRate      Missing Rate of Samples
+snpgdsSelectSNP         SNP selection
+snpgdsSlidingWindow     Sliding window
 snpgdsSNPList           Create a SNP list object
 snpgdsSNPListClass      the class of a SNP list
 snpgdsSNPListIntersect
@@ -71,10 +72,9 @@ snpgdsSNPListIntersect
                         objects
 snpgdsSNPRateFreq       Allele Frequency, Minor Allele Frequency,
                         Missing Rate of SNPs
-snpgdsSampMissRate      Missing Rate of Samples
-snpgdsSelectSNP         SNP selection
-snpgdsSlidingWindow     Sliding window
 snpgdsSummary           Summary of GDS genotype file
 snpgdsTranspose         Transpose genotypic matrix
 snpgdsVCF2GDS           Reformat VCF file(s)
 snpgdsVCF2GDS_R         Reformat a VCF file (R implementation)
+SNPRelate-package       Parallel Computing Toolset for Genome-Wide
+                        Association Studies

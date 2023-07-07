@@ -102,12 +102,12 @@ info(vcf)[1:4, 1:5]
 ###################################################
 ### code chunk number 16: examine_dbSNP
 ###################################################
-library(SNPlocs.Hsapiens.dbSNP.20101109)
-rd <- rowRanges(vcf)
-seqlevels(rd) <- "ch22"
-ch22snps <- getSNPlocs("ch22")
-dbsnpchr22 <- sub("rs", "", names(rd)) %in% ch22snps$RefSNP_id
-table(dbsnpchr22)
+library(SNPlocs.Hsapiens.dbSNP144.GRCh37)
+vcf_rsids <- names(rowRanges(vcf))
+chr22snps <- snpsBySeqname(SNPlocs.Hsapiens.dbSNP144.GRCh37, "22")
+chr22_rsids <- mcols(chr22snps)$RefSNP_id
+in_dbSNP <- vcf_rsids %in% chr22_rsids
+table(in_dbSNP)
 
 
 ###################################################
@@ -119,7 +119,7 @@ info(header(vcf))[c("VT", "LDAF", "RSQ"),]
 ###################################################
 ### code chunk number 18: examine_quality
 ###################################################
-metrics <- data.frame(QUAL=qual(vcf), inDbSNP=dbsnpchr22,
+metrics <- data.frame(QUAL=qual(vcf), in_dbSNP=in_dbSNP,
     VT=info(vcf)$VT, LDAF=info(vcf)$LDAF, RSQ=info(vcf)$RSQ)
 
 
@@ -127,7 +127,7 @@ metrics <- data.frame(QUAL=qual(vcf), inDbSNP=dbsnpchr22,
 ### code chunk number 19: examine_ggplot2
 ###################################################
 library(ggplot2)
-ggplot(metrics, aes(x=RSQ, fill=inDbSNP)) +
+ggplot(metrics, aes(x=RSQ, fill=in_dbSNP)) +
     geom_density(alpha=0.5) +
     scale_x_continuous(name="MaCH / Thunder Imputation Quality") +
     scale_y_continuous(name="Density") +

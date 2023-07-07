@@ -1,5 +1,5 @@
 # load symbol table
-useDynLib(xts)
+useDynLib(xts, .registration = TRUE, .fixes = "C_")
 
 # non-base package imports
 importFrom(stats,
@@ -13,6 +13,7 @@ importFrom(stats,
   start,
   end,
   window,
+  setNames,
   ts,
   as.ts,
   frequency,
@@ -27,6 +28,7 @@ importFrom(grDevices,
 
 importFrom(graphics,
   abline,
+  clip,
   legend,
   lines,
   par,
@@ -166,6 +168,7 @@ S3method(lines,xts)
 S3method(points,xts)
 S3method(print, replot_xts)
 S3method(plot, replot_xts)
+S3method(str, replot_xts)
 
 #export(lines.xts)
 #S3method(lines,xts)
@@ -207,6 +210,7 @@ importFrom(zoo, as.zoo)
 importFrom(zoo, rollapply)
 importFrom(zoo, na.approx)
 importFrom(zoo, na.fill)
+importFrom(zoo, na.fill0)
 importFrom(zoo, as.yearmon)
 importFrom(zoo, as.yearqtr)
 importFrom(zoo, is.regular)
@@ -223,6 +227,7 @@ S3method(start, xts)
 S3method(end, xts)
 S3method(na.omit,xts)
 S3method(na.locf,xts)
+S3method(na.fill,xts)
 S3method(print,xts)
 S3method(print,CLASS)
 S3method('CLASS<-',xts)
@@ -231,9 +236,12 @@ S3method(window,xts)
 S3method(dimnames, xts)
 S3method('dimnames<-', xts)
 
+S3method(tclass, default)
+S3method('tclass<-', default)
 S3method(tclass,xts)
 S3method('tclass<-',xts)
 
+S3method(tformat,default)
 S3method(tformat,xts)
 S3method('tformat<-',xts)
 
@@ -303,12 +311,6 @@ S3method(as.xts,timeSeries)
 
 # irts (package:tseries) specific methods
 S3method(as.xts,irts)
-
-# fts (package:fts) specific methods
-if (getRversion() >= "3.6.0") {
-  S3method(fts::as.fts, xts)
-}
-S3method(as.xts,fts)
 
 # Date specific methods
 S3method(as.xts,Date)

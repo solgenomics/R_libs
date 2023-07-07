@@ -3,13 +3,12 @@ browse-this             Visit important project-related web pages
 create_from_github      Create a project from a GitHub repo
 create_package          Create a package or project
 edit                    Open configuration files
-git-default-branch      Get or set the default Git branch
-git_credentials         Produce or register credentials for git2r
+git_credentials         Defunct git2r functions
 git_protocol            See or set the default Git protocol
 git_sitrep              Git/GitHub sitrep
 git_vaccinate           Vaccinate your global gitignore file
+git-default-branch      Get or set the default Git branch
 github-token            Get help with GitHub personal access tokens
-github_actions          GitHub Actions setup
 issue-this              Helpers for GitHub issues
 proj_activate           Activate a project
 proj_sitrep             Report working directory and usethis/RStudio
@@ -19,6 +18,8 @@ pull-requests           Helpers for GitHub pull requests
 rename_files            Automatically rename paired R/ and test/ files
 rprofile-helper         Helpers to make useful changes to '.Rprofile'
 use_addin               Add minimal RStudio Addin binding
+use_author              Add an author to the 'Authors@R' field in
+                        DESCRIPTION
 use_blank_slate         Don't save/load user workspace between sessions
 use_build_ignore        Add files to '.Rbuildignore'
 use_citation            Create a CITATION template
@@ -36,12 +37,14 @@ use_git_hook            Add a git hook
 use_git_ignore          Tell Git to ignore files
 use_git_remote          Configure and report Git remotes
 use_github              Connect a local repo with GitHub
+use_github_action       Set up a GitHub Actions workflow
 use_github_file         Copy a file from any GitHub repo into the
                         current project
 use_github_labels       Manage GitHub issue labels
 use_github_links        Use GitHub links in URL and BugReports
 use_github_pages        Configure a GitHub Pages site
-use_github_release      Draft a GitHub release
+use_github_release      Publish a GitHub release
+use_gitlab_ci           Continuous integration setup and badges
 use_import_from         Import a function from another package
 use_jenkins             Create Jenkinsfile for Jenkins CI Pipelines
 use_lifecycle           Use lifecycle badges
@@ -63,15 +66,19 @@ use_rmarkdown_template
                         Add an RMarkdown Template
 use_roxygen_md          Use roxygen2 with markdown
 use_rstudio             Add RStudio Project infrastructure
+use_rstudio_preferences
+                        Set global RStudio preferences
 use_spell_check         Use spell check
+use_standalone          Use a standalone file from another repo
 use_template            Use a usethis-style template
 use_testthat            Sets up overall testing infrastructure
 use_tibble              Prepare to return a tibble
 use_tidy_github_actions
                         Helpers for tidyverse development
 use_tidy_thanks         Identify contributors via GitHub activity
-use_travis              Continuous integration setup and badges
 use_tutorial            Create a learnr tutorial
+use_upkeep_issue        Create an upkeep checklist in a GitHub issue
 use_version             Increment package version
 use_vignette            Create a vignette or article
+usethis_options         Options consulted by usethis
 zip-utils               Download and unpack a ZIP file

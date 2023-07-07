@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head><title>R: Interface to Geometry Engine - Open Source ('GEOS')</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> Interface to Geometry Engine - Open Source ('GEOS')
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,9 +12,10 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;rgeos&rsquo; version 0.5-9</h2>
+</div><h2>Documentation for package &lsquo;rgeos&rsquo; version 0.6-3</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+<li><a href="../NEWS">Package NEWS</a>.</li>
 </ul>
 
 <h2>Help Pages</h2>
@@ -39,9 +41,9 @@
 </p>
 
 
-<h2><a name="A">-- A --</a></h2>
+<h2><a id="A">-- A --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="gpc-new-generics.html">append.poly</a></td>
 <td>Generics/Methods for polygon objects</td></tr>
 <tr><td style="width: 25%;"><a href="class-gpc.poly.html">append.poly-method</a></td>
@@ -56,9 +58,9 @@
 <td>Generics/Methods for polygon objects</td></tr>
 </table>
 
-<h2><a name="B">-- B --</a></h2>
+<h2><a id="B">-- B --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="class-Ring.html">bbox-method</a></td>
 <td>Class "Ring"</td></tr>
 <tr><td style="width: 25%;"><a href="class-SpatialRingsDataFrame.html">bbox-method</a></td>
@@ -67,9 +69,9 @@
 <td>Converts a bounding box into a SpatialPolygons object.</td></tr>
 </table>
 
-<h2><a name="C">-- C --</a></h2>
+<h2><a id="C">-- C --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="utility-functions.html">checkP4S</a></td>
 <td>RGEOS Utility Functions</td></tr>
 <tr><td style="width: 25%;"><a href="class-Ring.html">coerce-method</a></td>
@@ -106,24 +108,24 @@
 <td>RGEOS Polygon Hole Comment Functions</td></tr>
 </table>
 
-<h2><a name="D">-- D --</a></h2>
+<h2><a id="D">-- D --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="class-SpatialRingsDataFrame.html">dim-method</a></td>
 <td>Class "SpatialRingsDataFrame"</td></tr>
 </table>
 
-<h2><a name="G">-- G --</a></h2>
+<h2><a id="G">-- G --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="misc-gArea.html">gArea</a></td>
 <td>Area of Geometry</td></tr>
 <tr><td style="width: 25%;"><a href="experimental-functions.html">gBinarySTRtreeQuery</a></td>
 <td>Experimental Functions</td></tr>
 <tr><td style="width: 25%;"><a href="topo-unary-gBoundary.html">gBoundary</a></td>
 <td>Boundary of Geometry</td></tr>
-<tr><td style="width: 25%;"><a href="misc-gBuffer.html">gBuffer</a></td>
-<td>Buffer Geometry</td></tr>
+<tr><td style="width: 25%;"><a href="rgeos-deprecated.html">gBuffer</a></td>
+<td>Deprecated functions and methods</td></tr>
 <tr><td style="width: 25%;"><a href="topo-unary-gCentroid.html">gCentroid</a></td>
 <td>Centroid of Geometry</td></tr>
 <tr><td style="width: 25%;"><a href="pred-binary-gContains.html">gContains</a></td>
@@ -142,8 +144,8 @@
 <td>Geometry Relationships - Crosses and Overlaps</td></tr>
 <tr><td style="width: 25%;"><a href="topo-unary-gDelaunayTriangulation.html">gDelaunayTriangulation</a></td>
 <td>Compute Delaunay triangulation between points</td></tr>
-<tr><td style="width: 25%;"><a href="topo-bin-gDifference.html">gDifference</a></td>
-<td>Geometry Difference</td></tr>
+<tr><td style="width: 25%;"><a href="rgeos-deprecated.html">gDifference</a></td>
+<td>Deprecated functions and methods</td></tr>
 <tr><td style="width: 25%;"><a href="pred-binary-gIntersects.html">gDisjoint</a></td>
 <td>Geometry Relationships - Intersects and Disjoint</td></tr>
 <tr><td style="width: 25%;"><a href="misc-gDistance.html">gDistance</a></td>
@@ -180,8 +182,8 @@
 <td>RGEOS Utility Functions</td></tr>
 <tr><td style="width: 25%;"><a href="linref-gInterpolate.html">gInterpolate</a></td>
 <td>Interpolate Points along Line Geometry</td></tr>
-<tr><td style="width: 25%;"><a href="topo-bin-gIntersection.html">gIntersection</a></td>
-<td>Geometry Intersections</td></tr>
+<tr><td style="width: 25%;"><a href="rgeos-deprecated.html">gIntersection</a></td>
+<td>Deprecated functions and methods</td></tr>
 <tr><td style="width: 25%;"><a href="pred-binary-gIntersects.html">gIntersects</a></td>
 <td>Geometry Relationships - Intersects and Disjoint</td></tr>
 <tr><td style="width: 25%;"><a href="pred-unary-gIsEmpty.html">gIsEmpty</a></td>
@@ -222,16 +224,16 @@
 <td>Geometry Relationships - Intersection Matrix Pattern (DE-9IM)</td></tr>
 <tr><td style="width: 25%;"><a href="topo-unary-gSimplify.html">gSimplify</a></td>
 <td>Simplify Geometry</td></tr>
-<tr><td style="width: 25%;"><a href="topo-bin-gSymdifference.html">gSymdifference</a></td>
-<td>Geometry Symmetric Difference</td></tr>
+<tr><td style="width: 25%;"><a href="rgeos-deprecated.html">gSymdifference</a></td>
+<td>Deprecated functions and methods</td></tr>
 <tr><td style="width: 25%;"><a href="pred-binary-gTouches.html">gTouches</a></td>
 <td>Geometry Relationships - Touches</td></tr>
 <tr><td style="width: 25%;"><a href="experimental-functions.html">gUnarySTRtreeQuery</a></td>
 <td>Experimental Functions</td></tr>
 <tr><td style="width: 25%;"><a href="topo-bin-gUnion.html">gUnaryUnion</a></td>
 <td>Geometry Union</td></tr>
-<tr><td style="width: 25%;"><a href="topo-bin-gUnion.html">gUnion</a></td>
-<td>Geometry Union</td></tr>
+<tr><td style="width: 25%;"><a href="rgeos-deprecated.html">gUnion</a></td>
+<td>Deprecated functions and methods</td></tr>
 <tr><td style="width: 25%;"><a href="topo-bin-gUnion.html">gUnionCascaded</a></td>
 <td>Geometry Union</td></tr>
 <tr><td style="width: 25%;"><a href="pred-binary-gContains.html">gWithin</a></td>
@@ -240,16 +242,16 @@
 <td>Distance between geometries</td></tr>
 </table>
 
-<h2><a name="I">-- I --</a></h2>
+<h2><a id="I">-- I --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="class-gpc.poly.html">intersect-method</a></td>
 <td>Class "gpc.poly"</td></tr>
 </table>
 
-<h2><a name="N">-- N --</a></h2>
+<h2><a id="N">-- N --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="class-SpatialRingsDataFrame.html">names-method</a></td>
 <td>Class "SpatialRingsDataFrame"</td></tr>
 <tr><td style="width: 25%;"><a href="class-SpatialRingsDataFrame.html">names&lt;--method</a></td>
@@ -258,18 +260,18 @@
 <td>Generics/Methods for polygon objects</td></tr>
 </table>
 
-<h2><a name="O">-- O --</a></h2>
+<h2><a id="O">-- O --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="misc-over.html">overGeomGeom</a></td>
 <td>Find spatial join or intersections</td></tr>
 <tr><td style="width: 25%;"><a href="misc-over.html">overGeomGeomDF</a></td>
 <td>Find spatial join or intersections</td></tr>
 </table>
 
-<h2><a name="P">-- P --</a></h2>
+<h2><a id="P">-- P --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="class-SpatialCollections.html">plot-method</a></td>
 <td>Class "SpatialCollections"</td></tr>
 <tr><td style="width: 25%;"><a href="class-SpatialRings.html">plot-method</a></td>
@@ -286,19 +288,21 @@
 <td>Experimental Functions</td></tr>
 </table>
 
-<h2><a name="R">-- R --</a></h2>
+<h2><a id="R">-- R --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="gpc-polyfile.html">read.polyfile</a></td>
 <td>Read/Write polygon data</td></tr>
 <tr><td style="width: 25%;"><a href="wkt-functions.html">readWKT</a></td>
 <td>RGEOS WKT Functions</td></tr>
+<tr><td style="width: 25%;"><a href="rgeos-deprecated.html">rgeos-deprecated</a></td>
+<td>Deprecated functions and methods</td></tr>
 <tr><td style="width: 25%;"><a href="misc-gArea.html">RGEOSArea</a></td>
 <td>Area of Geometry</td></tr>
 <tr><td style="width: 25%;"><a href="topo-unary-gBoundary.html">RGEOSBoundary</a></td>
 <td>Boundary of Geometry</td></tr>
-<tr><td style="width: 25%;"><a href="misc-gBuffer.html">RGEOSBuffer</a></td>
-<td>Buffer Geometry</td></tr>
+<tr><td style="width: 25%;"><a href="rgeos-deprecated.html">RGEOSBuffer</a></td>
+<td>Deprecated functions and methods</td></tr>
 <tr><td style="width: 25%;"><a href="pred-binary-gContains.html">RGEOSContains</a></td>
 <td>Geometry Relationships - Contains and Within</td></tr>
 <tr><td style="width: 25%;"><a href="topo-unary-gConvexHull.html">RGEOSConvexHull</a></td>
@@ -365,9 +369,9 @@
 <td>Class "SpatialRingsDataFrame"</td></tr>
 </table>
 
-<h2><a name="S">-- S --</a></h2>
+<h2><a id="S">-- S --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="gpc-new-generics.html">scale.poly</a></td>
 <td>Generics/Methods for polygon objects</td></tr>
 <tr><td style="width: 25%;"><a href="class-gpc.poly.html">scale.poly-method</a></td>
@@ -420,9 +424,9 @@
 <td>Class "gpc.poly"</td></tr>
 </table>
 
-<h2><a name="T">-- T --</a></h2>
+<h2><a id="T">-- T --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="utility-functions.html">translate</a></td>
 <td>RGEOS Utility Functions</td></tr>
 <tr><td style="width: 25%;"><a href="gpc-new-generics.html">triangulate</a></td>
@@ -439,34 +443,34 @@
 <td>Generics/Methods for polygon objects</td></tr>
 </table>
 
-<h2><a name="U">-- U --</a></h2>
+<h2><a id="U">-- U --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="class-gpc.poly.html">union-method</a></td>
 <td>Class "gpc.poly"</td></tr>
 </table>
 
-<h2><a name="V">-- V --</a></h2>
+<h2><a id="V">-- V --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="utility-functions.html">version_GEOS</a></td>
 <td>RGEOS Utility Functions</td></tr>
 <tr><td style="width: 25%;"><a href="utility-functions.html">version_GEOS0</a></td>
 <td>RGEOS Utility Functions</td></tr>
 </table>
 
-<h2><a name="W">-- W --</a></h2>
+<h2><a id="W">-- W --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="gpc-polyfile.html">write.polyfile</a></td>
 <td>Read/Write polygon data</td></tr>
 <tr><td style="width: 25%;"><a href="wkt-functions.html">writeWKT</a></td>
 <td>RGEOS WKT Functions</td></tr>
 </table>
 
-<h2><a name="misc">-- misc --</a></h2>
+<h2><a id="misc">-- misc --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="class-SpatialRings.html">[-method</a></td>
 <td>Class "SpatialRings"</td></tr>
 <tr><td style="width: 25%;"><a href="class-SpatialRingsDataFrame.html">[-method</a></td>
@@ -474,4 +478,4 @@
 <tr><td style="width: 25%;"><a href="class-gpc.poly.html">[-method</a></td>
 <td>Class "gpc.poly"</td></tr>
 </table>
-</body></html>
+</div></body></html>

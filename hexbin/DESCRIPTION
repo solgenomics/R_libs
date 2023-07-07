@@ -1,5 +1,5 @@
 Package: hexbin
-Version: 1.28.2
+Version: 1.28.3
 Title: Hexagonal Binning Routines
 Author: Dan Carr <dcarr@voxel.galaxy.gmu.edu>, ported by Nicholas
         Lewin-Koh and Martin Maechler <maechler@stat.math.ethz.ch>,
@@ -18,7 +18,7 @@ License: GPL-2
 VignetteBuilder: knitr
 NeedsCompilation: yes
 URL: https://github.com/edzer/hexbin
-Packaged: 2021-01-08 08:39:28 UTC; edzer
+Packaged: 2023-03-21 20:34:52 UTC; edzer
 Repository: CRAN
-Date/Publication: 2021-01-08 09:40:03 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2022-02-15 16:30:43 UTC; unix
+Date/Publication: 2023-03-21 21:40:05 UTC
+Built: R 4.3.0; x86_64-pc-linux-gnu; 2023-07-07 02:34:16 UTC; unix

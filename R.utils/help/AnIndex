@@ -71,7 +71,6 @@ Assert$isMatrix	isMatrix.Assert
 Assert$isScalar	isScalar.Assert
 Assert$isVector	isVector.Assert
 Assert.check	check.Assert
-Assert.inherits	inheritsFrom.Assert
 Assert.inheritsFrom	inheritsFrom.Assert
 Assert.isMatrix	isMatrix.Assert
 Assert.isScalar	isScalar.Assert
@@ -428,10 +427,6 @@ inAnyInterval.numeric	inAnyInterval.numeric
 increase	Non-documented_objects
 increase,ProgressBar-method	increase.ProgressBar
 increase.ProgressBar	increase.ProgressBar
-inherits	Non-documented_objects
-inherits,Assert-method	inheritsFrom.Assert
-inherits.Assert	inheritsFrom.Assert
-inherits.default	Non-documented_objects
 inheritsFrom	inheritsFrom.Assert
 inheritsFrom,Assert-method	inheritsFrom.Assert
 inheritsFrom.Assert	inheritsFrom.Assert
@@ -653,6 +648,9 @@ printf,Verbose-method	printf.Verbose
 printf.default	printf
 printf.NullVerbose	writeRaw.NullVerbose
 printf.Verbose	printf.Verbose
+printWarnings	printWarnings.Verbose
+printWarnings,Verbose-method	printWarnings.Verbose
+printWarnings.Verbose	printWarnings.Verbose
 ProgressBar	ProgressBar
 ProgressBar.as.character	as.character.ProgressBar
 ProgressBar.getBarString	getBarString.ProgressBar
@@ -910,6 +908,7 @@ Verbose.on	on.Verbose
 Verbose.popState	pushState.Verbose
 Verbose.print	print.Verbose
 Verbose.printf	printf.Verbose
+Verbose.printWarnings	printWarnings.Verbose
 Verbose.pushState	pushState.Verbose
 Verbose.ruler	ruler.Verbose
 Verbose.setDefaultLevel	setDefaultLevel.Verbose
@@ -920,12 +919,10 @@ Verbose.summary	summary.Verbose
 Verbose.timestamp	timestamp.Verbose
 Verbose.timestampOff	timestampOn.Verbose
 Verbose.timestampOn	timestampOn.Verbose
-Verbose.warnings	warnings.Verbose
 Verbose.writeRaw	writeRaw.Verbose
 warnings	Non-documented_objects
-warnings,Verbose-method	warnings.Verbose
 warnings.default	Non-documented_objects
-warnings.Verbose	warnings.Verbose
+warnings.Verbose	printWarnings.Verbose
 whichVector	Non-documented_objects
 whichVector.logical	whichVector.logical
 whichVector.matrix	whichVector.logical

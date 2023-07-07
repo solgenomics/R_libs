@@ -1,3 +1,11 @@
+## -----------------------------------------------------------------------------
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+options(styler.colored_print.vertical = FALSE)
+styler::cache_deactivate()
+
 ## ---- message = FALSE---------------------------------------------------------
 library("styler")
 cache_deactivate()
@@ -11,7 +19,7 @@ tidyverse_style()$space$remove_space_after_opening_paren
 ## -----------------------------------------------------------------------------
 string_to_format <- "call( 3)"
 pd <- styler:::compute_parse_data_nested(string_to_format) %>%
-  styler:::pre_visit(c(default_style_guide_attributes))
+  styler:::pre_visit_one(default_style_guide_attributes)
 pd$child[[1]] %>%
   select(token, terminal, text, newlines, spaces)
 
@@ -29,7 +37,7 @@ all.equal(
 ## -----------------------------------------------------------------------------
 space_after_opening_style <- function(are_you_sure) {
   create_style_guide(
-    space = tibble::lst(remove_space_after_opening_paren = 
+    space = list(remove_space_after_opening_paren = 
     if (are_you_sure) styler:::remove_space_after_opening_paren),
     style_guide_name = "styler::space_after_opening_style@https://github.com/r-lib/styler",
     style_guide_version = read.dcf(here::here("DESCRIPTION"))[, "Version"]
@@ -72,7 +80,7 @@ set_line_break_before_curly_opening <- function(pd_flat) {
 ## -----------------------------------------------------------------------------
 set_line_break_before_curly_opening_style <- function() {
   create_style_guide(
-    line_break = lst(set_line_break_before_curly_opening),
+    line_break = list(set_line_break_before_curly_opening),
     style_guide_name = "styler::set_line_break_before_curly_opening_style@https://github.com/r-lib/styler",
     style_guide_version = read.dcf(here::here("DESCRIPTION"))[, "Version"]
   )

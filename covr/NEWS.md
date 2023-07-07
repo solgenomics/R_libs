@@ -1,3 +1,38 @@
+# covr 3.6.2
+
+# covr 3.6.1
+
+* `to_cobertura()` is now explicit about the doctype of the resulting XML. It also sets a source path if recorded. (@mmyrte, #524)
+
+* The internal generic `merge_coverage()` now correctly registers the S3 methods.
+
+* The internal test for recording large calls no longer assumes R is on the system PATH.
+
+# covr 3.6.0
+
+* Added `covr.record_tests` option. When `TRUE`, this enables the recording of the trace of the tests being executed and adds an itemization of which tests result in the execution of each trace.
+  For more details see `?covr.record_tests` (@dgkf, #463, #485, #503)
+
+* `as.data.frame()` now returns an 0 row data frame when there are no functions in a package (#427)
+
+* `codecov()` is now more robust when `coverage` is not the output from `package_coverage()` and `token` is not provided (#456)
+
+* `package_coverage(code = )` now accepts character vectors of length greater than 1 (@bastistician, #481)
+
+* `package_coverage()` now handles packages with install or render time examples (#488)
+
+* `package_coverage()` now sets the environment variable `R_TESTS` to the tests-startup.R file like R CMD check does (#420)
+
+* `report()` now provides a more detailed error message if the `DT` and `htmltools` dependencies are not installed (#500).
+
+* Fix `parse_gcov` bug when package is stored in directory with regex special characters, see #459
+
+* Error/warning thrown for, respectively, missing gcov or empty parsed gcov output (@stephematician, #448)
+
+* Support Google Cloud Build uploading reports to Codecov.io (@MarkEdmondson1234 #469)
+
+* covr is now licensed as MIT (#454)
+
 # covr 3.5.1
 
 * Generated files from [cpp11](https://cpp11.r-lib.org/) are now ignored (#437)
@@ -36,7 +71,7 @@
 ## New Features
 
 * New `azure()` function added to make it easy to use covr on [Azure
-  Pipelines](https://azure.microsoft.com/en-us/services/devops/pipelines/)
+  Pipelines](https://azure.microsoft.com/en-us/products/devops/pipelines/)
   (#370)
 
 * Work around issues related to the new curly curly syntax in rlang (#379, #377, rlang#813)
@@ -208,4 +243,5 @@
 * Move devtools dependency to suggests, only needed on windows
 * move htmltools to suggests
 
-# Initial Release #
+# 1.0.0 #
+* Initial Release

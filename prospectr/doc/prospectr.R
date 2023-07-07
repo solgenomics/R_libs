@@ -68,10 +68,10 @@ gd1 <- t(diff(t(NIRsoil$spc), differences = 1, lag = 10))
 
 ## ----gapseg,fig.cap="Effect of 1st-order gap-segment derivative ", fig.height = 4, fig.width = 6, fig.retina = 1, out.extra='style= "background-color: #FFFFFF; border: 10px solid transparent; padding:0px"'----
 # m = order of the derivative
-# w = window size ( = {2 * gap size} + 1)
+# w = gap size
 # s = segment size
-# first derivative with a gap of 10 bands
-gsd1 <- gapDer(X = NIRsoil$spc, m = 1, w = 11, s = 10) 
+# first derivative with a gap of 5 bands
+gsd1 <- gapDer(X = NIRsoil$spc, m = 1, w = 11, s = 5) 
 plot(as.numeric(colnames(d1)), 
      d1[1,], 
      type = "l", 
@@ -90,7 +90,7 @@ snv <- standardNormalVariate(X = NIRsoil$spc)
 
 ## ----msc, fig.cap="Effect of MSC on raw spectra", fig.height = 4, fig.width = 6, fig.retina = 1, out.extra='style= "background-color: #FFFFFF; border: 10px solid transparent; padding:0px"'----
 # X = input spectral matrix
-msc_spc <- msc(X = NIRsoil$spc, reference_spc = colMeans(NIRsoil$spc))
+msc_spc <- msc(X = NIRsoil$spc, ref_spectrum = colMeans(NIRsoil$spc))
 
 plot(as.numeric(colnames(NIRsoil$spc)), 
      NIRsoil$spc[1,], 
@@ -119,9 +119,9 @@ par(new = FALSE)
 #  Xr_msc <- msc(Xr)
 #  
 #  # apply the same msc to Xu
-#  attr(Xr_msc,"Reference spectrum") # use this info from the previous object
+#  attr(Xr_msc, "Reference spectrum") # use this info from the previous object
 #  
-#  Xu_msc <- msc(Xu, reference_spc = attr(Xr_msc, "Reference spectrum"))
+#  Xu_msc <- msc(Xu, ref_spectrum = attr(Xr_msc, "Reference spectrum"))
 
 ## ----detrend, fig.cap="Effect of SNV-Detrend on raw spectra",fig.height = 4, fig.width = 6, fig.retina = 1, out.extra='style= "background-color: #FFFFFF; border: 10px solid transparent; padding:0px"'----
 # X = input spectral matrix
@@ -225,7 +225,7 @@ points(X[ken$model,], col = "red", pch = 19, cex = 1.4)
 # Test with the NIRsoil dataset
 # one can also use the mahalanobis distance (metric argument)
 # computed in the pc space (pc argument)
-ken_mahal <- kenStone(X = NIRsoil$spc, k = 20, metric = "mahal", pc= 2)
+ken_mahal <- kenStone(X = NIRsoil$spc, k = 20, metric = "mahal", pc = 2)
 # The pc components in the output list stores the pc scores
 plot(ken_mahal$pc[,1], 
      ken_mahal$pc[,2], 
@@ -239,6 +239,40 @@ grid()
 points(ken_mahal$pc[ken_mahal$model, 1], 
        ken_mahal$pc[ken_mahal$model,2], 
        pch = 19, col = "red") 
+
+## ----ksinitalization, tidy = TRUE---------------------------------------------
+# Indices of the initialization samples
+initialization_ind <- c(486, 702, 722, 728) 
+ken_mahal_init <- kenStone(
+  X = NIRsoil$spc, 
+  k = 20, 
+  metric = "mahal", 
+  pc = 2, 
+  init = initialization_ind)
+
+ken_mahal_init$model
+
+## ----ken3, fig.cap="Kennard-Stone sampling with initialization samples", fig.height = 4.5, fig.width = 4, fig.retina = 1, fig.align = 'center', out.extra='style= "background-color: #FFFFFF; border: 10px solid transparent; padding:0px"'----
+
+# The pc components in the output list stores the pc scores
+plot(ken_mahal_init$pc[,1], 
+     ken_mahal_init$pc[,2], 
+     col = rgb(0, 0, 0, 0.3), 
+     pch = 19, 
+     xlab = "PC1",
+     ylab = "PC2",
+     main = "Kennard-Stone with 4 initialization samples") 
+grid()
+# This is the selected points in the pc space
+points(ken_mahal$pc[ken_mahal$model, 1], 
+       ken_mahal$pc[ken_mahal$model, 2], 
+       pch = 19, col = "red") 
+
+# Our initialization samples
+points(ken_mahal$pc[initialization_ind, 1], 
+       ken_mahal$pc[initialization_ind, 2], 
+       pch = 19, cex = 1.5, col = "blue") 
+
 
 ## ----duplex, fig.cap="Selection of 15 calibration and validation samples with the DUPLEX algorithm", fig.height = 4.5, fig.width = 4, fig.retina = 1, fig.align = 'center', out.extra='style= "background-color: #FFFFFF; border: 10px solid transparent; padding:0px"'----
 dup <- duplex(X = X, k = 15) # k is the number of selected samples

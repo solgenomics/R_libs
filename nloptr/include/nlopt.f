@@ -84,6 +84,8 @@
       parameter (NLOPT_LD_CCSAQ=41)
       integer NLOPT_GN_ESCH
       parameter (NLOPT_GN_ESCH=42)
+      integer NLOPT_GN_AGS
+      parameter (NLOPT_GN_AGS=43)
       integer NLOPT_FAILURE
       parameter (NLOPT_FAILURE=-1)
       integer NLOPT_INVALID_ARGS

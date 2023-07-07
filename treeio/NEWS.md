@@ -1,3 +1,50 @@
+# treeio 1.23.1
+
++ supports converting `dendro` object (output of `ggdendro::dendro_data()`) to a phylo object (2023-03-02, Thu, #95)
++ add `inner_join()` method to allows appending data of a variable
+  - use nested data structure and `tidyr::unnest` can extract and convert the data to a simple tibble data frame (#93)
++ update full_join method (#92)
+  - support standard dplyr UI of `by = c( 'columnX' = 'cloumnY')`
+  - drop data from external `data.frame` that are not presented in the tree
+  - use nested column if duplicated rows exist
+
+# treeio 1.22.0
+
++ Bioconductor RELEASE_3_16 (2022-11-02, Wed)
+
+# treeio 1.21.3
+
++ update `as.phylo` and `as.treedata` for data.frame object (2022-10-31, Mon, #88)
++ `as.phylo()` method for `list` (2022-09-14, Wed, #86)
+
+
+# treeio 1.21.2
+
++ update `as.treedata.pvclust` method (2022-08-15, Mon, #82)
++ add citation of the tree data book (2022-08-13, Sat)
+
+# treeio 1.21.1
+
++ `read.nextstrain.json()` function to parse json tree file from NextStrain (2022-08-03, Wed, #81)
+
+# treeio 1.20.0
+
++ Bioconductor 3.15 relase
+
+# treeio 1.19.2
+
++ update `offspring()` to work as `child()`. Actually they are using the same function with different default (`child(type = "children")` and `offspring(type="all")`) (2022-03-16, Wed)
++ update `child()` to support different types ("children", 'tips', 'internal', 'external', 'all') (2022-03-09, Wed, #75)
++ `write.beast` allows `treedata` object only contains `phylo` slot, then it will equivalent to `write.nexus` (2022-02-23, Wed)
+
+# treeio 1.19.1
+
++ bug fixed in `groupClade.treedata` to return a `treedata` object instead of `phylo` (2021-11-12, Fri)
+
+# treeio 1.18.0
+
++ Bioconductor 3.14 release
+
 # treeio 1.17.2
 
 + allow additional parameter to pass to `drop.tip` methods (2021-06-23, Wed, @xiangpin, #62)

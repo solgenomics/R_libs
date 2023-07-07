@@ -9,6 +9,7 @@ pdfauthor={David Clayton},
 pdftitle={Fst calculations}]
 {hyperref}
 
+
 \title{Fst\\The algorithm used in {\tt snpStats}}
 \author{David Clayton}
 \date{\today}
@@ -44,7 +45,7 @@ and let:
 \begin{eqnarray*}
   Y_s &=& \frac{N_s}{N_s-1}p_s(1-p_s)\\
   X_{sg} &=& \frac{N_{sg}}{N_{sg}-1} p_{sg}(1-p_{sg})\\
-  X_g &=& \sum_g W_g X_{sg}
+  X_s &=& \sum_g W_g X_{sg}
 \end{eqnarray*}
 where $W_g$ are group-specific weights (see below).
 
@@ -54,7 +55,7 @@ F_s = 1 - \frac{X_s}{Y_s} = \frac{Y_s - X_s}{Y_s}.
 \]
 
 A natural combined value over all SNPs is obtained by summing numerators and 
-denominators of teh SNP-specific values Denoting summation by a $+$ subsscript,
+denominators of the SNP-specific values Denoting summation by a $+$ subsscript,
 \[
 F = \frac{Y_+ - X_+}{Y_+},
 \]

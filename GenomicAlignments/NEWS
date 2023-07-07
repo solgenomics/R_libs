@@ -1,3 +1,56 @@
+CHANGES IN VERSION 1.36.0
+-------------------------
+
+NEW FEATURES
+
+    o Add 'strandMode' argument to readGAlignmentsList() (contributed by
+      Robert Castelo).
+
+BUG FIXES
+
+    o Increase 'cigar_buf' size to reduce risk of buffer overflow in
+      cigar-utils C code.
+
+
+CHANGES IN VERSION 1.34.0
+-------------------------
+
+BUG FIXES
+
+    o Fix buffer overflow in cigarNarrow()/cigarQNarrow()
+      See commit 5d0a29b2795a95dfb006e8e54c7532b12bd5e79c.
+
+
+CHANGES IN VERSION 1.32.0
+-------------------------
+
+- No significant changes in this version.
+
+
+CHANGES IN VERSION 1.30.0
+-------------------------
+
+- No changes in this version.
+
+
+CHANGES IN VERSION 1.28.0
+-------------------------
+
+- No changes in this version.
+
+
+CHANGES IN VERSION 1.26.0
+-------------------------
+
+- No changes in this version.
+
+
+CHANGES IN VERSION 1.24.0
+-------------------------
+
+- No changes in this version.
+
+
 CHANGES IN VERSION 1.22.0
 -------------------------
 

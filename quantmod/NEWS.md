@@ -1,4 +1,145 @@
-### Changes in 0.4-18 (2020-11-29)
+### Changes in 0.4.23 (2023-06-14)
+
+1. Fix `getQuote.yahoo()` error. Thanks to Ethan B. Smith for the report and
+    patch!
+    [#382](https://github.com/joshuaulrich/quantmod/issues/382)
+    [#383](https://github.com/joshuaulrich/quantmod/issues/383)
+
+1. Add `name` argument to `add_TA()`. Thanks to @SamoPP for the suggestion!
+    [#377](https://github.com/joshuaulrich/quantmod/issues/377)
+    [#205](https://github.com/joshuaulrich/quantmod/issues/205)
+
+### Changes in 0.4.22 (2023-04-05)
+
+1. Move jsonlite from Suggests to Imports so it doesn't cause a problem
+    when a package that doesn't also Suggest jsonlite uses getSymbols().
+    Thanks to Kurt Hornik for the report and fix!
+    [#380](https://github.com/joshuaulrich/quantmod/issues/380)
+
+### Changes in 0.4.21 (2023-03-29)
+
+1. Fix S3 method issues. R-devel (83995-ish) added a check for possible S3
+    method issues. Register methods it found that were not registered:
+    `str.replot()`, `seriesHi.timeSeries()`, and `seriesLo.timeSeries()`.
+
+    It was also confused by `range.bars()` and `unique.formula.names()`. Remove
+    `unique.formula.names()` because it wasn't exported or used internally.
+    Rename `range.bars()` to `rangeBars()`, which isn't exported.
+
+    Thanks to Kurt Hornik for the report!
+    [#375](https://github.com/joshuaulrich/quantmod/issues/375)
+
+1. Remove "^" prefix from `getSymbols()` return value. When the 'Symbols'
+    argument has a "^" prefix and `auto.assign = TRUE`:
+
+    * `getSymbols()` removes the "^" from the object it creates, but
+    * returns the 'Symbols' argument unchanged, and
+    * removes the "^" from the column names of the object it creates.
+
+    The example below will create an object named `IXIC` but the value of
+    `sym` will be "^IXIC".
+
+        sym <- getSymbols("^IXIC")
+
+    That means `x <- get(sym)` will not work because an object named `^IXIC`
+    doesn't exist.
+    [#371](https://github.com/joshuaulrich/quantmod/issues/371)
+
+1. Add 'from' and 'to' arguments to `getSymbols.FRED()`. Users expect to be
+    able to set the 'from' and 'to' arguments for FRED data like they can for
+    Yahoo data. Those values were ignored and the entire series was always
+    returned.
+    [#368](https://github.com/joshuaulrich/quantmod/issues/368)
+
+1. Change interval to 1d for `getDividends()` and `getSplits()`. The "3mo"
+    setting caused some dividends to be missing for companies that issued monthly
+    dividends. Note that the response to this request also includes all the OHLCV
+    data. But it's small (less than 1MB for 60+ years of daily data).
+    [#372](https://github.com/joshuaulrich/quantmod/issues/372)
+
+1. Handle errors in `getSplits()` and `getDividends()`. `getDividends()` didn't
+    handle cases where the download failed, or when dividends needed to be
+    split-adjusted but there were no splits. It also tried to set colnames
+    on the empty xts object that's returned when there are no dividends.
+    `getSplits()` had the same colnames issue. Check for no splits by testing
+    for `NULL` because that's more explicit. Thanks to Chris Cheung for the
+    report!
+    [#366](https://github.com/joshuaulrich/quantmod/issues/366)
+
+1. Export `HL()`, `is.HL()`, and `has.HL()` functions and add documentation.
+    These were added in 0.4.18 but not exported or included in the documentation.
+
+1. Use Yahoo Finance v8 JSON endpoint and remove the v7 CSV endpoint. There
+    seems to be a rate limit for the number of tickers you can request via the CSV
+    endpoint. The [yfinance python library](https://github.com/ranaroussi/yfinance)
+    uses the JSON endpoint and doesn't seem to have rate limit issues.
+    [#360](https://github.com/joshuaulrich/quantmod/issues/360)
+    [#362](https://github.com/joshuaulrich/quantmod/issues/362)
+    [#364](https://github.com/joshuaulrich/quantmod/issues/364)
+
+### Changes in 0.4.20 (2022-04-29)
+
+1. Remove check for Yahoo Finance cookies because the site no longer
+  responds with a cookie, and that caused the connection attempt to fail.
+  This affected `getSymbols()`, `getDividends()`, and `getSplits()`.
+  Thanks to several users for reporting, and especially to @pverspeelt and
+  @alihru for investigating potential fixes!
+  [#358](https://github.com/joshuaulrich/quantmod/issues/358)
+
+1. Update `getSymbols.yahooj()` for changes to the web page.
+  [#312](https://github.com/joshuaulrich/quantmod/issues/312)
+
+1. Add `HL()` and supporting functions. These are analogues to `HLC()`,
+  `OHLC()`, etc. Thanks for Karl Gauvin for the nudge to implement them.
+
+1. Add adjusted close to `getSymbols.tiingo()` output. Thanks to Ethan Smith
+  for the suggestion and patch!
+  [#289](https://github.com/joshuaulrich/quantmod/issues/289)
+  [#345](https://github.com/joshuaulrich/quantmod/pull/345)
+
+1. Use a Date index for `getSymbols.tiingo()` daily data. Thanks to Ethan
+  Smith for the report!
+  [#350](https://github.com/joshuaulrich/quantmod/issues/350)
+
+1. Remove unneeded arguments to the `getSymbols.tiingo()` implementation.
+  Thanks to Ethan Smith for the suggestion and patch!
+  [#343](https://github.com/joshuaulrich/quantmod/issues/343)
+  [#344](https://github.com/joshuaulrich/quantmod/pull/344)
+
+1. Load dividends and splits data into the correct environment when the user
+  provides a value for the `env` argument. The previous behavior always loaded
+  the data into the environment the function was called from. Thanks to
+  Stewart Wright for the report and patch!
+  [#33](https://github.com/joshuaulrich/quantmod/issues/33)
+
+1. Make `getOptionChain()` return all the fields that Yahoo Finance provides.
+  Thanks to Adam Childers (@rhizomatican) for the patch!
+  [#318](https://github.com/joshuaulrich/quantmod/issues/318)
+  [#336](https://github.com/joshuaulrich/quantmod/pull/336)
+
+1. Add [orats](https://docs.orats.io) as a source for `getOptionChain()`.
+  Thanks to Steve Bronder (@SteveBronder) for the suggestion and implementation!
+  [#325](https://github.com/joshuaulrich/quantmod/pull/325)
+
+1. Improve the error message when `getSymbols()` cannot import data for a
+  symbol because the symbol is not valid or does not have historical data.
+  Thanks to Peter Carl for the report.
+  [#333](https://github.com/joshuaulrich/quantmod/issues/333)
+
+1. Fix the `getMetals()` example in the documentation. The example section
+  previously had an example of `getFX()`. Thanks to Gerhard Nachtmann
+  (@nachti) for the report and patch!
+  [#330](https://github.com/joshuaulrich/quantmod/issues/330)
+
+1. Fix `getQuote()` so it returns data when the ticker symbol contains an "&".
+  Thanks to @pankaj3009 for the report!
+  [#324](https://github.com/joshuaulrich/quantmod/issues/324)
+
+1. Fix `addMACD()` when `col` is specified. Thanks to @nvalueanalytics for the
+  report!
+  [#321](https://github.com/joshuaulrich/quantmod/issues/321)
+
+### Changes in 0.4.18 (2020-11-29)
 
 1. Fix issues handling https:// in `getSymbols.yahooj()`. Thanks to @lobo1981
   and @tchevri for the reports and @ethanbsmith for the suggestion to move
@@ -39,7 +180,7 @@
   to Kurt Hornik for the report.
   [#319](https://github.com/joshuaulrich/quantmod/issues/319)
 
-### Changes in 0.4-17 (2020-03-31)
+### Changes in 0.4.17 (2020-03-31)
 
 1. `chartTheme()` now works when quantmod is not attached. Thanks to Kurt
   Hornik for the report.

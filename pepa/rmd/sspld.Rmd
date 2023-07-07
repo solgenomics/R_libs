@@ -23,14 +23,18 @@ params:
   sspf: "no data"
   rep: "no data"
   dfr: "no data"
+  pe: "no data"
   title: "no data"
   subtitle: "no data"
   author: "no data"
 ---
 
-```{r echo = FALSE}
+```{r global_options, include = FALSE}
 library(knitr)
+opts_chunk$set(echo = FALSE, comment = NA)
+```
 
+```{r}
 # Pass arguments
 
 traits <- params$traits
@@ -49,13 +53,6 @@ nsspf <- out$nl[[3]]
 nrep <- out$nrep
 dfr <- out$dfr
 nmis.fac <- out$nmis.fac
-
-# Define internal variables
-
-mpf <- dfr[, mpf]
-spf <- dfr[, spf]
-sspf <- dfr[, sspf]
-rep <- dfr[, rep]
 ```
 
 # 1. Model specification and data description

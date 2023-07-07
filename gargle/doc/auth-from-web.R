@@ -4,6 +4,9 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
+## ---- echo = FALSE, out.width = "400px"---------------------------------------
+knitr::include_graphics("invalid_request.png")
+
 ## ----eval = FALSE-------------------------------------------------------------
 #  library(googledrive)
 #  
@@ -15,11 +18,6 @@ knitr::opts_chunk$set(
 ## ----eval = FALSE-------------------------------------------------------------
 #  options(gargle_oob_default = TRUE)
 
-## ---- eval = FALSE------------------------------------------------------------
-#  drive_auth <- function(email = gargle::gargle_oauth_email(),
-#                         path = NULL,
-#                         scopes = "https://www.googleapis.com/auth/drive",
-#                         cache = gargle::gargle_oauth_cache(),
-#                         use_oob = gargle::gargle_oob_default(),
-#                         token = NULL) {...}
+## ----eval = FALSE-------------------------------------------------------------
+#  options(gargle_oauth_client_type = "web")
 

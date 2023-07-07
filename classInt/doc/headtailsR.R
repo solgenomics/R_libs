@@ -198,7 +198,7 @@ plot(brks_quantile, pal = pal1, main = "quantile")
 par(opar)
 
 ## ----benchmarkbreaks, fig.show='hold', fig.width=7----------------------------
-#Helper function to reescale values
+#Helper function to rescale values
 help_reescale <- function(x, min = 1, max = 10) {
   r <- (x - min(x)) / (max(x) - min(x))
   r <- r * (max - min) + min

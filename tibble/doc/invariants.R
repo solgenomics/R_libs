@@ -3,9 +3,11 @@
 library(tibble)
 library(vctrs)
 
-knitr::opts_chunk$set(error = TRUE)
-
-tibble:::set_fansi_hooks()
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  error = TRUE
+)
 tibble:::set_dftbl_hooks()
 
 options(
@@ -243,9 +245,9 @@ tbl[list(1), ]
 tbl["1", ]
 
 ## ----bracket-i-oob, dftbl = TRUE----------------------------------------------
-df[10, ]
+
 tbl[10, ]
-df["x", ]
+
 tbl["x", ]
 
 ## ----bracket-i-recycle, dftbl = TRUE------------------------------------------

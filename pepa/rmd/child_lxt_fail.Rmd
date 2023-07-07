@@ -2,7 +2,7 @@
 
 # {{i}}. Analysis for trait `r traits[i]`
 
-```{r echo = FALSE}
+```{r}
 lc.gd <- ck.lxt(line, tester, dfr)
 lc <- ck.rcbd(traits[i], 'geno', rep, dfr)
 ```
@@ -21,7 +21,7 @@ lc <- ck.rcbd(traits[i], 'geno', rep, dfr)
 
 `r if (lc$nmis > 0) paste0("There are missing values (", format(lc$pmis * 100, digits = 3), "%), the design is not balanced. The table below shows the frequencies of valid data for each genotype in each replication.")`
 
-```{r echo = FALSE}
+```{r}
 if (lc$ng.mult > 0 | lc$nmis > 0)
   lc$tfr
 if (lc$ng.0 > 0)

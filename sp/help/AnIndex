@@ -179,6 +179,14 @@ disaggregate,SpatialPolygons-method	disaggregate
 disaggregate,SpatialPolygonsDataFrame-method	disaggregate
 disaggregate-methods	disaggregate
 DMS-class	DMS-class
+elide	elide-methods
+elide,SpatialLines-method	elide-methods
+elide,SpatialLinesDataFrame-method	elide-methods
+elide,SpatialPoints-method	elide-methods
+elide,SpatialPointsDataFrame-method	elide-methods
+elide,SpatialPolygons-method	elide-methods
+elide,SpatialPolygonsDataFrame-method	elide-methods
+elide-methods	elide-methods
 flipHorizontal	flip
 flipVertical	flip
 fullgrid	gridded-methods
@@ -224,6 +232,7 @@ getSpPPolygonsIDSlots	sp-deprecated
 getSpPPolygonsLabptSlots	sp-deprecated
 getSpPpolygonsSlot	sp-deprecated
 get_col_regions	spplot
+get_evolution_status	spTransform
 get_ll_TOL	is.projected
 get_ll_warn	is.projected
 get_Polypath	SpatialPolygons-class
@@ -403,6 +412,7 @@ row.names.SpatialPolygonsDataFrame	SpatialPolygonsDataFrame-class
 select.spatial	select.spatial
 setParUsrBB	Spatial-class
 set_col_regions	spplot
+set_evolution_status	spTransform
 set_ll_TOL	is.projected
 set_ll_warn	is.projected
 set_Polypath	SpatialPolygons-class

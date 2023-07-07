@@ -2,5 +2,6 @@ calculateMAF	calculateMAF
 combineGenoData	combineGenoData
 convertToNumeric	convertToNumeric
 filterGenoData	filterGenoData
+genoDataFilter	genoDataFilter
 rawGenoData	rawGenoData
 roundAlleleDosage	roundAlleleDosage

@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 
 if (!requireNamespace("poorman", quietly = TRUE) ||
-    !requireNamespace("gt", quietly = TRUE)) {
+  !requireNamespace("gt", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 } else {
   library(poorman)
@@ -47,7 +47,6 @@ When I display in in the console (calling an object - e.g. `df` - is actually eq
 
 ```{r, eval=FALSE}
 knitr::kable(df, format = "markdown")
-
 ```
 ```
 | Variable|Group |   CI| CI_low| CI_high|      p|
@@ -82,23 +81,45 @@ format_table(df)
 As you can see, `format_table()` modifies columns, turning number into characters (so that it has the same amount of digits), and  detecting confidence intervals. This is usually combined with column-specific formatting functions, like `format_p()`:
 
 ```{r}
-df %>% 
-  mutate(p = format_p(p, stars = TRUE)) %>% 
+df %>%
+  mutate(p = format_p(p, stars = TRUE)) %>%
   format_table()
 ```
 
+## Using unicode symbols as effect size names
+
+With `use_symbols = TRUE`, it is possible to render certain effect size names as symbols, if these are used as column names. Note that this only works on OS X or Linux, or on Windows from R 4.2 or higher.
+
+```{r eval=.Platform$OS.type == "windows"}
+x <- data.frame(
+  phi_adjusted = 0.3,
+  Glass_delta = 0.4,
+  Epsilon2 = 0.7,
+  R2 = 0.4
+)
+
+# standard output
+format_table(x)
+
+# column names of effect sizes as symbols
+format_table(x, use_symbols = TRUE)
+```
+
+In combination with `export_table()` (see next section), this will give you nicely formatted tables.
+
+```{r eval=.Platform$OS.type == "windows"}
+export_table(format_table(x, use_symbols = TRUE))
+```
 
 ### Exporting
 
 The next step is *exporting*, which takes a data frame and renders it in a given format, so that it looks good in the console, or in markdown, HTML or latex.
 
-For console output, we need to `cat()` the returned result to get nicely printed code:
-
 ```{r}
-cat(export_table(df))
+export_table(df)
 ```
 
-For markdown or HTML, simply modify the `format` argument to markdown ("md")...
+For markdown or HTML, simply change the `format` argument to markdown ("md")...
 
 ```{r}
 export_table(df, format = "md")
@@ -113,8 +134,8 @@ export_table(df, format = "html")
 This can be combined with `format_table()`.
 
 ```{r}
-df %>% 
-  format_table(ci_brackets = c("(", ")")) %>% 
+df %>%
+  format_table(ci_brackets = c("(", ")")) %>%
   export_table(format = "html")
 ```
 

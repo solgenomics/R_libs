@@ -1,10 +1,12 @@
 Amatrix	Amatrix
 AmatrixPolyCross	AmatrixPolyCross
 datatreat	datatreat
+expandAmatrix	expandAmatrix
 filterpedigree	filterpedigree
 formatmatrix	formatmatrix
 Gmatrix	Gmatrix
 Hmatrix	Hmatrix
+Mcheck	Mcheck
 missingdata	missingdata
 ped.mrode	ped.mrode
 ped.sol	ped.sol

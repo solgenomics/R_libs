@@ -263,7 +263,7 @@ test_GRanges_mcols <- function()
                    silent=TRUE)
 
     mcols(gr1) <- NULL
-    target <- S4Vectors:::make_zero_col_DataFrame(length(gr1))
+    target <- make_zero_col_DFrame(length(gr1))
     checkIdentical(target, mcols(gr1, use.names=FALSE))
     checkIdentical(`rownames<-`(target, .TARGET_names), mcols(gr1))
 
@@ -499,6 +499,20 @@ test_GRanges_concatenate <- function()
     checkIdentical(end(gr12), c(end(gr1), end(gr2)))
     checkIdentical(strand(gr12), c(strand(gr1), strand(gr2)))
     checkIdentical(mcols(gr12), rbind(mcols(gr1), mcols(gr2)))
+
+    #########################################################################
+    ## Concatenate GRanges objects with differing seqlevels
+    x <- GRanges(seqinfo=Seqinfo(paste0("chr", 1:5), 1001:1005))
+    y <- GRanges("chr4:1-11")
+    current <- c(x, y)
+    checkTrue(validObject(current, complete=TRUE))
+    checkIdentical("chr4", as.character(seqnames(current)))
+    checkIdentical(seqlevels(x), levels(seqnames(current)))
+    current <- c(y, x)
+    checkTrue(validObject(current, complete=TRUE))
+    checkIdentical("chr4", as.character(seqnames(current)))
+    checkIdentical(paste0("chr", c(4, 1:3, 5)), levels(seqnames(current)))
+
 
     #########################################################################
     ## Concatenate GRanges objects with differing metadata columns

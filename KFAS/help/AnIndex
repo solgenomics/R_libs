@@ -4,6 +4,7 @@ artransform	artransform
 boat	boat
 coef.KFS	coef.SSModel
 coef.SSModel	coef.SSModel
+confint.KFS	confint.KFS
 deviance.KFS	KFAS-defunct
 fitSSM	fitSSM
 fitted.KFS	fitted.SSModel

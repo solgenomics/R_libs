@@ -1,0 +1,46 @@
+asymptoticVariance      Compute Asymptotic Efficiencies
+bindDatasets            Bind Generated Datasets
+chgDefaults             Change default arguments
+compare                 Create comparison charts for multiple fits
+createDatasetsFromList
+                        Create Dataset List From List of Data Objects
+createRhoFunction       Create Rho-Functions With Custom Tuning
+                        Parameter
+extractTuningParameter
+                        Extract Tuning Parameters Used In Fitting
+fitDatasets_lmer        Fitting Functions
+generateAnovaDatasets   Generate ANOVA type datasets
+generateMixedEffectDatasets
+                        Generate Mixed Effects Datasets
+generateSensitivityCurveDatasets
+                        Generate Datasets To Create Sensitivity Curves
+getME                   Extract or Get Generalize Components from a
+                        Fitted Mixed Effects Model
+lapplyDatasets          Lapply for generated datasets
+loadAndMergePartialResults
+                        Load And Merge Partial Results
+mergeProcessedFits      Merge Processed Fits
+partialMoment_standardNormal
+                        Compute Partial Moments
+plot-methods            Plot an Object of the "Psi Function" Class
+plot.rlmerMod           Plot Method for "rlmerMod" objects.
+prepareMixedEffectDataset
+                        Prepare Dataset for Parametric Bootstrap
+processDatasetsInParallel
+                        Process Datasets in Parallel
+processFile             Process File of Stored Datasets
+processFit              Process Fitted Objects
+psi-functions           Classical, Huber and smoothed Huber psi- or
+                        rho-functions
+psi2propII              Convert to Proposal 2 weight function
+residuals.rlmerMod      Get residuals
+rlmer                   Robust Scoring Equations Estimator for Linear
+                        Mixed Models
+rlmerMod-class          rlmerMod Class
+robustlmm-package       Robust linear mixed effects models
+saveDatasets            Save datasets
+shortenLabelsKS2022     Shorten Labels
+show                    Other methods
+splitDatasets           Split Datasets Into Chunks
+viewCopyOfSimulationStudy
+                        Access Simulation Study Code

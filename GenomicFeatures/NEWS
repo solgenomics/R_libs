@@ -1,3 +1,159 @@
+CHANGES IN VERSION 1.52.0
+-------------------------
+
+NEW FEATURES
+
+    o Small improvement to makeTxDbFromEnsembl(): The function can now be
+      called on the abbreviated organism, e.g. "hsapiens", in addition
+      to "homo sapiens".
+
+DEPRECATED AND DEFUNCT
+
+    o Finally remove disjointExons() (got deprecated in BioC 3.13 and defunct
+      in BioC 3.15).
+
+BUG FIXES
+
+    o Fix issue with order of sequences in seqinfo(makeTxDbFromUCSC()).
+      See commit e4381bc.
+
+
+CHANGES IN VERSION 1.50.0
+-------------------------
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o Use useEnsemblGenomes() instead of useMart() wherever possible.
+
+    o Improve pcoverageByTranscript() implementation. The function now uses
+      a chunking strategy to handle bigger CompressedGRangesList objects and
+      to reduce memory footprint. Note that even with this improvement, the
+      function is still not very efficient.
+
+    o Rename proteinToGenome() argument 'txdb' -> 'db'.
+
+BUG FIXES
+
+    o Change test for 'circ_seqs' argument in makeTxDbPackageFromUCSC() from
+      an error to a warning if argument set to NULL.
+
+
+CHANGES IN VERSION 1.48.0
+-------------------------
+
+NEW FEATURES
+
+    o Add proteinToGenome() generic and methods. Loosely modeled on
+      ensembldb::proteinToGenome().
+
+    o Add extendExonsIntoIntrons().
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o Use useEnsembl() instead of useMart() wherever possible.
+
+    o makeTxDbFromGFF() and makeTxDbFromGRanges() now recognize and
+      import features of type "gene_segment", "pseudogenic_gene_segment",
+      "antisense_RNA", "three_prime_overlapping_ncrna", or "vault_RNA",
+      as transcripts.
+      Note that, according to the Sequence Ontology, the "gene_segment"
+      and "pseudogenic_gene_segment" terms are NOT offsprings of the
+      "transcript" term via the **is_a** relationship but we still treat
+      them as if they were because that's what Ensembl does in their GFF3
+      files!
+
+DEPRECATED AND DEFUNCT
+
+    o Add warning about FeatureDb-related functionalities no longer being
+      actively maintained.
+
+    o disjointExons() is now defunct after being deprecated in BioC 3.13.
+
+
+CHANGES IN VERSION 1.46.0
+-------------------------
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o Small update to makeTxDbFromGFF()/makeTxDbFromGRanges():
+      makeTxDbFromGFF() and makeTxDbFromGRanges() now recognize and import
+      features of type protein_coding_gene (or of type any offspring of
+      the protein_coding_gene term) as genes. This was achieved by adding
+      protein_coding_gene + its offsprings to GenomicFeatures:::.GENE_TYPES.
+
+
+CHANGES IN VERSION 1.44.0
+-------------------------
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o Several improvements to makeTxDbFromGFF():
+      - More GFF3 feature types are recognized as transcripts or genes (commit
+        d7f5980f).
+      - Improve handling of GFF3 files from Ensembl (commit c1e3fb92).
+      - Handle exons with no Parent attribute. GFF3 files that contain exons
+        with no Parent attribute no longer break makeTxDbFromGRanges() or
+        makeTxDbFromGFF(). Orphan exons are dropped.
+
+DEPRECATED AND DEFUNCT
+
+    o Deprecate disjointExons() in favor of exonicParts().
+
+    o Remove species() method for TxDb objects (was deprecated in BioC 3.3
+      and defunct in BioC 3.4).
+
+
+CHANGES IN VERSION 1.42.0
+-------------------------
+
+NEW FEATURES
+
+    o Implement a restricted seqinfo() setter for TxDb objects that supports
+      altering only the seqlevels and/or genome of the object, but not its
+      seqlengths or circularity flags. This is all we need to make the improved
+      seqlevelsStyle() setter work on TxDb objects (see below).
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o The seqlevelsStyle() getter and setter do a better job when the
+      underlying genome is known. See NEWS file in the GenomeInfoDb package
+      for more information.
+
+
+CHANGES IN VERSION 1.40.0
+-------------------------
+
+NEW FEATURES
+
+    o Small improvements to makeTxDbFromEnsembl():
+      - check validity of user supplied transcript attribute code
+      - report nb of fetched transcripts and genes during progress
+      - produced TxDb will "remember" which transcript attribute code was used
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o genes() now prints a message when genes are dropped.
+
+    o getChromInfoFromUCSC() is now defined in the GenomeInfoDb package.
+      Note that the new function is a much improved version of the old one
+      but also the returned data frame has its columns named differently!
+      See ?getChromInfoFromUCSC in the GenomeInfoDb package for the details.
+
+    o Argument 'goldenPath_url' was renamed 'goldenPath.url' in functions
+      makeTxDbFromUCSC(), makeFeatureDbFromUCSC(), makeTxDbPackageFromUCSC(),
+      and makeFDbPackageFromUCSC().
+
+    o Default value for argument 'circ_seqs' was changed from DEFAULT_CIRC_SEQS
+      to NULL in all functions that have this argument.
+
+    o Global constant DEFAULT_CIRC_SEQS (character vector) was removed. It is
+      now defined in GenomeInfoDb but no longer exported, at least for now.
+
+BUG FIXES
+
+    o Make asGFF() method for TxDb objects robust to absence of CDS ranges.
+
+
 CHANGES IN VERSION 1.38.0
 -------------------------
 

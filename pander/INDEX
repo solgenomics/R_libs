@@ -1,6 +1,3 @@
-Pandoc-class            Reporting with Pandoc
-Pandoc.brew             Brew in pandoc format
-Pandoc.convert          Converts Pandoc to other format
 add.blank.lines         Add trailing and leading blank line
 add.significance.stars
                         Add significance stars
@@ -15,18 +12,12 @@ has.rownames            Check if rownames are available
 openFileInOS            Open file
 p                       Inline Printing
 pander                  Generic pander method
-pander.Arima            Prints an arima object from stats package in
-                        Pandoc's markdown.
-pander.CrossTable       Pander method for CrossTable class
-pander.Date             Pander method for Date class
-pander.Glm              Prints an Grm object from rms package in
-                        Pandoc's markdown.
-pander.NULL             Pander method for a NULL object
-pander.POSIXct          Pander method for POSIXct class
-pander.POSIXlt          Pander method for POSIXlt class
+pander_return           Pander and capture output
 pander.anova            Pander method for anova class
 pander.aov              Pander method for aov class
 pander.aovlist          Pander method for aovlist class
+pander.Arima            Prints an arima object from stats package in
+                        Pandoc's markdown.
 pander.call             Pander method for call class
 pander.cast_df          Pander method for cast_df class
 pander.character        Pander method for character class
@@ -34,8 +25,10 @@ pander.clogit           Pander method for clogit class
 pander.coxph            Pander method for coxph class
 pander.cph              Prints an cph object from rms package in
                         Pandoc's markdown.
+pander.CrossTable       Pander method for CrossTable class
 pander.data.frame       Pander method for data.frame class
 pander.data.table       Pander method for data.table class
+pander.Date             Pander method for Date class
 pander.default          Default Pander method
 pander.density          Pander method for density class
 pander.describe         Pander method for describe class
@@ -47,6 +40,8 @@ pander.formula          Pander method for formula class
 pander.ftable           Pander method for ftable class
 pander.function         Pander method for function class
 pander.glm              Pander method for summary.glm class
+pander.Glm              Prints an Grm object from rms package in
+                        Pandoc's markdown.
 pander.gtable           Pander method for gtable class
 pander.htest            Pander method for htest class
 pander.image            Pander method for image class
@@ -64,6 +59,7 @@ pander.microbenchmark   Pander method for microbenchmark class
 pander.name             Pander method for name class
 pander.nls              Prints an nls object from stats package in
                         Pandoc's markdown.
+pander.NULL             Pander method for a NULL object
 pander.numeric          Pander method for numeric class
 pander.ols              Prints an ols object from rms package in
                         Pandoc's markdown.
@@ -71,6 +67,8 @@ pander.orm              Prints an orm object from rms package in
                         Pandoc's markdown.
 pander.polr             Prints an polr object from MASS package in
                         Pandoc's markdown.
+pander.POSIXct          Pander method for POSIXct class
+pander.POSIXlt          Pander method for POSIXlt class
 pander.prcomp           Pander method for prcomp class
 pander.randomForest     Pander method for randomForest class
 pander.rapport          Pander method for rapport class
@@ -106,7 +104,9 @@ pander.tabular          Pander method for tabular class
 pander.ts               Pander method for timeseries class
 pander.zoo              Pander method for zoo class
 panderOptions           Querying/setting pander option
-pander_return           Pander and capture output
+Pandoc-class            Reporting with Pandoc
+Pandoc.brew             Brew in pandoc format
+Pandoc.convert          Converts Pandoc to other format
 pandoc.date.return      Dates
 pandoc.emphasis.return
                         Emphasis

@@ -1,3 +1,61 @@
+Changes in Version 1.8-12
+
+  o The autoplot() method for "zoo" objects now uses ggplot() directly rather
+    than the qplot() function which has been deprecated in recent versions of
+    ggplot2.
+
+  o Support start = NA and end = NA in addition to start = NULL and end = NULL
+    for unspecified start and end time of a window() of a zoo series.
+
+  o Remove unnecessary S3 method declarations for axis.yearmon/yearqtr as
+    axis() is no S3 generic, only Axis() is (reported by Kurt Hornik).
+
+  o The helper function index2char() now calls format() instead of as.character()
+    for objects inheriting from class POSIXt.
+
+
+Changes in Version 1.8-11
+
+  o The as.ts() methods for both "zoo" and "zooreg" objects now allow to pass on
+    the fill argument (through ...) to the underlying merge() call. Thus, you can
+    say as.ts(z, fill = 0) to fill potential gaps with 0s instead of NAs.
+
+  o The na.spline() method for "ts" objects had been provided internally in the
+    package but has only been correctly registered in the NAMESPACE now.
+
+  o The merge() method gained a sep = "." argument to optionally use a different
+    separator character when making pasting suffixes to column names for making
+    them unique (suggested by Joshua Ulrich).
+
+  o The MATCH() methods for Date/POSIXct/POSIXlt object now coerce the "table"
+    argument (if necessary) to Date or POSIXct, respectively, before calling
+    match(unclass(x), unclass(table), ...) internally.
+
+  o In case of a Date/POSIXct/POSIXlt "table" and a plain atomic argument "x",
+    the default MATCH() method coerces "x" to Date or POSIXct, respectively,
+    before calling match(unclass(x), unclass(table), ...) internally.
+
+  o As the "fts" package has been archived on CRAN for several months, it has been
+    excluded from the Suggests of the package. The as.zoo() method for "fts"
+    objects continues to be part of the package, though, just the hyperlinks in
+    the documentation have been removed.
+
+
+Changes in Version 1.8-10
+
+  o The transform() method now internally uses a list of zoo series (as opposed
+    to a data.frame of numeric variables, as used in previous versions). This
+    means that the transformations can really operate on full zoo series.
+
+  o Added MATCH() methods for classes "Date", "POSIXct", and "POSIXlt", all
+    of which essentially match the underlying numeric vector (suggested by
+    Kurt Hornik).
+
+  o In zooreg() the "ts.eps" argument is now also used (in squares) as the
+    tolerance in the all.equal() comparisons used to determine the underlying
+    regular time grid.
+
+
 Changes in Version 1.8-9
 
   o Added a basic boxplot(x, ...) method for zoo objects that simply calls

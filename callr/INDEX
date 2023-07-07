@@ -1,4 +1,5 @@
-callr                   Call R from R
+add_hook                Add a user hook to be executed before launching
+                        an R subprocess
 default_repos           Default value for the 'repos' option in callr
                         subprocesses
 r                       Evaluate an expression in another R session

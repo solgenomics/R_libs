@@ -2,8 +2,7 @@
 
 # {{i+1}}. Analysis for trait `r traits[i]`
 
-```{r echo = FALSE}
-
+```{r}
 # Check design
 
 lc <- ck.rcbd(traits[i], trt, rep, dfr)
@@ -46,27 +45,13 @@ if (!is.null(eu))
     rownames(at2) <- c(trt, rep, "Exp. Error", "Sampling Error")
     show.anova.sub <- TRUE
   }
-
 ```
 
 ## {{i+1}}.1. Exploratory analysis
 
 It is always good to have some visualization of your data. Below a histogram and a boxplot are shown.
 
-```{r include = !is.null(eu), echo = TRUE, eval = FALSE}
-# Keep a copy of full data
-mydata.full <- mydata
-# Get means for subsampling
-mydata <- st4gi::docomp("mean", trait, c(treatment, experimental.unit), rep, mydata)
-```
-
-```{r echo = TRUE, eval = FALSE}
-par(mfrow = c(1, 2))
-hist(mydata$trait)
-boxplot(mydata$trait)
-```
-
-```{r echo = FALSE, fig.height = 5, fig.width = 10}
+```{r fig.height = 5, fig.width = 10}
 par(mfrow = c(1, 2))
 hist(dfr[, traits[i]], main = paste("Histogram of", traits[i]), xlab = traits[i])
 boxplot(dfr[, traits[i]], ylab = traits[i])
@@ -74,11 +59,7 @@ boxplot(dfr[, traits[i]], ylab = traits[i])
 
 `r if(lc$ng < 10) {paste0(" Since the number of " , trt.lab.s, " in your experiment is not so large, we can plot the data for each ", trt.lab, ":")}`
 
-```{r include = lc$ng < 10, echo = TRUE, eval = FALSE}
-st4gi::msdplot(trait, treatment, mydata, conf = 1, pch = 4)
-```
-
-```{r echo = FALSE}
+```{r}
 if (lc$ng < 10) msdplot(traits[i], trt, dfr, conf = 1, pch = 4)
 ```
 
@@ -86,13 +67,7 @@ if (lc$ng < 10) msdplot(traits[i], trt, dfr, conf = 1, pch = 4)
 
 You have fitted a linear model for a RCBD. The ANOVA table for your model is:
 
-```{r echo = TRUE, eval = FALSE}
-at <- aov.rcbd(trait, treatment, rep, mydata)
-# Anova table
-at
-```
-
-```{r echo = FALSE}
+```{r}
 at
 ```
 
@@ -104,19 +79,7 @@ The p-value for `r trt.lab.s` is `r format(at[1, 5], digits = 4)`
 
 `r if(show.anova.sub) {"At the subsample level, the ANOVA table is:"}`
 
-```{r include = show.anova.sub, echo = TRUE, eval = FALSE}
-model.sub <- aov(trait ~ treatment + rep + experimental.unit %in% treatment, data = mydata.full)
-# Anova table with subsampling
-at.sub <- anova(model.sub)
-at.sub[1, 4] <- at.sub[1, 3] / at.sub[3, 3]
-at.sub[2, 4] <- at.sub[2, 3] / at.sub[3, 3]
-at.sub[1, 5] <- pf(at.sub[1, 4], at.sub[1, 1], at.sub[3, 1], lower.tail = FALSE)
-at.sub[2, 5] <- pf(at.sub[2, 4], at.sub[2, 1], at.sub[3, 1], lower.tail = FALSE)
-rownames(at.sub)[3:4] <- c("Exp. Error", "Sampling Error")
-at.sub
-```
-
-```{r echo = FALSE}
+```{r}
 if (show.anova.sub)
   at2
 ```
@@ -129,13 +92,7 @@ if (show.anova.sub)
 
 Don't forget the assumptions of the model. It is supposed that the errors are independent with a normal distribution and with the same variance for all the `r trt.lab.s`. The following plots can help you evaluate this:
 
-```{r echo = TRUE, eval = FALSE}
-par(mfrow = c(1, 2))
-plot(model, which = 1)
-plot(model, which = 2)
-```
-
-```{r echo = FALSE, fig.height = 5, fig.width = 10}
+```{r fig.height = 5, fig.width = 10}
 par(mfrow = c(1, 2))
 plot(model, which = 1)
 plot(model, which = 2)
@@ -145,59 +102,34 @@ Any trend in the residuals in the left plot would violate the assumption of inde
 
 ## {{i+1}}.4. `r trt.lab.c` means
 
-`r if(at[1, 5] < 0.05) {paste("Below are the sorted means for each", trt.lab, "using the Fisher's Least Significant Difference method and the multiple comparisons method of Tukey, both at the 5% level. Letters indicate if there are significant differences.")} else {paste("Because the effect of", trt.lab.s, "was not significant in the ANOVA, multiple comparison tests are not presented. The means of your", trt.lab.s, "are:")}`
+`r if(at[1, 5] < 0.05 | mc) {paste("Below are the sorted means for each", trt.lab, "using the Fisher's Least Significant Difference method and the multiple comparisons method of Tukey, both at the 5% level. Letters indicate if there are significant differences.")} else {paste("Because the effect of", trt.lab.s, "was not significant in the ANOVA, multiple comparison tests are not presented. The means of your", trt.lab.s, "are:")}`
 
-`r if (at[1, 5] < 0.05) {paste0("### ", {{i+1}}, ".3.1. LSD test")}`
+`r if (at[1, 5] < 0.05 | mc) {paste0("### ", {{i+1}}, ".4.1. LSD test")}`
 
-```{r include = at[1, 5] < 0.05, echo = TRUE, eval = FALSE}
-# If there are no missing values, get a copy for further use
-mydata$trait.est <- mydata.trait
-# If there are missing values, get estimates
-mydata$trait.est <- mve.rcbd(trait, treatment, rep, mydata)[, trait.est]
-# Run LSD test
-agricolae::LSD.test(mydata$trait.est, mydata$treatment, at[3, 1], at[3, 3])$groups
-```
-
-```{r echo = FALSE}
-if (at[1, 5] < 0.05) {
+```{r}
+if (at[1, 5] < 0.05 | mc) {
   means <- dfr[, trait.est]
   agricolae::LSD.test(means, dfr[, trt], at[3, 1], at[3, 3])$groups
 }
 ```
 
-`r if (at[1, 5] < 0.05) {paste0("### ", {{i+1}}, ".3.2. Tukey test")}`
+`r if (at[1, 5] < 0.05 | mc) {paste0("### ", {{i+1}}, ".4.2. Tukey test")}`
 
-```{r include = at[1, 5] < 0.05, echo = TRUE, eval = FALSE}
-agricolae::HSD.test(mydata$trait.est, mydata$treatment, at[3, 1], at[3, 3])$groups
-```
-
-```{r echo = FALSE}
-if (at[1, 5] < 0.05)
+```{r}
+if (at[1, 5] < 0.05 | mc)
   agricolae::HSD.test(means, dfr[, trt], at[3, 1], at[3, 3])$groups
 ```
 
-```{r include = at[1, 5] > 0.05, echo = TRUE, eval = FALSE}
-tapply(mydata$trait.est, mydata$treatment, mean, na.rm = TRUE)
-```
-
-```{r echo = FALSE}
-if (at[1, 5] > 0.05)
+```{r}
+if (at[1, 5] > 0.05 & !mc)
     tapply(dfr[, trait.est], dfr[, trt], mean)
 ```
-
-`r if (lc$ng < 10 & at[1, 5] < 0.05) {paste0("### ", {{i+1}}, ".3.3. Plot of means")}`
 
 ## {{i+1}}.5. Variance components
 
 Below are the variance components for this model, under the assumption that `r trt.lab.s` and blocks are random. Here the model is fitted using REML and missing values are not estimated.
 
-```{r echo = TRUE, eval = FALSE}
-model <- lme4::lmer(trait ~ (1|treatment) + (1|rep), data = mydata)
-vc <- data.frame(lme4::VarCorr(model))
-vc[, c(1, 4, 5)]
-```
-
-```{r echo = FALSE}
+```{r}
 y <- dfr[, traits[i]]
 fg <- dfr[, trt]
 fr <- dfr[, rep]

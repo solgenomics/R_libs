@@ -1,5 +1,5 @@
-augment.Mclust          Augment data with information from a(n) Mclust
-                        object
+augment_columns         Add fitted values, residuals, and other common
+                        outputs to an augment call
 augment.betamfx         Augment data with information from a(n) betamfx
                         object
 augment.betareg         Augment data with information from a(n) betareg
@@ -22,9 +22,9 @@ augment.gam             Augment data with information from a(n) gam
                         object
 augment.glm             Augment data with information from a(n) glm
                         object
-augment.glmRob          Augment data with information from a(n) glmRob
-                        object
 augment.glmrob          Augment data with information from a(n) glmrob
+                        object
+augment.glmRob          Augment data with information from a(n) glmRob
                         object
 augment.htest           Augment data with information from a(n) htest
                         object
@@ -34,11 +34,13 @@ augment.kmeans          Augment data with information from a(n) kmeans
                         object
 augment.lm              Augment data with information from a(n) lm
                         object
-augment.lmRob           Augment data with information from a(n) lmRob
-                        object
 augment.lmrob           Augment data with information from a(n) lmrob
                         object
+augment.lmRob           Augment data with information from a(n) lmRob
+                        object
 augment.loess           Tidy a(n) loess object
+augment.Mclust          Augment data with information from a(n) Mclust
+                        object
 augment.mfx             Augment data with information from a(n) mfx
                         object
 augment.mjoint          Augment data with information from a(n) mjoint
@@ -75,8 +77,6 @@ augment.stl             Augment data with information from a(n) stl
                         object
 augment.survreg         Augment data with information from a(n) survreg
                         object
-augment_columns         Add fitted values, residuals, and other common
-                        outputs to an augment call
 bootstrap               Set up bootstrap replicates of a dplyr
                         operation
 confint_tidy            (Deprecated) Calculate confidence interval as a
@@ -88,11 +88,11 @@ finish_glance           (Deprecated) Add logLik, AIC, BIC, and other
                         common measurements to a glance of a prediction
 fix_data_frame          Ensure an object is a data frame, with rownames
                         moved into a column
-glance.Arima            Glance at a(n) Arima object
-glance.Gam              Glance at a(n) Gam object
-glance.Mclust           Glance at a(n) Mclust object
+glance_optim            Tidy a(n) optim object masquerading as list
 glance.aareg            Glance at a(n) aareg object
+glance.anova            Glance at a(n) anova object
 glance.aov              Glance at a(n) lm object
+glance.Arima            Glance at a(n) Arima object
 glance.betamfx          Glance at a(n) betamfx object
 glance.betareg          Glance at a(n) betareg object
 glance.biglm            Glance at a(n) biglm object
@@ -111,20 +111,22 @@ glance.felm             Glance at a(n) felm object
 glance.fitdistr         Glance at a(n) fitdistr object
 glance.fixest           Glance at a(n) fixest object
 glance.gam              Glance at a(n) gam object
+glance.Gam              Glance at a(n) Gam object
 glance.garch            Tidy a(n) garch object
 glance.geeglm           Glance at a(n) geeglm object
 glance.glm              Glance at a(n) glm object
-glance.glmRob           Glance at a(n) glmRob object
 glance.glmnet           Glance at a(n) glmnet object
+glance.glmRob           Glance at a(n) glmRob object
 glance.gmm              Glance at a(n) gmm object
 glance.ivreg            Glance at a(n) ivreg object
 glance.kmeans           Glance at a(n) kmeans object
 glance.lavaan           Glance at a(n) lavaan object
 glance.lm               Glance at a(n) lm object
-glance.lmRob            Glance at a(n) lmRob object
 glance.lmodel2          Glance at a(n) lmodel2 object
 glance.lmrob            Glance at a(n) lmrob object
+glance.lmRob            Glance at a(n) lmRob object
 glance.margins          Glance at a(n) margins object
+glance.Mclust           Glance at a(n) Mclust object
 glance.mfx              Glance at a(n) mfx object
 glance.mjoint           Glance at a(n) mjoint object
 glance.mlogit           Glance at a(n) mlogit object
@@ -155,25 +157,22 @@ glance.survreg          Glance at a(n) survreg object
 glance.svyglm           Glance at a(n) svyglm object
 glance.svyolr           Glance at a(n) svyolr object
 glance.varest           Glance at a(n) varest object
-glance_optim            Tidy a(n) optim object masquerading as list
 leveneTest_tidiers      Tidy/glance a(n) leveneTest object
 list_tidiers            Tidying methods for lists / returned values
                         that are not S3 objects
 null_tidiers            Tidiers for NULL inputs
 sp_tidiers              Tidy a(n) SpatialPolygonsDataFrame object
-sparse_tidiers          Tidy a sparseMatrix object from the Matrix
-                        package
 summary_tidiers         (Deprecated) Tidy summaryDefault objects
-tidy.Arima              Tidy a(n) Arima object
-tidy.Gam                Tidy a(n) Gam object
-tidy.Kendall            Tidy a(n) Kendall object
-tidy.Mclust             Tidy a(n) Mclust object
-tidy.TukeyHSD           Tidy a(n) TukeyHSD object
+tidy_irlba              Tidy a(n) irlba object masquerading as list
+tidy_optim              Tidy a(n) optim object masquerading as list
+tidy_svd                Tidy a(n) svd object masquerading as list
+tidy_xyz                Tidy a(n) xyz object masquerading as list
 tidy.aareg              Tidy a(n) aareg object
 tidy.acf                Tidy a(n) acf object
 tidy.anova              Tidy a(n) anova object
 tidy.aov                Tidy a(n) aov object
 tidy.aovlist            Tidy a(n) aovlist object
+tidy.Arima              Tidy a(n) Arima object
 tidy.betamfx            Tidy a(n) betamfx object
 tidy.betareg            Tidy a(n) betareg object
 tidy.biglm              Tidy a(n) biglm object
@@ -203,29 +202,32 @@ tidy.fitdistr           Tidy a(n) fitdistr object
 tidy.fixest             Tidy a(n) fixest object
 tidy.ftable             (Deprecated) Tidy ftable objects
 tidy.gam                Tidy a(n) gam object
+tidy.Gam                Tidy a(n) Gam object
 tidy.garch              Tidy a(n) garch object
 tidy.geeglm             Tidy a(n) geeglm object
 tidy.glht               Tidy a(n) glht object
 tidy.glm                Tidy a(n) glm object
-tidy.glmRob             Tidy a(n) glmRob object
 tidy.glmnet             Tidy a(n) glmnet object
 tidy.glmrob             Tidy a(n) glmrob object
+tidy.glmRob             Tidy a(n) glmRob object
 tidy.gmm                Tidy a(n) gmm object
 tidy.htest              Tidy/glance a(n) htest object
 tidy.ivreg              Tidy a(n) ivreg object
 tidy.kappa              Tidy a(n) kappa object
 tidy.kde                Tidy a(n) kde object
+tidy.Kendall            Tidy a(n) Kendall object
 tidy.kmeans             Tidy a(n) kmeans object
 tidy.lavaan             Tidy a(n) lavaan object
 tidy.lm                 Tidy a(n) lm object
 tidy.lm.beta            Tidy a(n) lm.beta object
-tidy.lmRob              Tidy a(n) lmRob object
 tidy.lmodel2            Tidy a(n) lmodel2 object
 tidy.lmrob              Tidy a(n) lmrob object
+tidy.lmRob              Tidy a(n) lmRob object
 tidy.lsmobj             Tidy a(n) lsmobj object
 tidy.manova             Tidy a(n) manova object
 tidy.map                Tidy a(n) map object
 tidy.margins            Tidy a(n) margins object
+tidy.Mclust             Tidy a(n) Mclust object
 tidy.mediate            Tidy a(n) mediate object
 tidy.mfx                Tidy a(n) mfx object
 tidy.mjoint             Tidy a(n) mjoint object
@@ -262,9 +264,9 @@ tidy.sarlm              Tidying methods for spatially autoregressive
 tidy.spec               Tidy a(n) spec object
 tidy.speedglm           Tidy a(n) speedglm object
 tidy.speedlm            Tidy a(n) speedlm object
+tidy.summary_emm        Tidy a(n) summary_emm object
 tidy.summary.glht       Tidy a(n) summary.glht object
 tidy.summary.lm         Tidy a(n) summary.lm object
-tidy.summary_emm        Tidy a(n) summary_emm object
 tidy.survdiff           Tidy a(n) survdiff object
 tidy.survexp            Tidy a(n) survexp object
 tidy.survfit            Tidy a(n) survfit object
@@ -274,9 +276,6 @@ tidy.svyolr             Tidy a(n) svyolr object
 tidy.systemfit          Tidy a(n) systemfit object
 tidy.table              Tidy a(n) table object
 tidy.ts                 Tidy a(n) ts object
+tidy.TukeyHSD           Tidy a(n) TukeyHSD object
 tidy.varest             Tidy a(n) varest object
 tidy.zoo                Tidy a(n) zoo object
-tidy_irlba              Tidy a(n) irlba object masquerading as list
-tidy_optim              Tidy a(n) optim object masquerading as list
-tidy_svd                Tidy a(n) svd object masquerading as list
-tidy_xyz                Tidy a(n) xyz object masquerading as list

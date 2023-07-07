@@ -115,12 +115,15 @@ test.dst1.print <-
                           by = "hour", zone = "GMT", FinCenter = "Zurich")
     tseq2
 
-    # make sure that tseq1@Data is a continuous time
+    ## make sure that tseq1@Data is a continuous time
     checkIdentical(tseq1Test, format(tseq2@Data))
 
     # test taken from format(tseq2@Data, tz = "Europe/Zurich")
     tseq2Test <- c(
-                   "2008-03-30 01:00:00", "2008-03-30 03:00:00",
+        ## GNB: there is no "2008-03-30 01:00:00" in FinCenter "Zurich".
+        ##      was: "2008-03-30 01:00:00", "2008-03-30 03:00:00",
+        ## 
+                   "2008-03-30 02:00:00", "2008-03-30 03:00:00",
                    "2008-03-30 04:00:00", "2008-03-30 05:00:00",
                    "2008-03-30 06:00:00", "2008-03-30 07:00:00",
                    "2008-03-30 08:00:00", "2008-03-30 09:00:00",
@@ -134,9 +137,17 @@ test.dst1.print <-
                    "2008-03-31 00:00:00", "2008-03-31 01:00:00",
                    "2008-03-31 02:00:00")
 
+    ##
+    ## GNB:
+    ## TODO: by = "hour" works with numerics, directly creates POSIXct object,
+    ##       and doesn't call timeDate (it creates the object with new("timeDate", ...)
+    ##       That needs a separate fix to move the nonexistent "2008-03-30 01:00:00" in
+    ##       Zurich. See also the remarks for 'tseq2Test'
+    ## TODO: temporarilly, don't compare the first elements
+    ##
     checkIdentical(tseq2Test, format(tseq2))
-
-    # @Data slot should be the same for both object
+    
+    ## @Data slot should be the same for both object
     checkIdentical(tseq1@Data, tseq2@Data)
 
     # should be of length length(tseq2) - 1
@@ -146,7 +157,9 @@ test.dst1.print <-
 
     # test taken from format(tseq3@Data, tz = "Europe/Zurich")
     tseq3Test <- c(
-                   "2008-03-30 00:00:00", "2008-03-30 01:00:00",
+        ## GNB: "2008-03-30 01:00:00" doesn't exist in "Zurich"
+        ##      was: "2008-03-30 00:00:00", "2008-03-30 01:00:00",
+                   "2008-03-30 00:00:00", "2008-03-30 02:00:00",
                    "2008-03-30 03:00:00", "2008-03-30 04:00:00",
                    "2008-03-30 05:00:00", "2008-03-30 06:00:00",
                    "2008-03-30 07:00:00", "2008-03-30 08:00:00",
@@ -161,6 +174,96 @@ test.dst1.print <-
 
     checkIdentical(tseq3Test, format(tseq3))
 
+
+    ## more by GNB
+
+    ## Sofia GMT+2
+    around_midnight_char <- c("1983-03-26 23:00:00",
+                           "1983-03-27 00:00:00", # change to DST; doesn't exist in Sofia DST
+                           "1983-03-27 01:00:00",
+                           "1983-03-27 02:00:00",
+                           "1983-03-27 03:00:00")
+
+    Sofia_to_DST_test <- around_midnight_char
+    Sofia_to_DST_test[2] <- "1983-03-27 01:00:00" # gap to gap + 1 hour
+    
+    Sofia_to_DST <- timeDate(around_midnight_char, zone = "Sofia", FinCenter = "Sofia")
+
+    checkIdentical(format(Sofia_to_DST), Sofia_to_DST_test)
+
+    ## London
+    London_to_DST_test <- around_midnight_char
+    London_to_DST_test[3] <- "1983-03-27 02:00:00" # gap to gap + 1 hour
+    
+    London_to_DST <- timeDate(around_midnight_char, zone = "London", FinCenter = "London")
+
+    checkIdentical(format(London_to_DST), London_to_DST_test)
+
+    ## Zurich
+    Zurich_to_DST_test <- around_midnight_char
+    Zurich_to_DST_test[3] <- "1983-03-27 02:00:00" # gap to gap + 1 hour
+    
+    Zurich_to_DST <- timeDate(around_midnight_char, zone = "Zurich", FinCenter = "Zurich")
+
+    checkIdentical(format(Zurich_to_DST), Zurich_to_DST_test)
+
+
+    
+
+    
+    ## more by GNB -  TODO: consolidate and turn into proper tests
+
+    ## London
+    timeSequence(from = "2004-03-26 01:00:00", to = "2004-04-01 01:00:00",
+                 by = "DSTday", zone = "London", FinCenter = "London")
+
+    timeSequence(from = "2004-03-26 01:00:00", to = "2004-04-01 01:00:00",
+                 by = "DSTday", zone = "London", FinCenter = "London")@Data
+
+    timeDate("2004-03-26 01:00:00", zone = "London", FinCenter = "London")
+    timeDate("2004-03-26 01:00:00", zone = "London", FinCenter = "London")@Data
+
+    timeDate("2004-04-01 01:00:00", zone = "London", FinCenter = "London")
+    timeDate("2004-04-01 01:00:00", zone = "London", FinCenter = "London")@Data
+
+    
+    timeDate(c("2004-03-28 00:00:00", "2004-03-28 01:00:00", "2004-03-28 02:00:00",
+               "2004-03-28 03:00:00", "2004-03-28 04:00:00"),
+             zone = "London", FinCenter = "London")
+    
+    timeDate(c("2004-03-28 00:00:00", "2004-03-28 01:00:00", "2004-03-28 02:00:00",
+               "2004-03-28 03:00:00", "2004-03-28 04:00:00"),
+             zone = "London", FinCenter = "London")@Data
+
+
+    timeDate(c("2004-03-26 00:00:00", "2004-03-28 01:00:00", "2004-03-28 02:00:00",
+               "2004-03-28 03:00:00", "2004-03-28 04:00:00"),
+             zone = "London", FinCenter = "London")
+
+    ## Zurich
+    timeSequence(from = "2004-03-26 02:00:00", to = "2004-04-01 02:00:00",
+                 by = "DSTday", zone = "Zurich", FinCenter = "Zurich")
+    
+    timeSequence(from = "2004-03-26 02:00:00", to = "2004-04-01 02:00:00",
+                 by = "DSTday", zone = "Zurich", FinCenter = "Zurich")@Data
+
+    timeDate(c("2004-03-26 00:00:00", "2004-03-28 01:00:00", "2004-03-28 02:00:00",
+               "2004-03-28 03:00:00", "2004-03-28 04:00:00"),
+             zone = "Zurich", FinCenter = "Zurich")
+
+    
+    ## London BDST during war    
+    timeDate(c("1941-05-04 00:00:00", "1941-05-04 01:00:00", "1941-05-04 02:00:00",
+               "1941-05-04 03:00:00", "1941-05-04 04:00:00"),
+             zone = "London", FinCenter = "London")@Data
+    
+    timeDate(c("1941-05-04 00:00:00", "1941-05-04 01:00:00", "1941-05-04 02:00:00",
+               "1941-05-04 03:00:00", "1941-05-04 04:00:00"),
+             zone = "London", FinCenter = "London")
+
+    timeSequence(from = "1941-05-02 02:00:00", to = "1941-05-06 02:00:00",
+                 by = "DSTday", zone = "London", FinCenter = "London")
+    
 }
 
 # ------------------------------------------------------------------------------

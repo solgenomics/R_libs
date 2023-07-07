@@ -1,3 +1,20 @@
+webshot 0.5.5
+=============
+
+* Fixed #101, #116: When some parameters (like `cliprect` and `expand`) were used, it would raise `Warning: 'length(x) = 4 > 1' in coercion to 'logical(1)'`. In R 4.3, this warning changed to an error. (#117)
+
+webshot 0.5.4
+=============
+
+* Fixed #112: handling of Windows paths of the form "c:\file\path.html" did not work correctly. ([#114](https://github.com/wch/webshot/pull/114))
+
+webshot 0.5.3
+=============
+
+* Fixed logic in `install_phantomjs()` when `force=TRUE` is used. ([#89](https://github.com/wch/webshot/pull/89))
+
+* Fixed handling of `file://` URLs in Windows, when the URL contains a drive letter and colon, such as `"file://localhost/C:\\msys64"`. (#110, Thanks to Tomas Kalibera)
+
 webshot 0.5.2
 =============
 
@@ -7,7 +24,7 @@ webshot 0.5.2
 
 * Added `is_phantomjs_installed()` function to check if PhantomJS was installed on the user's computer. (@coatless, [#82](https://github.com/wch/webshot/pull/82))
 
-* Fixed `phantom_paths()` function to detect the path to PhantomJS on Linux (@coatless, @wildintellect, [#84](https://github.com/wch/webshot/pull/84))
+* Fixed `phantom_paths()` function to detect the path to PhantomJS on Linux (@coatless, @wildintellect, [#85](https://github.com/wch/webshot/pull/85))
 
 
 webshot 0.5.1

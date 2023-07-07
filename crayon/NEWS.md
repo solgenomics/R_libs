@@ -1,3 +1,12 @@
+# crayon 1.5.2
+
+* crayon functions now mark their output with the right encoding,
+  if their input was marked (#136, #138).
+
+# 1.5.1
+
+* crayon now does not fail to install from source if the utils package
+  is not loaded (#133).
 
 # 1.5.0
 
@@ -36,7 +45,7 @@
 
 * `reset` style now restores previous style for text following it (@brodieG,
   #35).
-  
+
 * Warnings are no longer generated when the INSIDE_EMACS environment variable is
   set but does not include a version number.
 

@@ -1,3 +1,59 @@
+# waldo 0.5.1
+
+* Tolerance is also taken into account when displaying differences (#173).
+
+* `NA_real_` and `NaN` are only treated as non-equal when tolerance is 
+  non-null. That means that `testthat::expect_equal(NaN, NA_real_)` will
+  pass but `testthat::expect_identical(NaN, NA_real_)` will fail (#174).
+
+# waldo 0.5.0
+
+* You can opt-out of quoting strings with `quote_strings = FALSE` (#145).
+
+* Improvements to missing value handling:
+
+  * `NA_character_` and `"NA"` are no longer treated as equal (#162).
+
+  * `NA_real_` and `NaN` are no longer treated as equal (@sorhawell, #150).
+
+  * Leading and trailing `NA`s are no longer omitted from output when the
+    lengths of `x` and `y` are unequal (#109).
+
+* The `balanced` attribute used by some `POSIXlt` objects in R 4.3 and greater
+  is now ignored (#160).
+
+* 3d (and greater) numeric arrays no longer cause an error (#148).
+
+* Support for complex numbers is improved (#146).
+
+* `ignore_attr = "class"` now works for more types of input (#143).
+
+# waldo 0.4.0
+
+* Atomic S3 classes with format methods now use those methods when 
+  displaying comparisons (#98). If the printed representation is the
+  same, they fallback to displaying the underlying data.
+
+* Rowwise data frame comparisons are now much much faster (#116),
+  and respect the `max_diffs` argument (@krlmlr, #110).
+
+* Unnamed environments now compare by value, not by reference (i.e. if 
+  two environments contain the same values, they compare the same, even
+  if they're different environments) (#127). Environments that contain
+  self-references are handled correctly (#117). Differences between pairs 
+  of environments are only ever reported once.
+
+* In the unlikely event that you have bare CHARSXP objects, waldo now
+  handles them (#121).
+
+* S4 objects are labelled with their class, not all superclasses (#125).
+
+* `compare_proxy()` ignores the `"index"` attribute for data tables 
+  (@krlmlr, #107), and works again for `RProtoBuf`  objects 
+  (@MichaelChirico, #119)
+
+* Infinite values can be compared with a tolerance (@dmurdoch, #122).
+
 # waldo 0.3.1
 
 * `compare()`ing data frames now works independently of `option(max.print)` 

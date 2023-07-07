@@ -1,9 +1,3 @@
-## ----echo=FALSE, include=FALSE------------------------------------------------
-knitr::opts_chunk$set(collapse = TRUE)
-#tmap_fixed = utils::packageVersion("tmap") >= "2.3-1"
-tmap_fixed = FALSE
-user_edzer_or_travis = Sys.getenv("USER") %in% c("travis", "edzer")
-
 ## -----------------------------------------------------------------------------
 library(sf)
 demo(nc, ask = FALSE, echo = FALSE)
@@ -89,19 +83,20 @@ ggplot() +
   facet_wrap(~VAR, ncol = 1) +
   scale_y_continuous(breaks = 34:36)
 
-## ----eval=user_edzer_or_travis------------------------------------------------
-library(mapview)
-mapview(nc["BIR74"], col.regions = sf.colors(10))
+## ---- eval = FALSE------------------------------------------------------------
+#  library(mapview)
+#  mapviewOptions(fgb = FALSE) # needed when creating web pages
+#  mapview(nc["BIR74"], col.regions = sf.colors(10), fgb = FALSE)
 
-## -----------------------------------------------------------------------------
+## ----eval=require("tmap", quietly = TRUE)-------------------------------------
 library(tmap)
 qtm(nc)
 
-## ----eval=tmap_fixed----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  tmap_mode("view")
 #  tm_shape(nc) + tm_fill("BIR74", palette = sf.colors(5))
 
-## ----eval=tmap_fixed----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  ttm()
-#  last_map()
+#  tmap_last()
 

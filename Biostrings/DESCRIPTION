@@ -3,15 +3,32 @@ Title: Efficient manipulation of biological strings
 Description: Memory efficient string containers, string matching
 	algorithms, and other utilities, for fast manipulation of large
 	biological sequences or sets of sequences.
-Version: 2.54.0
-Encoding: UTF-8
-Author: H. Pagès, P. Aboyoun, R. Gentleman, and S. DebRoy
-Maintainer: H. Pagès <hpages@fredhutch.org>
 biocViews: SequenceMatching, Alignment, Sequencing, Genetics,
         DataImport, DataRepresentation, Infrastructure
-Depends: R (>= 3.5.0), methods, BiocGenerics (>= 0.31.5), S4Vectors (>=
-        0.21.13), IRanges, XVector (>= 0.23.2)
-Imports: graphics, methods, stats, utils
+URL: https://bioconductor.org/packages/Biostrings
+BugReports: https://github.com/Bioconductor/Biostrings/issues
+Version: 2.68.1
+License: Artistic-2.0
+Encoding: UTF-8
+Authors@R: c(
+	person("Hervé", "Pagès", role=c("aut", "cre"),
+		email="hpages.on.github@gmail.com"),
+	person("Patrick", "Aboyoun", role="aut"),
+	person("Robert", "Gentleman", role="aut"),
+	person("Saikat", "DebRoy", role="aut"),
+	person("Vince", "Carey", role="ctb"),
+	person("Nicolas", "Delhomme", role="ctb"),
+	person("Felix", "Ernst", role="ctb"),
+	person("Aidan", "Lakshman", role="ctb"),
+	person("Kieran", "O'Neill", role="ctb"),
+	person("Valerie", "Obenchain", role="ctb"),
+	person("Marcel", "Ramos", role="ctb"),
+	person("Albert", "Vill", role="ctb"),
+	person("Erik", "Wright", role="ctb"))
+Depends: R (>= 4.0.0), methods, BiocGenerics (>= 0.37.0), S4Vectors (>=
+        0.27.12), IRanges (>= 2.31.2), XVector (>= 0.37.1),
+        GenomeInfoDb
+Imports: methods, utils, grDevices, graphics, stats, crayon
 LinkingTo: S4Vectors, IRanges, XVector
 Enhances: Rmpi
 Suggests: BSgenome (>= 1.13.14), BSgenome.Celegans.UCSC.ce2 (>=
@@ -19,12 +36,12 @@ Suggests: BSgenome (>= 1.13.14), BSgenome.Celegans.UCSC.ce2 (>=
         BSgenome.Hsapiens.UCSC.hg18, drosophila2probe, hgu95av2probe,
         hgu133aprobe, GenomicFeatures (>= 1.3.14), hgu95av2cdf, affy
         (>= 1.41.3), affydata (>= 1.11.5), RUnit
-License: Artistic-2.0
 LazyLoad: yes
 Collate: 00datacache.R utils.R IUPAC_CODE_MAP.R AMINO_ACID_CODE.R
-        GENETIC_CODE.R XStringCodec-class.R seqtype.R XString-class.R
-        XStringSet-class.R XStringSet-comparison.R XStringViews-class.R
-        MaskedXString-class.R XStringSetList-class.R xscat.R
+        GENETIC_CODE.R XStringCodec-class.R seqtype.R coloring.R
+        XString-class.R XStringSet-class.R XStringSet-comparison.R
+        XStringViews-class.R MaskedXString-class.R
+        XStringSetList-class.R seqinfo-methods.R xscat.R
         XStringSet-io.R letter.R getSeq.R letterFrequency.R
         dinucleotideFrequencyTest.R chartr.R reverseComplement.R
         translate.R toComplex.R replaceAt.R replaceLetterAt.R
@@ -39,10 +56,24 @@ Collate: 00datacache.R utils.R IUPAC_CODE_MAP.R AMINO_ACID_CODE.R
         align-utils.R pmatchPattern.R pairwiseAlignment.R stringDist.R
         needwunsQS.R MultipleAlignment.R matchprobes.R zzz.R
 git_url: https://git.bioconductor.org/packages/Biostrings
-git_branch: RELEASE_3_10
-git_last_commit: b8982e7
-git_last_commit_date: 2019-10-29
-Date/Publication: 2019-10-29
+git_branch: RELEASE_3_17
+git_last_commit: cfbb402
+git_last_commit_date: 2023-05-16
+Date/Publication: 2023-05-16
 NeedsCompilation: yes
-Packaged: 2019-10-29 23:35:27 UTC; biocbuild
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2022-02-24 20:46:51 UTC; unix
+Packaged: 2023-05-16 20:05:17 UTC; biocbuild
+Author: Hervé Pagès [aut, cre],
+  Patrick Aboyoun [aut],
+  Robert Gentleman [aut],
+  Saikat DebRoy [aut],
+  Vince Carey [ctb],
+  Nicolas Delhomme [ctb],
+  Felix Ernst [ctb],
+  Aidan Lakshman [ctb],
+  Kieran O'Neill [ctb],
+  Valerie Obenchain [ctb],
+  Marcel Ramos [ctb],
+  Albert Vill [ctb],
+  Erik Wright [ctb]
+Maintainer: Hervé Pagès <hpages.on.github@gmail.com>
+Built: R 4.3.0; x86_64-pc-linux-gnu; 2023-07-07 13:06:04 UTC; unix

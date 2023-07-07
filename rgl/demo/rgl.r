@@ -1,8 +1,10 @@
-# all rgl demos
-demo(hist3d)
-demo(abundance)
-demo(regression)
-demo(lsystem)
-demo(subdivision)
-# requires MASS library
-demo(bivar)
+# all rgl interactive demos
+demo(flag)
+demo(mouseCallbacks)
+demo(shapes3d)
+demo(shinyDemo)
+demo(shinyMouse)
+demo(shinyTabs)
+demo(shinyToggle)
+demo(simpleShinyRgl)
+demo(stereo)

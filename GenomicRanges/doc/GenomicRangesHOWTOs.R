@@ -1,5 +1,4 @@
 ### R code from vignette source 'GenomicRangesHOWTOs.Rnw'
-### Encoding: UTF-8
 
 ###################################################
 ### code chunk number 1: style
@@ -399,9 +398,11 @@ trak2_in_seqs[["uc002uyc.2"]]
 ###################################################
 ### code chunk number 52: cancer_1
 ###################################################
-library(KEGG.db)
-pathways <- toTable(KEGGPATHNAME2ID)
-pathways[grepl("cancer", pathways$path_name, fixed=TRUE),] 
+library(KEGGREST)
+li <- keggList("pathway", "hsa")
+ptag <- names(grep("Colorectal cancer", li, value=TRUE))
+ptag
+tag <- gsub("path:hsa", "", ptag)
 
 
 ###################################################
@@ -409,7 +410,7 @@ pathways[grepl("cancer", pathways$path_name, fixed=TRUE),]
 ###################################################
 library(KEGGgraph)
 dest <- tempfile()
-retrieveKGML("05200", "hsa", dest, "internal")
+retrieveKGML(tag, "hsa", dest)
 
 
 ###################################################

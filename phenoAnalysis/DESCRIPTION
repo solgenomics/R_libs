@@ -1,8 +1,8 @@
 Package: phenoAnalysis
 Type: Package
 Title: Phenotype Data Analysis
-Version: 0.3.6.9
-Date: 07-05-2022
+Version: 0.3.7.8
+Date: 02-01-2023
 Author: Isaak Y Tecle <iyt2@cornell.edu>
 Maintainer: Isaak Y Tecle <iyt2@cornell.edu>
 Description: Calculates genotype adjusted means, anova table for a trait and more. 
@@ -11,20 +11,19 @@ License: GPL-3
 Encoding: UTF-8
 Imports: dplyr, data.table, lmerTest (>= 3.0.1), lsmeans, stargazer,
         tibble, tidyselect
-LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.2.1
 RemoteType: github
 RemoteHost: api.github.com
 RemoteRepo: rPackages
 RemoteUsername: solgenomics
-RemoteRef: topic/clean_data_26april22
-RemoteSha: 550e2b7debdce8ae7793e585c1823c1acdf8fb34
+RemoteRef: HEAD
+RemoteSha: 392a5310f3f071ad7c0251b2c0df637f518fedbc
 RemoteSubdir: phenoAnalysis
 GithubRepo: rPackages
 GithubUsername: solgenomics
-GithubRef: topic/clean_data_26april22
-GithubSHA1: 550e2b7debdce8ae7793e585c1823c1acdf8fb34
+GithubRef: HEAD
+GithubSHA1: 392a5310f3f071ad7c0251b2c0df637f518fedbc
 GithubSubdir: phenoAnalysis
 NeedsCompilation: no
-Packaged: 2022-05-09 15:37:12 UTC; production
-Built: R 3.6.2; ; 2022-05-09 15:37:13 UTC; unix
+Packaged: 2023-07-07 13:28:18 UTC; root
+Built: R 4.3.0; ; 2023-07-07 13:28:18 UTC; unix

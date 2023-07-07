@@ -1,9 +1,539 @@
-# insight 0.14.6
+# insight 0.19.3
+
+## Breaking changes
+
+* `standardize_column_order()` has changed the position when re-ordering Bayes
+  factors, ROPEs and ESS / Rhat (mainly relevant for Bayesian models).
+
+## Changes to functions
+
+* `standardize_names()` and `standardize_column_order()` now also recognize the
+  `"response.level"` column name.
+
+* `get_data()` for _lavaan_ models is now more stable at retrieving model data
+  when this is not available in the environment.
+
+* `find_terms()` gets an `as_term_labels` argument, to extract model terms
+  from the formula's `"term.labels"` attribute. This is closer to the behaviour
+  of `stats::terms()`, but may be insufficient, e.g. for mixed models.
+
+## Bug fixes
+
+* `get_random()` now returns the same observations as `get_data()` and correctly
+  removes missing values from the data before returning it.
+
+* `find_parameters()` for marginal effects ignores the `"s.value"` column (which
+  was added in a recent update).
+
+* Fixed issue in `get_response()` for _brms_ models with `trunc()` function in
+  the response variable.
+
+# insight 0.19.2
+
+## Breaking changes
+
+* The minimum needed R version has been bumped to `3.6`.
+
+* `download_model()` no longer errors when a model object could not be downloaded,
+  but instead returns `NULL`. This prevents test failures, and allows to skip
+  tests when the return value of `download_model()` is `NULL`.
+
+## General
+
+* Improved support for `mclogit` models (package *mclogit*) and `mipo` objects
+  (package *mice*) for models with ordinal or categorical response.
+
+## New supported models
+
+* `phylolm` and `phyloglm` (package *phylolm*), `nestedLogit` (package *nestedLogit*).
+
+## Bug fixes
+
+* Fixed issue in `get_variance()` for *glmmTMB* models with rank deficient
+  coefficients.
+
+* Fixed issues in `get_weights()` for `glm` models without weights and `na.action`
+  not set to default in the model call.
+
+* `clean_names()` now also removes the `relevel()` pattern.
+
+* Fixed issue in `model_info()` for models of class `gamlss`.
+
+* Fixed problems preventing `get_data()` from locating data defined in
+  non-global environments.
+
+* Fixed issue in `get_predicted()` for variables of class numeric matrix created
+  by `scale()`, which were correctly handled only when `get_data()` failed to
+  find the data in the appropriate environment.
+
+* Fixed issue in `model_info()` for `gee` models from `binomial` families.
+
+# insight 0.19.1
+
+## New supported models
+
+* `hglm` (package *hglm*).
+
+## Changes to functions
+
+* Minor improvements to `get_data()` for `t.test()`.
+
+* `format_value()` gets a `lead_zero` argument, to keep or drop the leading
+  zero of a formatted value, as well as arguments `style_positive` and
+  `style_negative` to style positive or negative numbers.
+
+* `format_table()` now also formats columns named `SGPV` (second generation
+  p-values) as p-values.
+
+* Functions for models of class `clm` (like `find_formula()`, `find_variables()`,
+  `get_data()` etc.) now also include variables that were defined as `scale` or
+  `nominal` component.
+
+## Bug fixes
+
+* Fixed issue in `get_data()` for results from `kruskal.test()`.
+
+* Fixed issue in `find_weights()` for models of class `lme` and `gls`.
+
+* Fixed issue in `get_datagrid()` for models with multiple weight variables.
+
+# insight 0.19.0
+
+## New supported models
+
+* `mmrm` (package *mmrm*), `flac` and `flic` (*logistf*)
+
+## Breaking changes
+
+* `get_data()` was revised and now always tries to recover the data that was
+  used to fit a model from the environment. If this fails, it falls back to
+  recovering data from the model frame (the former default behaviour).
+  Furthermore, the `source` argument can be used to explicitly force the old
+  behaviour: `source = "mf"` will try to recover data from the model frame first,
+  then possibly falling back to look in the environment.
+
+## New functions
+
+* `n_grouplevels()`, to return random effect groups and number of group levels
+  for mixed models.
+
+## Changes to functions
+
+* `get_datagrid()` preserves all factor levels for factors that are hold constant
+  at their reference level. This is required to work together with
+  `get_modelmatrix()` when calculating standard errors for `get_predicted()`.
+
+## Bug fixes
+
+* Fixed but in `get_modelmatrix()` handling of incomplete factors which
+  sometimes had downstream implications for numerical results in the uncertainty
+  estimates produced by `get_predicted()`.
+
+* Fixed minor issues for HTML tables in `export_table()` when model parameters
+  were grouped.
+
+* Fixed issue with incorrect back-transforming in `get_data()` for models with
+  log-transformed variables.
+
+* Fixes issue in `compact_list()`.
+
+* `has_single_value()` now returns `FALSE` when the object only has `NA` and 
+  `na.rm = TRUE`.
+
+* Fixed issue in `get_parameters()` for gam-models without smooth terms, or with
+  only smooth terms and removed intercept.
+
+# insight 0.18.8
+
+## Bug fixes
+
+* Fixed test due to changes in the _performance_ package.
+
+# insight 0.18.7
+
+## General
+
+* Minor revisions to `get_predicted.glmmTMB()` due to changes in behaviour
+  of `predict.glmmTMB()` for truncated-family models since _glmmTMB_ 1.1.5.
+  
+* New function `has_single_value()` that is equivalent to `length(unique()) == 1`
+  (or `n_unique() == 1`) but faster.
+
+## Changes to functions
+
+* `ellipses_info()` now includes an attribute `$is_binomial`, which is `TRUE`
+  for each model from binomial family.
+
+## Bug fixes
+
+* Fixed behaviour of the `at` argument in `get_datagrid()`.
+
+* Fixed issue for accessing model data in `get_datagrid()` for some edge cases.
+
+# insight 0.18.6
+
+## New supported models
+
+* Support the *logitr* package: `get_data()`, `find_variables()` and more.
+
+## Bug fixes
+
+* Better detection of unicode-support, to avoid failures when building
+  vignettes.
+
+* `get_predicted()` now correctly handles variables of class numeric matrix
+  created by `scale()`, which fixes a bug in `performance::check_model()`
+  (easystats/performance#432).
+
+* Fixed issue with `iterations` argument in `get_predicted()` with _brms_
+  models.
+
+# insight 0.18.5
+
+## Breaking
+
+* `get_df(type = "satterthwaite")` for `lmerMod` objects now return degrees of
+  freedom per parameter, and no longer per observation. Use `df_per_obs TRUE`
+  to return degrees of freedom per observation.
+
+## New functions
+
+* `safe_deparse_symbol()` to only deparses a substituted expressions when
+  possible,which increases performance in case many calls to
+  `deparse(substitute())`.
+
+## Changes to functions
+
+* `format_table()` gets a `use_symbols` argument. If `TRUE`, column names that
+  refer to particular effectsizes (like Phi, Omega or Epsilon) include the related unicode-character instead of the written name. This only works on Windows for
+  R >= 4.2, and on OS X or Linux for R >= 4.0.
+
+* The `stars` argument in `format_table()` can now also be a character vector,
+  naming the columns that should include stars for significant values. This is
+  especially useful for Bayesian models, where we might have multiple columns
+  with significant values, e.g. `"BF"` for the Bayes factor or `"pd"` for the
+  probability of direction.
+
+* `get_df()` gets more `type` options to return different type of degrees of
+  freedom (namely, `"wald"` and `"normal"`, and for mixed models, `"ml1"`,
+  `"betwithin"`, `"satterthwaite"` and `"kenward-roger"`).
+
+* `standardize_names()` now recognized more classes from package _marginaleffects_.
+
+* Minor improvements to `find_parameters()` for models with nonlinear formula.
+
+* Minor speed improvements.
+
+## Bug fixes
+
+* Fixed issue in `get_data()` for models of class `plm`, which accidentally
+  converted factors into character vectors.
+
+* Fixed issue with column alignment in `export_table()` when the data frame 
+  to print contained unicode-characters longer than 1 byte.
+
+* Correctly extract predictors for `fixest::i(f1, i.f2)` interactions (#649 by 
+  @grantmcdermott).
+  
+# insight 0.18.4
+
+## Changes to functions
+
+* `model_info()` now includes information for `htest` objects from
+  `shapiro.test()` and `bartlett.test()` (will return `$is_variancetest = TRUE`).
+
+## Bug fixes
+
+* Fixed issue in `get_data()` which did not correctly backtransform to original
+  data when terms had log-transformations such as `log(1 + x)` or `log(x + 1)`.
+
+* Fixed CRAN check issues.
+
+# insight 0.18.3
+
+## New functions
+
+* `format_alert()`, `format_warning()` and `format_error()`, as convenient
+  wrappers around `message()`, `warning()` or `stop()` in combination with
+  `format_message()`. You can use these funcionts to format messages, warnings
+  or errors.
+
+## Changes to functions
+
+* `get_predicted()` for models of class `clm` now includes confidence intervals
+  of predictions.
+
+* `format_message()` gets some additional formatting features. See 'Details'
+  in `?format_message` for more information and some current limitations.
+
+* `format_message()` gets an `indent` argument, to specify indention string
+  for subsequent lines.
+
+* `format_table()` now merges IC and IC weights columns into one column (e.g.,
+  former columns `"AIC"` and `"AIC_wt"` will now be printed as one column, named
+  `"AIC (weights)"`). Furthermore, an `ic_digits` argument was added to control
+  the number of significant digits for the IC values.
+
+* `print_color()` and `color_text()` now support bright variants of colors and
+  background colors.
+
+* `get_datagrid()` gets more options for `at` and `range`, to provide more
+  control how to generate the reference grid.
+
+* `get_data()` for models of class `geeglm` and `fixest`now more reliably
+  retrieves the model data.
+
+## New supported models
+
+* Support for models of class `mblogit` and `mclogit`.
+
+## Bug fixes
+
+* Fixed issues with wrong attribute `adjusted_for` in `insight::get_datagrid()`.
+
+* Fixed issue (resp. implemented workaround) in `get_data.iv_robust()`, which
+  failed due to a bug in the _estimatr_ package.
+
+* Fixed issue where `get_predicted()` failed when data contains factors with 
+  only one or incomplete levels.
+
+* Fixed issue in `get_predicted()` for models of class `mlm`.
+
+* Fixed issue where `get_predicted()` failed to compute confidence intervals
+  of predictions when model contained matrix-alike response columns, e.g. a 
+  response variable created with `cbind()`.
+
+# insight 0.18.2
+
+## New functions
+
+* `format_percent()` as short-cut for `format_value(as_percent = TRUE)`.
+
+* `is_converged()`, to check whether a mixed model has converged or not.
+
+## Changes to functions
+
+* `format_table()` gains an `exact` argument, to either report exact or rounded
+  Bayes factors.
+
+* `get_predicted()` gets a method for models of class `gamlss` (and thereby,
+  `get_loglikelihood()` now also works for those model classes).
+
+* `get_predicted()` now better handles models of class `polr`, `multinom` and 
+  `rlm`.
+
+## Bug fixes
+
+* Fixed test failures.
+
+* Minor fixes to address changes in other packages.
+
+# insight 0.18.0
+
+## Breaking changes
+
+* The `ci` argument in `get_predicted()` now defaults to `NULL`. One reason was
+  to make the function faster if confidence intervals are not required, which 
+  was the case for many downstream usages of that function. Please set `ci` 
+  explicitly to compute confidence intervals for predictions.
+  
+* `get_data()` no longer returns logical types for numeric variables that have
+  been converted to logicals on-the-fly within formulas (like `y ~ as.logical(x)`).
+  Instead, for each numeric variable that was coerced to logical within a formula
+  gets a `logical` attribute (set to `TRUE`), and the returned data frame gets
+  a `logicals` attribute including all names of affected variables.
+
+* `parameters_table()`, the alias for `format_table()`, was removed.
+
+## Changes to functions
+
+* `find_transformation()` and `get_transformation()` now also work for models 
+  where the response was transformed using `log2()` or `log10()`.
+
+## Bug fixes
+
+* `get_sigma()` for models from package _VGAM_ returned wrong sigma-parameter.
+
+* `find_predictors()` for models from package _fixest_ that contained 
+  interaction terms in the endogenous formula part did not correctly return
+  all instruments.
+
+* Fixed formatting of HTML table footers in `export_table()`.
+
+* Several fixes to `get_predicted()` for models from `mgcv::gam()`.
+
+* The `component` argument in `find_parameters()` for `stanmvreg` models did
+  not accept the `"location"` value.
+
+* `null_model()` did not consider offset-terms if these were specified inside
+  formulas.
+
+* Argument `allow.new.levels` was not passed to `predict()` for 
+  `get_predicted.glmmTMB()`.
+  
+* `clean_names()` now works correctly when several variables are specified in 
+  `s()` (#573, @etiennebacher).
+
+# insight 0.17.1
+
+## New supported model classes
+
+* `deltaMethod` (*car*), `marginaleffects`, `marginaleffects.summary`
+  (*marginaleffects*)
+
+## General
+
+* `get_predicted()` now supports models of class `iv_robust` and `ivreg`.
+
+* For `get_predicted()`, when both `type` and `predict` are given, `type` 
+  will overwrite `predict`. Note that this will print a message, because 
+  `predict` is the preferred argument.
+
+* `get_varcov()` gains `vcov` and `vcov_args` arguments, to specify the
+  variance-covariance matrix used to compute uncertainty estimates (e.g., for 
+  robust standard errors).
+
+* `get_loglikehood()` improved handling of models from package *estimator*.
+
+## Bug fixes
+
+* Fixed bug in `get_data()` for model objects whose data needs to be recovered
+  from the environment, and where the data name was a reserved word (e.g., named
+  like an R function).
+
+* The matrix returned by `get_varcov()` for models of class *bife* now returns 
+  row and column names.
+  
+* `find_offset()` did not find offset-terms for `merMod` objects when the 
+  offset was specified as `offset` argument in the function call.
+
+# insight 0.17.0
+
+## Breaking changes
+
+* Arguments `vcov_estimation` and `vcov_type` in `get_predicted()`, 
+  `get_predicted_se()` and `get_predicted_ci()` are replaced by `vcov` and
+  `vcov_args`, to have a more simplified and common interface to control
+  robust covariance matrix estimation.
+
+## General
+
+* Improved performance for various functions, in particular `get_data()` and
+  `model_info()`.
+
+## New functions
+
+* To check for names: `object_has_names()` and `object_has_rownames()`
+
+* To work with lists: `is_empty_object()` and `compact_list()`
+
+* To work with strings: `compact_character()`
+
+* Further utility functions are `safe_deparse()`, `trim_ws()` and `n_unique()`.
+
+## Changes to functions
+
+* `export_table()` now better checks for invalid values of caption and footer
+  for tables in HTML format, and silently removes, e.g., ansi-colour codes that
+  only work for text-format.
+  
+* `get_data.coxph()` returns the original data frame instead of data with type 
+   coercion.
+
+* `get_loglikelihood()` gets a `check_response` argument, to check if a model
+  has a transformed response variable (like `log()` or `sqrt()` transformation), 
+  and if so, returns a corrected log-likelihood.
+  
+* `get_modelmatrix()` now supports *BayesFactor* models.
+
+* `get_loglikelihood()` and `get_df()` now support more model classes.
+
+* `get_predicted()` was improved for multinomial models from *brms*.
+
+* `get_variance()` was improved to cover more edge cases of (more complex)
+  random effect structures.
+
+* `get_data()` now includes variables in the returned data frame that were
+  used in the `subset` argument of regression functions (like `lm()`).
+
+* In some edge cases, where `get_data()` is unable to retrieve the data that 
+  was used to fit the model, now a more informative error is printed.
+
+* `ellipses_info()` now also accepts a list of model objects, is more stable
+  and returns more information about the provided models (like if all fixed 
+  or random effects are the same across models, if all models are mixed models
+  or null-models, etc.)
+
+* `check_if_installed()` now works interactively and lets the user prompt
+  whether to automatically update or install packages.
+
+## Bug fixes
+
+* Fixed incorrect column name conversion in `standardize_names()` for certain
+  columns returned by `broom::glance()`.
+
+* Fixed issue with correctly detecting Tweedie-models in `model_info()`.
+
+* Fixed issue with `get_datagrid()` for *brms* models with monotonic factors.
+
+* Fixed issue in `find_formula()` when argument `correlation` was defined
+  outside of `lme()` and `gls()` (@etiennebacher, #525).
+
+* Fixed issue with `get_data()` when back-transforming data from predictors 
+  that used `cos()`, `sin()` or `tan()` transformations.
+
+# insight 0.16.0
+
+## New functions
+
+* `get_datagrid()`, to generate a reference grid, usually used when computing
+  adjusted predictions or marginal means from regression models.
+
+## Changes to functions
+
+### `get_predicted()`
+
+* `get_predicted()` was revised. Beside the four core options for the `predict`
+  argument, it is now also possible to use any value that is valid for the
+  model's `predict()` method's `type` argument.
+
+* `get_predicted()` now supports more models (e.g., from packages like 
+  _GLMMadaptive_ or _survival_).
+
+* `get_predicted()` is now more robust when calculating standard errors of
+  predictions.
+
+### Other functions
+
+* `get_statistic()` and `find_statistic()` now support *htest* objects.
+
+## General
+
+* Various minor improvements.
+
+# insight 0.15.1
+
+## General
+
+* Improved speed performance, especially for `get_data()`.
+
+## Changes to functions
+
+* `get_data()` for `coxph` models now returns the original factor levels for
+  variables transformed with `strata()` inside formulas.
+
+# insight 0.15.0
 
 ## Breaking changes
 
 * Data management functions (like `reshape_longer()`, or `data_match()`) have
   been moved to the *datawizard* package.
+
+* `get_data()` no longer returns factor types for numeric variables that have
+  been converted to factors on-the-fly within formulas (like `y ~ as.factor(x)`).
+  Instead, for each numeric variable that was coerced to factor within a formula
+  gets a `factor` attribute (set to `TRUE`), and the returned data frame gets
+  a `factors` attribute including all names of affected variables.
 
 ## New supported model classes
 

@@ -257,6 +257,7 @@ print.mclustICL	mclustICL
 print.mclustLoglik	mclustLoglik
 print.MclustSSC	MclustSSC
 print.summary.clustCombi	clustCombi
+print.summary.crimcoords	crimcoords
 print.summary.gmmhd	gmmhd
 print.summary.Mclust	summary.Mclust
 print.summary.mclustBIC	summary.mclustBIC
@@ -295,6 +296,7 @@ simVVE	simE
 simVVI	simE
 simVVV	simE
 summary.clustCombi	clustCombi
+summary.crimcoords	crimcoords
 summary.gmmhd	gmmhd
 summary.Mclust	summary.Mclust
 summary.mclustBIC	summary.mclustBIC

@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head><title>R: Companion to Applied Regression</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> Companion to Applied Regression
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;car&rsquo; version 3.0-12</h2>
+</div><h2>Documentation for package &lsquo;car&rsquo; version 3.1-2</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -46,9 +47,9 @@
 </p>
 
 
-<h2><a name="A">-- A --</a></h2>
+<h2><a id="A">-- A --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="densityPlot.html">adaptiveKernel</a></td>
 <td>Nonparametric Density Estimates</td></tr>
 <tr><td style="width: 25%;"><a href="Anova.html">Anova</a></td>
@@ -81,6 +82,8 @@
 <td>Anova Tables for Various Statistical Models</td></tr>
 <tr><td style="width: 25%;"><a href="Anova.html">Anova.rlm</a></td>
 <td>Anova Tables for Various Statistical Models</td></tr>
+<tr><td style="width: 25%;"><a href="Anova.html">Anova.svycoxph</a></td>
+<td>Anova Tables for Various Statistical Models</td></tr>
 <tr><td style="width: 25%;"><a href="Anova.html">Anova.svyglm</a></td>
 <td>Anova Tables for Various Statistical Models</td></tr>
 <tr><td style="width: 25%;"><a href="Anova.html">as.data.frame.univaov</a></td>
@@ -97,15 +100,21 @@
 <td>Added-Variable Plots</td></tr>
 <tr><td style="width: 25%;"><a href="avPlots.html">avPlot.lm</a></td>
 <td>Added-Variable Plots</td></tr>
+<tr><td style="width: 25%;"><a href="avPlots.html">avPlot3d</a></td>
+<td>Added-Variable Plots</td></tr>
+<tr><td style="width: 25%;"><a href="avPlots.html">avPlot3d.glm</a></td>
+<td>Added-Variable Plots</td></tr>
+<tr><td style="width: 25%;"><a href="avPlots.html">avPlot3d.lm</a></td>
+<td>Added-Variable Plots</td></tr>
 <tr><td style="width: 25%;"><a href="avPlots.html">avPlots</a></td>
 <td>Added-Variable Plots</td></tr>
 <tr><td style="width: 25%;"><a href="avPlots.html">avPlots.default</a></td>
 <td>Added-Variable Plots</td></tr>
 </table>
 
-<h2><a name="B">-- B --</a></h2>
+<h2><a id="B">-- B --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="bcPower.html">basicPower</a></td>
 <td>Box-Cox, Box-Cox with Negatives Allowed, Yeo-Johnson and Basic Power Transformations</td></tr>
 <tr><td style="width: 25%;"><a href="TransformationAxes.html">basicPowerAxis</a></td>
@@ -212,9 +221,9 @@
 <td>Print Abbreviated Ouput</td></tr>
 </table>
 
-<h2><a name="C">-- C --</a></h2>
+<h2><a id="C">-- C --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="car-defunct.html">car-defunct</a></td>
 <td>Defunct Functions in the car Package</td></tr>
 <tr><td style="width: 25%;"><a href="car-deprecated.html">car-deprecated</a></td>
@@ -252,6 +261,14 @@
 <tr><td style="width: 25%;"><a href="Ellipses.html">confidenceEllipse.glm</a></td>
 <td>Ellipses, Data Ellipses, and Confidence Ellipses</td></tr>
 <tr><td style="width: 25%;"><a href="Ellipses.html">confidenceEllipse.lm</a></td>
+<td>Ellipses, Data Ellipses, and Confidence Ellipses</td></tr>
+<tr><td style="width: 25%;"><a href="Ellipses.html">confidenceEllipse.mlm</a></td>
+<td>Ellipses, Data Ellipses, and Confidence Ellipses</td></tr>
+<tr><td style="width: 25%;"><a href="Ellipses.html">confidenceEllipses</a></td>
+<td>Ellipses, Data Ellipses, and Confidence Ellipses</td></tr>
+<tr><td style="width: 25%;"><a href="Ellipses.html">confidenceEllipses.default</a></td>
+<td>Ellipses, Data Ellipses, and Confidence Ellipses</td></tr>
+<tr><td style="width: 25%;"><a href="Ellipses.html">confidenceEllipses.mlm</a></td>
 <td>Ellipses, Data Ellipses, and Confidence Ellipses</td></tr>
 <tr><td style="width: 25%;"><a href="S.html">Confint</a></td>
 <td>Modified Functions for Summarizing Linear, Generalized Linear, and Some Other Models</td></tr>
@@ -297,15 +314,19 @@
 <td>Component+Residual (Partial Residual) Plots</td></tr>
 <tr><td style="width: 25%;"><a href="crPlots.html">crPlot.lm</a></td>
 <td>Component+Residual (Partial Residual) Plots</td></tr>
+<tr><td style="width: 25%;"><a href="crPlots.html">crPlot3d</a></td>
+<td>Component+Residual (Partial Residual) Plots</td></tr>
+<tr><td style="width: 25%;"><a href="crPlots.html">crPlot3d.lm</a></td>
+<td>Component+Residual (Partial Residual) Plots</td></tr>
 <tr><td style="width: 25%;"><a href="crPlots.html">crPlots</a></td>
 <td>Component+Residual (Partial Residual) Plots</td></tr>
 <tr><td style="width: 25%;"><a href="crPlots.html">crPlots.default</a></td>
 <td>Component+Residual (Partial Residual) Plots</td></tr>
 </table>
 
-<h2><a name="D">-- D --</a></h2>
+<h2><a id="D">-- D --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="car-defunct.html">data.ellipse</a></td>
 <td>Defunct Functions in the car Package</td></tr>
 <tr><td style="width: 25%;"><a href="Ellipses.html">dataEllipse</a></td>
@@ -368,25 +389,25 @@
 <td>Durbin-Watson Test for Autocorrelated Errors</td></tr>
 </table>
 
-<h2><a name="E">-- E --</a></h2>
+<h2><a id="E">-- E --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="Ellipses.html">ellipse</a></td>
 <td>Ellipses, Data Ellipses, and Confidence Ellipses</td></tr>
 <tr><td style="width: 25%;"><a href="Export.html">Export</a></td>
 <td>Export a data frame to disk in one of many formats</td></tr>
 </table>
 
-<h2><a name="G">-- G --</a></h2>
+<h2><a id="G">-- G --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="ScatterplotSmoothers.html">gamLine</a></td>
 <td>Smoothers to Draw Lines on Scatterplots</td></tr>
 </table>
 
-<h2><a name="H">-- H --</a></h2>
+<h2><a id="H">-- H --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="hccm.html">hccm</a></td>
 <td>Heteroscedasticity-Corrected Covariance Matrices</td></tr>
 <tr><td style="width: 25%;"><a href="hccm.html">hccm.default</a></td>
@@ -397,9 +418,9 @@
 <td>Methods Functions to Support 'boot' Objects</td></tr>
 </table>
 
-<h2><a name="I">-- I --</a></h2>
+<h2><a id="I">-- I --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="scatter3d.html">Identify3d</a></td>
 <td>Three-Dimensional Scatterplots and Point Identification</td></tr>
 <tr><td style="width: 25%;"><a href="Import.html">Import</a></td>
@@ -444,9 +465,9 @@
 <td>Choose a Predictor Transformation Visually or Numerically</td></tr>
 </table>
 
-<h2><a name="L">-- L --</a></h2>
+<h2><a id="L">-- L --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="car-defunct.html">levene.test</a></td>
 <td>Defunct Functions in the car Package</td></tr>
 <tr><td style="width: 25%;"><a href="leveneTest.html">leveneTest</a></td>
@@ -507,9 +528,9 @@
 <td>Logit Transformation</td></tr>
 </table>
 
-<h2><a name="M">-- M --</a></h2>
+<h2><a id="M">-- M --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="linearHypothesis.html">makeHypothesis</a></td>
 <td>Test Linear Hypothesis</td></tr>
 <tr><td style="width: 25%;"><a href="Anova.html">Manova</a></td>
@@ -556,9 +577,9 @@
 <td>Marginal Model Plotting</td></tr>
 </table>
 
-<h2><a name="N">-- N --</a></h2>
+<h2><a id="N">-- N --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="car-defunct.html">ncv.test</a></td>
 <td>Defunct Functions in the car Package</td></tr>
 <tr><td style="width: 25%;"><a href="ncvTest.html">ncvTest</a></td>
@@ -575,9 +596,9 @@
 <td>Deprecated Functions in the car Package</td></tr>
 </table>
 
-<h2><a name="O">-- O --</a></h2>
+<h2><a id="O">-- O --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="car-defunct.html">outlier.test</a></td>
 <td>Defunct Functions in the car Package</td></tr>
 <tr><td style="width: 25%;"><a href="outlierTest.html">outlierTest</a></td>
@@ -590,11 +611,13 @@
 <td>Bonferroni Outlier Test</td></tr>
 </table>
 
-<h2><a name="P">-- P --</a></h2>
+<h2><a id="P">-- P --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="panel.car.html">panel.car</a></td>
 <td>Panel Function for Coplots</td></tr>
+<tr><td style="width: 25%;"><a href="pointLabel.html">pointLabel</a></td>
+<td>Label placement for points to avoid overlaps</td></tr>
 <tr><td style="width: 25%;"><a href="poTest.html">poTest</a></td>
 <td>Test for Proportional Odds in the Proportional-Odds Logistic-Regression Model</td></tr>
 <tr><td style="width: 25%;"><a href="poTest.html">poTest.polr</a></td>
@@ -651,9 +674,9 @@
 <td>Axes for Transformed Variables</td></tr>
 </table>
 
-<h2><a name="Q">-- Q --</a></h2>
+<h2><a id="Q">-- Q --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="car-defunct.html">qq.plot</a></td>
 <td>Defunct Functions in the car Package</td></tr>
 <tr><td style="width: 25%;"><a href="qqPlot.html">qqp</a></td>
@@ -672,9 +695,9 @@
 <td>Smoothers to Draw Lines on Scatterplots</td></tr>
 </table>
 
-<h2><a name="R">-- R --</a></h2>
+<h2><a id="R">-- R --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="recode.html">Recode</a></td>
 <td>Recode a Variable</td></tr>
 <tr><td style="width: 25%;"><a href="recode.html">recode</a></td>
@@ -705,9 +728,9 @@
 <td>Residual Plots for Linear and Generalized Linear Models</td></tr>
 </table>
 
-<h2><a name="S">-- S --</a></h2>
+<h2><a id="S">-- S --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="S.html">S</a></td>
 <td>Modified Functions for Summarizing Linear, Generalized Linear, and Some Other Models</td></tr>
 <tr><td style="width: 25%;"><a href="S.html">S.data.frame</a></td>
@@ -806,9 +829,9 @@
 <td>Boxplots for transformations to symmetry</td></tr>
 </table>
 
-<h2><a name="T">-- T --</a></h2>
+<h2><a id="T">-- T --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="Tapply.html">Tapply</a></td>
 <td>Apply a Function to a Variable Within Factor Levels</td></tr>
 <tr><td style="width: 25%;"><a href="testTransform.html">testTransform</a></td>
@@ -823,14 +846,16 @@
 <td>Residual Plots for Linear and Generalized Linear Models</td></tr>
 </table>
 
-<h2><a name="V">-- V --</a></h2>
+<h2><a id="V">-- V --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="hist.boot.html">vcov.boot</a></td>
 <td>Methods Functions to Support 'boot' Objects</td></tr>
 <tr><td style="width: 25%;"><a href="vif.html">vif</a></td>
 <td>Variance Inflation Factors</td></tr>
 <tr><td style="width: 25%;"><a href="vif.html">vif.default</a></td>
+<td>Variance Inflation Factors</td></tr>
+<tr><td style="width: 25%;"><a href="vif.html">vif.lm</a></td>
 <td>Variance Inflation Factors</td></tr>
 <tr><td style="width: 25%;"><a href="vif.html">vif.merMod</a></td>
 <td>Variance Inflation Factors</td></tr>
@@ -840,9 +865,9 @@
 <td>Variance Inflation Factors</td></tr>
 </table>
 
-<h2><a name="W">-- W --</a></h2>
+<h2><a id="W">-- W --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="wcrossprod.html">wcrossprod</a></td>
 <td>Weighted Matrix Crossproduct</td></tr>
 <tr><td style="width: 25%;"><a href="which.names.html">which.names</a></td>
@@ -855,19 +880,19 @@
 <td>Position of Row Names</td></tr>
 </table>
 
-<h2><a name="Y">-- Y --</a></h2>
+<h2><a id="Y">-- Y --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="bcPower.html">yjPower</a></td>
 <td>Box-Cox, Box-Cox with Negatives Allowed, Yeo-Johnson and Basic Power Transformations</td></tr>
 <tr><td style="width: 25%;"><a href="TransformationAxes.html">yjPowerAxis</a></td>
 <td>Axes for Transformed Variables</td></tr>
 </table>
 
-<h2><a name="misc">-- misc --</a></h2>
+<h2><a id="misc">-- misc --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="car-internal.html">.carEnv</a></td>
 <td>Internal Objects for the 'car' package</td></tr>
 </table>
-</body></html>
+</div></body></html>

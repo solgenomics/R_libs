@@ -3,6 +3,7 @@ $.multiPhylo	multiphylo
 $<-.multiPhylo	multiphylo
 +.phylo	bind.tree
 .compressTipLabel	c.phylo
+.PlotPhyloEnv	ape-internal
 .uncompressTipLabel	c.phylo
 AAbin	AAbin
 AAsubst	AAbin
@@ -172,11 +173,14 @@ dnds	dnds
 drawSupportOnEdges	plot.phyloExtra
 drop.fossil	rlineage
 drop.tip	drop.tip
+drop.tip.multiPhylo	drop.tip
+drop.tip.phylo	drop.tip
 drop1.compar.gee	compar.gee
 dyule	dbd
 edgelabels	nodelabels
 edges	edges
 editFileExtensions	apetools
+efastats	clustal
 estimate.dates	node.dating
 estimate.mu	node.dating
 evonet	evonet
@@ -220,6 +224,8 @@ is.ultrametric	is.ultrametric
 is.ultrametric.multiPhylo	is.ultrametric
 is.ultrametric.phylo	is.ultrametric
 keep.tip	drop.tip
+keep.tip.multiPhylo	drop.tip
+keep.tip.phylo	drop.tip
 kronoviz	kronoviz
 label2table	label2table
 labels.AAbin	AAbin
@@ -227,6 +233,7 @@ labels.DNAbin	DNAbin
 ladderize	ladderize
 LargeNumber	howmanytrees
 latag2n	latag2n
+letterconf	clustal
 lice.D	parafit
 lines.popsize	mcmc.popsize
 lines.skyline	skylineplot
@@ -265,6 +272,7 @@ multi2di.multiPhylo	multi2di
 multi2di.phylo	multi2di
 multiphylo	multiphylo
 muscle	clustal
+muscle5	clustal
 mvr	mvr
 mvrs	mvr
 Nedge	summary.phylo

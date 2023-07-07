@@ -3,11 +3,12 @@ source("setup.R")
 setupKnitr(autoprint = TRUE)
 set.seed(123)
 
-## -----------------------------------------------------------------------------
+## ----"plot3d()"---------------------------------------------------------------
 with(iris, plot3d(Sepal.Length, Sepal.Width, Petal.Length, 
                   type="s", col=as.numeric(Species)))
 
-## ----persp3d, fig.height=3, fig.width=6, fig.keep="last"----------------------
+## ----"persp3d()", fig.height=3, fig.width=6, fig.keep="last", eval=requireNamespace("MASS",quietly=TRUE)----
+# This example requires the MASS package
 library(MASS)
 # from the fitdistr example
 set.seed(123)
@@ -33,22 +34,28 @@ persp3d(loglik,
 methods(plot3d)
 methods(persp3d)
 
-## ----fig.width=3, fig.height=3------------------------------------------------
+## ----"triangles3d()", fig.width=3, fig.height=3-------------------------------
 triangles3d(cbind(x=rnorm(9), y=rnorm(9), z=rnorm(9)), col = "green")
 decorate3d()
 bg3d("lightgray")
 aspect3d(1,1,1)
 
-## -----------------------------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
+#  myview <- par3d("userMatrix")
+#  # ... later ...
+#  par3d(userMatrix = myview)
+
+## ----Texture------------------------------------------------------------------
 filename <- tempfile(fileext = ".png")
 png(filename = filename)
 plot(rnorm(1000), rnorm(1000))
 dev.off()
 open3d()
 xyz <- cbind(c(0,1,1,0), 0, c(0,0,1,1))
-quads3d(xyz, texture = filename, texcoords = xyz[,c(1, 3)]*2, col = "white", specular = "black")
+quads3d(xyz, texture = filename, texcoords = xyz[,c(1, 3)]*2, 
+        col = "white", specular = "black")
 
-## -----------------------------------------------------------------------------
+## ----Solids-------------------------------------------------------------------
 cols <- rainbow(7)
 layout3d(matrix(1:16, 4,4), heights=c(1,3,1,3))
 text3d(0,0,0,"tetrahedron3d"); next3d()
@@ -66,7 +73,7 @@ shade3d(cuboctahedron3d(col=cols[6])); next3d()
 text3d(0,0,0,"oh3d"); next3d()
 shade3d(oh3d(col=cols[7]))
 
-## -----------------------------------------------------------------------------
+## ----Autoprint----------------------------------------------------------------
 xyz <- matrix(rnorm(27), ncol = 3)
 triangles3d(xyz, col = rainbow(9))
 spheres3d(xyz, col = rainbow(9), radius = 0.1)
@@ -90,11 +97,12 @@ spheres3d(xyz, col = rainbow(9), radius = 0.1)
 ## -----------------------------------------------------------------------------
 par3d("mouseMode")
 
-## ----echo = 2:3---------------------------------------------------------------
+## ----fig.alt="Volcano in rgl", echo = 2:3-------------------------------------
 close3d()
 persp3d(volcano, col = "green")
 
-## -----------------------------------------------------------------------------
+## ----eval=requireNamespace("orientlib", quietly = TRUE) && requireNamespace("lattice", quietly = TRUE), fig.alt=paste0("Volcano in ", c("lattice", "base"), "graphics.")----
+# Only evaluated if the lattice & orientlib packages are installed
 lattice::wireframe(volcano, col = "green", 
 		   screen = rglToLattice())
 angles <- rglToBase()
@@ -102,7 +110,7 @@ persp(volcano, col = "green", shade = TRUE,
       theta = angles$theta, phi = angles$phi)
 
 ## ----echo=FALSE---------------------------------------------------------------
-setdiff(ls("package:rgl"), documentedfns)
+setdiff(ls("package:rgl"), c(documentedfns, deprecatedfns))
 
 ## ----echo=FALSE, results="asis"-----------------------------------------------
 writeIndex(cols = if (knitr::is_html_output()) 5 else 4)

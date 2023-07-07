@@ -1,5 +1,3 @@
-MWController-class      Controller object of a manipulateWidget
-                        application
 combineWidgets          Combine several interactive plots
 combineWidgets-shiny    Shiny bindings for combineWidgets
 compareOptions          Options for comparison mode
@@ -12,6 +10,8 @@ manipulateWidget-package
 mwCheckbox              Add a checkbox to a manipulateWidget gadget
 mwCheckboxGroup         Add a group of checkboxes to a manipulateWidget
                         gadget
+MWController-class      Controller object of a manipulateWidget
+                        application
 mwDate                  Add a date picker to a manipulateWidget gadget
 mwDateRange             Add a date range picker to a manipulateWidget
                         gadget

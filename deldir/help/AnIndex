@@ -10,7 +10,10 @@ duplicatedxy	duplicatedxy
 findNewInOld	deldir-internal
 get.cnrind	deldir-internal
 getCol	deldir-internal
+getNbrs	getNbrs
 grapherXmpl	grapherXmpl
+insidePoly	deldir-internal
+insideRect	deldir-internal
 lawSummary	lawSummary
 mid.in	deldir-internal
 mnndR	deldir-internal

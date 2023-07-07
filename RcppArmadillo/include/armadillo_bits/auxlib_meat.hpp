@@ -30,25 +30,7 @@ auxlib::inv(Mat<eT>& A)
   
   if(A.is_empty())  { return true; }
   
-  #if defined(ARMA_USE_ATLAS)
-    {
-    arma_debug_assert_atlas_size(A);
-    
-    podarray<int> ipiv(A.n_rows);
-    
-    int info = 0;
-    
-    arma_extra_debug_print("atlas::clapack_getrf()");
-    info = atlas::clapack_getrf(atlas::CblasColMajor, A.n_rows, A.n_cols, A.memptr(), A.n_rows, ipiv.memptr());
-    
-    if(info != 0)  { return false; }
-    
-    arma_extra_debug_print("atlas::clapack_getri()");
-    info = atlas::clapack_getri(atlas::CblasColMajor, A.n_rows, A.memptr(), A.n_rows, ipiv.memptr());
-    
-    return (info == 0);
-    }
-  #elif defined(ARMA_USE_LAPACK)
+  #if defined(ARMA_USE_LAPACK)
     {
     arma_debug_assert_blas_size(A);
     
@@ -59,10 +41,15 @@ auxlib::inv(Mat<eT>& A)
     
     podarray<blas_int> ipiv(A.n_rows);
     
+    arma_extra_debug_print("lapack::getrf()");
+    lapack::getrf(&n, &n, A.memptr(), &lda, ipiv.memptr(), &info);
+    
+    if(info != 0)  { return false; }
+    
     if(n > 16)
       {
-      eT        work_query[2];
-      blas_int lwork_query = -1;
+      eT        work_query[2] = {};
+      blas_int lwork_query    = -1;
       
       arma_extra_debug_print("lapack::getri()");
       lapack::getri(&n, A.memptr(), &lda, ipiv.memptr(), &work_query[0], &lwork_query, &info);
@@ -76,11 +63,6 @@ auxlib::inv(Mat<eT>& A)
     
     podarray<eT> work( static_cast<uword>(lwork) );
     
-    arma_extra_debug_print("lapack::getrf()");
-    lapack::getrf(&n, &n, A.memptr(), &lda, ipiv.memptr(), &info);
-    
-    if(info != 0)  { return false; }
-    
     arma_extra_debug_print("lapack::getri()");
     lapack::getri(&n, A.memptr(), &lda, ipiv.memptr(), work.memptr(), &lwork, &info);
     
@@ -89,7 +71,7 @@ auxlib::inv(Mat<eT>& A)
   #else
     {
     arma_ignore(A);
-    arma_stop_logic_error("inv(): use of ATLAS or LAPACK must be enabled");
+    arma_stop_logic_error("inv(): use of LAPACK must be enabled");
     return false;
     }
   #endif
@@ -114,6 +96,76 @@ auxlib::inv(Mat<eT>& out, const Mat<eT>& X)
 template<typename eT>
 inline
 bool
+auxlib::inv_rcond(Mat<eT>& A, typename get_pod_type<eT>::result& out_rcond)
+  {
+  arma_extra_debug_sigprint();
+  
+  typedef typename get_pod_type<eT>::result T;
+  
+  out_rcond = T(0);
+  
+  if(A.is_empty())  { return true; }
+  
+  #if defined(ARMA_USE_LAPACK)
+    {
+    arma_debug_assert_blas_size(A);
+    
+    char     norm_id  = '1';
+    blas_int n        = blas_int(A.n_rows);
+    blas_int lda      = blas_int(A.n_rows);
+    blas_int lwork    = (std::max)(blas_int(podarray_prealloc_n_elem::val), n);
+    blas_int info     = 0;
+    T        norm_val = T(0);
+    
+    podarray<T>        junk(1);
+    podarray<blas_int> ipiv(A.n_rows);
+    
+    arma_extra_debug_print("lapack::lange()");
+    norm_val = lapack::lange<eT>(&norm_id, &n, &n, A.memptr(), &lda, junk.memptr());
+    
+    arma_extra_debug_print("lapack::getrf()");
+    lapack::getrf(&n, &n, A.memptr(), &lda, ipiv.memptr(), &info);
+    
+    if(info != 0)  { return false; }
+    
+    out_rcond = auxlib::lu_rcond<T>(A, norm_val);
+    
+    if(n > 16)
+      {
+      eT        work_query[2] = {};
+      blas_int lwork_query    = -1;
+      
+      arma_extra_debug_print("lapack::getri()");
+      lapack::getri(&n, A.memptr(), &lda, ipiv.memptr(), &work_query[0], &lwork_query, &info);
+      
+      if(info != 0)  { return false; }
+      
+      blas_int lwork_proposed = static_cast<blas_int>( access::tmp_real(work_query[0]) );
+      
+      lwork = (std::max)(lwork_proposed, lwork);
+      }
+    
+    podarray<eT> work( static_cast<uword>(lwork) );
+    
+    arma_extra_debug_print("lapack::getri()");
+    lapack::getri(&n, A.memptr(), &lda, ipiv.memptr(), work.memptr(), &lwork, &info);
+    
+    return (info == 0);
+    }
+  #else
+    {
+    arma_ignore(A);
+    arma_stop_logic_error("inv_rcond(): use of LAPACK must be enabled");
+    return false;
+    }
+  #endif
+  }
+
+
+
+template<typename eT>
+inline
+bool
 auxlib::inv_tr(Mat<eT>& A, const uword layout)
   {
   arma_extra_debug_sigprint();
@@ -121,7 +173,7 @@ auxlib::inv_tr(Mat<eT>& A, const uword layout)
   #if defined(ARMA_USE_LAPACK)
     {
     if(A.is_empty())  { return true; }
-  
+    
     arma_debug_assert_blas_size(A);
     
     char     uplo = (layout == 0) ? 'U' : 'L';
@@ -133,15 +185,6 @@ auxlib::inv_tr(Mat<eT>& A, const uword layout)
     lapack::trtri(&uplo, &diag, &n, A.memptr(), &n, &info);
     
     if(info != 0)  { return false; }
-    
-    if(layout == 0)
-      {
-      A = trimatu(A);  // upper triangular
-      }
-    else
-      {
-      A = trimatl(A);  // lower triangular
-      }
     
     return true;
     }
@@ -160,33 +203,57 @@ auxlib::inv_tr(Mat<eT>& A, const uword layout)
 template<typename eT>
 inline
 bool
-auxlib::inv_sympd(Mat<eT>& A)
+auxlib::inv_tr_rcond(Mat<eT>& A, typename get_pod_type<eT>::result& out_rcond, const uword layout)
   {
   arma_extra_debug_sigprint();
   
-  if(A.is_empty())  { return true; }
-  
-  #if defined(ARMA_USE_ATLAS)
+  #if defined(ARMA_USE_LAPACK)
     {
-    arma_debug_assert_atlas_size(A);
+    typedef typename get_pod_type<eT>::result T;
     
-    int info = 0;
+    if(A.is_empty())  { return true; }
     
-    arma_extra_debug_print("atlas::clapack_potrf()");
-    info = atlas::clapack_potrf(atlas::CblasColMajor, atlas::CblasLower, A.n_rows, A.memptr(), A.n_rows);
+    out_rcond = auxlib::rcond_trimat(A, layout);
     
-    if(info != 0)  { return false; }
+    arma_debug_assert_blas_size(A);
     
-    arma_extra_debug_print("atlas::clapack_potri()");
-    info = atlas::clapack_potri(atlas::CblasColMajor, atlas::CblasLower, A.n_rows, A.memptr(), A.n_rows);
+    char     uplo = (layout == 0) ? 'U' : 'L';
+    char     diag = 'N';
+    blas_int n    = blas_int(A.n_rows);
+    blas_int info = 0;
     
-    if(info != 0)  { return false; }
+    arma_extra_debug_print("lapack::trtri()");
+    lapack::trtri(&uplo, &diag, &n, A.memptr(), &n, &info);
     
-    A = symmatl(A);
+    if(info != 0)  { out_rcond = T(0); return false; }
     
     return true;
     }
-  #elif defined(ARMA_USE_LAPACK)
+  #else
+    {
+    arma_ignore(A);
+    arma_ignore(out_rcond);
+    arma_ignore(layout);
+    arma_stop_logic_error("inv(): use of LAPACK must be enabled");
+    return false;
+    }
+  #endif
+  }
+
+
+
+template<typename eT>
+inline
+bool
+auxlib::inv_sympd(Mat<eT>& A, bool& out_sympd_state)
+  {
+  arma_extra_debug_sigprint();
+  
+  out_sympd_state = false;
+  
+  if(A.is_empty())  { return true; }
+  
+  #if defined(ARMA_USE_LAPACK)
     {
     arma_debug_assert_blas_size(A);
     
@@ -201,6 +268,8 @@ auxlib::inv_sympd(Mat<eT>& A)
     
     if(info != 0)  { return false; }
     
+    out_sympd_state = true;
+    
     arma_extra_debug_print("lapack::potri()");
     lapack::potri(&uplo, &n, A.memptr(), &n, &info);
     
@@ -213,7 +282,8 @@ auxlib::inv_sympd(Mat<eT>& A)
   #else
     {
     arma_ignore(A);
-    arma_stop_logic_error("inv_sympd(): use of ATLAS or LAPACK must be enabled");
+    arma_ignore(out_sympd_state);
+    arma_stop_logic_error("inv_sympd(): use of LAPACK must be enabled");
     return false;
     }
   #endif
@@ -230,7 +300,9 @@ auxlib::inv_sympd(Mat<eT>& out, const Mat<eT>& X)
   
   out = X;
   
-  return auxlib::inv_sympd(out);
+  bool sympd_state_junk = false;
+  
+  return auxlib::inv_sympd(out, sympd_state_junk);
   }
 
 
@@ -238,9 +310,11 @@ auxlib::inv_sympd(Mat<eT>& out, const Mat<eT>& X)
 template<typename eT>
 inline
 bool
-auxlib::inv_sympd_rcond(Mat<eT>& A, const eT rcond_threshold)
+auxlib::inv_sympd_rcond(Mat<eT>& A, bool& out_sympd_state, eT& out_rcond)
   {
   arma_extra_debug_sigprint();
+  
+  out_sympd_state = false;
   
   if(A.is_empty())  { return true; }
   
@@ -264,11 +338,13 @@ auxlib::inv_sympd_rcond(Mat<eT>& A, const eT rcond_threshold)
     arma_extra_debug_print("lapack::potrf()");
     lapack::potrf(&uplo, &n, A.memptr(), &n, &info);
     
-    if(info != 0)  { return false; }
+    if(info != 0)  { out_rcond = eT(0); return false; }
     
-    const T rcond = auxlib::lu_rcond_sympd<T>(A, norm_val);
+    out_sympd_state = true;
     
-    if(rcond < rcond_threshold)  { return false; }
+    out_rcond = auxlib::lu_rcond_sympd<T>(A, norm_val);
+    
+    if(arma_isnan(out_rcond))  { return false; }
     
     arma_extra_debug_print("lapack::potri()");
     lapack::potri(&uplo, &n, A.memptr(), &n, &info);
@@ -282,7 +358,8 @@ auxlib::inv_sympd_rcond(Mat<eT>& A, const eT rcond_threshold)
   #else
     {
     arma_ignore(A);
-    arma_ignore(rcond_threshold);
+    arma_ignore(out_sympd_state);
+    arma_ignore(out_rcond);
     arma_stop_logic_error("inv_sympd_rcond(): use LAPACK must be enabled");
     return false;
     }
@@ -294,16 +371,19 @@ auxlib::inv_sympd_rcond(Mat<eT>& A, const eT rcond_threshold)
 template<typename T>
 inline
 bool
-auxlib::inv_sympd_rcond(Mat< std::complex<T> >& A, const T rcond_threshold)
+auxlib::inv_sympd_rcond(Mat< std::complex<T> >& A, bool& out_sympd_state, T& out_rcond)
   {
   arma_extra_debug_sigprint();
+  
+  out_sympd_state = false;
   
   if(A.is_empty())  { return true; }
   
   #if defined(ARMA_CRIPPLED_LAPACK)
     {
     arma_ignore(A);
-    arma_ignore(rcond_threshold);
+    arma_ignore(out_sympd_state);
+    arma_ignore(out_rcond);
     return false;
     }
   #elif defined(ARMA_USE_LAPACK)
@@ -324,11 +404,13 @@ auxlib::inv_sympd_rcond(Mat< std::complex<T> >& A, const T rcond_threshold)
     arma_extra_debug_print("lapack::potrf()");
     lapack::potrf(&uplo, &n, A.memptr(), &n, &info);
     
-    if(info != 0)  { return false; }
+    if(info != 0)  { out_rcond = T(0); return false; }
     
-    const T rcond = auxlib::lu_rcond_sympd<T>(A, norm_val);
+    out_sympd_state = true;
     
-    if(rcond < rcond_threshold)  { return false; }
+    out_rcond = auxlib::lu_rcond_sympd<T>(A, norm_val);
+    
+    if(arma_isnan(out_rcond))  { return false; }
     
     arma_extra_debug_print("lapack::potri()");
     lapack::potri(&uplo, &n, A.memptr(), &n, &info);
@@ -342,7 +424,8 @@ auxlib::inv_sympd_rcond(Mat< std::complex<T> >& A, const T rcond_threshold)
   #else
     {
     arma_ignore(A);
-    arma_ignore(rcond_threshold);
+    arma_ignore(out_sympd_state);
+    arma_ignore(out_rcond);
     arma_stop_logic_error("inv_sympd_rcond(): use LAPACK must be enabled");
     return false;
     }
@@ -361,33 +444,7 @@ auxlib::det(eT& out_val, Mat<eT>& A)
   
   if(A.is_empty())  { out_val = eT(1); return true; }
   
-  #if defined(ARMA_USE_ATLAS)
-    {
-    arma_debug_assert_atlas_size(A);
-    
-    podarray<int> ipiv(A.n_rows);
-    
-    arma_extra_debug_print("atlas::clapack_getrf()");
-    const int info = atlas::clapack_getrf(atlas::CblasColMajor, A.n_rows, A.n_cols, A.memptr(), A.n_rows, ipiv.memptr());
-    
-    if(info < 0)  { return false; }
-    
-    // on output A appears to be L+U_alt, where U_alt is U with the main diagonal set to zero
-    eT val = A.at(0,0);
-    for(uword i=1; i < A.n_rows; ++i)  { val *= A.at(i,i); }
-    
-    int sign = +1;
-    for(uword i=0; i < A.n_rows; ++i)
-      {
-      // NOTE: no adjustment required, as the clapack version of getrf() assumes counting from 0
-      if( int(i) != ipiv.mem[i] )  { sign *= -1; }
-      }
-    
-    out_val = (sign < 0) ? eT(-val) : eT(val);
-    
-    return true;
-    }
-  #elif defined(ARMA_USE_LAPACK)
+  #if defined(ARMA_USE_LAPACK)
     {
     arma_debug_assert_blas_size(A);
     
@@ -421,7 +478,7 @@ auxlib::det(eT& out_val, Mat<eT>& A)
     {
     arma_ignore(out_val);
     arma_ignore(A);
-    arma_stop_logic_error("det(): use of ATLAS or LAPACK must be enabled");
+    arma_stop_logic_error("det(): use of LAPACK must be enabled");
     return false;
     }
   #endif
@@ -439,51 +496,9 @@ auxlib::log_det(eT& out_val, typename get_pod_type<eT>::result& out_sign, Mat<eT
   
   typedef typename get_pod_type<eT>::result T;
   
-  if(A.is_empty())
-    {
-    out_val  = eT(0);
-    out_sign =  T(1);
-    return true;
-    }
-    
-  #if defined(ARMA_USE_ATLAS)
-    {
-    arma_debug_assert_atlas_size(A);
-    
-    podarray<int> ipiv(A.n_rows);
-    
-    arma_extra_debug_print("atlas::clapack_getrf()");
-    const int info = atlas::clapack_getrf(atlas::CblasColMajor, A.n_rows, A.n_cols, A.memptr(), A.n_rows, ipiv.memptr());
-    
-    if(info < 0)  { return false; }
-    
-    // on output A appears to be L+U_alt, where U_alt is U with the main diagonal set to zero
-    
-    sword sign = (is_cx<eT>::no) ? ( (access::tmp_real( A.at(0,0) ) < T(0)) ? -1 : +1 ) : +1;
-    eT    val  = (is_cx<eT>::no) ? std::log( (access::tmp_real( A.at(0,0) ) < T(0)) ? A.at(0,0)*T(-1) : A.at(0,0) ) : std::log( A.at(0,0) );
-    
-    for(uword i=1; i < A.n_rows; ++i)
-      {
-      const eT x = A.at(i,i);
-      
-      sign *= (is_cx<eT>::no) ? ( (access::tmp_real(x) < T(0)) ? -1 : +1 ) : +1;
-      val  += (is_cx<eT>::no) ? std::log( (access::tmp_real(x) < T(0)) ? x*T(-1) : x ) : std::log(x);
-      }
-    
-    for(uword i=0; i < A.n_rows; ++i)
-      {
-      if( int(i) != ipiv.mem[i] )  // NOTE: no adjustment required, as the clapack version of getrf() assumes counting from 0
-        {
-        sign *= -1;
-        }
-      }
-    
-    out_val  = val;
-    out_sign = T(sign);
-    
-    return true;
-    }
-  #elif defined(ARMA_USE_LAPACK)
+  if(A.is_empty())  { out_val  = eT(0); out_sign =  T(1); return true; }
+  
+  #if defined(ARMA_USE_LAPACK)
     {
     arma_debug_assert_blas_size(A);
     
@@ -529,7 +544,7 @@ auxlib::log_det(eT& out_val, typename get_pod_type<eT>::result& out_sign, Mat<eT
     arma_ignore(A);
     arma_ignore(out_val);
     arma_ignore(out_sign);
-    arma_stop_logic_error("log_det(): use of ATLAS or LAPACK must be enabled");
+    arma_stop_logic_error("log_det(): use of LAPACK must be enabled");
     return false;
     }
   #endif
@@ -548,26 +563,7 @@ auxlib::log_det_sympd(typename get_pod_type<eT>::result& out_val, Mat<eT>& A)
   
   if(A.is_empty())  { out_val = T(0); return true; }
   
-  #if defined(ARMA_USE_ATLAS)
-    {
-    arma_debug_assert_atlas_size(A);
-    
-    int info = 0;
-    
-    arma_extra_debug_print("atlas::clapack_potrf()");
-    info = atlas::clapack_potrf(atlas::CblasColMajor, atlas::CblasLower, A.n_rows, A.memptr(), A.n_rows);
-    
-    if(info != 0)  { return false; }
-    
-    T val = std::log( access::tmp_real(A.at(0,0)) );
-    
-    for(uword i=1; i < A.n_rows; ++i)  { val += std::log( access::tmp_real(A.at(i,i)) ); }
-    
-    out_val = T(2) * val;
-    
-    return true;
-    }
-  #elif defined(ARMA_USE_LAPACK)
+  #if defined(ARMA_USE_LAPACK)
     {
     arma_debug_assert_blas_size(A);
     
@@ -580,9 +576,9 @@ auxlib::log_det_sympd(typename get_pod_type<eT>::result& out_val, Mat<eT>& A)
     
     if(info != 0)  { return false; }
     
-    T val = std::log( access::tmp_real(A.at(0,0)) );
+    T val = T(0);
     
-    for(uword i=1; i < A.n_rows; ++i)  { val += std::log( access::tmp_real(A.at(i,i)) ); }
+    for(uword i=0; i < A.n_rows; ++i)  { val += std::log( access::tmp_real(A.at(i,i)) ); }
     
     out_val = T(2) * val;
     
@@ -592,7 +588,7 @@ auxlib::log_det_sympd(typename get_pod_type<eT>::result& out_val, Mat<eT>& A)
     {
     arma_ignore(out_val);
     arma_ignore(A);
-    arma_stop_logic_error("det(): use of ATLAS or LAPACK must be enabled");
+    arma_stop_logic_error("log_det_sympd(): use of LAPACK must be enabled");
     return false;
     }
   #endif
@@ -613,47 +609,26 @@ auxlib::lu(Mat<eT>& L, Mat<eT>& U, podarray<blas_int>& ipiv, const Base<eT,T1>& 
   const uword U_n_rows = U.n_rows;
   const uword U_n_cols = U.n_cols;
   
-  if(U.is_empty())
-    {
-    L.set_size(U_n_rows, 0);
-    U.set_size(0, U_n_cols);
-    ipiv.reset();
-    return true;
-    }
+  if(U.is_empty())  { L.set_size(U_n_rows, 0); U.set_size(0, U_n_cols); ipiv.reset(); return true; }
   
-  #if defined(ARMA_USE_ATLAS) || defined(ARMA_USE_LAPACK)
+  #if defined(ARMA_USE_LAPACK)
     {
-    #if defined(ARMA_USE_ATLAS)
-      {
-      arma_debug_assert_atlas_size(U);
-      
-      ipiv.set_size( (std::min)(U_n_rows, U_n_cols) );
-      
-      arma_extra_debug_print("atlas::clapack_getrf()");
-      int info = atlas::clapack_getrf(atlas::CblasColMajor, U_n_rows, U_n_cols, U.memptr(), U_n_rows, ipiv.memptr());
-      
-      if(info < 0)  { return false; }
-      }
-    #elif defined(ARMA_USE_LAPACK)
-      {
-      arma_debug_assert_blas_size(U);
-      
-      ipiv.set_size( (std::min)(U_n_rows, U_n_cols) );
-      
-      blas_int info = 0;
-      
-      blas_int n_rows = blas_int(U_n_rows);
-      blas_int n_cols = blas_int(U_n_cols);
-      
-      arma_extra_debug_print("lapack::getrf()");
-      lapack::getrf(&n_rows, &n_cols, U.memptr(), &n_rows, ipiv.memptr(), &info);
-      
-      if(info < 0)  { return false; }
-      
-      // take into account that Fortran counts from 1
-      arrayops::inplace_minus(ipiv.memptr(), blas_int(1), ipiv.n_elem);
-      }
-    #endif
+    arma_debug_assert_blas_size(U);
+    
+    ipiv.set_size( (std::min)(U_n_rows, U_n_cols) );
+    
+    blas_int info = 0;
+    
+    blas_int n_rows = blas_int(U_n_rows);
+    blas_int n_cols = blas_int(U_n_cols);
+    
+    arma_extra_debug_print("lapack::getrf()");
+    lapack::getrf(&n_rows, &n_cols, U.memptr(), &n_rows, ipiv.memptr(), &info);
+    
+    if(info < 0)  { return false; }
+    
+    // take into account that Fortran counts from 1
+    arrayops::inplace_minus(ipiv.memptr(), blas_int(1), ipiv.n_elem);
     
     L.copy_size(U);
     
@@ -680,7 +655,7 @@ auxlib::lu(Mat<eT>& L, Mat<eT>& U, podarray<blas_int>& ipiv, const Base<eT,T1>& 
     }
   #else
     {
-    arma_stop_logic_error("lu(): use of ATLAS or LAPACK must be enabled");
+    arma_stop_logic_error("lu(): use of LAPACK must be enabled");
     return false;
     }
   #endif
@@ -833,14 +808,9 @@ auxlib::eig_gen
     
     arma_debug_assert_blas_size(X);
     
-    if(X.is_empty())
-      {
-      vals.reset();
-      vecs.reset();
-      return true;
-      }
+    if(X.is_empty())  { vals.reset(); vecs.reset(); return true; }
     
-    if(X.is_finite() == false)  { return false; }
+    if(arma_config::check_nonfinite && X.internal_has_nonfinite())  { return false; }
     
     vals.set_size(X.n_rows, 1);
     
@@ -946,14 +916,9 @@ auxlib::eig_gen
     
     arma_debug_assert_blas_size(X);
     
-    if(X.is_empty())
-      {
-      vals.reset();
-      vecs.reset();
-      return true;
-      }
+    if(X.is_empty())  { vals.reset(); vecs.reset(); return true; }
     
-    if(X.is_finite() == false)  { return false; }
+    if(arma_config::check_nonfinite && X.internal_has_nonfinite())  { return false; }
     
     vals.set_size(X.n_rows, 1);
     
@@ -1018,14 +983,9 @@ auxlib::eig_gen_balance
     
     arma_debug_assert_blas_size(X);
     
-    if(X.is_empty())
-      {
-      vals.reset();
-      vecs.reset();
-      return true;
-      }
+    if(X.is_empty())  { vals.reset(); vecs.reset(); return true; }
     
-    if(X.is_finite() == false)  { return false; }
+    if(arma_config::check_nonfinite && X.internal_has_nonfinite())  { return false; }
     
     vals.set_size(X.n_rows, 1);
     
@@ -1147,14 +1107,9 @@ auxlib::eig_gen_balance
     
     arma_debug_assert_blas_size(X);
     
-    if(X.is_empty())
-      {
-      vals.reset();
-      vecs.reset();
-      return true;
-      }
+    if(X.is_empty())  { vals.reset(); vecs.reset(); return true; }
     
-    if(X.is_finite() == false)  { return false; }
+    if(arma_config::check_nonfinite && X.internal_has_nonfinite())  { return false; }
     
     vals.set_size(X.n_rows, 1);
     
@@ -1228,15 +1183,9 @@ auxlib::eig_gen_twosided
     
     arma_debug_assert_blas_size(X);
     
-    if(X.is_empty())
-      {
-       vals.reset();
-      lvecs.reset();
-      rvecs.reset();
-      return true;
-      }
+    if(X.is_empty())  { vals.reset(); lvecs.reset(); rvecs.reset(); return true; }
     
-    if(X.is_finite() == false)  { return false; }
+    if(arma_config::check_nonfinite && X.internal_has_nonfinite())  { return false; }
     
     vals.set_size(X.n_rows, 1);
     
@@ -1335,15 +1284,9 @@ auxlib::eig_gen_twosided
     
     arma_debug_assert_blas_size(X);
     
-    if(X.is_empty())
-      {
-       vals.reset();
-      lvecs.reset();
-      rvecs.reset();
-      return true;
-      }
+    if(X.is_empty())  { vals.reset(); lvecs.reset(); rvecs.reset(); return true; }
     
-    if(X.is_finite() == false)  { return false; }
+    if(arma_config::check_nonfinite && X.internal_has_nonfinite())  { return false; }
     
     vals.set_size(X.n_rows, 1);
     
@@ -1405,15 +1348,9 @@ auxlib::eig_gen_twosided_balance
     
     arma_debug_assert_blas_size(X);
     
-    if(X.is_empty())
-      {
-       vals.reset();
-      lvecs.reset();
-      rvecs.reset();
-      return true;
-      }
+    if(X.is_empty())  { vals.reset(); lvecs.reset(); rvecs.reset(); return true; }
     
-    if(X.is_finite() == false)  { return false; }
+    if(arma_config::check_nonfinite && X.internal_has_nonfinite())  { return false; }
     
     vals.set_size(X.n_rows, 1);
     
@@ -1528,15 +1465,9 @@ auxlib::eig_gen_twosided_balance
     
     arma_debug_assert_blas_size(X);
     
-    if(X.is_empty())
-      {
-       vals.reset();
-      lvecs.reset();
-      rvecs.reset();
-      return true;
-      }
+    if(X.is_empty())  { vals.reset(); lvecs.reset(); rvecs.reset(); return true; }
     
-    if(X.is_finite() == false)  { return false; }
+    if(arma_config::check_nonfinite && X.internal_has_nonfinite())  { return false; }
     
     vals.set_size(X.n_rows, 1);
     
@@ -1612,15 +1543,10 @@ auxlib::eig_pair
     
     arma_debug_assert_blas_size(A);
     
-    if(A.is_empty())
-      {
-      vals.reset();
-      vecs.reset();
-      return true;
-      }
+    if(A.is_empty())  { vals.reset(); vecs.reset(); return true; }
     
-    if(A.is_finite() == false)  { return false; }
-    if(B.is_finite() == false)  { return false; }
+    if(arma_config::check_nonfinite && A.internal_has_nonfinite())  { return false; }
+    if(arma_config::check_nonfinite && B.internal_has_nonfinite())  { return false; }
     
     vals.set_size(A.n_rows, 1);
     
@@ -1755,15 +1681,10 @@ auxlib::eig_pair
     
     arma_debug_assert_blas_size(A);
     
-    if(A.is_empty())
-      {
-      vals.reset();
-      vecs.reset();
-      return true;
-      }
+    if(A.is_empty())  { vals.reset(); vecs.reset(); return true; }
     
-    if(A.is_finite() == false)  { return false; }
-    if(B.is_finite() == false)  { return false; }
+    if(arma_config::check_nonfinite && A.internal_has_nonfinite())  { return false; }
+    if(arma_config::check_nonfinite && B.internal_has_nonfinite())  { return false; }
     
     vals.set_size(A.n_rows, 1);
     
@@ -1857,16 +1778,10 @@ auxlib::eig_pair_twosided
     
     arma_debug_assert_blas_size(A);
     
-    if(A.is_empty())
-      {
-       vals.reset();
-      lvecs.reset();
-      rvecs.reset();
-      return true;
-      }
+    if(A.is_empty())  { vals.reset(); lvecs.reset(); rvecs.reset(); return true; }
     
-    if(A.is_finite() == false)  { return false; }
-    if(B.is_finite() == false)  { return false; }
+    if(arma_config::check_nonfinite && A.internal_has_nonfinite())  { return false; }
+    if(arma_config::check_nonfinite && B.internal_has_nonfinite())  { return false; }
     
     vals.set_size(A.n_rows, 1);
     
@@ -1994,16 +1909,10 @@ auxlib::eig_pair_twosided
     
     arma_debug_assert_blas_size(A);
     
-    if(A.is_empty())
-      {
-       vals.reset();
-      lvecs.reset();
-      rvecs.reset();
-      return true;
-      }
+    if(A.is_empty())  { vals.reset(); lvecs.reset(); rvecs.reset(); return true; }
     
-    if(A.is_finite() == false)  { return false; }
-    if(B.is_finite() == false)  { return false; }
+    if(arma_config::check_nonfinite && A.internal_has_nonfinite())  { return false; }
+    if(arma_config::check_nonfinite && B.internal_has_nonfinite())  { return false; }
     
     vals.set_size(A.n_rows, 1);
     
@@ -2079,16 +1988,12 @@ auxlib::eig_sym(Col<eT>& eigval, Mat<eT>& A)
     
     if(A.is_empty())  { eigval.reset(); return true; }
     
-    // if(auxlib::rudimentary_sym_check(A) == false)
-    //   {
-    //   arma_debug_warn_level(1, "eig_sym(): given matrix is not symmetric");
-    //   return false;
-    //   }
-    
     if((arma_config::debug) && (auxlib::rudimentary_sym_check(A) == false))
       {
       arma_debug_warn_level(1, "eig_sym(): given matrix is not symmetric");
       }
+    
+    if(arma_config::check_nonfinite && trimat_helper::has_nonfinite_triu(A))  { return false; }
     
     arma_debug_assert_blas_size(A);
     
@@ -2136,16 +2041,12 @@ auxlib::eig_sym(Col<T>& eigval, Mat< std::complex<T> >& A)
     
     if(A.is_empty())  { eigval.reset(); return true; }
     
-    // if(auxlib::rudimentary_sym_check(A) == false)
-    //   {
-    //   arma_debug_warn_level(1, "eig_sym(): given matrix is not hermitian");
-    //   return false;
-    //   }
-    
     if((arma_config::debug) && (auxlib::rudimentary_sym_check(A) == false))
       {
       arma_debug_warn_level(1, "eig_sym(): given matrix is not hermitian");
       }
+    
+    if(arma_config::check_nonfinite && trimat_helper::has_nonfinite_triu(A))  { return false; }
     
     arma_debug_assert_blas_size(A);
     
@@ -2190,14 +2091,11 @@ auxlib::eig_sym(Col<eT>& eigval, Mat<eT>& eigvec, const Mat<eT>& X)
     {
     arma_debug_check( (X.is_square() == false), "eig_sym(): given matrix must be square sized" );
     
+    if(arma_config::check_nonfinite && trimat_helper::has_nonfinite_triu(X))  { return false; }
+    
     eigvec = X;
     
-    if(eigvec.is_empty())
-      {
-      eigval.reset();
-      eigvec.reset();
-      return true;
-      }
+    if(eigvec.is_empty())  { eigval.reset(); eigvec.reset(); return true; }
     
     arma_debug_assert_blas_size(eigvec);
     
@@ -2244,14 +2142,11 @@ auxlib::eig_sym(Col<T>& eigval, Mat< std::complex<T> >& eigvec, const Mat< std::
     
     arma_debug_check( (X.is_square() == false), "eig_sym(): given matrix must be square sized" );
     
+    if(arma_config::check_nonfinite && trimat_helper::has_nonfinite_triu(X))  { return false; }
+    
     eigvec = X;
     
-    if(eigvec.is_empty())
-      {
-      eigval.reset();
-      eigvec.reset();
-      return true;
-      }
+    if(eigvec.is_empty())  { eigval.reset(); eigvec.reset(); return true; }
     
     arma_debug_assert_blas_size(eigvec);
     
@@ -2297,14 +2192,11 @@ auxlib::eig_sym_dc(Col<eT>& eigval, Mat<eT>& eigvec, const Mat<eT>& X)
     {
     arma_debug_check( (X.is_square() == false), "eig_sym(): given matrix must be square sized" );
     
+    if(arma_config::check_nonfinite && trimat_helper::has_nonfinite_triu(X))  { return false; }
+    
     eigvec = X;
     
-    if(eigvec.is_empty())
-      {
-      eigval.reset();
-      eigvec.reset();
-      return true;
-      }
+    if(eigvec.is_empty())  { eigval.reset(); eigvec.reset(); return true; }
     
     arma_debug_assert_blas_size(eigvec);
     
@@ -2323,8 +2215,8 @@ auxlib::eig_sym_dc(Col<eT>& eigval, Mat<eT>& eigvec, const Mat<eT>& X)
     
     if(N >= 32)
       {
-      eT        work_query[2];
-      blas_int iwork_query[2];
+      eT        work_query[2] = {};
+      blas_int iwork_query[2] = {};
       
       blas_int  lwork_query = -1;
       blas_int liwork_query = -1;
@@ -2376,14 +2268,11 @@ auxlib::eig_sym_dc(Col<T>& eigval, Mat< std::complex<T> >& eigvec, const Mat< st
     
     arma_debug_check( (X.is_square() == false), "eig_sym(): given matrix must be square sized" );
     
+    if(arma_config::check_nonfinite && trimat_helper::has_nonfinite_triu(X))  { return false; }
+    
     eigvec = X;
     
-    if(eigvec.is_empty())
-      {
-      eigval.reset();
-      eigvec.reset();
-      return true;
-      }
+    if(eigvec.is_empty())  { eigval.reset(); eigvec.reset(); return true; }
     
     arma_debug_assert_blas_size(eigvec);
     
@@ -2404,9 +2293,9 @@ auxlib::eig_sym_dc(Col<T>& eigval, Mat< std::complex<T> >& eigvec, const Mat< st
     
     if(N >= 32)
       {
-      eT        work_query[2];
-      T        rwork_query[2];
-      blas_int iwork_query[2];
+      eT        work_query[2] = {};
+      T        rwork_query[2] = {};
+      blas_int iwork_query[2] = {};
       
       blas_int  lwork_query = -1;
       blas_int lrwork_query = -1;
@@ -2455,18 +2344,7 @@ auxlib::chol_simple(Mat<eT>& X)
   {
   arma_extra_debug_sigprint();
   
-  #if defined(ARMA_USE_ATLAS)
-    {
-    arma_debug_assert_atlas_size(X);
-    
-    int info = 0;
-    
-    arma_extra_debug_print("atlas::clapack_potrf()");
-    info = atlas::clapack_potrf(atlas::CblasColMajor, atlas::CblasUpper, X.n_rows, X.memptr(), X.n_rows);
-    
-    return (info == 0);
-    }
-  #elif defined(ARMA_USE_LAPACK)
+  #if defined(ARMA_USE_LAPACK)
     {
     arma_debug_assert_blas_size(X);
     
@@ -2483,7 +2361,7 @@ auxlib::chol_simple(Mat<eT>& X)
     {
     arma_ignore(X);
     
-    arma_stop_logic_error("chol(): use of ATLAS or LAPACK must be enabled");
+    arma_stop_logic_error("chol(): use of LAPACK must be enabled");
     return false;
     }
   #endif
@@ -2498,22 +2376,7 @@ auxlib::chol(Mat<eT>& X, const uword layout)
   {
   arma_extra_debug_sigprint();
   
-  #if defined(ARMA_USE_ATLAS)
-    {
-    arma_debug_assert_atlas_size(X);
-    
-    int info = 0;
-    
-    arma_extra_debug_print("atlas::clapack_potrf()");
-    info = atlas::clapack_potrf(atlas::CblasColMajor, ((layout == 0) ? atlas::CblasUpper : atlas::CblasLower), X.n_rows, X.memptr(), X.n_rows);
-    
-    if(info != 0)  { return false; }
-    
-    X = (layout == 0) ? trimatu(X) : trimatl(X);  // trimatu() and trimatl() return the same type
-    
-    return true;
-    }
-  #elif defined(ARMA_USE_LAPACK)
+  #if defined(ARMA_USE_LAPACK)
     {
     arma_debug_assert_blas_size(X);
     
@@ -2535,7 +2398,7 @@ auxlib::chol(Mat<eT>& X, const uword layout)
     arma_ignore(X);
     arma_ignore(layout);
     
-    arma_stop_logic_error("chol(): use of ATLAS or LAPACK must be enabled");
+    arma_stop_logic_error("chol(): use of LAPACK must be enabled");
     return false;
     }
   #endif
@@ -2696,10 +2559,7 @@ auxlib::hess(Mat<eT>& H, const Base<eT,T1>& X, Col<eT>& tao)
     
     arma_debug_check( (H.is_square() == false), "hess(): given matrix must be square sized" );
     
-    if(H.is_empty())
-      {
-      return true;
-      }
+    if(H.is_empty())  { return true; }
     
     arma_debug_assert_blas_size(H);
     
@@ -2751,11 +2611,7 @@ auxlib::qr(Mat<eT>& Q, Mat<eT>& R, const Base<eT,T1>& X)
     const uword R_n_rows = R.n_rows;
     const uword R_n_cols = R.n_cols;
     
-    if(R.is_empty())
-      {
-      Q.eye(R_n_rows, R_n_rows);
-      return true;
-      }
+    if(R.is_empty())  { Q.eye(R_n_rows, R_n_rows); return true; }
     
     arma_debug_assert_blas_size(R);
     
@@ -2767,8 +2623,8 @@ auxlib::qr(Mat<eT>& Q, Mat<eT>& R, const Base<eT,T1>& X)
     
     podarray<eT> tau( static_cast<uword>(k) );
     
-    eT        work_query[2];
-    blas_int lwork_query = -1;
+    eT        work_query[2] = {};
+    blas_int lwork_query    = -1;
     
     arma_extra_debug_print("lapack::geqrf()");
     lapack::geqrf(&m, &n, R.memptr(), &m, tau.memptr(), &work_query[0], &lwork_query, &info);
@@ -2842,10 +2698,7 @@ auxlib::qr_econ(Mat<eT>& Q, Mat<eT>& R, const Base<eT,T1>& X)
       const unwrap<T1>   tmp(X.get_ref());
       const Mat<eT>& M = tmp.M;
       
-      if(M.n_rows < M.n_cols)
-        {
-        return auxlib::qr(Q, R, X);
-        }
+      if(M.n_rows < M.n_cols)  { return auxlib::qr(Q, R, X); }
       }
     
     Q = X.get_ref();
@@ -2853,17 +2706,9 @@ auxlib::qr_econ(Mat<eT>& Q, Mat<eT>& R, const Base<eT,T1>& X)
     const uword Q_n_rows = Q.n_rows;
     const uword Q_n_cols = Q.n_cols;
     
-    if( Q_n_rows <= Q_n_cols )
-      {
-      return auxlib::qr(Q, R, Q);
-      }
+    if( Q_n_rows <= Q_n_cols )  { return auxlib::qr(Q, R, Q); }
     
-    if(Q.is_empty())
-      {
-      Q.set_size(Q_n_rows, 0       );
-      R.set_size(0,        Q_n_cols);
-      return true;
-      }
+    if(Q.is_empty())  { Q.set_size(Q_n_rows, 0); R.set_size(0, Q_n_cols); return true; }
     
     arma_debug_assert_blas_size(Q);
     
@@ -2875,8 +2720,8 @@ auxlib::qr_econ(Mat<eT>& Q, Mat<eT>& R, const Base<eT,T1>& X)
     
     podarray<eT> tau( static_cast<uword>(k) );
     
-    eT        work_query[2];
-    blas_int lwork_query = -1;
+    eT        work_query[2] = {};
+    blas_int lwork_query    = -1;
     
     arma_extra_debug_print("lapack::geqrf()");
     lapack::geqrf(&m, &n, Q.memptr(), &m, tau.memptr(), &work_query[0], &lwork_query, &info);
@@ -2971,8 +2816,8 @@ auxlib::qr_pivot(Mat<eT>& Q, Mat<eT>& R, Mat<uword>& P, const Base<eT,T1>& X)
     
     jpvt.zeros();
     
-    eT        work_query[2];
-    blas_int lwork_query = -1;
+    eT        work_query[2] = {};
+    blas_int lwork_query    = -1;
     
     arma_extra_debug_print("lapack::geqp3()");
     lapack::geqp3(&m, &n, R.memptr(), &m, jpvt.memptr(), tau.memptr(), &work_query[0], &lwork_query, &info);
@@ -3065,8 +2910,8 @@ auxlib::qr_pivot(Mat< std::complex<T> >& Q, Mat< std::complex<T> >& R, Mat<uword
     
     jpvt.zeros();
     
-    eT        work_query[2];
-    blas_int lwork_query = -1;
+    eT        work_query[2] = {};
+    blas_int lwork_query    = -1;
     
     arma_extra_debug_print("lapack::geqp3()");
     lapack::cx_geqp3(&m, &n, R.memptr(), &m, jpvt.memptr(), tau.memptr(), &work_query[0], &lwork_query, rwork.memptr(), &info);
@@ -3129,6 +2974,8 @@ auxlib::svd(Col<eT>& S, Mat<eT>& A)
     {
     if(A.is_empty())  { S.reset(); return true; }
     
+    if(arma_config::check_nonfinite && A.internal_has_nonfinite())  { return false; }
+    
     arma_debug_assert_blas_size(A);
     
     Mat<eT> U(1, 1,        arma_nozeros_indicator());
@@ -3150,10 +2997,10 @@ auxlib::svd(Col<eT>& S, Mat<eT>& A)
     
     blas_int lwork_proposed = 0;
     
-    if((m*n) >= 1024)
+    if(A.n_elem >= 1024)
       {
-      eT        work_query[2];
-      blas_int lwork_query = -1;
+      eT        work_query[2] = {};
+      blas_int lwork_query    = -1;
       
       arma_extra_debug_print("lapack::gesvd()");
       lapack::gesvd<eT>(&jobu, &jobvt, &m, &n, A.memptr(), &lda, S.memptr(), U.memptr(), &ldu, V.memptr(), &ldvt, &work_query[0], &lwork_query, &info);
@@ -3197,6 +3044,8 @@ auxlib::svd(Col<T>& S, Mat< std::complex<T> >& A)
     
     if(A.is_empty())  { S.reset(); return true; }
     
+    if(arma_config::check_nonfinite && A.internal_has_nonfinite())  { return false; }
+    
     arma_debug_assert_blas_size(A);
     
     Mat<eT> U(1, 1,        arma_nozeros_indicator());
@@ -3220,10 +3069,10 @@ auxlib::svd(Col<T>& S, Mat< std::complex<T> >& A)
     
     blas_int lwork_proposed = 0;
     
-    if((m*n) >= 1024)
+    if(A.n_elem >= 256)
       {
-      eT        work_query[2];
-      blas_int lwork_query = -1;  // query to find optimum size of workspace
+      eT        work_query[2] = {};
+      blas_int lwork_query    = -1;  // query to find optimum size of workspace
       
       arma_extra_debug_print("lapack::cx_gesvd()");
       lapack::cx_gesvd<T>(&jobu, &jobvt, &m, &n, A.memptr(), &lda, S.memptr(), U.memptr(), &ldu, V.memptr(), &ldvt, &work_query[0], &lwork_query, rwork.memptr(), &info);
@@ -3263,13 +3112,9 @@ auxlib::svd(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, Mat<eT>& A)
   
   #if defined(ARMA_USE_LAPACK)
     {
-    if(A.is_empty())
-      {
-      U.eye(A.n_rows, A.n_rows);
-      S.reset();
-      V.eye(A.n_cols, A.n_cols);
-      return true;
-      }
+    if(A.is_empty())  { U.eye(A.n_rows, A.n_rows); S.reset(); V.eye(A.n_cols, A.n_cols); return true; }
+    
+    if(arma_config::check_nonfinite && A.internal_has_nonfinite())  { return false; }
     
     arma_debug_assert_blas_size(A);
     
@@ -3292,11 +3137,11 @@ auxlib::svd(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, Mat<eT>& A)
     
     blas_int lwork_proposed = 0;
     
-    if((m*n) >= 1024)
+    if(A.n_elem >= 1024)
       {
       // query to find optimum size of workspace
-      eT        work_query[2];
-      blas_int lwork_query = -1;
+      eT        work_query[2] = {};
+      blas_int lwork_query    = -1;
       
       arma_extra_debug_print("lapack::gesvd()");
       lapack::gesvd<eT>(&jobu, &jobvt, &m, &n, A.memptr(), &lda, S.memptr(), U.memptr(), &ldu, V.memptr(), &ldvt, &work_query[0], &lwork_query, &info);
@@ -3344,13 +3189,9 @@ auxlib::svd(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >& V, Mat
     {
     typedef std::complex<T> eT;
     
-    if(A.is_empty())
-      {
-      U.eye(A.n_rows, A.n_rows);
-      S.reset();
-      V.eye(A.n_cols, A.n_cols);
-      return true;
-      }
+    if(A.is_empty())  { U.eye(A.n_rows, A.n_rows); S.reset(); V.eye(A.n_cols, A.n_cols); return true; }
+    
+    if(arma_config::check_nonfinite && A.internal_has_nonfinite())  { return false; }
     
     arma_debug_assert_blas_size(A);
     
@@ -3375,10 +3216,10 @@ auxlib::svd(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >& V, Mat
     
     blas_int lwork_proposed = 0;
     
-    if((m*n) >= 1024)
+    if(A.n_elem >= 256)
       {
-      eT        work_query[2];
-      blas_int lwork_query = -1;  // query to find optimum size of workspace
+      eT        work_query[2] = {};
+      blas_int lwork_query    = -1;  // query to find optimum size of workspace
       
       arma_extra_debug_print("lapack::cx_gesvd()");
       lapack::cx_gesvd<T>(&jobu, &jobvt, &m, &n, A.memptr(), &lda, S.memptr(), U.memptr(), &ldu, V.memptr(), &ldvt, &work_query[0], &lwork_query, rwork.memptr(), &info);
@@ -3424,13 +3265,9 @@ auxlib::svd_econ(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, Mat<eT>& A, const char mode
   
   #if defined(ARMA_USE_LAPACK)
     {
-    if(A.is_empty())
-      {
-      U.eye();
-      S.reset();
-      V.eye();
-      return true;
-      }
+    if(A.is_empty())  { U.eye(); S.reset(); V.eye(); return true; }
+    
+    if(arma_config::check_nonfinite && A.internal_has_nonfinite())  { return false; }
     
     arma_debug_assert_blas_size(A);
     
@@ -3489,10 +3326,10 @@ auxlib::svd_econ(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, Mat<eT>& A, const char mode
     
     blas_int lwork_proposed = 0;
     
-    if((m*n) >= 1024)
+    if(A.n_elem >= 1024)
       {
-      eT        work_query[2];
-      blas_int lwork_query = -1;  // query to find optimum size of workspace
+      eT        work_query[2] = {};
+      blas_int lwork_query    = -1;  // query to find optimum size of workspace
       
       arma_extra_debug_print("lapack::gesvd()");
       lapack::gesvd<eT>(&jobu, &jobvt, &m, &n, A.memptr(), &lda, S.memptr(), U.memptr(), &ldu, V.memptr(), &ldvt, &work_query[0], &lwork_query, &info);
@@ -3541,13 +3378,9 @@ auxlib::svd_econ(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >& V
     {
     typedef std::complex<T> eT;
     
-    if(A.is_empty())
-      {
-      U.eye();
-      S.reset();
-      V.eye();
-      return true;
-      }
+    if(A.is_empty())  { U.eye(); S.reset(); V.eye(); return true; }
+    
+    if(arma_config::check_nonfinite && A.internal_has_nonfinite())  { return false; }
     
     arma_debug_assert_blas_size(A);
     
@@ -3607,10 +3440,10 @@ auxlib::svd_econ(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >& V
     
     blas_int lwork_proposed = 0;
     
-    if((m*n) >= 1024)
+    if(A.n_elem >= 256)
       {
-      eT        work_query[2];
-      blas_int lwork_query = -1;  // query to find optimum size of workspace
+      eT        work_query[2] = {};
+      blas_int lwork_query    = -1;  // query to find optimum size of workspace
       
       arma_extra_debug_print("lapack::cx_gesvd()");
       lapack::cx_gesvd<T>(&jobu, &jobvt, &m, &n, A.memptr(), &lda, S.memptr(), U.memptr(), &ldu, V.memptr(), &ldvt, &work_query[0], &lwork_query, rwork.memptr(), &info);
@@ -3659,6 +3492,8 @@ auxlib::svd_dc(Col<eT>& S, Mat<eT>& A)
     {
     if(A.is_empty())  { S.reset(); return true; }
     
+    if(arma_config::check_nonfinite && A.internal_has_nonfinite())  { return false; }
+    
     arma_debug_assert_blas_size(A);
     
     Mat<eT> U(1, 1, arma_nozeros_indicator());
@@ -3682,10 +3517,10 @@ auxlib::svd_dc(Col<eT>& S, Mat<eT>& A)
     
     blas_int lwork_proposed = 0;
     
-    if((m*n) >= 1024)
+    if(A.n_elem >= 1024)
       {
-      eT        work_query[2];
-      blas_int lwork_query = blas_int(-1);
+      eT        work_query[2] = {};
+      blas_int lwork_query    = blas_int(-1);
       
       arma_extra_debug_print("lapack::gesdd()");
       lapack::gesdd<eT>(&jobz, &m, &n, A.memptr(), &lda, S.memptr(), U.memptr(), &ldu, V.memptr(), &ldvt, &work_query[0], &lwork_query, iwork.memptr(), &info);
@@ -3729,6 +3564,8 @@ auxlib::svd_dc(Col<T>& S, Mat< std::complex<T> >& A)
     
     if(A.is_empty())  { S.reset(); return true; }
     
+    if(arma_config::check_nonfinite && A.internal_has_nonfinite())  { return false; }
+    
     arma_debug_assert_blas_size(A);
     
     Mat<eT> U(1, 1, arma_nozeros_indicator());
@@ -3753,10 +3590,10 @@ auxlib::svd_dc(Col<T>& S, Mat< std::complex<T> >& A)
     
     blas_int lwork_proposed = 0;
     
-    if((m*n) >= 1024)
+    if(A.n_elem >= 256)
       {
-      eT        work_query[2];
-      blas_int lwork_query = blas_int(-1);
+      eT        work_query[2] = {};
+      blas_int lwork_query    = blas_int(-1);
       
       arma_extra_debug_print("lapack::cx_gesdd()");
       lapack::cx_gesdd<T>(&jobz, &m, &n, A.memptr(), &lda, S.memptr(), U.memptr(), &ldu, V.memptr(), &ldvt, &work_query[0], &lwork_query, rwork.memptr(), iwork.memptr(), &info);
@@ -3796,13 +3633,9 @@ auxlib::svd_dc(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, Mat<eT>& A)
   
   #if defined(ARMA_USE_LAPACK)
     {
-    if(A.is_empty())
-      {
-      U.eye(A.n_rows, A.n_rows);
-      S.reset();
-      V.eye(A.n_cols, A.n_cols);
-      return true;
-      }
+    if(A.is_empty())  { U.eye(A.n_rows, A.n_rows); S.reset(); V.eye(A.n_cols, A.n_cols); return true; }
+    
+    if(arma_config::check_nonfinite && A.internal_has_nonfinite())  { return false; }
     
     arma_debug_assert_blas_size(A);
     
@@ -3829,10 +3662,10 @@ auxlib::svd_dc(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, Mat<eT>& A)
     
     blas_int lwork_proposed = 0;
     
-    if((m*n) >= 1024)
+    if(A.n_elem >= 1024)
       {
-      eT        work_query[2];
-      blas_int lwork_query = blas_int(-1);
+      eT        work_query[2] = {};
+      blas_int lwork_query    = blas_int(-1);
       
       arma_extra_debug_print("lapack::gesdd()");
       lapack::gesdd<eT>(&jobz, &m, &n, A.memptr(), &lda, S.memptr(), U.memptr(), &ldu, V.memptr(), &ldvt, &work_query[0], &lwork_query, iwork.memptr(), &info);
@@ -3880,13 +3713,9 @@ auxlib::svd_dc(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >& V, 
     {
     typedef std::complex<T> eT;
     
-    if(A.is_empty())
-      {
-      U.eye(A.n_rows, A.n_rows);
-      S.reset();
-      V.eye(A.n_cols, A.n_cols);
-      return true;
-      }
+    if(A.is_empty())  { U.eye(A.n_rows, A.n_rows); S.reset(); V.eye(A.n_cols, A.n_cols); return true; }
+    
+    if(arma_config::check_nonfinite && A.internal_has_nonfinite())  { return false; }
     
     arma_debug_assert_blas_size(A);
     
@@ -3913,10 +3742,10 @@ auxlib::svd_dc(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >& V, 
     
     blas_int lwork_proposed = 0;
     
-    if((m*n) >= 1024)
+    if(A.n_elem >= 256)
       {
-      eT        work_query[2];
-      blas_int lwork_query = blas_int(-1);
+      eT        work_query[2] = {};
+      blas_int lwork_query    = blas_int(-1);
       
       arma_extra_debug_print("lapack::cx_gesdd()");
       lapack::cx_gesdd<T>(&jobz, &m, &n, A.memptr(), &lda, S.memptr(), U.memptr(), &ldu, V.memptr(), &ldvt, &work_query[0], &lwork_query, rwork.memptr(), iwork.memptr(), &info);
@@ -3962,6 +3791,8 @@ auxlib::svd_dc_econ(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, Mat<eT>& A)
   
   #if defined(ARMA_USE_LAPACK)
     {
+    if(arma_config::check_nonfinite && A.internal_has_nonfinite())  { return false; }
+    
     arma_debug_assert_blas_size(A);
     
     char jobz = 'S';
@@ -3996,10 +3827,10 @@ auxlib::svd_dc_econ(Mat<eT>& U, Col<eT>& S, Mat<eT>& V, Mat<eT>& A)
     
     blas_int lwork_proposed = 0;
     
-    if((m*n) >= 1024)
+    if(A.n_elem >= 1024)
       {
-      eT        work_query[2];
-      blas_int lwork_query = blas_int(-1);
+      eT        work_query[2] = {};
+      blas_int lwork_query    = blas_int(-1);
       
       arma_extra_debug_print("lapack::gesdd()");
       lapack::gesdd<eT>(&jobz, &m, &n, A.memptr(), &lda, S.memptr(), U.memptr(), &ldu, V.memptr(), &ldvt, &work_query[0], &lwork_query, iwork.memptr(), &info);
@@ -4047,6 +3878,8 @@ auxlib::svd_dc_econ(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >
     {
     typedef std::complex<T> eT;
     
+    if(arma_config::check_nonfinite && A.internal_has_nonfinite())  { return false; }
+    
     arma_debug_assert_blas_size(A);
     
     char jobz = 'S';
@@ -4081,10 +3914,10 @@ auxlib::svd_dc_econ(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >
     
     blas_int lwork_proposed = 0;
     
-    if((m*n) >= 1024)
+    if(A.n_elem >= 256)
       {
-      eT        work_query[2];
-      blas_int lwork_query = blas_int(-1);
+      eT        work_query[2] = {};
+      blas_int lwork_query    = blas_int(-1);
       
       arma_extra_debug_print("lapack::cx_gesdd()");
       lapack::cx_gesdd<T>(&jobz, &m, &n, A.memptr(), &lda, S.memptr(), U.memptr(), &ldu, V.memptr(), &ldvt, &work_query[0], &lwork_query, rwork.memptr(), iwork.memptr(), &info);
@@ -4121,61 +3954,6 @@ auxlib::svd_dc_econ(Mat< std::complex<T> >& U, Col<T>& S, Mat< std::complex<T> >
 
 
 
-//! solve a system of linear equations via explicit inverse (tiny matrices)
-template<typename T1>
-arma_cold
-inline
-bool
-auxlib::solve_square_tiny(Mat<typename T1::elem_type>& out, const Mat<typename T1::elem_type>& A, const Base<typename T1::elem_type,T1>& B_expr)
-  {
-  arma_extra_debug_sigprint();
-  
-  // NOTE: assuming A has size <= 4x4
-  
-  typedef typename T1::elem_type eT;
-  
-  const uword A_n_rows = A.n_rows;
-  
-  Mat<eT> A_inv(A_n_rows, A_n_rows, arma_nozeros_indicator());
-  
-  const bool status = op_inv::apply_tiny_noalias(A_inv, A);
-  
-  if(status == false)  { return false; }
-  
-  const quasi_unwrap<T1> UB(B_expr.get_ref());
-  const Mat<eT>& B     = UB.M;
-  
-  const uword B_n_rows = B.n_rows;
-  const uword B_n_cols = B.n_cols;
-  
-  arma_debug_check( (A_n_rows != B_n_rows), "solve(): number of rows in the given matrices must be the same" );
-  
-  if(A.is_empty() || B.is_empty())
-    {
-    out.zeros(A.n_cols, B_n_cols);
-    return true;
-    }
-  
-  if(UB.is_alias(out))
-    {
-    Mat<eT> tmp(A_n_rows, B_n_cols, arma_nozeros_indicator());
-    
-    gemm_emul<false,false,false,false>::apply(tmp, A_inv, B);
-    
-    out.steal_mem(tmp);
-    }
-  else
-    {
-    out.set_size(A_n_rows, B_n_cols);
-    
-    gemm_emul<false,false,false,false>::apply(out, A_inv, B);
-    }
-  
-  return true;
-  }
-
-
-
 //! solve a system of linear equations via LU decomposition
 template<typename T1>
 inline
@@ -4186,50 +3964,26 @@ auxlib::solve_square_fast(Mat<typename T1::elem_type>& out, Mat<typename T1::ele
   
   typedef typename T1::elem_type eT;
   
-  const uword A_n_rows = A.n_rows;
-  
-  if((A_n_rows <= 4) && is_cx<eT>::no)
-    {
-    const bool status = auxlib::solve_square_tiny(out, A, B_expr.get_ref());
-    
-    if(status)  { return true; }
-    }
-  
   out = B_expr.get_ref();
   
   const uword B_n_rows = out.n_rows;
   const uword B_n_cols = out.n_cols;
-    
-  arma_debug_check( (A_n_rows != B_n_rows), "solve(): number of rows in the given matrices must be the same" );
-    
-  if(A.is_empty() || out.is_empty())
-    {
-    out.zeros(A.n_cols, B_n_cols);
-    return true;
-    }
   
-  #if defined(ARMA_USE_ATLAS)
-    {
-    arma_debug_assert_atlas_size(A);
-    
-    podarray<int> ipiv(A_n_rows + 2);  // +2 for paranoia: old versions of Atlas might be trashing memory
-    
-    arma_extra_debug_print("atlas::clapack_gesv()");
-    int info = atlas::clapack_gesv<eT>(atlas::CblasColMajor, A_n_rows, B_n_cols, A.memptr(), A_n_rows, ipiv.memptr(), out.memptr(), A_n_rows);
-    
-    return (info == 0);
-    }
-  #elif defined(ARMA_USE_LAPACK)
+  arma_debug_check( (A.n_rows != B_n_rows), "solve(): number of rows in given matrices must be the same", [&](){ out.soft_reset(); } );
+  
+  if(A.is_empty() || out.is_empty())  { out.zeros(A.n_cols, B_n_cols); return true; }
+  
+  #if defined(ARMA_USE_LAPACK)
     {
     arma_debug_assert_blas_size(A);
     
-    blas_int n    = blas_int(A_n_rows);  // assuming A is square
-    blas_int lda  = blas_int(A_n_rows);
+    blas_int n    = blas_int(A.n_rows);  // assuming A is square
+    blas_int lda  = blas_int(A.n_rows);
     blas_int ldb  = blas_int(B_n_rows);
     blas_int nrhs = blas_int(B_n_cols);
     blas_int info = blas_int(0);
     
-    podarray<blas_int> ipiv(A_n_rows + 2);  // +2 for paranoia: some versions of Lapack might be trashing memory
+    podarray<blas_int> ipiv(A.n_rows + 2);  // +2 for paranoia: some versions of Lapack might be trashing memory
     
     arma_extra_debug_print("lapack::gesv()");
     lapack::gesv<eT>(&n, &nrhs, A.memptr(), &lda, ipiv.memptr(), out.memptr(), &ldb, &info);
@@ -4238,7 +3992,7 @@ auxlib::solve_square_fast(Mat<typename T1::elem_type>& out, Mat<typename T1::ele
     }
   #else
     {
-    arma_stop_logic_error("solve(): use of ATLAS or LAPACK must be enabled");
+    arma_stop_logic_error("solve(): use of LAPACK must be enabled");
     return false;
     }
   #endif
@@ -4250,7 +4004,7 @@ auxlib::solve_square_fast(Mat<typename T1::elem_type>& out, Mat<typename T1::ele
 template<typename T1>
 inline
 bool
-auxlib::solve_square_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_type& out_rcond, Mat<typename T1::elem_type>& A, const Base<typename T1::elem_type,T1>& B_expr, const bool allow_ugly)
+auxlib::solve_square_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_type& out_rcond, Mat<typename T1::elem_type>& A, const Base<typename T1::elem_type,T1>& B_expr)
   {
   arma_extra_debug_sigprint();
   
@@ -4265,14 +4019,10 @@ auxlib::solve_square_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_ty
     
     const uword B_n_rows = out.n_rows;
     const uword B_n_cols = out.n_cols;
-      
-    arma_debug_check( (A.n_rows != B_n_rows), "solve(): number of rows in the given matrices must be the same" );
-      
-    if(A.is_empty() || out.is_empty())
-      {
-      out.zeros(A.n_cols, B_n_cols);
-      return true;
-      }
+    
+    arma_debug_check( (A.n_rows != B_n_rows), "solve(): number of rows in given matrices must be the same", [&](){ out.soft_reset(); } );
+    
+    if(A.is_empty() || out.is_empty())  { out.zeros(A.n_cols, B_n_cols); return true; }
     
     arma_debug_assert_blas_size(A);
     
@@ -4303,8 +4053,6 @@ auxlib::solve_square_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_ty
     
     out_rcond = auxlib::lu_rcond<T>(A, norm_val);
     
-    if( (allow_ugly == false) && (out_rcond < auxlib::epsilon_lapack(A)) )  { return false; }
-    
     return true;
     }
   #else
@@ -4313,7 +4061,6 @@ auxlib::solve_square_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_ty
     arma_ignore(out_rcond);
     arma_ignore(A);
     arma_ignore(B_expr);
-    arma_ignore(allow_ugly);
     arma_stop_logic_error("solve(): use of LAPACK must be enabled");
     return false;
     }
@@ -4326,7 +4073,7 @@ auxlib::solve_square_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_ty
 template<typename T1>
 inline
 bool
-auxlib::solve_square_refine(Mat<typename T1::pod_type>& out, typename T1::pod_type& out_rcond, Mat<typename T1::pod_type>& A, const Base<typename T1::pod_type,T1>& B_expr, const bool equilibrate, const bool allow_ugly)
+auxlib::solve_square_refine(Mat<typename T1::pod_type>& out, typename T1::pod_type& out_rcond, Mat<typename T1::pod_type>& A, const Base<typename T1::pod_type,T1>& B_expr, const bool equilibrate)
   {
   arma_extra_debug_sigprint();
   
@@ -4346,13 +4093,9 @@ auxlib::solve_square_refine(Mat<typename T1::pod_type>& out, typename T1::pod_ty
     
     const Mat<eT>& B = (use_copy) ? B_tmp : UB_M_as_Mat;
     
-    arma_debug_check( (A.n_rows != B.n_rows), "solve(): number of rows in the given matrices must be the same" );
+    arma_debug_check( (A.n_rows != B.n_rows), "solve(): number of rows in given matrices must be the same" );
       
-    if(A.is_empty() || B.is_empty())
-      {
-      out.zeros(A.n_rows, B.n_cols);
-      return true;
-      }
+    if(A.is_empty() || B.is_empty())  { out.zeros(A.n_rows, B.n_cols); return true; }
     
     arma_debug_assert_blas_size(A,B);
     
@@ -4405,7 +4148,7 @@ auxlib::solve_square_refine(Mat<typename T1::pod_type>& out, typename T1::pod_ty
     
     out_rcond = rcond;
     
-    return (allow_ugly) ? ((info == 0) || (info == (n+1))) : (info == 0);
+    return ((info == 0) || (info == (n+1)));
     }
   #else
     {
@@ -4414,7 +4157,6 @@ auxlib::solve_square_refine(Mat<typename T1::pod_type>& out, typename T1::pod_ty
     arma_ignore(A);
     arma_ignore(B_expr);
     arma_ignore(equilibrate);
-    arma_ignore(allow_ugly);
     arma_stop_logic_error("solve(): use of LAPACK must be enabled");
     return false;
     }
@@ -4427,7 +4169,7 @@ auxlib::solve_square_refine(Mat<typename T1::pod_type>& out, typename T1::pod_ty
 template<typename T1>
 inline
 bool
-auxlib::solve_square_refine(Mat< std::complex<typename T1::pod_type> >& out, typename T1::pod_type& out_rcond, Mat< std::complex<typename T1::pod_type> >& A, const Base<std::complex<typename T1::pod_type>,T1>& B_expr, const bool equilibrate, const bool allow_ugly)
+auxlib::solve_square_refine(Mat< std::complex<typename T1::pod_type> >& out, typename T1::pod_type& out_rcond, Mat< std::complex<typename T1::pod_type> >& A, const Base<std::complex<typename T1::pod_type>,T1>& B_expr, const bool equilibrate)
   {
   arma_extra_debug_sigprint();
   
@@ -4448,13 +4190,9 @@ auxlib::solve_square_refine(Mat< std::complex<typename T1::pod_type> >& out, typ
     
     const Mat<eT>& B = (use_copy) ? B_tmp : UB_M_as_Mat;
     
-    arma_debug_check( (A.n_rows != B.n_rows), "solve(): number of rows in the given matrices must be the same" );
+    arma_debug_check( (A.n_rows != B.n_rows), "solve(): number of rows in given matrices must be the same" );
       
-    if(A.is_empty() || B.is_empty())
-      {
-      out.zeros(A.n_rows, B.n_cols);
-      return true;
-      }
+    if(A.is_empty() || B.is_empty())  { out.zeros(A.n_rows, B.n_cols); return true; }
     
     arma_debug_assert_blas_size(A,B);
     
@@ -4507,7 +4245,7 @@ auxlib::solve_square_refine(Mat< std::complex<typename T1::pod_type> >& out, typ
     
     out_rcond = rcond;
     
-    return (allow_ugly) ? ((info == 0) || (info == (n+1))) : (info == 0);
+    return ((info == 0) || (info == (n+1)));
     }
   #else
     {
@@ -4516,7 +4254,6 @@ auxlib::solve_square_refine(Mat< std::complex<typename T1::pod_type> >& out, typ
     arma_ignore(A);
     arma_ignore(B_expr);
     arma_ignore(equilibrate);
-    arma_ignore(allow_ugly);
     arma_stop_logic_error("solve(): use of LAPACK must be enabled");
     return false;
     }
@@ -4556,47 +4293,23 @@ auxlib::solve_sympd_fast_common(Mat<typename T1::elem_type>& out, Mat<typename T
   
   typedef typename T1::elem_type eT;
   
-  const uword A_n_rows = A.n_rows;
-  
-  if((A_n_rows <= 4) && is_cx<eT>::no)
-    {
-    const bool status = auxlib::solve_square_tiny(out, A, B_expr.get_ref());
-    
-    if(status)  { return true; }
-    }
-  
   out = B_expr.get_ref();
   
   const uword B_n_rows = out.n_rows;
   const uword B_n_cols = out.n_cols;
   
-  arma_debug_check( (A_n_rows != B_n_rows), "solve(): number of rows in the given matrices must be the same" );
+  arma_debug_check( (A.n_rows != B_n_rows), "solve(): number of rows in given matrices must be the same", [&](){ out.soft_reset(); } );
   
-  if(A.is_empty() || out.is_empty())
-    {
-    out.zeros(A.n_cols, B_n_cols);
-    return true;
-    }
+  if(A.is_empty() || out.is_empty())  { out.zeros(A.n_cols, B_n_cols); return true; }
   
-  #if defined(ARMA_USE_ATLAS)
-    {
-    arma_debug_assert_atlas_size(A, out);
-    
-    int info = 0;
-    
-    arma_extra_debug_print("atlas::clapack_posv()");
-    info = atlas::clapack_posv<eT>(atlas::CblasColMajor, atlas::CblasLower, A_n_rows, B_n_cols, A.memptr(), A_n_rows, out.memptr(), B_n_rows);
-    
-    return (info == 0);
-    }
-  #elif defined(ARMA_USE_LAPACK)
+  #if defined(ARMA_USE_LAPACK)
     {
     arma_debug_assert_blas_size(A, out);
     
     char     uplo = 'L';
-    blas_int n    = blas_int(A_n_rows);  // assuming A is square
+    blas_int n    = blas_int(A.n_rows);  // assuming A is square
     blas_int nrhs = blas_int(B_n_cols);
-    blas_int lda  = blas_int(A_n_rows);
+    blas_int lda  = blas_int(A.n_rows);
     blas_int ldb  = blas_int(B_n_rows);
     blas_int info = blas_int(0);
     
@@ -4610,7 +4323,7 @@ auxlib::solve_sympd_fast_common(Mat<typename T1::elem_type>& out, Mat<typename T
     arma_ignore(out);
     arma_ignore(A);
     arma_ignore(B_expr);
-    arma_stop_logic_error("solve(): use of ATLAS or LAPACK must be enabled");
+    arma_stop_logic_error("solve(): use of LAPACK must be enabled");
     return false;
     }
   #endif
@@ -4622,7 +4335,7 @@ auxlib::solve_sympd_fast_common(Mat<typename T1::elem_type>& out, Mat<typename T
 template<typename T1>
 inline
 bool
-auxlib::solve_sympd_rcond(Mat<typename T1::pod_type>& out, typename T1::pod_type& out_rcond, Mat<typename T1::pod_type>& A, const Base<typename T1::pod_type,T1>& B_expr, const bool allow_ugly)
+auxlib::solve_sympd_rcond(Mat<typename T1::pod_type>& out, bool& out_sympd_state, typename T1::pod_type& out_rcond, Mat<typename T1::pod_type>& A, const Base<typename T1::pod_type,T1>& B_expr)
   {
   arma_extra_debug_sigprint();
   
@@ -4631,20 +4344,17 @@ auxlib::solve_sympd_rcond(Mat<typename T1::pod_type>& out, typename T1::pod_type
     typedef typename T1::elem_type eT;
     typedef typename T1::pod_type   T;
     
-    out_rcond = T(0);
+    out_sympd_state = false;
+    out_rcond       = T(0);
     
     out = B_expr.get_ref();
     
     const uword B_n_rows = out.n_rows;
     const uword B_n_cols = out.n_cols;
     
-    arma_debug_check( (A.n_rows != B_n_rows), "solve(): number of rows in the given matrices must be the same" );
+    arma_debug_check( (A.n_rows != B_n_rows), "solve(): number of rows in given matrices must be the same", [&](){ out.soft_reset(); } );
     
-    if(A.is_empty() || out.is_empty())
-      {
-      out.zeros(A.n_cols, B_n_cols);
-      return true;
-      }
+    if(A.is_empty() || out.is_empty())  { out.zeros(A.n_cols, B_n_cols); return true; }
     
     arma_debug_assert_blas_size(A, out);
     
@@ -4665,6 +4375,8 @@ auxlib::solve_sympd_rcond(Mat<typename T1::pod_type>& out, typename T1::pod_type
     
     if(info != 0)  { return false; }
     
+    out_sympd_state = true;
+    
     arma_extra_debug_print("lapack::potrs()");
     lapack::potrs<eT>(&uplo, &n, &nrhs, A.memptr(), &n, out.memptr(), &n, &info);
     
@@ -4672,17 +4384,15 @@ auxlib::solve_sympd_rcond(Mat<typename T1::pod_type>& out, typename T1::pod_type
     
     out_rcond = auxlib::lu_rcond_sympd<T>(A, norm_val);
     
-    if( (allow_ugly == false) && (out_rcond < auxlib::epsilon_lapack(A)) )  { return false; }
-    
     return true;
     }
   #else
     {
     arma_ignore(out);
+    arma_ignore(out_sympd_state);
     arma_ignore(out_rcond);
     arma_ignore(A);
     arma_ignore(B_expr);
-    arma_ignore(allow_ugly);
     arma_stop_logic_error("solve(): use of LAPACK must be enabled");
     return false;
     }
@@ -4695,7 +4405,7 @@ auxlib::solve_sympd_rcond(Mat<typename T1::pod_type>& out, typename T1::pod_type
 template<typename T1>
 inline
 bool
-auxlib::solve_sympd_rcond(Mat< std::complex<typename T1::pod_type> >& out, typename T1::pod_type& out_rcond, Mat< std::complex<typename T1::pod_type> >& A, const Base< std::complex<typename T1::pod_type>,T1>& B_expr, const bool allow_ugly)
+auxlib::solve_sympd_rcond(Mat< std::complex<typename T1::pod_type> >& out, bool& out_sympd_state, typename T1::pod_type& out_rcond, Mat< std::complex<typename T1::pod_type> >& A, const Base< std::complex<typename T1::pod_type>,T1>& B_expr)
   {
   arma_extra_debug_sigprint();
   
@@ -4703,27 +4413,26 @@ auxlib::solve_sympd_rcond(Mat< std::complex<typename T1::pod_type> >& out, typen
     {
     arma_extra_debug_print("auxlib::solve_sympd_rcond(): redirecting to auxlib::solve_square_rcond() due to crippled LAPACK");
     
-    return auxlib::solve_square_rcond(out, out_rcond, A, B_expr, allow_ugly);
+    out_sympd_state = false;
+    
+    return auxlib::solve_square_rcond(out, out_rcond, A, B_expr);
     }
   #elif defined(ARMA_USE_LAPACK)
     {
     typedef typename T1::pod_type     T;
     typedef typename std::complex<T> eT;
     
-    out_rcond = T(0);
+    out_sympd_state = false;
+    out_rcond       = T(0);
     
     out = B_expr.get_ref();
     
     const uword B_n_rows = out.n_rows;
     const uword B_n_cols = out.n_cols;
     
-    arma_debug_check( (A.n_rows != B_n_rows), "solve(): number of rows in the given matrices must be the same" );
+    arma_debug_check( (A.n_rows != B_n_rows), "solve(): number of rows in given matrices must be the same", [&](){ out.soft_reset(); } );
     
-    if(A.is_empty() || out.is_empty())
-      {
-      out.zeros(A.n_cols, B_n_cols);
-      return true;
-      }
+    if(A.is_empty() || out.is_empty())  { out.zeros(A.n_cols, B_n_cols); return true; }
     
     arma_debug_assert_blas_size(A, out);
     
@@ -4744,6 +4453,8 @@ auxlib::solve_sympd_rcond(Mat< std::complex<typename T1::pod_type> >& out, typen
     
     if(info != 0)  { return false; }
     
+    out_sympd_state = true;
+    
     arma_extra_debug_print("lapack::potrs()");
     lapack::potrs<eT>(&uplo, &n, &nrhs, A.memptr(), &n, out.memptr(), &n, &info);
     
@@ -4751,17 +4462,15 @@ auxlib::solve_sympd_rcond(Mat< std::complex<typename T1::pod_type> >& out, typen
     
     out_rcond = auxlib::lu_rcond_sympd<T>(A, norm_val);
     
-    if( (allow_ugly == false) && (out_rcond < auxlib::epsilon_lapack(A)) )  { return false; }
-    
     return true;
     }
   #else
     {
     arma_ignore(out);
+    arma_ignore(out_sympd_state);
     arma_ignore(out_rcond);
     arma_ignore(A);
     arma_ignore(B_expr);
-    arma_ignore(allow_ugly);
     arma_stop_logic_error("solve(): use of LAPACK must be enabled");
     return false;
     }
@@ -4774,7 +4483,7 @@ auxlib::solve_sympd_rcond(Mat< std::complex<typename T1::pod_type> >& out, typen
 template<typename T1>
 inline
 bool
-auxlib::solve_sympd_refine(Mat<typename T1::pod_type>& out, typename T1::pod_type& out_rcond, Mat<typename T1::pod_type>& A, const Base<typename T1::pod_type,T1>& B_expr, const bool equilibrate, const bool allow_ugly)
+auxlib::solve_sympd_refine(Mat<typename T1::pod_type>& out, typename T1::pod_type& out_rcond, Mat<typename T1::pod_type>& A, const Base<typename T1::pod_type,T1>& B_expr, const bool equilibrate)
   {
   arma_extra_debug_sigprint();
   
@@ -4794,13 +4503,9 @@ auxlib::solve_sympd_refine(Mat<typename T1::pod_type>& out, typename T1::pod_typ
     
     const Mat<eT>& B = (use_copy) ? B_tmp : UB_M_as_Mat;
     
-    arma_debug_check( (A.n_rows != B.n_rows), "solve(): number of rows in the given matrices must be the same" );
+    arma_debug_check( (A.n_rows != B.n_rows), "solve(): number of rows in given matrices must be the same" );
     
-    if(A.is_empty() || B.is_empty())
-      {
-      out.zeros(A.n_rows, B.n_cols);
-      return true;
-      }
+    if(A.is_empty() || B.is_empty())  { out.zeros(A.n_rows, B.n_cols); return true; }
     
     arma_debug_assert_blas_size(A,B);
     
@@ -4832,9 +4537,10 @@ auxlib::solve_sympd_refine(Mat<typename T1::pod_type>& out, typename T1::pod_typ
     // NOTE: using const_cast<eT*>(B.memptr()) to allow B to be overwritten for equilibration;
     // NOTE: B is created as a copy of B_expr if equilibration is enabled; otherwise B is a reference to B_expr
     
+    // NOTE: lapack::posvx() sets rcond to zero if A is not sympd
     out_rcond = rcond;
     
-    return (allow_ugly) ? ((info == 0) || (info == (n+1))) : (info == 0);
+    return ((info == 0) || (info == (n+1)));
     }
   #else
     {
@@ -4843,7 +4549,6 @@ auxlib::solve_sympd_refine(Mat<typename T1::pod_type>& out, typename T1::pod_typ
     arma_ignore(A);
     arma_ignore(B_expr);
     arma_ignore(equilibrate);
-    arma_ignore(allow_ugly);
     arma_stop_logic_error("solve(): use of LAPACK must be enabled");
     return false;
     }
@@ -4856,7 +4561,7 @@ auxlib::solve_sympd_refine(Mat<typename T1::pod_type>& out, typename T1::pod_typ
 template<typename T1>
 inline
 bool
-auxlib::solve_sympd_refine(Mat< std::complex<typename T1::pod_type> >& out, typename T1::pod_type& out_rcond, Mat< std::complex<typename T1::pod_type> >& A, const Base<std::complex<typename T1::pod_type>,T1>& B_expr, const bool equilibrate, const bool allow_ugly)
+auxlib::solve_sympd_refine(Mat< std::complex<typename T1::pod_type> >& out, typename T1::pod_type& out_rcond, Mat< std::complex<typename T1::pod_type> >& A, const Base<std::complex<typename T1::pod_type>,T1>& B_expr, const bool equilibrate)
   {
   arma_extra_debug_sigprint();
   
@@ -4864,7 +4569,7 @@ auxlib::solve_sympd_refine(Mat< std::complex<typename T1::pod_type> >& out, type
     {
     arma_extra_debug_print("auxlib::solve_sympd_refine(): redirecting to auxlib::solve_square_refine() due to crippled LAPACK");
     
-    return auxlib::solve_square_refine(out, out_rcond, A, B_expr, equilibrate, allow_ugly);
+    return auxlib::solve_square_refine(out, out_rcond, A, B_expr, equilibrate);
     }
   #elif defined(ARMA_USE_LAPACK)
     {
@@ -4883,13 +4588,9 @@ auxlib::solve_sympd_refine(Mat< std::complex<typename T1::pod_type> >& out, type
     
     const Mat<eT>& B = (use_copy) ? B_tmp : UB_M_as_Mat;
     
-    arma_debug_check( (A.n_rows != B.n_rows), "solve(): number of rows in the given matrices must be the same" );
+    arma_debug_check( (A.n_rows != B.n_rows), "solve(): number of rows in given matrices must be the same" );
       
-    if(A.is_empty() || B.is_empty())
-      {
-      out.zeros(A.n_rows, B.n_cols);
-      return true;
-      }
+    if(A.is_empty() || B.is_empty())  { out.zeros(A.n_rows, B.n_cols); return true; }
     
     arma_debug_assert_blas_size(A,B);
     
@@ -4921,9 +4622,10 @@ auxlib::solve_sympd_refine(Mat< std::complex<typename T1::pod_type> >& out, type
     // NOTE: using const_cast<eT*>(B.memptr()) to allow B to be overwritten for equilibration;
     // NOTE: B is created as a copy of B_expr if equilibration is enabled; otherwise B is a reference to B_expr
     
+    // NOTE: lapack::cx_posvx() sets rcond to zero if A is not sympd
     out_rcond = rcond;
     
-    return (allow_ugly) ? ((info == 0) || (info == (n+1))) : (info == 0);
+    return ((info == 0) || (info == (n+1)));
     }
   #else
     {
@@ -4932,7 +4634,6 @@ auxlib::solve_sympd_refine(Mat< std::complex<typename T1::pod_type> >& out, type
     arma_ignore(A);
     arma_ignore(B_expr);
     arma_ignore(equilibrate);
-    arma_ignore(allow_ugly);
     arma_stop_logic_error("solve(): use of LAPACK must be enabled");
     return false;
     }
@@ -4956,13 +4657,9 @@ auxlib::solve_rect_fast(Mat<typename T1::elem_type>& out, Mat<typename T1::elem_
     const unwrap<T1>   U(B_expr.get_ref());
     const Mat<eT>& B = U.M;
     
-    arma_debug_check( (A.n_rows != B.n_rows), "solve(): number of rows in the given matrices must be the same" );
+    arma_debug_check( (A.n_rows != B.n_rows), "solve(): number of rows in given matrices must be the same" );
     
-    if(A.is_empty() || B.is_empty())
-      {
-      out.zeros(A.n_cols, B.n_cols);
-      return true;
-      }
+    if(A.is_empty() || B.is_empty())  { out.zeros(A.n_cols, B.n_cols); return true; }
     
     arma_debug_assert_blas_size(A,B);
     
@@ -4990,10 +4687,10 @@ auxlib::solve_rect_fast(Mat<typename T1::elem_type>& out, Mat<typename T1::elem_
     
     blas_int lwork_proposed = 0;
     
-    if((m*n) >= 1024)
+    if(A.n_elem >= ((is_cx<eT>::yes) ? uword(256) : uword(1024)))
       {
-      eT        work_query[2];
-      blas_int lwork_query = -1;
+      eT        work_query[2] = {};
+      blas_int lwork_query    = -1;
       
       arma_extra_debug_print("lapack::gels()");
       lapack::gels<eT>( &trans, &m, &n, &nrhs, A.memptr(), &lda, tmp.memptr(), &ldb, &work_query[0], &lwork_query, &info );
@@ -5040,7 +4737,7 @@ auxlib::solve_rect_fast(Mat<typename T1::elem_type>& out, Mat<typename T1::elem_
 template<typename T1>
 inline
 bool
-auxlib::solve_rect_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_type& out_rcond, Mat<typename T1::elem_type>& A, const Base<typename T1::elem_type,T1>& B_expr, const bool allow_ugly)
+auxlib::solve_rect_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_type& out_rcond, Mat<typename T1::elem_type>& A, const Base<typename T1::elem_type,T1>& B_expr)
   {
   arma_extra_debug_sigprint();
   
@@ -5054,13 +4751,9 @@ auxlib::solve_rect_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_type
     const unwrap<T1>   U(B_expr.get_ref());
     const Mat<eT>& B = U.M;
     
-    arma_debug_check( (A.n_rows != B.n_rows), "solve(): number of rows in the given matrices must be the same" );
+    arma_debug_check( (A.n_rows != B.n_rows), "solve(): number of rows in given matrices must be the same" );
     
-    if(A.is_empty() || B.is_empty())
-      {
-      out.zeros(A.n_cols, B.n_cols);
-      return true;
-      }
+    if(A.is_empty() || B.is_empty())  { out.zeros(A.n_cols, B.n_cols); return true; }
     
     arma_debug_assert_blas_size(A,B);
     
@@ -5088,10 +4781,10 @@ auxlib::solve_rect_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_type
     
     blas_int lwork_proposed = 0;
     
-    if((m*n) >= 1024)
+    if(A.n_elem >= ((is_cx<eT>::yes) ? uword(256) : uword(1024)))
       {
-      eT        work_query[2];
-      blas_int lwork_query = -1;
+      eT        work_query[2] = {};
+      blas_int lwork_query    = -1;
       
       arma_extra_debug_print("lapack::gels()");
       lapack::gels<eT>( &trans, &m, &n, &nrhs, A.memptr(), &lda, tmp.memptr(), &ldb, &work_query[0], &lwork_query, &info );
@@ -5129,8 +4822,6 @@ auxlib::solve_rect_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_type
       
       // determine quality of solution
       out_rcond = auxlib::rcond_trimat(R, 0);   // 0: upper triangular; 1: lower triangular
-      
-      if( (allow_ugly == false) && (out_rcond < auxlib::epsilon_lapack(A)) )  { return false; }
       }
     else
     if(A.n_rows < A.n_cols)
@@ -5152,8 +4843,6 @@ auxlib::solve_rect_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_type
       
       // determine quality of solution
       out_rcond = auxlib::rcond_trimat(L, 1);   // 0: upper triangular; 1: lower triangular
-      
-      if( (allow_ugly == false) && (out_rcond < auxlib::epsilon_lapack(A)) )  { return false; }
       }
     
     if(tmp.n_rows == A.n_cols)
@@ -5173,7 +4862,6 @@ auxlib::solve_rect_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_type
     arma_ignore(out_rcond);
     arma_ignore(A);
     arma_ignore(B_expr);
-    arma_ignore(allow_ugly);
     arma_stop_logic_error("solve(): use of LAPACK must be enabled");
     return false;
     }
@@ -5196,13 +4884,12 @@ auxlib::solve_approx_svd(Mat<typename T1::pod_type>& out, Mat<typename T1::pod_t
     const unwrap<T1>   U(B_expr.get_ref());
     const Mat<eT>& B = U.M;
     
-    arma_debug_check( (A.n_rows != B.n_rows), "solve(): number of rows in the given matrices must be the same" );
+    arma_debug_check( (A.n_rows != B.n_rows), "solve(): number of rows in given matrices must be the same" );
     
-    if(A.is_empty() || B.is_empty())
-      {
-      out.zeros(A.n_cols, B.n_cols);
-      return true;
-      }
+    if(A.is_empty() || B.is_empty())  { out.zeros(A.n_cols, B.n_cols); return true; }
+    
+    if(arma_config::check_nonfinite && A.internal_has_nonfinite())  { return false; }
+    if(arma_config::check_nonfinite && B.internal_has_nonfinite())  { return false; }
     
     arma_debug_assert_blas_size(A,B);
     
@@ -5224,7 +4911,8 @@ auxlib::solve_approx_svd(Mat<typename T1::pod_type>& out, Mat<typename T1::pod_t
     blas_int nrhs   = blas_int(B.n_cols);
     blas_int lda    = blas_int(A.n_rows);
     blas_int ldb    = blas_int(tmp.n_rows);
-    eT       rcond  = eT(-1);  // -1 means "use machine precision"
+  //eT       rcond  = eT(-1);  // -1 means "use machine precision"
+    eT       rcond  = (std::max)(A.n_rows, A.n_cols) * std::numeric_limits<eT>::epsilon();
     blas_int rank   = blas_int(0);
     blas_int info   = blas_int(0);
     
@@ -5251,15 +4939,15 @@ auxlib::solve_approx_svd(Mat<typename T1::pod_type>& out, Mat<typename T1::pod_t
     blas_int smlsiz    = (std::max)( blas_int(25), laenv_result );
     blas_int smlsiz_p1 = blas_int(1) + smlsiz;
     
-    blas_int nlvl   = (std::max)( blas_int(0), blas_int(1) + blas_int( std::log(double(min_mn) / double(smlsiz_p1))/double(0.69314718055994530942) ) );
+    blas_int nlvl   = (std::max)( blas_int(0), blas_int(1) + blas_int( std::log2( double(min_mn)/double(smlsiz_p1) ) ) );
     blas_int liwork = (std::max)( blas_int(1), (blas_int(3)*min_mn*nlvl + blas_int(11)*min_mn) );
     
     podarray<blas_int> iwork( static_cast<uword>(liwork) );
     
     blas_int lwork_min = blas_int(12)*min_mn + blas_int(2)*min_mn*smlsiz + blas_int(8)*min_mn*nlvl + min_mn*nrhs + smlsiz_p1*smlsiz_p1;
     
-    eT        work_query[2];
-    blas_int lwork_query = blas_int(-1);
+    eT        work_query[2] = {};
+    blas_int lwork_query    = blas_int(-1);
     
     arma_extra_debug_print("lapack::gelsd()");
     lapack::gelsd(&m, &n, &nrhs, A.memptr(), &lda, tmp.memptr(), &ldb, S.memptr(), &rcond, &rank, &work_query[0], &lwork_query, iwork.memptr(), &info);
@@ -5317,13 +5005,12 @@ auxlib::solve_approx_svd(Mat< std::complex<typename T1::pod_type> >& out, Mat< s
     const unwrap<T1>   U(B_expr.get_ref());
     const Mat<eT>& B = U.M;
     
-    arma_debug_check( (A.n_rows != B.n_rows), "solve(): number of rows in the given matrices must be the same" );
+    arma_debug_check( (A.n_rows != B.n_rows), "solve(): number of rows in given matrices must be the same" );
     
-    if(A.is_empty() || B.is_empty())
-      {
-      out.zeros(A.n_cols, B.n_cols);
-      return true;
-      }
+    if(A.is_empty() || B.is_empty())  { out.zeros(A.n_cols, B.n_cols); return true; }
+    
+    if(arma_config::check_nonfinite && A.internal_has_nonfinite())  { return false; }
+    if(arma_config::check_nonfinite && B.internal_has_nonfinite())  { return false; }
     
     arma_debug_assert_blas_size(A,B);
     
@@ -5345,7 +5032,8 @@ auxlib::solve_approx_svd(Mat< std::complex<typename T1::pod_type> >& out, Mat< s
     blas_int nrhs   = blas_int(B.n_cols);
     blas_int lda    = blas_int(A.n_rows);
     blas_int ldb    = blas_int(tmp.n_rows);
-    T        rcond  = T(-1);  // -1 means "use machine precision"
+  //T        rcond  = T(-1);  // -1 means "use machine precision"
+    T        rcond  = (std::max)(A.n_rows, A.n_cols) * std::numeric_limits<T>::epsilon();
     blas_int rank   = blas_int(0);
     blas_int info   = blas_int(0);
     
@@ -5369,7 +5057,7 @@ auxlib::solve_approx_svd(Mat< std::complex<typename T1::pod_type> >& out, Mat< s
     blas_int smlsiz    = (std::max)( blas_int(25), laenv_result );
     blas_int smlsiz_p1 = blas_int(1) + smlsiz;
     
-    blas_int nlvl = (std::max)( blas_int(0), blas_int(1) + blas_int( std::log(double(min_mn) / double(smlsiz_p1))/double(0.69314718055994530942) ) );
+    blas_int nlvl = (std::max)( blas_int(0), blas_int(1) + blas_int( std::log2( double(min_mn)/double(smlsiz_p1) ) ) );
     
     blas_int lrwork = (m >= n)
       ? blas_int(10)*n + blas_int(2)*n*smlsiz + blas_int(8)*n*nlvl + blas_int(3)*smlsiz*nrhs + (std::max)( (smlsiz_p1)*(smlsiz_p1), n*(blas_int(1)+nrhs) + blas_int(2)*nrhs )
@@ -5382,8 +5070,8 @@ auxlib::solve_approx_svd(Mat< std::complex<typename T1::pod_type> >& out, Mat< s
     
     blas_int lwork_min = 2*min_mn + min_mn*nrhs;
     
-    eT        work_query[2];
-    blas_int lwork_query = blas_int(-1);
+    eT        work_query[2] = {};
+    blas_int lwork_query    = blas_int(-1);
     
     arma_extra_debug_print("lapack::cx_gelsd()");
     lapack::cx_gelsd(&m, &n, &nrhs, A.memptr(), &lda, tmp.memptr(), &ldb, S.memptr(), &rcond, &rank, &work_query[0], &lwork_query, rwork.memptr(), iwork.memptr(), &info);
@@ -5438,13 +5126,9 @@ auxlib::solve_trimat_fast(Mat<typename T1::elem_type>& out, const Mat<typename T
     const uword B_n_rows = out.n_rows;
     const uword B_n_cols = out.n_cols;
     
-    arma_debug_check( (A.n_rows != B_n_rows), "solve(): number of rows in the given matrices must be the same" );
+    arma_debug_check( (A.n_rows != B_n_rows), "solve(): number of rows in given matrices must be the same", [&](){ out.soft_reset(); } );
     
-    if(A.is_empty() || out.is_empty())
-      {
-      out.zeros(A.n_cols, B_n_cols);
-      return true;
-      }
+    if(A.is_empty() || out.is_empty())  { out.zeros(A.n_cols, B_n_cols); return true; }
     
     arma_debug_assert_blas_size(A,out);
     
@@ -5477,7 +5161,7 @@ auxlib::solve_trimat_fast(Mat<typename T1::elem_type>& out, const Mat<typename T
 template<typename T1>
 inline
 bool
-auxlib::solve_trimat_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_type& out_rcond, const Mat<typename T1::elem_type>& A, const Base<typename T1::elem_type,T1>& B_expr, const uword layout, const bool allow_ugly)
+auxlib::solve_trimat_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_type& out_rcond, const Mat<typename T1::elem_type>& A, const Base<typename T1::elem_type,T1>& B_expr, const uword layout)
   {
   arma_extra_debug_sigprint();
   
@@ -5492,13 +5176,9 @@ auxlib::solve_trimat_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_ty
     const uword B_n_rows = out.n_rows;
     const uword B_n_cols = out.n_cols;
     
-    arma_debug_check( (A.n_rows != B_n_rows), "solve(): number of rows in the given matrices must be the same" );
+    arma_debug_check( (A.n_rows != B_n_rows), "solve(): number of rows in given matrices must be the same", [&](){ out.soft_reset(); } );
     
-    if(A.is_empty() || out.is_empty())
-      {
-      out.zeros(A.n_cols, B_n_cols);
-      return true;
-      }
+    if(A.is_empty() || out.is_empty())  { out.zeros(A.n_cols, B_n_cols); return true; }
     
     arma_debug_assert_blas_size(A,out);
     
@@ -5517,8 +5197,6 @@ auxlib::solve_trimat_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_ty
     // determine quality of solution
     out_rcond = auxlib::rcond_trimat(A, layout);
     
-    if( (allow_ugly == false) && (out_rcond < auxlib::epsilon_lapack(A)) )  { return false; }
-    
     return true;
     }
   #else
@@ -5528,7 +5206,6 @@ auxlib::solve_trimat_rcond(Mat<typename T1::elem_type>& out, typename T1::pod_ty
     arma_ignore(A);
     arma_ignore(B_expr);
     arma_ignore(layout);
-    arma_ignore(allow_ugly);
     arma_stop_logic_error("solve(): use of LAPACK must be enabled");
     return false;
     }
@@ -5593,13 +5270,9 @@ auxlib::solve_band_fast_common(Mat<typename T1::elem_type>& out, const Mat<typen
     const uword B_n_rows = out.n_rows;
     const uword B_n_cols = out.n_cols;
     
-    arma_debug_check( (A.n_rows != B_n_rows), "solve(): number of rows in the given matrices must be the same" );
+    arma_debug_check( (A.n_rows != B_n_rows), "solve(): number of rows in given matrices must be the same", [&](){ out.soft_reset(); } );
     
-    if(A.is_empty() || out.is_empty())
-      {
-      out.zeros(A.n_rows, B_n_cols);
-      return true;
-      }
+    if(A.is_empty() || out.is_empty())  { out.zeros(A.n_rows, B_n_cols); return true; }
     
     // for gbsv, matrix AB size: 2*KL+KU+1 x N; band representation of A stored in rows KL+1 to 2*KL+KU+1  (note: fortran counts from 1)
     
@@ -5646,11 +5319,11 @@ auxlib::solve_band_fast_common(Mat<typename T1::elem_type>& out, const Mat<typen
 template<typename T1>
 inline
 bool
-auxlib::solve_band_rcond(Mat<typename T1::pod_type>& out, typename T1::pod_type& out_rcond, Mat<typename T1::pod_type>& A, const uword KL, const uword KU, const Base<typename T1::pod_type,T1>& B_expr, const bool allow_ugly)
+auxlib::solve_band_rcond(Mat<typename T1::pod_type>& out, typename T1::pod_type& out_rcond, Mat<typename T1::pod_type>& A, const uword KL, const uword KU, const Base<typename T1::pod_type,T1>& B_expr)
   {
   arma_extra_debug_sigprint();
   
-  return auxlib::solve_band_rcond_common(out, out_rcond, A, KL, KU, B_expr, allow_ugly);
+  return auxlib::solve_band_rcond_common(out, out_rcond, A, KL, KU, B_expr);
   }
 
 
@@ -5659,7 +5332,7 @@ auxlib::solve_band_rcond(Mat<typename T1::pod_type>& out, typename T1::pod_type&
 template<typename T1>
 inline
 bool
-auxlib::solve_band_rcond(Mat< std::complex<typename T1::pod_type> >& out, typename T1::pod_type& out_rcond, Mat< std::complex<typename T1::pod_type> >& A, const uword KL, const uword KU, const Base< std::complex<typename T1::pod_type>,T1>& B_expr, const bool allow_ugly)
+auxlib::solve_band_rcond(Mat< std::complex<typename T1::pod_type> >& out, typename T1::pod_type& out_rcond, Mat< std::complex<typename T1::pod_type> >& A, const uword KL, const uword KU, const Base< std::complex<typename T1::pod_type>,T1>& B_expr)
   {
   arma_extra_debug_sigprint();
   
@@ -5670,11 +5343,11 @@ auxlib::solve_band_rcond(Mat< std::complex<typename T1::pod_type> >& out, typena
     arma_ignore(KL);
     arma_ignore(KU);
     
-    return auxlib::solve_square_rcond(out, out_rcond, A, B_expr, allow_ugly);
+    return auxlib::solve_square_rcond(out, out_rcond, A, B_expr);
     }
   #else
     {
-    return auxlib::solve_band_rcond_common(out, out_rcond, A, KL, KU, B_expr, allow_ugly);
+    return auxlib::solve_band_rcond_common(out, out_rcond, A, KL, KU, B_expr);
     }
   #endif
   }
@@ -5685,7 +5358,7 @@ auxlib::solve_band_rcond(Mat< std::complex<typename T1::pod_type> >& out, typena
 template<typename T1>
 inline
 bool
-auxlib::solve_band_rcond_common(Mat<typename T1::elem_type>& out, typename T1::pod_type& out_rcond, const Mat<typename T1::elem_type>& A, const uword KL, const uword KU, const Base<typename T1::elem_type,T1>& B_expr, const bool allow_ugly)
+auxlib::solve_band_rcond_common(Mat<typename T1::elem_type>& out, typename T1::pod_type& out_rcond, const Mat<typename T1::elem_type>& A, const uword KL, const uword KU, const Base<typename T1::elem_type,T1>& B_expr)
   {
   arma_extra_debug_sigprint();
   
@@ -5701,13 +5374,9 @@ auxlib::solve_band_rcond_common(Mat<typename T1::elem_type>& out, typename T1::p
     const uword B_n_rows = out.n_rows;
     const uword B_n_cols = out.n_cols;
     
-    arma_debug_check( (A.n_rows != B_n_rows), "solve(): number of rows in the given matrices must be the same" );
+    arma_debug_check( (A.n_rows != B_n_rows), "solve(): number of rows in given matrices must be the same", [&](){ out.soft_reset(); } );
     
-    if(A.is_empty() || out.is_empty())
-      {
-      out.zeros(A.n_rows, B_n_cols);
-      return true;
-      }
+    if(A.is_empty() || out.is_empty())  { out.zeros(A.n_rows, B_n_cols); return true; }
     
     // for gbtrf, matrix AB size: 2*KL+KU+1 x N; band representation of A stored in rows KL+1 to 2*KL+KU+1  (note: fortran counts from 1)
     
@@ -5747,8 +5416,6 @@ auxlib::solve_band_rcond_common(Mat<typename T1::elem_type>& out, typename T1::p
     
     out_rcond = auxlib::lu_rcond_band<T>(AB, KL, KU, ipiv, norm_val);
     
-    if( (allow_ugly == false) && (out_rcond < auxlib::epsilon_lapack(AB)) )  { return false; }
-    
     return true;
     }
   #else
@@ -5759,7 +5426,6 @@ auxlib::solve_band_rcond_common(Mat<typename T1::elem_type>& out, typename T1::p
     arma_ignore(KL);
     arma_ignore(KU);
     arma_ignore(B_expr);
-    arma_ignore(allow_ugly);
     arma_stop_logic_error("solve(): use of LAPACK must be enabled");
     return false;
     }
@@ -5772,7 +5438,7 @@ auxlib::solve_band_rcond_common(Mat<typename T1::elem_type>& out, typename T1::p
 template<typename T1>
 inline
 bool
-auxlib::solve_band_refine(Mat<typename T1::pod_type>& out, typename T1::pod_type& out_rcond, Mat<typename T1::pod_type>& A, const uword KL, const uword KU, const Base<typename T1::pod_type,T1>& B_expr, const bool equilibrate, const bool allow_ugly)
+auxlib::solve_band_refine(Mat<typename T1::pod_type>& out, typename T1::pod_type& out_rcond, Mat<typename T1::pod_type>& A, const uword KL, const uword KU, const Base<typename T1::pod_type,T1>& B_expr, const bool equilibrate)
   {
   arma_extra_debug_sigprint();
   
@@ -5782,13 +5448,9 @@ auxlib::solve_band_refine(Mat<typename T1::pod_type>& out, typename T1::pod_type
     
     Mat<eT> B = B_expr.get_ref();  // B is overwritten
     
-    arma_debug_check( (A.n_rows != B.n_rows), "solve(): number of rows in the given matrices must be the same" );
+    arma_debug_check( (A.n_rows != B.n_rows), "solve(): number of rows in given matrices must be the same" );
       
-    if(A.is_empty() || B.is_empty())
-      {
-      out.zeros(A.n_rows, B.n_cols);
-      return true;
-      }
+    if(A.is_empty() || B.is_empty())  { out.zeros(A.n_rows, B.n_cols); return true; }
     
     // for gbsvx, matrix AB size: KL+KU+1 x N; band representation of A stored in rows 1 to KL+KU+1  (note: fortran counts from 1)
     
@@ -5847,7 +5509,7 @@ auxlib::solve_band_refine(Mat<typename T1::pod_type>& out, typename T1::pod_type
     
     out_rcond = rcond;
     
-    return (allow_ugly) ? ((info == 0) || (info == (n+1))) : (info == 0);
+    return ((info == 0) || (info == (n+1)));
     }
   #else
     {
@@ -5858,7 +5520,6 @@ auxlib::solve_band_refine(Mat<typename T1::pod_type>& out, typename T1::pod_type
     arma_ignore(KU);
     arma_ignore(B_expr);
     arma_ignore(equilibrate);
-    arma_ignore(allow_ugly);
     arma_stop_logic_error("solve(): use of LAPACK must be enabled");
     return false;
     }
@@ -5871,7 +5532,7 @@ auxlib::solve_band_refine(Mat<typename T1::pod_type>& out, typename T1::pod_type
 template<typename T1>
 inline
 bool
-auxlib::solve_band_refine(Mat< std::complex<typename T1::pod_type> >& out, typename T1::pod_type& out_rcond, Mat< std::complex<typename T1::pod_type> >& A, const uword KL, const uword KU, const Base<std::complex<typename T1::pod_type>,T1>& B_expr, const bool equilibrate, const bool allow_ugly)
+auxlib::solve_band_refine(Mat< std::complex<typename T1::pod_type> >& out, typename T1::pod_type& out_rcond, Mat< std::complex<typename T1::pod_type> >& A, const uword KL, const uword KU, const Base<std::complex<typename T1::pod_type>,T1>& B_expr, const bool equilibrate)
   {
   arma_extra_debug_sigprint();
   
@@ -5882,7 +5543,7 @@ auxlib::solve_band_refine(Mat< std::complex<typename T1::pod_type> >& out, typen
     arma_ignore(KL);
     arma_ignore(KU);
     
-    return auxlib::solve_square_refine(out, out_rcond, A, B_expr, equilibrate, allow_ugly);
+    return auxlib::solve_square_refine(out, out_rcond, A, B_expr, equilibrate);
     }
   #elif defined(ARMA_USE_LAPACK)
     {
@@ -5891,13 +5552,9 @@ auxlib::solve_band_refine(Mat< std::complex<typename T1::pod_type> >& out, typen
     
     Mat<eT> B = B_expr.get_ref();  // B is overwritten
     
-    arma_debug_check( (A.n_rows != B.n_rows), "solve(): number of rows in the given matrices must be the same" );
+    arma_debug_check( (A.n_rows != B.n_rows), "solve(): number of rows in given matrices must be the same" );
       
-    if(A.is_empty() || B.is_empty())
-      {
-      out.zeros(A.n_rows, B.n_cols);
-      return true;
-      }
+    if(A.is_empty() || B.is_empty())  { out.zeros(A.n_rows, B.n_cols); return true; }
     
     // for gbsvx, matrix AB size: KL+KU+1 x N; band representation of A stored in rows 1 to KL+KU+1  (note: fortran counts from 1)
     
@@ -5956,7 +5613,7 @@ auxlib::solve_band_refine(Mat< std::complex<typename T1::pod_type> >& out, typen
     
     out_rcond = rcond;
     
-    return (allow_ugly) ? ((info == 0) || (info == (n+1))) : (info == 0);
+    return ((info == 0) || (info == (n+1)));
     }
   #else
     {
@@ -5967,7 +5624,6 @@ auxlib::solve_band_refine(Mat< std::complex<typename T1::pod_type> >& out, typen
     arma_ignore(KU);
     arma_ignore(B_expr);
     arma_ignore(equilibrate);
-    arma_ignore(allow_ugly);
     arma_stop_logic_error("solve(): use of LAPACK must be enabled");
     return false;
     }
@@ -6029,13 +5685,9 @@ auxlib::solve_tridiag_fast_common(Mat<typename T1::elem_type>& out, const Mat<ty
     const uword B_n_rows = out.n_rows;
     const uword B_n_cols = out.n_cols;
     
-    arma_debug_check( (A.n_rows != B_n_rows), "solve(): number of rows in the given matrices must be the same" );
+    arma_debug_check( (A.n_rows != B_n_rows), "solve(): number of rows in given matrices must be the same", [&](){ out.soft_reset(); } );
     
-    if(A.is_empty() || out.is_empty())
-      {
-      out.zeros(A.n_rows, B_n_cols);
-      return true;
-      }
+    if(A.is_empty() || out.is_empty())  { out.zeros(A.n_rows, B_n_cols); return true; }
     
     Mat<eT> tridiag;
     band_helper::extract_tridiag(tridiag, A);
@@ -6081,12 +5733,7 @@ auxlib::schur(Mat<eT>& U, Mat<eT>& S, const Base<eT,T1>& X, const bool calc_U)
     
     arma_debug_check( (S.is_square() == false), "schur(): given matrix must be square sized" );
     
-    if(S.is_empty())
-      {
-      U.reset();
-      S.reset();
-      return true;
-      }
+    if(S.is_empty())  { U.reset(); S.reset(); return true; }
     
     arma_debug_assert_blas_size(S);
     
@@ -6155,12 +5802,7 @@ auxlib::schur(Mat< std::complex<T> >& U, Mat< std::complex<T> >& S, const bool c
     {
     typedef std::complex<T> eT;
     
-    if(S.is_empty())
-      {
-      U.reset();
-      S.reset();
-      return true;
-      }
+    if(S.is_empty())  { U.reset(); S.reset(); return true; }
     
     arma_debug_assert_blas_size(S);
     
@@ -6277,18 +5919,14 @@ auxlib::qz(Mat<T>& A, Mat<T>& B, Mat<T>& vsl, Mat<T>& vsr, const Base<T,T1>& X_e
     A = X_expr.get_ref();
     B = Y_expr.get_ref();
     
-    arma_debug_check( ((A.is_square() == false) || (B.is_square() == false)), "qz(): given matrices must be square sized" );
+    arma_debug_check( ((A.is_square() == false) || (B.is_square() == false)), "qz(): given matrices must be square sized", [&](){ A.soft_reset(); B.soft_reset(); } );
     
     arma_debug_check( (A.n_rows != B.n_rows), "qz(): given matrices must have the same size" );
     
-    if(A.is_empty())
-      {
-        A.reset();
-        B.reset();
-      vsl.reset();
-      vsr.reset();
-      return true;
-      }
+    if(A.is_empty())  { A.reset();  B.reset();  vsl.reset(); vsr.reset(); return true; }
+    
+    if(arma_config::check_nonfinite && A.internal_has_nonfinite())  { return false; }
+    if(arma_config::check_nonfinite && B.internal_has_nonfinite())  { return false; }
     
     arma_debug_assert_blas_size(A);
     
@@ -6368,18 +6006,14 @@ auxlib::qz(Mat< std::complex<T> >& A, Mat< std::complex<T> >& B, Mat< std::compl
     A = X_expr.get_ref();
     B = Y_expr.get_ref();
     
-    arma_debug_check( ((A.is_square() == false) || (B.is_square() == false)), "qz(): given matrices must be square sized" );
+    arma_debug_check( ((A.is_square() == false) || (B.is_square() == false)), "qz(): given matrices must be square sized", [&](){ A.soft_reset(); B.soft_reset(); } );
     
     arma_debug_check( (A.n_rows != B.n_rows), "qz(): given matrices must have the same size" );
     
-    if(A.is_empty())
-      {
-        A.reset();
-        B.reset();
-      vsl.reset();
-      vsr.reset();
-      return true;
-      }
+    if(A.is_empty())  { A.reset(); B.reset(); vsl.reset(); vsr.reset(); return true; }
+    
+    if(arma_config::check_nonfinite && A.internal_has_nonfinite())  { return false; }
+    if(arma_config::check_nonfinite && B.internal_has_nonfinite())  { return false; }
     
     arma_debug_assert_blas_size(A);
     
@@ -6982,58 +6616,6 @@ auxlib::crippled_lapack(const Base<typename T1::elem_type, T1>&)
     return false;
     }
   #endif
-  }
-
-
-
-template<typename T1>
-inline
-typename T1::pod_type
-auxlib::epsilon_lapack(const Base<typename T1::elem_type, T1>&)
-  {
-  typedef typename T1::pod_type T;
-  
-  return T(0.5)*std::numeric_limits<T>::epsilon();
-  
-  // value reverse engineered from dgesvx.f and dlamch.f
-  // http://www.netlib.org/lapack/explore-html/da/d21/dgesvx_8f.html
-  // http://www.netlib.org/lapack/explore-html/d5/dd4/dlamch_8f.html
-  //
-  // Fortran epsilon(X) function:
-  // https://gcc.gnu.org/onlinedocs/gfortran/EPSILON.html
-  // "EPSILON(X) returns the smallest number E of the same kind as X such that 1 + E > 1"
-  // 
-  // C++ std::numeric_limits<T>::epsilon() function:
-  // https://en.cppreference.com/w/cpp/types/numeric_limits/epsilon
-  // "the difference between 1.0 and the next value representable by the floating-point type T"
-  // 
-  // extract from dgesvx.f:
-  // 
-  //   IF( rcond.LT.dlamch( 'Epsilon' ) )
-  //     info = n + 1
-  //   RETURN
-  // 
-  // extract from dlamch.f:
-  //   
-  //   * rnd = 1.0 when rounding occurs in addition, 0.0 otherwise
-  //   ...
-  //   *  Assume rounding, not chopping. Always
-  //   
-  //   rnd = one
-  //   
-  //   IF( one.EQ.rnd ) THEN
-  //     eps = epsilon(zero) * 0.5
-  //   ELSE
-  //     eps = epsilon(zero)
-  //   END IF
-  //   ...
-  //   IF( lsame( cmach, 'E' ) ) THEN
-  //     rmach = eps
-  //   ...
-  //   END IF
-  //   ...
-  //   dlamch = rmach
-  //   RETURN
   }
 
 

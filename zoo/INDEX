@@ -1,5 +1,3 @@
-MATCH                   Value Matching
-ORDER                   Ordering Permutation
 aggregate.zoo           Compute Summary Statistics of zoo Objects
 as.zoo                  Coercion from and to zoo
 coredata                Extracting/Replacing the Core Data of Objects
@@ -10,13 +8,15 @@ index                   Extracting/Replacing the Index of Objects
 is.regular              Check Regularity of a Series
 lag.zoo                 Lags and Differences of zoo Objects
 make.par.list           Make a List from a Parameter Specification
+MATCH                   Value Matching
 merge.zoo               Merge Two or More zoo Objects
-na.StructTS             Fill NA or specified positions.
 na.aggregate            Replace NA by Aggregation
 na.approx               Replace NA by Interpolation
 na.fill                 Fill NA or specified positions.
 na.locf                 Last Observation Carried Forward
+na.StructTS             Fill NA or specified positions.
 na.trim                 Trim Leading/Trailing Missing Observations
+ORDER                   Ordering Permutation
 plot.zoo                Plotting zoo Objects
 read.zoo                Reading and Writing zoo Series
 rollapply               Apply Rolling Functions

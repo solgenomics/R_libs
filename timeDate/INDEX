@@ -1,62 +1,63 @@
-.endpoints              Endpoints Indexes
+.endpoints              Endpoints indexes
+align                   Align a 'timeDate' object to regular date/time
+                        stamps
+as.timeDate             Coercion from/to 'timeDate'
+blockStart              Equally sized 'timeDate' blocks
+c                       Concatenating 'timeDate' objects
+currentYear             Current year
 DaylightSavingTime      Daylight Saving Time Rules
+dayOfWeek               Day of the week
+dayOfYear               Day of the year
+diff                    Lagged 'timeDate' differences
+difftimeDate            Difference of two 'timeDate' objects
 Easter                  Date of Easter
-Sys.timeDate            System Time as 'timeDate' Object
-align                   Making a 'timeDate' object unique
-as.timeDate             Any to 'timeDate' Coercion
-blockStart              Equally sized 'timeDate' Blocks
-c                       Concatenating 'timeDate' Objects
-currentYear             Current Year
-dayOfWeek               Day of the Week
-dayOfYear               Day of the Year
-diff                    Lagged 'timeDate' Differences
-difftimeDate            Difference of two 'timeDate' Objects
 finCenter               Financial Center of a timeDate object
-firstDay                First and Last Days
-format                  Format Methods
-holiday                 Holiday Dates
-holidayDate             Public and Ecclesiastical Holidays
+firstDay                First and last days
+format                  Format methods
+holiday                 Holiday dates
+holidayDate             Public and ecclesiastical holidays
 holidayLONDON           London Bank Holidays
-holidayNERC             NERC Holiday Calendar
-holidayNYSE             NYSE Holiday Calendar
-holidayTSX              TSX Holiday Calendar
-holidayZURICH           Zurich Holiday Calendar
-is.na-methods           is.na Methods
-isBizday                Business and Holidays
+holidayNERC             NERC holiday calendar
+holidayNYSE             NYSE holiday calendar
+holidayTSX              TSX holiday calendar
+holidayZURICH           Zurich holiday calendar
+is.na-methods           Methods for 'is.na'
+isBizday                Check if dates are business or holidays
 isRegular               Checks if a date/time vector is regular
-isWeekday               Weekdays and Weekends
+isWeekday               Weekdays and weekends
 julian,timeDate-method
-                        Julian Counts and Calendar Atoms
+                        Julian counts and calendar atoms
 kurtosis                Kurtosis
-length                  Length of a 'timeDate' Object
-listFinCenter           List of Financial Centers
-listHolidays            List of Holidayss
-midnightStandard        Midnight Standard
-myFinCenter             myFinCenter Variable
-myUnits                 Frequency of date/time Units
-nDay                    n-th n-day Dates
-names-methods           The Names of a timeDate Object
-onOrAfter               OnOrAfter/Before Dates
+length                  Length of a 'timeDate' object
+listFinCenter           List of financial centers
+listHolidays            List of holidays
+midnightStandard        Midnight standard
+myFinCenter             myFinCenter variable
+myUnits                 Frequency of date/time units
+names-methods           The names of a 'timeDate' object
+nDay                    n-th n-day dates
+onOrAfter               On-or-after/before dates
 periods                 Rolling periods
-plot,timeDate-method    Plot Methods
-rep                     Replicating 'timeDate' Objects
-rev                     Reverting 'timeDate' Objects
-round                   Rounding and Truncating 'timeDate' Objects
-rulesFinCenter          Financial Centers DST Rules
-sample                  Resampling 'timeDate' Objects
-setRmetricsOptions      Rmetrics Option Settings
-show-methods            Show Methods
+plot,timeDate-method    Plot methods
+rep                     Replicating 'timeDate' objects
+rev                     Reverse 'timeDate' objects
+round                   Rounding and truncating 'timeDate' objects
+rulesFinCenter          Financial centers DST rules
+sample                  Resampling 'timeDate' objects
+setRmetricsOptions      Rmetrics option settings
+show-methods            Show methods
 skewness                Skewness
-sort                    Sorting 'timeDate' Objects
-start                   Terminal Times and Range
-subset                  Subsetting a 'timeDate' Object
-summary.timeDate        Summary Method
-timeCalendar            'timeDate' from Calendar Atoms
-timeDate                'timeDate' Objects from Scratch
+sort                    Sorting 'timeDate' objects
+start                   Terminal times and range
+subset                  Subsetting a 'timeDate' object
+summary.timeDate        Summary method
+Sys.timeDate            System time as 'timeDate' object
+timeCalendar            'timeDate' from calendar atoms
+timeDate                Create 'timeDate' objects from scratch
 timeDate-class          Class "timeDate"
-timeDate-package        Utilities and Tools Package
-timeDateMathOps         timeDate Mathematical Operations
+timeDate-package        Utilities and tools package
+timeDateMathOps         Mathematical operations with 'timeDate' objects
 timeSequence            Regularly spaced 'timeDate' objects
-unique                  Making a 'timeDate' object unique
-whichFormat             Format Recognation
-window                  Time Windows
+unique                  Remove duplicated dates from 'timeDate' objects
+whichFormat             Format recognation
+window                  Time windows

@@ -2,18 +2,98 @@
 
 # {{i+1}}. Analysis for trait `r traits[i]`
 
-```{r echo = FALSE, results = 'hide'}
+```{r results = 'hide'}
 y <- dfr[, traits[i]]
 
 if (is.null(sspf)) {
-  model <- agricolae::sp.plot(rep, mpf, spf, y)
+  model <- agricolae::sp.plot(dfr[, rep], dfr[, mpf], dfr[, spf], y)
 } else {
-  model <- agricolae::ssp.plot(rep, mpf, spf, sspf, y)
+  model <- agricolae::ssp.plot(dfr[, rep], dfr[, mpf], dfr[, spf], dfr[, sspf], y)
 }
 ```
 
 ## {{i+1}}.1. ANOVA
 
-```{r echo = FALSE}
-model$ANOVA
+```{r}
+at <- model$ANOVA
+rownames(at) <- c(rep, mpf, 'Ea', spf, paste(mpf, spf, sep = ':'), 'Eb')
+at
+```
+
+`r if (is.null(sspf) & (at[2, 5] < 0.05 | at[5, 5] < 0.05)) {paste0("## ", {{i+1}}, ".2. LSD test for ", mpf)}`
+
+```{r}
+if (is.null(sspf) & at[2, 5] < 0.05 & (at[5, 5] > 0.05 | pe)) {
+  y <- dfr[, traits[i]]
+  agricolae::LSD.test(y, dfr[, mpf], at[3, 1], at[3, 3])$groups
+}
+
+if (is.null(sspf) & at[5, 5] < 0.05) {
+  for (j in 1:nspf) {
+    temp <- dfr[dfr[, spf] == unique(dfr[, spf])[j], ]
+    y <- temp[, traits[i]]
+    print(paste("LSD test for", spf, unique(dfr[, spf])[j]))
+    print(agricolae::LSD.test(y, temp[, mpf], at[6, 1], at[6, 3])$groups)
+    cat("\n")
+  }
+}
+```
+
+`r if (is.null(sspf) & (at[2, 5] < 0.05 | at[5, 5] < 0.05)) {paste0("## ", {{i+1}}, ".3. Tukey test for ", mpf)}`
+
+```{r}
+if (is.null(sspf) & at[2, 5] < 0.05 & (at[5, 5] > 0.05 | pe)) {
+  y <- dfr[, traits[i]]
+  agricolae::HSD.test(y, dfr[, mpf], at[3, 1], at[3, 3])$groups
+}
+
+if (is.null(sspf) & at[5, 5] < 0.05) {
+  for (j in 1:nspf) {
+    temp <- dfr[dfr[, spf] == unique(dfr[, spf])[j], ]
+    y <- temp[, traits[i]]
+    print(paste("HSD Tukey test for", spf, unique(dfr[, spf])[j]))
+    print(agricolae::HSD.test(y, temp[, mpf], at[6, 1], at[6, 3])$groups)
+    cat("\n")
+  }
+}
+```
+
+`r if (is.null(sspf) & (at[4, 5] < 0.05 & at[2, 5] > 0.05 & at[5, 5] > 0.05)) {paste0("## ", {{i+1}}, ".2. LSD test for ", spf)}`
+`r if (is.null(sspf) & (at[5, 5] < 0.05 | (at[2, 5] < 0.05 & at[4, 5] < 0.05))) {paste0("## ", {{i+1}}, ".4. LSD test for ", spf)}`
+
+```{r}
+if (is.null(sspf) & at[4, 5] < 0.05 & (at[5, 5] > 0.05 | pe)) {
+  y <- dfr[, traits[i]]
+  agricolae::LSD.test(y, dfr[, spf], at[6, 1], at[6, 3])$groups
+}
+
+if (is.null(sspf) & at[5, 5] < 0.05) {
+  for (j in 1:nmpf) {
+    temp <- dfr[dfr[, mpf] == unique(dfr[, mpf])[j], ]
+    y <- temp[, traits[i]]
+    print(paste("LSD test for ", mpf, unique(dfr[, mpf])[j]))
+    print(agricolae::LSD.test(y, temp[, spf], at[6, 1], at[6, 3])$groups)
+    cat("\n")
+  }
+}
+```
+
+`r if (is.null(sspf) & (at[4, 5] < 0.05 & at[2, 5] > 0.05 & at[5, 5] > 0.05)) {paste0("## ", {{i+1}}, ".3. Tukey test for ", spf)}`
+`r if (is.null(sspf) & (at[5, 5] < 0.05 | (at[2, 5] < 0.05 & at[4, 5] < 0.05))) {paste0("## ", {{i+1}}, ".5. Tukey test for ", spf)}`
+
+```{r}
+if (is.null(sspf) & at[4, 5] < 0.05 & (at[5, 5] > 0.05 | pe)) {
+  y <- dfr[, traits[i]]
+  agricolae::HSD.test(y, dfr[, spf], at[6, 1], at[6, 3])$groups
+}
+
+if (is.null(sspf) & at[5, 5] < 0.05) {
+  for (j in 1:nmpf) {
+    temp <- dfr[dfr[, mpf] == unique(dfr[, mpf])[j], ]
+    y <- temp[, traits[i]]
+    print(paste("HSD Tukey test for ", mpf, unique(dfr[, mpf])[j]))
+    print(agricolae::HSD.test(y, temp[, spf], at[6, 1], at[6, 3])$groups)
+    cat("\n")
+  }
+}
 ```

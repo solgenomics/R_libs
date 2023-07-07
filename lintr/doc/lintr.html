@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Alexander Rosenstock" />
+
+
+<title>Using lintr</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Using lintr</h1>
+<h4 class="author">Alexander Rosenstock</h4>
+
+
+
+<p>This vignette describes how to set up and configure <code>lintr</code> for use with projects or packages.</p>
+<div id="running-lintr-on-a-project" class="section level2">
+<h2>Running <code>lintr</code> on a project</h2>
+<p>Checking an R project for lints can be done with three different functions:</p>
+<ul>
+<li><p>Lint a single file using <code>lint()</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lint</span>(<span class="at">filename =</span> <span class="st">&quot;R/bad.R&quot;</span>)</span></code></pre></div></li>
+<li><p>Lint a directory using <code>lint_dir()</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lint_dir</span>(<span class="at">path =</span> <span class="st">&quot;R&quot;</span>)</span></code></pre></div>
+<p>This will apply <code>lint()</code> to all R source files matching the <code>pattern</code> argument. By default, this means all <code>.R</code> files as well as <code>knitr</code> formats (e.g. <code>.Rmd</code>, <code>.Rnw</code>).</p>
+<p><code>lint_dir</code> is vectorized over <code>path</code>, so multiple directories can be linted at the same time.</p></li>
+<li><p>Lint all relevant directories of an R package using <code>lint_package()</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lint_package</span>(<span class="at">path =</span> <span class="st">&quot;.&quot;</span>)</span></code></pre></div>
+<p>This will apply <code>lint_dir()</code> to all subdirectories usually containing R code in packages:</p>
+<ul>
+<li><code>R</code> containing the package implementation.</li>
+<li><code>tests</code> containing test code.</li>
+<li><code>inst</code> containing sample code or vignettes that will be installed along with the package.</li>
+<li><code>vignettes</code> containing package vignettes.</li>
+<li><code>data-raw</code> containing code to produce <code>data</code> files.</li>
+</ul></li>
+</ul>
+<p>For more information about the assumed package structure, see <a href="https://r-pkgs.org/structure.html">R Packages</a>.</p>
+</div>
+<div id="configuring-linters" class="section level2">
+<h2>Configuring linters</h2>
+<div id="the-.lintr-file" class="section level3">
+<h3>The <code>.lintr</code> file</h3>
+<p>The canonical way to configure R projects and packages for linting is to create a <code>.lintr</code> file in the project root. This is a file in debian control format (<code>?read.dcf</code>), each value of which is evaluated as R code by <code>lintr</code> when reading the settings. A minimal <code>.lintr</code> file can be generated by running <code>use_lintr()</code> in the project directory. Lintr supports per-project configuration of the following fields.</p>
+<ul>
+<li><code>linters</code> - see <code>?linters_with_defaults</code> for example of specifying only a few non-default linters and <code>?linters_with_tags</code> for more fine-grained control.</li>
+<li><code>exclusions</code> - a list of filenames to exclude from linting. You can use a named item to exclude only certain lines from a file.</li>
+<li><code>exclude</code> - a regex pattern for lines to exclude from linting. Default is “# nolint”</li>
+<li><code>exclude_start</code> - a regex pattern to start exclusion range. Default is “# nolint start”</li>
+<li><code>exclude_end</code> - a regex pattern to end exclusion range. Default is “# nolint end”</li>
+<li><code>encoding</code> - the encoding used for source files. Default inferred from .Rproj or DESCRIPTION files, fallback to UTF-8</li>
+</ul>
+</div>
+<div id="lintr-file-example" class="section level3">
+<h3>.lintr File Example</h3>
+<p>Below is an example .lintr file that uses 120 character line lengths, disables <code>commented_code_linter</code>, excludes a couple of files.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">linters</span><span class="kw">:</span><span class="at"> linters_with_defaults(</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">    line_length_linter(120), </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">    commented_code_linter = NULL</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">  )</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">exclusions</span><span class="kw">:</span><span class="at"> list(</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="st">&quot;inst/doc/creating_linters.R&quot;</span><span class="at"> = 1, </span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="st">&quot;inst/example/bad.R&quot;</span><span class="at">, </span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="st">&quot;tests/testthat/exclusions-test&quot;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="at">  )</span></span></code></pre></div>
+</div>
+<div id="other-configuration-options" class="section level3">
+<h3>Other configuration options</h3>
+<p>More generally, <code>lintr</code> searches for a settings file according to following prioritized list. The first one found, if any, will be used.</p>
+<ol style="list-style-type: decimal">
+<li>If <code>options(lintr.linter_file)</code> is an absolute path, this file will be used. The default for this option is <code>&quot;.lintr&quot;</code>.</li>
+<li>A linter file (that is a file named like <code>lintr.linter_file</code>) in the currently searched directory, i.e. the directory of the file passed to <code>lint()</code>. When run from <code>lint_package()</code>, this directory can differ for each linted file.</li>
+<li>A linter file in a parent directory of the currently-searched directory, starting from the deepest path, moving upwards one level at a time.</li>
+<li>A linter file in the user’s <code>HOME</code> directory.</li>
+</ol>
+<p>If no linter file is found, only default settings take effect (see <a href="#defaults">defaults</a>).</p>
+</div>
+<div id="using-options" class="section level3">
+<h3>Using <code>options()</code></h3>
+<p>Values in <code>options()</code>, if they are not <code>NULL</code>, take precedence over those in the linter file (e.g. <code>.lintr</code>). Note that the key <code>option_name</code> in the linter file translates to an R option <code>lintr.option_name</code>. For example, <code>options(lintr.exclude = &quot;# skip lint&quot;)</code> will take precedence over <code>exclude: # nolint</code> in the linter file.</p>
+</div>
+<div id="using-arguments-to-lint" class="section level3">
+<h3>Using arguments to <code>lint()</code></h3>
+<p>The settings can also be passed as arguments to linting functions directly. In case of <code>exclusions</code>, these will be combined with the globally parsed settings. Other settings will be overridden.</p>
+<p>If only the specified settings should be changed, and the remaining settings should be taken directly from the defaults, the argument <code>parse_settings = FALSE</code> can be added to the function calls. This will suppress reading of the <code>.lintr</code> configuration. This is particularly useful for tests which should not exclude example files containing lints while the package-level <code>.lintr</code> excludes those files because the lints are intentional.</p>
+</div>
+<div id="defaults" class="section level3">
+<h3>Defaults</h3>
+<p>The default settings of <code>lintr</code> are intended to conform to the <a href="https://style.tidyverse.org/">tidyverse style guide</a>. However, the behavior can be customized using different methods.</p>
+<p>Apart from <code>lintr.linter_file</code>, which defaults to <code>&quot;.lintr&quot;</code>, there are the following settings:</p>
+<table>
+<colgroup>
+<col width="15%" />
+<col width="84%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">linters</td>
+<td align="left"><code>lintr::default_linters</code></td>
+</tr>
+<tr class="even">
+<td align="left">encoding</td>
+<td align="left">UTF-8</td>
+</tr>
+<tr class="odd">
+<td align="left">exclude</td>
+<td align="left">regex: <code>#[[:space:]]*nolint</code></td>
+</tr>
+<tr class="even">
+<td align="left">exclude_start</td>
+<td align="left">regex: <code>#[[:space:]]*nolint start</code></td>
+</tr>
+<tr class="odd">
+<td align="left">exclude_end</td>
+<td align="left">regex: <code>#[[:space:]]*nolint end</code></td>
+</tr>
+<tr class="even">
+<td align="left">exclude_linter</td>
+<td align="left">regex: <code>^[[:space:]]*:[[:space:]]*(?&lt;linters&gt;(?:(?:[^,.])+[[:space:]]*,[[:space:]]*)*(?:[^,.])+)\.</code></td>
+</tr>
+<tr class="odd">
+<td align="left">exclude_linter_sep</td>
+<td align="left">regex: <code>[[:space:]]*,[[:space:]]*</code></td>
+</tr>
+<tr class="even">
+<td align="left">exclusions</td>
+<td align="left">(empty)</td>
+</tr>
+<tr class="odd">
+<td align="left">cache_directory</td>
+<td align="left">/Users/jimhester/Library/Caches/org.R-project.R/R/lintr</td>
+</tr>
+<tr class="even">
+<td align="left">comment_token</td>
+<td align="left">(lintr-bot comment token for automatic GitHub comments)</td>
+</tr>
+<tr class="odd">
+<td align="left">comment_bot</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">error_on_lint</td>
+<td align="left">FALSE</td>
+</tr>
+</tbody>
+</table>
+<p>Note that the default <code>encoding</code> setting depends on the file to be linted. If an Encoding is found in a <code>.Rproj</code> file or a <code>DESCRIPTION</code> file, that encoding overrides the default of UTF-8.</p>
+<div id="customizing-active-linters" class="section level4">
+<h4>Customizing active linters</h4>
+<p>If you only want to customize some linters, you can use the helper function <code>linters_with_defaults()</code>, which will keep all unnamed linters with the default settings. Disable a linter by passing <code>NULL</code>. For example, to set the line length limit to 120 characters and globally disable the <code>no_tab_linter</code>, you can put this into your <code>.lintr</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>linters<span class="sc">:</span> <span class="fu">linters_with_defaults</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">line_length_linter =</span> <span class="fu">line_length_linter</span>(120L),</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">no_tab_linter =</span> <span class="cn">NULL</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p>By default, the following linters are enabled. Where applicable, the default settings are also shown.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">settings</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">assignment_linter</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">brace_linter</td>
+<td align="left">allow_single_line = FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">commas_linter</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">commented_code_linter</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">cyclocomp_linter</td>
+<td align="left">complexity_limit = 15L</td>
+</tr>
+<tr class="even">
+<td align="left">equals_na_linter</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">function_left_parentheses_linter</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">infix_spaces_linter</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">line_length_linter</td>
+<td align="left">length = 80L</td>
+</tr>
+<tr class="even">
+<td align="left">no_tab_linter</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">object_length_linter</td>
+<td align="left">length = 30L</td>
+</tr>
+<tr class="even">
+<td align="left">object_name_linter</td>
+<td align="left">styles = c(“snake_case”, “symbols”)</td>
+</tr>
+<tr class="odd">
+<td align="left">object_usage_linter</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">paren_body_linter</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">pipe_continuation_linter</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">semicolon_linter</td>
+<td align="left">allow_compound = FALSE, allow_trailing = FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">seq_linter</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">single_quotes_linter</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">spaces_inside_linter</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">spaces_left_parentheses_linter</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">T_and_F_symbol_linter</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">trailing_blank_lines_linter</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">trailing_whitespace_linter</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">vector_logic_linter</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="advanced-programmatic-retrieval-of-linters" class="section level4">
+<h4>Advanced: programmatic retrieval of linters</h4>
+<p>For some use cases, it may be useful to specify linters by string instead of by name, i.e. <code>&quot;assignment_linter&quot;</code> instead of writing out <code>assignment_linter()</code>.</p>
+<p>Beware that in such cases, a simple <code>get()</code> is not enough:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lintr)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Attaching package: &#39;lintr&#39;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following object is masked _by_ &#39;.GlobalEnv&#39;:</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     default_settings</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>linter_name <span class="ot">&lt;-</span> <span class="st">&quot;assignment_linter&quot;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>withr<span class="sc">::</span><span class="fu">with_tempfile</span>(<span class="st">&quot;tmp&quot;</span>, {</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">writeLines</span>(<span class="st">&quot;a = 1&quot;</span>, tmp)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># linter column is just &#39;get&#39;</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">as.data.frame</span>(<span class="fu">lint</span>(tmp, <span class="at">linters =</span> <span class="fu">get</span>(linter_name)())))</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  this_linter <span class="ot">&lt;-</span> <span class="fu">get</span>(linter_name)()</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">attr</span>(this_linter, <span class="st">&quot;name&quot;</span>) <span class="ot">&lt;-</span> linter_name</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># linter column is &#39;assignment_linter&#39;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">as.data.frame</span>(<span class="fu">lint</span>(tmp, <span class="at">linters =</span> this_linter)))</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># more concise alternative: use eval(call(.))</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">as.data.frame</span>(<span class="fu">lint</span>(tmp, <span class="at">linters =</span> <span class="fu">eval</span>(<span class="fu">call</span>(linter_name)))))</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                               filename</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 /private/var/folders/v4/gklzj0ms5mb3kp20s64y4dcc0000gn/T/RtmpcMIURL/filecf1214ccfaf4</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   line_number column_number  type                        message  line linter</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1           1             3 style Use &lt;-, not =, for assignment. a = 1    get</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                               filename</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 /private/var/folders/v4/gklzj0ms5mb3kp20s64y4dcc0000gn/T/RtmpcMIURL/filecf1214ccfaf4</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   line_number column_number  type                        message  line</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1           1             3 style Use &lt;-, not =, for assignment. a = 1</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              linter</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 assignment_linter</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                               filename</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 /private/var/folders/v4/gklzj0ms5mb3kp20s64y4dcc0000gn/T/RtmpcMIURL/filecf1214ccfaf4</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   line_number column_number  type                        message  line</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1           1             3 style Use &lt;-, not =, for assignment. a = 1</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              linter</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 assignment_linter</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="exclusions" class="section level2">
+<h2>Exclusions</h2>
+<p>Sometimes, linters should not be globally disabled. Instead, one might want to exclude some code from linting altogether or selectively disable some linters on some part of the code.</p>
+<blockquote>
+<p>Note that the preferred way of excluding lints from source code is to use the narrowest possible scope and specify exactly which linters should not throw a lint on a marked line. This prevents accidental suppression of justified lints that happen to be on the same line as a lint that needs to be suppressed.</p>
+</blockquote>
+<div id="excluding-lines-of-code" class="section level3">
+<h3>Excluding lines of code</h3>
+<p>Within source files, special comments can be used to exclude single lines of code from linting. All lints produced on the marked line are excluded from the results.</p>
+<p>By default, this special comment is <code># nolint</code>:</p>
+<p><strong>file.R</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">=</span> 42L <span class="co"># -------------- this comment overflows the default 80 chars line length.</span></span></code></pre></div>
+<p><code>&gt; lint(&quot;file.R&quot;)</code></p>
+<pre><code>#&gt; &lt;text&gt;:1:1: style: [object_name_linter] Variable and function name style should be snake_case or symbols.
+#&gt; X = 42L # -------------- this comment overflows the default 80 chars line length.
+#&gt; ^
+#&gt; &lt;text&gt;:1:3: style: [assignment_linter] Use &lt;-, not =, for assignment.
+#&gt; X = 42L # -------------- this comment overflows the default 80 chars line length.
+#&gt;   ^
+#&gt; &lt;text&gt;:1:81: style: [line_length_linter] Lines should not be more than 80 characters.
+#&gt; X = 42L # -------------- this comment overflows the default 80 chars line length.
+#&gt; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^</code></pre>
+<p><strong>file2.R</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">=</span> 42L <span class="co"># nolint ------ this comment overflows the default 80 chars line length.</span></span></code></pre></div>
+<p><code>&gt; lint(&quot;file2.R&quot;)</code></p>
+<p>Observe how all lints were suppressed and no output is shown. Sometimes, only a specific linter needs to be excluded. In this case, the <em>name</em> of the linter can be appended to the <code># nolint</code> comment preceded by a colon and terminated by a dot.</p>
+</div>
+<div id="excluding-only-some-linters" class="section level3">
+<h3>Excluding only some linters</h3>
+<p><strong>file3.R</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">=</span> 42L <span class="co"># nolint: object_name_linter. this comment overflows the default 80 chars line length.</span></span></code></pre></div>
+<p><code>&gt; lint(&quot;file3.R&quot;)</code></p>
+<pre><code>#&gt; &lt;text&gt;:1:3: style: [assignment_linter] Use &lt;-, not =, for assignment.
+#&gt; X = 42L # nolint: object_name_linter. this comment overflows the default 80 chars line length.
+#&gt;   ^
+#&gt; &lt;text&gt;:1:81: style: [line_length_linter] Lines should not be more than 80 characters.
+#&gt; X = 42L # nolint: object_name_linter. this comment overflows the default 80 chars line length.
+#&gt; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~</code></pre>
+<p>Observe how only the <code>object_name_linter</code> was suppressed. This is preferable to blanket <code># nolint</code> statements because blanket exclusions may accidentally silence a linter that was not intentionally suppressed.</p>
+<p>Multiple linters can be specified by listing them with a comma as a separator:</p>
+<p><strong>file4.R</strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">=</span> 42L <span class="co"># nolint: object_name_linter, line_length_linter. this comment overflows the default 80 chars line length.</span></span></code></pre></div>
+<p><code>&gt; lint(&quot;file4.R&quot;)</code></p>
+<pre><code>#&gt; &lt;text&gt;:1:3: style: [assignment_linter] Use &lt;-, not =, for assignment.
+#&gt; X = 42L # nolint: object_name_linter, line_length_linter. this comment overflows the default 80 chars line length.
+#&gt;   ^</code></pre>
+<p>You can also specify the linter names by a unique prefix instead of their full name:</p>
+<p><strong>file5.R</strong></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">=</span> 42L <span class="co"># nolint: object_name, line_len. this comment still overflows the default 80 chars line length.</span></span></code></pre></div>
+<p><code>&gt; lint(&quot;file5.R&quot;)</code></p>
+<pre><code>#&gt; &lt;text&gt;:1:3: style: [assignment_linter] Use &lt;-, not =, for assignment.
+#&gt; X = 42L # nolint: object_name, line_len. this comment still overflows the default 80 chars line length.
+#&gt;   ^</code></pre>
+</div>
+<div id="excluding-multiple-lines-of-codes" class="section level3">
+<h3>Excluding multiple lines of codes</h3>
+<p>If any or all linters should be disabled for a contiguous block of code, the <code>exclude_start</code> and <code>exclude_end</code> patterns can be used. They default to <code># nolint start</code> and <code># nolint end</code> respectively.</p>
+<p><code># nolint start</code> accepts the same syntax as <code># nolint</code> to disable specific linters in the following lines until a <code># nolint end</code> is encountered.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># x &lt;- 42L</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># print(x)</span></span></code></pre></div>
+<pre><code>#&gt; &lt;text&gt;:1:3: style: [commented_code_linter] Commented code should be removed.
+#&gt; # x &lt;- 42L
+#&gt;   ^~~~~~~~
+#&gt; &lt;text&gt;:2:3: style: [commented_code_linter] Commented code should be removed.
+#&gt; # print(x)
+#&gt;   ^~~~~~~~</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># nolint start: commented_code_linter.</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># x &lt;- 42L</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># print(x)</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># nolint end</span></span></code></pre></div>
+<p>(No lints)</p>
+</div>
+<div id="excluding-lines-via-the-config-file" class="section level3">
+<h3>Excluding lines via the config file</h3>
+<p>Individual lines can also be excluded via the config file by setting the key <code>exclusions</code> to a list with elements corresponding to different files. To exclude all lints for line 1 of file <code>R/bad.R</code> and <code>line_length_linter</code> for lines 4 to 6 of the same file, one can set</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>exclusions<span class="sc">:</span> <span class="fu">list</span>(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;R/bad.R&quot;</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>      <span class="dv">1</span>, <span class="co"># global exclusions are unnamed</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">line_length_linter =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">6</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p>All paths are interpreted relative to the location of the <code>.lintr</code> file.</p>
+</div>
+<div id="excluding-files-completely" class="section level3">
+<h3>Excluding files completely</h3>
+<p>The linter configuration can also be used to exclude a file entirely, or a linter for a file entirely. Use the sentinel line number <code>Inf</code> to mark all lines as excluded within a file. If a file is only given as a character vector, full exclusion is implied.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>exclusions<span class="sc">:</span> <span class="fu">list</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># excluded from all lints:</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;R/excluded1.R&quot;</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;R/excluded2.R&quot;</span> <span class="ot">=</span> <span class="cn">Inf</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;R/excluded3.R&quot;</span> <span class="ot">=</span> <span class="fu">list</span>(<span class="cn">Inf</span>),</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># excluded from line_length_linter:</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;R/no-line-length.R&quot;</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">line_length_linter =</span> <span class="cn">Inf</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+</div>
+<div id="excluding-directories-completely" class="section level3">
+<h3>Excluding directories completely</h3>
+<p>Entire directories are also recognized when supplied as strings in the <code>exclusions</code> key. For example, to exclude the <code>renv</code> folder from linting in a R project using <code>renv</code>, set</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>exclusions<span class="sc">:</span> <span class="fu">list</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;renv&quot;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p>This is particularly useful for projects which include external code in subdirectories.</p>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

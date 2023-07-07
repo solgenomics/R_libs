@@ -11,12 +11,20 @@ library(gargle)
 #  token_fetch(scopes, ...)
 
 ## -----------------------------------------------------------------------------
-names(cred_funs_list())
+writeLines(names(cred_funs_list()))
+
+## ---- eval = FALSE------------------------------------------------------------
+#  token_fetch(token = <TOKEN2.0>)
+#  
+#  credentials_byo_oauth2(
+#    token = <TOKEN2.0>
+#  )
 
 ## ---- eval = FALSE------------------------------------------------------------
 #  token_fetch(scopes = <SCOPES>, path = "/path/to/your/service-account.json")
 #  
-#  # leads to this call:
+#  # credentials_byo_oauth2() fails because no `token`,
+#  # which leads to this call:
 #  credentials_service_account(
 #    scopes = <SCOPES>,
 #    path = "/path/to/your/service-account.json"
@@ -25,7 +33,10 @@ names(cred_funs_list())
 ## ---- eval = FALSE------------------------------------------------------------
 #  token_fetch(scopes = <SCOPES>, path = "/path/to/your/external-account.json")
 #  
-#  # leads to this call:
+#  # credentials_byo_oauth2() fails because no `token`,
+#  # credentials_service_account() fails because the JSON provided via
+#  #   `path` is not of type "service_account",
+#  # which leads to this call:
 #  credentials_external_account(
 #    scopes = <SCOPES>,
 #    path = "/path/to/your/external-account.json"
@@ -34,7 +45,9 @@ names(cred_funs_list())
 ## ---- eval = FALSE------------------------------------------------------------
 #  token_fetch(scopes = <SCOPES>)
 #  
+#  # credentials_byo_oauth2() fails because no `token`,
 #  # credentials_service_account() fails because no `path`,
+#  # credentials_external_account() fails because no `path`,
 #  # which leads to this call:
 #  credentials_app_default(
 #    scopes = <SCOPES>
@@ -57,7 +70,9 @@ names(cred_funs_list())
 #  # or perhaps
 #  token_fetch(scopes = <SCOPES>, service_account = <SERVICE_ACCOUNT>)
 #  
+#  # credentials_byo_oauth2() fails because no `token`,
 #  # credentials_service_account() fails because no `path`,
+#  # credentials_external_account() fails because no `path`,
 #  # credentials_app_default() fails because no ADC found,
 #  # which leads to one of these calls:
 #  credentials_gce(
@@ -71,23 +86,13 @@ names(cred_funs_list())
 #  )
 
 ## ---- eval = FALSE------------------------------------------------------------
-#  token_fetch(token = <TOKEN2.0>)
-#  
-#  # credentials_service_account() fails because no `path`,
-#  # credentials_app_default() fails because no ADC found,
-#  # credentials_gce() fails because not on GCE,
-#  # which leads to this call:
-#  credentials_byo_oauth2(
-#    token = <TOKEN2.0>
-#  )
-
-## ---- eval = FALSE------------------------------------------------------------
 #  token_fetch(scopes = <SCOPES>)
 #  
+#  # credentials_byo_oauth2() fails because no `token`,
 #  # credentials_service_account() fails because no `path`,
+#  # credentials_external_account() fails because no `path`,
 #  # credentials_app_default() fails because no ADC found,
 #  # credentials_gce() fails because not on GCE,
-#  # credentials_byo_oauth2() fails because no `token`,
 #  # which leads to this call:
 #  credentials_user_oauth2(
 #    scopes = <SCOPES>,
@@ -123,27 +128,23 @@ names(cred_funs_list())
 #  )
 
 ## ---- eval = FALSE------------------------------------------------------------
-#  The thingyr package is requesting access to your Google account. Select a
-#  pre-authorised account or enter '0' to obtain a new token. Press Esc/Ctrl + C to
-#  abort.
-#  
-#  1: janedoe_personal@gmail.com
-#  2: janedoe@example.com
-#  3: janedoe_work@gmail.com
-#  
-#  Selection: 3
+#  The thingyr package is requesting access to your Google account.
+#  Enter '1' to start a new auth process or select a pre-authorized account.
+#  1: Send me to the browser for a new auth process.
+#  2: janedoe_personal@gmail.com
+#  3: janedoe@example.com
+#  4: janedoe_work@gmail.com
+#  Selection:
 
 ## ---- eval = FALSE------------------------------------------------------------
 #  thingy_auth(email = "janedoe_work@gmail.com")
 
 ## ---- eval = FALSE------------------------------------------------------------
 #  gargle_oauth_sitrep()
-#  #' gargle OAuth cache path:
-#  #' /Users/janedoe/.R/gargle/gargle-oauth
+#  #> 14 tokens found in this gargle OAuth cache:
+#  #> ~/Library/Caches/gargle
 #  #'
-#  #' 14 tokens found
-#  #'
-#  #' email                         app         scope                          hash...
+#  #' email                         app         scopes                         hash...
 #  #' ----------------------------- ----------- ------------------------------ ----------
 #  #' abcdefghijklm@gmail.com       thingy      ...bigquery, ...cloud-platform 128f9cc...
 #  #' buzzy@example.org             gargle-demo                                15acf95...
@@ -159,4 +160,10 @@ names(cred_funs_list())
 #  #' abcdefghijklm@gmail.com       tidyverse   ...drive.readonly              ecd11fa...
 #  #' abcdefghijklm@gmail.com       tidyverse   ...bigquery, ...cloud-platform ece63f4...
 #  #' nopqr@ABCDEFG.com             tidyverse   ...spreadsheets                f178dd8...
+
+## -----------------------------------------------------------------------------
+writeLines(names(cred_funs_list()))
+
+## ----eval = FALSE-------------------------------------------------------------
+#  gargle::cred_funs_add(credentials_gce = NULL)
 

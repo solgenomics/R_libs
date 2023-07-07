@@ -15,8 +15,13 @@ params:
   author: "no data"
 ---
 
+```{r global_options, include = FALSE}
+library(knitr)
+opts_chunk$set(echo = FALSE, comment = NA)
+```
+
 You have a nice data table with `r dim(params$x)[1]` rows and `r dim(params$x)[2]` columns. The first six rows are shown below:
-```{r echo = FALSE}
+```{r}
 head(params$x)
 ```
 Remember that the table is the standard format for data analysis; it is the kind of data structure that any statistical package prefers. In a table you have:

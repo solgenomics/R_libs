@@ -1,37 +1,20 @@
-AMMI                    AMMI Analysis
-AMMI.contour            AMMI contour
-BIB.test                Finding the Variance Analysis of the Balanced
-                        Incomplete Block Design
-CIC                     Data for late blight of potatoes
-Chz2006                 Data amendment Carhuaz 2006
-ComasOxapampa           Data AUDPC Comas - Oxapampa
-DAU.test                Finding the Variance Analysis of the Augmented
-                        block Design
-DC                      Data for the analysis of carolina genetic
-                        design
-Glycoalkaloids          Data Glycoalkaloids
-HSD.test                Multiple comparisons: Tukey
-Hco2006                 Data amendment Huanuco 2006
-LSD.test                Multiple comparisons, "Least significant
-                        difference" and Adjust P-values
-LxT                     Data Line by tester
-Median.test             Median test. Multiple comparisons
-PBIB.test               Analysis of the Partially Balanced Incomplete
-                        Block Design
-REGW.test               Ryan, Einot and Gabriel and Welsch multiple
-                        range test
-RioChillon              Data and analysis Mother and baby trials
-SNK.test                Student-Newman-Keuls (SNK)
 agricolae-package       Statistical Procedures for Agricultural
                         Research
+AMMI                    AMMI Analysis
+AMMI.contour            AMMI contour
 audpc                   Calculating the absolute or relative value of
                         the AUDPC
 audps                   The Area Under the Disease Progress Stairs
 bar.err                 Plotting the standard error or standard
                         deviance of a multiple comparison of means
 bar.group               Plotting the multiple comparison of means
+BIB.test                Finding the Variance Analysis of the Balanced
+                        Incomplete Block Design
 carolina                North Carolina Designs I, II and III
+Chz2006                 Data amendment Carhuaz 2006
+CIC                     Data for late blight of potatoes
 clay                    Data of Ralstonia population in clay soil
+ComasOxapampa           Data AUDPC Comas - Oxapampa
 consensus               consensus of clusters
 corn                    Data of corn
 correl                  Correlation Coefficient
@@ -40,6 +23,10 @@ correlation             Correlation analysis. Methods of Pearson,
 cotton                  Data of cotton
 cv.model                Coefficient of the experiment variation
 cv.similarity           Coefficient of the similarity matrix variation
+DAU.test                Finding the Variance Analysis of the Augmented
+                        block Design
+DC                      Data for the analysis of carolina genetic
+                        design
 delete.na               Omitting the rows or columns with missing
                         observations of a matrix (NA)
 design.ab               Design of experiments for a factorial
@@ -66,15 +53,18 @@ friedman                Friedman test and multiple comparison of
                         treatments
 frijol                  Data of frijol
 genxenv                 Data of potato yield in a different environment
+Glycoalkaloids          Data Glycoalkaloids
 graph.freq              Histogram
 grass                   Data for Friedman test
 greenhouse              Data in greenhouse
 growth                  Data growth of trees
 haynes                  Data of AUDPC for nonparametrical stability
                         analysis
+Hco2006                 Data amendment Huanuco 2006
 hcut                    Cut tree of consensus
 heterosis               Data of potato, Heterosis
 hgroups                 groups of hclust
+HSD.test                Multiple comparisons: Tukey
 huasahuasi              Data: Rainfall thresholds as support for timing
                         fungicide applications in the control of potato
                         late blight in Peru
@@ -82,7 +72,7 @@ index.AMMI              AMMI index and yield stability
 index.bio               Biodiversity Index
 index.smith             Uniformity soil. Smith's Index of Soil
                         Heterogeneity
-intervals.freq          Class intervals
+inter.freq              Class intervals
 join.freq               Join class for histogram
 kendall                 Correlation of Kendall
 kruskal                 Kruskal Wallis test and multiple comparison of
@@ -92,7 +82,11 @@ lastC                   Setting the last character of a chain
 lateblight              LATEBLIGHT - Simulator for potato late blight
                         Version LB2004
 lineXtester             Line x Tester Analysis
+LSD.test                Multiple comparisons, "Least significant
+                        difference" and Adjust P-values
+LxT                     Data Line by tester
 markers                 Data of molecular markers
+Median.test             Median test. Multiple comparisons
 melon                   Data of yield of melon in a Latin square
                         experiment
 montecarlo              Random generation by Montecarlo
@@ -107,6 +101,8 @@ orderPvalue             Grouping the treatments averages in a
 pamCIP                  Data Potato Wild
 paracsho                Data of Paracsho biodiversity
 path.analysis           Path Analysis
+PBIB.test               Analysis of the Partially Balanced Incomplete
+                        Block Design
 plot.AMMI               PLOT AMMI
 plot.graph.freq         Histogram
 plot.group              Plotting the multiple comparison of means
@@ -117,15 +113,19 @@ potato                  Data of cutting
 ralstonia               Data of assessment of the population in the
                         soil R.solanacearum
 reg.homog               Homologation of regressions
+REGW.test               Ryan, Einot and Gabriel and Welsch multiple
+                        range test
 resampling.cv           Resampling to find the optimal number of
                         markers
 resampling.model        Resampling for linear models
 rice                    Data of Grain yield of rice variety IR8
+RioChillon              Data and analysis Mother and baby trials
 scheffe.test            Multiple comparisons, scheffe
 similarity              Matrix of similarity in binary data
 simulation.model        Simulation of the linear model under normality
 sinRepAmmi              Data for AMMI without repetition
 skewness                Finding the skewness coefficient
+SNK.test                Student-Newman-Keuls (SNK)
 soil                    Data of soil analysis for 13 localities
 sp.plot                 Splip-Plot analysis
 ssp.plot                Split-split-Plot analysis

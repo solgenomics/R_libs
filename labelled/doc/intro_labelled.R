@@ -4,7 +4,10 @@ library(labelled)
 var_label(iris$Sepal.Length) <- "Length of sepal"
 
 ## -----------------------------------------------------------------------------
-var_label(iris) <- list(Petal.Length = "Length of petal", Petal.Width = "Width of Petal")
+var_label(iris) <- list(
+  Petal.Length = "Length of petal",
+  Petal.Width = "Width of Petal"
+)
 
 ## -----------------------------------------------------------------------------
 var_label(iris$Petal.Width)
@@ -22,7 +25,10 @@ look_for(iris, "pet")
 look_for(iris, details = FALSE)
 
 ## -----------------------------------------------------------------------------
-v <- labelled(c(1,2,2,2,3,9,1,3,2,NA), c(yes = 1, no = 3, "don't know" = 8, refused = 9))
+v <- labelled(
+  c(1, 2, 2, 2, 3, 9, 1, 3, 2, NA),
+  c(yes = 1, no = 3, "don't know" = 8, refused = 9)
+)
 v
 
 ## -----------------------------------------------------------------------------
@@ -69,7 +75,7 @@ val_labels(df) <- list(v1 = c(yes = 1, no = 3), v2 = c(a = 1, b = 2, c = 3))
 val_labels(df)
 
 ## -----------------------------------------------------------------------------
-v <- c(1,2,2,2,3,9,1,3,2,NA)
+v <- c(1, 2, 2, 2, 3, 9, 1, 3, 2, NA)
 val_label(v, 1) <- "yes"
 val_label(v, 3) <- "no"
 val_label(v, 9) <- "refused"
@@ -85,7 +91,10 @@ sort_val_labels(v, decreasing = TRUE)
 sort_val_labels(v, according_to = "l")
 
 ## -----------------------------------------------------------------------------
-v <- labelled(c(1,2,2,2,3,9,1,3,2,NA), c(yes = 1, no = 3, "don't know" = 9))
+v <- labelled(
+  c(1, 2, 2, 2, 3, 9, 1, 3, 2, NA),
+  c(yes = 1, no = 3, "don't know" = 9)
+)
 v
 na_values(v) <- 9
 na_values(v)
@@ -121,7 +130,7 @@ na_values(v) <- NULL
 v
 
 ## -----------------------------------------------------------------------------
-v <- labelled(c(1,2,2,2,3,9,1,3,2,NA), c(yes = 1, maybe = 2, no = 3))
+v <- labelled(c(1, 2, 2, 2, 3, 9, 1, 3, 2, NA), c(yes = 1, maybe = 2, no = 3))
 v
 nolabel_to_na(v)
 
@@ -133,7 +142,10 @@ size
 val_labels_to_na(size)
 
 ## -----------------------------------------------------------------------------
-v <- labelled(c(1,2,2,2,3,9,1,3,2,NA), c(yes = 1, no = 3, "don't know" = 8, refused = 9))
+v <- labelled(
+  c(1, 2, 2, 2, 3, 9, 1, 3, 2, NA),
+  c(yes = 1, no = 3, "don't know" = 8, refused = 9)
+)
 v
 to_factor(v)
 
@@ -197,13 +209,13 @@ df <- data.frame(
   c = labelled(c(1, 1, 2, 2), labels = c(No = 1, Yes = 2, DK = 3)),
   d = labelled(c("a", "a", "b", "c"), labels = c(No = "a", Yes = "b")),
   e = labelled_spss(
-    c(1, 9, 1, 2), 
+    c(1, 9, 1, 2),
     labels = c(No = 1, Yes = 2),
     na_values = 9
     )
 )
 df %>% look_for()
-unlabelled(df)%>% look_for()
+unlabelled(df) %>% look_for()
 unlabelled(df, user_na_to_na = TRUE) %>% look_for()
 unlabelled(df, drop_unused_labels = TRUE) %>% look_for()
 
@@ -223,7 +235,7 @@ unlabelled(df, drop_unused_labels = TRUE) %>% look_for()
 #  
 #   # from memisc
 #   library(memisc)
-#   nes1948.por <- UnZip("anes/NES1948.ZIP", "NES1948.POR", package="memisc")
+#   nes1948.por <- UnZip("anes/NES1948.ZIP", "NES1948.POR", package = "memisc")
 #   nes1948 <- spss.portable.file(nes1948.por)
 #   df <- to_labelled(nes1948)
 #   ds <- as.data.set(nes19480)
@@ -232,7 +244,7 @@ unlabelled(df, drop_unused_labels = TRUE) %>% look_for()
 ## -----------------------------------------------------------------------------
 library(dplyr)
 
-df <- data_frame(s1 = c("M", "M", "F"), s2 = c(1, 1, 2)) %>% 
+df <- data_frame(s1 = c("M", "M", "F"), s2 = c(1, 1, 2)) %>%
   set_variable_labels(s1 = "Sex", s2 = "Question") %>%
   set_value_labels(s1 = c(Male = "M", Female = "F"), s2 = c(Yes = 1, No = 2))
 df$s2

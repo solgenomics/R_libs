@@ -1,3 +1,168 @@
+# testthat 3.1.10
+
+* Fix for upcoming R-devel release.
+
+* `testthat` now sets the `_R_CHECK_BROWSER_NONINTERACTIVE_` environment variable
+  when running tests. This should ensure that left-over `browser()` statements
+  will trigger an error if encountered while running tests. This functionality
+  is only enabled with R (>= 4.3.0). (#1825)
+
+# testthat 3.1.9
+
+* New `expect_contains()` and `expect_in()` that works similarly to 
+  `expect_true(all(expected %in% object))` or 
+  `expect_true(all(object %in% expected))` but give more informative failure
+  messages (#1346).
+
+* New `is_snapshot()` returns `TRUE` if code is running inside a snapshot test
+  (#1796) and `is_checking()` returns `TRUE` if test is running inside of 
+  `R CMD check` (#1795)
+
+* `ProgressReporter` only reports the run time of test files that take longer 
+  than 1s, rather than 0.1s. (#1806) and re-displays all failures at the end
+  of the results. Skips are now only shown at the end of reporter summaries, 
+  not as tests are run. This makes them less intrusive in interactive tests 
+  while still allowing you to verify that the correct tests are skipped (#1801).
+  When using parallel tests, links to failed tests (#1787) and links to 
+  accept/review snapshot (#1802) now work.
+
+* `set_state_inspector()` allows to to register a function that's called
+  before and after every test, reporting on any differences. This
+  is very useful for detecting if any of your tests have made changes to 
+  global state (like options, env vars, or connections) (#1674). This 
+  function was inspired by renv's testing infrastructure.
+
+* `skip_on_cran()` no longer skips (errors) when run interactively.
+
+* `teardown_env()` works in more cases.
+
+* All packages, regardless of whether or not they use rlang, now
+  use the new snapshot display for errors, warnings, and messages.
+
+* testthat no longer truncates tracebacks and uses rlang's default tree
+  display.
+
+# testthat 3.1.8
+
+* `expect_snapshot()` differences no longer use quotes.
+
+* `expect_error()`, `expect_warning()`, and `expect_message()` now correctly
+  enforce that the condition is of the expected base class (e.g. error, 
+  warning, message) even when the `class` argument is used (#1168).
+
+* `it()` now calls `local_test_context()` so that it behaves more
+  similarly to `test_that()` (#1731), and is now exported so that you
+  can more easily run BDD tests interactively (#1587)
+
+* `skip_on_bioc()` now uses the documented environment variable
+  (`IS_BIOC_BUILD_MACHINE`) (#1712).
+
+* `source_file()`, which is used by various parts of the helper and 
+  setup/teardown machinery, now reports the file name in the case of 
+  errors (#1704).
+
+* `test_path()` now works when called within helper files (#1562).
+
+* New `vignette("special-files")` describes the various special files
+  that testthat uses (#1638).
+
+* `with_mocked_bindings()` and `local_mocked_bindings()` now also bind in the
+  imports namespace and can mock S3 methods. These changes make them good 
+  substitutes for the deprecated functions `with_mock()` and `local_mock()`, so 
+  those older functions now recommend switching to the newer equivalents 
+  instead of using the mockr or mockery packages.
+
+# testthat 3.1.7
+
+* `expect_setequal()` gives more actionable feedback (#1657).
+
+* `expect_snapshot()` no longer elides new lines when run interactively (#1726).
+
+* Experimental new `with_mocked_bindings()` and `local_mocked_bindings()` 
+  (#1739).
+
+# testthat 3.1.6
+
+* The embedded version of Catch no longer uses `sprintf()`.
+
+# testthat 3.1.5
+
+* Deprecation warnings are no longer captured by `expect_warning(code, NA)`,
+  `expect_no_warning(code)`, or `expect_silent(code)`. This ensures that they 
+  bubble up to the top level so that you can address them (#1680). If you want 
+  to assert that code does not throw a deprecation warning, use
+  `expect_no_condition(code(), class = "lifecycle_warning_deprecation")`.
+
+* New experimental `expect_no_error()`, `expect_no_warning()`, 
+  `expect_no_message()`, and `expect_no_condition()` for asserting
+  the code runs without an error, warning, message, or condition (#1679).
+
+* Fixed a warning in R >=4.2.0 on Windows that occurred when using the C++
+  testing infrastructure that testthat provides (#1672).
+
+* Fixed an issue that could prevent compilation of Catch unit tests with
+  LLVM 15. In the interim, packages needing a local workaround can set
+  `PKG_CPPFLAGS = -DCATCH_CONFIG_CPP11_NO_SHUFFLE` in their `src/Makevars`.
+  (@kevinushey, #1687)
+
+* Improve way `capture_output()` handles encoding thanks to suggestion from
+  Kurt Hornik (#1693). This means that snapshots using UTF-8 encoded text on 
+  windows work once again.
+
+* `local_reproducible_output()` will no longer attempt to set the local language
+  when `LANG='C'` is set or an R version is used that was not compiled with
+  natural language support (NLS), which would previously emit non-test-related
+  warnings during testing (@dgkf, #1662; @heavywatal, #1689).
+
+* `test_check()` now suppresses hyperlinks since they'll take you to the wrong
+  places (#1648).
+
+* New `set_max_fails()` helper to make it easier to set the maximum number of
+  failures before stopping the test suite. And the advice to set to Inf is
+  now clickable (#1628).
+
+* You can now configure the behaviour of the implicit
+  `devtools::load_all()` call performed by `devtools::test()` in your
+  package DESCRIPTION file (#1636). To disable exports of internal
+  functions and of testthat helpers, use:
+
+  ```
+  Config/testthat/load-all: list(export_all = FALSE, helpers = FALSE)
+  ```
+
+  Helpers are now attached on the search path by default after calling
+  `devtools::test()`.
+
+# testthat 3.1.4
+
+* Minor tweaks to output for latest cli (#1606).
+
+# testthat 3.1.3
+
+* Package that explicitly depend on rlang in their description file
+  are now opting into a new snapshot display for errors, warnings, and
+  messages. Previously this only concerned packages that explicitly
+  depended on rlang >= 1.0.0. This display will eventually become the
+  default for all packages.
+
+  Changes include:
+
+  - Condition classes are no longer included in the snapshot by
+    default. This is to avoid snapshot noise when upstream code adds
+    or changes a class. For instance, r-devel has added classes to
+    base errors.
+
+  - Warnings and errors are now printed with rlang, including the
+    `call` field. This makes it easy to monitor the full appearance of
+    warning and error messages as they are displayed to users.
+
+    This change is part of a push towards mentioning the useful
+    context of an error as part of messages, see the release notes of
+    rlang 1.0.0 for more about this.
+
+* Test results show hyperlinks to failed expectation when supported (#1544). 
+
+
 # testthat 3.1.2
 
 * testthat now uses brio for all reading and writing (#1120). This
@@ -44,6 +209,8 @@
 * When a snapshot changes the hint also mentions that you can use 
   `snapshot_review()` (#1500, @DanChaltiel) and the message tells you what 
   variant is active (#1540).
+* JUnit reporter now includes skip messages/reasons (@rfineman, #1507). 
+
 
 # testthat 3.1.1
 
@@ -323,7 +490,7 @@ Learn more in `vignette("third-edition")`.
 
 * Messages are no longer automatically silenced. Either use 
   `suppressMessages()` to hide unimportant messages, or
-  `expect_messsage()` to catch important messages (#1095).
+  `expect_message()` to catch important messages (#1095).
   
 * `setup()` and `teardown()` are deprecated in favour of test fixtures.
   See `vignette("test-fixtures")` for more details.

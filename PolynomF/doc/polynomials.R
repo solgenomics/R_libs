@@ -2,9 +2,11 @@
 knitr::opts_chunk$set(collapse = TRUE,
                       comment = "",
                       fig.height = 5.5,
-                      fig.width = 7,
-                      fig.align = "center",
-                      out.height = "0.3\\textheight")
+                      fig.width = 7)
+if(knitr::is_latex_output()) {
+  knitr::opts_chunk$set(fig.align = "center",
+                        out.height = "30%")
+}
 library(PolynomF)
 library(knitr)
 setHook("plot.new",
@@ -26,20 +28,14 @@ setHook("plot.new",
         "replace")
 
 
-## ---- echo=FALSE--------------------------------------------------------------
-old <- paste0("`", ls("package:PolynomF", pattern = "\\."), "`")
-new <- gsub("\\.", "_", old)
-tab <- data.frame(`Old name` = old, `New name` = new, check.names = FALSE)
-kable(tab, caption = "Function name changes in version 2.0-0")
-
-## ---- fig.width = 8, out.height="0.25\\textheight"----------------------------
+## ---- fig.width = 8-----------------------------------------------------------
 Discrete <- function(p, q = p, x, w = function(x, ...) 1, ...) sum(w(x, ...)*p(x)*q(x))
 PC <- poly_orth_general(inner_product = Discrete, degree = 4, 
                         x = 0:100, w = dpois, lambda = 1)
 plot(PC, lwd = 2, legend = TRUE)
 title(main = "Poisson-Charlier(1) polynomials to degree 4", font.main = 3)
 
-## ---- out.height="0.23\\textheight"-------------------------------------------
+## -----------------------------------------------------------------------------
 (p1 <- poly_calc(1:6))       ## a monic polynomial with given zeros
 solve(p1)                    ## check that the zeros are as specified
 polyroot(coef(p1))           ## check using the Traub-Jenkins algorithm
@@ -66,14 +62,14 @@ setNames((p1*p2)(z), paste0("z=", z))
 p3 <- (p1 - 2 * p2)^2                         ## moderately complicated expression.
 setNames(p3(0:4), paste0("z=", 0:4))          ## should have zeros at 1, 2, 3
 
-## ---- fig.width = 8.5*0.9, fig.height = 5*0.9, out.height="0.25\\textheight"----
+## -----------------------------------------------------------------------------
 x0 <- c(0:3, 5)
 op <- poly_orth(x0, norm = TRUE)
 plot(op, lwd = 2, legend = TRUE)
 fop <- as.function(op)        ## Explicit coercion needed for polylist
 zap(crossprod(fop(x0)))       ## Verify orthonormality
 
-## ---- out.height="0.26\\textheight"-------------------------------------------
+## -----------------------------------------------------------------------------
 x <- polynomial()
 Tr <- polylist(1, x)
 for(j in 3:15) {
@@ -88,7 +84,7 @@ ChebyT <- function(p, q = p) {
 }
 zap(outer(Tr, Tr, Vectorize(ChebyT))*2/pi) ## check of orthogonality
 
-## ---- fig.height = 5*0.9, fig.width = 6.5*0.9, out.height = "0.26\\textheight"----
+## -----------------------------------------------------------------------------
 fx <- function(x) dnorm(x, sd = 0.25)
 b <- sapply(Tr, ChebyT, q = fx)/sapply(Tr, ChebyT)
 fx_approx <- sum(b * Tr)
@@ -97,7 +93,7 @@ lines(fx_approx, col = "red", limits = c(-1, 1))
 curve(1e4*(fx(x) - fx_approx(x)), xlim = c(-1,1)) ## error pattern x 10000
 
 
-## ---- fig.height = 5*0.9, fig.width = 6.5*0.9, out.height = "0.26\\textheight"----
+## -----------------------------------------------------------------------------
 Fx <- function(x) pnorm(x, sd = 0.25) 
 Fx_approx <- integral(fx_approx) + 0.5
 curve(Fx, xlim = c(-1, 1))
@@ -105,7 +101,7 @@ lines(Fx_approx, col = "red", limits = c(-1,1))
 curve(1e4*(Fx(x) - Fx_approx(x)), xlim = c(-1,1)) ## error pattern x 10000
 
 
-## ---- fig.height = 5, fig.width = 7, out.height = "0.26\\textheight"----------
+## -----------------------------------------------------------------------------
 x <- polynomial()
 Ur <- polylist(1, 2*x)
 
@@ -127,7 +123,7 @@ lines(asin_approx, col = "red", limits = c(-1,1))
 curve(1e4*(asin(x) - asin_approx(x)), xlim = c(-1,1), ylim = c(-50,50)) ## errors by 10000
 
 
-## ---- fig.height = 5*0.9, fig.width = 6.5*0.9, out.height = "0.27\\textheight"----
+## -----------------------------------------------------------------------------
 P <- polynomial(c(1, 5, 3, 1))/10
 s <- polynomial(c(0, 1))
 (mean_offspring <- deriv(P)(1))
@@ -153,7 +149,7 @@ lines(P(P(P)),    col = 3, limits = 0:1)
 lines(P(P(P(P))), col = 4, limits = 0:1)
 arrows(ex, P(ex), ex, par("usr")[3], angle = 15, length = 0.125)
 
-## ---- fig.height = 5, fig.width = 6.5, out.height = "0.31\\textheight"--------
+## -----------------------------------------------------------------------------
 x0 <- 80:89
 y0 <- c(487, 370, 361, 313, 246, 234, 173, 128, 88, 83)
 p <- poly_calc(x0, y0)        ## leads to catastropic numerical failure!

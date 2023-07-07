@@ -1,8 +1,4 @@
 Assays-class            Assays objects
-RangedSummarizedExperiment-class
-                        RangedSummarizedExperiment objects
-SummarizedExperiment-class
-                        SummarizedExperiment objects
 coverage-methods        Coverage of a RangedSummarizedExperiment object
 findOverlaps-methods    Finding overlapping ranges in
                         RangedSummarizedExperiment objects
@@ -21,4 +17,7 @@ makeSummarizedExperimentFromLoom
                         file
 nearest-methods         Finding the nearest range neighbor in
                         RangedSummarizedExperiment objects
-readKallisto            Input kallisto or kallisto bootstrap results.
+RangedSummarizedExperiment-class
+                        RangedSummarizedExperiment objects
+SummarizedExperiment-class
+                        SummarizedExperiment objects

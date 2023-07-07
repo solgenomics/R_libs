@@ -24,20 +24,18 @@ params:
   eu: "no data"
   dfr: "no data"
   maxp: "no data"
+  mc: "no data"
   title: "no data"
   subtitle: "no data"
   author: "no data"
 ---
 
 ```{r global_options, include = FALSE}
-
-knitr::opts_chunk$set(comment = NA)
-
+library(knitr)
+opts_chunk$set(echo = FALSE, comment = NA)
 ```
 
-```{r echo = FALSE}
-library(knitr)
-
+```{r}
 # Pass arguments
 
 traits <- params$traits
@@ -51,6 +49,7 @@ rep <- params$rep
 eu <- params$eu
 dfr <- params$dfr
 maxp <- params$maxp
+mc <- params$mc
 
 # Get means if subsamples
 

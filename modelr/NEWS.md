@@ -1,3 +1,15 @@
+# modelr 0.1.11
+
+* Fixes for R CMD check
+
+# modelr 0.1.10
+
+* Relax test for R-devel
+
+# modelr 0.1.9
+
+* Redocument to fix HTML issues in .Rd
+
 # modelr 0.1.8
 
 * Eliminate direct dplyr dependency in favour of vctrs.

@@ -1,10 +1,11 @@
 Alfalfa                 Split-Plot Experiment on Varieties of Alfalfa
 Assay                   Bioassay on Cell Culture Plate
 BodyWeight              Rat weight over time for different diets
-CO2                     Carbon Dioxide uptake in grass plants
 Cefamandole             Pharmacokinetics of Cefamandole
+CO2                     Carbon Dioxide uptake in grass plants
 Dialyzer                High-Flux Hemodialyzer
 Earthquake              Earthquake Intensity
+ergoStool               Ergometrics experiment with stool types
 Fatigue                 Cracks caused by metal fatigue
 Gasoline                Refinery yield of gasoline
 Glucose                 Glucose levels over time
@@ -12,8 +13,8 @@ Glucose2                Glucose Levels Following Alcohol Ingestion
 Gun                     Methods for firing naval guns
 IGF                     Radioimmunoassay of IGF-I Protein
 Machines                Productivity Scores for Machines and Workers
-MathAchSchool           School demographic data for MathAchieve
 MathAchieve             Mathematics achievement scores
+MathAchSchool           School demographic data for MathAchieve
 Meat                    Tenderness of meat
 Milk                    Protein content of cows' milk
 Muscle                  Contraction of heart muscle sections
@@ -39,4 +40,3 @@ Theoph                  Pharmacokinetics of theophylline
 Wafer                   Modeling of Analog MOS Circuits
 Wheat                   Yields by growing conditions
 Wheat2                  Wheat Yield Trials
-ergoStool               Ergometrics experiment with stool types

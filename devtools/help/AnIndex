@@ -1,4 +1,4 @@
-devtools-package	devtools
+devtools-package	devtools-package
 as.package	as.package
 bash	bash
 build	build
@@ -20,7 +20,7 @@ check_win_release	check_win
 clean_dll	reexports
 clean_vignettes	clean_vignettes
 create	create
-devtools	devtools
+devtools	devtools-package
 devtools-deprecated	devtools-deprecated
 dev_mode	dev_mode
 dev_packages	dev_packages

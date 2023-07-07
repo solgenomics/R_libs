@@ -9,8 +9,8 @@ fit_with                Fit a list of formulas
 formulas                Create a list of formulas
 geom_ref_line           Add a reference line (ggplot2).
 heights                 Height and income data.
-model-quality           Compute model quality for a given dataset
 model_matrix            Construct a design matrix
+model-quality           Compute model quality for a given dataset
 na.warn                 Handle missing values with a warning
 permute                 Generate 'n' permutation replicates.
 resample                A "lazy" resample.

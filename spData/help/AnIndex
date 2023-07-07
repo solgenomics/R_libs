@@ -19,6 +19,7 @@ congruent	congruent
 coords	columbus
 cycle_hire	cycle_hire
 cycle_hire_osm	cycle_hire_osm
+depmunic	depmunic
 dll	elect80
 e80_queen	elect80
 eire	eire
@@ -28,12 +29,12 @@ eire.nb	eire
 eire.polys.utm	eire
 elect80	elect80
 elect80_lw	elect80
-elev	elev
+elev.tif	elev.tif
 getisord	getisord
 go_x	getisord
 go_xyz	getisord
 go_y	getisord
-grain	grain
+grain.tif	grain.tif
 hawaii	hawaii
 hopkins	hopkins
 house	house
@@ -54,6 +55,7 @@ nz	nz
 nz_height	nz_height
 paper.nb	afcon
 polys	columbus
+properties	properties
 rivers	seine
 seine	seine
 sidscents	nc.sids

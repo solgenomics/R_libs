@@ -1,3 +1,31 @@
+# gdtools 0.3.3
+
+## Issues
+
+- no more calls to `gfonts::get_all_fonts()`. This should enable usage
+for those with no access to website used by 'gfonts'.
+
+# gdtools 0.3.2
+
+## New features
+
+- new function `installed_gfonts()` to list installed font from 'Google'
+
+# gdtools 0.3.1
+
+## New features
+
+- add 'liberation-sans' for having a fallback when off-line
+
+# gdtools 0.3.0
+
+## New features
+
+- The package now allows to download and work with Google Fonts thanks to the
+'gfonts' and 'systemfonts' package. This is very useful for managing fonts with
+graphics produced with 'ragg', 'svglite' and 'ggiraph' but also with 'flextable'
+tables. Finally, it is possible to easily embed these fonts in HTML documents.
+
 # gdtools 0.2.4
 
 * Windows: add support for ucrt toolchains

@@ -1,6 +1,7 @@
 .svycheck	as.svydesign2
 AIC.svycoxph	svycoxph
 AIC.svyglm	anova.svyglm
+anova.svycoxph	anova.svyglm
 anova.svyglm	anova.svyglm
 anova.svyloglin	svyloglin
 api	api
@@ -122,6 +123,7 @@ mrbweights	bootweights
 mu284	mu284
 multistage	svyrecvar
 multistage.phase1	twophase
+myco	myco
 na.exclude.survey.design	svydesign
 na.exclude.twophase	twophase
 na.fail.survey.design	svydesign
@@ -156,6 +158,7 @@ ppsmat	HR
 predict.svrepglm	svyglm
 predict.svycoxph	svycoxph
 predict.svyglm	svyglm
+predict.svyolr	svyolr
 predict.svyratio	svyratio
 predict.svyratio_separate	svyratio
 print.anova.svyloglin	svyloglin
@@ -179,6 +182,7 @@ rake	rake
 regTermTest	regTermTest
 residuals.svrepglm	svyglm
 residuals.svyglm	svyglm
+salamander	salamander
 scd	scd
 SE	SE
 SE.default	SE
@@ -274,6 +278,8 @@ svyratio.svyrep.design	svyratio
 svyratio.twophase	svyratio
 svyrecvar	svyrecvar
 svyrecvar.phase1	twophase
+svyscoretest	svyscoretest
+svyscoretest.svyglm	svyscoretest
 svysmooth	svysmooth
 svysmooth.default	svysmooth
 svystandardize	svystandardize
@@ -319,6 +325,7 @@ withReplicates.svrepstat	withReplicates
 withReplicates.svrepvar	withReplicates
 withReplicates.svyimputationList	withReplicates
 withReplicates.svyrep.design	withReplicates
+xdesign	xdesign
 yrbs	yrbs
 [.nonresponse	nonresponse
 [.repweights_compressed	compressWeights

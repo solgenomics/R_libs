@@ -11,17 +11,20 @@ GCP
 IDEs
 JSON
 OAuth
+OOB
 ORCID
+PBC
 PUTs
 RESTful
+RStudio
 Tidyverse
 VMs
+appdata
 auth
 behaviour
 bigrquery
 cli
 cli's
-colab
 commenter
 csv
 de
@@ -33,6 +36,7 @@ filepath
 funder
 ggplot
 gmailr
+googleapis
 googledrive's
 googlesheets
 https
@@ -43,12 +47,11 @@ lifecycle
 lowerCamel
 magrittr
 mockr
-oauth
-oob
 pkgdown
 pre
 programmatically
 purrr
+readonly
 rebranded
 recency
 reprexes
@@ -56,7 +59,6 @@ rlang's
 rprojroot
 setwise
 targetted
-targetting
 testthat
 th
 threshhold
@@ -69,3 +71,4 @@ vctrs
 vectorization
 vectorized
 withr
+www

@@ -30,12 +30,16 @@ params:
   author: "no data"
 ---
 
+```{r global_options, include = FALSE}
+library(knitr)
+opts_chunk$set(echo = FALSE, comment = NA)
+```
+
 # 1. ANOVA for trait `r response`
 
 This is a simple analysis of the data, you may want to pursue this further using more sophisticated models.
 
-```{r echo = FALSE}
-
+```{r}
 ## Keep copy of full data
 
 dfr.full <- params$dfr
@@ -103,13 +107,11 @@ if (!is.null(rep) & subsamp) {
   at[1:4, 5] <- pf(at[1:4, 4], at[1:4, 1], at[5, 1], lower.tail = FALSE)
   at
 }
-
 ```
 
 # 2. Dispersion plot with a fitted smoothing function
 
-```{r echo = FALSE, fig.align = "center", fig.height = 5, fig.width = 8, warning = FALSE}
-
+```{r fig.align = "center", fig.height = 5, fig.width = 8, warning = FALSE}
 ## Data
 
 dfr <- dfr.full[, c(response, treat, eu, dap)]
@@ -132,5 +134,4 @@ if (se) {
     labs(x = dap, y = response) +
     geom_smooth(se = FALSE)
 }
-
 ```

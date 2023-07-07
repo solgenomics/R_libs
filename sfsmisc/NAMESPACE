@@ -27,13 +27,11 @@ importFrom("stats",
 
 importFrom("utils", head, tail, toLatex, #<- S3 generics !
            help,
-	   capture.output, data, packageDescription, read.table,
+	   capture.output, count.fields, data, packageDescription, read.table,
 	   sessionInfo, str)
 
 importFrom("tools", Rcmd)
 
-## Using "::" in code -> no need here:
-importFrom("methods", existsFunction)
 
 
 ### Export almost all
@@ -85,6 +83,7 @@ export (
 	"is.whole",
 	"iterate.lin.recursion",
 	"KSd",
+    list_,
 	"last",
 	"linesHyperb.lm",
 	"list2mat",
