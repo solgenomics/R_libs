@@ -1,0 +1,29 @@
+add_anova               Additive ANOVA for Genotypes by Environment
+                        Interaction (GEI) model
+ammi                    Additive Main Effects and Multiplicative
+                        Interaction (AMMI)
+ammi_biplot             Additive Main Effects and Multiplicative
+                        Interaction (AMMI) Biplot
+er_anova                Eberhart & Russel’s Model ANOVA
+ge_data                 Data for Genotypes by Environment Interaction
+                        (GEI)
+ge_effects              Genotype by Environment Interaction Effects
+ge_means                Genotype by Environment Interaction Means and
+                        Ranks
+gge_biplot              Genotype plus Genotypes by Environment (GGE)
+                        Interaction Biplot
+indiv_anova             Individual ANOVA for Each Environment
+stab_asv                Additive Main Effects and Multiplicative
+                        Interacion Stability Value
+stab_dist               Stability Distance in AMMI
+stab_fox                Stability Fox Function
+stab_kang               Stability Kang Function
+stab_masv               Modified Additive Main Effects and
+                        Multiplicative Interacion Stability Value
+stab_measures           Stability Measures for Genotypes by Environment
+                        Interaction (GEI)
+stab_par                Stability Parameters for Genotypes by
+                        Environment Interaction (GEI)
+stab_reg                Individual Regression for each Genotype
+stability               Stability Analysis of Genotype by Environment
+                        Interaction (GEI)
