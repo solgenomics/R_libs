@@ -1,0 +1,38 @@
+alpha_lattice           Generates an Alpha Design
+CRD                     Generates a Completely Randomized Design (CRD)
+diagonal_arrangement    Spatial Un-replicated Diagonal Arrangement
+                        Design
+do_optim                Generate the sparse or p-rep allocation to
+                        multiple locations.
+full_factorial          Generates a Full Factorial Design
+incomplete_blocks       Generates a Resolvable Incomplete Block Design
+latin_square            Generates a Latin Square Design
+multi_location_prep     Optimized multi-location partially replicated
+                        design
+optimized_arrangement   Generates an Spatial Un-replicated Optimized
+                        Arrangement Design
+partially_replicated    Generates a Spatial Partially Replicated
+                        Arrangement Design
+plot.FielDHub           Plot a 'FielDHub' object
+print.FielDHub          Print a 'FielDHub' object
+print.fieldLayout       Print a 'fieldLayout' plot object
+print.summary.FielDHub
+                        Print the summary of a 'FielDHub' object
+RCBD                    Generates a Randomized Complete Block Design
+                        (RCBD)
+RCBD_augmented          Generates an Augmented Randomized Complete
+                        Block Design (ARCBD)
+rectangular_lattice     Generates a Rectangular Lattice Design.
+row_column              Generates a Resolvable Row-Column Design
+                        (RowColD)
+run_app                 Run the Shiny Application
+sparse_allocation       Unreplicated designs using the sparse
+                        allocation approach
+split_families          Split a population of genotypes randomly into
+                        several locations.
+split_plot              Generates a Split Plot Design
+split_split_plot        Generates a Split Split Plot Design
+square_lattice          Generates a Square Lattice Design.
+strip_plot              Strip Plot Design
+summary.FielDHub        Summary a 'FielDHub' object
+swap_pairs              Swap pairs in a matrix of integers
