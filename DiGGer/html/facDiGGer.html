@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Function to generate a DiGGer search for a factorial design</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for facDiGGer {DiGGer}"><tr><td>facDiGGer {DiGGer}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Function to generate a DiGGer search for a factorial design</h2>
+
+<h3>Description</h3>
+
+<p>Generate a DiGGer search for designs with factorial treatments.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+facDiGGer(factorNames = NULL, rowsInDesign = NULL, columnsInDesign =
+NULL, rowsInReplicate = NULL, columnsInReplicate = NULL, mainPlotSizes =
+NULL, treatDataFrame = DF, treatRepColumn = "Repeats",
+blockSequence = NULL, objectiveWeight = c(0.8, 0.2), searchIntensity =
+100, chequerboard = FALSE, spatial = TRUE, rowColumn = TRUE,
+designLayoutTemplate = NULL, maxInterchanges = 100000, rngSeeds =
+NULL, rngState = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>factorNames</code></td>
+<td>
+<p>Text vector of factor names.</p>
+</td></tr>
+<tr valign="top"><td><code>rowsInDesign</code></td>
+<td>
+<p>Number of rows in the design.</p>
+</td></tr>
+<tr valign="top"><td><code>columnsInDesign</code></td>
+<td>
+<p>Number of columns in the design.</p>
+</td></tr>
+<tr valign="top"><td><code>rowsInReplicate</code></td>
+<td>
+<p>Number or rows in each replicate block.</p>
+</td></tr>
+<tr valign="top"><td><code>columnsInReplicate</code></td>
+<td>
+<p>Number of columns in each replicate block.</p>
+</td></tr>
+<tr valign="top"><td><code>mainPlotSizes</code></td>
+<td>
+<p>A list of dimension pairs indicating main plot
+sizes.  Randomised factorial designs have main plot sizes of
+<code>c(1,1)</code> whereas split plot designs have the dimensions of the
+main plots.</p>
+</td></tr>
+<tr valign="top"><td><code>treatDataFrame</code></td>
+<td>
+<p>Data frame with treatment factors and
+repeats per replicate.</p>
+</td></tr>
+<tr valign="top"><td><code>treatRepColumn</code></td>
+<td>
+<p>Text name of the column in the
+<code>treatDataFrame</code> with treatment repeats information.</p>
+</td></tr>
+<tr valign="top"><td><code>blockSequence</code></td>
+<td>
+<p>List of dimension pairs of blocks to be optimised
+in sequence.</p>
+</td></tr>
+<tr valign="top"><td><code>objectiveWeight</code></td>
+<td>
+<p>Relative weights for multiple objectives &ndash;
+limited use.</p>
+</td></tr>
+<tr valign="top"><td><code>searchIntensity</code></td>
+<td>
+<p>Percentage of possible interchanges to consider
+for non-improving interchanges &ndash; limited use.</p>
+</td></tr>
+<tr valign="top"><td><code>chequerboard</code></td>
+<td>
+<p>Used with 2 level factors.  If <code>FALSE</code> the
+<code>spatial</code> setting is not used with this factor, otherwise
+spatial correlation will favour a chequerboard arrangement of the
+factor levels.</p>
+</td></tr>
+<tr valign="top"><td><code>spatial</code></td>
+<td>
+<p>If <code>TRUE</code> separable AR processes between rows and
+between columns are specified in the final DiGGer search phase for
+each factor.</p>
+</td></tr>
+<tr valign="top"><td><code>rowColumn</code></td>
+<td>
+<p>If <code>TRUE</code> random rows, random columns and random
+error
+are specified in the final DiGGer search phase for each factor.</p>
+</td></tr>
+<tr valign="top"><td><code>designLayoutTemplate</code></td>
+<td>
+<p>An optional matrix showing replicate
+numbers with missing plots coded as 0.</p>
+</td></tr>
+<tr valign="top"><td><code>maxInterchanges</code></td>
+<td>
+<p>Maximum number of interchanges used in each
+search phase.</p>
+</td></tr>
+<tr valign="top"><td><code>rngSeeds</code></td>
+<td>
+<p>Seeds c(s1,s2) to control the DiGGer search. s1
+must be in the range [0,31328], s2 must be in the range
+[0,30081].</p>
+</td></tr>
+<tr valign="top"><td><code>rngState</code></td>
+<td>
+<p>Current state of the random number generator.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>facDiGGer</code> is a one factor at a time search which optimises the
+first factor across the whole design before considering each
+subsequent factor in order.  As each factor is added to the design the
+number of treatments in the design is increased and the levels of the
+latest factor added are used as a group code.  The last factor added
+may have limited randomisation.
+</p>
+<p>Split-plot designs are created by creating main plots and expanding
+them to the appropriate size before adding subsequent factors.
+</p>
+<p>The <code>createFactorialDF</code> function is provided to help create
+factorial treatment data frames.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>DiGGer</code> object with the sequentially optimised design.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Neil Coombes
+</p>
+
+
+<h3>References</h3>
+
+<p>Coombes, N.E. (2002) The Reactive Tabu Search for Efficient Correlated
+Experimental Designs.  PhD Thesis, Liverpool John Moores University.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# 3x3x3 factorial
+# blocked to give replicates in two directions
+DF27 &lt;- createFactorialDF(c(3,3,3))
+test27 &lt;- facDiGGer(c("F1","F2","F3"),
+                    27,3, 27,1, treatDataFrame = DF27,
+                    rngSeeds = c(2468, 1357),
+                    blockSequence = list(c(9,1)))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiGGer</em> version 1.0.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

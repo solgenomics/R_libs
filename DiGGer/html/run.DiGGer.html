@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Run a DiGGer search.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for run {DiGGer}"><tr><td>run {DiGGer}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2> Run a DiGGer search. </h2>
+
+<h3>Description</h3>
+
+<p>Run a <code>DiGGer</code> search to optimise a design subject to specified
+correlation, blocking and A-measure type.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'DiGGer'
+run(this, newStart = FALSE, newPath = FALSE, err =
+errcodes, continue=FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>this</code></td>
+<td>
+<p> A <code>DiGGer</code> object. </p>
+</td></tr>
+<tr valign="top"><td><code>newStart</code></td>
+<td>
+<p> If <code>newStart</code> is <code>TRUE</code> create a new
+starting design else use the current starting design. </p>
+</td></tr>
+<tr valign="top"><td><code>newPath</code></td>
+<td>
+<p> If <code>newPath</code> is <code>TRUE</code> the random number
+generator is re-initialised.</p>
+</td></tr>
+<tr valign="top"><td><code>err</code></td>
+<td>
+<p> Data file of error codes. </p>
+</td></tr>
+<tr valign="top"><td><code>continue</code></td>
+<td>
+<p> If <code>TRUE</code> a search will be run even if the
+DiGGer object contains a completed search, otherwise a search will
+not be run to prevent overwriting the current search. </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p> Not used. </p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A <code>DiGGer</code> design object.
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>ddphase</code></td>
+<td>
+<p>A list with an element for each phase of the search
+initially set <code>NULL</code>.  An element is populated with
+<code>seeds</code>, <code>design</code>, <code>aMeasures</code> and
+<code>lastImprovement</code> as each search phase is
+completed. </p>
+</td></tr>
+<tr valign="top"><td><code>dlist</code></td>
+<td>
+<p>A data frame holding the field-book listing of the
+design, with rows nested within columns of the design. </p>
+</td></tr>
+<tr valign="top"><td><code>errcode</code></td>
+<td>
+<p>The numeric code for the error status of the DiGGer
+run.  Non-zero codes indicate a fault in the search.</p>
+</td></tr>
+<tr valign="top"><td><code>idsgn</code></td>
+<td>
+<p> The matrix of design numbers used as the
+<code>InitialDesign</code> in the search.</p>
+</td></tr>
+<tr valign="top"><td><code>iswap</code></td>
+<td>
+<p> The matrix of swap codes used to restrict interchanges
+between experimental units of the design.</p>
+</td></tr>
+<tr valign="top"><td><code>treatment</code></td>
+<td>
+<p> A dataframe with columns <code>Name</code>, <code>Number</code>,
+<code>Repeats</code> and <code>Group</code> detailing the treatment
+specifications for the design.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p> Neil Coombes </p>
+
+
+<h3>References</h3>
+
+<p>Coombes, N.E. (2002) The Reactive Tabu Search for Efficient Correlated
+Experimental Designs.  PhD Thesis, Liverpool John Moores University.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Example of search set up for 21 treatments
+# arranged in 21 rows by 3 columns
+# with replicates 21 rows by 1 column
+d21 &lt;- corDiGGer(21, 21,3, 21,1)
+d21 &lt;- run(d21)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiGGer</em> version 1.0.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

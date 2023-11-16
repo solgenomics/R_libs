@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Constructor function for a DiGGer design.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for DiGGer {DiGGer}"><tr><td>DiGGer {DiGGer}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Constructor function for a DiGGer design.</h2>
+
+<h3>Description</h3>
+
+<p><code>DiGGer</code> initialises a DiGGer object which may be modified to
+create a search for producing efficient experimental designs.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+DiGGer(numberOfTreatments = 18, rowsInDesign = 18, columnsInDesign = 3,
+rowsInReplicate = NULL, columnsInReplicate = NULL,
+treatName = NULL, treatNumber = NULL,
+treatRepPerRep = NULL, treatGroup = NULL,
+treatType = "FIXED", treatVarianceRatio = -1, initialDesign = NULL,
+initialSwap = NULL, rngSeeds = NULL, rngState = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>numberOfTreatments</code></td>
+<td>
+<p>The number of treatments in the design.</p>
+</td></tr>
+<tr valign="top"><td><code>rowsInDesign</code></td>
+<td>
+<p>The number of rows in the design.</p>
+</td></tr>
+<tr valign="top"><td><code>columnsInDesign</code></td>
+<td>
+<p>The number of columns in the design.</p>
+</td></tr>
+<tr valign="top"><td><code>rowsInReplicate</code></td>
+<td>
+<p>The number or rows in the template replicate
+block.</p>
+</td></tr>
+<tr valign="top"><td><code>columnsInReplicate</code></td>
+<td>
+<p>The number of columns in the template
+replicate block.</p>
+</td></tr>
+<tr valign="top"><td><code>treatName</code></td>
+<td>
+<p>Vector of treatment names to be associated with
+the design numbers.</p>
+</td></tr>
+<tr valign="top"><td><code>treatNumber</code></td>
+<td>
+<p>Vector of treatment numbers to be associated
+with the design numbers.</p>
+</td></tr>
+<tr valign="top"><td><code>treatRepPerRep</code></td>
+<td>
+<p>Vector of replication levels for
+each treatment within each replicate template block.</p>
+</td></tr>
+<tr valign="top"><td><code>treatGroup</code></td>
+<td>
+<p>Vector of group codes (up to 200 distinct
+values) associated with treatments.  Group codes may be used to
+modify the A-efficiency measure in the optimisation.</p>
+</td></tr>
+<tr valign="top"><td><code>treatType</code></td>
+<td>
+<p>By default treatments are of &quot;FIXED&quot;
+type. Treatments of &quot;RANDOM&quot; type require a
+<code>treatVarianceRatio</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>treatVarianceRatio</code></td>
+<td>
+<p>A positive value is required for
+&quot;RANDOM&quot; treatment types, otherwise treatments are &quot;FIXED&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>initialDesign</code></td>
+<td>
+<p>A matrix <code>rowsInDesign</code> by
+<code>columnsInDesign</code> giving design numbers in the initial design.</p>
+</td></tr>
+<tr valign="top"><td><code>initialSwap</code></td>
+<td>
+<p>A matrix <code>rowsInDesign</code> by
+<code>columnsInDesign</code> of swap codes.  Only plots with the same swap
+code may have treatment interchanges during the DiGGer search.</p>
+</td></tr>
+<tr valign="top"><td><code>rngSeeds</code></td>
+<td>
+<p>Seeds c(s1,s2) to control the DiGGer search. s1
+must be in the range [0,31328], s2 must be in the range
+[0,30081].</p>
+</td></tr>
+<tr valign="top"><td><code>rngState</code></td>
+<td>
+<p>Current state of the random number generator.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>DiGGer</code> constructs a framework for a DiGGer search for efficient
+experimental designs.  The random number generator is initialised.
+Treatment information is used to create a treatment data frame.
+</p>
+<p><code>DiGGer</code> establishes an <code>initialDesign</code>
+and an <code>initialSwap</code> matrix.
+If no <code>initialDesign</code> is supplied the parameters,
+<code>numberOfTreatments</code>, <code>rowsInDesign</code>, <code>columnsInDesign</code>,
+<code>rowsInReplicate</code>, <code>columnsInReplicate</code> and
+<code>treatRepPerRep</code>, are used to generate an initial
+design.  If no <code>initialSwap</code> matrix is supplied a matrix of 1s is
+set up to allow all treatment plot interchanges within a replicate.
+</p>
+<p>Wrapper functions are applied to the <code>DiGGer</code> object to create
+searches for common design types.  Alternatively constructor functions
+<code>Block</code>, <code>Correlation</code>, <code>Objective</code> and <code>Phase</code> may
+be used to modify the search framework to create a set of search
+instructions.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>DiGGer</code> search object for a null search.
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>idsgn</code></td>
+<td>
+<p>An initial design matrix of design numbers.</p>
+</td></tr>
+<tr valign="top"><td><code>iswap</code></td>
+<td>
+<p>An initial matrix of swap codes.  Swaps are possible
+between units with the same swap code.</p>
+</td></tr>
+<tr valign="top"><td><code>treatment</code></td>
+<td>
+<p>A treatment data frame with columns <code>ID</code>,
+<code>ENTRY</code>, <code>Repeats</code> and <code>Group</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>ddphase</code></td>
+<td>
+<p>An empty list to be populated with search
+instructions.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Neil Coombes</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Example of initialisation for 21 treatments
+# arranged in 21 rows by 3 columns
+# with replicates 21 rows by 1 column
+d21 &lt;- DiGGer(21, 21,3, 21,1)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiGGer</em> version 1.0.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

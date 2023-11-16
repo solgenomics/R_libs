@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Set the type of A-Measure for a DiGGer search phase.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for setAType {DiGGer}"><tr><td>setAType {DiGGer}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2> Set the type of A-Measure for a DiGGer search phase. </h2>
+
+<h3>Description</h3>
+
+<p>Set the A-measure type for a phase of a <code>DiGGer</code> search.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'DiGGer'
+setAType(this, phaseNo = 1, aType = "A++", ...)
+## S3 method for class 'Phase'
+setAType(this, aType = "A++", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>this</code></td>
+<td>
+<p> A <code>DiGGer</code> search object. </p>
+</td></tr>
+<tr valign="top"><td><code>phaseNo</code></td>
+<td>
+<p> The <code>Phase</code> number to be modified. </p>
+</td></tr>
+<tr valign="top"><td><code>AType</code></td>
+<td>
+<p> A <code>DiGGer</code> A-measure type: &quot;A++&quot;, &quot;Agg&quot;, &quot;A22&quot;,
+&quot;A11&quot;, &quot;A1+&quot;, &quot;Aa2&quot; or &quot;Aaa&quot;. </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p> Not used. </p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>DiGGer optimisation is based on the average variance of treatment
+contrasts.  The default, <code>aType="A++"</code>, optimises the average
+variance of pairwise contrasts amongst all treatments.  Other
+A-measure types are based on the treatment group code defined for each
+treatment in the design.
+</p>
+<p>If <code>aType="Agg"</code> the average variance between all pairs of
+treatments from different treatment groups is minimised.
+</p>
+<p>If <code>aType="A22"</code> the average variance of pairwise comparisons of
+treatments in group 2 is optimised.
+</p>
+<p>If <code>aType="A11"</code> the average variance of pairwise comparisons of
+treatments in group 1 is optimised.
+</p>
+<p>If <code>aType="A1+"</code> the average variance of pairwise comparisons of
+treatments in group 1 with treatments in other groups is optimised.
+</p>
+<p>If <code>aType="Aa2"</code> the comparisons optimised are between the
+average of group 1 treatments and each treatment in group 2.
+</p>
+<p>If <code>aType="Aaa"</code> the comparison optimised is the average of
+group 1 treatments with the average of group 2 treatments.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Neil Coombes </p>
+
+<hr /><div style="text-align: center;">[Package <em>DiGGer</em> version 1.0.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

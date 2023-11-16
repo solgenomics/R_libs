@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get a Block object from a DiGGer search object.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for getBlock {DiGGer}"><tr><td>getBlock {DiGGer}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get a Block object from a DiGGer search object.</h2>
+
+<h3>Description</h3>
+
+<p>Get a copy of a <code>Block</code> object from a DiGGer search object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'DiGGer'
+getBlock(this, phaseNo = 1, objectiveNo = 1, blockNo =
+1, allBlocks=FALSE, ...)
+## S3 method for class 'Phase'
+getBlock(this, objectiveNo = 1, blockNo = 1, ...)
+## S3 method for class 'Objective'
+getBlock(this, blockNo = 1, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>this</code></td>
+<td>
+<p>A <code>DiGGer</code>, component object from a DiGGer search.</p>
+</td></tr>
+<tr valign="top"><td><code>phaseNo</code></td>
+<td>
+<p>The <code>Phase</code> to be queried.</p>
+</td></tr>
+<tr valign="top"><td><code>objectiveNo</code></td>
+<td>
+<p>The <code>Objective</code> to be queried.</p>
+</td></tr>
+<tr valign="top"><td><code>blockNo</code></td>
+<td>
+<p>The <code>Block</code> to be returned.</p>
+</td></tr>
+<tr valign="top"><td><code>allBlocks</code></td>
+<td>
+<p>If <code>TRUE</code> a dataframe of all blocks in the
+design is returned.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Not used.</p>
+</td></tr>
+</table>
+
+
+<h3>Warning</h3>
+
+<p>Modification of this <code>Block</code> object will also
+modify the copy in its original context, <code>Objective</code>,
+<code>Phase</code>, <code>DiGGer</code>.  A new <code>Block()</code> assignment to
+this object will not affect the original context.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Neil Coombes</p>
+
+<hr /><div style="text-align: center;">[Package <em>DiGGer</em> version 1.0.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Set an Objective to optimise in a DiGGer search</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for setObjective {DiGGer}"><tr><td>setObjective {DiGGer}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2> Set an Objective to optimise in a DiGGer search </h2>
+
+<h3>Description</h3>
+
+<p>Modify an existing <code>Objective</code> to be optimised in a DiGGer
+search.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'DiGGer'
+setObjective(this, phaseNo = 1, objectiveNo = 1, ...)
+## S3 method for class 'Phase'
+setObjective(this, objectiveNo, weight=1.00,
+                     linearCovariate="NONE", blocks=NULL,
+                     corr=Correlation(), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>this</code></td>
+<td>
+<p> A <code>DiGGer</code> object. </p>
+</td></tr>
+<tr valign="top"><td><code>phaseNo</code></td>
+<td>
+<p> The <code>Phase</code> number to be modified. </p>
+</td></tr>
+<tr valign="top"><td><code>objectiveNo</code></td>
+<td>
+<p> The <code>Objective</code> number to be modified. </p>
+</td></tr>
+<tr valign="top"><td><code>weight</code></td>
+<td>
+<p>Weight to multiply the A-measure associated with the
+objective.</p>
+</td></tr>
+<tr valign="top"><td><code>linearCovariate</code></td>
+<td>
+<p>Code for the linear covariate of this
+objective.  One of &quot;NONE&quot;, &quot;ROWS&quot;,&quot;COLUMNS&quot; or &quot;BOTH&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>blocks</code></td>
+<td>
+<p>Either <code>NULL</code> or a list of <code>Block</code> objects.</p>
+</td></tr>
+<tr valign="top"><td><code>corr</code></td>
+<td>
+<p>The <code>Correlation</code> object of this objective.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p> Not used.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p> Neil Coombes </p>
+
+<hr /><div style="text-align: center;">[Package <em>DiGGer</em> version 1.0.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

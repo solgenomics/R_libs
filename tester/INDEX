@@ -1,0 +1,58 @@
+has_dimension           Has dimension?
+has_factors             Has factors?
+has_missing             Has missing values, NA, NaN, Inf
+has_names               Has or lacks names?
+has_rownames            Has or lacks row/column names?
+is_class                Is class
+is_dataframe            Is data frame
+is_decimal              Is decimal
+is_diagonal             Is diagonal matrix
+is_even                 Is even
+is_integer              Is integer
+is_matrix               Is matrix
+is_multiple             Is multiple
+is_natural              Is natural
+is_negative             Is negative
+is_negative_decimal     Is negative decimal
+is_negative_integer     Is negative integer
+is_odd                  Is even
+is_one_dim              Test if an object has one-dimension
+is_positive             Is positive
+is_positive_decimal     Is positive decimal
+is_positive_integer     Is positive integer
+is_scalar               Is scalar
+is_single               Is single
+is_single_decimal       Is single decimal
+is_single_even          Is single even
+is_single_false         Is single false
+is_single_logical       Is single logical
+is_single_negative      Is single negative number
+is_single_negative_decimal
+                        Is single negative decimal
+is_single_negative_integer
+                        Is single negative integer
+is_single_number        Is single number
+is_single_odd           Is single odd
+is_single_positive      Is single positive number
+is_single_positive_decimal
+                        Is single positive decimal
+is_single_positive_integer
+                        Is single positive integer
+is_single_string        Is single string
+is_single_true          Is single true
+is_square_matrix        Is square matrix
+is_square_numeric_matrix
+                        Is square numeric matrix
+is_string               Is string
+is_tabular              Is tabular
+is_triangular_matrix    Is triangular matrix
+is_TRUE                 If TRUE or FALSE
+is_vector               Is vector
+list_of_vectors         List of vectors
+list_with_vectors       List with vectors
+same_class              Same Class
+same_dim                Same Dimension
+same_length             Same Length
+same_mode               Same Mode
+same_nrow               Same Number of Rows / Columns
+same_type               Same Type

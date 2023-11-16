@@ -1,0 +1,23 @@
+df_to_blocks            Split a data frame into blocks
+dummy_to_list           Create an indexed list from a dummy matrix
+factor_to_dummy         Create a dummy matrix from the elements in a
+                        factor
+from_to                 Starting and ending positions
+funlist                 Apply a function to all elements in a list
+indexify                Create indices for elements in a vector or list
+lengths                 Length of each element within a list
+list_ones               List with vectors of ones
+list_to_dummy           Create a dummy matrix from the elements in a
+                        list
+list_to_matrix          Design-type matrix from the elements in a list
+listify                 Create a list from a vector of integers
+listsize                Size: total number of elements in a list
+matrix_to_blocks        Split a matrix into blocks
+maxlist                 Maximum of all elements in a list
+meanlist                Mean of all elements in a list
+minlist                 Minimum of all elements in a list
+prodlist                Product of all elements in a list
+sumlist                 Sum of all elements in a list
+turner-package          turner
+vector_to_dummy         Create a dummy matrix from the elements in a
+                        vector

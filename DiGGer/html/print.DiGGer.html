@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Print a DiGGer search object.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for print.DiGGer {DiGGer}"><tr><td>print.DiGGer {DiGGer}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Print a DiGGer search object.</h2>
+
+<h3>Description</h3>
+
+<p>Print a <code>DiGGer</code> search object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'DiGGer'
+print(this, option = "search", file = NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>this</code></td>
+<td>
+<p>A <code>DiGGer</code> search object.</p>
+</td></tr>
+<tr valign="top"><td><code>option</code></td>
+<td>
+<p>The default <code>option="search"</code> prints a summary of
+the planned search to the screen if <code>file=NULL</code> or prints to a
+file in the format required to run DiGGer externally. Other options
+print: the initial design with <code>option="idsgn"</code>, the initial
+swap codes with <code>option="swap"</code>, the treatment information
+details with <code>option="treatment"</code>, and the field book listing
+of the final design with <code>option="list"</code>. </p>
+</td></tr>
+<tr valign="top"><td><code>file</code></td>
+<td>
+<p>The file basename to print to.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Not used.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Printing a <code>DiGGer</code> object with <code>option="search"</code> to the
+computer screen gives a schematic
+representation of the DiGGer search.
+</p>
+<p>Search initialisation
+information precedes the information for each <code>Phase</code> call to the
+DiGGer program.  This includes the number and type of treatments, the
+dimensions of the design and the dimensions of each replicate within
+the design.
+</p>
+<p>The <code>Phase</code> header information shows the
+dimensions of swap and correlation template blocks, the DiGGer
+stopping rules, target A-measure and maximum interchanges, and the
+type of A-measure and search intensity.
+</p>
+<p>Each phase has at least one <code>Objective</code> and the weight, linear
+covariate, spatial model and blocking structures are summarised.
+</p>
+<p>With <code>option="idsgn"</code> the matrix representation of the initial
+design is printed.
+</p>
+<p>With <code>option="iswap"</code> the matrix of initial swap codes is
+printed.
+</p>
+<p>With <code>option="treatment"</code> the data frame of treatment names,
+treatment numbers, treatment repeats per replicate and treatment group
+codes is printed.
+</p>
+<p><code>option="list"</code> should only be used once the DiGGer search has
+been run.  This produces a field-book listing of the design, rows
+nested within columns, with treatment and design information.
+</p>
+<p><code>option="all"</code> prints all of the above.
+</p>
+<p>Printing to file produces the files needed for DiGGer to be run from a
+command window using the standalone program.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Neil Coombes</p>
+
+<hr /><div style="text-align: center;">[Package <em>DiGGer</em> version 1.0.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

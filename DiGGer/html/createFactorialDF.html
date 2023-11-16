@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a factorial treatment data frame.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for createFactorialDF {DiGGer}"><tr><td>createFactorialDF {DiGGer}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a factorial treatment data frame.</h2>
+
+<h3>Description</h3>
+
+<p>Create a factorial treatment data frame with factor levels and
+replication levels.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+createFactorialDF(nlevelsVector = NULL, treatName = NULL, treatRepPerRep
+= NULL.)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>nlevelsVector</code></td>
+<td>
+<p>A vector of the number of levels in each factor.</p>
+</td></tr>
+<tr valign="top"><td><code>treatName</code></td>
+<td>
+<p>A list of named vectors.  Each vector may contain
+labels associated with the levels of each factor.</p>
+</td></tr>
+<tr valign="top"><td><code>treatRepPerRep</code></td>
+<td>
+<p>Repeats per replicate of each factor
+combination.  If
+not given each treatment combination has a repeats value of 1.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Creates a treatment data frame with numeric levels and factor labels
+for factors with replication levels per replicate.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Neil Coombes</p>
+
+<hr /><div style="text-align: center;">[Package <em>DiGGer</em> version 1.0.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,5 @@
+desplot                 Plot the layout/data of a field experiment.
+geom_tileborder         Borders between tiles
+panel.outlinelevelplot
+                        Panel Function for desplot
+RedGrayBlue             Function to create a Red-Gray-Blue palette

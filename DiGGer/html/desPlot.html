@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plot a design as a matrix</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for desPlot {DiGGer}"><tr><td>desPlot {DiGGer}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plot a design as a matrix</h2>
+
+<h3>Description</h3>
+
+<p>Plot a matrix representing an experimental design to the current
+graphics device.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+desPlot(dsgn, trts = NULL, rprop = 1, cprop = 1, label = TRUE, plotchar
+= NULL, plotbndry = TRUE, chtdiv = 2, bdef = NULL, bcol = 1, bwd = 2,
+rotate = FALSE, new = TRUE, cstr = "Range", rstr = "Row", rlab = TRUE,
+clab = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dsgn</code></td>
+<td>
+<p>A matrix representation of an experimental design.</p>
+</td></tr>
+<tr valign="top"><td><code>trts</code></td>
+<td>
+<p>Specific treatment labels to be plotted.</p>
+</td></tr>
+<tr valign="top"><td><code>rprop</code></td>
+<td>
+<p>Proportion of the row boundary of an experimental unit to
+plot.</p>
+</td></tr>
+<tr valign="top"><td><code>cprop</code></td>
+<td>
+<p>Proportion of the column boundary of an experimental unit
+to plot.</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>If TRUE print a label for all treatments or specific treatments
+listed in <code>trts</code>. If FALSE labels are not printed.</p>
+</td></tr>
+<tr valign="top"><td><code>plotchar</code></td>
+<td>
+<p>A single text character or plotting symbol to be used
+as the label.</p>
+</td></tr>
+<tr valign="top"><td><code>plotbndry</code></td>
+<td>
+<p>If plotbndry is TRUE, a <code>polygon</code> is used to
+plot the experimental unit.</p>
+</td></tr>
+<tr valign="top"><td><code>chtdiv</code></td>
+<td>
+<p>A reduction factor for the plotting symbol.</p>
+</td></tr>
+<tr valign="top"><td><code>bdef</code></td>
+<td>
+<p>A matrix rx2. Each row defines the rows and columns in a
+block template to be plotted.</p>
+</td></tr>
+<tr valign="top"><td><code>bcol</code></td>
+<td>
+<p>The colour used for the block boundary.</p>
+</td></tr>
+<tr valign="top"><td><code>bwd</code></td>
+<td>
+<p>The width of the block boundary to be plotted.</p>
+</td></tr>
+<tr valign="top"><td><code>rotate</code></td>
+<td>
+<p>If TRUE the matrix is rotated 90 degrees for plotting.</p>
+</td></tr>
+<tr valign="top"><td><code>new</code></td>
+<td>
+<p>If TRUE a new plot is produced, if FALSE the current plot
+is added to.</p>
+</td></tr>
+<tr valign="top"><td><code>cstr</code></td>
+<td>
+<p>String to label Columns of the matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>rstr</code></td>
+<td>
+<p>String to label Rows of the matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>rlab</code></td>
+<td>
+<p>If TRUE rows of the design are labelled.</p>
+</td></tr>
+<tr valign="top"><td><code>clab</code></td>
+<td>
+<p>If TRUE columns of the design are labelled.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments to <code>polygon</code> used for plotting
+experimental units in the design.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>des.plot</code> may be used to build a graphical representation of a
+matrix, highlighting the position of certain treatments in the design
+and the blocking factors used in the design.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A plot is produced.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Neil Coombes</p>
+
+<hr /><div style="text-align: center;">[Package <em>DiGGer</em> version 1.0.5 <a href="00Index.html">Index</a>]</div>
+</body></html>
