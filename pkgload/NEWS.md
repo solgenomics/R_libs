@@ -1,7 +1,34 @@
+# pkgload 1.3.4
+
+* On load, pkgload now sets `PKGLOAD_PARENT_TEMPDIR` to the temporary
+  directory used in the current process. This provides a convenient place
+  to cache results for functions used in subprocesses (e.g. `devtools::test()`,
+  `devtools::document()`).
+
+* Fixes for Debian packaging.
+
+
+# pkgload 1.3.3
+
+* `dev_topic_index()` is now exported (#257).
+
+* Fix handling of active bindings inside a package during unloading (#255, @klmr).
+
+* The `helpers` argument of `load_all` now defaults to the value
+  provided for the `export_all` arguments. This makes the behaviour
+  safer by default (#244).
+
+* pkgload now depends unconditionally on pkgbuild (#249).
+
+* `load_all()` no longer standardises version number in namespace metadata
+  (#231).
+
+* New `pkg_version_raw()` to get raw package version as a string.
+
+
 # pkgload 1.3.2
 
 * Fixes for CRAN checks.
-
 
 # pkgload 1.3.1
 
