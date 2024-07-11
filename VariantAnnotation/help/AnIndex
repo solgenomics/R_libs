@@ -346,6 +346,7 @@ totalDepth	VRanges-class
 totalDepth,VRanges-method	VRanges-class
 totalDepth<-	VRanges-class
 totalDepth<-,VRanges-method	VRanges-class
+updateObject,VCF-method	VCF-class
 upstream	VariantType-class
 upstream,AllVariants-method	VariantType-class
 upstream,IntergenicVariants-method	VariantType-class

@@ -76,8 +76,8 @@ narrow,XVectorList-method	intra-range-methods
 OnDiskRaw	OnDiskRaw-class
 OnDiskRaw-class	OnDiskRaw-class
 order,XRawList-method	XRawList-comparison
-parallelSlotNames,GroupedIRanges-method	XVectorList-class
-parallelSlotNames,XVectorList-method	XVectorList-class
+parallel_slot_names,GroupedIRanges-method	XVectorList-class
+parallel_slot_names,XVectorList-method	XVectorList-class
 pcompare	XRawList-comparison
 pcompare,XRawList,XRawList-method	XRawList-comparison
 rank,XRawList-method	XRawList-comparison

@@ -70,7 +70,7 @@ accu_proxy_linear(const Proxy<T1>& P)
     }
   else
     {
-    #if defined(__FINITE_MATH_ONLY__) && (__FINITE_MATH_ONLY__ > 0)
+    #if defined(__FAST_MATH__)
       {
       if(P.is_aligned())
         {
@@ -643,7 +643,7 @@ accu_cube_proxy_linear(const ProxyCube<T1>& P)
     }
   else
     {
-    #if defined(__FINITE_MATH_ONLY__) && (__FINITE_MATH_ONLY__ > 0)
+    #if defined(__FAST_MATH__)
       {
       if(P.is_aligned())
         {
@@ -845,23 +845,36 @@ accu(const SpBase<typename T1::elem_type,T1>& expr)
   
   const SpProxy<T1> P(expr.get_ref());
   
+  const uword N = P.get_n_nonzero();
+  
+  if(N == 0)  { return eT(0); }
+  
   if(SpProxy<T1>::use_iterator == false)
     {
     // direct counting
-    return arrayops::accumulate(P.get_values(), P.get_n_nonzero());
+    return arrayops::accumulate(P.get_values(), N);
     }
-  else
+  
+  if(is_SpSubview<typename SpProxy<T1>::stored_type>::value)
     {
-    typename SpProxy<T1>::const_iterator_type it = P.begin();
+    const SpSubview<eT>& sv = reinterpret_cast< const SpSubview<eT>& >(P.Q);
     
-    const uword P_n_nz = P.get_n_nonzero();
-    
-    eT val = eT(0);
-    
-    for(uword i=0; i < P_n_nz; ++i)  { val += (*it); ++it; }
-    
-    return val;
+    if(sv.n_rows == sv.m.n_rows)
+      {
+      const SpMat<eT>& m   = sv.m;
+      const uword      col = sv.aux_col1;
+      
+      return arrayops::accumulate(&(m.values[ m.col_ptrs[col] ]), N);
+      }
     }
+  
+  typename SpProxy<T1>::const_iterator_type it = P.begin();
+  
+  eT val = eT(0);
+  
+  for(uword i=0; i < N; ++i)  { val += (*it); ++it; }
+  
+  return val;
   }
 
 

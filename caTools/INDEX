@@ -1,9 +1,9 @@
-LogitBoost              LogitBoost Classification Algorithm
 base64encode            Convert R vectors to/from the Base64 format
 caTools-package         Tools: moving window statistics, GIF, Base64,
                         ROC AUC, etc.
 colAUC                  Column-wise Area Under ROC Curve (AUC)
 combs                   All Combinations of k Elements from Vector v
+LogitBoost              LogitBoost Classification Algorithm
 predict.LogitBoost      Prediction Based on LogitBoost Classification
                         Algorithm
 read.ENVI               Read and Write Binary Data in ENVI Format

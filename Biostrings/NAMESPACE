@@ -1,25 +1,18 @@
 useDynLib(Biostrings)
 
 import(methods)
+importFrom(utils, data, packageVersion)
+importFrom(grDevices, rgb)
+importFrom(graphics, axis, legend, lines, par, plot.new, plot.window, title)
+importFrom(stats, chisq.test, complete.cases, diffinv, pchisq, setNames)
 
-importFrom(graphics,
-    axis, legend, lines, par, plot.new,
-    plot.window, title
-)
-
-importFrom(stats,
-    chisq.test, complete.cases, diffinv,
-    pchisq, setNames
-)
-
-importFrom(utils,
-    data, packageVersion
-)
+importFrom(crayon, make_style, black)
 
 import(BiocGenerics)
 import(S4Vectors)
 import(IRanges)
 import(XVector)
+import(GenomeInfoDb)
 
 
 ### ==========================================================================
@@ -42,8 +35,10 @@ exportClasses(
     XString, BString, DNAString, RNAString, AAString,
     XStringSet, BStringSet, DNAStringSet, RNAStringSet, AAStringSet,
     XStringViews,
-    MaskedXString, MaskedBString, MaskedDNAString, MaskedRNAString, MaskedAAString,
-    XStringSetList, BStringSetList, DNAStringSetList, RNAStringSetList, AAStringSetList
+    MaskedXString,
+    MaskedBString, MaskedDNAString, MaskedRNAString, MaskedAAString,
+    XStringSetList,
+    BStringSetList, DNAStringSetList, RNAStringSetList, AAStringSetList
 )
 
 export(
@@ -83,6 +78,7 @@ exportMethods(
     length,
     nchar, width,
     seqtype, "seqtype<-",
+    seqinfo, "seqinfo<-",
     updateObject,
     names, "names<-", "[", "[[",
     show, showAsCell,
@@ -400,7 +396,7 @@ exportMethods(
     subpatterns, pattern,
     quality, encoding,
     insertion, deletion,
-    parallelSlotNames,
+    parallel_slot_names,
     unaligned, aligned, indel, nindel,
     parallelVectorNames,
     subject, type, alignedPattern, alignedSubject, score, pid,

@@ -1,11 +1,11 @@
 Package: markdown
 Type: Package
-Title: Render Markdown with the C Library 'Sundown'
-Version: 1.1
+Title: Render Markdown with 'commonmark'
+Version: 1.7
 Authors@R: c(
+   person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666")),
    person("JJ", "Allaire", role = "aut"),
    person("Jeffrey", "Horner", role = "aut"),
-   person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666")),
    person("Henrik", "Bengtsson", role = "ctb"),
    person("Jim", "Hester", role = "ctb"),
    person("Yixuan", "Qiu", role = "ctb"),
@@ -16,28 +16,28 @@ Authors@R: c(
    person("Thomas", "Leeper", role = "ctb"),
    person("Joe", "Cheng", role = "ctb"),
    person("Andrzej", "Oles", role = "ctb"),
-   person("Vicent", "Marti", role = c("aut", "cph"), comment = "The Sundown library"),
-   person("Natacha", "Porte", role = c("aut", "cph"), comment = "The Sundown library"),
-   person(family = "RStudio", role = "cph")
+   person(given = "Posit Software, PBC", role = c("cph", "fnd"))
    )
-Description: Provides R bindings to the 'Sundown' Markdown rendering library
-    (<https://github.com/vmg/sundown>). Markdown is a plain-text formatting
-    syntax that can be converted to 'XHTML' or other formats. See
-    <http://en.wikipedia.org/wiki/Markdown> for more information about Markdown.
+Description: Render Markdown to full and lightweight HTML/LaTeX documents with
+    the 'commonmark' package. It also supports features that are missing in
+    'commonmark', such as raw HTML/LaTeX blocks, LaTeX math, superscripts,
+    subscripts, footnotes, element attributes, appendices, and fenced 'Divs'.
+    With additional JavaScript and CSS, it can also create HTML slides and
+    articles.
 Depends: R (>= 2.11.1)
-Imports: utils, xfun, mime (>= 0.3)
-Suggests: knitr, RCurl
-License: GPL-2
+Imports: utils, commonmark (>= 1.9.0), xfun (>= 0.38)
+Suggests: knitr, rmarkdown (>= 2.18), yaml, RCurl
+License: MIT + file LICENSE
 URL: https://github.com/rstudio/markdown
 BugReports: https://github.com/rstudio/markdown/issues
 VignetteBuilder: knitr
-RoxygenNote: 6.1.1
+RoxygenNote: 7.2.3
 Encoding: UTF-8
-NeedsCompilation: yes
-Packaged: 2019-08-07 15:59:28 UTC; yihui
-Author: JJ Allaire [aut],
+NeedsCompilation: no
+Packaged: 2023-05-16 04:10:01 UTC; yihui
+Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
+  JJ Allaire [aut],
   Jeffrey Horner [aut],
-  Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   Henrik Bengtsson [ctb],
   Jim Hester [ctb],
   Yixuan Qiu [ctb],
@@ -48,10 +48,8 @@ Author: JJ Allaire [aut],
   Thomas Leeper [ctb],
   Joe Cheng [ctb],
   Andrzej Oles [ctb],
-  Vicent Marti [aut, cph] (The Sundown library),
-  Natacha Porte [aut, cph] (The Sundown library),
-  RStudio [cph]
+  Posit Software, PBC [cph, fnd]
 Maintainer: Yihui Xie <xie@yihui.name>
 Repository: CRAN
-Date/Publication: 2019-08-07 16:30:02 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-03-24 19:57:57 UTC; unix
+Date/Publication: 2023-05-16 10:00:03 UTC
+Built: R 4.3.0; ; 2023-07-07 02:35:35 UTC; unix

@@ -1,24 +1,14 @@
 Anova                   Anova Tables for Various Statistical Models
-Boot                    Bootstrapping for regression models
-Boxplot                 Boxplots With Point Identification
-Contrasts               Functions to Construct Contrasts
-Export                  Export a data frame to disk in one of many
-                        formats
-Import                  Import data from many file formats
-Predict                 Model Predictions
-S                       Modified Functions for Summarizing Linear,
-                        Generalized Linear, and Some Other Models
-ScatterplotSmoothers    Smoothers to Draw Lines on Scatterplots
-Tapply                  Apply a Function to a Variable Within Factor
-                        Levels
 avPlots                 Added-Variable Plots
 basicPowerAxis          Axes for Transformed Variables
 bcPower                 Box-Cox, Box-Cox with Negatives Allowed,
                         Yeo-Johnson and Basic Power Transformations
+Boot                    Bootstrapping for regression models
 boxCox                  Graph the profile log-likelihood for Box-Cox
                         transformations in 1D, or in 2D with the
                         bcnPower family.
 boxCoxVariable          Constructed Variable for Box-Cox Transformation
+Boxplot                 Boxplots With Point Identification
 boxTidwell              Box-Tidwell Transformations
 brief                   Print Abbreviated Ouput
 car-defunct             Defunct Functions in the car Package
@@ -33,6 +23,7 @@ ceresPlots              Ceres Plots
 compareCoefs            Print estimated coefficients and their standard
                         errors in a table for several regression
                         models.
+Contrasts               Functions to Construct Contrasts
 crPlots                 Component+Residual (Partial Residual) Plots
 deltaMethod             Estimate and Standard Error of a Nonlinear
                         Function of Estimated Regression Coefficients
@@ -41,9 +32,12 @@ dfbetaPlots             dfbeta and dfbetas Index Plots
 durbinWatsonTest        Durbin-Watson Test for Autocorrelated Errors
 ellipse                 Ellipses, Data Ellipses, and Confidence
                         Ellipses
+Export                  Export a data frame to disk in one of many
+                        formats
 hccm                    Heteroscedasticity-Corrected Covariance
                         Matrices
 hist.boot               Methods Functions to Support 'boot' Objects
+Import                  Import data from many file formats
 infIndexPlot            Influence Index Plot
 influence.mixed.models
                         Influence Diagnostics for Mixed-Effects Models
@@ -62,20 +56,25 @@ mmps                    Marginal Model Plotting
 ncvTest                 Score Test for Non-Constant Error Variance
 outlierTest             Bonferroni Outlier Test
 panel.car               Panel Function for Coplots
+pointLabel              Label placement for points to avoid overlaps
 poTest                  Test for Proportional Odds in the
                         Proportional-Odds Logistic-Regression Model
 powerTransform          Finding Univariate or Multivariate Power
                         Transformations
+Predict                 Model Predictions
 qqPlot                  Quantile-Comparison Plot
 recode                  Recode a Variable
 regLine                 Plot Regression Line
 residualPlots           Residual Plots for Linear and Generalized
                         Linear Models
+S                       Modified Functions for Summarizing Linear,
+                        Generalized Linear, and Some Other Models
 scatter3d               Three-Dimensional Scatterplots and Point
                         Identification
 scatterplot             Enhanced Scatterplots with Marginal Boxplots,
                         Point Marking, Smoothers, and More
 scatterplotMatrix       Scatterplot Matrices
+ScatterplotSmoothers    Smoothers to Draw Lines on Scatterplots
 showLabels              Functions to Identify and Mark Extreme Points
                         in a 2D Plot.
 sigmaHat                Return the scale estimate for a regression
@@ -87,6 +86,8 @@ strings2factors         Convert Character-String Variables in a Data
 subsets                 Plot Output from regsubsets Function in leaps
                         package
 symbox                  Boxplots for transformations to symmetry
+Tapply                  Apply a Function to a Variable Within Factor
+                        Levels
 testTransform           Likelihood-Ratio Tests for Univariate or
                         Multivariate Power Transformations to Normality
 vif                     Variance Inflation Factors

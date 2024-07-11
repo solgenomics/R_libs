@@ -8,18 +8,18 @@ library(curl)
 library(jsonlite)
 
 ## ---------------------------------------------------------------------------------------------------------------------
-req <- curl_fetch_memory("https://eu.httpbin.org/get?foo=123")
+req <- curl_fetch_memory("https://hb.cran.dev/get?foo=123")
 str(req)
 parse_headers(req$headers)
 jsonlite::prettify(rawToChar(req$content))
 
 ## ---------------------------------------------------------------------------------------------------------------------
 tmp <- tempfile()
-curl_download("https://eu.httpbin.org/get?bar=456", tmp)
+curl_download("https://hb.cran.dev/get?bar=456", tmp)
 jsonlite::prettify(readLines(tmp))
 
 ## ---------------------------------------------------------------------------------------------------------------------
-con <- curl("https://eu.httpbin.org/get")
+con <- curl("https://hb.cran.dev/get")
 open(con)
 
 # Get 3 lines
@@ -51,7 +51,7 @@ pool <- new_pool()
 cb <- function(req){cat("done:", req$url, ": HTTP:", req$status, "\n")}
 curl_fetch_multi('https://www.google.com', done = cb, pool = pool)
 curl_fetch_multi('https://cloud.r-project.org', done = cb, pool = pool)
-curl_fetch_multi('https://httpbin.org/blabla', done = cb, pool = pool)
+curl_fetch_multi('https://hb.cran.dev/blabla', done = cb, pool = pool)
 
 ## ---------------------------------------------------------------------------------------------------------------------
 # This actually performs requests:
@@ -114,11 +114,11 @@ curl_symbols('CURL_HTTP_VERSION_')
 handle_setopt(handle, http_version = 2)
 
 ## ---------------------------------------------------------------------------------------------------------------------
-req <- curl_fetch_memory("https://eu.httpbin.org/post", handle = h)
+req <- curl_fetch_memory("https://hb.cran.dev/post", handle = h)
 jsonlite::prettify(rawToChar(req$content))
 
 ## ---------------------------------------------------------------------------------------------------------------------
-con <- curl("https://eu.httpbin.org/post", handle = h)
+con <- curl("https://hb.cran.dev/post", handle = h)
 jsonlite::prettify(readLines(con))
 
 ## ---- echo = FALSE, message = FALSE, warning=FALSE--------------------------------------------------------------------
@@ -126,11 +126,11 @@ close(con)
 
 ## ---------------------------------------------------------------------------------------------------------------------
 tmp <- tempfile()
-curl_download("https://eu.httpbin.org/post", destfile = tmp, handle = h)
+curl_download("https://hb.cran.dev/post", destfile = tmp, handle = h)
 jsonlite::prettify(readLines(tmp))
 
 ## ---------------------------------------------------------------------------------------------------------------------
-curl_fetch_multi("https://eu.httpbin.org/post", handle = h, done = function(res){
+curl_fetch_multi("https://hb.cran.dev/post", handle = h, done = function(res){
   cat("Request complete! Response content:\n")
   cat(rawToChar(res$content))
 })
@@ -143,16 +143,16 @@ out <- multi_run()
 h <- new_handle()
 
 # Ask server to set some cookies
-req <- curl_fetch_memory("https://eu.httpbin.org/cookies/set?foo=123&bar=ftw", handle = h)
-req <- curl_fetch_memory("https://eu.httpbin.org/cookies/set?baz=moooo", handle = h)
+req <- curl_fetch_memory("https://hb.cran.dev/cookies/set?foo=123&bar=ftw", handle = h)
+req <- curl_fetch_memory("https://hb.cran.dev/cookies/set?baz=moooo", handle = h)
 handle_cookies(h)
 
 # Unset a cookie
-req <- curl_fetch_memory("https://eu.httpbin.org/cookies/delete?foo", handle = h)
+req <- curl_fetch_memory("https://hb.cran.dev/cookies/delete?foo", handle = h)
 handle_cookies(h)
 
 ## ---------------------------------------------------------------------------------------------------------------------
-req1 <- curl_fetch_memory("https://eu.httpbin.org/get")
+req1 <- curl_fetch_memory("https://hb.cran.dev/get")
 req2 <- curl_fetch_memory("https://www.r-project.org")
 
 ## ---------------------------------------------------------------------------------------------------------------------
@@ -175,7 +175,7 @@ handle_setform(h,
   description = form_file(system.file("DESCRIPTION")),
   logo = form_file(file.path(R.home('doc'), "html/logo.jpg"), "image/jpeg")
 )
-req <- curl_fetch_memory("https://eu.httpbin.org/post", handle = h)
+req <- curl_fetch_memory("https://hb.cran.dev/post", handle = h)
 
 ## ---------------------------------------------------------------------------------------------------------------------
 library(magrittr)
@@ -183,6 +183,6 @@ library(magrittr)
 new_handle() %>%
   handle_setopt(copypostfields = "moo=moomooo") %>%
   handle_setheaders("Content-Type"="text/moo", "Cache-Control"="no-cache", "User-Agent"="A cow") %>%
-  curl_fetch_memory(url = "https://eu.httpbin.org/post") %$% content %>% 
+  curl_fetch_memory(url = "https://hb.cran.dev/post") %$% content %>% 
   rawToChar %>% jsonlite::prettify()
 

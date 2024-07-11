@@ -3,7 +3,8 @@ knitr::opts_chunk$set(
   message = FALSE,
   digits = 3,
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = requireNamespace("modeldata", quietly = TRUE)
   )
 options(digits = 3)
 
@@ -26,7 +27,7 @@ dummied <- rec %>% step_dummy(all_nominal())
 ## ----dummy_2------------------------------------------------------------------
 dummied <- rec %>% step_dummy(Records) # or
 dummied <- rec %>% step_dummy(all_nominal(), - Status) # or
-dummied <- rec %>% step_dummy(all_nominal(), - all_outcomes()) 
+dummied <- rec %>% step_dummy(all_nominal_predictors()) 
 
 ## ----dummy_3------------------------------------------------------------------
 dummied <- prep(dummied, training = credit_data)

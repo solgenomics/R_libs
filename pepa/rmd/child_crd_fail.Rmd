@@ -2,7 +2,7 @@
 
 # {{i+1}}. Analysis for trait `r traits[i]`
 
-```{r echo = FALSE}
+```{r}
 lc <- ck.crd(traits[i], trt, dfr)
 ```
 
@@ -14,7 +14,7 @@ lc <- ck.crd(traits[i], trt, dfr)
 
 `r if (lc$ng.0 > 0 & lc$ng > 2 & lc$nrep > 1) paste0("There is at least one ", trt.lab, " without data. The table below shows the frequencies of valid data for each ", trt.lab, ". The analysis cannot be produced if there are ", trt.lab.s, " without data.")`
 
-```{r echo = FALSE}
+```{r}
 if (lc$ng.0 > 0 & lc$ng > 2 & lc$nrep > 1)
   lc$tf
 ```

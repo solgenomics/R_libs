@@ -5,7 +5,7 @@ knitr::opts_chunk$set(
 )
 
 if (!requireNamespace("poorman", quietly = TRUE) ||
-    !requireNamespace("gt", quietly = TRUE)) {
+  !requireNamespace("gt", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 } else {
   library(poorman)
@@ -28,7 +28,6 @@ df
 
 ## ---- eval=FALSE--------------------------------------------------------------
 #  knitr::kable(df, format = "markdown")
-#  
 
 ## ---- results='asis'----------------------------------------------------------
 knitr::kable(df, format = "html")
@@ -37,12 +36,29 @@ knitr::kable(df, format = "html")
 format_table(df)
 
 ## -----------------------------------------------------------------------------
-df %>% 
-  mutate(p = format_p(p, stars = TRUE)) %>% 
+df %>%
+  mutate(p = format_p(p, stars = TRUE)) %>%
   format_table()
 
+## ----eval=.Platform$OS.type == "windows"--------------------------------------
+x <- data.frame(
+  phi_adjusted = 0.3,
+  Glass_delta = 0.4,
+  Epsilon2 = 0.7,
+  R2 = 0.4
+)
+
+# standard output
+format_table(x)
+
+# column names of effect sizes as symbols
+format_table(x, use_symbols = TRUE)
+
+## ----eval=.Platform$OS.type == "windows"--------------------------------------
+export_table(format_table(x, use_symbols = TRUE))
+
 ## -----------------------------------------------------------------------------
-cat(export_table(df))
+export_table(df)
 
 ## -----------------------------------------------------------------------------
 export_table(df, format = "md")
@@ -51,7 +67,7 @@ export_table(df, format = "md")
 export_table(df, format = "html")
 
 ## -----------------------------------------------------------------------------
-df %>% 
-  format_table(ci_brackets = c("(", ")")) %>% 
+df %>%
+  format_table(ci_brackets = c("(", ")")) %>%
   export_table(format = "html")
 

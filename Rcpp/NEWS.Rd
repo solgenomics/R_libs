@@ -3,6 +3,144 @@
 \newcommand{\ghpr}{\href{https://github.com/RcppCore/Rcpp/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/RcppCore/Rcpp/issues/#1}{##1}}
 
+\section{Changes in Rcpp release version 1.0.12 (2024-01-08)}{
+  \itemize{
+    \item Changes in Rcpp API:
+    \itemize{
+      \item Missing header includes as spotted by some recent tools were
+      added in two places (Michael Chirico in \ghpr{1272} closing
+      \ghit{1271}).
+      \item Casts to avoid integer overflow in matrix row/col selections
+      have neem added (Aaron Lun \ghpr{1281}).
+      \item Three print format correction uncovered by R-devel were
+      applied with thanks to Tomas Kalibera (Dirk in \ghpr{1285}).
+      \item Correct a print format correction in the RcppExports glue code
+      (Dirk in \ghpr{1288} fixing \ghit{1287}).
+      \item The upcoming \code{OBJSXP} addition to R 4.4.0 is supported in
+      the \code{type2name} mapper (Dirk and Iñaki in \ghpr{1293}).
+    }
+    \item Changes in Rcpp Attributes:
+    \itemize{
+      \item Generated interface code from base R that fails under LTO is now
+      corrected (Iñaki in \ghpr{1274} fixing a StackOverflow issue).
+    }
+    \item Changes in Rcpp Documentation:
+    \itemize{
+      \item The caption for third figure in the introductory vignette has
+      been corrected (Dirk in \ghpr{1277} fixing \ghit{1276}).
+      \item A small formatting issue was correct in an Rd file as
+      noticed by R-devel (Dirk in \ghpr{1282}).
+      \item The Rcpp FAQ vignette has been updated (Dirk in \ghpr{1284}).
+      \item The \code{Rcpp.bib} file has been refreshed to current package
+      versions.
+    }
+    \item Changes in Rcpp Deployment:
+    \itemize{
+      \item The RcppExports file for an included test package has been
+      updated (Dirk in \ghpr{1289}).
+    }
+  }
+}
+
+\section{Changes in Rcpp release version 1.0.11 (2023-07-03)}{
+  \itemize{
+    \item Changes in Rcpp API:
+    \itemize{
+      \item \code{Rcpp:::CxxFlags()} now quotes only non-standard include path
+      on linux (Lukasz in \ghpr{1243} closing \ghit{1242}).
+      \item Two unit tests no longer accidentally bark on stdout (Dirk and
+      Iñaki in \ghpr{1245}).
+      \item Compilation under C++20 using \pkg{clang++} and its standard
+      library is enabled (Dirk in \ghpr{1248} closing \ghit{1244}).
+      \item Use backticks in a generated \code{.Call()} statement in
+      \code{RcppExports.R} (Dirk \ghpr{1256} closing \ghit{1255}).
+      \item Switch to \code{system2()} to capture standard error messages in
+      error cases (Iñaki in \ghpr{1259} and \ghpr{1261} fixing \ghit{1257}).
+    }
+    \item Changes in Rcpp Documentation:
+    \itemize{
+      \item The CITATION file format has been updated (Dirk in \ghpr{1250}
+      fixing \ghit{1249}).
+    }
+    \item Changes in Rcpp Deployment:
+    \itemize{
+      \item A test for \code{qnorm} now uses the more accurate value from R
+      4.3.0 (Dirk in \ghpr{1252} and \ghpr{1260} fixing \ghit{1251}).
+      \item Skip tests with path issues on Windows (Iñaki in \ghpr{1258}).
+      \item Container deployment in continuous integrations was
+      improved. (Iñaki and Dirk in \ghpr{1264}, Dirk in \ghpr{1269}).
+      \item Several files receives minor edits to please \code{R CMD check}
+      from r-devel (Dirk in \ghpr{1267}).
+    }
+  }
+}
+
+\section{Changes in Rcpp release version 1.0.10 (2023-01-12)}{
+  \itemize{
+    \item Changes in Rcpp API:
+    \itemize{
+      \item Unwind protection is enabled by default (Iñaki in \ghpr{1225}).
+      It can be disabled by defining \code{RCPP_NO_UNWIND_PROTECT} before
+      including \code{Rcpp.h}. \code{RCPP_USE_UNWIND_PROTECT} is not checked
+      anymore and has no effect. The associated plugin \code{unwindProtect}
+      is therefore deprecated and will be removed in a future release.
+      \item The 'finalize' method for Rcpp Modules is now eagerly materialized,
+      fixing an issue where errors can occur when Module finalizers are run
+      (Kevin in \ghpr{1231} closing \ghit{1230}).
+      \item Zero-row \code{data.frame} objects can receive \code{push_back}
+      or \code{push_front} (Dirk in \ghpr{1233} fixing \ghit{1232}).
+      \item One remaining \code{sprintf} has been replaced by
+      \code{snprintf} (Dirk and Kevin in \ghpr{1236} and \ghpr{1237}).
+      \item Several conversion warnings found by \code{clang++} have been
+      addressed (Dirk in \ghpr{1240} and \ghpr{1241}).
+    }
+    \item Changes in Rcpp Attributes:
+    \itemize{
+      \item The C++20, C++2b (experimental) and C++23 standards now have
+      plugin support like the other C++ standards (Dirk in \ghpr{1228}).
+      \item The source path for attributes received one more protection
+      from spaces (Dirk in \ghpr{1235} addressing \ghit{1234}).
+    }
+    \item Changes in Rcpp Deployment:
+    \itemize{
+      \item Several GitHub Actions have been updated.
+    }
+  }
+}
+
+\section{Changes in Rcpp release version 1.0.9 (2022-07-02)}{
+  \itemize{
+    \item Changes in Rcpp API:
+    \itemize{
+      \item Accomodate C++98 compilation by adjusting attributes.cpp (Dirk in
+      \ghpr{1193} fixing \ghit{1192})
+      \item Accomodate newest compilers replacing deprecated
+       \code{std::unary_function} and \code{std::binary_function} with
+       \code{std::function} (Dirk in \ghpr{1202} fixing \ghit{1201} and
+       CRAN request)
+       \item Upon removal from precious list, the tag is set to null
+       (Iñaki in \ghpr{1205} fixing \ghit{1203})
+       \item Move constructor and assignment for strings have been added
+       (Dean Scarff in \ghpr{1219}).
+    }
+    \item Changes in Rcpp Documentation:
+    \itemize{
+      \item Adjust one overflowing column (Bill Denney in \ghpr{1196} fixing
+      \ghit{1195})
+      \item Correct a typo in the FAQ (Marco Colombo in \ghpr{1217})
+    }
+    \item Changes in Rcpp Deployment:
+    \itemize{
+      \item Accomodate four digit version numbers in unit test (Dirk)
+      \item Do not run complete test suite to limit test time to CRAN
+      preference (Dirk in \ghpr{1206})
+      \item Small updates to the CI test containers have been made
+      \item Some of changes also applied to an interim release
+      1.0.8.3 made for CRAN on 2022-03-14.
+    }
+  }
+}
+
 \section{Changes in Rcpp release version 1.0.8 (2022-01-11)}{
   \itemize{
     \item Changes in Rcpp API:

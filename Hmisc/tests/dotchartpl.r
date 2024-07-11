@@ -23,7 +23,7 @@ with(d,
 ## width equal to half-width of confidence interval
 d <- subset(d, city==0)
 i <- with(d, order(major, minor, group))
-xless(d[i, ])
+# xless(d[i, ])
 with(d,
      dotchartpl(x, major, minor, group, refgroup='Male', num=num, denom=denom,
                   xlim=c(0,1))
@@ -86,6 +86,7 @@ dm <- addMarginal(d, region)
 s <- summaryP(race + sex + smoking + hypertension ~
                 region + treat,  data=dm)
 
+require(ggplot2)
 ## add exclude1=FALSE to include female category
 ggplot(s, groups='treat', exclude1=TRUE, abblen=12)
 ggplot(s, groups='region')
@@ -102,7 +103,3 @@ with(s2,
      dotchartpl(freq / denom, major=var, minor=val, group=treat, mult=region,
                 big=region == 'All Regions', num=freq, denom=denom)
 )
-
-
-
-

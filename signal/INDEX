@@ -1,10 +1,7 @@
-Arma                    Create an autoregressive moving average (ARMA)
-                        model.
-FilterOfOrder           Filter of given order and specifications.
-Ma                      Create a moving average (MA) model
-Zpg                     Zero-pole-gain model
 an                      Complex unit phasor of the given angle in
                         degrees.
+Arma                    Create an autoregressive moving average (ARMA)
+                        model.
 bartlett                Windowing functions
 bilinear                Bilinear transformation
 butter                  Generate a Butterworth filter.
@@ -20,6 +17,7 @@ ellipke                 Internal or uncommented functions
 ellipord                Elliptic filter order and cutoff
 fftfilt                 Filters with an FIR filter using the FFT
 filter                  Filter a signal
+FilterOfOrder           Filter of given order and specifications.
 filtfilt                Forward and reverse filter a signal
 fir1                    FIR filter generation
 fir2                    FIR filter generation
@@ -34,6 +32,7 @@ kaiser                  Kaiser window
 kaiserord               Parameters for an FIR filter from a Kaiser
                         window
 levinson                Durbin-Levinson Recursion
+Ma                      Create a moving average (MA) model
 medfilt1                Median filter
 pchip                   Piecewise cubic hermite interpolation
 poly                    Polynomial given roots
@@ -49,4 +48,5 @@ specgram                Spectrogram plot
 spencer                 Spencer filter
 unwrap                  Unwrap radian phases
 wav                     Example wav file
+Zpg                     Zero-pole-gain model
 zplane                  Pole-zero plot

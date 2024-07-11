@@ -1,3 +1,19 @@
+# mclust 6.0.0
+
+- Major release of mclust accompanying the upcoming book by Chapman & Hall/CRC Press.
+
+# mclust 5.4.11 (NOT ON CRAN)
+
+- Added `summary.crimcoords()` method and removed argument `plot` from 
+  `crimcoords()` function call.
+
+# mclust 5.4.10 
+
+- Updated banner on startup.
+- Updated info on man page for datasets `diabetes`, `wdbc`, and `thyroid`.  
+- Std. error for cross-validation in `cvMclustDA()` uses formula for the weighted standard deviation with weights given by folds size.
+- Fix .Rd files.
+
 # mclust 5.4.9
 
 - Added `crimcoords()` to compute discriminant coordinates or crimcoords.

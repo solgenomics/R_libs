@@ -24,7 +24,12 @@ params:
   author: "no data"
 ---
 
-```{r echo = FALSE}
+```{r global_options, include = FALSE}
+library(knitr)
+opts_chunk$set(echo = FALSE, comment = NA)
+```
+
+```{r}
 ## Data
 
 traits <- params$traits
@@ -42,13 +47,13 @@ msg <- paste(names_trait, collapse = ", ") %>% paste0("The next traits have miss
 ```
 
 `r if (lgc_val) {"There are missing values in some traits. For this reason, we could not perform a principal components analysis"}`
-```{r conditional, echo = FALSE, eval = lgc_val}
+```{r conditional, eval = lgc_val}
 cat(msg)
 ```
 
 `r if (!lgc_val) {"A principal components analysis is shown to see the associations among the genotypes and some attributes."} `
 
-```{r echo = FALSE, eval = !lgc_val, fig.height = 6, fig.width = 6}
+```{r eval = !lgc_val, fig.height = 6, fig.width = 6}
 princip <- prcomp(dfr, center = TRUE, scale = TRUE)
 summary(princip)
 print(princip$x)

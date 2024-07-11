@@ -1,3 +1,36 @@
+CHANGES IN VERSION 1.54.0
+-------------------------
+
+NEW FEATURES
+
+    o There is a new replacement package for the Inparanoid orthology packages, called Orthology.eg.db
+    o This package uses NCBI orthology data to map NCBI Gene IDs between species using the usual select() interface
+
+MODIFICATIONS
+
+    o UniGene data have been removed from OrgDb and ChipDb packages
+    o Gene type data have been added to OrgDb and ChipDb packages
+    
+
+CHANGES IN VERSION 1.53.0
+-------------------------
+
+NEW FEATURES
+
+    o organismKEGGFrame() provides a data.frame of species names and KEGG orgs
+
+MODIFICATIONS
+
+    o Conversion from KEGG.db (which was deprecated) to KEGGREST
+    - This involved changing how KEGG Ids checked when creating a KEGGFrame 
+    object.
+
+    o Removal of any use of Inparanoid data/structures since the hom.*.inp.db 
+    packages have been removed. The data is extremely outdated and there is no 
+    replacement for it.
+    - Removed the InparanoidDb object and all of the methods
+
+
 CHANGES IN VERSION 1.36.0
 -------------------------
 

@@ -60,11 +60,11 @@ Scroll down or follow the links to those groups for more information.
 |             |         |         |`"vbeta.fij", "robust", "naive")` or a matrix                |
 |geese        |geepack  |[E](#E)  |Like `geeglm`                                                |
 |glm          |stats    |[G](#G)  |                                                             |
-|glm.nb       |MASS     |[G](#G)  |Requires `data` argument                                     |
+|glm.nb       |MASS     |[G](#G)  |                                     |
 |glmerMod     |lme4     |[G](#G)  |                                                             |
 |glmmadmb     |glmmADMB |         |No longer supported                                          |
 |glmmPQL      |MASS     |[G](#G)  |inherits `lm` support                                        |
-|glmmTMB      |glmmTMB  |[P](#P)  |Supported in **glmmTMB** package (dev. version only?)        |
+|glmmTMB      |glmmTMB  |[P](#P)  |Supported in **glmmTMB** package                             |
 |gls          |nlme     |[K](#K)  |`mode = c("auto", "df.error", "satterthwaite", "asymptotic")`|
 |gnls         |nlme     |[A](#A)  |Supports `params` part. Requires `param = "<name>"`          |
 |hurdle       |pscl     |[C](#C)  |`mode = c("response", "count", "zero", "prob0"),`            |
@@ -76,11 +76,13 @@ Scroll down or follow the links to those groups for more information.
 |lmerMod      |lme4     |[L](#L)  |`lmer.df = c("kenward-roger", "satterthwaite", "asymptotic")`, |
 |             |         |         |`pbkrtest.limit = 3000`,  `disable.pbkrtest = FALSE`.        |
 |             |         |         |`emm_options(lmer.df =, pbkrtest.limit =, disable.pbkrtest =)` |
+|logistf      |glmmTMB  |[P](#P)  |Supported in **logistf** package                             |
 |lqm,lqmm     |lqmm     |[Q](#Q)  |`tau = "0.5"` (must match an entry in `object$tau`)          |
 |             |         |         |Optional: `method`, `R`, `seed`, `startQR` (must be fully spelled-out) |
 |manova       |stats    |[M](#M)  |`mult.name`, `mult.levs`                                     |
 |maov         |stats    |[M](#M)  |`mult.name`, `mult.levs`                                     |
-|mblogit      |mclogit  |[P](#P)  |Supported in **mclogit** (overrides previous minimal support here)  |
+|mblogit      |mclogit  |[N](#N)  |`mode = c("prob", "latent")`                                 |
+|             |         |         |Always include response in specs for `emmeans()`
 |mcmc         |mcmc     |[S](#S)  |May require `formula`, `data`                                |
 |MCMCglmm     |MCMCglmm |[S](#S)  |(see also [M](#M#))  `mult.name`, `mult.levs`, `trait`,              |
 |             |         |         |`mode = c("default", "multinomial")`; `data` is required     |
@@ -104,6 +106,7 @@ Scroll down or follow the links to those groups for more information.
 |stanreg      |rstanarm |[S](#S)  |Args for `stanreg_`*xxx* similar to those for *xxx*          |
 |survreg      |survival |[A](#A)  |                                                             |
 |svyglm       |survey   |[A](#A)  |                                                             |
+|svyolr       |survey   |[O](#O)  |Piggybacks on `polr` support         |
 |zeroinfl     |pscl     |[C](#C)  |`mode = c("response", "count", "zero", "prob0")`,            |
 |             |         |         |`lin.pred = c(FALSE, TRUE)`                                  |
 
@@ -187,7 +190,7 @@ Most models in this group receive only standard support as in [Group A](#A), but
 typically the tests and confidence intervals are asymptotic. Thus the
 `df` column for tabular results will be `Inf`.
 
-Some objects in this group *require* that the original or reference dataset 
+Some objects in this group may require that the original or reference dataset 
 be provided when calling `ref_grid()` or `emmeans()`.
 
 In the case of `mgcv::gam` objects, there are optional `freq` and
@@ -229,14 +232,15 @@ subsets or imputed values. The `bhat` and `V` slots are obtained via averaging
 and, in the case of multiple imputation, adding a multiple of the between-imputation 
 covariance per Rubin's rules. 
 
-Support for `MuMIn::averaging` objects may be somewhat dodgy, as it is not clear that
-all supported model classes will work. The object *must* have a `"modelList"` attribute
-(obtained by constructing the object explicitly from a model list or by including 
-`fit = TRUE` in the call). And each model should be fitted with `data` as a **named**
-argument in the call; or else provide a `data` argument in the call to `emmeans()` or
-`ref_grid()`. No estimability checking is done at present: if/when it is added,
-a linear function will be estimable only if it is estimable in *all* models included
-in the averaging.
+Support for `MuMIn::averaging` objects may be somewhat dodgy, as it is not clear
+that all supported model classes will work. The object *must* have a
+`"modelList"` attribute (obtained by constructing the object explicitly from a
+model list or by including `fit = TRUE` in the call). And each model should be
+fitted with `data` as a **named** argument in the call; or else provide a `data`
+argument in the call to `emmeans()` or `ref_grid()`. Only ``full'' averaging is
+supported; conditional averaging can result in non-positive-definite covariance
+matrices, and so cannot be considered. No estimability checking is done at
+present (not clear what we even mean by it).
 
 
 ## Group K -- `gls` and `lme` models {#K}
@@ -268,11 +272,15 @@ An alternative method is `"df.error"` (for `gls`) and
 the model, minus the number of extra random effects estimated; it generally
 over-estimates the degrees of freedom. The `asymptotic` mode simply sets the 
 degrees of freedom to infinity.
-"containment"` mode (for `lme` models) determines the degrees of
+`"containment"` mode (for `lme` models) determines the degrees of
 freedom for the coarsest grouping involved in the contrast or linear function
 involved, so it tends to under-estimate the degrees of freedom.
 The default is `mode = "auto"`, which uses Satterthwaite if there are estimated 
 random effects and the non-Satterthwaite option otherwise.
+
+User reports indicate that models with special terms like `poly()` are not adequately
+supported by `gls` in that the needed basis is not recoverable from its `terms`
+component. This is not a problem with `lme`.
 
 The `extra.iter` argument is ignored unless the d.f. method is (or defaults to) 
 `appx-satterthwaite`.

@@ -77,7 +77,8 @@ S3method(predict, slda)
 S3method(predict, ipredknn) 
 #S3method(predict, sclass)
 #S3method(predict, sreg)
-
+S3method("ipredbagg", "default")
+S3method("ipredbagg", "integer")
 
 ##imported functions
 importFrom(class, knn)

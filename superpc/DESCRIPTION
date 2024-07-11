@@ -27,4 +27,4 @@ Date/Publication: 2020-10-19 22:10:03 UTC
 License: GPL (>= 3) | file LICENSE
 Archs: i386, x64
 Packaged: 2020-10-19 18:31:57 UTC; JE D
-Built: R 3.6.3; ; 2022-02-15 17:01:28 UTC; unix
+Built: R 4.3.0; ; 2023-07-07 03:31:19 UTC; unix

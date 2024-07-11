@@ -1,0 +1,140 @@
+% preamble taken from the vignette in package strucchange
+%
+\documentclass[12pt,a4paper]{article}
+\usepackage[left=20mm,right=20mm,top=20mm,bottom=20mm]{geometry}
+\usepackage{graphicx,color,alltt}
+\usepackage[authoryear,round,longnamesfirst]{natbib}
+\usepackage{hyperref}
+
+\definecolor{Red}{rgb}{0.7,0,0}
+\definecolor{Blue}{rgb}{0,0,0.8}
+\definecolor{hellgrau}{rgb}{0.55,0.55,0.55}
+
+\newcommand{\E}{\mbox{$\mathsf{E}$}}
+\newcommand{\VAR}{\mbox{$\mathsf{VAR}$}}
+\newcommand{\COV}{\mbox{$\mathsf{COV}$}}
+\newcommand{\p}{\mbox{$\mathsf{P}$}}
+\newcommand{\email}[1]{\href{mailto:#1}{\normalfont\texttt{#1}}}
+\newenvironment{smallexample}{\begin{alltt}\small}{\end{alltt}}
+
+\setlength{\parskip}{0.5ex plus0.1ex minus0.1ex}
+\setlength{\parindent}{0em}
+
+\bibpunct{(}{)}{;}{a}{}{,}
+
+\newcommand{\ui}{\underline{i}}
+\newcommand{\oi}{\overline{\imath}}
+
+\RequirePackage{color}
+\definecolor{Red}{rgb}{0.5,0,0}
+\definecolor{Blue}{rgb}{0,0,0.5}
+\definecolor{hellgrau}{rgb}{0.55,0.55,0.55}
+
+\hypersetup{%
+hyperindex,%
+colorlinks,%
+linktocpage,%
+plainpages=false,%
+linkcolor=Blue,%
+citecolor=Blue,%
+urlcolor=Red,%
+pdfstartview=Fit,%
+pdfview={XYZ null null null}%
+}
+
+\usepackage{verbatim}
+\usepackage{shortvrb}
+\MakeShortVerb{\|}
+%\MakeShortVerb{"}
+
+
+\begin{document}
+
+\SweaveOpts{engine=R,eps=FALSE}
+%\VignetteIndexEntry{Plotting with plotpdf()}
+%\VignetteDepends{gbutils}
+%\VignetteKeywords{plot, pdf, cdf, quantiles}
+%\VignettePackage{gbutils}
+
+\setkeys{Gin}{width=0.4\textwidth}
+
+<<echo=FALSE>>=
+library(gbutils)
+@
+
+\title{Plotting with plotpdf()}
+\author{Georgi N. Boshnakov}
+\date{}
+\maketitle
+
+The function |plotpdf()| plots a function, usually probability density (pdf) or cumulative
+distribution function (cdf), over an interval containing the ``interesting'' part of the
+function. The interval is based on quantiles computed from a supplied cdf or quantile
+function.
+
+|plotpdf()| is most useful when the quantiles are not readily availaible but here are some
+examples with a normal distribution to illustrate the idea:
+<<>>=
+pdf1 <- function(x) dnorm(x, mean = 100, sd = 5) # pdf
+qdf1 <- function(x) qnorm(x, mean = 100, sd = 5) # qf
+cdf1 <- function(x) pnorm(x, mean = 100, sd = 5) # cdf
+@
+
+|plot(pdf1)| works but needs arguments 'from' and 'to' for a meaningful plot.
+We can simply pass the quantile function to |plotpdf()| to achieve this:
+<<fig=TRUE>>=
+plotpdf(pdf1, qdf1)
+@
+
+Similar result is obtained by supplying the cdf, which is handy when the quantiles are not
+easily available:
+<<fig=TRUE>>=
+plotpdf(pdf1, cdf = cdf1)
+@
+
+By default, the lower and upper $0.01$ quantiles are used to set the limits on the $x$-axis.
+This can be changed with arguments |lq| and |uq|
+<<fig=TRUE>>=
+plotpdf(pdf1, cdf = cdf1, lq = 0.001, uq = 0.999)
+@
+
+<<fig=TRUE>>=
+plotpdf(cdf1, cdf = cdf1, lq = 0.001, uq = 0.999) # plot a cdf
+@
+
+The pdf and cdf of a mixture distribution are usually straight-forward. Here is an example:
+<<>>=
+pf1 <- function(x){
+    0.25 * pnorm(x, mean = 3, sd = 0.2) + 0.75 * pnorm(x, mean = -1, sd = 0.5)
+}
+df1 <- function(x){
+    0.25 * dnorm(x, mean = 3, sd = 0.2) + 0.75 * dnorm(x, mean = -1, sd = 0.5)
+}
+@
+
+Here is a plot of the pdf:
+<<fig=TRUE>>=
+plotpdf(df1, cdf = pf1) # plot the pdf
+@
+
+... and this produces the cdf:
+<<fig=TRUE>>=
+plotpdf(pf1, cdf = pf1) # plot the cdf
+@
+
+
+Additional arguments can be specified as for |plot()|:
+<<fig=TRUE>>=
+plotpdf(pf1, cdf = pf1)                           # plot the cdf
+plotpdf(df1, cdf = pf1, add = TRUE, col = "blue") # overlay the pdf
+@
+
+\bigskip{}
+
+|plotpdf()| uses |cdf2quantile()| to compute quantiles from a cdf.
+|cdf2quantile()| can be used directly, as well:
+<<>>=
+c(q5pc = cdf2quantile(0.05, pf1), q95pc = cdf2quantile(0.95, pf1))
+@
+
+\end{document}

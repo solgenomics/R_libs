@@ -1,5 +1,6 @@
 all_output_formats      Determine all output formats for an R Markdown
                         document
+available_templates     List available R Markdown template in a package
 beamer_presentation     Convert to a Beamer presentation
 compile_notebook        Compiling R scripts to a notebook
 context_document        Convert to a ConTeXt document
@@ -12,8 +13,6 @@ find_external_resources
                         Find External Resource References
 find_pandoc             Find the 'pandoc' executable
 github_document         Convert to GitHub Flavored Markdown
-html-dependencies       Provide common HTML dependencies for R Markdown
-                        formats
 html_document           Convert to an HTML document
 html_document_base      Base output format for HTML-based output
                         formats
@@ -23,6 +22,8 @@ html_notebook_metadata
                         Generate R Notebook Metadata
 html_notebook_output    Generate R Notebook Output
 html_vignette           Convert to an HTML vignette
+html-dependencies       Provide common HTML dependencies for R Markdown
+                        formats
 includes                Include content within output
 ioslides_presentation   Convert to an ioslides Presentation
 knit_params_ask         Run a shiny application asking for parameter
@@ -30,8 +31,8 @@ knit_params_ask         Run a shiny application asking for parameter
 knitr_options           Knitr options for an output format
 knitr_options_html      Knitr options for an HTML output format
 knitr_options_pdf       Knitr options for a PDF output format
-latex-dependencies      Provide common LaTeX dependencies
 latex_dependency        Define a LaTeX package dependency
+latex-dependencies      Provide common LaTeX dependencies
 md_document             Convert to a markdown document
 metadata                The YAML metadata of the current R Markdown
                         document
@@ -68,8 +69,8 @@ render_supporting_files
                         Render supporting files for an input document
 resolve_output_format   Resolve the output format for an R Markdown
                         document
-rmarkdown-package       R Markdown Document Conversion
 rmarkdown_format        R Markdown input format definition
+rmarkdown-package       R Markdown Document Conversion
 rmd_metadata            R Markdown Metadata
 rtf_document            Convert to an RTF document
 run                     Run a Shiny document
@@ -81,5 +82,4 @@ shiny_prerendered_clean
 site_resources          Determine website resource files for a
                         directory
 slidy_presentation      Convert to a slidy presentation
-tufte_handout           Tufte handout format (PDF)
 word_document           Convert to an MS Word document

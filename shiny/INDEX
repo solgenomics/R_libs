@@ -1,6 +1,3 @@
-MockShinySession        Mock Shiny Session
-NS                      Namespaced IDs for inputs/outputs
-Progress                Reporting progress (object-oriented API)
 absolutePanel           Panel with absolute positioning
 actionButton            Action button/link
 addResourcePath         Resource Publishing
@@ -10,9 +7,9 @@ bindEvent               Make an object respond only to specified
 bookmarkButton          Create a button for bookmarking/sharing
 bootstrapLib            Bootstrap libraries
 bootstrapPage           Create a Bootstrap page
-brushOpts               Create an object representing brushing options
 brushedPoints           Find rows of data selected on an interactive
                         plot.
+brushOpts               Create an object representing brushing options
 callModule              Invoke a Shiny module
 checkboxGroupInput      Checkbox Group Input Control
 checkboxInput           Checkbox Input Control
@@ -53,18 +50,20 @@ insertUI                Insert and remove UI objects
 invalidateLater         Scheduled Invalidation
 is.reactivevalues       Checks whether an object is a reactivevalues
                         object
+isolate                 Create a non-reactive scope for an expression
 isRunning               Check whether a Shiny application is running
 isTruthy                Truthy and falsy values
-isolate                 Create a non-reactive scope for an expression
 loadSupport             Load an app's supporting R files
-markRenderFunction      Mark a function as a render function
 markdown                Insert inline Markdown
+markRenderFunction      Mark a function as a render function
 maskReactiveContext     Evaluate an expression without a reactive
                         context
+MockShinySession        Mock Shiny Session
 modalDialog             Create a modal dialog UI
 moduleServer            Shiny modules
 navbarPage              Create a page with a top level navigation bar
 navlistPanel            Create a navigation list panel
+NS                      Namespaced IDs for inputs/outputs
 numericInput            Create a numeric input control
 observe                 Create a reactive observer
 observeEvent            Event handler
@@ -76,8 +75,8 @@ outputOptions           Set options for an output object.
 parseQueryString        Parse a GET query string from a URL
 passwordInput           Create a password input control
 plotOutput              Create an plot or image output element
-plotPNG                 Run a plotting function and save the output as
-                        a PNG
+plotPNG                 Capture a plot as a PNG file.
+Progress                Reporting progress (object-oriented API)
 radioButtons            Create radio buttons
 reactive                Create a reactive expression
 reactiveFileReader      Reactive file reader
@@ -132,8 +131,8 @@ snapshotPreprocessOutput
 splitLayout             Split layout
 stopApp                 Stop the currently running Shiny app
 submitButton            Create a submit button
-tabPanel                Create a tab panel
 tableOutput             Table Output
+tabPanel                Create a tab panel
 tabsetPanel             Create a tabset panel
 testServer              Reactive testing for Shiny server functions and
                         modules

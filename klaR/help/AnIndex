@@ -95,7 +95,6 @@ stepclass.formula	stepclass
 svmlight	svmlight
 svmlight.data.frame	svmlight
 svmlight.default	svmlight
-svmlight.file	svmlight
 svmlight.formula	svmlight
 svmlight.matrix	svmlight
 TopoS	TopoS

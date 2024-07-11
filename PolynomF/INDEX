@@ -1,7 +1,3 @@
-GCD                     Greatest common divisor
-GroupGenerics           Summary and Math methods for polynomials
-LCM                     Lowest Common Multiple
-Ops.polynom             Polynomial arithmetic
 [.polylist              Extract components of a list of polynomials
 as.character.polynom    Polynomial coercion to character
 as.function.polynom     Coercion to function
@@ -9,6 +5,11 @@ c.polynom               Concatenation of polynomial objects into lists
 change_origin           Change origin of a polynomial
 coef.polynom            Polynomial coefficients
 deriv.polynom           Polynomial Calculus
+GCD                     Greatest common divisor
+GroupGenerics           Summary and Math methods for polynomials
+LCM                     Lowest Common Multiple
+neville                 Lagrange Interpolation Polynomials
+Ops.polynom             Polynomial arithmetic
 plot.polylist           Plot method for polynomials
 poly_calc               Lagrange interpolation polynomial
 poly_orth               Simpl orthogonal polynomials

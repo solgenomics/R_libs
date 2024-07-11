@@ -1,5 +1,3 @@
-LegacyArguments         Legacy Arguments for 'plot' and 'Effect'
-                        Methods
 effCoef                 Function to get coefficient estimates from
                         regression models for use in the effects
                         package.
@@ -9,6 +7,8 @@ effects-package         Effect Displays for Linear, Generalized Linear,
 effectsHexsticker       View the Official Hex Sticker for the effects
                         Package
 effectsTheme            Set the lattice Theme for Effect Plots
+LegacyArguments         Legacy Arguments for 'plot' and 'Effect'
+                        Methods
 plot.effects            Plots of Effects and Predictor Effects
 predictorEffects        Functions For Computing Predictor Effects
 summary.eff             Summarizing and Printing Effects

@@ -39,7 +39,7 @@ dim,SpatialRingsDataFrame-method	class-SpatialRingsDataFrame
 gArea	misc-gArea
 gBinarySTRtreeQuery	experimental-functions
 gBoundary	topo-unary-gBoundary
-gBuffer	misc-gBuffer
+gBuffer	rgeos-deprecated
 gCentroid	topo-unary-gCentroid
 gContains	pred-binary-gContains
 gContainsProperly	pred-binary-gContains
@@ -49,7 +49,7 @@ gCoveredBy	pred-binary-gContains
 gCovers	pred-binary-gContains
 gCrosses	pred-binary-gCrosses
 gDelaunayTriangulation	topo-unary-gDelaunayTriangulation
-gDifference	topo-bin-gDifference
+gDifference	rgeos-deprecated
 gDisjoint	pred-binary-gIntersects
 gDistance	misc-gDistance
 gEnvelope	topo-unary-gEnvelope
@@ -68,7 +68,7 @@ get_RGEOS_dropSlivers	utility-functions
 get_RGEOS_polyThreshold	utility-functions
 get_RGEOS_warnSlivers	utility-functions
 gInterpolate	linref-gInterpolate
-gIntersection	topo-bin-gIntersection
+gIntersection	rgeos-deprecated
 gIntersects	pred-binary-gIntersects
 gIsEmpty	pred-unary-gIsEmpty
 gIsRing	pred-unary-gIsRing
@@ -89,11 +89,11 @@ gPolygonize	topo-unary-gPolygonize
 gProject	linref-gProject
 gRelate	pred-binary-gRelate
 gSimplify	topo-unary-gSimplify
-gSymdifference	topo-bin-gSymdifference
+gSymdifference	rgeos-deprecated
 gTouches	pred-binary-gTouches
 gUnarySTRtreeQuery	experimental-functions
 gUnaryUnion	topo-bin-gUnion
-gUnion	topo-bin-gUnion
+gUnion	rgeos-deprecated
 gUnionCascaded	topo-bin-gUnion
 gWithin	pred-binary-gContains
 gWithinDistance	misc-gDistance
@@ -113,9 +113,10 @@ polygonsLabel	labelpt
 poly_findInBoxGEOS	experimental-functions
 read.polyfile	gpc-polyfile
 readWKT	wkt-functions
+rgeos-deprecated	rgeos-deprecated
 RGEOSArea	misc-gArea
 RGEOSBoundary	topo-unary-gBoundary
-RGEOSBuffer	misc-gBuffer
+RGEOSBuffer	rgeos-deprecated
 RGEOSContains	pred-binary-gContains
 RGEOSConvexHull	topo-unary-gConvexHull
 RGEOSCrosses	pred-binary-gCrosses

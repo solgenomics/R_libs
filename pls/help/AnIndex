@@ -1,3 +1,4 @@
+as.data.frame.mvrVal	summary.mvr
 biplot.mvr	biplot.mvr
 coef.mvr	coef.mvr
 coefplot	coefplot
@@ -69,6 +70,7 @@ summary.mvr	summary.mvr
 svdpc.fit	svdpc.fit
 validationplot	validationplot
 var.jack	var.jack
+vcov.mvr	vcov.mvr
 widekernelpls.fit	widekernelpls.fit
 yarn	yarn
 Yloadings	scores

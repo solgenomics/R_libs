@@ -1,4 +1,5 @@
 dtplyr-package	dtplyr-package
+.datatable.aware	dot-datatable.aware
 arrange.dtplyr_step	arrange.dtplyr_step
 as.data.frame.dtplyr_step	collect.dtplyr_step
 as.data.table.dtplyr_step	collect.dtplyr_step
@@ -44,3 +45,4 @@ transmute.dtplyr_step	transmute.dtplyr_step
 ungroup.dtplyr_step	group_by.dtplyr_step
 union.dtplyr_step	intersect.dtplyr_step
 union_all.dtplyr_step	intersect.dtplyr_step
+unite.dtplyr_step	unite.dtplyr_step

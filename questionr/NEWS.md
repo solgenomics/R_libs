@@ -1,3 +1,7 @@
+# questionr 0.7.8
+
+* Fix error in `iorder`, `icut` and `irec` when variable name is not syntactically valid (#133, @bassam-abulnoor)
+
 # questionr 0.7.7
 
 * Fix error in `iorder` when reordering a numeric variable with `forcats` (#131, @bassam-abulnoor)

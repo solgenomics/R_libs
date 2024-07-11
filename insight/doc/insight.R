@@ -37,12 +37,12 @@ for (i in 1:5) {
     sample(1:30, size = sum(filter_group), replace = TRUE)
 }
 
-model <- lmer(
+model <- suppressWarnings(lmer(
   Reaction ~ Days + I(Days^2) + log1p(Weeks) + cat +
-    (1 | mygrp / mysubgrp) + 
+    (1 | mygrp / mysubgrp) +
     (1 + Days | Subject),
   data = sleepstudy
-)
+))
 
 ## ----echo=TRUE,message=FALSE,warning=FALSE------------------------------------
 # find the response variable

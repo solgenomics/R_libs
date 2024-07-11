@@ -1,5 +1,3 @@
-Frankenstein            A perfect magic cube due to Frankenstein
-Ollerenshaw             A most perfect square due to Ollerenshaw
 adiag                   Binds arrays corner-to-corner
 allsubhypercubes        Subhypercubes of magic hypercubes
 allsums                 Row, column, and two diagonal sums of arrays
@@ -20,6 +18,7 @@ do.index                Apply a function to array element indices
 eq                      Comparison of two magic squares
 fnsd                    First non-singleton dimension
 force.integer           Integerize array elements
+Frankenstein            A perfect magic cube due to Frankenstein
 hadamard                Hadamard matrices
 hendricks               A perfect magic cube due to Hendricks
 hudson                  Pandiagonal magic squares due to Hudson
@@ -46,6 +45,7 @@ magicplot               Joins consecutive numbers of a magic square.
 minmax                  are all elements of a vector identical?
 notmagic.2n             An unmagic square
 nqueens                 N queens problem
+Ollerenshaw             A most perfect square due to Ollerenshaw
 panmagic.4              Panmagic squares of order 4
 panmagic.6npm1          Panmagic squares of order 4n, 6n+1 and 6n-1
 panmagic.8              Panmagic squares of order 8

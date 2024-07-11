@@ -16,6 +16,7 @@
 .psi.ggw.findc	psiFindc
 .psi.lqq.findc	psiFindc
 .psi2ipsi	M.psi
+.regularize.Mpsi	M.psi
 .signflip	robustbase-internal
 .vcov.avar1	lmrob
 .vcov.w	lmrob
@@ -79,11 +80,13 @@ hard.rejection	covOGK
 hatvalues.lmrob	summary.lmrob
 hbk	hbk
 heart	heart
+huberize	huberize
 huberM	huberM
 huberPsi	psiFunc
 internals	robustbase-internal
 kootenay	kootenay
 lactic	lactic
+lmc	lmc-rmc
 lmrob	lmrob
 lmrob..D..fit	lmrob..D..fit
 lmrob..M..fit	lmrob..M..fit
@@ -146,6 +149,7 @@ radarImage	radarImage
 rankMM	rankMM
 residuals.glmrob	residuals.glmrob
 residuals.nlrob	nlrob
+rmc	lmc-rmc
 robMD	robustbase-internal
 robustbase-deprecated	tukeyPsi1
 rowMedians	colMedians
@@ -175,6 +179,7 @@ tolEllipsePlot	tolEllipsePlot
 toxicity	toxicity
 tukeyChi	tukeyPsi1
 tukeyPsi1	tukeyPsi1
+update.lmrobCtrl	lmrob.control
 vaso	vaso
 vcov.glmrob	summary.glmrob
 vcov.lmrob	summary.lmrob
@@ -184,3 +189,4 @@ weights.glmrob	weights.lmrob
 weights.lmrob	weights.lmrob
 wgt.himedian	wgt.himedian
 wood	wood
+x30o50	xtrData

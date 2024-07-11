@@ -1,5 +1,5 @@
-M1 <- matrix(1, 5, 3, dimnames=list(NULL, NULL))
-M2 <- matrix(1, 3, 3, dimnames=list(NULL, NULL))
+M1 <- matrix(1, 5, 3)
+M2 <- matrix(1, 3, 3)
 assaysList <- list(gr=SimpleList(m=M1), grl=SimpleList(m=M2))
 rowRangesList <- 
     list(gr=GRanges("chr1", IRanges(1:5, 10)), 
@@ -141,6 +141,18 @@ test_GenomicRanges_SummarizedExperiment_coercion <- function()
                        sampleNames(eset5))
 }
 
+test_GenomicRanges_SummarizedExperiment_coercion_lockedEnvironment <- function()
+{
+    ## https://github.com/Bioconductor/SummarizedExperiment/issues/43
+    se = SummarizedExperiment(list(exprs = matrix(1:10, 5)))
+    es1 = es2 = as(se, "ExpressionSet")
+    original <- exprs(es2)
+    checkIdentical(original, exprs(es2))
+    exprs(es1)[1, 1] = 2
+    checkTrue(!identical(original, exprs(es1)))
+    checkIdentical(original, exprs(es2))
+}
+    
 test_GenomicRanges_SummarizedExperiment_coercion_mappingFunctions <- function()
 {
     ## naiveRangeMapper

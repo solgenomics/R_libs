@@ -1,31 +1,29 @@
 Package: waldo
 Title: Find Differences Between R Objects
-Version: 0.3.1
-Authors@R: 
-    c(person(given = "Hadley",
-             family = "Wickham",
-             role = c("aut", "cre"),
-             email = "hadley@rstudio.com"),
-      person(given = "RStudio",
-             role = "cph"))
-Description: Compare complex R objects and reveal the key
-    differences.  Designed particularly for use in testing packages where
-    being able to quickly isolate key differences makes understanding test
-    failures much easier.
+Version: 0.5.1
+Authors@R: c(
+    person("Hadley", "Wickham", , "hadley@rstudio.com", role = c("aut", "cre")),
+    person("RStudio", role = c("cph", "fnd"))
+  )
+Description: Compare complex R objects and reveal the key differences.
+    Designed particularly for use in testing packages where being able to
+    quickly isolate key differences makes understanding test failures much
+    easier.
 License: MIT + file LICENSE
 URL: https://waldo.r-lib.org, https://github.com/r-lib/waldo
 BugReports: https://github.com/r-lib/waldo/issues
 Imports: cli, diffobj (>= 0.3.4), fansi, glue, methods, rematch2, rlang
-        (>= 0.4.10), tibble
-Suggests: testthat (>= 3.0.0), covr, R6, withr, xml2
-Encoding: UTF-8
-RoxygenNote: 7.1.2
+        (>= 1.0.0), tibble
+Suggests: covr, R6, testthat (>= 3.0.0), withr, xml2
 Config/testthat/edition: 3
+Config/Needs/website: tidyverse/tidytemplate
+Encoding: UTF-8
+RoxygenNote: 7.2.3
 NeedsCompilation: no
-Packaged: 2021-09-14 17:58:24 UTC; hadley
+Packaged: 2023-05-08 21:54:20 UTC; hadleywickham
 Author: Hadley Wickham [aut, cre],
-  RStudio [cph]
+  RStudio [cph, fnd]
 Maintainer: Hadley Wickham <hadley@rstudio.com>
 Repository: CRAN
-Date/Publication: 2021-09-14 18:20:02 UTC
-Built: R 3.6.3; ; 2022-02-15 17:06:38 UTC; unix
+Date/Publication: 2023-05-08 22:20:02 UTC
+Built: R 4.3.0; ; 2023-07-07 03:49:21 UTC; unix

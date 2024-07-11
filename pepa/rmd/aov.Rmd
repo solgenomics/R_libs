@@ -15,8 +15,13 @@ params:
   author: "no data"
 ---
 
-Congratulations! You have fitted a linear model. The ANOVA table for your model is
-```{r echo = FALSE}
+```{r global_options, include = FALSE}
+library(knitr)
+opts_chunk$set(echo = FALSE, comment = NA)
+```
+
+You have fitted a linear model. The ANOVA table for your model is:
+```{r}
 anova(params$x)
 noterms <- dim(anova(params$x))[1] - 1
 pvalues <- anova(params$x)[1:noterms, 5]

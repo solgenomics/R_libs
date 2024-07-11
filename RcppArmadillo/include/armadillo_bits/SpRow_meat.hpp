@@ -204,7 +204,6 @@ SpRow<eT>::SpRow
 
 template<typename eT>
 inline
-arma_warn_unused
 const SpOp<SpRow<eT>,spop_htrans>
 SpRow<eT>::t() const
   {
@@ -215,7 +214,6 @@ SpRow<eT>::t() const
 
 template<typename eT>
 inline
-arma_warn_unused
 const SpOp<SpRow<eT>,spop_htrans>
 SpRow<eT>::ht() const
   {
@@ -226,7 +224,6 @@ SpRow<eT>::ht() const
 
 template<typename eT>
 inline
-arma_warn_unused
 const SpOp<SpRow<eT>,spop_strans>
 SpRow<eT>::st() const
   {
@@ -427,7 +424,7 @@ SpRow<eT>::end_row(const uword row_num) const
 
 
   
-#ifdef ARMA_EXTRA_SPROW_MEAT
+#if defined(ARMA_EXTRA_SPROW_MEAT)
   #include ARMA_INCFILE_WRAP(ARMA_EXTRA_SPROW_MEAT)
 #endif
 

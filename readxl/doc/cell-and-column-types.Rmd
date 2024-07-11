@@ -31,7 +31,7 @@ read_excel("yo.xlsx", col_types = c("date", "skip", "guess", "numeric"))
 
 ## Type guessing
 
-If you use other packages in the [tidyverse](http://tidyverse.org), you are probably familiar with [readr](http://readr.tidyverse.org), which reads data from flat files. Like readxl, readr also provides column type guessing, but readr and readxl are very different under the hood.
+If you use other packages in the [tidyverse](https://www.tidyverse.org/), you are probably familiar with [readr](https://readr.tidyverse.org/), which reads data from flat files. Like readxl, readr also provides column type guessing, but readr and readxl are very different under the hood.
 
   * readr guesses column type *based on the data*.
   * readxl guesses column type *based on Excel cell types*.
@@ -145,12 +145,17 @@ print(df, n = Inf)
 ```
 
 ```{r out.width = '70%', echo = FALSE}
+#| fig-alt: Screenshot of the worksheet named "logical_coercion" inside the
+#|     "type-me.xlsx" example spreadsheet. The cells in the first column
+#|     (column A) have very mixed contents, such as empty, datetime, or string.
+#|     The cells in the second column (column B) describe the contents of the
+#|     first column in precise language.
 knitr::include_graphics("img/type-me-logical.png")
 ```
 
 ### Numeric column
 
-A boolean cell is coerced to zero if `FALSE` and one if `TRUE`. A datetime comes in as the underlying serial date, which is the number of days, possibly fractional, since the [date origin](https://support.microsoft.com/en-us/help/214330/differences-between-the-1900-and-the-1904-date-system-in-excel). For text, numeric conversion is attempted, to handle the "number as text" phenomenon. If unsuccessful, text cells import as `NA`.
+A boolean cell is coerced to zero if `FALSE` and one if `TRUE`. A datetime comes in as the underlying serial date, which is the number of days, possibly fractional, since the [date origin](https://learn.microsoft.com/en-US/office/troubleshoot/excel/1900-and-1904-date-system). For text, numeric conversion is attempted, to handle the "number as text" phenomenon. If unsuccessful, text cells import as `NA`.
 
 ```{r}
 df <- read_excel(readxl_example("type-me.xlsx"), sheet = "numeric_coercion",
@@ -159,6 +164,11 @@ print(df, n = Inf)
 ```
 
 ```{r out.width = '70%', echo = FALSE}
+#| fig-alt: Screenshot of the worksheet named "numeric_coercion" inside the
+#|     "type-me.xlsx" example spreadsheet. The cells in the first column
+#|     (column A) have very mixed contents, such as empty, datetime, or string.
+#|     The cells in the second column (column B) describe the contents of the
+#|     first column in precise language.
 knitr::include_graphics("img/type-me-numeric.png")
 ```
 
@@ -173,6 +183,11 @@ print(df, n = Inf)
 ```
 
 ```{r out.width = '70%', echo = FALSE}
+#| fig-alt: Screenshot of the worksheet named "date_coercion" inside the
+#|     "type-me.xlsx" example spreadsheet. The cells in the first column
+#|     (column A) have very mixed contents, such as empty, datetime, or string.
+#|     The cells in the second column (column B) describe the contents of the
+#|     first column in precise language.
 knitr::include_graphics("img/type-me-date.png")
 ```
 
@@ -187,5 +202,10 @@ print(df, n = Inf)
 ```
 
 ```{r out.width = '70%', echo = FALSE}
+#| fig-alt: Screenshot of the worksheet named "text_coercion" inside the
+#|     "type-me.xlsx" example spreadsheet. The cells in the first column
+#|     (column A) have very mixed contents, such as empty, datetime, or string.
+#|     The cells in the second column (column B) describe the contents of the
+#|     first column in precise language.
 knitr::include_graphics("img/type-me-text.png")
 ```

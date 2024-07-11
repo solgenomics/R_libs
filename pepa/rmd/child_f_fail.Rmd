@@ -2,7 +2,7 @@
 
 # {{i+1}}. Analysis for trait `r traits[i]`
 
-```{r echo = FALSE}
+```{r}
 lc <- ck.f(traits[i], factors, rep, dfr)
 ```
 
@@ -14,7 +14,7 @@ lc <- ck.f(traits[i], factors, rep, dfr)
 
 `r if (lc$pmis > maxp & lc$nt.0 == 0 & lc$nrep > 1 & lc$nt.mult == 0) paste0("There are too many missing values (", format(lc$pmis * 100, digits = 3), "%). The table below shows the frequencies of valid data for each combination of the levels of the factors. This procedure estimates up to 10%.")`
 
-```{r echo = FALSE}
+```{r}
 if (lc$nrep > 1 & lc$nt.mult > 0)
   lc$tfr
 if (lc$nrep > 1 & lc$nt.mult == 0)

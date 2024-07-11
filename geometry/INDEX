@@ -1,13 +1,10 @@
-Unique                  Extract Unique Rows
 bary2cart               Conversion of Barycentric to Cartesian
                         coordinates
 cart2bary               Conversion of Cartesian to Barycentric
                         coordinates.
 cart2pol                Transform Cartesian coordinates to polar or
                         cylindrical coordinates.
-cart2sph                If called with a single matrix argument then
-                        each row of 'c' represents the Cartesian
-                        coordinate ('x', 'y', 'z').
+cart2sph                Transform Cartesian to spherical coordinates
 convhulln               Compute smallest convex hull that encloses a
                         set of points
 delaunayn               Delaunay triangulation in N dimensions
@@ -43,3 +40,4 @@ to.mesh3d               Convert convhulln object to RGL mesh
 trimesh                 Display triangles mesh (2D)
 tsearch                 Search for the enclosing Delaunay convex hull
 tsearchn                Search for the enclosing Delaunay convex hull
+Unique                  Extract Unique Rows

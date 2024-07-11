@@ -2,19 +2,19 @@
 
 # {{i}}. Analysis for trait `r traits[i]`
 
-```{r echo = FALSE}
+```{r}
 model <- aov.lxt(traits[i], line, tester, rep, dfr)
 ```
 
 #### GCA effects for lines plot
 
-```{r echo = FALSE}
+```{r}
 barplot(model$GCA.le[, 1], col = "lightblue", las = 2, cex.names = 0.8, ylab = "GCA effects")
 ```
 
 #### Mid parent heterosis increment plot
 
-```{r echo = FALSE}
+```{r}
 # Means
 
 means <- docomp('mean', traits[i], c(line, tester), dfr = dfr)

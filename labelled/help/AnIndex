@@ -9,6 +9,11 @@ duplicated_tagged_na	unique_tagged_na
 foreign_to_labelled	to_labelled
 format_tagged_na	reexports
 generate_dictionary	look_for
+get_label_attribute	var_label
+get_na_range	na_values
+get_na_values	na_values
+get_value_labels	val_labels
+get_variable_labels	var_label
 is.labelled	reexports
 is_prefixed	is_prefixed
 is_regular_na	na_values
@@ -16,6 +21,8 @@ is_tagged_na	reexports
 is_user_na	na_values
 labelled	reexports
 labelled_spss	reexports
+label_attribute	var_label
+label_attribute<-	var_label
 lookfor	look_for
 lookfor_to_long_format	look_for
 look_for	look_for
@@ -41,6 +48,7 @@ remove_user_na	remove_labels
 remove_value_labels	val_labels
 remove_val_labels	remove_labels
 remove_var_label	remove_labels
+set_label_attribute	var_label
 set_na_range	na_values
 set_na_values	na_values
 set_value_labels	val_labels
@@ -52,6 +60,7 @@ tagged_na	reexports
 tagged_na_to_regular_na	tagged_na_to_user_na
 tagged_na_to_user_na	tagged_na_to_user_na
 to_character	to_character
+to_character.data.frame	to_character
 to_character.double	to_character
 to_character.haven_labelled	to_character
 to_factor	to_factor
@@ -79,6 +88,7 @@ val_labels	val_labels
 val_labels<-	val_labels
 val_labels_to_na	val_labels_to_na
 var_label	var_label
+var_label.data.frame	var_label
 var_label<-	var_label
 x_haven_2.0	test_datasets
 x_spss_haven_2.0	test_datasets

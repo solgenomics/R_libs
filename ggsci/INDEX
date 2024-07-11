@@ -1,7 +1,8 @@
-ggsci-package           Scientific Journal and Sci-Fi Themed Color
-                        Palettes for 'ggplot2'
 pal_aaas                AAAS Journal Color Palettes
+pal_cosmic              COSMIC Color Palettes
 pal_d3                  D3.js Color Palettes
+pal_flatui              Flat UI Color Palettes
+pal_frontiers           Frontiers Color Palettes
 pal_futurama            The Futurama Color Palettes
 pal_gsea                The GSEA GenePattern Color Palettes
 pal_igv                 Integrative Genomics Viewer (IGV) Color
@@ -23,7 +24,10 @@ pal_ucscgb              UCSC Genome Browser Color Palette
 rgb_gsea                The GSEA GenePattern Color Palettes
 rgb_material            Material Design Color Palettes
 scale_color_aaas        AAAS Journal Color Scales
+scale_color_cosmic      COSMIC Color Scales
 scale_color_d3          D3.js Color Scales
+scale_color_flatui      Flat UI Color Scales
+scale_color_frontiers   Frontiers Color Scales
 scale_color_futurama    The Futurama Color Scales
 scale_color_gsea        The GSEA GenePattern Color Scales
 scale_color_igv         Integrative Genomics Viewer (IGV) Color Scales

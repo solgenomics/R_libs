@@ -1,20 +1,7 @@
 Package: biomaRt
-Version: 2.42.1
+Version: 2.56.1
 Title: Interface to BioMart databases (i.e. Ensembl)
-Authors@R: c(person("Steffen", "Durinck", role = c("aut"), 
-            email = "biomartdev@gmail.com"), 
-        person("Wolfgang", "Huber", role="aut"),
-        person("Sean", "Davis", role="ctb", email = "sdavis2@mail.nih.gov"),
-        person("Francois", "Pepin", role="ctb"),
-        person(given = "Vince S", family = "Buffalo", role="ctb"),
-        person("Mike", "Smith", role=c("ctb", "cre"), 
-            email = "grimbough@gmail.com"))
-Depends: methods
-Imports: utils, XML, AnnotationDbi, progress, stringr, httr, openssl,
-        BiocFileCache, rappdirs
-Suggests: annotate, BiocStyle, knitr, rmarkdown, testthat
-VignetteBuilder: knitr
-biocViews: Annotation
+License: Artistic-2.0
 Description: In recent years a wealth of biological data has become available
         in public data repositories. Easy access to these valuable data 
         resources and firm integration with data analysis is needed for
@@ -27,21 +14,40 @@ Description: In recent years a wealth of biological data has become available
         provides biomaRt users direct access to a diverse set of data and enables
         a wide range of powerful online queries from gene annotation to 
         database mining.
-License: Artistic-2.0
+Authors@R: c(person("Steffen", "Durinck", role = c("aut"), 
+            email = "biomartdev@gmail.com"), 
+        person("Wolfgang", "Huber", role="aut"),
+        person("Sean", "Davis", role="ctb", email = "sdavis2@mail.nih.gov"),
+        person("Francois", "Pepin", role="ctb"),
+        person(given = "Vince S", family = "Buffalo", role="ctb"),
+        person("Mike", "Smith", role=c("ctb", "cre"), 
+            email = "grimbough@gmail.com",
+            comment = c(ORCID = "0000-0002-7800-3848")))
+Depends: methods
+Imports: utils, XML (>= 3.99-0.7), AnnotationDbi, progress, stringr,
+        httr, digest, BiocFileCache, rappdirs, xml2
+Suggests: BiocStyle, knitr, mockery, rmarkdown, testthat, webmockr
+URL: https://github.com/grimbough/biomaRt
+BugReports: https://github.com/grimbough/biomaRt/issues
+VignetteBuilder: knitr
+biocViews: Annotation
 LazyLoad: yes
 NeedsCompilation: no
 Encoding: UTF-8
+RoxygenNote: 7.1.1
+Collate: biomaRtClasses.R methods-Mart.R biomaRt.R caching.R ensembl.R
+        ensembl_wrappers.R ensembl_ssl_settings.R utilityFunctions.R
 git_url: https://git.bioconductor.org/packages/biomaRt
-git_branch: RELEASE_3_10
-git_last_commit: 381229c
-git_last_commit_date: 2020-03-26
-Date/Publication: 2020-03-26
-Packaged: 2020-03-26 23:24:20 UTC; biocbuild
+git_branch: RELEASE_3_17
+git_last_commit: dd7710f
+git_last_commit_date: 2023-06-09
+Date/Publication: 2023-06-09
+Packaged: 2023-06-09 20:02:48 UTC; biocbuild
 Author: Steffen Durinck [aut],
   Wolfgang Huber [aut],
   Sean Davis [ctb],
   Francois Pepin [ctb],
   Vince S Buffalo [ctb],
-  Mike Smith [ctb, cre]
+  Mike Smith [ctb, cre] (<https://orcid.org/0000-0002-7800-3848>)
 Maintainer: Mike Smith <grimbough@gmail.com>
-Built: R 3.6.3; ; 2022-02-24 20:46:28 UTC; unix
+Built: R 4.3.0; ; 2023-07-07 13:08:35 UTC; unix

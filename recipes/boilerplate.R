@@ -15,7 +15,7 @@ make_new <- function(name,
     rlang::abort("Change working directory to package root")
   }
 
-  if (glue::glue("{name}.R") %in% list.files("./R")) {
+  if (glue("{name}.R") %in% list.files("./R")) {
     rlang::abort("step or check already present with this name in /R")
   }
 
@@ -55,8 +55,8 @@ create_documentation <- function(name,
 #'  preprocessing have been estimated.
 #' <additional args here>
 #' @param skip A logical. Should the step be skipped when the
-#'  recipe is baked by [bake.recipe()]? While all operations are baked
-#'  when [prep.recipe()] is run, some operations may not be able to be
+#'  recipe is baked by [bake()]? While all operations are baked
+#'  when [prep()] is run, some operations may not be able to be
 #'  conducted on new data (e.g. processing the outcome variable(s)).
 #'  Care should be taken when using `skip = TRUE` as it may affect
 #'  the computations for subsequent operations
@@ -65,6 +65,11 @@ create_documentation <- function(name,
 #'
 #' @export
 #' @details <describe details>
+#'
+#' # Tidying
+#'
+#' When you [`tidy()`][tidy.recipe()] this step, a tibble with columns
+#' <describe tidying> is returned.
 #'
 #' @examples
 
@@ -84,7 +89,7 @@ create_function <- function(name, which) {
       add_{which}(
         recipe,
         {which}_{name}_new(
-          terms = ellipse_check(...),
+          terms = enquos(...),
           trained = trained,
           role = role,
           <additional args here>
@@ -116,7 +121,8 @@ create_generator <- function(name, which) {
 }
 
 create_prep_method <- function(name, which) {
-  glue('
+  glue("
+#' @export
 prep.{which}_{name} <- function(x, training, info = NULL, ...) {{
   col_names <- recipes_eval_select(x$terms, training, info)
   check_type(training[, col_names])
@@ -133,25 +139,26 @@ prep.{which}_{name} <- function(x, training, info = NULL, ...) {{
   )
 }}
 
-')
+")
 }
 
 create_bake_method <- function(name, which) {
-  glue('
+  glue("
+#' @export
 bake.{which}_{name} <- function(object, new_data, ...) {{
   <baking actions here>
   as_tibble(new_data)
 }}
 
-')
+")
 }
 
 create_print_method <- function(name, which) {
   glue('
 print.{which}_{name} <-
   function(x, width = max(20, options()$width - 30), ...) {{
-    cat("<describe action here> ", sep = "")
-    printer(names(x$means), x$terms, x$trained, width = width)
+    title <- "<describe action here> "
+    print_step(names(x$means), x$terms, x$trained, title, width)
     invisible(x)
   }}
 
@@ -160,8 +167,7 @@ print.{which}_{name} <-
 
 create_tidy_method <- function(name, which) {
   glue("
-#' @rdname {which}_{name}
-#' @param x A `{which}_{name}` object.
+#' @rdname tidy.recipe
 #' @export
 tidy.{which}_{name} <- function(x, ...) {{
   if (is_trained(x)) {{

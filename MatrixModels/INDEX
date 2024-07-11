@@ -1,9 +1,9 @@
-Model-class             Mother Class "Model" of all S4 Models
 glm4                    Fitting Generalized Linear Models (using S4)
 glpModel-class          Class "glpModel" of General Linear Prediction
                         Models
 lm.fit.sparse           Fitter Function for Sparse Linear Models
 mkRespMod               Create a respModule object
+Model-class             Mother Class "Model" of all S4 Models
 model.Matrix            Construct Possibly Sparse Design or Model
                         Matrices
 modelMatrix-class       Class "modelMatrix" and SubClasses

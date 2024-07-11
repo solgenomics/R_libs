@@ -1,21 +1,20 @@
-citHeader("To cite kernlab in publications use:")
+bibentry("Manual",
+         other = unlist(citation(auto = meta), recursive = FALSE))
 
-citEntry(entry="Article",
+bibentry("Article",
          title = "kernlab -- An {S4} Package for Kernel Methods in {R}",
-         author = c(as.person("Alexandros Karatzoglou"),
-	            as.person("Alex Smola"),
-		    as.person("Kurt Hornik"),
-		    as.person("Achim Zeileis")),
+         author = c(person("Alexandros", "Karatzoglou"),
+	            person("Alex", "Smola"),
+		    person("Kurt", "Hornik",
+                           email = "Kurt.Hornik@R-project.org",
+                           comment = c(ORCID = "0000-0003-4198-9911")),
+		    person("Achim", "Zeileis",
+                           email = "Achim.Zeileis@R-project.org",
+                           comment = c(ORCID = "0000-0003-0918-3766"))),
          journal      = "Journal of Statistical Software",
          year         = "2004",
 	 volume       = "11",
 	 number       = "9",
 	 pages        = "1--20",
-         url          = "http://www.jstatsoft.org/v11/i09/",
-         
-         textVersion = 
-         paste("Alexandros Karatzoglou, Alex Smola, Kurt Hornik, Achim Zeileis (2004).", 
-               "kernlab - An S4 Package for Kernel Methods in R.",
-               "Journal of Statistical Software 11(9), 1-20.",
-	       "URL http://www.jstatsoft.org/v11/i09/")
-)
+         doi = "10.18637/jss.v011.i09"
+         )

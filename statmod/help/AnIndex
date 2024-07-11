@@ -8,6 +8,7 @@ Digamma	digammaf
 dinvgauss	invgauss
 elda	elda
 eldaOneGroup	elda
+expectedDeviance	expectedDeviance
 fitNBP	fitNBP
 forward	forward
 gauss.quad	gauss.quad

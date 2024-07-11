@@ -1,5 +1,5 @@
 Package: rgl
-Version: 0.108.3
+Version: 1.2.1
 Title: 3D Visualization Using OpenGL
 Authors@R: c(person("Duncan", "Murdoch", role = c("aut", "cre"),
                      email = "murdoch.duncan@gmail.com"),
@@ -23,15 +23,18 @@ Authors@R: c(person("Duncan", "Murdoch", role = c("aut", "cre"),
               person("Xavier", "Fernandez i Marin", role = "ctb"),
               person("George", "Helffrich", role = "ctb"),
               person("Ivan", "Krylov", role = "ctb"),
-              person("Michael", "Sumner", role = "ctb"))
+              person("Michael", "Sumner", role = "ctb"),
+              person("Mike", "Stein", role = "ctb"))
 Depends: R (>= 3.3.0)
-Suggests: MASS, rmarkdown, deldir (>= 1.0-4), orientlib, lattice,
-        misc3d, magick, plotrix (>= 3.7-3), tripack, interp,
-        alphashape3d, tcltk, js (>= 1.2), akima, webshot2, downlit (>=
-        0.4.0), pkgdown, extrafont, shiny, manipulateWidget (>= 0.9.0),
-        testthat, markdown, crosstalk
-Imports: graphics, grDevices, stats, utils, htmlwidgets, htmltools,
-        knitr (>= 1.33), jsonlite (>= 0.9.20), magrittr, R6
+Suggests: MASS, rmarkdown (>= 2.16), deldir (>= 1.0-4), orientlib,
+        lattice, misc3d, magick, plotrix (>= 3.7-3), tripack, interp,
+        alphashape3d, tcltk, js (>= 1.2), webshot2 (>= 0.1.0), downlit
+        (>= 0.4.0), pkgdown (>= 2.0.0), extrafont, shiny,
+        manipulateWidget (>= 0.9.0), testthat, markdown, crosstalk, V8,
+        chromote, jpeg, png
+Imports: graphics, grDevices, stats, utils, htmlwidgets (>= 1.6.0),
+        htmltools, knitr (>= 1.33), jsonlite (>= 0.9.20), magrittr, R6,
+        base64enc, mime
 Enhances: waldo
 Description: Provides medium to high level functions for 3D interactive graphics, including
     functions modelled on base graphics (plot3d(), etc.) as well as functions for
@@ -40,17 +43,17 @@ Description: Provides medium to high level functions for 3D interactive graphics
     WebGL, PLY, OBJ, STL as well as 2D image formats, including PNG, Postscript, SVG, PGF.
 License: GPL
 URL: https://github.com/dmurdoch/rgl, https://dmurdoch.github.io/rgl/
-SystemRequirements: OpenGL, GLU Library, XQuartz (on OSX), zlib
+SystemRequirements: OpenGL and GLU Library (Required for display in R.
+        See "Installing OpenGL support" in README.md. Not needed if
+        only browser displays using rglwidget() are wanted.), zlib
         (optional), libpng (>=1.2.9, optional), FreeType (optional),
-        pandoc (>=1.14, needed for vignettes; if not present, markdown
-        package will be used)
+        pandoc (>=1.14, needed for vignettes)
 BugReports: https://github.com/dmurdoch/rgl/issues
-VignetteBuilder: knitr
+VignetteBuilder: knitr, rmarkdown
 Biarch: true
-Additional_repositories: https://dmurdoch.github.io/drat
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.2.9000
 NeedsCompilation: yes
-Packaged: 2021-11-21 16:42:37 UTC; murdoch
+Packaged: 2023-07-04 13:17:31 UTC; murdoch
 Author: Duncan Murdoch [aut, cre],
   Daniel Adler [aut],
   Oleg Nenadic [ctb],
@@ -71,8 +74,9 @@ Author: Duncan Murdoch [aut, cre],
   Xavier Fernandez i Marin [ctb],
   George Helffrich [ctb],
   Ivan Krylov [ctb],
-  Michael Sumner [ctb]
+  Michael Sumner [ctb],
+  Mike Stein [ctb]
 Maintainer: Duncan Murdoch <murdoch.duncan@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-11-21 17:40:02 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2022-02-15 17:03:47 UTC; unix
+Date/Publication: 2023-07-06 00:10:42 UTC
+Built: R 4.3.0; x86_64-pc-linux-gnu; 2023-07-07 03:52:39 UTC; unix

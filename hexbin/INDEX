@@ -1,6 +1,4 @@
 ColorRamps              Color Ramps on Perceptually Linear Scales
-NHANES                  NHANES Data : National Health and Nutrition
-                        Examination Survey
 erode.hexbin            Erosion of a Hexagon Count Image
 getHMedian              Get coordiantes of the median cell after the
                         erode operation
@@ -12,23 +10,25 @@ hcell2xy                Compute X and Y Coordinates for Hexagon Cells
 hcell2xyInt             Change cell ids to 2d integer coordinate system
 hdiffplot               Plot of Domain and Median Differences of Two
                         "hexbin" Objects
+hexbin                  Bivariate Binning into Hexagon Cells
+hexbinplot              Trellis Hexbin Displays
 hexGraphPaper           Create a Hexgon Grid
 hexList                 Conditional Bivariate Binning into Hexagon
                         Cells
 hexMA.loess             Add Loess Fit to Hexplot
-hexTapply               Apply function to data from each hexagon bin.
-hexVP-class             Formal class "hexVP" of a Hexagon Viewport
-hexVP.abline            Add a Straight Line to a HexPlot
-hexViewport             Compute a Grid Viewport for Hexagon / Hexbin
-                        Graphics
-hexbin                  Bivariate Binning into Hexagon Cells
-hexbinplot              Trellis Hexbin Displays
 hexplom                 Hexbin Plot Matrices
 hexpolygon              Hexagon Coordinates and Polygon Drawing
+hexTapply               Apply function to data from each hexagon bin.
+hexViewport             Compute a Grid Viewport for Hexagon / Hexbin
+                        Graphics
+hexVP-class             Formal class "hexVP" of a Hexagon Viewport
+hexVP.abline            Add a Straight Line to a HexPlot
 hsmooth-methods         Hexagon Bin Smoothing: Generic hsmooth() and
                         Methods
 inout.hex               Check points for inclusion
 list2hexList            Convert list to hexList
+NHANES                  NHANES Data : National Health and Nutrition
+                        Examination Survey
 optShape                Optimal Shape Parameter for Hexbin Viewport
 panel.hexboxplot        Boxplot for hexbin lattice plot
 panel.hexgrid           Hexagonal grid for a lattice plot

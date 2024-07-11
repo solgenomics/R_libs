@@ -1,8 +1,8 @@
-%$%                     Exposition pipe
+[[.fseq                 Extract function(s) from a functional sequence.
 %<>%                    Assignment pipe
 %>%                     Pipe
+%$%                     Exposition pipe
 %T>%                    Tee pipe
-[[.fseq                 Extract function(s) from a functional sequence.
 debug_fseq              Debugging function for functional sequences.
 debug_pipe              Debugging function for magrittr pipelines.
 extract                 Aliases

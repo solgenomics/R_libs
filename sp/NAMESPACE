@@ -59,6 +59,8 @@ export(
 	set_PolypathRule,
 	set_col_regions,
 	get_col_regions,
+	set_evolution_status,
+	get_evolution_status,
 
 	coordinatevalues,
 
@@ -273,6 +275,10 @@ exportMethods(
 	surfaceArea, 
 	spTransform,
         rebuild_CRS
+)
+
+exportMethods(
+ elide # usmap https://github.com/pdil/usmap/issues/57
 )
 
 S3method(as.array, SpatialGridDataFrame)

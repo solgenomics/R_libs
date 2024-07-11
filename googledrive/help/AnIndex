@@ -1,7 +1,7 @@
 googledrive-package	googledrive-package
 %>%	pipe
 as_dribble	as_dribble
-as_id	as_id
+as_id	drive_id
 as_shared_drive	as_shared_drive
 as_team_drive	deprecated-team-drive-functions
 confirm_dribble	dribble-checks
@@ -36,12 +36,14 @@ drive_fields	drive_fields
 drive_find	drive_find
 drive_get	drive_get
 drive_has_token	drive_has_token
+drive_id	drive_id
 drive_link	drive_link
 drive_ls	drive_ls
 drive_mime_type	drive_mime_type
 drive_mkdir	drive_mkdir
 drive_mv	drive_mv
-drive_oauth_app	drive_auth_configure
+drive_oauth_app	googledrive-deprecated
+drive_oauth_client	drive_auth_configure
 drive_publish	drive_publish
 drive_put	drive_put
 drive_read_raw	drive_read_string
@@ -49,6 +51,7 @@ drive_read_string	drive_read_string
 drive_rename	drive_rename
 drive_reveal	drive_reveal
 drive_rm	drive_rm
+drive_scopes	drive_scopes
 drive_share	drive_share
 drive_share_anyone	drive_share
 drive_token	drive_token

@@ -4,8 +4,147 @@
 \title{News for \R Package \pkg{robustbase}}
 \encoding{UTF-8}
 
-  % --- 1.0-0  if we fix  adjOutlyingness() properly !
-  %     =====  *and* fix  mc()  nicely according to Lukas Graz' MSc thesis !!
+\section{CHANGES in robustbase VERSION 0.99-0 (2023-06-12, svn r928)}{
+  % --- 1.0-0  once we fix  adjOutlyingness() properly !
+  %     =====
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item In case it finds an \emph{exact fit}, i.e., \eqn{k > n/2}
+      residuals are (practically) zero, \code{lmrob.S()} now returns that,
+      \code{scale = 0}, and robustness weights \code{weights(.,	"robustness")}
+      which are either 0 or 1 quickly and more consistently.
+
+      This is \emph{not yet} satisfactorily working for the \dQuote{large n} case.
+
+      **** \bold{TODO}: Optionally (but off by default?? for back compatibility??),
+      \code{lmrob()} initialized by such an exact-fit estimator may use a
+      (user-specified or automatic) scale \eqn{\hat{s} > 0}{s^ > 0} to
+      continue providing efficient SM / MM estimates.
+
+      \item \code{lmrob.control()} gets class \code{"lmrobCtrl"} which can be
+      \code{print()}ed and \code{update()}d.
+
+      \item New tuning const \code{zero.scale = 1e-10} instead of hardwired
+      \code{EPS_ZERO} in \code{lmrob.S()}'s C code; additionally the exact
+      fit / zero-residuals checking is finally y-scale equivariant, using
+      \eqn{1/n ||y||_1 = } \code{mean(abs(y))}.
+    }
+  }
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item Fixed \code{covMcd()}: corrected the consistency correction
+      factor for the reweighted estimate: was MCDCons(p, sum(w)/n),
+      now is MCDCons(p, 0.975), see Croux and Haesbroeck (1999).
+
+      Consequently, often \code{covMcd()} and estimates based on it, such
+      as \code{BYlogreg()} or \code{ltsReg()} are slightly changed. % 3 of our ex. checks broke
+
+      \item registered \code{residuals.lmrob.S} \emph{and} changed
+      \code{formals} compatible with generic to \code{(object, ...)}.
+
+      \item \code{lmrob.S()} in C level \code{refine_fast_s()} no longer
+      modifies \code{beta_cand[]} which notably fixes a bug found in
+      exact-fit examples previously resulting in \code{coef() == 0}
+      \dQuote{results}, also for \code{lmrob()} which calls
+      \code{lmrob.S()} for its default initial estimate.
+
+      \item \code{print(<lmrob.S>)} finally works again as intended
+      (\emph{not} printing a largish list); mostly by fixing internal
+      \code{lmrob.control.minimal()}.
+
+      \item \code{summary.lmrob(obj)} now also gets a \code{weights}
+      component from \code{obj} if that is non-trivial; this may also
+      correct \code{summary()} output in weighted cases.
+
+      \item Minor fixes in \code{plot.lts()} related to par mfrow.
+
+      \item ltsReg() Help file changed - the note strongly advising NOT
+      to use LTS regression removed.
+    }
+  }
+  \subsection{Misc}{
+    \itemize{
+      \item argument \code{mf} e.g., in \code{lmrob.fit()} has been deprecated
+      since 2017-12-09 and is defunct now.
+
+      \item \code{lmrob()} tweaks, notably saying more for \code{trace.lev >= 3}.
+
+      \item replaceed (almost) all \code{Calloc()} by \code{R_alloc()} in C code;
+      e.g., prevents leakage from user interrupt.
+    }
+  }
+}
+
+\section{CHANGES in robustbase VERSION 0.95-1 (2023-03-28, svn r903)}{
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item Fixed \code{covMcd()}: \code{raw.only=TRUE} does not work in the case \code{nsamp="deterministic"}
+    }
+  }
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item New \code{lmc()} and \code{rmc()} for robust tail weight
+      (\dQuote{robust kurtosis}). % ../man/lmc-rmc.Rd
+    }
+  }
+  \subsection{Misc}{
+    \itemize{
+      \item Our \file{tests/*.R} no longer rely on the \CRANpkg{Matrix}
+      \file{test-tools.R} collection but rather use our much smaller own
+      one in \file{xtraR/test-tools.R}.
+
+      \item fixed \code{\\} escape in \file{man/aircraft.Rd}.
+
+      \item initialize \var{equed} in \file{src/lmrob.c} to avoid
+      false positive compiler warning.
+
+      \item document "internal" \code{.regularize.Mpsi()}.
+
+      \item replace \code{()} by \code{(void)} arguments for \code{F77_SUB(println)}.
+    }
+  }
+}
+
+\section{CHANGES in robustbase VERSION 0.95-0 (2022-04-02, svn r894)}{
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item \code{huberM(x, k)} now also works in small sample cases with
+      \code{+/-Inf}, e.g. for \code{x = c(-Inf, 1)}.
+    }
+  }
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item New \code{huberize()} utility, notably by default used in \code{mc()}.
+
+      \item \code{mc()} now by default uses \code{doScale=FALSE} in order
+      to guarantee convergence also in extreme cases when used \emph{together}
+      with new \code{c.huberize = 1e11}.  Both are \emph{not} back
+      compatible but clearly better in extreme cases, as assessed by
+      Lukas Graz' BSc thesis.
+      Note that the behavior of the new default \code{doScale=FALSE} has
+      been amended in the C code to be more compatible in its \code{eps}
+      checks with (the previous default) \code{doScale=TRUE}.
+
+      Lastly, a \code{message()} is printed currently, at most once per \R session,
+      whenever \code{mc()} is called without an explicit specification of \code{doScale=*},
+      alerting users to the changed default.  This message can be turned
+      off by setting \code{options(mc_doScale_quiet = TRUE)}.
+
+      \item New dataset \code{data(x30o50)} as an example of potentially
+      problematic data, not just for \code{mc()}.
+    }
+  }
+  \subsection{Misc}{
+    \itemize{
+      \item rather "truncating" \eqn{+/-}\code{Inf} to <large>, use
+      \code{NA.OK = TRUE} in \code{Qn()} and \code{Sn()}'s \code{.C()} call.
+
+      \item Our C code no longer uses the \code{DOUBLE_*} constants from S,
+      but rather standard \code{<float.h>}.
+    }
+  }
+}
+
 
 \section{CHANGES in robustbase VERSION 0.93-9 (2021-09-27, svn r888)}{
   \subsection{BUG FIXES}{

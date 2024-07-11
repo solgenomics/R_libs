@@ -4,8 +4,8 @@ Authors@R: c(person("Julien", "Barnier", email="julien.barnier@cnrs.fr",
     role=c("aut","cre")), person("François", "Briatte",
     email="f.briatte@gmail.com", role="aut"), person("Joseph", "Larmarange",
     email="joseph@larmarange.net", role="aut"))
-Version: 0.7.7
-Date: 2022-01-31
+Version: 0.7.8
+Date: 2023-01-31
 License: GPL (>= 2)
 Encoding: UTF-8
 Title: Functions to Make Surveys Processing Easier
@@ -15,7 +15,7 @@ Description: Set of functions to make the processing and analysis of
     functions.
 Depends: R (>= 3.5.0)
 Imports: shiny (>= 1.0.5), miniUI, rstudioapi, highr, styler, classInt,
-        htmltools, graphics, stats, utils, labelled (>= 2.6.0)
+        htmltools, graphics, stats, utils, rlang, labelled (>= 2.6.0)
 Suggests: testthat, roxygen2, dplyr, ggplot2, tidyr, janitor, forcats,
         knitr, rmarkdown, survey, Hmisc
 SystemRequirements: xclip (Linux)
@@ -24,10 +24,10 @@ URL: https://juba.github.io/questionr/
 BugReports: https://github.com/juba/questionr/issues
 RoxygenNote: 7.1.2
 NeedsCompilation: no
-Packaged: 2022-01-31 16:03:08 UTC; julien
+Packaged: 2023-01-31 13:05:25 UTC; julien
 Author: Julien Barnier [aut, cre],
   François Briatte [aut],
   Joseph Larmarange [aut]
 Repository: CRAN
-Date/Publication: 2022-01-31 16:30:08 UTC
-Built: R 3.6.3; ; 2022-02-15 17:10:48 UTC; unix
+Date/Publication: 2023-01-31 14:30:05 UTC
+Built: R 4.3.0; ; 2023-07-07 03:57:48 UTC; unix

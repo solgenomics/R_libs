@@ -13,6 +13,7 @@ bos	bos
 bosms3	bos
 bosms4	bos
 coef.flexsurvreg	coef.flexsurvreg
+coxsnell_flexsurvreg	coxsnell_flexsurvreg
 dbasis	basis
 dfss	basis
 dgenf	GenF
@@ -67,6 +68,7 @@ Hllogis	Llogis
 hllogis	Llogis
 Hlnorm	hazard
 hlnorm	hazard
+hr_flexsurvreg	hr_flexsurvreg
 Hsurvspline	Survspline
 hsurvspline	Survspline
 Hsurvspline0	Survsplinek
@@ -130,6 +132,7 @@ pgengamma.orig	GenGamma.orig
 pgompertz	Gompertz
 pllogis	Llogis
 plot.flexsurvreg	plot.flexsurvreg
+plot.standsurv	plot.standsurv
 plot.survrtrunc	plot_survtrunc
 pmatrix.fs	pmatrix.fs
 pmatrix.simfs	pmatrix.simfs
@@ -211,6 +214,7 @@ simfinal_fmsm	simfinal_fmsm
 simfs_bytrans	simfs_bytrans
 simt_flexsurvmix	simt_flexsurvmix
 simulate.flexsurvreg	simulate.flexsurvreg
+standsurv	standsurv
 summary.flexsurvreg	summary.flexsurvreg
 summary.flexsurvrtrunc	summary.flexsurvrtrunc
 survrtrunc	survrtrunc
@@ -218,6 +222,7 @@ Survspline	Survspline
 Survsplinek	Survsplinek
 tidy	reexports
 tidy.flexsurvreg	tidy.flexsurvreg
+tidy.standsurv	tidy.standsurv
 totlos.fs	totlos.fs
 totlos.simfs	totlos.simfs
 unroll.function	unroll.function

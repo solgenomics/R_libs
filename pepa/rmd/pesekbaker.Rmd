@@ -23,7 +23,12 @@ params:
   author: "no data"
 ---
 
-```{r echo = FALSE}
+```{r global_options, include = FALSE}
+library(knitr)
+opts_chunk$set(echo = FALSE, comment = NA)
+```
+
+```{r}
 traits <- params$traits
 geno <- params$geno
 env <- params$env
@@ -39,25 +44,29 @@ pbindex <- pesekbaker(traits, geno, env, rep, dfr, means, dgg, units, sf)
 
 ### Desired genetic gains
 You have computed the Pesek-Baker index for traits `r traits` with the following desired genetic gains in actual units:
-```{r echo = FALSE}
+
+```{r}
 pbindex$Desired.Genetic.Gains
 ```
 
 ### Standard deviation
 The estimated genotypic standard deviations for these traits are:
-```{r echo = FALSE}
+
+```{r}
 pbindex$Standard.Deviations
 ```
 
 ### The Pesek-Baker index
 
 The index coefficients for the Pesek-Baker index are:
-```{r echo = FALSE}
+
+```{r}
 pbindex$Index.Coefficients
 ```
 
 With this, the Pesek-Baker index for each genotype is shown below. As you see, genotype `r (pbindex$Pesek.Baker.Index[sort(pbindex$Pesek.Baker.Index$PB.Index, decreasing = TRUE, index.return = TRUE)$ix, ])[1,1]` is the one with the highest value.
-```{r echo = FALSE}
+
+```{r}
 pbindex$Pesek.Baker.Index[sort(pbindex$Pesek.Baker.Index$PB.Index, decreasing = TRUE,
                                index.return = TRUE)$ix, ]
 ```
@@ -65,10 +74,13 @@ pbindex$Pesek.Baker.Index[sort(pbindex$Pesek.Baker.Index$PB.Index, decreasing = 
 ### The response to selection
 
 For a selection fraction of `r sf`, the responses to selection in actual units are:
-```{r echo = FALSE}
+
+```{r}
 pbindex$Response.to.Selection
 ```
+
 and in standardized units:
-```{r echo = FALSE}
+
+```{r}
 pbindex$Std.Response.to.Selection
 ```

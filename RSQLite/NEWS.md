@@ -1,4 +1,112 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
+
+# RSQLite 2.3.1 (2023-04-03)
+
+## Features
+
+- Upgrade bundled SQLite to 3.41.2 (#455).
+
+## Chore
+
+- Require cpp11 \>= 0.4.0 in `DESCRIPTION` (#456).
+
+
+# RSQLite 2.3.0 (2023-02-13)
+
+## Features
+
+- Upgrade bundled SQLite to 3.40.1 (#448).
+
+## Chore
+
+- Upgrade boost to 1.81.0-1 (#450).
+
+- Clean up GitPod configuration.
+
+- Replace Rcpp by cpp11 (@Antonov548, #441).
+
+
+# RSQLite 2.2.20 (2022-12-21)
+
+## Features
+
+- Upgrade bundled SQLite to 3.40.0 (#446).
+
+## Tests
+
+- Fix test on non-UTF-8 locales.
+
+## Internal
+
+- GitPod and cmake integration.
+
+
+# RSQLite 2.2.19 (2022-11-22)
+
+## Bug fixes
+
+- Add missing boost headers for icpc compiler (@lolow, #442, #443).
+
+## Internal
+
+- Use testthat edition 3 (#438).
+
+
+# RSQLite 2.2.18 (2022-10-04)
+
+- Upgrade bundled SQLite to 3.39.4 (#435).
+
+
+# RSQLite 2.2.17 (2022-09-09)
+
+- Upgrade bundled SQLite to 3.39.3 (#433).
+
+
+# RSQLite 2.2.16 (2022-08-16)
+
+- Upgrade bundled SQLite to 3.39.2 (#431).
+
+
+# RSQLite 2.2.15 (2022-07-15)
+
+- Upgrade bundled SQLite to 3.39.1 (#429).
+
+
+# RSQLite 2.2.14 (2022-05-05)
+
+- Upgrade bundled SQLite to version 3.38.5 (#421, #423).
+
+
+# RSQLite 2.2.13 (2022-04-29)
+
+- Upgrade bundled SQLite to version 3.38.3 (#418).
+
+
+# RSQLite 2.2.12 (2022-04-02)
+
+## Features
+
+- Upgrade bundled SQLite to version 3.38.2 (#415).
+
+## Internal
+
+- Prefer `empty()` over `size() == 0` (#410, @MichaelChirico).
+- Refactor to improve code consistency (#411, @MichaelChirico).
+- Use more parsimonious header to avoid CRAN warnings.
+
+
+# RSQLite 2.2.11 (2022-03-07)
+
+## Features
+
+- `initExtension()` gains `extension` argument (#407, #408) with options
+  `"math"`, `"regexp"`, `"series"` and `"csv"` (#274, #389, @mgirlich).
+- Upgrade bundled SQLite to version 3.38.0 (#405).
+
+## Bug fixes
+
+- Skip failing test on CRAN.
+
 
 # RSQLite 2.2.10 (2022-02-16)
 

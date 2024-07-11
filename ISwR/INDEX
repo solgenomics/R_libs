@@ -1,4 +1,3 @@
-IgM                     Immunoglobulin G
 alkfos                  Alkaline phosphatase data
 ashina                  Ashina's crossover trial
 bcmort                  Breast cancer mortality
@@ -15,6 +14,7 @@ fake.trypsin            Trypsin by age groups
 graft.vs.host           Graft versus host disease
 heart.rate              Heart rates after enalaprilat
 hellung                 Growth of Tetrahymena cells
+IgM                     Immunoglobulin G
 intake                  Energy intake
 juul                    Juul's IGF data
 juul2                   Juul's IGF data, extended version

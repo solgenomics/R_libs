@@ -18,6 +18,700 @@
 ##   require(bbmle)
 ## }
 
+## Email from Paul S
+library(rstpm2)
+fit <- stpm2(Surv(rectime,censrec==1)~hormon,data=brcancer,df=3,tvc=list(hormon=2))
+## Plot marginal HR
+## Straight from plot function
+plot(fit, type = "meanhr", newdata = transform(brcancer, hormon = 0), exposed = function(data) transform(data, hormon = 1))
+
+## Using ggplot (need to manually extract predictions and plot)
+library(ggplot2)
+## debugonce(rstpm2:::predict.stpm2.base)
+system.time(pred <- predict(fit,
+                            newdata = transform(brcancer, hormon = 0),
+                            grid = TRUE, full = TRUE, se.fit = TRUE, type = "meanhr", recent=TRUE,
+                            exposed = function(data) transform(data, hormon = 1)))
+system.time(pred2 <- predict(fit,
+                             newdata = transform(brcancer, hormon = 0),
+                             grid = TRUE, full = TRUE, se.fit = TRUE, type = "meanhr",
+                             exposed = function(data) transform(data, hormon = 1)))
+## Plot
+ggplot(pred, aes(x = rectime, y = Estimate)) +
+  geom_line() +
+  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.3) +
+  ylim(0,2) +
+  xlab('Time (days)') + ylab('HR') +
+  theme_bw(base_size = 15)
+
+
+## Email for episig
+## install.packages("extRemes")
+library(extRemes)
+library(survival)
+set.seed(12345)
+n<-500000
+x1<-rnorm(n)
+x2<-rnorm(n)
+error<-revd(n, loc = 0, scale = 1)
+b0<- 1
+b1<-0.5
+b2<--1.2
+c<-1
+time<-exp(b0+b1*x1+b2*x2-c*error)
+status<-rep(1,n)
+survreg(Surv(time, status==1) ~ x1+x2,dist="exponential")
+
+
+library(rstpm2)
+object <- stpm2(Surv(rectime,censrec==1)~hormon,data=brcancer,df=3,tvc=list(hormon=2))
+newdata = data.frame(hormon=0)
+simulate(object, newdata=newdata) # currently returns just the times -- this will later return a data-frame
+simulate(object, newdata=newdata, start=1500) # left-truncation
+plot(object, newdata=newdata)
+
+grep_call = function(name,x) {
+    local_function = function(x)
+        if(length(x)==1) x==name else any(sapply(x, local_function))
+    which(sapply(x, local_function))
+}
+gsm_design = function(object, newdata, inflate=100) {
+    stopifnot(inherits(object, "stpm2"),
+              is.list(newdata),
+              is.numeric(inflate),
+              length(inflate) == 1)
+    ## Assumed patterns:
+    ## timeEffect := (ns|nsx)(log(timeVar),knots,Boundary.knots,centre=FALSE,derivs=(c(2,2)|c(2,1)))
+    ## effect := timeEffect | otherEffect:timeEffect | timeEffect:otherEffect
+    terms = attr(object@model.frame, "terms")
+    factors = attr(terms, "factors")[-1,,drop=FALSE]
+    variables = attr(terms, "variables")[-(1:2)]
+    predvars = attr(terms, "predvars")[-(1:2)]
+    indices = grep_call(object@timeVar, variables)
+    if(length(indices)==0) stop("No timeVar in the formula -- unexpected error")
+    index_time_variables = grep_call(object@timeVar, variables) # time variables
+    index_time_effects = grep(object@timeVar,colnames(factors)) # components in the rhs with time variables
+    ## I want to know how wide is each term
+    nms = names(coef(object))
+    term.labels = attr(terms, "term.labels")
+    coef_index <-
+        sapply(strsplit(nms, ":"), function(c) {
+            if (length(c)>2)
+                stop("current implementation only allows for main effects and two-way interactions")
+            pmatchp = function(x, table)
+                !is.na(pmatch(x, table))
+            if(length(c)==1) {
+                for (i in seq_along(term.labels)) {
+                    t = term.labels[i]
+                    ## browser()
+                    if (pmatchp(t,c))
+                        return(i)
+                }
+                if (c == "(Intercept)")
+                    return(0)
+                return(-1)
+            }
+            ## => length(c) == 2
+            term.labels.split = strsplit(term.labels, ":")
+            for (i in seq_along(term.labels)) {
+                t = term.labels.split[[i]]
+                if (all(pmatchp(t,c)))
+                    return(i)
+            }
+            return(-1)
+        })
+    ## how to map from term.labels to factors to predvars?
+    ## Can I replace each term with its predvars?
+    parse_ns = function(mycall,x,index_time_effect) {
+        df = length(c(mycall$knots, mycall$Boundary.knots)) - 1
+        stopifnot(mycall[[1]] == quote(nsx) || mycall[[1]] == quote(ns),
+                  length(mycall[[2]])>1,
+                  mycall[[2]][[1]] == quote(log), # assumes log
+                  mycall[[2]][[2]] == object@timeVar, # what about a scalar product or divisor?
+                  is.null(mycall$deriv) || (mycall$derivs[1] == 2 && mycall$derivs[2] %in% 1:2),
+                  mycall$centre == FALSE) # doesn't allow for centering
+        cure = !is.null(mycall$derives) && all(mycall$derivs == c(2,1))
+        time = object@args$time
+        q_const = attr(nsx(log(mean(time)), knots=mycall$knots,
+                           Boundary.knots=mycall$Boundary.knots,
+                           intercept=mycall$intercept),
+                       "q.const")
+        ## browser()
+        list(call = mycall,
+             knots=mycall$knots,
+             Boundary_knots=mycall$Boundary.knots,
+             intercept=as.integer(mycall$intercept),
+             gamma=coef(object)[which(coef_index %in% index_time_effect)],
+             q_const = q_const,
+             cure = as.integer(cure),
+             x=x)
+    }
+    time = object@args$time
+    newdata[[object@timeVar]] = mean(time) # NB: time not used
+    Xp = predict(object, newdata=newdata, type="lpmatrix")
+    index2 = which(coef_index %in% index_time_effects)
+    etap = drop(Xp[, index2, drop=FALSE] %*% coef(object)[index2])
+    list(type="gsm",
+         link_name=object@args$link,
+         tmin = min(time), # not currently used?
+         tmax = max(time),
+         inflate=as.double(inflate),
+         etap=etap,
+         log_time=TRUE,
+         terms =
+             lapply(index_time_effects,
+                    function(i) {
+                        j = which(factors[,i] != 0)
+                        if (length(j)==1)
+                            return(parse_ns(predvars[[j]], rep(1, nrow(newdata)), i))
+                        else {
+                            if(length(j)>3)
+                                stop("Current implementation only allows for two-way interaction terms")
+                            if (j[1] %in% index_time_variables)
+                                return(parse_ns(predvars[[j[1]]], eval(predvars[[j[2]]], newdata), i))
+                            else return(parse_ns(predvars[[j[2]]], eval(predvars[[j[1]]], newdata), i))
+                        }
+                    })
+         )
+}
+
+library(rstpm2)
+library(microsimulation)
+object <- gsm(Surv(rectime,censrec==1)~hormon,data=brcancer,df=3,tvc=list(hormon=2))
+newdata = data.frame(hormon=0:1)
+inflate = 100
+(design <- gsm_design(object,newdata))
+replicate(10,.Call("test_read_gsm", design, PACKAGE="microsimulation"))
+
+
+set.seed(1002)
+simulate(fit1, nsim=10, newdata=nd)
+simulate(fit1, newdata=data.frame(hormon=0:1))
+set.seed(1002)
+replicate(10,.Call("test_read_gsm", design, PACKAGE="rstpm2"))
+set.seed(1002)
+range(replicate(10,.Call("test_read_gsm", gsm_design(fit1,nd), PACKAGE="rstpm2")) -
+      simulate(fit1, nsim=10, seed=1002, newdata=nd))
+library(microsimulation)
+set.seed(1002)
+replicate(10,.Call("test_read_gsm", gsm_design(fit1,nd), PACKAGE="microsimulation"))
+
+simulate.stpm2 <- function(object, nsim=1, seed=NULL,
+                           newdata=NULL, lower=1e-6, upper=1e5, ...) {
+    stopifnot(!is.null(newdata))
+    if (!is.null(seed)) set.seed(seed)
+    ## assumes nsim replicates per row in newdata
+    n = nsim * nrow(newdata)
+    newdata = newdata[rep(1:nrow(newdata), each=nsim), , drop=FALSE]
+    e <- rexp(n)
+    objective <- function(time) {
+        newdata[[object@timeVar]] <- time
+        predict(object, type="cumhaz", newdata=newdata) - e
+    }
+    vuniroot(objective, lower=rep(lower,length=n), upper=rep(upper,length=n))$root
+}
+setMethod("simulate", "stpm2", simulate.stpm2)
+setMethod("simulate", "pstpm2", simulate.stpm2)
+
+
+
+## Can we estimate the hessian externally?
+library(rstpm2)
+library(numDeriv)
+fit = stpm2(Surv(rectime,censrec==1)~hormon,data=brcancer,df=4)
+summary(fit)
+fit@vcov = solve(numDeriv::hessian(fit@minuslogl, coef(fit)))
+summary(fit)
+## Can we also use the gradient?
+(solve(numDeriv::jacobian(fit@args$gradnegll, coef(fit))) - solve(numDeriv::hessian(fit@minuslogl, coef(fit)))) |> range()
+(solve(numDeriv::jacobian(fit@args$gradnegll, coef(fit))) - vcov(fit)) |> range()
+
+## Can we improve on accuracy using nsxD? This would also include predictions using C++ code.
+
+##
+library(rstpm2)
+m <- rstpm2::stpm2(Surv(time, status) ~ sex, data = lung)
+predict(m, newdata = data.frame(sex = c(1,1), time = c(100,200)), type = "rmst", se.fit=TRUE) # ok
+plot(m, newdata = data.frame(sex = 1), type="rmst")
+plot(m, newdata = data.frame(sex = 1), var="sex", type="rmstdiff")
+
+
+## Predictions for differences
+## Can we return the predictions, gradients and covariance matrix and use those for differences?
+## preddiff = pred1 - pred0
+## graddiff = grad1 - grad0
+## vardiff = graddiff^T Sigma graddiff
+## Note that we can silently return attributes
+d = structure(data.frame(a=1), attr1=1:100, class=c("Test","data.frame"))
+print(d) # print.Test() does not exist, so this uses print.data.frame()
+## What about gradients on transformed scales,
+## with a transformation g and an inverse transformation G?
+## var(eta1) = grad_eta1^T Sigma grad_eta1
+## and pred1 = G(eta1)
+## => var(pred1) = var(G(eta1)) = grad(G(eta1))^T Sigma grad(G(eta1))
+## where grad1 = grad(G(eta1)) = G'(eta1) grad_eta1?? (chain rule)
+## preddiff = pred1 - pred0
+## graddiff = grad1 - grad0
+## vardiff = graddiff^T Sigma graddiff
+
+
+
+## add cure for the AFT models
+library(rstpm2)
+fit0 = aft(Surv(rectime,censrec==1)~hormon,data=brcancer,df=4)
+fit = aft(Surv(rectime,censrec==1)~hormon,data=brcancer,df=4,cure=TRUE)
+par(mfrow=1:2)
+plot(fit0,newdata=data.frame(hormon=0),main="Without cure")
+plot(fit,newdata=data.frame(hormon=0),main="With cure")
+cov2cor(vcov(fit0))
+
+## cure models paper
+library(cuRe)
+colonDC <- subset(cuRe::colonDC, stage %in% c("Regional","Distant"))
+colonDC <- transform(colonDC, stage=factor(stage),
+                     stageDistant=as.numeric(stage == "Distant"),
+                     bhaz = general.haz(time = "FU",
+                                        rmap = list(age="agedays", sex = "sex", year = "dx"),
+                                        data = colonDC, ratetable = survexp.dk))
+fit.lat <- stpm2(Surv(FUyear, status) ~ stageDistant + bhazard(bhaz),
+                 data = colonDC, df = 4, cure = TRUE)
+fit.lat.timevar <- stpm2(Surv(FUyear, status) ~ stageDistant + bhazard(bhaz),
+                         data = colonDC, df = 4, cure = TRUE,
+                         tvc.formula = ~nsx(log(FUyear), df=4, cure=TRUE):stageDistant)
+fit.lat.timevar2 <- stpm2(Surv(FUyear, status) ~ stageDistant + bhazard(bhaz),
+                         data = colonDC, df = 4, cure = TRUE, tvc = list(stageDistant = 4))
+
+predict(fit.lat, newdata = data.frame(FUyear = 0, stageDistant = 0), type = "probcure", se.fit = TRUE)
+predict(fit.lat, newdata = data.frame(FUyear = 2, stageDistant = 0), type = "uncured", se.fit = TRUE)
+predict(fit.lat.timevar, newdata = data.frame(FUyear = 2, stageDistant = 0), type = "probcure", se.fit = TRUE)
+
+plot(fit.lat, newdata = data.frame(stageDistant = 0), type = "probcure") 
+plot(fit.lat, newdata = data.frame(stageDistant = 0), type = "surv") 
+plot(fit.lat, newdata = data.frame(stageDistant = 0), type = "uncured") 
+
+## solve A x = b
+set.seed(12345)
+A = matrix(rnorm(18),3,byrow=TRUE)
+b = c(0,0,1)
+x = qr.solve(A,b) # under-determined system
+drop(A %*% x - b) # this is a solution -- noice!
+qmat = qr.Q(qr(t(A)), complete=TRUE)[, -(1:3), drop=FALSE]
+A %*% qmat %*% rnorm(3)  # should be close to zero...
+A %*% qmat
+
+library(rstpm2)
+library(splines)
+print(ns1 <- nsx(1:10,df=4,intercept=TRUE))
+## check how to calculate q.const
+Bstar <- splineDesign(sort(c(rep(1,4),attr(ns1,"knots"),rep(10,4))),
+                      x=c(1,10),derivs=c(2,2))
+qr.Q(qr(t(Bstar)), complete=TRUE)[,-(1:2), drop=FALSE] - attr(ns1, "q.const") # OK
+## Now, solve: Bstar x = c(0,0,1)
+Bstar <- splineDesign(sort(c(rep(1,4),attr(ns1,"knots"),rep(10,4))),
+                      x=c(1,10,10),derivs=c(2,2,1))
+b = c(0,0,1)
+x = qr.solve(Bstar,b) # magic sauce
+drop(Bstar %*% x) - b # OK
+qmat = qr.Q(qr(t(Bstar)), complete=TRUE)[,-(1:3), drop=FALSE]
+theta = rnorm(3)
+drop(Bstar %*% (drop(qmat %*% theta) + x)) - b # OK
+Bstar %*% qmat %*% theta + Bstar %*% x - b # OK
+## transformation: theta -> B %*% (drop(qmat %*% theta) + x) = B %*% qmat %*% theta + B %*% x
+## nsx(..., derivs, target=rep(0,length(derivs))) for target=b
+## returns an attribute for offset=x
+## For fixed design matrix, we get N = B %*% qmat and C = B %*% x, so that theta -> N %*% theta + C
+## How will this affect the linear predictor?
+## Rather than N(t)^T theta, we will have N(t)^T theta + C
+## For the derivative, we get N' = B' %*% qmat and C' = B' %*% x,
+## so that we have N'(t)^T theta + C'
+xs = seq(1,10,l=301)
+B <- splineDesign(sort(c(rep(1,4),attr(ns1,"knots"),rep(10,4))),
+                      x=xs)
+N = B %*% qmat
+C = B %*% x
+theta = rnorm(3)
+plot(xs, N %*% theta + C, type="l")
+## Plot of derivatives...
+B <- splineDesign(sort(c(rep(1,4),attr(ns1,"knots"),rep(10,4))),
+                      x=xs, derivs=1)
+N = B %*% qmat
+C = B %*% x
+theta = rnorm(3)
+plot(xs, N %*% theta + C, type="l")
+## How to predict outside of the boundaries?
+
+## test for smoothpwc
+library(rstpm2)
+library(dplyr)
+relative_survival <- function(model1, smoothpwc, ...) {
+    transmat = matrix(c(NA,1,2,
+                        NA,NA,NA,
+                        NA,NA,NA),3,3,byrow=TRUE)
+    rownames(transmat) <- colnames(transmat) <- c("Initial","Cause-specific death","Other causes of death")
+    rstpm2::markov_msm(list(model1,smoothpwc), ..., trans = transmat)
+}
+## use popmort
+colon2 = inner_join(survival::colon |> filter(etype==2),
+                    mutate(popmort,sex=2-sex,rate) |> filter(year==2000), by=c("age","sex")) |>
+    mutate(t=time/365.25)
+excess = gsm(Surv(t,status)~factor(rx)+bhazard(rate), data=colon2, df=3)
+smoothpwc1 = with(filter(popmort,sex==1 & year==2000),smoothpwc(age+0.5-70,rate)) # example is for men aged 70 years
+rs = relative_survival(excess, smoothpwc1, newdata=data.frame(rx="Obs"), t = seq(0,7, length=301))
+plot(rs,ggplot=TRUE)
+
+
+
+
+## Spline interpolation
+library(schumaker)
+d <- data.frame(x=(0:9)+0.5,y=((1:10)-5.5)^2)
+xs=seq(0,20,length=301)
+plot(xs,Schumaker(d$x,d$y,Extrapolation="Constant")$Spline(xs),type="l")
+points(y~x,data=d)
+library(splines)
+plot(xs,splinefun(d$x,d$y,method="natural")(xs),type="l")
+points(y~x,data=d)
+d2 <- rbind(d,transform(tail(d,1)[rep(1,2),],x=c(9.5+1e-7,9.5+2e-7)))
+xs=seq(9.5-1e-3,9.5+1e-3,length=301)
+plot(xs,splinefun(d2$x,d2$y,method="natural")(xs),type="l")
+points(y~x,data=d2)
+abline(h=20.25,lty=2)
+splinefun(d2$x,d2$y,method="natural")(15)-20.25
+splinefunx <- function(x, y, method="natural", constant.left=FALSE, constant.right=FALSE, ...) {
+    xstar <- x
+    ystar <- y
+    if (constant.right) {
+        xstar <- c(xstar,tail(x,1)+(1:10)*1e-7)
+        ystar <- c(ystar,rep(tail(y,1),10))
+    }
+    if (constant.left) {
+        xstar <- c(xstar,x[1]-(1:10)*1e-7)
+        ystar <- c(ystar,rep(y[1],10))
+    }
+    splinefun(xstar, ystar, ..., method=method)
+}
+splinefunx(d$x,d$y,constant.right=TRUE)(15)-20.25
+splinefunx(d$x,d$y,constant.right=TRUE)(15000)-20.25
+splinefunx(d$x,d$y)(9.5)-20.25
+##
+library(numDeriv)
+xs=seq(0,20,length=301)
+plot(xs, numDeriv::grad(splinefunx(d$x,d$y,constant.right=TRUE), xs), type="l")
+rug(d$x)
+xs=seq(9.5-1e-3,9.5+1e-3,length=301)
+plot(xs, numDeriv::grad(splinefunx(d$x,d$y,constant.right=TRUE), xs), type="l")
+
+## Rather than using mid-points, we could use intervals and then assume a monotone smoother...
+numdiff <- function(f,x,eps=1e-5) (f(x+eps)-f(x-eps))/2/eps
+d <- transform(data.frame(x0=0:9,x1=(0:9)+1,delta=1),
+               xmid=(x0+x1)/2,
+               yint=((x1-5)^3-(x0-5)^3)/3)
+set.seed(12345)
+d <- transform(d,
+               yint_ = yint*rgamma(NROW(d),10,10))
+xs=seq(0,20,length=301)
+## cumd <- transform(d, H=cumsum(c(0,diff(x0)*head(y0,-1))))
+cumd <- with(d, data.frame(x=c(x0,tail(x1,1)), H=cumsum(c(0,diff(c(x0,tail(x1,1)))*yint))))
+sf.natural <- splinefun(cumd$x,cumd$H, method="natural")
+sf.mono <- splinefun(cumd$x,cumd$H, method="hyman")
+plot(xs, numdiff(sf.natural,xs), type="l", ylim=c(0,25)) # constant from rhs of last interval
+lines(xs, splinefunx(d$xmid,d$yint,constant.right=TRUE)(xs), col="blue") # constant from mid-point
+curve((x-5)^2, col="green", add=TRUE)
+lines(xs, numdiff(sf.mono,xs), type="l", col="orange") # extrapolates nicely if quadratic
+
+## now with variation in the outcome
+cumd <- with(d, data.frame(x=c(x0,tail(x1,1)+1), H=cumsum(c(0,diff(c(x0,tail(x1,1)+1))*yint_))))
+sf <- splinefun(cumd$x,cumd$H, method="hyman")
+plot(xs, numdiff(sf,xs), type="l", ylim=c(0,35))
+lines(xs, splinefunx(d$xmid,d$yint_,constant.right=TRUE)(xs), col="blue")
+curve((x-5)^2, col="green", add=TRUE)
+
+## gradient for penalty in the AFT model
+library(Rcpp)
+library(RcppArmadillo)
+fdiff = \(f,x,eps=1e-5)
+    sapply(1:length(x),
+           \(i) (f("[<-"(x,i,x[i]+eps)) - f("[<-"(x,i,x[i]-eps)))/2/eps)
+src = "#include <RcppArmadillo.h>
+using namespace arma;
+// [[Rcpp::depends(RcppArmadillo)]]
+// [[Rcpp::export]]
+mat differenceMatrix(int n) {
+  return join_rows(zeros(n-1,1),eye(n-1,n-1)) - join_rows(eye(n-1,n-1),zeros(n-1,1));
+}
+// [[Rcpp::export]]
+vec quadraticPenalty(mat Q, vec beta) {
+  vec delta = differenceMatrix(Q.n_rows) * Q * beta;
+  return delta % delta % (delta<0);
+}
+// [[Rcpp::export]]
+vec gradientPenalty(mat Q, vec beta) { // Q: (nbeta+2) x nbeta 
+  size_t n = Q.n_rows;
+  mat D = join_rows(zeros(n-1,1),eye(n-1,n-1)) - join_rows(eye(n-1,n-1),zeros(n-1,1)); // (nbeta+1) x (nbeta+2)
+  vec delta = D * Q * beta; // nbeta+1
+  mat M = Q.t() * D.row(0).t() * D.row(0) * Q * (delta(0)<0.0); // nbeta x nbeta
+  for(size_t j=1; j<delta.size(); j++) {
+    if (delta(j)<0.0)
+      M += Q.t() * D.row(j).t() * D.row(j) * Q;
+  }
+  return 2*M*beta;
+}
+// [[Rcpp::export]]
+vec gradientPenalty2(mat Q, vec beta) { // Q: (nbeta+2) x nbeta; beta: nbeta
+  vec betaStar = Q * beta; // nbeta+2
+  size_t n = Q.n_rows; // nbeta+2
+  mat D(n-1,n); // nbeta+1 x nbeta+2
+  D.zeros();
+  for(size_t i=0; i<n-1; i++)
+    if (betaStar(i)>betaStar(i+1)) {
+      D(i,i) = -1.0;
+      D(i,i+1) = 1.0;
+    }
+  mat M = Q.t() * D.t() * D * Q; // nbeta x nbeta
+  return 2*M*beta;
+}
+"
+sourceCpp(code=src)
+##
+library(rstpm2)
+Qmat = attr(nsx(1:10,df=3,intercept = TRUE),"q.const") # 5x3
+differenceMatrix(nrow(Qmat)) # 4x5
+quadraticPenalty(Qmat, c(1,-1,1)) # 4x1
+as.vector(gradientPenalty(Qmat, c(1,-1,1))) 
+as.vector(gradientPenalty2(Qmat, c(1,-1,1))) 
+fdiff(\(x) sum(quadraticPenalty(Qmat, x)), c(1,-1,1), 1e-5)
+as.vector(gradientPenalty(Qmat, c(1,-1,1))) - 
+    fdiff(\(x) sum(quadraticPenalty(Qmat, x)), c(1,-1,1), 1e-3)
+
+quadraticPenalty(Qmat, c(1,-1,2)) # 4x1
+gradientPenalty(Qmat, c(1,-1,2))
+
+## Error report by Joshua (now fixed)
+## Load package
+library(rstpm2)
+## Define start time
+brcancer2 <- transform(brcancer,
+                       startTime = ifelse(hormon == 0, rectime * 0.5, 0))
+## Stpm2 call without explicit specification of the type argument
+stpm2(Surv(startTime, rectime, censrec == 1) ~ hormon,
+      data = brcancer2,
+      df = 3)
+## Stpm2 call with explicit specification of the type argument
+## Do not run, this will cause your R-session to terminate
+## debug(gsm)
+stpm2(Surv(startTime, rectime, censrec == 1, type = "counting") ~ hormon,
+      data = brcancer2,
+      df = 3)
+
+## Are 2D thin-plate spline approximations in mgcv dense matrices?
+library(mgcv)
+df=expand.grid(u=seq(0,1,length=100),v=seq(0,1,length=100))
+set.seed(12345)
+df=transform(df,y=rnorm(nrow(df),sin(u*2*pi)*cos(v*2*pi),0.1))
+gam1=gam(y~s(u,v,bs="ts"),data=df)
+
+## Email from Grace
+library(rstpm2)
+fit = gsm(Surv(rectime,censrec==1)~hormon,data=brcancer,df=3)
+fit@lm
+attr(fit@lm$terms, "predvars")
+nd = data.frame(rectime=1000, hormon=0)
+rstpm2:::lpmatrix.lm(fit@lm, nd) %*% coef(fit) # or, more simply
+predict(fit@lm, nd)
+##
+eps=1e-4
+(predict(fit@lm, data.frame(rectime=1000+eps, hormon=0)) -
+ predict(fit@lm, data.frame(rectime=1000-eps, hormon=0)))/2/eps
+## or 
+(predict(fit@lm, data.frame(rectime=1000*exp(eps), hormon=0)) -
+ predict(fit@lm, data.frame(rectime=1000*exp(-eps), hormon=0)))/2/eps/1000
+##
+exp(predict(fit@lm, nd))*
+    (predict(fit@lm, data.frame(rectime=1000*exp(eps), hormon=0)) -
+     predict(fit@lm, data.frame(rectime=1000*exp(-eps), hormon=0)))/2/eps/1000
+predict(fit, newdata=nd, type="haz")
+plot(fit,type="haz", newdata=data.frame(hormon=0))
+
+## biostat3: coxphHaz and coxphHazList 
+as.data.frame.coxphHaz = function(x, row.names=NULL, optional = FALSE, ...) {
+    newdata = attr(x,"newdata")
+    ## To avoid "row names were found from a short variable and have been discarded":
+    rownames(newdata) = NULL 
+    data.frame(newdata, x=x$x, y=x$y)
+}
+as.data.frame.coxphHazList = function(x, row.names=NULL, optional = FALSE, ...) {
+    do.call(rbind, lapply(x, as.data.frame))
+}
+fit <- coxph(Surv(surv_mm/12,status=="Dead: cancer")~agegrp, data=colon)
+newdata <- data.frame(agegrp=levels(colon$agegrp))
+haz <- suppressWarnings(coxphHaz(fit,newdata))
+library(ggplot2)
+head(as.data.frame(haz))
+ggplot(as.data.frame(haz), aes(x=x,y=y,ymin=y.lower,ymax=y.upper,col=agegrp,fill=agegrp)) +
+    geom_ribbon(alpha=0.5) + geom_line(col="black") # + facet_grid(~agegrp)
+
+
+
+## Constrained MLE
+
+
+
+## relative survival and LEL
+library(rstpm2)
+library(biostat3)
+head(melanoma)
+head(popmort)
+merged = merge(transform(melanoma, ye = floor(yexit), se=ifelse(sex=="Male",1,2), event=status != "Alive"),
+               popmort, by.x=c("age","ye","se"), by.y=c("_age","_year","sex"), all.x=TRUE) 
+merged = subset(merged, sex="Female")
+## sum(is.na(merged$rate))
+model1 = stpm2(Surv(surv_mm,event)~bhazard(rate),data=merged,df=3) # only intercept - was buggy
+## model2 = stpm2(Surv(surv_mm,event)~age+bhazard(rate)+cluster(age),data=merged,df=3)
+## model1 = stpm2(Surv(surv_mm,event)~1,data=merged,df=3,bhazard=merged$rate)
+
+## mean(subset(merged,event)$yexit)
+## We need event counts and person-time in the popmort data-frame
+library(dplyr)
+temp = cbind(filter(popmort,sex==1) %>% mutate(males=rate,rate=NULL,sex=NULL),
+             data.frame(females=filter(popmort,sex==2)$rate))
+plot(males~females,temp,log="xy")
+abline(0,1,col=2)
+
+##
+d = data.frame(y=c(1000,2000),sex=0:1,pt=1e5) # some data
+fit = glm(y~sex+offset(log(pt)),data=d, family=poisson) # Poisson regression
+pred = predict(fit,newdata=transform(d,pt=1),type="link",se.fit=TRUE)
+with(pred,
+     exp(data.frame(Estimate=fit,Lower=fit-1.96*se.fit,Upper=fit+1-96*se.fit)))
+library(rstpm2)
+exp(confint(predictnl(fit,predict,newdata=transform(d,pt=1),type="response")))
+
+set.seed(12345)
+n = 1000
+x = factor(rbinom(n,1,0.5))
+y = rnorm(n, x==1)
+fit = lm(y~x)
+predict(fit, newdata=data.frame(x=0)) # fails
+predict(fit, newdata=data.frame(x=1)) # fails
+predict(fit, newdata=data.frame(x=factor(0:1))) # okay
+predict(fit, newdata=data.frame(x=factor(0,0:1))) # okay
+
+##
+library(expm)
+##
+K = 2
+Z = c(1,0,0)
+Y = c(1000,2000); N = 1e4; Sigma=diag(Y/N^2)
+lambda=Y/N
+##
+alpha=cbind(c(-sum(lambda),lambda),matrix(0,K+1,K))
+expm(alpha*10) # ok
+##
+Z = c(1,rep(0,(1+2)*3-1))
+alpha=cbind(c(-sum(lambda),lambda,-1,-1,1,0,0,1),matrix(0,length(Z),length(Z)-1))
+expm(alpha)
+m=matrix(expm(alpha)[4:9,1],2,3)
+t(m) %*% Sigma %*% m # includes covariance terms
+expm(alpha*10)
+m=matrix(expm(alpha*10)[4:9,1],2,3)
+sqrt(diag(t(m) %*% Sigma %*% m)) # includes covariance terms
+
+
+## This approach works!
+## We can add further differential equations for the covariance matrix for P (for a time-dependent covariance matrix for the parameters)
+library(deSolve)
+func <- function(t, y, parms, ...) {
+    ## browser()
+    index = findInterval(t,parms$t)
+    lambda = parms$lambda[index,] # length=K
+    K = length(lambda)
+    q = rbind(c(-sum(lambda),lambda),matrix(0,K,K+1)) # length=K+1
+    Qm = lapply(1:K,function(k) {
+        m = matrix(0,K+1,K+1)
+        m[1,1] = -1
+        m[1,k+1] = 1
+        m
+    })
+    Sigma = parms$Sigma[[index]] # dim=K^2
+    P = y[1:(K+1)] # K+1 rowvec
+    Pm = matrix(y[(2+K):(1+K+K*(K+1))],K+1,K) # (K+1)*K
+    dPdt = P %*% q
+    dPmdt = sapply(1:K, function(k) Pm[,k] %*% q + P %*% Qm[[k]]) # (K+1)*K
+    dphidt = dPmdt %*% (Sigma %*% t(Pm)) + Pm %*% (Sigma %*% t(dPmdt)) # (K+1)^2
+    list(c(dPdt, dPmdt, dphidt)) # length=1+K+(K+1)*K+(K+1)^2
+}
+Y = c(1000,2000); N = 1e4; Sigma=diag(Y/N^2); K=2
+lambda = Y/N
+y = c(1,rep(0,K+K*(K+1)+(K+1)^2))
+parms = list(t=c(0,Inf), lambda=rbind(lambda), Sigma=list(Sigma))
+ode1 = ode(y,seq(0,10),func,parms)
+ode1[11,2:4]
+sqrt(diag(matrix(ode1[11,11:19],3,3)))
+ode1
+
+## Using markov_msm (with an *identity* link for comparability)
+fit1=glm(rate~1, data=data.frame(rate=0.1,N=1e4), family=poisson(link="identity"), weight=N)
+fit2=glm(rate~1, data=data.frame(rate=0.2,N=1e4), family=poisson(link="identity"), weight=N)
+test=markov_msm(list(fit1,fit2),
+                trans=matrix(c(NA,1,2,NA,NA,NA,NA,NA,NA),3,3,TRUE), t=0:10, newdata=data.frame(N=1),
+                tmvar="t")
+print(test,se=TRUE)
+test$Pu
+
+## fit1=glm(rate~factor(findInterval(t,0:2))-1, data=data.frame(t=0:2,rate=c(0.1,0.2,0.3),N=1e4), family=poisson(link="identity"), weight=N)
+
+fit1=glm(Y~offset(log(N)), data=data.frame(Y=1000,N=1e4), family=poisson)
+fit2=glm(Y~offset(log(N)), data=data.frame(Y=2000,N=1e4), family=poisson)
+test=markov_msm(list(fit1,fit2),
+                trans=matrix(c(NA,1,2,NA,NA,NA,NA,NA,NA),3,3,TRUE), t=0:10, newdata=data.frame(N=1),
+                tmvar="t")
+print(test,se=TRUE)
+
+
+## Inquiry
+library(survival)
+library(rstpm2)
+m <- rstpm2::stpm2(Surv(time, status) ~ sex, data = lung)
+plot(m, newdata=data.frame(sex=2))
+predict(m, newdata = data.frame(sex = 2, time = 100), type = "rmst", se.fit=TRUE)
+## plot(m, newdata=data.frame(sex=2), type="rmst") # fails
+## predict(m, newdata = data.frame(sex = 1:2, time = 100), type = "rmst", se.fit=TRUE) # fails
+
+## Inquiry
+## Cross-validation with bias correction (Davison and Hinkley, 1997, p. 295)
+crossValidation = function(object,data,prediction,K = 10,correction=TRUE) {
+    N = nrow(data)
+    ndex = 1:N
+    part = as.factor(sample(1:K, N, replace = TRUE))
+    folds = split(ndex, part)
+    p = sapply(folds, length)/N
+    sum(sapply(1:K, function(k) {
+        training = data[unlist(folds[-k]), ]
+        validation = data[folds[[k]], ]
+        objectStar = update(object,data=training)
+        prediction(objectStar,validation) - p[k]*prediction(objectStar,data)*correction
+    })) + prediction(object,data)*correction
+}
+library(rstpm2)
+setMethod("update", "stpm2", function(object, ...) { # I have added this to rstpm2 on GitHub
+    object@call = object@Call
+    update.default(object, ...)
+})
+fit = gsm(Surv(rectime,censrec==1)~hormon+x1+x2+x3,data=brcancer,df=3)
+set.seed(420)
+## Currently, there is no simpler way to predict out-of-sample -2*log-likelihood for an stpm2 model
+predictDeviance = function(eventVar) function(object,newdata) {
+    events = newdata[[eventVar]]>0
+    -2*(sum(predict(object,newdata=newdata[events,,drop=FALSE],
+                    type="loghazard"))-
+        sum(predict(object,newdata=newdata,type="cumhaz")))
+}
+crossValidation(fit, brcancer,predictDeviance("censrec"))
+set.seed(420)
+crossValidation(fit, brcancer,predictDeviance("censrec"),correction=FALSE)
+AIC(fit)
+BIC(fit)
+
 library(rstpm2)
 library(survival)
 library(timereg)
@@ -33,14 +727,83 @@ two_states <- function(model, ...) {
 }
 ## Note: the first argument is the hazard model. The other arguments are arguments to the
 ## markov_msm function, except for the transition matrix, which is defined by the new function.
+colon2 <- transform(survival::colon, Obs=(rx=="Obs")+0, Lev=(rx=="Lev")+0,Lev_5FU=(rx=="Lev+5FU")+0)
+death = aalen(Surv(time,status)~Lev+Lev_5FU, data=subset(colon2,etype==2))
+cr = two_states(death, newdata=data.frame(Lev=0,Lev_5FU=0))
+plot(cr,ggplot=TRUE,stacked=FALSE,which="L") # ok
+plot(cr,ggplot=TRUE,which="L") # ok - is this sensible?
+plot(cr) # ok -- no legend
+plot(cr,ggplot=TRUE) # ok
+plot(cr,lattice=TRUE) # ok -- no legend
+plot(cr,ggplot=TRUE,stacked=FALSE) # ok
+##
+competing_risks <- function(models, ...) {
+    transmat = matrix(c(NA,1,2,
+                        NA,NA,NA,
+                        NA,NA,NA),3,3,byrow=TRUE)
+    rownames(transmat) <- colnames(transmat) <- c("Initial","Event 1","Event 2")
+    markov_sde(models, ..., trans = transmat)
+}
+## Note: the first argument is the hazard model. The other arguments are arguments to the
+## markov_msm function, except for the transition matrix, which is defined by the new function.
+colon2 <- transform(survival::colon, Obs=(rx=="Obs")+0, Lev=(rx=="Lev")+0,Lev_5FU=(rx=="Lev+5FU")+0)
+progression = aalen(Surv(time,status)~Lev+Lev_5FU, data=subset(colon2,etype==1))
+death = aalen(Surv(time,status)~Lev+Lev_5FU, data=subset(colon2,etype==2))
+cr = competing_risks(list(progression,death), newdata=data.frame(Lev=0,Lev_5FU=0))
+plot(cr)
+##
+illness_death <- function(models, ...) {
+    transmat = matrix(c(NA,1,2,
+                        NA,NA,3,
+                        NA,NA,NA),3,3,byrow=TRUE)
+    rownames(transmat) <- colnames(transmat) <- c("Initial","Illness","Death")
+    markov_sde(models, ..., trans = transmat)
+}
+## Note: the first argument is the hazard model. The other arguments are arguments to the
+## markov_msm function, except for the transition matrix, which is defined by the new function.
 colon2 <- transform(survival::colon, Obs=(rx=="Obs"), Lev=(rx=="Lev"),Lev_5FU=(rx=="Lev+5FU"))
-death = aalen(Surv(time,status)~Obs, data=subset(colon2,etype==2))
-## cr = two_states(death, newdata=data.frame(rx="Obs")) # fails
-## cr = two_states(death, newdata=data.frame(rx=levels(survival::colon$rx)))
-
-death = aalen(Surv(time,status)~factor(rx), data=subset(survival::colon,etype==2))
-cr = two_states(death, newdata=data.frame(rx=factor("Obs",levels(survival::colon$rx)))) # fails
-
+d1 = subset(colon2,etype==1)
+d2 = subset(colon2,etype==2)
+index = d1$time < d2$time & d1$status==1 # index for initial -> recurrence
+d12 = d1 # initial -> recurrence
+d23 = transform(d2[index,], enter=d1$time[index]) # recurrence -> death
+d13 = transform(d2, # initial -> death
+                time=pmin(d1$time,d2$time),
+                status=ifelse(d1$time==d2$time,d2$status,0))
+progression = aalen(Surv(time,status)~Lev+Lev_5FU, data=d12)
+death1 = aalen(Surv(time,status)~Lev+Lev_5FU, data=d13)
+death2 = aalen(Surv(enter,time,status)~Lev+Lev_5FU, data=d23)
+cr = illness_death(list(progression,death1,death2), newdata=data.frame(Lev=FALSE,Lev_5FU=FALSE)) # fails
+plot(cr)
+##
+illness_death = function(models, ...) {
+    transmat = matrix(c(NA,1,2,NA,
+                        NA,NA,NA,3,
+                        NA,NA,NA,NA,
+                        NA,NA,NA,NA),4,4,byrow=TRUE)
+    rownames(transmat) <- colnames(transmat) <- c("Initial","Illness","DirectDeath","DeathAfterRecurrence")
+    markov_sde(models, ..., trans = transmat)
+}
+## Note: the first argument is the hazard model. The other arguments are arguments to the
+## markov_msm function, except for the transition matrix, which is defined by the new function.
+colon2 = transform(survival::colon, Obs=(rx=="Obs")+0, Lev=(rx=="Lev")+0, Lev_5FU=(rx=="Lev+5FU")+0)
+d1 = subset(colon2,etype==1)
+d2 = subset(colon2,etype==2)
+index = d1$time < d2$time & d1$status==1 # index for initial -> recurrence
+d12 = d1 # initial -> recurrence
+d23 = transform(d2[index,], enter=d1$time[index]) # recurrence -> death
+d13 = transform(d2, # initial -> death
+                time=pmin(d1$time,d2$time),
+                status=ifelse(d1$time==d2$time,d2$status,0))
+progression = aalen(Surv(time,status)~Lev+Lev_5FU, data=d12)
+death1 = aalen(Surv(time,status)~Lev+Lev_5FU, data=d13)
+death2 = aalen(Surv(enter,time,status)~Lev+Lev_5FU, data=d23)
+cr = illness_death(list(progression,death1,death2), newdata=data.frame(Lev=0,Lev_5FU=0:1),
+                   weights=c(-1,1), los=FALSE)
+plot(cr,ggplot=TRUE) + facet_grid(~Lev_5FU) # ok
+plot(cr,ggplot=TRUE,stacked=FALSE) + facet_grid(state~Lev_5FU) # ok
+plot(cr,ggplot=TRUE,stacked=FALSE,which="L") + facet_grid(state~Lev_5FU) # ok
+plot(standardise(cr),stacked=FALSE,ggplot=TRUE) # CIs are *very* wide -- error?
 
 ## Non-parametric baseline: SDE approach due to Ryalen and colleagues
 markov_sde <- function(models, trans, newdata, init=NULL, nLebesgue=1e4+1, los=FALSE, nOut=300,

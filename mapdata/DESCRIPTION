@@ -1,17 +1,17 @@
 Package: mapdata
 Title: Extra Map Databases
-Version: 2.3.0
-Date: 2018-03-29
+Version: 2.3.1
+Date: 2022-10-31
 Author: Original S code by Richard A. Becker and Allan R. Wilks.
 	R version by Ray Brownrigg <Ray.Brownrigg@ecs.vuw.ac.nz>.
-Description: Supplement to maps package, providing the larger and/or
-	higher-resolution databases.
+Description: Supplement to maps package, providing some larger and/or
+	higher-resolution databases. NOTE: this is a legacy package. The world map is out-dated.
 Depends: R (>= 2.14.0), maps (>= 2.0-7)
 LazyData: yes
 License: GPL-2
 Maintainer: Alex Deckmyn <alex.deckmyn@meteo.be>
 NeedsCompilation: yes
-Packaged: 2018-03-30 10:58:56 UTC; dalex
+Packaged: 2022-10-31 20:52:53 UTC; alex
 Repository: CRAN
-Date/Publication: 2018-03-30 13:12:08 UTC
-Built: R 3.6.0; x86_64-pc-linux-gnu; 2019-05-10 11:37:29 UTC; unix
+Date/Publication: 2022-11-01 00:57:32 UTC
+Built: R 4.3.0; x86_64-pc-linux-gnu; 2023-07-07 02:35:27 UTC; unix

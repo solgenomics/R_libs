@@ -1,3 +1,82 @@
+CHANGES IN VERSION 1.52.0
+-------------------------
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+  o Improve documentation of findOverlaps() argument 'minoverlap':
+    The man page now explains how findOverlaps() argument 'minoverlap'
+    is interpreted when 'query' or 'subject' is a GRangesList object.
+
+
+CHANGES IN VERSION 1.50.0
+-------------------------
+
+- No changes in this version.
+
+
+CHANGES IN VERSION 1.48.0
+-------------------------
+
+NEW FEATURES
+
+    o Add subtract() for subtracting a set of genomic ranges from a GRanges
+      object. This is similar to bedtools subtract.
+
+    o Add 'na.rm' argument to makeGRangesFromDataFrame().
+
+DEPRECATED AND DEFUNCT
+
+    o Remove the GenomicRangesList() constructor. This constructor got
+      deprecated in BioC 3.10 and defunct in BioC 3.13.
+
+BUG FIXES
+
+    o Make sure promoters() works on GPos objects.
+
+
+CHANGES IN VERSION 1.46.0
+-------------------------
+
+- No changes in this version.
+
+
+CHANGES IN VERSION 1.44.0
+-------------------------
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o Replace KEGG.db usage with KEGGREST in vignettes and examples.
+
+DEPRECATED AND DEFUNCT
+
+    o The GenomicRangesList() constructor is now defunct (got deprecated in
+      BioC 3.10).
+
+
+CHANGES IN VERSION 1.42.0
+-------------------------
+
+NEW FEATURES
+
+    o Add nearestKNeighbors() method for GenomicRanges derivatives.
+
+    o coverage() now supports 'method="naive"'. This is in addition to the
+      already supported methods "sort" and "hash". This new method is a slower
+      version of the "hash" method that has the advantage of avoiding floating
+      point artefacts in the no-coverage regions of the numeric-Rle object
+      returned by coverage() when the weights are supplied as a numeric vector
+      of type 'double'. See "FLOATING POINT ARITHMETIC CAN BRING A SURPRISE"
+      example in '?coverage' in the IRanges package.
+
+
+CHANGES IN VERSION 1.40.0
+-------------------------
+
+NEW FEATURES
+
+    o Add trim() method for GRangesList objects.
+
+
 CHANGES IN VERSION 1.38.0
 -------------------------
 

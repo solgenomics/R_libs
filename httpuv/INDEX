@@ -1,4 +1,3 @@
-WebSocket               WebSocket class
 encodeURI               URI encoding/decoding
 httpuv-package          HTTP and WebSocket server
 interrupt               Interrupt httpuv runloop
@@ -17,3 +16,4 @@ stopAllServers          Stop all servers
 stopDaemonizedServer    Stop a running daemonized server in Unix
                         environments (deprecated)
 stopServer              Stop a server
+WebSocket               WebSocket class

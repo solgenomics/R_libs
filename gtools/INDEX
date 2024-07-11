@@ -1,6 +1,5 @@
-ASCIIfy                 Convert Characters to ASCII
-ELISA                   Data from an ELISA assay
 asc                     Convert between characters and ASCII codes
+ASCIIfy                 Convert Characters to ASCII
 ask                     Display a prompt and collect the user's
                         response
 assert                  Defunct Functions in package 'gtools'
@@ -15,6 +14,7 @@ combinations            Enumerate the Combinations or Permutations of
                         the Elements of a Vector
 defmacro                Define a macro
 dirichlet               Functions for the Dirichlet Distribution
+ELISA                   Data from an ELISA assay
 foldchange              Compute fold-change or convert between
                         log-ratio and fold-change.
 getDependencies         Get package dependencies

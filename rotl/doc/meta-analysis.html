@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="David Winter" />
+
+<meta name="date" content="2023-06-13" />
+
+<title>Using the Open Tree synthesis in a comparative analysis</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap;
+}
+pre {
+
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Using the Open Tree synthesis in a
+comparative analysis</h1>
+<h4 class="author">David Winter</h4>
+<h4 class="date">2023-06-13</h4>
+
+
+
+<div id="phylogenetic-comparative-methods" class="section level2">
+<h2>Phylogenetic Comparative Methods</h2>
+<p>The development of phylogenetic comparative methods has made
+phylogenies and important source of data in fields as diverse as
+ecology, genomic and medicine. Comparative methods can be used to
+investigate patterns in the evolution of traits or the diversification
+of lineages. In other cases a phylogeny is treated as a “nuisance
+parameter”, allowing with the autocorrelation created by the shared
+evolutionary history of the different species included to be controlled
+for.</p>
+<p>In many cases finding a tree that relates the species for which trait
+data are available is a rate-limiting step in such comparative analyses.
+Here we show how the synthetic tree provided by Open Tree of Life (and
+made available in R via <code>rotl</code>) can help to fill this
+gap.</p>
+</div>
+<div id="a-phylogenetic-meta-analysis" class="section level2">
+<h2>A phylogenetic meta-analysis</h2>
+<p>To demonstrate the use of <code>rotl</code> in a comparative
+analysis, we will partially reproduce the results of <a href="https://doi.org/10.1111/jeb.12282">Rutkowska <em>et al</em>
+2014</a>. Very briefly, this study is a meta-analysis summarising the
+results of multiple studies testing for systematic differences in the
+size of eggs which contain male and female offspring. Such a difference
+might mean that birds invest more heavily in one sex than the other.</p>
+<p>Because this study involves data from 51 different species, Rutkowska
+<em>et al</em> used a phylogenetic comparative approach to account for
+the shared evolutionary history among some of the studied-species.</p>
+<div id="gather-the-data" class="section level3">
+<h3>Gather the data</h3>
+<p>If we are going to reproduce this analysis, we will first need to
+gather the data. Thankfully, the data is available as supplementary
+material from the publisher’s website. We provide a copy of this data
+with the package:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rotl)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## This dataset is available from the publisher&#39;s study website:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>egg_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;egg.csv&quot;</span>, <span class="at">package =</span> <span class="st">&quot;rotl&quot;</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="do">## }</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(egg_data)</span></code></pre></div>
+<pre><code>##                   animal                   Spp       Lndim Measure Neggs
+## 1 Zonotrichia_leucophrys White-crowned sparrow 0.000000000  volume   294
+## 2      Passer_domesticus         House sparrow 0.009407469  volume   149
+## 3        Serinus_canaria                Canary 0.000000000  volume    52
+## 4          Turdus_merula    European blackbird 0.021189299  volume    82
+## 5    Agelaius_phoeniceus  Red-winged blackbird 0.218316086  volume   394
+## 6    Quiscalus_mexicanus  Great-tailed grackle 0.281894985    mass   822
+##   Nclutches        ESr Type         StudyID Year        D        EN         Zr
+## 1        73 0.14004594 stat        Mead1987 1987 3.421918  85.91673 0.14097244
+## 2        31 0.11175203 stat     Cordero2000 2000 4.045161  36.83413 0.11222075
+## 3        21 0.49679140 stat     Leitner2006 2006 2.180952  23.84279 0.54503712
+## 4        54 0.38598540 stat     Martyka2010 2010 1.414815  57.95812 0.40707397
+## 5       106 0.07410136  raw Weatherhead1985 1985 3.173585 124.14982 0.07423744
+## 6       205 0.05178834  raw     Teather1989 1989 3.407805 241.21099 0.05183471
+##           VZr
+## 1 0.012060292
+## 2 0.029555954
+## 3 0.047978211
+## 4 0.018195675
+## 5 0.008254242
+## 6 0.004197959</code></pre>
+<p>The most important variable in this dataset is <code>Zr</code>, which
+is a <a href="https://en.wikipedia.org/wiki/Fisher_transformation">normalized
+effect size</a> for difference ,in size between eggs that contain males
+and females. Values close to zero come from studies that found the sex
+of an egg’s inhabitant had little effect in its size, while large
+positive or negative values correspond to studies with substantial sex
+biases (towards males and females respectively). Since this is a
+meta-analysis we should produce the classic <a href="https://en.wikipedia.org/wiki/Funnel_plot">funnel plot</a> with
+effects-size on the y-axis and precision (the inverse of the sample
+standard error) on the x-axis. Here we calculate precision from the
+sample variance (<code>Vzr</code>):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="fu">sqrt</span>(egg_data<span class="sc">$</span>VZr), egg_data<span class="sc">$</span>Zr,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">16</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Effect size (Zr)&quot;</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Precision (1/SE)&quot;</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Effect sizes for sex bias in egg size among 51 brid species&quot;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="figure">
+<img src="data:image/png;base64,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" alt />
+<p class="caption">plot of chunk eggs_in_a_funnel</p>
+</div>
+<p>In order to use this data later on we need to first convert it to a
+standard <code>data.frame</code>. We can also convert the
+<code>animal</code> column (the species names) to lower case, and remove
+the underscores in their names, which will make it easier to match names
+later on:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>egg_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(egg_data)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Convert taxon names to lower case</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>egg_data<span class="sc">$</span>animal <span class="ot">&lt;-</span> <span class="fu">tolower</span>(egg_data<span class="sc">$</span>animal)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Let&#39;s remove the underscores (_) from the taxon names</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>egg_data<span class="sc">$</span>animal <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot; &quot;</span>, egg_data<span class="sc">$</span>animal)</span></code></pre></div>
+</div>
+<div id="find-the-species-in-ott" class="section level3">
+<h3>Find the species in OTT</h3>
+<p>We can use the OTL synthesis tree to relate these species. To do so
+we first need to find Open Tree Taxonomy (OTT) IDs for each species. We
+can do that with the Taxonomic Name Resolution Service function
+<code>tnrs_match_names</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>taxa <span class="ot">&lt;-</span> <span class="fu">tnrs_match_names</span>(<span class="fu">unique</span>(egg_data<span class="sc">$</span>animal), <span class="at">context =</span> <span class="st">&quot;Animals&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in tnrs_match_names(unique(egg_data$animal), context = &quot;Animals&quot;):
+## partial argument match of &#39;context&#39; to &#39;context_name&#39;</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(taxa)</span></code></pre></div>
+<pre><code>##            search_string            unique_name approximate_match ott_id
+## 1 zonotrichia leucophrys Zonotrichia leucophrys             FALSE 265553
+## 2      passer domesticus      Passer domesticus             FALSE 745175
+## 3        serinus canaria        Serinus canaria             FALSE 464865
+## 4          turdus merula          Turdus merula             FALSE 568572
+## 5    agelaius phoeniceus    Agelaius phoeniceus             FALSE 226605
+## 6    quiscalus mexicanus    Quiscalus mexicanus             FALSE 743411
+##   is_synonym          flags number_matches
+## 1      FALSE                             1
+## 2      FALSE                             1
+## 3      FALSE sibling_higher              1
+## 4      FALSE                             1
+## 5      FALSE                             1
+## 6      FALSE                             1</code></pre>
+<p>All of these species are in OTT, but a few of them go by different
+names in the Open Tree than we have in our data set. Because the tree
+<code>rotl</code> fetches will have Open Tree names, we need to create a
+named vector that maps the names we have for each species to the names
+Open Tree uses for them:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>taxon_map <span class="ot">&lt;-</span> <span class="fu">structure</span>(taxa<span class="sc">$</span>search_string, <span class="at">names =</span> taxa<span class="sc">$</span>unique_name)</span></code></pre></div>
+<p>Now we can use this map to retrieve “data set names” from “OTT
+names”:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>taxon_map[<span class="st">&quot;Anser caerulescens&quot;</span>]</span></code></pre></div>
+<pre><code>##  Anser caerulescens 
+## &quot;chen caerulescens&quot;</code></pre>
+</div>
+<div id="get-a-tree" class="section level3">
+<h3>Get a tree</h3>
+<p>Now we can get the tree. There are really too many tips here to show
+nicely, so we will leave them out of this plot</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>tr <span class="ot">&lt;-</span> <span class="fu">tol_induced_subtree</span>(<span class="fu">ott_id</span>(taxa)[<span class="fu">is_in_tree</span>(<span class="fu">ott_id</span>(taxa))])</span></code></pre></div>
+<pre><code>## Warning in collapse_singles(tr, show_progress): Dropping singleton nodes
+## with labels: mrcaott246ott5481, mrcaott246ott7145, mrcaott246ott928360,
+## mrcaott246ott1858, mrcaott246ott2907, mrcaott246ott3600042, mrcaott246ott7113,
+## Passeriformes ott1041547, mrcaott246ott3212, mrcaott246ott428578,
+## mrcaott246ott44866, mrcaott246ott5929, mrcaott246ott32658,
+## mrcaott246ott310390, mrcaott246ott176461, mrcaott246ott22325,
+## mrcaott246ott10351, mrcaott246ott193904, mrcaott246ott5934, mrcaott246ott1566,
+## mrcaott1566ott3598440, mrcaott1566ott496009, mrcaott1566ott59716,
+## mrcaott1566ott32651, mrcaott1566ott24297, mrcaott1566ott45312,
+## mrcaott1566ott22300, mrcaott22300ott35350, mrcaott22300ott547548,
+## mrcaott22300ott909199, mrcaott22300ott67150, mrcaott22300ott130294,
+## mrcaott22300ott3598245, mrcaott22300ott416087, mrcaott22300ott629342,
+## mrcaott22300ott416089, mrcaott22300ott107840, mrcaott364210ott451069,
+## mrcaott364210ott3598839, mrcaott3598839ott5341363, mrcaott19467ott431648,
+## mrcaott19467ott252687, mrcaott19467ott401023, mrcaott19467ott233446,
+## mrcaott19467ott168078, mrcaott19467ott1046624, mrcaott19467ott161293,
+## mrcaott19467ott46396, mrcaott46396ott46398, mrcaott46398ott168083,
+## mrcaott168083ott431676, mrcaott2175ott35326, mrcaott2175ott968664,
+## mrcaott2175ott259082, mrcaott2175ott59905, mrcaott2175ott2224,
+## mrcaott2224ott366470, mrcaott3364ott310375, mrcaott3364ott3370,
+## mrcaott4083ott35042, mrcaott4083ott370807, mrcaott4083ott469177,
+## mrcaott4083ott18592, mrcaott4083ott139823, mrcaott4083ott11712,
+## mrcaott4083ott95949, Erythrura ott465905, mrcaott24017ott389884,
+## mrcaott24017ott24025, mrcaott24025ott596763, mrcaott24025ott453058,
+## mrcaott24025ott141501, mrcaott141501ott966119, mrcaott141501ott865472,
+## mrcaott141501ott389883, mrcaott105913ott311555, mrcaott311555ott1082386,
+## mrcaott311555ott708327, mrcaott708327ott966122, mrcaott4088ott8371,
+## mrcaott4088ott5616, mrcaott5616ott28339, mrcaott5616ott6023,
+## mrcaott6023ott243614, mrcaott6023ott101225, mrcaott6023ott125079,
+## mrcaott125079ott463026, mrcaott125079ott765405, Zonotrichia (genus in
+## domain Eukaryota) ott789032, mrcaott125079ott265547, mrcaott125079ott265554,
+## mrcaott5620ott254662, mrcaott5620ott29804, mrcaott29804ott449580,
+## mrcaott29804ott449562, mrcaott29804ott86894, mrcaott29804ott93045,
+## mrcaott93045ott264496, mrcaott264496ott264500, mrcaott264500ott3597163,
+## mrcaott264500ott283668, Quiscalus ott743410, mrcaott283673ott673386,
+## mrcaott283673ott741944, mrcaott283673ott735243, mrcaott213448ott213452,
+## mrcaott213448ott1009279, mrcaott213448ott213451, mrcaott213454ott430627,
+## mrcaott430627ott498751, mrcaott430627ott617797, mrcaott430627ott3597159,
+## mrcaott99175ott364331, Xanthocephalus ott364336, mrcaott6366ott28332,
+## mrcaott6366ott88283, mrcaott6366ott341465, mrcaott6366ott157599,
+## mrcaott6366ott178457, mrcaott6366ott405215, mrcaott6366ott238142,
+## mrcaott6366ott6375, mrcaott6375ott119724, mrcaott6375ott238137,
+## mrcaott238137ott328909, mrcaott238137ott464865, Haemorhous ott3601758,
+## mrcaott9416ott840030, mrcaott9416ott96148, mrcaott9416ott7068473, Passer
+## ott515158, mrcaott9416ott407769, mrcaott9416ott25628, mrcaott9416ott407764,
+## mrcaott9416ott68955, mrcaott9416ott73636, mrcaott1488ott72472,
+## mrcaott1488ott63797, mrcaott1488ott284404, mrcaott1488ott107463,
+## mrcaott1488ott17016, mrcaott1488ott44217, mrcaott1488ott16185,
+## mrcaott16185ott274931, Hirundinidae ott897681, mrcaott16185ott67916,
+## mrcaott67916ott67921, mrcaott67916ott368059, mrcaott67916ott67920,
+## Delichon ott922719, mrcaott107476ott177058, mrcaott107476ott271376,
+## mrcaott107476ott337752, mrcaott337752ott7661935, mrcaott337752ott337762,
+## mrcaott337752ott7068616, mrcaott2375ott73144, mrcaott2375ott124085,
+## mrcaott2375ott71358, mrcaott2375ott814750, mrcaott2375ott61147,
+## mrcaott84656ott123763, mrcaott123763ott728471, mrcaott123763ott258794,
+## mrcaott4820ott409116, mrcaott4820ott17162, mrcaott4820ott20998,
+## mrcaott4820ott20989, mrcaott4820ott58860, mrcaott4820ott23690,
+## mrcaott4820ott20996, mrcaott4820ott11462, mrcaott4820ott140440,
+## mrcaott4820ott197505, mrcaott4820ott75978, mrcaott4820ott11315,
+## mrcaott4820ott5933, mrcaott5933ott60465, mrcaott5933ott25637,
+## mrcaott25637ott199843, mrcaott25637ott473431, mrcaott25637ott686166,
+## mrcaott25637ott111993, mrcaott25637ott183621, mrcaott183621ott501241,
+## mrcaott501241ott3598010, mrcaott501241ott597018, mrcaott686165ott686168,
+## mrcaott60456ott662804, mrcaott60456ott75990, Pica ott776480, Falconiformes
+## ott212187, Falconidae ott212186, mrcaott47588ott225286, mrcaott47588ott748842,
+## mrcaott47588ott201377, mrcaott201377ott773020, Cerchneis ott3596159,
+## mrcaott179290ott352521, mrcaott179290ott624976, mrcaott179290ott624973,
+## mrcaott179290ott624974, mrcaott179290ott432111, mrcaott5272ott92263,
+## mrcaott5272ott24121, Scolopacidae ott887699, mrcaott24121ott217797,
+## mrcaott24121ott45306, mrcaott24121ott654830, mrcaott24121ott214779,
+## mrcaott24121ott651066, mrcaott651066ott1090732, mrcaott7639ott306220,
+## mrcaott7639ott57833, mrcaott7639ott383929, mrcaott7639ott279504,
+## mrcaott7639ott47401, mrcaott7639ott341047, mrcaott7639ott234666,
+## mrcaott7639ott341034, mrcaott7639ott285543, Sterna ott16767,
+## mrcaott285543ott341030, mrcaott285543ott738509, mrcaott285543ott966606,
+## mrcaott285543ott966604, mrcaott22965ott738512, mrcaott22965ott80679,
+## mrcaott22965ott558955, mrcaott22965ott154126, mrcaott22965ott241571,
+## mrcaott22965ott282132, mrcaott22965ott414141, mrcaott22965ott704174,
+## mrcaott22965ott704175, mrcaott22965ott324050, mrcaott22965ott353849,
+## mrcaott22965ott75913, mrcaott75913ott335736, mrcaott306645ott450107,
+## mrcaott425206ott887691, mrcaott425206ott515355, mrcaott119599ott993041,
+## mrcaott119599ott509055, mrcaott698969ott4947414, mrcaott147723ott219032,
+## Stercorariidae ott168297, Stercorarius ott742632, mrcaott742640ott742641,
+## mrcaott57823ott57827, mrcaott57823ott242771, mrcaott57823ott112937,
+## mrcaott112937ott129402, mrcaott112937ott454019, mrcaott112937ott242776,
+## mrcaott242776ott313115, mrcaott242776ott704464, mrcaott242776ott331994,
+## mrcaott331994ott413796, mrcaott9830ott86672, mrcaott9830ott90560,
+## mrcaott9830ott324158, mrcaott9830ott55044, mrcaott9830ott285638,
+## mrcaott9830ott117726, Sulidae ott452462, mrcaott170197ott403772, Sula ott160486,
+## mrcaott170197ott5859716, mrcaott170197ott429615, mrcaott429615ott1030312,
+## Procellariiformes ott452461, mrcaott18206ott31011, mrcaott31011ott71459,
+## Diomedeidae ott85277, mrcaott71459ott320282, Phoebastria ott941509,
+## mrcaott320282ott320284, Sphenisciformes ott494366, Spheniscidae ott494367,
+## mrcaott60413ott3600120, mrcaott60413ott4130813, mrcaott60413ott4130835,
+## mrcaott60413ott4130830, mrcaott60413ott3600127, mrcaott60413ott4130831,
+## mrcaott60413ott3600124, mrcaott60413ott3600128, mrcaott60413ott3600129,
+## mrcaott60413ott4130819, mrcaott60413ott4130817, mrcaott60413ott60417,
+## mrcaott60413ott3600131, mrcaott60413ott917663, Eudyptes ott494364,
+## mrcaott82219ott116946, mrcaott116946ott219197, mrcaott134466ott494361,
+## Pygoscelis ott494365, mrcaott134466ott783352, mrcaott5021ott198671,
+## mrcaott5021ott75792, Cuculiformes ott212171, mrcaott75792ott212172,
+## mrcaott75792ott3601282, mrcaott75792ott119216, mrcaott119216ott212175,
+## mrcaott119216ott169265, mrcaott169265ott550039, mrcaott169265ott462546,
+## mrcaott462546ott3596355, mrcaott462546ott1050027, Cuculus ott1041429,
+## mrcaott549514ott7068132, mrcaott549514ott3596308, mrcaott549514ott3596307,
+## mrcaott549514ott3596306, mrcaott549514ott792626, mrcaott17146ott57819,
+## Columbiformes ott363030, mrcaott17146ott45505, mrcaott45505ott50388,
+## mrcaott45505ott506098, mrcaott45505ott51607, mrcaott51607ott277822,
+## mrcaott51607ott67614, mrcaott51607ott244134, Columba ott938415,
+## mrcaott51607ott277817, mrcaott277817ott320359, mrcaott320359ott493986,
+## mrcaott320359ott767317, mrcaott320359ott921832, mrcaott320359ott938416,
+## Galliformes ott837585, mrcaott4765ott6520194, mrcaott4765ott109888,
+## mrcaott4765ott75785, mrcaott4765ott104461, mrcaott4765ott151684,
+## mrcaott4765ott54193, mrcaott4765ott49319, mrcaott4765ott3596087,
+## mrcaott4765ott415487, mrcaott4765ott51354, mrcaott4765ott446490, Tetraoninae
+## ott999677, mrcaott4765ott55929, mrcaott4765ott539045, mrcaott4765ott234824,
+## Centrocercus ott728081, mrcaott53700ott572162, mrcaott53700ott466627,
+## mrcaott53700ott309383, mrcaott53700ott102722, mrcaott102722ott137547, Phasianus
+## ott102718, mrcaott49310ott102705, mrcaott49310ott153554, mrcaott153554o</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tr, <span class="at">show.tip.label =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" title="plot of chunk birds_in_a_tree" alt="plot of chunk birds_in_a_tree" style="display: block; margin: auto;" /></p>
+<p>There are a few things to note here. First, the tree has no branch
+lengths. At present this is true for the whole of the Open Tree
+synthetic tree. Some comparative methods require either branch lengths
+or an ultrametric tree. Before you can use one of those methods you will
+need to get a tree with branch lengths. You could try looking for
+published trees made available by the Open Tree with
+<code>studies_find_trees</code>. Alternatively, you could estimate
+branch lengths from the toplogy of a phylogeny returned by
+<code>tol_induced_subtree</code>, perhaps by downloading DNA sequences
+from the NCBI with <code>rentrez</code> or “hanging” the tree on nodes
+of known-age using penalized likelihood method in
+<code>ape::chronos</code>. In this case, we will use only the topology
+of the tree as input to our comparative analysis, so we can skip these
+steps.</p>
+<p>Second, the tip labels contain OTT IDs, which means they will not
+perfectly match the species names in our dataset or the taxon map that
+we created earlier:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>tr<span class="sc">$</span>tip.label[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;Ficedula_albicollis_ott107840&quot; &quot;Luscinia_svecica_ott274225&quot;   
+## [3] &quot;Turdus_merula_ott568572&quot;       &quot;Sturnus_unicolor_ott366470&quot;</code></pre>
+<p>Finally, the tree contains node labels for those nodes that match a
+higher taxonomic group, and empty character vectors (<code>&quot;&quot;</code>)
+for all other nodes. Some comparative methods either do no expect node
+labels at all, or require all labeled nodes to have a unique name
+(meaning multiple “empty” labels will cause and error).</p>
+<p>We can deal with all these details easily. <code>rotl</code> provides
+the convenience function <code>strip_ott_ids</code> to remove the extra
+information from the tip labels. With the IDs removed, we can use our
+taxon map to replace the tip labels in the tree with the species names
+from dataset.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>otl_tips <span class="ot">&lt;-</span> <span class="fu">strip_ott_ids</span>(tr<span class="sc">$</span>tip.label, <span class="at">remove_underscores =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>tr<span class="sc">$</span>tip.label <span class="ot">&lt;-</span> taxon_map[ otl_tips ]</span></code></pre></div>
+<p>Finally, we can remove the node labels by setting the
+<code>node.label</code> attribute of the tree to <code>NULL</code>.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>tr<span class="sc">$</span>node.label <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>egg_data <span class="ot">&lt;-</span> egg_data[egg_data<span class="sc">$</span>animal <span class="sc">%in%</span> tr<span class="sc">$</span>tip.label, ]</span></code></pre></div>
+</div>
+<div id="perform-the-meta-analysis" class="section level3">
+<h3>Perform the meta-analysis</h3>
+<p>Now we have data and a tree, and we know the names in the tree match
+the ones in the data. It’s time to do the comparative analysis.
+Rutkowska <em>et al</em>. used <code>MCMCglmm</code>, a Bayesian MCMC
+approach to fitting multi-level models,to perform their meta-analysis,
+and we will do the same. Of course, to properly analyse these data you
+would take some care in deciding on the appropriate priors to use and
+inspect the results carefully. In this case, we are really interested in
+using this as a demonstration, so we will just run a simple model.</p>
+<p>Specifically we sill fit a model where the only variable that might
+explain the values of <code>Zr</code> is the random factor
+<code>animal</code>, which corresponds to the phylogenetic relationships
+among species. We also provide <code>Zvr</code> as the measurement error
+variance, effectively adding extra weight to the results of more
+powerful studies. Here’s how we specify and fit that model with
+<code>MCMCglmm</code>:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">require</span>(MCMCglmm, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  pr <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">R =</span> <span class="fu">list</span>(<span class="at">V =</span> <span class="dv">1</span>, <span class="at">nu =</span> <span class="fl">0.002</span>),</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">G =</span> <span class="fu">list</span>(<span class="at">G1 =</span> <span class="fu">list</span>(<span class="at">V =</span> <span class="dv">1</span>, <span class="at">nu =</span> <span class="fl">0.002</span>))</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  model <span class="ot">&lt;-</span> <span class="fu">MCMCglmm</span>(Zr <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">random =</span> <span class="sc">~</span>animal,</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">pedigree =</span> tr,</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">mev =</span> egg_data<span class="sc">$</span>VZr,</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">prior =</span> pr,</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> egg_data,</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  model <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;mcmcglmm_model.rds&quot;</span>, <span class="at">package =</span> <span class="st">&quot;rotl&quot;</span>))</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## Warning in inverseA(pedigree = pedigree, scale = scale, nodes = nodes): no
+## branch lengths: compute.brlen from ape has been used</code></pre>
+<pre><code>## Warning in sing.rm$coef: partial match of &#39;coef&#39; to &#39;coefficients&#39;</code></pre>
+<pre><code>## Warning in x$n: partial match of &#39;n&#39; to &#39;nu&#39;
+
+## Warning in x$n: partial match of &#39;n&#39; to &#39;nu&#39;
+
+## Warning in x$n: partial match of &#39;n&#39; to &#39;nu&#39;
+
+## Warning in x$n: partial match of &#39;n&#39; to &#39;nu&#39;
+
+## Warning in x$n: partial match of &#39;n&#39; to &#39;nu&#39;
+
+## Warning in x$n: partial match of &#39;n&#39; to &#39;nu&#39;</code></pre>
+<p>Now that we have a result we can find out how much phylogenetic
+signal exists for sex-biased differences in egg-size. In a multi-level
+model we can use variance components to look at this, specifically the
+proportion of the total variance that can be explained by phylogeny is
+called the phylogenetic reliability, <em>H</em>. Let’s calculate the
+<em>H</em> for this model:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>var_comps <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(model<span class="sc">$</span>VCV)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>var_comps[<span class="st">&quot;animal&quot;</span>] <span class="sc">/</span> <span class="fu">sum</span>(var_comps)</span></code></pre></div>
+<pre><code>##     animal 
+## 0.00283581</code></pre>
+<p>It appears there is almost no phylogenetic signal to the data. The
+relationships among species explain much less that one percent of the
+total variance in the data. If you were wondering, Rutkowska <em>et
+al</em>. report a similar result, even after adding more predictors to
+their model most of the variance in <code>Zr</code> was left
+unexplained.</p>
+</div>
+</div>
+<div id="what-other-comparative-methods-can-i-use-in-r" class="section level2">
+<h2>What other comparative methods can I use in R?</h2>
+<p>Here we have demonstrated just one comparative analysis that you
+might do in R. There are an ever-growing number of packages that allow
+an ever-growing number of analysis to performed in R. Some “classics”
+like ancestral state reconstruction, phylogenetic independent contrasts
+and lineage through time plots are implemented in <code>ape</code>.
+Packages like <code>phytools</code>, <code>caper</code> and
+<code>diversitree</code> provide extensions to these methods. The <a href="https://github.com/bomeara/PhylogeneticsTaskView/blob/main/Phylogenetics.md">CRAN
+Phylogenetics Taskview</a> gives a good idea of the diversity of
+packages and analyses that can be completed in R (note that this links
+to a draft of the next version of the Taskview as it is currently
+unavailable from CRAN).</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

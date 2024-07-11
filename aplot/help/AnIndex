@@ -1,4 +1,7 @@
 %>%	reexports
+as.patchwork	as.patchwork
+gglist	gglist
+ggrange	reexports
 ggsave	reexports
 insert_bottom	plot-insertion
 insert_left	plot-insertion
@@ -7,6 +10,6 @@ insert_top	plot-insertion
 plot_list	plot_list
 reexports	reexports
 xlim2	align_axis
-xrange	ggrange
+xrange	reexports
 ylim2	align_axis
-yrange	ggrange
+yrange	reexports

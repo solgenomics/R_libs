@@ -1,14 +1,11 @@
-BloodBrain              Blood Brain Barrier Data
-BoxCoxTrans             Box-Cox and Exponential Transformations
-GermanCredit            German Credit Data
-SLC14_1                 Simulation Functions
-Sacramento              Sacramento CA Home Prices
 as.matrix.confusionMatrix
                         Confusion matrix as a table
 avNNet                  Neural Networks Using Model Averaging
 bag                     A General Framework For Bagging
 bagEarth                Bagged Earth
 bagFDA                  Bagged FDA
+BloodBrain              Blood Brain Barrier Data
+BoxCoxTrans             Box-Cox and Exponential Transformations
 calibration             Probability Calibration Plot
 caretSBF                Selection By Filtering (SBF) Helper Functions
 cars                    Kelly Blue Book resale data for 2005 model year
@@ -38,10 +35,11 @@ filterVarImp            Calculation of filter-based variable importance
 findCorrelation         Determine highly correlated variables
 findLinearCombos        Determine linear combinations in a matrix
 format.bagEarth         Format 'bagEarth' objects
+gafs_initial            Ancillary genetic algorithm functions
 gafs.default            Genetic algorithm feature selection
 gafsControl             Control parameters for GA and SA feature
                         selection
-gafs_initial            Ancillary genetic algorithm functions
+GermanCredit            German Credit Data
 getSamplingInfo         Get sampling info from a train model
 ggplot.rfe              Plot RFE Performance Profiles
 ggplot.train            Plot Method for the train Class
@@ -77,7 +75,6 @@ plsda                   Partial Least Squares and Sparse Partial Least
 pottery                 Pottery from Pre-Classical Sites in Italy
 prcomp.resamples        Principal Components Analysis of Resampling
                         Results
-preProcess              Pre-Processing of Predictors
 predict.bagEarth        Predicted values based on bagged Earth and FDA
                         models
 predict.gafs            Predict new samples
@@ -85,35 +82,38 @@ predict.knn3            Predictions from k-Nearest Neighbors
 predict.knnreg          Predictions from k-Nearest Neighbors Regression
                         Model
 predictors              List predictors used in the model
+preProcess              Pre-Processing of Predictors
 print.confusionMatrix   Print method for confusionMatrix
 print.train             Print Method for the train Class
 recall                  Calculate recall, precision and F values
 resampleHist            Plot the resampling distribution of the model
                         statistics
-resampleSummary         Summary of resampled performance estimates
 resamples               Collation and Visualization of Resampling
                         Results
+resampleSummary         Summary of resampled performance estimates
 rfe                     Backwards Feature Selection
 rfeControl              Controlling the Feature Selection Algorithms
+Sacramento              Sacramento CA Home Prices
 safs                    Simulated annealing feature selection
 safs_initial            Ancillary simulated annealing functions
 sbf                     Selection By Filtering (SBF)
 sbfControl              Control Object for Selection By Filtering (SBF)
 scat                    Morphometric Data on Scat
 segmentationData        Cell Body Segmentation
+SLC14_1                 Simulation Functions
 spatialSign             Compute the multivariate spatial sign
 summary.bagEarth        Summarize a bagged earth or FDA fit
 tecator                 Fat, Water and Protein Content of Meat Samples
 thresholder             Generate Data to Choose a Probability Threshold
 train                   Fit Predictive Models over Different Tuning
                         Parameters
-trainControl            Control parameters for train
 train_model_list        A List of Available Models in train
+trainControl            Control parameters for train
 update.safs             Update or Re-fit a SA or GA Model
 update.train            Update or Re-fit a Model
+var_seq                 Sequences of Variables for Tuning
 varImp                  Calculation of variable importance for
                         regression and classification models
 varImp.gafs             Variable importances for GAs and SAs
-var_seq                 Sequences of Variables for Tuning
 xyplot.resamples        Lattice Functions for Visualizing Resampling
                         Results

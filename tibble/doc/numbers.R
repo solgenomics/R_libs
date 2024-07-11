@@ -1,8 +1,10 @@
 ## ----setup, include = FALSE---------------------------------------------------
 library(tibble)
 set.seed(1014)
-
-tibble:::set_fansi_hooks()
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
 
 ## ----numbers-2----------------------------------------------------------------
 library(tibble)
@@ -26,6 +28,17 @@ tibble(
   char = char(paste(LETTERS, collapse = " "), shorten = "mid")
 )
 
+## -----------------------------------------------------------------------------
+library(dplyr, warn.conflicts = FALSE)
+
+markets <-
+  as_tibble(EuStockMarkets) %>%
+  mutate(time = time(EuStockMarkets), .before = 1)
+
+markets
+markets %>%
+  mutate(across(-time, ~ num(.x, digits = 3)))
+
 ## ----numbers-13---------------------------------------------------------------
 num(1) + 2
 1 + num(2)
@@ -42,7 +55,7 @@ sin(num(1:3, label = "%", scale = 100))
 
 ## ----numbers-15---------------------------------------------------------------
 num(1:3 + 0.125, digits = 4)
-transf <- 10 ^ num(1:3 + 0.125, digits = 4)
+transf <- 10^num(1:3 + 0.125, digits = 4)
 transf
 num(transf, sigfig = 3)
 
@@ -50,8 +63,12 @@ num(transf, sigfig = 3)
 x <- num(c(1, 2, 4), notation = "eng")
 var(x)
 
+## ----numbers-16-a, error = TRUE-----------------------------------------------
+median(x)
+
 ## ----numbers-16a--------------------------------------------------------------
 num(var(x), notation = "eng")
+num(median(as.numeric(x)), notation = "eng")
 
 ## ----numbers-16b--------------------------------------------------------------
 var_ <- function(x, ...) {

@@ -1,13 +1,13 @@
-BIC-methods             Log likelihoods and model selection for mle2
-                        objects
-ICtab                   Compute table of information criteria and
-                        auxiliary info
 as.data.frame.profile.mle2
                         convert profile to data frame
+BIC-methods             Log likelihoods and model selection for mle2
+                        objects
 call.to.char            Convert calls to character
 dnorm_n                 Normal distribution with profiled-out standard
                         deviation
 get.mnames              extract model names
+ICtab                   Compute table of information criteria and
+                        auxiliary info
 mle2                    Maximum Likelihood Estimation
 mle2-class              Class "mle2". Result of Maximum Likelihood
                         Estimation.

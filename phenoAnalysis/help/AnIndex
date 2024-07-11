@@ -17,6 +17,7 @@ getModelSummary	getModelSummary
 getNumericCols	getNumericCols
 mergeVariables	mergeVariables
 models	models
+phenoAnalysis	phenoAnalysis
 randomAlpha	models
 randomAugmentedRCBD	models
 randomCRD	models

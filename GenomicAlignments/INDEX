@@ -1,9 +1,3 @@
-GAlignmentPairs-class   GAlignmentPairs objects
-GAlignments-class       GAlignments objects
-GAlignmentsList-class   GAlignmentsList objects
-GappedReads-class       (Legacy) GappedReads objects
-OverlapEncodings-class
-                        OverlapEncodings objects
 cigar-utils             CIGAR utility functions
 coverage-methods        Coverage of a GAlignments, GAlignmentPairs, or
                         GAlignmentsList object
@@ -20,11 +14,17 @@ findSpliceOverlaps-methods
                         Classify ranges (reads) as compatible with
                         existing genomic annotations or as having novel
                         splice events
+GAlignmentPairs-class   GAlignmentPairs objects
+GAlignments-class       GAlignments objects
+GAlignmentsList-class   GAlignmentsList objects
+GappedReads-class       (Legacy) GappedReads objects
 intra-range-methods     Intra range transformations of a GAlignments or
                         GAlignmentsList object
 junctions-methods       Extract junctions from genomic alignments
 mapToAlignments         Map range coordinates between reads and genome
                         space using CIGAR alignments
+OverlapEncodings-class
+                        OverlapEncodings objects
 pileLettersAt           Pile the letters of a set of aligned reads on
                         top of a set of genomic positions
 readGAlignments         Reading genomic alignments from a file

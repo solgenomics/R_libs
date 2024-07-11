@@ -50,8 +50,35 @@ translate_sql(if (x > 5) "big" else "small")
 translate_sql(switch(x, a = 1L, b = 2L, 3L))
 
 ## -----------------------------------------------------------------------------
+translate_sql(foofify(x, y))
+
+## -----------------------------------------------------------------------------
+translate_sql(FOOFIFY(x, y))
+
+## -----------------------------------------------------------------------------
+translate_sql(x %LIKE% "%foo%")
+
+## -----------------------------------------------------------------------------
+translate_sql(x %||% y)
+
+## -----------------------------------------------------------------------------
+translate_sql(sql("x!"))
+translate_sql(x == sql("ANY VALUES(1, 2, 3)"))
+
+## -----------------------------------------------------------------------------
+mf <- memdb_frame(x = 1, y = 2)
+
+mf %>% 
+  transmute(factorial = sql("x!")) %>% 
+  show_query()
+
+mf %>% 
+  transmute(factorial = sql("CAST(x AS FLOAT)")) %>% 
+  show_query()
+
+## ---- error = TRUE------------------------------------------------------------
+options(dplyr.strict_sql = TRUE)
 translate_sql(glob(x, y))
-translate_sql(x %like% "ab%")
 
 ## ----echo = FALSE, out.width = "100%"-----------------------------------------
 knitr::include_graphics("windows.png", dpi = 300)

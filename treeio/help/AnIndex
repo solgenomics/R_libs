@@ -1,3 +1,5 @@
+treeio-package	treeio-package
+%<>%	reexports
 %>%	reexports
 ancestor	reexports
 as.phylo	reexports
@@ -21,6 +23,7 @@ get.tree	get.tree
 get.treetext	get.treetext-methods
 get.treetext,treedata-method	get.treetext-methods
 getNodeNum	getNodeNum
+inner_join	reexports
 is.ggtree	is.ggtree
 is.rooted	reexports
 isTip	isTip
@@ -58,6 +61,7 @@ read.mega	beast-parser
 read.mega_tabular	read.mega_tabular
 read.mrbayes	beast-parser
 read.newick	read.newick
+read.nextstrain.json	read.nextstrain.json
 read.nexus	reexports
 read.nhx	read.nhx
 read.paml_rst	read.paml_rst
@@ -77,6 +81,7 @@ root.treedata	root-method
 rootnode	reexports
 rtree	reexports
 treedata	reexports
+treeio	treeio-package
 tree_subset	tree_subset
 tree_subset.phylo	tree_subset
 tree_subset.treedata	tree_subset

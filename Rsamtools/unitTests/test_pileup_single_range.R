@@ -48,23 +48,25 @@ bf <- BamFile(fl)
                   use_ex1.bam_levels=FALSE) {
     if(is.null(pos) || is.null(count) || is.null(seqnames))
         stop("'pos', 'count', and 'seqnames' must not be 'NULL'")
-    target <- data.frame(pos=as.integer(pos), stringsAsFactors=FALSE)
+    target <- data.frame(pos=as.integer(pos))
     seqnames_levels <- .tiny.sam_seqlevels()
     if(use_ex1.bam_levels)
         seqnames_levels <- .ex1.sam_seqlevels()        
     target <- cbind(seqnames=factor(seqnames, levels=seqnames_levels), target)
     
     if(!is.null(strand))
-        target <- cbind(target, strand=factor(strand, levels=.s_levels()))
+        target <- cbind(target,
+                        strand=factor(strand, levels=.s_levels()))
     if(!is.null(nucleotide))
         target <- cbind(target,
                         nucleotide=factor(nucleotide, levels=.n_levels()))
     if(!is.null(left_bin))
         target <- cbind(target,
-                        left_bin=left_bin)
+                        left_bin=left_bin,
+                        stringsAsFactors=TRUE)
     target <- cbind(target, count=as.integer(count))
     if(!is.null(which_label))
-        target <- cbind(target, which_label=which_label)
+        target <- cbind(target, which_label=which_label, stringsAsFactors=TRUE)
     target
 }
 
@@ -1247,23 +1249,6 @@ test_schema_distinguish_nothing <- function() {
     checkIdentical(sapply(expected, names), sapply(xx, names))
     checkIdentical(sapply(expected, length), sapply(xx, length))
     checkIdentical(sapply(expected, class), sapply(xx, class))
-}
-
-test_schemabuilder_default_params <- function() {
-    pileupParam <- PileupParam()
-    schema <- Rsamtools:::.schemaBuilder(pileupParam)
-    expected <- list(c("strand", "nucleotide"),
-                     list(c("+", "-"), c("A", "C", "G", "T", "-")))
-    checkIdentical(expected, schema)
-}
-
-test_schemabuilder_distinguish_nothing <- function() {
-    pileupParam <- PileupParam(distinguish_nucleotides=FALSE, # non-default
-                              distinguish_strands=FALSE) # non-default
-    schema <- Rsamtools:::.schemaBuilder(pileupParam)
-    expected <- list(c("strand", "nucleotide"),
-                     list("", ""))
-    checkIdentical(expected, schema)
 }
 
 ## REVERSE COMPLEMENT

@@ -1,4 +1,3 @@
-NNclean                 Nearest neighbor based clutter/noise detection
 abundtest               Parametric bootstrap test for clustering in
                         abundance matrices
 allele2zeroone          Converts alleleobject into binary matrix
@@ -42,6 +41,7 @@ nastats                 Missing values statistics for matrix
 nb                      Neighborhood list for Aegean islands
 nbtest                  Test of neighborhood list
 nn                      Mean distance to kth nearest neighbor
+NNclean                 Nearest neighbor based clutter/noise detection
 phipt                   Distances between communities, auxiliary
                         functions
 piecewiselin            Piecewise linear transformation for distance

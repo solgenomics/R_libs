@@ -1,7 +1,6 @@
 chain                   Create a chaining iterator
 enumerate               Create an enumeration object
 hasNext                 Does This Iterator Have A Next Element
-iRNGStream              Iterators that support parallel RNG
 iarray                  Create an iterator over an array
 ibreak                  Create an iterator that can be told to stop
 ichunk                  Create a chunking iterator
@@ -16,6 +15,7 @@ ireaddf                 Create an iterator to read data frames from
 irecord                 Record and replay iterators
 irep                    Create a repeating iterator
 irepeat                 Create a repeating iterator
+iRNGStream              Iterators that support parallel RNG
 is.iterator             Utilities for writing iterators
 isplitCols              Create an iterator that splits a matrix into
                         block columns

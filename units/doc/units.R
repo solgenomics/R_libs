@@ -1,5 +1,5 @@
 ## ----echo=FALSE---------------------------------------------------------------
-knitr::opts_chunk$set(collapse = TRUE)
+knitr::opts_chunk$set(collapse = TRUE, fig.asp = 0.7, fig.width = 7)
 
 ## ----echo=FALSE---------------------------------------------------------------
 units:::units_options(negative_power = FALSE)
@@ -114,7 +114,7 @@ x + y
 ## -----------------------------------------------------------------------------
 deparse_unit(x)
 
-## ----fig=TRUE-----------------------------------------------------------------
+## -----------------------------------------------------------------------------
 mar = par("mar") + c(0, .3, 0, 0)
 displacement = mtcars$disp * as_units("in")^3
 units(displacement) = make_units(cm^3)

@@ -1,4 +1,4 @@
-// Darkly 5.1.0
+// Darkly 5.2.2
 // Bootswatch
 
 
@@ -9,18 +9,22 @@ $web-font-path: "https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0
   @import url($web-font-path);
 }
 
+:root {
+  color-scheme: dark;
+}
+
 // Typography
 
 .blockquote {
   &-footer {
-    color: $gray-600;
+    color: body-mix(75%);
   }
 }
 
 // Forms
 
 .input-group-addon {
-  color: $white;
+  color: $body-color;
 }
 
 .form-floating > label {
@@ -38,12 +42,12 @@ $web-font-path: "https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0
   .nav-item.open .nav-link,
   .nav-item.open .nav-link:focus,
   .nav-item.open .nav-link:hover {
-    color: $white;
+    color: $body-color;
   }
 }
 
 .breadcrumb a {
-  color: $white;
+  color: $body-color;
 }
 
 .pagination {
@@ -55,19 +59,19 @@ $web-font-path: "https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0
 // Indicators
 
 .alert {
+  color: $body-color;
   border: none;
-  color: $white;
 
   a,
   .alert-link {
-    color: $white;
+    color: $body-color;
     text-decoration: underline;
   }
 
   @each $color, $value in $theme-colors {
     &-#{$color} {
       @if $enable-gradients {
-        background: $value linear-gradient(180deg, mix($white, $value, 15%), $value) repeat-x;
+        background: $value linear-gradient(180deg, mix($body-color, $value, 15%), $value) repeat-x;
       } @else {
         background-color: $value;
       }

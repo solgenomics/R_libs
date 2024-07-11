@@ -28,6 +28,6 @@ flights %>%
 ## -----------------------------------------------------------------------------
 flights %>%
   group_by(month, day) %>%
-  summarise(delay = mean(dep_delay)) %>%
+  summarise(delay = mean(dep_delay, na.rm = TRUE)) %>%
   show_query()
 

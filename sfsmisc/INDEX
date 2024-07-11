@@ -1,17 +1,4 @@
 AsciiToInt              Character to and from Integer Codes Conversion
-D1D2                    Numerical Derivatives of (x,y) Data via
-                        Smoothing Splines
-D2ss                    Numerical Derivatives of (x,y) Data (via
-                        Smoothing Splines)
-Duplicated              Counting-Generalization of duplicated()
-KSd                     Approximate Critical Values for
-                        Kolmogorov-Smirnov's D
-QUnif                   Quasi Randum Numbers via Halton Sequences
-Sys.cpuinfo             Provide Information about the Linux Hardware
-                        (CPU, Memory, etc)
-Sys.ps                  Return Process Status (Unix 'ps') Information
-TA.plot                 Tukey-Anscombe Plot (Residual vs. Fitted) of a
-                        Linear Model
 axTexpr                 Axis Ticks Expressions in Nice 10 ** k Form
 cairoSwd                Cairo PDF Graphics Device useful for Sweave
 capture.and.write       Capture output and Write / Print First and Last
@@ -19,10 +6,15 @@ capture.and.write       Capture output and Write / Print First and Last
 col01scale              Matrix Scaling Utilities
 compresid2way           Plot Components + Residuals for Two Factors
 cum.Vert.funkt          Kumulative Verteilung Aufzeichnen
+D1D2                    Numerical Derivatives of (x,y) Data via
+                        Smoothing Splines
+D2ss                    Numerical Derivatives of (x,y) Data (via
+                        Smoothing Splines)
 diagDA                  Diagonal Discriminant Analysis
 diagX                   The "Other" Diagonal Matrix
 digitsBase              Digit/Bit Representation of Integers in any
                         Base
+Duplicated              Counting-Generalization of duplicated()
 eaxis                   Extended / Engineering Axis for Graphics
 ecdf.ksCI               Plot Empirical Distribution Function With 95%
                         Confidence Curves
@@ -43,9 +35,12 @@ inv.seq                 Inverse seq() - Short Expression for Index
 is.whole                Test Whether a Vector or Array Consists of
                         Whole Numbers
 iterate.lin.recursion   Generate Sequence Iterating a Linear Recursion
+KSd                     Approximate Critical Values for
+                        Kolmogorov-Smirnov's D
 last                    Get Last Elements of a Vector
 linesHyperb.lm          Plot Confidence or Prediction Hyperbolas around
                         a Regression Line
+list_                   Automatically Named list()
 loessDemo               Graphical Interactive Demo of loess()
 lseq                    Generate Sequences, Equidistant on Log Scale
 mat2tex                 Produce LaTeX commands to print a matrix
@@ -94,6 +89,7 @@ ps.end                  Close PostScript or Acrobat Graphics Device
 ps.latex                PostScript/PDF Preview Device with Optional
                         'LaTeX' Touch
 quadrant                Give the Quadrant Number of Planar Points
+QUnif                   Quasi Randum Numbers via Halton Sequences
 read.org.table          Read.table for an Emacs Org Table
 relErr                  Relative Error When Appropriate, Absolute
                         Otherwise
@@ -111,15 +107,20 @@ shortRversion           Short R Version String
 signi                   Rounding to Significant Digits
 sourceAttach            Source and Attach an R source file
 str_data                Overview on All Datasets in an R Package
+Sys.cpuinfo             Provide Information about the Linux Hardware
+                        (CPU, Memory, etc)
+Sys.ps                  Return Process Status (Unix 'ps') Information
+TA.plot                 Tukey-Anscombe Plot (Residual vs. Fitted) of a
+                        Linear Model
 tapplySimpl             More simplification in tapply() result
 tkdensity               GUI Density Estimation using Tcl/Tk
 toLatex.numeric         LaTeX or Sweave friendly Formatting of Numbers
-u.Datumvonheute         Datum und Uhrzeit (auf deutsch)
 u.assign0               'Portable' assign / get functions (R / S-plus)
                         for 'Frame 0'
 u.boxplot.x             Utility Returning x-Coordinates of Boxplot
 u.date                  Return Date[-Time] String in 'European' Format
 u.datumdecode           Convert "Numeric" Dates
+u.Datumvonheute         Datum und Uhrzeit (auf deutsch)
 u.log                   (Anti)Symmetric Log High-Transform
 u.sys                   'Portable' System function (R / S-plus)
 unif                    Nice Uniform Points in Interval

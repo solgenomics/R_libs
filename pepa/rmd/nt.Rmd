@@ -15,7 +15,12 @@ params:
   author: "no data"
 ---
 
-```{r echo = FALSE}
+```{r global_options, include = FALSE}
+library(knitr)
+opts_chunk$set(echo = FALSE, comment = NA)
+```
+
+```{r}
 # Some parameters
 p1 <- length(params$x)
 p2 <- max(table(params$x))
@@ -23,12 +28,12 @@ p3 <- length(table(params$x))
 ```
 
 It looks like you have a numeric trait. You can see a descriptive summary below:
-```{r echo = FALSE}
+```{r}
 output <- summary(params$x)
 output
 ```
 
-```{r echo = FALSE}
+```{r}
 sk <- 3 * (mean(params$x) - median(params$x)) / sd(params$x)
 ```
 
@@ -38,27 +43,27 @@ sk <- 3 * (mean(params$x) - median(params$x)) / sd(params$x)
 
 `r if (p1 > 25 & (p1 / p3 <= 2 | (p1 / p3 > 2 & p3 > 20))) {"A boxplot could be a suitable plot for these data:"}`
 
-```{r echo = FALSE}
+```{r}
 if (p1 > 25 & (p1 / p3 <= 2 | (p1 / p3 > 2 & p3 > 20)))
   boxplot(params$x)
 ```
 `r if (p1 > 25 & p1 / p3 > 2 & p3 <= 20) {"For this trait a frequency table could produce a good display of the data:"}`
 
-```{r echo = FALSE}
+```{r}
 if (p1 > 25 & p1 / p3 > 2 & p3 <= 20)
   table(params$x)
 ```
 
 `r if(p1 <= 25) {"A dotplot could be a suitable plot for these data:"}`
 
-```{r echo = FALSE}
+```{r}
 if (p1 <= 25)
   stripchart(params$x)
 ```
 
 `r if (p1 > 25 & p1 / p3 < 2 & p2 / p1 > 0.05) {"Although your trait seems to be on a continuous scale, there are some values with a very high frequency. What out with this if you plan to fit a model that assumes normality. You can see these values and their frequency below:"}`
 
-```{r echo = FALSE}
+```{r}
 if (p1 > 25 & p1 / p3 < 2 & p2 / p1 > 0.05)
   table(params$x)[table(params$x) / p1 > 0.05]
 ```

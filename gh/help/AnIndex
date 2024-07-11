@@ -6,6 +6,7 @@ gh_last	gh_next
 gh_next	gh_next
 gh_prev	gh_next
 gh_rate_limit	gh_rate_limit
+gh_rate_limits	gh_rate_limit
 gh_token	gh_token
 gh_tree_remote	gh_tree_remote
 gh_whoami	gh_whoami

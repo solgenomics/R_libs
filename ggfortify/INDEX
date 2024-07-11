@@ -3,10 +3,6 @@
 apply_facets            Apply facets to to 'ggplot2::ggplot'
 apply_grid              Apply grid to to 'ggplot2::ggplot'
 as_tibble.basis         Convert a spline basis to a tibble
-autoplot.MSM.lm         Autoplot 'MSwM::MSM.lm'
-autoplot.RasterCommon   Autoplot 'raster::raster'
-autoplot.SpatialCommon
-                        Autoplot 'maps::map'
 autoplot.aareg          Autoplot 'survival::aareg'
 autoplot.acf            Autoplot 'stats::acf'. Note to pass 'plot =
                         FALSE' to original function to suppress
@@ -27,9 +23,13 @@ autoplot.list           Autoplot list
 autoplot.lm             Autoplot 'stats::lm' and 'stats::glm'
 autoplot.map            Autoplot 'maps::map'
 autoplot.matrix         Plot 'base::matrix'
+autoplot.MSM.lm         Autoplot 'MSwM::MSM.lm'
 autoplot.pca_common     Autoplot PCA-likes
 autoplot.performance    Autoplot 'ROCR::performance'
+autoplot.RasterCommon   Autoplot 'raster::raster'
 autoplot.silhouette     Autoplot silhouette instances
+autoplot.SpatialCommon
+                        Autoplot 'maps::map'
 autoplot.spec           Autoplot 'stats::spec'
 autoplot.stepfun        Plot 'stats::stepfun'
 autoplot.survfit        Autoplot 'survival::survfit'
@@ -42,9 +42,8 @@ confint.acf             Calculate confidence interval for 'stats::acf'
 deprecate.warning       Show deprecate warning
 fitted.ar               Calculate fitted values for 'stats::ar'
 flatten                 Flatten dataframe contains matrix
-fortify.MSM.lm          Convert 'MSwM::MSM.lm' to 'data.frame'
-fortify.RasterCommon    Convert 'raster' to 'data.frame'
-fortify.SpatialCommon   Convert 'sp' instances to 'data.frame'.
+fortify_base            Convert 'base::table' to 'data.frame'
+fortify_map             Convert 'maps::map' to 'data.frame'.
 fortify.aareg           Convert 'survival::aareg' to 'data.frame'
 fortify.acf             Convert 'stats::acf' to 'data.frame'
 fortify.basis           Convert spline basis instances to 'data.frame'
@@ -63,11 +62,14 @@ fortify.lfda            Convert 'lfda::lfda' or 'lfda::klfda' or
                         'lfda::self' to 'data.frame'
 fortify.list            Convert list to data.frame
 fortify.matrix          Convert 'base::matrix' to 'data.frame'
+fortify.MSM.lm          Convert 'MSwM::MSM.lm' to 'data.frame'
 fortify.performance     Convert 'ROCR::performance' objects to
                         'data.frame'
 fortify.prcomp          Convert 'stats::prcomp', 'stats::princomp' to
                         'data.frame'
+fortify.RasterCommon    Convert 'raster' to 'data.frame'
 fortify.silhouette      Convert 'cluster::silhouette' to 'data.frame'
+fortify.SpatialCommon   Convert 'sp' instances to 'data.frame'.
 fortify.spec            Convert 'stats::spec' to 'data.frame'
 fortify.stepfun         Convert 'stats::stepfun' to 'data.frame'
 fortify.survfit         Convert 'survival::survfit' to 'data.frame'
@@ -76,17 +78,15 @@ fortify.ts              Convert time-series-like to data.frame
 fortify.tsmodel         Convert time series models (like AR, ARIMA) to
                         'data.frame'
 fortify.varprd          Convert 'vars::varprd' to 'data.frame'
-fortify_base            Convert 'base::table' to 'data.frame'
-fortify_map             Convert 'maps::map' to 'data.frame'.
 geom_confint            Connect observations by stairs.
 geom_factory            Factory function to control 'ggplot2::geom_xxx'
+                        functions
+get_geom_function       Factory function to control 'ggplot2::geom_xxx'
                         functions
 get.dtindex             Convert 'ts' index to 'Date' 'vector'
 get.dtindex.continuous
                         Get 'Date' 'vector' continue to 'ts' index
 get.layout              Calcurate layout matrix for 'ggmultiplot'
-get_geom_function       Factory function to control 'ggplot2::geom_xxx'
-                        functions
 ggbiplot                Draw 'biplot' using 'ggplot2'.
 ggcpgram                Plots a cumulative periodogram
 ggdistribution          Plot distribution
@@ -100,9 +100,9 @@ grid.draw.ggmultiplot   The implemented grid.draw method for
                         ggmultiplot, in order to work with ggsave()
                         properly
 infer                   Infer class name
-is.univariate           Check if Validates number of 'ts' variates
 is_derived_from         Check object is target class, or object is
                         'data.frame' fortified from target.
+is.univariate           Check if Validates number of 'ts' variates
 plot_confint            Attach confidence interval to 'ggplot2::ggplot'
 plot_label              Attach label to 'ggplot2::ggplot'
 post_autoplot           Post process for fortify. Based on

@@ -1,14 +1,14 @@
 AIC-methods             Akaike Information Criterion for Markov
                         Switching models.
-MSM.fitted-class        Class "MSM.fitted"
-MSM.glm-class           Class "MSM.glm"
-MSM.lm-class            Class "MSM.lm"
-MSwM-package            MSwM package
 energy                  Price of energy in Spain
 example                 Example data generated
 intervals-methods       Function: Confidence Intervals on Coefficients
+MSM.fitted-class        Class "MSM.fitted"
+MSM.glm-class           Class "MSM.glm"
+MSM.lm-class            Class "MSM.lm"
 msmFit                  Fitting Markov Switching Models
 msmResid                Extract Markov Switching Model Residuals
+MSwM-package            MSwM package
 plot-methods            Function: plot for Markov Switching Models
 plotDiag                Plot Diagnostics for an msm Object
 plotProb                Plot of filtered and smoothed probabilities

@@ -10,7 +10,11 @@ pillar:::set_show_source_hooks()
 library(pillar)
 
 ## ----echo = FALSE, error = TRUE-----------------------------------------------
-DiagrammeR::mermaid("format.mmd")
+text <- paste(
+  readLines("format.mmd"),
+  collapse = "\n"
+)
+DiagrammeR::mermaid(text)
 
 ## -----------------------------------------------------------------------------
 tbl <- tibble::tibble(a = 1:3, b = tibble::tibble(c = 4:6, d = 7:9), e = 10:12)
@@ -114,6 +118,10 @@ typeof(tbl_format_body(tbl, setup))
 #  tbl_format_header.tbl <- function (x, setup, ...) 
 #  {
 #      named_header <- setup$tbl_sum
+#      focus <- attr(x, "pillar_focus")
+#      if (!is.null(focus)) {
+#          named_header <- c(named_header, `Focus columns` = collapse(tick_if_needed(focus)))
+#      }
 #      if (all(names2(named_header) == "")) {
 #          header <- named_header
 #      }
@@ -135,8 +143,11 @@ typeof(tbl_format_body(tbl, setup))
 #  tbl_format_footer.tbl <- function (x, setup, ...) 
 #  {
 #      footer <- format_footer(x, setup)
-#      footer_comment <- wrap_footer(footer, setup)
-#      style_subtle(footer_comment)
+#      footer_comment <- wrap_footer_bullet(footer, setup)
+#      footer_advice <- format_footer_advice(x, setup)
+#      footer_advice_comment <- wrap_footer_bullet(footer_advice, 
+#          setup, lines = 1, ellipsis = FALSE, bullet = symbol$info)
+#      style_subtle(c(footer_comment, footer_advice_comment))
 #  }
 
 ## -----------------------------------------------------------------------------
@@ -151,11 +162,11 @@ ctl_new_pillar_list(tbl, tbl$b, width = 20)
 #          new_data_frame_pillar_list(x, controller, width, title = title, 
 #              first_pillar = first_pillar)
 #      }
-#      else if (is.matrix(x)) {
+#      else if (is.matrix(x) && !inherits(x, c("Surv", "Surv2"))) {
 #          new_matrix_pillar_list(x, controller, width, title = title, 
 #              first_pillar = first_pillar)
 #      }
-#      else if (is.array(x) && length(dim(x)) > 1) {
+#      else if (is.array(x) && length(dim(x)) > 2) {
 #          new_array_pillar_list(x, controller, width, title = title, 
 #              first_pillar = first_pillar)
 #      }
@@ -208,8 +219,7 @@ ctl_new_pillar(tbl, tbl$a, width = 20)
 #          width <- get_width(x)
 #      }
 #      if (is.null(width)) {
-#          widths <- pillar_get_widths(x)
-#          width <- sum(widths) + length(widths) - 1
+#          width <- pillar_get_width(x)
 #      }
 #      as_glue(pillar_format_parts_2(x, width)$aligned)
 #  }

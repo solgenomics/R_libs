@@ -1,6 +1,6 @@
 Package: car
-Version: 3.0-12
-Date: 2021-11-02
+Version: 3.1-2
+Date: 2023-03-25
 Title: Companion to Applied Regression
 Authors@R: c(person("John", "Fox", role = c("aut", "cre"), email = "jfox@mcmaster.ca"),
 	person("Sanford", "Weisberg", role = "aut", email = "sandy@umn.edu"),
@@ -23,6 +23,7 @@ Authors@R: c(person("John", "Fox", role = c("aut", "cre"), email = "jfox@mcmaste
     person("Henric", "Nilsson", role = "ctb"),
     person("Derek", "Ogle", role = "ctb"),
     person("Brian", "Ripley", role = "ctb"),
+    person("Tom", "Short", role="ctb"),
     person("William", "Venables", role = "ctb"),
     person("Steve", "Walker", role="ctb"),
     person("David", "Winsemius", role="ctb"),
@@ -30,11 +31,11 @@ Authors@R: c(person("John", "Fox", role = c("aut", "cre"), email = "jfox@mcmaste
     person("R-Core", role="ctb"))
 Depends: R (>= 3.5.0), carData (>= 3.0-0)
 Imports: abind, MASS, mgcv, nnet, pbkrtest (>= 0.4-4), quantreg,
-        grDevices, utils, stats, graphics, maptools, lme4 (>=
-        1.1-27.1), nlme
+        grDevices, utils, stats, graphics, lme4 (>= 1.1-27.1), nlme,
+        scales
 Suggests: alr4, boot, coxme, effects, knitr, leaps, lmtest, Matrix,
-        MatrixModels, rgl (>= 0.93.960), rio, sandwich, SparseM,
-        survival, survey
+        MatrixModels, mvtnorm, rgl (>= 0.111.3), rio, sandwich,
+        SparseM, survival, survey
 ByteCompile: yes
 LazyLoad: yes
 Description: 
@@ -45,8 +46,6 @@ URL: https://r-forge.r-project.org/projects/car/,
         https://CRAN.R-project.org/package=car,
         https://socialsciences.mcmaster.ca/jfox/Books/Companion/index.html
 VignetteBuilder: knitr
-NeedsCompilation: no
-Packaged: 2021-11-02 20:02:44 UTC; zeileis
 Author: John Fox [aut, cre],
   Sanford Weisberg [aut],
   Brad Price [aut],
@@ -68,6 +67,7 @@ Author: John Fox [aut, cre],
   Henric Nilsson [ctb],
   Derek Ogle [ctb],
   Brian Ripley [ctb],
+  Tom Short [ctb],
   William Venables [ctb],
   Steve Walker [ctb],
   David Winsemius [ctb],
@@ -75,5 +75,10 @@ Author: John Fox [aut, cre],
   R-Core [ctb]
 Maintainer: John Fox <jfox@mcmaster.ca>
 Repository: CRAN
-Date/Publication: 2021-11-06 05:35:32 UTC
-Built: R 3.6.3; ; 2022-02-15 17:11:23 UTC; unix
+Repository/R-Forge/Project: car
+Repository/R-Forge/Revision: 742
+Repository/R-Forge/DateTimeStamp: 2023-03-25 21:15:09
+Date/Publication: 2023-03-30 10:40:02 UTC
+NeedsCompilation: no
+Packaged: 2023-03-25 21:36:48 UTC; rforge
+Built: R 4.3.0; ; 2023-07-07 04:01:46 UTC; unix

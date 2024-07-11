@@ -66,3 +66,8 @@ gargle_verbosity()
 ## ---- echo = FALSE, out.width = "400px"---------------------------------------
 knitr::include_graphics("deleted_client.png")
 
+## ----include = FALSE----------------------------------------------------------
+# only run the chunk below in settings that are known to be safe, i.e. where
+# occasional, incidental failure is OK
+can_decrypt <- gargle::secret_has_key("GARGLE_KEY")
+

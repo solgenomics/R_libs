@@ -60,6 +60,7 @@ cpt.reg-method,test.stat<-	cpt.reg-class
 cpt.var	cpt.var
 cpts	cpts
 cpts,cpt-method	cpts-methods
+cpts,cpt.range-method	cpts-methods
 cpts,cpt.reg-method	cpts-methods
 cpts-methods	cpts-methods
 cpts.full	cpts.full
@@ -74,6 +75,7 @@ cpts.ts,cpt.reg-method	cpts.ts-methods
 cpts.ts-methods	cpts.ts-methods
 cpts<-	cpts-
 cpts<-,cpt-method	cpts--methods
+cpts<-,cpt.range-method	cpts--methods
 cpts<-,cpt.reg-method	cpts--methods
 cpts<--methods	cpts--methods
 cpttype	cpttype

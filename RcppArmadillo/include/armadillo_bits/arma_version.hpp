@@ -21,10 +21,10 @@
 
 
 
-#define ARMA_VERSION_MAJOR 10
-#define ARMA_VERSION_MINOR 8
+#define ARMA_VERSION_MAJOR 12
+#define ARMA_VERSION_MINOR 4
 #define ARMA_VERSION_PATCH 1
-#define ARMA_VERSION_NAME  "Realm Raider"
+#define ARMA_VERSION_NAME  "Cortisol Profusion Redux"
 
 
 

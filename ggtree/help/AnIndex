@@ -40,6 +40,7 @@ geom_rootedge	geom_rootedge
 geom_rootpoint	geom_rootpoint
 geom_segment2	geom_segment2
 geom_strip	geom_strip
+geom_striplab	geom_striplab
 geom_taxalink	geom_taxalink
 geom_text	reexports
 geom_text2	geom_text2
@@ -76,7 +77,7 @@ gzoom,phylo-method	gzoom-methods
 gzoom,treedata-method	gzoom-methods
 gzoom.phylo	gzoom.phylo
 hexpand	ggexpand
-identify.gg	identify
+identify	reexports
 inset	inset
 label_pad	label_pad
 layoutDaylight	layoutDaylight
@@ -96,6 +97,7 @@ nodelab	reexports
 nodepie	nodepie
 open_tree	open_tree
 package-ggtree	ggtree
+plot_list	reexports
 range_format	range_format
 read.tree	reexports
 reexports	reexports
@@ -109,8 +111,11 @@ scale_color	scale_color-methods
 scale_color,phylo-method	scale_color-methods
 scale_color,treedata-method	scale_color-methods
 scale_color_manual	reexports
+scale_color_subtree	scale-color-subtree
 scale_colour_manual	reexports
+scale_colour_subtree	scale-color-subtree
 scale_fill_manual	reexports
+scale_x_continuous	reexports
 scale_x_ggtree	scale_x_ggtree
 scale_x_range	scale_x_range
 set_hilight_legend	set_hilight_legend

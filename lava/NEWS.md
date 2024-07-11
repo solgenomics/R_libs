@@ -1,3 +1,27 @@
+# lava 1.7.2.1
+  - Maintenance release as version 1.7.2 broke compatibility with R<4.1.
+
+# lava 1.7.2
+  - Compatibility issues with development version of R fixed.
+  - cluster.index now also works when not loading the package (directly calling lava::estimate)
+  - `weibull.lvm` and `coxExponential.lvm` now uses default parametrizations
+    similar to `rweibull`, `rexp`. `weibull.lvm` now has arguments
+    "intercept","sigma" that directly relates to the accelerated failure time formulation. 
+  - Packages `gof`, `lava.tobit` are removed from Suggested packages.
+  
+# lava 1.7.1
+  - Fixed bug in variance estimates from `estimate` with clustered observations.
+  - Discrete uniform distributions can now be specified with `uniform.lvm(value=...)`. 
+  
+# lava 1.7.0
+  - `cv` method moved to the 'targeted' package
+  - New `IC` method that returns influence function of a model object. The `iid`
+    argument `iid` of the `estimate` method is now replaced with an argument
+    `IC` (with a user supplied matrix this must now be the actual influence
+    function and not the sample-size scaled version returned by the `iid` method).
+  - fixed bug where calls like `regression("y", value=function(x) x)` did not
+    work. `merge.estimate` now works without IC element
+  
 # lava 1.6.10
   - Improved starting values for MLE optimization.
   - New simulation distributions: `multinomial.lvm`, `none.lvm`, `constant.lvm`,
@@ -13,7 +37,8 @@
   - New `plot_region` function for adding confidence regions to plots.
   
 # lava 1.6.9
-  - `idplot`: now accepts matrix or data.frame as 1st argument. New argument: return.data.
+  - `idplot`: now accepts matrix or data.frame as 1st argument. 
+    New argument: return.data.
   - Unit tests updated 
   - Bug fixes: 
     `cv`: rmse output fixed.
@@ -26,8 +51,8 @@
   - `confpred`: split-conformal prediction method updated
 
 # lava 1.6.8
-  - Bug-fix: parameter(m,x) now returns an lvm object and not just x
-  - profile likelihood CI w. tobit/censored observations.
+  - Bug-fix: `parameter(m,x)` now returns an lvm object and not just x
+  - profile likelihood confidence intervals with tobit/censored observations.
   - Vignettes added
     - Estimating partial correlations
 	- Non-linear latent variable omdels
@@ -41,14 +66,14 @@
   - `plot.sim`: 'rug' argument is now by default FALSE and 'auto.layout'
     disabled when nr=nc=1.
   - base::sequence() is now a generic function and as a consequence
-    sequence.lvm has been renamed to Sequence.lvm. The function
-    binary.lvm is now an alias of ones.lvm.
+    `sequence.lvm` has been renamed to `Sequence.lvm`. The function
+    `binary.lvm` is now an alias of `ones.lvm`.
 
 # lava 1.6.6
-  - Weighted kmeans++ (wkm). Gaussian mixture models (mvnmix) are now
+  - Weighted kmeans++ (`wkm`). Gaussian mixture models (`mvnmix`) are now
     initialized by default using kmeans++.
-  - sim method implemented for mvnmix models.
-  - Bug fix: Newton-Raphson method (lava::NR) used a numerical
+  - `sim` method implemented for mvnmix models.
+  - Bug fix: Newton-Raphson method (`lava::NR`) used a numerical
     approximation of the Hessian even when submitted as attribute to
     the objective function.
 
@@ -58,157 +83,158 @@
 # lava 1.6.4
   - New simulation distributions: constant relative risk and risk
     difference models as in Richardson, Robins and Wang, 2017):
-    binomial.rd, binomial.rr.
+    `binomial.rd`, `binomial.rr`.
     Base on new hook 'simulate.multiple.inputs' which allows the
     distribution to depend non-linearly on multiple different input
     variables.
-  - sim.lvm: 'X' argument can now fix (manipulate) any variable and not
+  - `sim.lvm`: 'X' argument can now fix (manipulate) any variable and not
     only exogenous variables.
-  - Summary function for sim.default updated (the 'estimate' argument
+  - Summary function for `sim.default` updated (the 'estimate' argument
     can now be a list with each element being the estimate position
     and optionally standard error and true value).
   - Starting values updated for mixture models. The parameter names
-    can be obtained with mixture(...,names=TRUE) and set with
-    mixture(...,control=list(start=...))).
+    can be obtained with `mixture(...,names=TRUE)` and set with
+    `mixture(...,control=list(start=...)))`.
   - Naming conventions for multigroup parameters: 'par@g' (par: name
     of parameter, g: first group number where 'par' is
     observed). Starting values can be specified with
     estimate(...,control(list(start=...))).
   - New print and summary methods for mixture models.
-  - Renamed (weighted) K-means function 'km' to 'wkm'.
+  - Renamed (weighted) K-means function 'km' to `wkm`.
   - Derivative method deriv.function based on complex step derivatives.
-  - twostageCV: estimation of mixture models are now parallelized if
+  - `twostageCV`: estimation of mixture models are now parallelized if
     mc.cores>1.
 
 # lava 1.6.3
   - Fixed problems with plots (Rgraphviz)
-  - Better print method for twostageCV
-  - Improved M-step in mixture.method
+  - Better print method for `twostageCV`
+  - Improved M-step in `mixture` method
 
 # lava 1.6.2
-  - twostageCV: cross-validate two-stage estimator
+  - `twostageCV`: cross-validate two-stage estimator
   - rmvn, dmvn moved to mets package (C++ implementation, old versions
-    renamed to lava::rmvn0, lava::dmvn0)
+    renamed to `lava::rmvn0`, `lava::dmvn0`)
   - mediation proportion handled correctly when direct effect is zero
   - unit tests clean-up (namespace)
-  - merge.lvm now correctly handles fixed covariance parameters
+  - `merge.lvm` now correctly handles fixed covariance parameters
 
 # lava 1.6.1
   - Newton-raphson algorithm made more robust.
-  - New sim.as method. plot.sim method now by default only plots
+  - New `sim.as` method. `plot.sim` method now by default only plots
     density estimates
   - Compatibility fix with Matrix library
 
 # lava 1.6
-  - Mixture Latent variable models (mixture). Fast version
-    requires 'mets' packages; Gaussian mixture models (mvnmix);
-    weighted k-means (km)
-  - estimate.default: 'keep', 'use' arguments can be specified as
+  - Mixture Latent variable models (`mixture`). Fast version
+    requires 'mets' packages; Gaussian mixture models (`mvnmix`);
+    weighted k-means (`km`)
+  - `estimate.default`: 'keep', 'use' arguments can be specified as
     regular expressions (with argument regex=TRUE).
     Summary method now returns Wald test (null: all parameters being zero).
-  - makemissing: seed argument added.
+  - `makemissing`: seed argument added.
   - Global change: 'silent' argument renamed to 'messages'
-  - New utility functions: Grep, Na2x, x2NA, wait, waitclick,
-    rotation, Rot2d, Rot3d
+  - New utility functions: `Grep`, `Na2x`, `x2NA`, `wait`, `waitclick`,
+    `rotation`, `Rot2d`, `Rot3d`
   - Condition numbers calculated via SVD
-  - na.pass0: returns data.frame with original number of rows but with
+  - `na.pass0`: returns data.frame with original number of rows but with
     zeros (or first level of factors) in the rows with missing data.
-  - stack: 'weights' argument renamed to 'propensity'. If
+  - `stack`: 'weights' argument renamed to 'propensity'. If
     propensity=TRUE, the first argument (model) will be treated as
     propensity score model (glm) and 'predict' method will be
     used for the predictions.
-  - estimate.formula now by default wraps glm such that 'iid' method
+  - `estimate.formula` now by default wraps glm such that the `iid` method
     return matrix of same size as full data (with zero rows where data
     are missing).
   - Updated output functions for class 'sim' (print method and
     plot).. Plot method: density.alpha is applied to each standard
     error ('se') level.
-  - composite likelihood (complik) refactored + new example. 'ordinal' method now
-    cleans up properly when variables are removed (rmvar, subset).
-  - twostage: fixed for mixture model (class 'lvm.mixture'). New help
+  - composite likelihood (`complik`) refactored + new example. `ordinal` method now
+    cleans up properly when variables are removed (`rmvar`, `subset`).
+  - `twostage`: fixed for mixture model (class 'lvm.mixture'). New help
     page + examples.  Predict function updated (newdata argument where
     covariate levels can be specified).
 
 # lava 1.5.1
-  - conformal predictions: confpred
+  - conformal predictions: `confpred`
   - warnings (char2num used instead of coersion via as.numeric)
-  - %++% for function compositon
-  - New summary.effects methods with mediation proportion in the
+  - `%++%` for function compositon
+  - New `summary.effects` methods with mediation proportion in the
     output
-  - New hook: remove.hooks (see example ordinal.lvm)
-  - constrain methods now handled more robustly in sim.lvm allowing
+  - New hook: `remove.hooks` (see example `ordinal.lvm`)
+  - constrain methods now handled more robustly in `sim.lvm` allowing
     both vectorized and non-vectorized functions
-  - Non-linear associations can now be specified with 'nonlinear'
-    method. Estimation via the 'twostage' function.
+  - Non-linear associations can now be specified with `nonlinear`
+    method. Estimation via the `twostage` function.
   - Robust standard errors added to the IV estimator (2SLS)
-  - New cross-validation function: cv (and csplit function for
+  - New cross-validation function: `cv` (and `csplit` function for
     creating random sets).
 
 # lava 1.5
   - lava.tobit is longer required for ordinal and censored
     responses. Default is now to use the implementation in the 'mets' package.
-  - Composite likelihood method (complik) updated
+  - Composite likelihood method (`complik`) updated
   - weight argument renamed to weights in agreement with lm, glm, coxph, ...
-  - sim.default: new argument 'arg' passed on to simulation function
-  - sim.default: new argument 'iter'. If TRUE the iteration number is
+  - `sim.default`: new argument 'arg' passed on to simulation function
+  - `sim.default`: new argument 'iter'. If TRUE the iteration number is
     passed to function call as first argument (default FALSE)
-  - estimate.default: Wildcards/global expressions can now be used for specifying
-    contrasts based on the syntax of the functions 'contr', 'parsedesign'.
+  - `estimate.default`: Wildcards/global expressions can now be used for specifying
+    contrasts based on the syntax of the functions `contr`, `parsedesign`.
     See examples on the help-page.
     The argument transform.ci has been renamed to back.transform.
   - correlation methods for matrices and data.frames (either pairwise or full MLE).
     All methods can now return the influence functions.
-  - revdiag: dimnames are kept
-  - Combine: output updated
-  - forestplot: point estimates shown by default
-  - backdoor now works without conditioning set (yields all possible conditioning sets)
+  - `revdiag`: dimnames are kept
+  - `Combine`: output updated
+  - `forestplot`: point estimates shown by default
+  - `backdoor` now works without conditioning set (yields all possible conditioning sets)
   - New formula syntax: y+x~v+z same as c(y,x)~v+z
-  - spaghetti: trend.formula can now contain a factor statement on the rhs
+  - `spaghetti`: trend.formula can now contain a factor statement on the rhs
 
 # lava 1.4.7
   - Maintenance release
   - models can now be specified as y1+y2~x1+x2 instead of c(y1,2y)~x1+x2
-  - sim method now has a seed argument
+  - `sim` method now has a seed argument
 
 # lava 1.4.6
-  - New backtrace algorithms for Newton-Raphson optimization routine.
-  - 'diagtest' updated.
+  - New backtrace algorithms for Newton-Raphson optimization routine (`NR`).
+  - `diagtest` updated.
 
 # lava 1.4.5
   - New graph functions:
-    dsep: check for d-separation (conditional independence).
-    backdoor: check backdoor criterion of a graph (lvm-object).
-    adjMat: return adjaceny matrix.
-    edgeList: return edge list.
-    ancestors: return ancenstors of nodes.
-    descendants: return descendants of nodes.
+    `dsep`: check for d-separation (conditional independence).
+    `backdoor`: check backdoor criterion of a graph (lvm-object).
+    `adjMat`: return adjaceny matrix.
+    `edgeList`: return edge list.
+    `ancestors`: return ancenstors of nodes.
+    `descendants`: return descendants of nodes.
   - All simple paths in a graph can now be extracted with:
-    path(...,all=TRUE)
-  - Covariance parameters are now reference with ~~ instead of ,.
-    Applies to setting starting values in 'estimate', parameters in
-    'sim','compare','estimate',...
-    To use the old syntax set 'lava.options(symbol=c("~",","))'
-  - 'layout' argument added to lava.options (default 'dot')
-  - visNetwork support, new 'plot.engine' argument added to plot methods.
-  - bootstrap.lvmfit now default returns original estimates.
-  - print, transform methods updated (transform output).
-  - '+' operator overloaded for lvm and estimate objects (merge).
-  - New composite likelihood function: complik.
-  - New functions for simple association measures: riskcomp, rdiff, rratio,...
-  - New argument 'latent' in simulate method. If FALSE the latent
+    `path(...,all=TRUE)`
+  - Covariance parameters are now reference with `~~` instead of `,`.
+    Applies to setting starting values in `estimate`, parameters in
+    `sim`,`compare`,`estimate`,...
+    To use the old syntax set `lava.options(symbol=c("~",","))`.
+  - `layout` argument added to `lava.options` (default 'dot')
+  - visNetwork support, new `plot.engine` argument added to plot methods.
+  - `bootstrap.lvmfit` now default returns original estimates.
+  - `print`, `transform` methods updated (transform output).
+  - `+` operator overloaded for lvm and estimate objects (merge).
+  - New composite likelihood function: `complik`.
+  - New functions for simple association measures: `riskcomp`, `rdiff`,
+    `rratio`, ...
+  - New argument 'latent' in `simulate` method. If FALSE the latent
     variables are dropped from the returned data.frame.
-  - modelsearch by default now shows both directional or undirectional
+  - `modelsearch` by default now shows both directional or undirectional
     associations (type='all' vs type='cor').
-  - sim.default now stores timings. New print functions (data.table
+  - `sim.default` now stores timings. New print functions (data.table
     like output).
-  - lvm model can now be updated with the 'sim' function,
+  - lvm model can now be updated with the `sim` function,
     for instance setting parameter values for the simulation only once:
-    m <- sim(m,p=p,...), with faster subsequent calls sim(m,n=n).
-  - estimate.default can now simulate p-values ('R' argument). Returns
-    an object which can also be used as input for 'estimate'.
-  - Bug fixes: NR optimization with back-tracing; fixed matrices.lvm when called
+    `m <- sim(m,p=p,...)`, with faster subsequent calls `sim(m,n=n)`.
+  - `estimate.default` can now simulate p-values ('R' argument). Returns
+    an object which can also be used as input for `estimate`.
+  - Bug fixes: `NR` optimization with back-tracing; fixed `matrices.lvm` when called
     without variance parameters; fixed a bug in r-square computations.
-  - Contrast matrix can be specified with the function 'contr'.
+  - Contrast matrix can be specified with the function `contr`.
 
 # lava 1.4.4
   - estimate.default will now use the id-variable of an 'estimate'

@@ -20,7 +20,6 @@ combine	combine
 ConvertMedUnits	ConvertMedUnits
 drop.levels	drop.levels
 duplicated2	duplicated2
-elem	elem
 env	env
 first	first
 first<-	first
@@ -66,6 +65,8 @@ keep	keep
 last	first
 last<-	first
 left	left
+left.data.frame	left
+left.matrix	left
 ll	ll
 lowerTriangle	upperTriangle
 lowerTriangle<-	upperTriangle
@@ -105,6 +106,8 @@ rename.vars	rename.vars
 reorder.factor	reorder
 resample	resample
 right	left
+right.data.frame	left
+right.matrix	left
 sheetCount	sheetCount
 sheetNames	sheetCount
 sort.levelsMap	mapLevels
@@ -118,6 +121,7 @@ unknownToNA.default	unknown
 unknownToNA.factor	unknown
 unknownToNA.list	unknown
 unmatrix	unmatrix
+update.data.frame	update.list
 update.list	update.list
 upperTriangle	upperTriangle
 upperTriangle<-	upperTriangle

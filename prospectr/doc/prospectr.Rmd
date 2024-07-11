@@ -42,13 +42,11 @@ Since the publication of the
 [special special Volume in Spectroscopy and Chemometrics in R](https://www.jstatsoft.org/issue/view/v018) [@mullen2007] many spectroscopy-related packages have been released. Most of 
 these packages can be found at the following CRAN task views:
 
-- [Multivariate Statistics](https://CRAN.R-project.org/view=Multivariate) 
-
 - [Machine Learning & Statistical Learning](https://CRAN.R-project.org/view=MachineLearning) 
 
 - [Chemometrics and Computational Physics](https://CRAN.R-project.org/view=ChemPhys) 
 
-In addition, [Bryan Hanson](https://github.com/bryanhanson?tab=followers) 
+In addition, [Bryan Hanson](https://github.com/bryanhanson) 
 provides a list of Free Open Source Software (FOSS) dedictaed to Spectroscopic 
 applications in general 
 (see [https://bryanhanson.github.io/FOSS4Spectroscopy/](https://bryanhanson.github.io/FOSS4Spectroscopy/)). 
@@ -232,17 +230,19 @@ gd1 <- t(diff(t(NIRsoil$spc), differences = 1, lag = 10))
 ```
 
 For more flexibility and control over the degree of smoothing, one could however 
-use the Savitzky-Golay (`savitzkyGolay`) and Gap-segment derivative (`gapDer`)
+use the Savitzky-Golay (`savitzkyGolay`) and gap-segment derivative (`gapDer`)
 algorithms. The Gap-segment algorithms performs first a smoothing under a given
 segment size, followed by a derivative of a given order under a given gap size. 
-Here is an exemple of the use of the `gapDer` function.
+Here is an example of the use of the `gapDer` function. For Savitzky-Golay and 
+gap-segment derivatives we refer the reader to @luo2005properties and 
+@hopkins2001norris respectively.
 
 ```{r gapseg,fig.cap="Effect of 1st-order gap-segment derivative ", fig.height = 4, fig.width = 6, fig.retina = 1, out.extra='style= "background-color: #FFFFFF; border: 10px solid transparent; padding:0px"'}
 # m = order of the derivative
-# w = window size ( = {2 * gap size} + 1)
+# w = gap size
 # s = segment size
-# first derivative with a gap of 10 bands
-gsd1 <- gapDer(X = NIRsoil$spc, m = 1, w = 11, s = 10) 
+# first derivative with a gap of 5 bands
+gsd1 <- gapDer(X = NIRsoil$spc, m = 1, w = 11, s = 5) 
 plot(as.numeric(colnames(d1)), 
      d1[1,], 
      type = "l", 
@@ -290,7 +290,7 @@ where $a_i$ and $m_i$ are the additive and multiplicative terms respectively.
 
 ```{r msc, fig.cap="Effect of MSC on raw spectra", fig.height = 4, fig.width = 6, fig.retina = 1, out.extra='style= "background-color: #FFFFFF; border: 10px solid transparent; padding:0px"'}
 # X = input spectral matrix
-msc_spc <- msc(X = NIRsoil$spc, reference_spc = colMeans(NIRsoil$spc))
+msc_spc <- msc(X = NIRsoil$spc, ref_spectrum = colMeans(NIRsoil$spc))
 
 plot(as.numeric(colnames(NIRsoil$spc)), 
      NIRsoil$spc[1,], 
@@ -324,9 +324,9 @@ Xu <- NIRsoil$spc[NIRsoil$train == 0, ]
 Xr_msc <- msc(Xr)
 
 # apply the same msc to Xu
-attr(Xr_msc,"Reference spectrum") # use this info from the previous object
+attr(Xr_msc, "Reference spectrum") # use this info from the previous object
 
-Xu_msc <- msc(Xu, reference_spc = attr(Xr_msc, "Reference spectrum"))
+Xu_msc <- msc(Xu, ref_spectrum = attr(Xr_msc, "Reference spectrum"))
 ```
 
 ### SNV-Detrend
@@ -593,7 +593,7 @@ points(X[ken$model,], col = "red", pch = 19, cex = 1.4)
 # Test with the NIRsoil dataset
 # one can also use the mahalanobis distance (metric argument)
 # computed in the pc space (pc argument)
-ken_mahal <- kenStone(X = NIRsoil$spc, k = 20, metric = "mahal", pc= 2)
+ken_mahal <- kenStone(X = NIRsoil$spc, k = 20, metric = "mahal", pc = 2)
 # The pc components in the output list stores the pc scores
 plot(ken_mahal$pc[,1], 
      ken_mahal$pc[,2], 
@@ -607,6 +607,48 @@ grid()
 points(ken_mahal$pc[ken_mahal$model, 1], 
        ken_mahal$pc[ken_mahal$model,2], 
        pch = 19, col = "red") 
+```
+
+In cases where we have calibration samples which have been already pre-selected, 
+we can use the `init` argument of the `kenStone()` function. If we 
+want to force (because of convenience) a subset of observations in the 
+calibration set search we can initialize the Kennard-Stone algorithm with such 
+samples. For example:
+
+```{r ksinitalization, tidy = TRUE}
+# Indices of the initialization samples
+initialization_ind <- c(486, 702, 722, 728) 
+ken_mahal_init <- kenStone(
+  X = NIRsoil$spc, 
+  k = 20, 
+  metric = "mahal", 
+  pc = 2, 
+  init = initialization_ind)
+
+ken_mahal_init$model
+```
+
+```{r ken3, fig.cap="Kennard-Stone sampling with initialization samples", fig.height = 4.5, fig.width = 4, fig.retina = 1, fig.align = 'center', out.extra='style= "background-color: #FFFFFF; border: 10px solid transparent; padding:0px"'}
+
+# The pc components in the output list stores the pc scores
+plot(ken_mahal_init$pc[,1], 
+     ken_mahal_init$pc[,2], 
+     col = rgb(0, 0, 0, 0.3), 
+     pch = 19, 
+     xlab = "PC1",
+     ylab = "PC2",
+     main = "Kennard-Stone with 4 initialization samples") 
+grid()
+# This is the selected points in the pc space
+points(ken_mahal$pc[ken_mahal$model, 1], 
+       ken_mahal$pc[ken_mahal$model, 2], 
+       pch = 19, col = "red") 
+
+# Our initialization samples
+points(ken_mahal$pc[initialization_ind, 1], 
+       ken_mahal$pc[initialization_ind, 2], 
+       pch = 19, cex = 1.5, col = "blue") 
+
 ```
 
 

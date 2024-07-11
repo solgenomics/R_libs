@@ -1,6 +1,6 @@
 Package: lokern
-Version: 1.1-9
-Date: 2021-04-09
+Version: 1.1-10
+Date: 2023-02-20
 Title: Kernel Regression Smoothing with Local or Global Plug-in
         Bandwidth
 Author: Eva Herrmann <eherrmann@mathematik.tu-darmstadt.de> (F77 & S original);
@@ -12,7 +12,7 @@ Description: Kernel regression smoothing with adaptive local or global plug-in
 BuildResaveData: no
 License: GPL (>= 2)
 NeedsCompilation: yes
-Packaged: 2021-04-09 15:50:52 UTC; maechler
+Packaged: 2023-02-20 10:13:43 UTC; maechler
 Repository: CRAN
-Date/Publication: 2021-04-13 22:00:08 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2022-02-15 16:47:35 UTC; unix
+Date/Publication: 2023-02-21 23:00:02 UTC
+Built: R 4.3.0; x86_64-pc-linux-gnu; 2023-07-07 02:35:21 UTC; unix

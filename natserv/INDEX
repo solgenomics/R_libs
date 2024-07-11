@@ -1,0 +1,10 @@
+nat_states              A data.frame with 49 rows and 2 columns
+natserv-package         natserv
+ns_altid                Get taxon by uid, id, or elCode
+ns_ecohier              Get a summary of the upper level hierarchy for
+                        an Ecosystem record
+ns_export               Search exports
+ns_id                   Get taxon by uid
+ns_search_comb          Combined search
+ns_search_eco           Ecosystem search
+ns_search_spp           Species search

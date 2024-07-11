@@ -2,6 +2,8 @@ handler_ascii_alert     Progression Handler: Progress Reported as ASCII
                         BEL Symbols (Audio or Blink) in the Terminal
 handler_beepr           Progression Handler: Progress Reported as
                         'beepr' Sounds (Audio)
+handler_cli             Progression Handler: Progress Reported via
+                        'cli' Progress Bars (Text) in the Terminal
 handler_debug           Progression Handler: Progress Reported as Debug
                         Information (Text) in the Terminal
 handler_filesize        Progression Handler: Progress Reported as the
@@ -29,8 +31,8 @@ progress_progressr      Use Progressr with Plyr Map-Reduce Functions
 progressor              Create a Progressor Function that Signals
                         Progress Updates
 progressr               progressr: A Unifying API for Progress Updates
+with_progress           Report on Progress while Evaluating an R
+                        Expression
 withProgressShiny       Use Progressr in Shiny Apps: Plug-in Backward
                         Compatibility Replacement for
                         shiny::withProgress()
-with_progress           Report on Progress while Evaluating an R
-                        Expression

@@ -12,6 +12,7 @@ rlang-package	rlang-package
 abort	abort
 add_backtrace	rlang_backtrace_on_error
 are_na	are_na
+args_data_masking	args_data_masking
 args_dots_empty	args_dots_empty
 args_dots_used	args_dots_used
 args_error_context	args_error_context
@@ -66,7 +67,7 @@ check_dots_used	check_dots_used
 check_exclusive	check_exclusive
 check_installed	is_installed
 check_required	check_required
-child_env	env
+child_env	child_env
 chr	vector-construction
 chr_unserialise_unicode	chr_unserialise_unicode
 cnd	cnd
@@ -97,7 +98,7 @@ done	done
 dot-data	dot-data
 dots_list	list2
 dots_n	dots_n
-dots_splice	splice
+dots_splice	dots_splice
 dots_values	dots_values
 duplicate	duplicate
 dyn-dots	dyn-dots
@@ -126,6 +127,7 @@ env_browse	env_browse
 env_bury	env_bury
 env_cache	env_cache
 env_clone	env_clone
+env_coalesce	env_clone
 env_depth	env_depth
 env_get	env_get
 env_get_list	env_get
@@ -133,6 +135,7 @@ env_has	env_has
 env_inherits	env_inherits
 env_is_browsed	env_browse
 env_is_locked	env_lock
+env_is_user_facing	env_is_user_facing
 env_label	env_name
 env_length	env_names
 env_lock	env_lock
@@ -146,6 +149,7 @@ env_print	env_print
 env_tail	env_parent
 env_unbind	env_unbind
 env_unlock	env_unlock
+error_call	format_error_call
 error_cnd	cnd
 eval_bare	eval_bare
 eval_tidy	eval_tidy
@@ -161,6 +165,9 @@ expr_name	expr_label
 expr_print	expr_print
 expr_text	expr_label
 faq-options	faq-options
+ffi_standalone_check_number_1.0.7	ffi_standalone_types_check
+ffi_standalone_is_bool_1.0.7	ffi_standalone_types_check
+ffi_standalone_types_check	ffi_standalone_types_check
 flatten	flatten
 flatten_chr	flatten
 flatten_cpl	flatten
@@ -213,7 +220,6 @@ inject	inject
 injection-operator	injection-operator
 int	vector-construction
 interrupt	interrupt
-int_along	vector-old-ctors
 invoke	invoke
 is_atomic	type-predicates
 is_attached	search_envs
@@ -312,7 +318,6 @@ last_messages	last_warnings
 last_trace	last_error
 last_warnings	last_warnings
 lgl	vector-construction
-lgl_along	vector-old-ctors
 list2	list2
 ll	list2
 locally	with_env
@@ -371,6 +376,7 @@ nse-inject	topic-inject
 ns_env	ns_env
 ns_env_name	ns_env
 ns_imports_env	ns_env
+ns_registry_env	ns_registry_env
 obj_address	obj_address
 on_load	on_load
 on_package_load	on_load
@@ -414,9 +420,13 @@ quo_text	quo_label
 raw_deparse_str	raw_deparse_str
 rep_along	rep_along
 rep_named	rep_along
+reset_message_verbosity	abort
+reset_warning_verbosity	abort
 return_from	return_from
 rlang	rlang-package
 rlang_backtrace_on_error	rlang_backtrace_on_error
+rlang_backtrace_on_error_report	rlang_backtrace_on_error
+rlang_backtrace_on_warning_report	rlang_backtrace_on_error
 rlang_error	rlang_error
 rlib_trace_spec	rlib_trace_spec
 run_on_load	on_load
@@ -462,6 +472,8 @@ topic-defuse	topic-defuse
 topic-double-evaluation	topic-double-evaluation
 topic-embrace-constants	topic-embrace-constants
 topic-embrace-non-args	topic-embrace-non-args
+topic-error-call	topic-error-call
+topic-error-chaining	topic-error-chaining
 topic-inject	topic-inject
 topic-inject-out-of-context	topic-inject-out-of-context
 topic-metaprogramming	topic-metaprogramming
@@ -477,7 +489,6 @@ UQ	UQ
 UQS	UQ
 vector-coercion	vector-coercion
 vector-construction	vector-construction
-vector-old-ctors	vector-old-ctors
 vec_poke_n	vec_poke_n
 vec_poke_range	vec_poke_n
 warn	abort

@@ -1,11 +1,9 @@
-Rscript                 Run the commands 'Rscript' and 'R CMD'
-Rscript_call            Call a function in a new R session via
-                        'Rscript()'
+alnum_id                Generate ID strings
 attr                    Obtain an attribute of an object without
                         partial matching
+base_pkgs               Get base R package names
 base64_encode           Encode/decode data into/from base64 encoding.
 base64_uri              Generate the Data URI for a file
-base_pkgs               Get base R package names
 bg_process              Start a background process
 broken_packages         Find out broken packages and reinstall them
 bump_version            Bump version numbers
@@ -16,9 +14,12 @@ del_empty_dir           Delete an empty directory
 dir_create              Create a directory recursively by default
 dir_exists              Test the existence of files and directories
 do_once                 Perform a task once in an R session
+download_cache          Download a file from a URL and cache it on disk
 download_file           Try various methods to download a file
 embed_file              Embed a file, multiple files, or directory on
                         an HTML page
+env_option              Retrieve a global option from both 'options()'
+                        and environment variables
 existing_files          Find file paths that exist
 exit_call               Call 'on.exit()' in a parent function
 file_ext                Manipulate filename extensions
@@ -35,10 +36,11 @@ in_dir                  Evaluate an expression under a specified
                         working directory
 install_dir             Install a source package from a directory
 install_github          An alias of 'remotes::install_github()'
-isFALSE                 Test if an object is identical to 'FALSE'
 is_abs_path             Test if paths are relative or absolute
 is_ascii                Check if a character vector consists of
                         entirely ASCII characters
+is_blank                Test if a character vector consists of blank
+                        strings
 is_sub_path             Test if a path is a subpath of a dir
 is_web_path             Test if a path is a web path
 is_windows              Test for types of operating systems
@@ -77,6 +79,9 @@ rest_api                Get data from a REST API
 retry                   Retry calling a function for a number of times
 rev_check               Run 'R CMD check' on the reverse dependencies
                         of a package
+Rscript                 Run the commands 'Rscript' and 'R CMD'
+Rscript_call            Call a function in a new R session via
+                        'Rscript()'
 rstudio_type            Type a character vector into the RStudio source
                         editor
 same_path               Test if two paths are the same after they are
@@ -84,12 +89,11 @@ same_path               Test if two paths are the same after they are
 session_info            An alternative to sessionInfo() to print
                         session information
 set_envvar              Set environment variables
+shrink_images           Shrink images to a maximum width
 split_lines             Split a character vector by line breaks
 split_source            Split source lines into complete expressions
 strict_list             Strict lists
-stringsAsStrings        Set the global option 'options(stringsAsFactors
-                        = FALSE)' inside a parent function and restore
-                        the option after the parent function exits
+strip_html              Strip HTML tags
 submit_cran             Submit a source package to CRAN
 system3                 Run 'system2()' and mark its character output
                         as UTF-8 if appropriate
@@ -103,3 +107,6 @@ upload_ftp              Upload to an FTP server via 'curl'
 url_accessible          Test if a URL is accessible
 url_filename            Extract filenames from a URLs
 valid_syntax            Check if the syntax of the code is valid
+yaml_body               Partition the YAML metadata and the body in a
+                        document
+yaml_load               Read YAML data

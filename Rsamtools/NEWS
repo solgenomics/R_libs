@@ -1,12 +1,44 @@
-CHANGES IN VERSION 2.2
+CHANGES IN VERSION 2.16
+-----------------------
+
+NEW FEATURES
+
+    o (v 2.15.1) sortBam() gains support for sorting by tag (byTag) and using
+      multiple threads (nThreads). (See
+      https://github.com/Bioconductor/Rsamtools/issues/46. ; kriemo)
+
+CHANGES IN VERSION 2.10
+-----------------------
+
+DEPRECATED AND DEFUNCT
+
+    o (v 2.9.1) Deprecate applyPileups() in favor of pileup().
+
+CHANGES IN VERSION 2.8
+----------------------
+
+NEW FEATURES
+
+    o (v 2.7.2) idxstatsBam works on remote (e.g., http://) files and reports
+      unmapped ('seqnames' equal to *) reads. See
+      https://support.bioconductor.org/p/9136222.
+
+CHANGES IN VERSION 2.4
 ----------------------
 
 BUG FIXES
 
-    o (v 2.2.2) Correctly handle '*' ('unknown') RNAME during paired-end
-      processing. See https://github.com/Bioconductor/Rsamtools/issues/16.
+    o (v 2.3.2; from v 2.2.2) Correctly handle '*' ('unknown') RNAME
+      during paired-end processing. See
+      https://github.com/Bioconductor/Rsamtools/issues/16.
 
-    o (v 2.2.3) Fix regression introduced by v 2.2.2.
+    o (v 2.3.5) Fix regression introduced by v 2.3.2
+
+NEW FEATURES
+
+    o (v 2.3.1) Don't require BAM files to have @SQ lines; allows
+      parsing PacBio 'unaligned' BAM files.
+      (https://github.com/Bioconductor/Rsamtools/issues/15 ; jayoung)
 
 CHANGES IN VERSION 2.0
 ----------------------

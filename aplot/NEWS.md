@@ -1,3 +1,40 @@
+# aplot 0.1.10
+
++ fixed R check for a typo in `grid.draw.aplot()` method (2023-03-08, Wed)
+
+# aplot 0.1.9
+
++ use `ggfun::theme_noxaxis()` instead of `ggtree::theme_dendrogram()` (2022-11-21, Mon)
++ use original scale when sub plot is not a 'ggtree' object (2022-11-18, Fri, #23)
+
+# aplot 0.1.8
+
++ user can use `options(aplot_align = "y")` to pass the value to `as.patchwork(align="y")` (2022-10-09, Sun)
+    - <https://github.com/YuLab-SMU/ChIPseeker/pull/199#pullrequestreview-1135289398>
+
+# aplot 0.1.7
+
++ `[`, `[<-`, `[[` and `[[<-` methods for the 'aplot' class (2022-08-27, Sat, #22)
++ introduce `align` parameter in `as.patchwork()` (2022-07-27, Wed, #19)
+
+# aplot 0.1.6
+
++ bug fixed 
+
+# aplot 0.1.5
+
++ `output` parameter in `plot_list()` can specify to return a `gglist` or `patchwork` object (2022-06-01, Wed)
++ `plot_list()` calls `gglist()` and return a `gglist` object (2022-05-05, Thu)
+
+# aplot 0.1.4
+
++ `gglist()` function to construct composite plot (2022-05-05, Thu)
++ based on the update of `ggrange()`, now in `xlim2()` and `ylim2()`, we should specify `region = 'plot'` (2022-04-06, Wed)
++ mv `ggrange()`, `xrange()` and `yrange()` to 'ggfun' (2022-04-01, Fri)
+
+# aplot 0.1.3
+
++ update `ggrange()` to support extracting plot limit and range (newly added) (2022-04-01, Fri)
 
 # aplot 0.1.2
 

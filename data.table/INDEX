@@ -1,7 +1,5 @@
-.Last.updated           Number of rows affected by last update
 :=                      Assignment by reference
-IDateTime               Integer based date class
-J                       Creates a join 'data.table'
+.Last.updated           Number of rows affected by last update
 address                 Address in RAM of a variable
 all.equal               Equality Test Between Two Data Tables
 as.data.table           Coerce to data.table
@@ -26,6 +24,8 @@ fread                   Fast and friendly file finagler
 fsort                   Fast parallel sort
 fwrite                  Fast CSV writer
 groupingsets            Grouping Set aggregation for data tables
+IDateTime               Integer based date class
+J                       Creates a join 'data.table'
 last                    First/last item of an object
 like                    Convenience function for calling grep.
 melt.data.table         Fast melt for data.table
@@ -40,16 +40,16 @@ rbindlist               Makes one data.table from a list of many
 rleid                   Generate run-length type group id
 roll                    Rolling functions
 rowid                   Generate unique row ids within each group
+setattr                 Set attributes of objects by reference
+setcolorder             Fast column reordering of a data.table by
+                        reference
 setDF                   Coerce a data.table to data.frame by reference
 setDT                   Coerce lists and data.frames to data.table by
                         reference
 setDTthreads            Set or get number of threads that data.table
                         should use
-setNumericRounding      Change or turn off numeric rounding
-setattr                 Set attributes of objects by reference
-setcolorder             Fast column reordering of a data.table by
-                        reference
 setkey                  Create key on a data.table
+setNumericRounding      Change or turn off numeric rounding
 setops                  Set operations for data tables
 setorder                Fast row reordering of a data.table by
                         reference
@@ -68,5 +68,5 @@ transpose               Efficient transpose of list
 truelength              Over-allocation access
 tstrsplit               strsplit and transpose the resulting list
                         efficiently
-update.dev.pkg          Perform update of development version of a
+update_dev_pkg          Perform update of development version of a
                         package

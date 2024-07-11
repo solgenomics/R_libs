@@ -40,7 +40,7 @@ flights_db %>% filter(dep_delay > 240)
 
 flights_db %>% 
   group_by(dest) %>%
-  summarise(delay = mean(dep_time))
+  summarise(delay = mean(dep_delay))
 
 ## -----------------------------------------------------------------------------
 tailnum_delay_db <- flights_db %>% 

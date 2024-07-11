@@ -1,8 +1,6 @@
 +.scanone               Arithmetic operators for scanone and scantwo
                         results
 +.scanoneperm           Arithmetic Operators for permutation results
-MQM                     Introduction to Multiple QTL Model (MQM)
-                        mapping
 add.cim.covar           Indicate marker covariates from composite
                         interval mapping
 add.threshold           Add significance threshold to plot
@@ -74,6 +72,7 @@ fake.4way               Simulated data for a 4-way cross
 fake.bc                 Simulated data for a backcross
 fake.f2                 Simulated data for an F2 intercross
 fill.geno               Fill holes in genotype data
+find_large_intervals    Find large intervals in a map
 find.flanking           Find flanking markers for a specified position
 find.marker             Find marker closest to a specified position
 find.markerindex        Determine the numeric index for a marker
@@ -82,7 +81,6 @@ find.pheno              Find column number for a particular phenotype
 find.pseudomarker       Find the pseudomarker closest to a specified
                         position
 findDupMarkers          Find markers with identical genotype data
-find_large_intervals    Find large intervals in a map
 fitqtl                  Fit a multiple-QTL model
 fitstahl                Fit Stahl interference model
 flip.order              Flip the orders of markers on a set of
@@ -116,11 +114,13 @@ mapthis                 Simulated data for illustrating genetic map
 markerlrt               General likelihood ratio test for association
                         between marker pairs
 markernames             Pull out the marker names from a cross
+max.scanone             Maximum peak in genome scan
 max.scanPhyloQTL        Maximum peak in genome scan to map a QTL to a
                         phylogenetic tree
-max.scanone             Maximum peak in genome scan
 max.scantwo             Maximum peak in two-dimensional genome scan
 movemarker              Move a marker to a new chromosome
+MQM                     Introduction to Multiple QTL Model (MQM)
+                        mapping
 mqmaugment              MQM augmentation
 mqmautocofactors        Automatic setting of cofactors, taking marker
                         density into account
@@ -178,12 +178,12 @@ plot.cross              Plot various features of a cross object
 plot.qtl                Plot QTL locations
 plot.rfmatrix           Plot recombination fractions or LOD scores for
                         a single marker
-plot.scanPhyloQTL       Plot LOD curves from single-QTL scan to map QTL
-                        to a phylogenetic tree
 plot.scanone            Plot LOD curves
 plot.scanoneboot        Plot results of bootstrap for QTL position
 plot.scanoneperm        Plot permutation results for a single-QTL
                         genome scan
+plot.scanPhyloQTL       Plot LOD curves from single-QTL scan to map QTL
+                        to a phylogenetic tree
 plot.scantwo            Plot LOD scores for a two-dimensional genome
                         scan
 plot.scantwoperm        Plot permutation results for a 2d, 2-QTL genome
@@ -196,8 +196,8 @@ plotLodProfile          Plot 1-d LOD profiles for a multiple QTL model
 plotMap                 Plot genetic map
 plotMissing             Plot grid of missing genotypes
 plotModel               Plot a QTL model
-plotPXG                 Plot phenotypes versus marker genotypes
 plotPheno               Plot a phenotype distribution
+plotPXG                 Plot phenotypes versus marker genotypes
 plotRF                  Plot recombination fractions
 pull.argmaxgeno         Pull out the results of the Viterbi algorithm
                         from a cross
@@ -226,8 +226,6 @@ replaceqtl              Replace a QTL in a qtl object with a different
                         position
 rescalemap              Rescale genetic maps
 ripple                  Compare marker orders
-scanPhyloQTL            Single-QTL genome scan to map QTL to a
-                        phylogenetic tree
 scanone                 Genome scan with a single QTL model
 scanoneboot             Bootstrap to get interval estimate of QTL
                         location
@@ -236,6 +234,8 @@ scanonevar              Genome scan for QTL affecting mean and/or
 scanonevar.meanperm     Permutation test for mean effect in scanonevar
 scanonevar.varperm      Permutation test for variance effect in
                         scanonevar
+scanPhyloQTL            Single-QTL genome scan to map QTL to a
+                        phylogenetic tree
 scanqtl                 General QTL scan
 scantwo                 Two-dimensional genome scan with a two-QTL
                         model
@@ -264,11 +264,11 @@ summary.cross           Print summary of QTL experiment
 summary.fitqtl          Summary of fit of qtl model
 summary.qtl             Print summary of a QTL object
 summary.ripple          Print summary of ripple results
-summary.scanPhyloQTL    Summarize the results a genome scan to map a
-                        QTL to a phylogenetic tree
 summary.scanone         Summarize the results of a genome scans
 summary.scanoneboot     Bootstrap confidence interval for QTL location
 summary.scanoneperm     LOD thresholds from scanone permutation results
+summary.scanPhyloQTL    Summarize the results a genome scan to map a
+                        QTL to a phylogenetic tree
 summary.scantwo         Summarize the results of a two-dimensional
                         genome scan
 summary.scantwoperm     LOD thresholds from scantwo permutation results

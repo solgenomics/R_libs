@@ -15,23 +15,16 @@ knitr::opts_chunk$set(
 #  gs4_example("gapminder") %>%
 #    read_sheet()
 
-## ----eval = FALSE-------------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
 #  library(googledrive)
 #  
-#  # method 1: direct provision client ID and secret
-#  google_app <- httr::oauth_app(
-#    "my-very-own-google-app",
-#    key = "123456789.apps.googleusercontent.com",
-#    secret = "abcdefghijklmnopqrstuvwxyz"
+#  google_client <- gargle::gargle_oauth_client_from_json(
+#    path = "/path/to/the/JSON/that/was/downloaded/from/gcp/console.json",
+#    name = "acme-corp-google-client"
 #  )
-#  drive_auth_configure(app = google_app)
+#  drive_auth_configure(app = google_client)
 #  
-#  # method 2: provide filepath to JSON containing client ID and secret
-#  drive_auth_configure(
-#    path = "/path/to/the/JSON/you/downloaded/from/gcp/console.json"
-#  )
-#  
-#  # now any new OAuth tokens are obtained with the configured app
+#  # now any new OAuth tokens are obtained with the configured client
 
 ## ----eval = FALSE-------------------------------------------------------------
 #  # googledrive

@@ -1,8 +1,3 @@
-Math.Surv               Methods for Surv objects
-Surv                    Create a Survival Object
-Surv2                   Create a survival object
-Surv2data               Convert data from timecourse to (time1,time2)
-                        style
 aareg                   Aalen's additive regression model for censored
                         data
 aeqSurv                 Adjudicate near ties in a Surv object
@@ -32,6 +27,8 @@ coxph.control           Ancillary arguments for controlling coxph fits
 coxph.detail            Details of a Cox Model Fit
 coxph.object            Proportional Hazards Regression Object
 coxph.wtest             Compute a quadratic form
+coxphms.object          Multi-state Proportional Hazards Regression
+                        Object
 coxsurv.fit             A direct interface to the 'computational
                         engine' of survfit.coxph
 diabetic                Ddiabetic retinopathy
@@ -47,9 +44,10 @@ is.ratetable            Verify that an object is of class ratetable.
 kidney                  Kidney catheter data
 levels.Surv             Return the states of a multi-state Surv object
 lines.survfit           Add Lines or Points to a Survival Plot
-logLik.coxph            logLik method for a Cox model
 logan                   Data from the 1972-78 GSS data used by Logan
+logLik.coxph            logLik method for a Cox model
 lung                    NCCTG Lung Cancer Data
+Math.Surv               Methods for Surv objects
 mgus                    Monoclonal gammopathy data
 mgus2                   Monoclonal gammopathy data
 model.frame.coxph       Model.frame method for coxph objects
@@ -80,7 +78,7 @@ pseudo                  Pseudo values for survival.
 pspline                 Smoothing splines using a pspline basis
 pyears                  Person Years
 quantile.survfit        Quantiles from a survfit object
-ratetable               Rate table structure
+ratetable               Allow ratetable() terms in a model
 ratetableDate           Convert date objects to ratetable form
 rats                    Rat treatment data from Mantel et al
 rats2                   Rat data from Gail et al.
@@ -104,8 +102,12 @@ summary.coxph           Summary method for Cox models
 summary.pyears          Summary function for pyears objecs
 summary.survexp         Summary function for a survexp object
 summary.survfit         Summary of a Survival Curve
-survSplit               Split a survival data set at specified times
+Surv                    Create a Survival Object
+Surv2                   Create a survival object
+Surv2data               Convert data from timecourse to (time1,time2)
+                        style
 survcheck               Checks of a survival data set
+survcondense            Shorten a (time1, time2) survival dataset
 survdiff                Test Survival Curve Differences
 survexp                 Compute Expected Survival
 survexp.fit             Compute Expected Survival
@@ -129,6 +131,7 @@ survreg.control         Package options for survreg and coxph
 survreg.distributions   Parametric Survival Distributions
 survreg.object          Parametric Survival Model Object
 survregDtest            Verify a survreg distribution
+survSplit               Split a survival data set at specified times
 tcut                    Factors for person-year calculations
 tmerge                  Time based merge for survival data
 tobin                   Tobin's Tobit data

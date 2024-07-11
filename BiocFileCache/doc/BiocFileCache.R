@@ -1,29 +1,29 @@
-## ----setup, echo=FALSE-----------------------------------------------------
+## ----setup, echo=FALSE--------------------------------------------------------
 knitr::opts_chunk$set(collapse=TRUE)
 
-## ---- eval = FALSE---------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
 #  if (!"BiocManager" %in% rownames(installed.packages()))
 #       install.packages("BiocManager")
 #  BiocManager::install("BiocFileCache", dependencies=TRUE)
 
-## ---- results='hide', warning=FALSE, message=FALSE-------------------------
+## ---- results='hide', warning=FALSE, message=FALSE----------------------------
 library(BiocFileCache)
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 path <- tempfile()
 bfc <- BiocFileCache(path, ask = FALSE)
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 bfccache(bfc)
 length(bfc)
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 bfc
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 bfcinfo(bfc)
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 savepath <- bfcnew(bfc, "NewResource", ext=".RData")
 savepath
 
@@ -34,7 +34,7 @@ save(m, file=savepath)
 ## and that file will be tracked in the cache
 bfcinfo(bfc)
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 fl1 <- tempfile(); file.create(fl1)
 add2 <- bfcadd(bfc, "Test_addCopy", fl1)                 # copy
 # returns filepath being tracked in cache
@@ -55,7 +55,7 @@ file.exists(fl1)    # TRUE - copied from original location
 file.exists(fl2)    # FALSE - moved from original location
 file.exists(fl3)    # TRUE - left asis, original location tracked
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 url <- "http://httpbin.org/get"
 add5 <- bfcadd(bfc, "TestWeb", fpath=url)
 rid5 <- names(add5)
@@ -71,7 +71,7 @@ rid7 <- names(add7)
 bfc
 bfcinfo(bfc)
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 bfcquery(bfc, "Web")
 
 bfcquery(bfc, "copy")
@@ -80,15 +80,15 @@ q1 <- bfcquery(bfc, "wiki")
 q1
 class(q1)
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 bfccount(q1)
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 bfcsubWeb = bfc[paste0("BFC", 5:6)]
 bfcsubWeb
 bfcinfo(bfcsubWeb)
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 bfc[["BFC2"]]
 bfcpath(bfc, "BFC2")
 bfcpath(bfc, "BFC5")
@@ -96,12 +96,12 @@ bfcrpath(bfc, rids="BFC5")
 bfcrpath(bfc)
 bfcrpath(bfc, c("http://httpbin.org/get","Test3_addAsis"))
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 bfcneedsupdate(bfc, "BFC5")
 bfcneedsupdate(bfc, "BFC6")
 bfcneedsupdate(bfc)
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 fileBeingReplaced <- bfc[[rid3]]
 fileBeingReplaced
 
@@ -111,12 +111,12 @@ fl3
 bfc[[rid3]]<-fl3
 bfc[[rid3]]
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 bfcinfo(bfc, "BFC1")
 bfcupdate(bfc, "BFC1", rname="FirstEntry")
 bfcinfo(bfc, "BFC1")
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 suppressPackageStartupMessages({
     library(dplyr)
 })
@@ -124,35 +124,35 @@ bfcinfo(bfc, "BFC6") %>% select(rid, rpath, fpath)
 bfcupdate(bfc, "BFC6", fpath=url, rname="Duplicate", ask=FALSE)
 bfcinfo(bfc, "BFC6") %>% select(rid, rpath, fpath)
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 rid <- "BFC5"
 test <- !identical(bfcneedsupdate(bfc, rid), FALSE) # 'TRUE' or 'NA'
 if (test)
     bfcdownload(bfc, rid, ask=FALSE)
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 names(bfcinfo(bfc))
 meta <- as.data.frame(list(rid=bfcrid(bfc)[1:3], idx=1:3))
 bfcmeta(bfc, name="resourceData") <- meta
 names(bfcinfo(bfc))
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 bfcmetalist(bfc)
 bfcmeta(bfc, name="resourceData")
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 bfcmetaremove(bfc, name="resourceData")
 
-## ----eval=FALSE------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  bfcmeta(name="resourceData") <- meta
 #  Error in bfcmeta(name = "resourceData") <- meta :
 #    target of assignment expands to non-language object
 
-## ----eval=FALSE------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  bfc <- BiocFileCache()
 #  bfcmeta(bfc, name="resourceData") <- meta
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # let's remind ourselves of our object
 bfc
 
@@ -162,7 +162,7 @@ bfcremove(bfc, "BFC1")
 # let's look at our BiocFileCache object now
 bfc
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # create a new entry that hasn't been used
 path <- bfcnew(bfc, "UseMe")
 rmMe <- names(path)
@@ -181,7 +181,7 @@ unlink(fileBeingReplaced)
 
 bfcsync(bfc)
 
-## ----eval=FALSE------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  # export entire biocfilecache
 #  exportbfc(bfc)
 #  
@@ -195,7 +195,7 @@ bfcsync(bfc)
 #  exportbfc(sub1, outputFile = "BiocFileCacheExportWeb.zip",
 #  	  outMethod="zip")
 
-## ----eval=FALSE------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  
 #  bfc <- importbfc("BiocFileCacheExport.tar")
 #  
@@ -203,7 +203,7 @@ bfcsync(bfc)
 #  
 #  bfc3 <- importbfc("BiocFileCacheExportWeb.zip", archiveMethod="unzip")
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 tbl <- data.frame(rtype=c("web","web"),
 		      rpath=c(NA_character_,NA_character_),
 		  fpath=c("http://httpbin.org/get",
@@ -211,7 +211,7 @@ tbl <- data.frame(rtype=c("web","web"),
 		      keywords = c("httpbin", "wiki"), stringsAsFactors=FALSE)
 tbl
 
-## ----eval=FALSE------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  
 #  newbfc <- makeBiocFileCacheFromDataFrame(tbl,
 #  					 cache=file.path(tempdir(),"BFC"),
@@ -220,35 +220,35 @@ tbl
 #  					 metadataName="resourceMetadata")
 #  
 
-## ----eval=FALSE------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  cleanbfc(bfc)
 
-## ----eval=FALSE------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  removebfc(bfc)
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 ## paste to avoid long line in vignette
 url <- paste(
     "ftp://ftp.ensembl.org/pub/release-71/gtf",
     "homo_sapiens/Homo_sapiens.GRCh37.71.gtf.gz",
     sep="/")
 
-## ---- eval=FALSE-----------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  library(BiocFileCache)
 #  bfc <- BiocFileCache()
 #  path <- bfcrpath(bfc, url)
 
-## ---- eval=FALSE-----------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  gtf <- rtracklayer::import.gff(path)
 
-## ---- eval=FALSE-----------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  gtf <- rtracklayer::import.gff(bfcrpath(BiocFileCache(), url))
 
-## ---- eval=FALSE-----------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  library(BiocFileCache)
 #  bfc <- BiocFileCache("~/my-experiment/results")
 
-## ---- eval=FALSE-----------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  suppressPackageStartupMessages({
 #      library(DESeq2)
 #      library(airway)
@@ -257,13 +257,13 @@ url <- paste(
 #  dds <- DESeqDataData(airway, design = ~ cell + dex)
 #  result <- DESeq(dds)
 
-## ---- eval=FALSE-----------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  saveRDS(result, bfcnew(bfc, "airway / DESeq standard analysis"))
 
-## ---- eval=FALSE-----------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  result <- readRDS(bfcrpath(bfc, "airway / DESeq standard analysis"))
 
-## ----eval=FALSE------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  suppressPackageStartupMessages({
 #      library(BiocFileCache)
 #      library(rtracklayer)
@@ -310,7 +310,7 @@ url <- paste(
 #  temp = GTFFile(ans)
 #  info = import(temp)
 
-## ----eval=TRUE-------------------------------------------------------------
+## ----eval=TRUE----------------------------------------------------------------
 
 #
 # A simplier test to see if something is in the cache
@@ -341,7 +341,7 @@ info = import(GTFFile(pathsToLoad[1]))
 class(info)
 summary(info)
 
-## ----eval=FALSE------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  #
 #  # One could also imagine the following:
 #  #
@@ -362,15 +362,15 @@ summary(info)
 #  
 #  # now the R workspace is being tracked in the cache
 
-## ---- eval=FALSE-----------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  .get_cache <-
 #      function()
 #  {
-#      cache <- rappdirs::user_cache_dir(appname="MyNewPackage")
+#      cache <- tools::R_user_dir("MyNewPackage", which="cache")
 #      BiocFileCache::BiocFileCache(cache)
 #  }
 
-## ---- eval=FALSE-----------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  download_data_file <-
 #      function( verbose = FALSE )
 #  {
@@ -389,7 +389,7 @@ summary(info)
 #      bfcrpath(bfc, rids = rid)
 #  }
 
-## --------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 url <- "http://bioconductor.org/packages/stats/bioc/BiocFileCache/BiocFileCache_stats.tab"
 
 headFile <-                         # how to process file before caching
@@ -410,4 +410,48 @@ if (!isFALSE(update))               # download & process
 
 rpath <- bfcrpath(bfc, rids=rid)    # path to processed result
 readLines(rpath)                    # read processed result
+
+## ---- eval=FALSE--------------------------------------------------------------
+#         # make sure you have permissions on the cache/files
+#         # use at own risk
+#  
+#  	moveFiles<-function(package){
+#  	    olddir <- path.expand(rappdirs::user_cache_dir(appname=package))
+#  	    newdir <- tools::R_user_dir(package, which="cache")
+#  	    dir.create(path=newdir, recursive=TRUE)
+#  	    files <- list.files(olddir, full.names =TRUE)
+#  	    moveres <- vapply(files,
+#  		FUN=function(fl){
+#  		  filename = basename(fl)
+#  		  newname = file.path(newdir, filename)
+#  		  file.rename(fl, newname)
+#  		},
+#  		FUN.VALUE = logical(1))
+#  	    if(all(moveres)) unlink(olddir, recursive=TRUE)
+#  	}
+#  
+#  
+#  	package="BiocFileCache"
+#  	moveFiles(package)
+#  
+
+## ---- eval=FALSE--------------------------------------------------------------
+#  library(BiocFileCache)
+#  
+#  
+#  package = "BiocFileCache"
+#  
+#  BFC_CACHE = rappdirs::user_cache_dir(appname=package)
+#  Sys.setenv(BFC_CACHE = BFC_CACHE)
+#  bfc = BiocFileCache(BFC_CACHE)
+#  ## CAUTION: This removes the cache and all downloaded resources
+#  removebfc(bfc, ask=FALSE)
+#  
+#  ## create new empty cache in new default location
+#  bfc = BiocFileCache(ask=FALSE)
+#  
+
+## -----------------------------------------------------------------------------
+sessionInfo()
+
 

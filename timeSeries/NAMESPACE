@@ -3,13 +3,81 @@
 ## import name space
 ################################################
 
-## MM: This (importing all) is stupid:
-import("graphics")
-import("grDevices")
-import("methods")
-import("stats")
-import("utils")
-import("timeDate")
+## MM: Importing all is almost surely a waste [FIXME!]
+import("methods") # , show
+
+
+importFrom("timeDate"
+         , abline # the S4 generic from here, not "graphics"
+         ##--- For these we provide and export methods :
+         , lines, plot, points # graphics
+         , frequency           # stats
+         , isDaily, isMonthly, isQuarterly, isRegular
+         ##---- end of generics for which we define/export methods
+         , getRmetricsOptions, setRmetricsOptions
+         , align, as.timeDate, atoms, dayOfWeek
+         , finCenter
+         , "finCenter<-"
+         , isWeekday
+         , kurtosis, skewness
+         , timeCalendar, timeDate
+         , timeFirstDayInMonth, timeFirstDayInQuarter
+         , timeLastDayInMonth, timeLastDayInQuarter
+         , timeSequence
+           )
+
+importMethodsFrom("timeDate"
+         , "+", "-", "Ops", "["
+)
+
+importFrom("grDevices"
+         , col2rgb, rgb
+         , xy.coords
+           )
+
+## From "timeDate" we get 4 generics for which we provide methods.
+##       --------  We should *not* additionally import them for their base packages,
+## as we then get warnings such as
+
+##   Warning: replacing previous import 'timeDate::lines' by 'graphics::lines'
+##            when loading 'timeSeries'
+
+## gen.fn.:  lines     plot	points	  frequency
+## package:  graphics  graphics	graphics  stats
+
+importFrom("graphics"
+## from timeDate:  , lines, plot, points # <- for these we export methods
+         , axTicks, axis, axis.POSIXct
+         , box, grid, layout
+         , mtext
+         , par
+         , plot.default, plot.new, plot.window
+         , segments, text, title
+           )
+
+importFrom("stats"
+         , approx, approxfun
+         , cor, deltat, dist
+         , hclust, is.mts, qt
+         , rnorm, runif, runmed
+         , spline, splinefun, ts, var
+           ## for these, we provide methods :
+         , aggregate, as.ts
+         , start, end, time, window
+         , filter
+## from timeDate:  , frequency
+         , lag
+         , median, quantile
+         , na.contiguous, na.omit
+       )
+
+importFrom("utils"
+         , .DollarNames # as we provide an S3 method
+         , head.matrix, read.table, tail.matrix
+           ## provide methods for these :
+         , head, tail
+         , str
+           )
 
 
 ################################################
@@ -34,11 +102,9 @@ export("colCummaxs",
 
 exportMethods("$",
               "$<-",
-              "+",
-              "-",
+              "+", "-",
               "Ops",
               "[",
-              "[<-",
               "aggregate",
               "align",
               "apply",
@@ -106,7 +172,10 @@ exportMethods("$",
               "t",
               "tail",
               "time",
-              "window" )
+              "window"
+
+              # , summary # GNB
+              )
 
 ################################################
 ## S3 classes
@@ -148,6 +217,11 @@ S3method("time", "timeSeries")
 S3method("time<-", "timeSeries")
 S3method("window", "timeSeries")
 
+## new
+S3method("summary", timeSeries) 
+S3method("print", timeSeries_summary) 
+
+
 ################################################
 ## functions
 ################################################
@@ -176,69 +250,74 @@ export(
       ".periodicity2",
       ".colorwheelPalette",
     # ADD:
-      "getAttributes",      "setAttributes<-",      ".appendList"
+    "getAttributes",
+    "setAttributes<-",
+    ".appendList"
 )
 
 
 export(
-    ".DollarNames.timeSeries",
-    ".aggregate.timeSeries",
-    ".align.timeSeries",
-    ".applySeries",
-    ".as.data.frame.timeSeries",
-    ".as.list.timeSeries",
-    ".as.matrix.timeSeries",
-    ".as.ts.timeSeries",
-    ".cut.timeSeries",
-    ".description",
-    #".diff.timeSeries",
-    ".dollar_assign",
-    ".end.timeSeries",
-    ".extract.turnpointsPastecs",
-    ".fapply",
-    ".findIndex",
-    ".head.timeSeries",
-    ".isOHLC",
-    ".isOHLCV",
-    ".lines.timeSeries",
-    ".lowessSmoother",
-    ".merge.timeSeries",
-    ".na.omit.timeSeries",
-    ".naOmitMatrix",
-    ".old2newRda",
-    ".old2newTimeSeries",
-    ".plot.timeSeries",
-    ".plot.turnpointsPastecs",
-    ".points.timeSeries",
-    ".print.timeSeries",
-    ".rev.timeSeries",
-    ".rollmax.timeSeries",
-    ".rollmean.timeSeries",
-    ".rollmedian.timeSeries",
-    ".rollmin.timeSeries",
-    ".scale.timeSeries",
-    ".signalCounts",
-    ".signalSeries",
-    ".sort.timeSeries",
-    ".splineSmoother",
-    ".start.timeSeries",
-    ".str.timeSeries",
-    ".subset_timeSeries",
-    ".summary.turnpointsPastecs",
-    ".supsmuSmoother",
-    ".tail.timeSeries",
-    ".time.timeSeries",
-    ".timeSeries",
-    ".turnpoints2",
-    ".turnpointsPastecs",
-    ".turnpointsSeries",
-    ".turnpointsStats",
-    ".validity_timeSeries",
-    ".window.timeSeries",
+    ".DollarNames.timeSeries", # the 'timeSeries' method for utils::.DollarNames
+
+    ".align.timeSeries", # fPortfolio/R/backtest-Plots.R, line 517, rev. 6295
+    ##                     #  changed to align(Data) in rev. 6296
+    ##                     # nevertheless, keeping it for now as it is not clear 
+    ##                     # when a new version will be pulished.
+    ##                     # TODO: remove it eventually!
+    ### ".aggregate.timeSeries",
+    ### ".as.data.frame.timeSeries",
+    ### ".as.list.timeSeries",
+    ### ".as.matrix.timeSeries",
+    ### ".as.ts.timeSeries",
+    ### ".cut.timeSeries",
+    ### ".description",
+    ### #".diff.timeSeries",
+    ### ".dollar_assign",
+    ### ".end.timeSeries",
+    ### ".extract.turnpointsPastecs",
+    ### ".findIndex",
+    ### ".head.timeSeries",
+    ### ".isOHLC",
+    ### ".isOHLCV",
+    ### ".lines.timeSeries",
+    ### ".lowessSmoother",
+    ### ".merge.timeSeries",
+    ### ".na.omit.timeSeries",
+    ### ".naOmitMatrix",
+    ### ".old2newRda",
+    ### ".old2newTimeSeries",
+    ### ".plot.timeSeries",
+    ### ".plot.turnpointsPastecs",
+    ### ".points.timeSeries",
+    ### ".print.timeSeries",
+    ### ".rev.timeSeries",
+    ### ".rollmax.timeSeries",
+    ### ".rollmean.timeSeries",
+    ### ".rollmedian.timeSeries",
+    ### ".rollmin.timeSeries",
+    ### ".scale.timeSeries",
+    ### ".signalCounts",
+    ### ".signalSeries",
+    ### ".sort.timeSeries",
+    ### ".splineSmoother",
+    ### ".start.timeSeries",
+    ### ".str.timeSeries",
+    ### ".subset_timeSeries",
+    ### ".summary.turnpointsPastecs",
+    ### ".supsmuSmoother",
+    ### ".tail.timeSeries",
+    ### ".time.timeSeries",
+    ### ".timeSeries",
+    ### ".turnpoints2",
+    ### ".turnpointsPastecs",
+    ### ".turnpointsSeries",
+    ### ".turnpointsStats",
+    ### ".validity_timeSeries",
+    ### ".window.timeSeries",
     "alignDailySeries",
     "applySeries",
     "as.timeSeries",
-    "colAvgs",
+    # "colAvgs",
     "colKurtosis",
     "colMaxs",
     "colMins",
@@ -247,7 +326,11 @@ export(
     "colSds",
     "colSkewness",
     "colStats",
-    "colStdevs",
+    "colStdevs",   # still in fAssets::assetsRiskReturnPlot
+    ##                  I corrected the devel version.
+    ##                     # nevertheless, keeping it for now as it is not clear 
+    ##                     # when a new version will be pulished.
+    ##                     # TODO: remove it eventually!
     "colVars",
     "countMonthlyRecords",
     "cumulated",
@@ -255,12 +338,17 @@ export(
     "drawdowns",
     "drawdownsStats",
     "dummyDailySeries",
-    "dummySeries",
+    "dummyMonthlySeries",  # replacement for "dummySeries"
+    "dummySeries", # deprecated, TDO: remove after some time
     "durationSeries",
     "durations",
     "fapply",
     "getFinCenter",
-    "getReturns",
+    "getReturns", # several uses in the tests in 'fTrading' TODO: check before submission
+    ##               I corrected the devel version.
+    ##                     # nevertheless, keeping it for now as it is not clear 
+    ##                     # when a new version will be pulished.
+    ##                     # TODO: remove it eventually!
     "getTime",
     "getUnits",
 	"getUnits.default",
@@ -270,16 +358,16 @@ export(
     "is.timeSeries",
     "isMultivariate",
     "isUnivariate",
-    "midquoteSeries",
+    ## "midquoteSeries",
     "midquotes",
-    "newPositions<-",
+    ## "newPositions<-",
         ".ohlcDailyPlot",
     "orderColnames",
     "orderStatistics",
     "pcaColnames",
     "readSeries",
     "removeNA",
-    "returnSeries",
+    ## "returnSeries",
     "rollDailySeries",
     "rollMax",
     "rollMean",
@@ -290,8 +378,8 @@ export(
     "rollStats",
     "runlengths",
     "sampleColnames",
-    "seriesData",
-    "seriesPositions",
+    ## "seriesData",
+    ## "seriesPositions",
     "setFinCenter<-",
     "setTime<-",
     "setUnits<-",
@@ -299,7 +387,7 @@ export(
     "smoothSpline",
     "smoothSupsmu",
     "sortColnames",
-    "spreadSeries",
+    ## "spreadSeries",
     "spreads",
     "statsColnames",
     "substituteNA",

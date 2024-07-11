@@ -71,7 +71,6 @@ coxGompertz.lvm	sim
 coxWeibull.lvm	sim
 csplit	csplit
 curly	curly
-cv	cv
 decomp.specials	internal
 density.sim	plot.sim
 deriv	internal
@@ -143,12 +142,13 @@ heavytail	sim
 heavytail<-	sim
 hubble	hubble
 hubble2	hubble2
+IC	IC
+IC.default	IC
 id.lvm	sim
 Identical	internal
 idplot	click
 igraph.lvm	internal
 iid	iid
-iid.default	iid
 images	images
 index	internal
 index.lvm	internal
@@ -247,6 +247,7 @@ ordinal	ordinal-set
 ordinal<-	ordinal-set
 ordreg	ordreg
 p.correct	closed.testing
+pairwise.diff	contr
 parameter	internal
 parameter<-	constrain-set
 parents	children
@@ -366,6 +367,7 @@ variances	internal
 vars	vars
 vars.lvm	vars
 vars.lvmfit	vars
+var_ic	IC
 vec	vec
 wait	wait
 waitclick	wait

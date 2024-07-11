@@ -40,9 +40,9 @@ diff.git_repository     Changes between commits, trees, working tree,
 discover_repository     Find path to repository for any file
 fetch                   Fetch new data and update tips
 fetch_heads             Get updated heads during the last fetch.
-git2r                   git2r: R bindings to the libgit2 library
 git_config_files        Locate the path to configuration files
 git_time                Time
+git2r                   git2r: R bindings to the libgit2 library
 hash                    Determine the sha from a blob string
 hashfile                Determine the sha from a blob in a file
 head.git_repository     Get HEAD for a repository
@@ -72,8 +72,8 @@ libgit2_version         Version of the libgit2 library
 lookup                  Lookup
 lookup_commit           Lookup the commit related to a git object
 ls_tree                 List the contents of a tree object
-merge.git_branch        Merge a branch into HEAD
 merge_base              Find a merge base between two commits
+merge.git_branch        Merge a branch into HEAD
 note_create             Add note for a object
 note_default_ref        Default notes reference
 note_remove             Remove the note for an object

@@ -1,3 +1,43 @@
+# devtools 2.4.5
+
+* `check(cleanup =)` was deprecated in devtools v1.11.0 (2016-04-12) and was
+  made defunct in v2.4.4 (2022-07-20). The documentation is more clear now about
+  recommended alternatives.
+
+* `check(check_dir = NULL)` is the new default, to align with the default
+  behaviour of the underlying `rcmdcheck::rcmdcheck()`.
+
+* `check(cran = TRUE)` sets the env var
+  `_R_CHECK_PACKAGES_USED_IGNORE_UNUSED_IMPORTS_` to `FALSE`, in order to
+  surface the `"Namespace in Imports field not imported from"` NOTE. This only
+  applies to R >= 4.2, due to favorable changes in the behaviour of
+  `R CMD check --as-cran` (#2459).
+
+* `test_active_file()` passes the package onto to testthat so it can correctly
+  set the `TESTTHAT_PKG` envvar (#2470).
+
+* `test()` and `test_active_file()` once again work with testthat itself.
+
+# devtools 2.4.4
+
+* `install(reload = TRUE)` now calls `pkgload::unregister()` instead
+  of `pkload::unload()` (#2349). This allows the package to keep
+  functioning if it is still in use in the R session (e.g. through
+  event handlers).
+
+* `test()` no longer calls `load_all()` twice. `test_active_file()`
+  now calls `load_all()` via testthat.
+
+* `aspell_env_var()` does a better job of matching `R CMD check` behaviour,
+  which is only to use `aspell`, not `hunspell` or `ispell` (#2376).
+
+* Installing devtools now installs pkgdown, profvis, bench, miniUI,
+  and urlchecker, ensuring that you have everything needed for package
+  development (#2388).
+
+* `dev_sitrep()` has been updated for the calendar-based version number scheme
+  adopted by the RStudio IDE in September 2021 (#2397, #2410).
+
 # devtools 2.4.3
 
 * New `check_mac_release()` function to check a package using the macOS builder at https://mac.r-project.org/macbuilder/submit.html (#2375)

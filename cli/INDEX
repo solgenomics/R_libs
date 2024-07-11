@@ -1,12 +1,15 @@
-ansi-styles             ANSI colored text
 ansi_align              Align an ANSI colored string
+ansi_collapse           Collapse a vector into a string scalar
 ansi_columns            Format a character vector in multiple columns
+ansi_grep               Like 'base::grep()' and 'base::grepl()', but
+                        for ANSI strings
 ansi_has_any            Check if a string has some ANSI styling
 ansi_hide_cursor        Hide/show cursor in a terminal
 ansi_html               Convert ANSI styled text to HTML
 ansi_html_style         CSS styles for the output of 'ansi_html()'
 ansi_nchar              Count number of characters in an ANSI colored
                         string
+ansi_nzchar             Like 'base::nzchar()', but for ANSI strings
 ansi_regex              Perl compatible regular expression that matches
                         ANSI escape sequences
 ansi_simplify           Simplify ANSI styling tags
@@ -19,10 +22,10 @@ ansi_substring          Substring(s) of an ANSI colored string
 ansi_toupper            ANSI character translation and case folding
 ansi_trimws             Remove leading and/or trailing whitespace from
                         an ANSI string
+ansi-styles             ANSI colored text
 builtin_theme           The built-in CLI theme
 cat_line                'cat()' helpers
 cli                     Compose multiple cli functions
-cli-config              cli environment variables and options
 cli_abort               Signal an error, warning or message with a cli
                         formatted message
 cli_alert               CLI alerts
@@ -34,6 +37,8 @@ cli_debug_doc           Debug cli internals
 cli_div                 Generic CLI container
 cli_dl                  Definition list
 cli_end                 Close a CLI container
+cli_fmt                 Capture the output of cli functions instead of
+                        printing it
 cli_format              Format a value for printing
 cli_format_method       Create a format method for an object using cli
                         tools
@@ -65,6 +70,7 @@ cli_text                CLI text
 cli_ul                  Unordered CLI list
 cli_vec                 Add custom cli style to a vector
 cli_verbatim            CLI verbatim text
+cli-config              cli environment variables and options
 code_highlight          Syntax highlight R code
 code_theme_list         Syntax highlighting themes
 combine_ansi_styles     Combine two or more ANSI styles
@@ -78,9 +84,12 @@ faq                     Frequently Asked Questions
 format_error            Format an error, warning or diagnostic message
 format_inline           Format and returns a line of text
 get_spinner             Character vector to put a spinner on the screen
+has_keypress_support    Check if the current platform/terminal supports
+                        reading single keys.
 hash_animal             Adjective-animal hash
 hash_emoji              Emoji hash
 hash_md5                MD5 hash
+hash_sha1               SHA-1 hash
 hash_sha256             SHA-256 hash
 inline-markup           About inline markup in the semantic cli
 is_ansi_tty             Detect if a stream support ANSI escape
@@ -88,6 +97,8 @@ is_ansi_tty             Detect if a stream support ANSI escape
 is_dynamic_tty          Detect whether a stream supports \\r (Carriage
                         return)
 is_utf8_output          Whether cli is emitting UTF-8 characters
+keypress                Read a single keypress at the terminal
+links                   cli hyperlinks
 list_border_styles      Draw a banner-like box in the console
 list_spinners           List all available spinners
 make_ansi_style         Create a new ANSI style
@@ -96,6 +107,8 @@ no                      Pluralization helper functions
 num_ansi_colors         Detect the number of ANSI colors to use
 pluralization           About cli pluralization
 pluralize               String templating with pluralization
+pretty_print_code       Turn on pretty-printing functions at the R
+                        console
 progress-c              The cli progress C API
 progress-variables      Progress bar variables
 rule                    Make a rule with one or two text labels
@@ -118,3 +131,4 @@ utf8_graphemes          Break an UTF-8 character vector into grapheme
 utf8_nchar              Count the number of characters in a character
                         vector
 utf8_substr             Substring of an UTF-8 string
+vt_output               Simulate (a subset of) a VT-5xx ANSI terminal

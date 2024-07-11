@@ -2,7 +2,7 @@
 
 # {{i}}. Analysis for trait `r traits[i]`
 
-```{r echo = FALSE}
+```{r}
 if (model == 1)
   temp <- dfr[, c(set, male, female, progeny, rep, traits[i])]
 

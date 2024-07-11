@@ -1,3 +1,30 @@
+1.8.7
+  - toJSON(digits = NA) once again prints 15 digits max
+  - Fix getRversion type (requested by CRAN)
+
+1.8.6
+  - Add method [.json such that subsetting keeps json class
+
+1.8.5
+  - Max digits in toJSON() raised from 15 to 17 (see #412)
+  - Remove online example from flaky httpbin server
+
+1.8.4
+  - Replace sprintf with snprintf for CRAN
+
+1.8.3
+ - Fix strict-prototypes warning
+
+1.8.2
+ - Also fix breaking change in base_r for as.character.Date
+
+1.8.1
+ - Use base::url instead of curl::curl for downloading URLs in fromJSON
+ - Fix for breaking change 82904 in base-R  (changed default as.character.POSIX behavior)
+
+1.8.0
+ - Remove all calls to setOldClass() for R >= 4.0 (#378)
+
 1.7.3
  - Fix memory bug in toJSON(pretty=TRUE) for 0-length vectors (#366)
  - Ported rbind_pages() to use vctrs::vec_rbind (#352)

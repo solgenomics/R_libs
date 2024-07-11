@@ -1,5 +1,4 @@
 ### R code from vignette source 'qhull-eg.Rnw'
-### Encoding: UTF-8
 
 ###################################################
 ### code chunk number 1: qhull-eg.Rnw:27-31

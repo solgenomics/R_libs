@@ -32,6 +32,7 @@ multi	multi
 multipart	multipart
 multi_add	multi
 multi_cancel	multi
+multi_download	multi_download
 multi_fdset	multi
 multi_list	multi
 multi_run	multi

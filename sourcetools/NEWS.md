@@ -1,3 +1,8 @@
+
+# sourcetools 0.1.7-1
+
+- Use `std::snprintf()` instead of `std::sprintf()`.
+
 # sourcetools 0.1.7
 
 - Ensure tests past on platforms where `char` is unsigned. (#21)

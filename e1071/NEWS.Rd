@@ -2,6 +2,25 @@
 \title{News for Package \pkg{e1071}}
 \newcommand{\cpkg}{\href{https://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 
+\section{Changes in version 1.7-12}{
+   \itemize{\item add ORCID ids}
+}
+
+\section{Changes in version 1.7-12}{
+   \itemize{\item add \code{tune.gknn()} wrapper}
+}
+
+\section{Changes in version 1.7-11}{
+   \itemize{\item cosmetic changes}
+}
+
+\section{Changes in version 1.7-10}{
+  \itemize{
+    \item small fix in \code{coef.svm} for sparse data
+  }
+}
+
+
 \section{Changes in version 1.7-9}{
   \itemize{
     \item Remove configure code testing for gcc 2.96.

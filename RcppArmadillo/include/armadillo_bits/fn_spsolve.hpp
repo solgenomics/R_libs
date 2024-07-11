@@ -19,8 +19,7 @@
 //! \addtogroup fn_spsolve
 //! @{
 
-//! Solve a system of linear equations, A*X = B, where X is unknown,
-//! A is sparse, and B is dense.  X will be dense too.
+
 
 template<typename T1, typename T2>
 inline
@@ -30,8 +29,8 @@ spsolve_helper
            Mat<typename T1::elem_type>&     out,
   const SpBase<typename T1::elem_type, T1>& A,
   const   Base<typename T1::elem_type, T2>& B,
-  const char*                          solver,
-  const spsolve_opts_base&             settings,
+  const char*                               solver,
+  const spsolve_opts_base&                  settings,
   const typename arma_blas_type_only<typename T1::elem_type>::result* junk = nullptr
   )
   {
@@ -104,7 +103,7 @@ spsolve_helper
       if(opts.equilibrate == true                  )  { flags |= solve_opts::flag_equilibrate; }
       if(opts.allow_ugly  == true                  )  { flags |= solve_opts::flag_allow_ugly;  }
       
-      status = glue_solve_gen::apply(out, AA, B.get_ref(), flags);
+      status = glue_solve_gen_full::apply(out, AA, B.get_ref(), flags);
       }
     }
   
@@ -114,13 +113,17 @@ spsolve_helper
     arma_debug_warn_level(2, "spsolve(): system is singular (rcond: ", rcond, ")");
     }
   
-  if( (status == true) && (rcond > T(0)) && (rcond < auxlib::epsilon_lapack(out)) )
+  if( (status == true) && (rcond > T(0)) && (rcond < std::numeric_limits<T>::epsilon()) )
     {
     arma_debug_warn_level(2, "solve(): solution computed, but system is singular to working precision (rcond: ", rcond, ")");
     }
   
   return status;
   }
+
+
+
+//
 
 
 
@@ -132,8 +135,8 @@ spsolve
            Mat<typename T1::elem_type>&     out,
   const SpBase<typename T1::elem_type, T1>& A,
   const   Base<typename T1::elem_type, T2>& B,
-  const char*                          solver   = "superlu",
-  const spsolve_opts_base&             settings = spsolve_opts_none(),
+  const char*                               solver   = "superlu",
+  const spsolve_opts_base&                  settings = spsolve_opts_none(),
   const typename arma_blas_type_only<typename T1::elem_type>::result* junk = nullptr
   )
   {
@@ -161,8 +164,8 @@ spsolve
   (
   const SpBase<typename T1::elem_type, T1>& A,
   const   Base<typename T1::elem_type, T2>& B,
-  const char*                          solver   = "superlu",
-  const spsolve_opts_base&             settings = spsolve_opts_none(),
+  const char*                               solver   = "superlu",
+  const spsolve_opts_base&                  settings = spsolve_opts_none(),
   const typename arma_blas_type_only<typename T1::elem_type>::result* junk = nullptr
   )
   {

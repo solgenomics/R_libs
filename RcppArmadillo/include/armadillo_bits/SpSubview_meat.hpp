@@ -354,7 +354,60 @@ SpSubview<eT>::operator%=(const Base<eT, T1>& x)
   {
   arma_extra_debug_sigprint();
   
-  return (*this).operator=( (*this) % x.get_ref() );
+  SpSubview<eT>& sv = (*this);
+  
+  const quasi_unwrap<T1> U(x.get_ref());
+  const Mat<eT>& B     = U.M;
+  
+  arma_debug_assert_same_size(sv.n_rows, sv.n_cols, B.n_rows, B.n_cols, "element-wise multiplication");
+  
+  SpMat<eT>& sv_m = access::rw(sv.m);
+  
+  sv_m.sync_csc();
+  sv_m.invalidate_cache();
+  
+  const uword m_row_start = sv.aux_row1;
+  const uword m_row_end   = sv.aux_row1 + sv.n_rows - 1;
+  
+  const uword m_col_start = sv.aux_col1;
+  const uword m_col_end   = sv.aux_col1 + sv.n_cols - 1;
+  
+  constexpr eT zero = eT(0);
+  
+  bool  has_zero = false;
+  uword count    = 0;
+  
+  for(uword m_col = m_col_start; m_col <= m_col_end; ++m_col)
+    {
+    const uword sv_col = m_col - m_col_start;
+    
+    const uword index_start = sv_m.col_ptrs[m_col    ];
+    const uword index_end   = sv_m.col_ptrs[m_col + 1];
+    
+    for(uword i=index_start; i < index_end; ++i)
+      {
+      const uword m_row = sv_m.row_indices[i];
+      
+      if(m_row < m_row_start)  { continue; }
+      if(m_row > m_row_end  )  { break;    }
+      
+      const uword sv_row = m_row - m_row_start;
+      
+      eT& m_val = access::rw(sv_m.values[i]);
+      
+      const eT result = m_val * B.at(sv_row, sv_col);
+      
+      m_val = result;
+      
+      if(result == zero)  { has_zero = true; } else { ++count; }
+      }
+    }
+  
+  if(has_zero)  { sv_m.remove_zeros(); }
+  
+  access::rw(sv.n_nonzero) = count;
+  
+  return (*this);
   }
 
 
@@ -367,7 +420,68 @@ SpSubview<eT>::operator/=(const Base<eT, T1>& x)
   {
   arma_extra_debug_sigprint();
   
-  return (*this).operator=( (*this) / x.get_ref() );
+  const SpSubview<eT>& A = (*this);
+  
+  const quasi_unwrap<T1> U(x.get_ref());
+  const Mat<eT>& B     = U.M;
+  
+  arma_debug_assert_same_size(A.n_rows, A.n_cols, B.n_rows, B.n_cols, "element-wise division");
+  
+  bool result_ok = true;
+  
+  constexpr eT zero = eT(0);
+  
+  const uword B_n_rows = B.n_rows;
+  const uword B_n_cols = B.n_cols;
+  
+  for(uword c=0; c < B_n_cols; ++c)
+    {
+    for(uword r=0; r < B_n_rows; ++r)
+      {
+      // a zero in B and A at the same location implies the division result is NaN;
+      // hence a zero in A (not stored) needs to be changed into a non-zero
+      
+      // for efficiency, an element in B is checked before checking the corresponding element in A
+      
+      if((B.at(r,c) == zero) && (A.at(r,c) == zero))  { result_ok = false; break; }
+      }
+    
+    if(result_ok == false)  { break; }
+    }
+  
+  if(result_ok)
+    {
+    const_iterator cit     = A.begin();
+    const_iterator cit_end = A.end();
+    
+    while(cit != cit_end)
+      {
+      const eT tmp = (*cit) / B.at(cit.row(), cit.col());
+      
+      if(tmp == zero)  { result_ok = false; break; }
+      
+      ++cit;
+      }
+    }
+  
+  if(result_ok)
+    {
+    iterator it     = (*this).begin();
+    iterator it_end = (*this).end();
+    
+    while(it != it_end)
+      {
+      (*it) /= B.at(it.row(), it.col());
+      
+      ++it;
+      }
+    }
+  else
+    {
+    (*this).operator=( (*this) / B );
+    }
+  
+  return (*this);
   }
 
 
@@ -941,7 +1055,6 @@ SpSubview<eT>::randn()
 
 
 template<typename eT>
-arma_hot
 inline
 SpSubview_MapMat_val<eT>
 SpSubview<eT>::operator[](const uword i)
@@ -955,7 +1068,6 @@ SpSubview<eT>::operator[](const uword i)
 
 
 template<typename eT>
-arma_hot
 inline
 eT
 SpSubview<eT>::operator[](const uword i) const
@@ -969,7 +1081,6 @@ SpSubview<eT>::operator[](const uword i) const
 
 
 template<typename eT>
-arma_hot
 inline
 SpSubview_MapMat_val<eT>
 SpSubview<eT>::operator()(const uword i)
@@ -985,7 +1096,6 @@ SpSubview<eT>::operator()(const uword i)
 
 
 template<typename eT>
-arma_hot
 inline
 eT
 SpSubview<eT>::operator()(const uword i) const
@@ -1001,7 +1111,6 @@ SpSubview<eT>::operator()(const uword i) const
 
 
 template<typename eT>
-arma_hot
 inline
 SpSubview_MapMat_val<eT>
 SpSubview<eT>::operator()(const uword in_row, const uword in_col)
@@ -1014,7 +1123,6 @@ SpSubview<eT>::operator()(const uword in_row, const uword in_col)
 
 
 template<typename eT>
-arma_hot
 inline
 eT
 SpSubview<eT>::operator()(const uword in_row, const uword in_col) const
@@ -1027,7 +1135,6 @@ SpSubview<eT>::operator()(const uword in_row, const uword in_col) const
 
 
 template<typename eT>
-arma_hot
 inline
 SpSubview_MapMat_val<eT>
 SpSubview<eT>::at(const uword i)
@@ -1041,7 +1148,6 @@ SpSubview<eT>::at(const uword i)
 
 
 template<typename eT>
-arma_hot
 inline
 eT
 SpSubview<eT>::at(const uword i) const
@@ -1055,7 +1161,6 @@ SpSubview<eT>::at(const uword i) const
 
 
 template<typename eT>
-arma_hot
 inline
 SpSubview_MapMat_val<eT>
 SpSubview<eT>::at(const uword in_row, const uword in_col)
@@ -1066,7 +1171,6 @@ SpSubview<eT>::at(const uword in_row, const uword in_col)
 
 
 template<typename eT>
-arma_hot
 inline
 eT
 SpSubview<eT>::at(const uword in_row, const uword in_col) const
@@ -1470,6 +1574,8 @@ inline
 typename SpSubview<eT>::iterator
 SpSubview<eT>::begin()
   {
+  m.sync_csc();
+  
   return iterator(*this);
   }
 
@@ -1642,7 +1748,6 @@ SpSubview<eT>::is_alias(const SpMat<eT>& X) const
 
 template<typename eT>
 inline
-arma_warn_unused
 eT&
 SpSubview<eT>::insert_element(const uword in_row, const uword in_col, const eT in_val)
   {
@@ -1764,7 +1869,6 @@ SpSubview_col<eT>::operator=(const Base<eT,T1>& x)
 
 template<typename eT>
 inline
-arma_warn_unused
 const SpOp<SpSubview_col<eT>,spop_htrans>
 SpSubview_col<eT>::t() const
   {
@@ -1775,7 +1879,6 @@ SpSubview_col<eT>::t() const
 
 template<typename eT>
 inline
-arma_warn_unused
 const SpOp<SpSubview_col<eT>,spop_htrans>
 SpSubview_col<eT>::ht() const
   {
@@ -1786,7 +1889,6 @@ SpSubview_col<eT>::ht() const
 
 template<typename eT>
 inline
-arma_warn_unused
 const SpOp<SpSubview_col<eT>,spop_strans>
 SpSubview_col<eT>::st() const
   {
@@ -1873,7 +1975,6 @@ SpSubview_row<eT>::operator=(const Base<eT,T1>& x)
 
 template<typename eT>
 inline
-arma_warn_unused
 const SpOp<SpSubview_row<eT>,spop_htrans>
 SpSubview_row<eT>::t() const
   {
@@ -1884,7 +1985,6 @@ SpSubview_row<eT>::t() const
 
 template<typename eT>
 inline
-arma_warn_unused
 const SpOp<SpSubview_row<eT>,spop_htrans>
 SpSubview_row<eT>::ht() const
   {
@@ -1895,7 +1995,6 @@ SpSubview_row<eT>::ht() const
 
 template<typename eT>
 inline
-arma_warn_unused
 const SpOp<SpSubview_row<eT>,spop_strans>
 SpSubview_row<eT>::st() const
   {

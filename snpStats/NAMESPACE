@@ -1,13 +1,13 @@
 useDynLib("snpStats")
 import(methods)
 import(zlibbioc)
-importFrom(graphics, abline, axis, barplot, legend, mtext, par, plot,
-           points, polygon)
+importFrom(graphics, abline, axis, barplot, legend, lines, text, mtext, par,
+           plot, points, polygon)
 importFrom(grDevices, heat.colors)
-importFrom(stats, model.matrix, model.offset, model.response,
+importFrom(stats, model.matrix, model.offset, model.response, contrasts,
            model.weights, pchisq, qbeta, qchisq, terms)
 importFrom(survival, cluster, strata, untangle.specials)
-importFrom(utils, download.file, flush.console, head, read.table)
+importFrom(utils, download.file, flush.console, head, read.table, write.table)
 importFrom(BiocGenerics, cbind)
 importFrom(BiocGenerics, rbind)
 importClassesFrom(Matrix, dsCMatrix, dgCMatrix)

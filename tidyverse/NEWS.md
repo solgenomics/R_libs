@@ -1,3 +1,24 @@
+# tidyverse 2.0.0
+
+* lubridate is now a member of the core tidyverse (#157)!
+
+* tidyverse now installs ragg (#310).
+
+* Loading the tidyverse now advertises `library(conflicted)` because it 
+  resolves many conflict problems and silences tidyverse's automated report 
+  (#218).
+
+* `tidyverse_sitrep()` correctly displays installed package versions and 
+  highlights development versions of pacakges (#222).
+
+# tidyverse 1.3.2
+
+* Text version of the citation now lists all authors (#269).
+
+* All packages have been bumped to their latest versions.
+
+* Messaging uses modern approach to avoid red text in RStudio (#296).
+
 # tidyverse 1.3.1
 
 * tidyverse now installs dtplyr (#216), googledrive, and googlesheets4 (#229).

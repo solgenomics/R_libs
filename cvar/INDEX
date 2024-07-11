@@ -1,0 +1,8 @@
+cvar-package            Compute Conditional Value-at-Risk and
+                        Value-at-Risk
+ES                      Compute expected shortfall (ES) of
+                        distributions
+GarchModel              Specify a GARCH model
+predict.garch1c1        Prediction for GARCH(1,1) time series
+sim_garch1c1            Simulate GARCH(1,1) time series
+VaR                     Compute Value-at-Risk (VaR)

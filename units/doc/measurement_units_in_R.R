@@ -1,5 +1,5 @@
 ## ----echo=FALSE---------------------------------------------------------------
-knitr::opts_chunk$set(collapse = TRUE)
+knitr::opts_chunk$set(collapse = TRUE, fig.asp = 0.7, fig.width = 7)
 
 ## -----------------------------------------------------------------------------
 temp_data = subset(read.table("647_Global_Temperature_Data_File.txt", 
@@ -89,7 +89,7 @@ set_units(1, m^5/s^4)
 as_units("m2 s-1")
 deparse_unit(set_units(1, m^2*s^-1))
 
-## ----fig=TRUE, height=3.8, width=7--------------------------------------------
+## -----------------------------------------------------------------------------
 library(units)
 units_options(negative_power = TRUE)
 # initialize variables with units:
@@ -102,7 +102,7 @@ mtcars$displacement = set_units(mtcars$displacement, cm^3)
 par(mar = par("mar") + c(0, .3, 0, 0))
 with(mtcars, plot(1/displacement, 1/consumption))
 
-## ----fig=TRUE, height=3.8, width=7, eval=requireNamespace("ggplot2", quietly=TRUE)----
+## ---- eval=requireNamespace("ggplot2", quietly=TRUE)--------------------------
 library(ggplot2)
 ggplot(mtcars) + geom_point(aes(x = 1/displacement, y = 1/consumption))
 

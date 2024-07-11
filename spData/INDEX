@@ -1,4 +1,3 @@
-SplashDams              Data for Splash Dams in western Oregon
 afcon                   Spatial patterns of conflict in Africa 1966-78
 alaska                  Alaska multipolygon
 auckland                Marshall's infant mortality in Auckland dataset
@@ -10,11 +9,12 @@ congruent               Datasets to illustrate the concept of spatial
                         congruence
 cycle_hire              Cycle hire points in London
 cycle_hire_osm          Cycle hire points in London from OSM
+depmunic                Municipality departments of Athens (Sf)
 eire                    Eire data sets
 elect80                 1980 Presidential election results
-elev                    Artificial elevation raster data set
+elev.tif                Artificial elevation raster data set
 getisord                Getis-Ord remote sensing example data
-grain                   Artificial raster dataset representing grain
+grain.tif               Artificial raster dataset representing grain
                         sizes
 hawaii                  Hawaii multipolygon
 hopkins                 Hopkins burnt savanna herb remains
@@ -27,7 +27,10 @@ nc.sids                 North Carolina SIDS data
 nydata                  New York leukemia data
 nz                      Regions in New Zealand
 nz_height               High points in New Zealand
+properties              Dataset of properties in the municipality of
+                        Athens (sf)
 seine                   Small river network in France
+SplashDams              Data for Splash Dams in western Oregon
 state.vbm               US State Visibility Based Map
 urban_agglomerations    Major urban areas worldwide
 us_states               US states polygons

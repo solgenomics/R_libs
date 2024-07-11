@@ -1,10 +1,6 @@
+html_format             R Markdown output formats
+mark                    Render Markdown to an output format
 markdown                Markdown rendering for R
-markdownExtensions      Markdown extensions
-markdownHTMLOptions     Markdown HTML rendering options
-markdownToHTML          Render markdown to HTML
-registeredRenderers     List of Registered Markdown Renderers
-renderMarkdown          Render markdown to an HTML fragment
-rendererExists          Testing for existence of a markdown renderer
-rendererOutputType      Fetch the Renderer Output Type
+markdown_options        Markdown rendering options
 rpubsUpload             Upload an HTML file to RPubs
-smartypants             smartypants: ASCII punctuation to HTML entities
+smartypants             Convert some ASCII strings to HTML entities

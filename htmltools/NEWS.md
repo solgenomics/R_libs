@@ -1,3 +1,41 @@
+# htmltools 0.5.5
+
+## Bug fixes
+
+* Closed #355: `tagQuery()` was failing to select elements with tag names that contained hyphens. (@slodge, #302)
+
+* Closed #366: `tagQuery()`'s `find()` method no longer errors out when tags contain language objects. (#366)
+
+# htmltools 0.5.4
+
+## New Features
+
+* Added a new `bindFillRole()` function for modifying `tag()` object(s) into tags that are allowed to grow and shrink when their parent is opinionated about their height. See `help(bindFillRole, "htmltools")` for documentation and examples. Note the primary motivation for adding these functions is to power `{bslib}`'s new `card()` API (in particular, [responsive sizing](https://rstudio.github.io/bslib/articles/cards.html#responsive-sizing)) as well as the new `fill` arguments in `shiny::plotOutput()`, `shiny::imageOutput()`, `shiny::uiOutput()`, `htmlwidgets::sizingPolicy()`, and `htmlwidgets::shinyWidgetOutput()`. (#343)
+
+## Bug fixes
+
+* Closed #331: `copyDependencyToDir()` creates `outputDir` recursively, which happens in Quarto or when `lib_dir` points to a nested directory. (@gadenbuie, #332)
+
+* Closed #346: `tagQuery()`'s `$remove()`, `$after()`, `$before()`, `$replaceWith()` had a bug that prevented expected behavior when sibling children values where not tag elements. (#348)
+
+
+# htmltools 0.5.3
+
+## Breaking changes
+
+* Closed #305: `htmlPreserve()` no longer uses _inline_ code blocks for Pandoc's raw attribute feature when used inside a _non_-inline knitr/rmarkdown code chunk, and as a result, in this case, an additional `<p>` tag is no longer wrapped around the HTML content. (#306)
+
+## Bug fixes
+
+* Closed #301: `tagQuery()` was failing to copy all `tagList()` html dependencies within nest child tag lists. `tagQuery()` will now relocate html dependencies as child objects. (#302)
+
+* Closed #290: htmltools previously did not specify which version of fastmap to use, and would fail to install with an old version of fastmap. (#291)
+
+* `copyDependencyToDir()` no longer creates empty directories for dependencies that do not have any files. (@gadenbuie, #276)
+
+* Closed #320: `copyDependencyToDir()` now works with dependencies with specified attributes. (@dmurdoch, #321)
+
+
 # htmltools 0.5.2
 
 ## Breaking Changes
@@ -65,7 +103,7 @@
   documented in [MDN Web Docs](https://developer.mozilla.org).  This feature
   only appends to the existing set of `tags` (#159)
 
-* Removed the Rcpp depedency and the compiled code now uses C rather than C++ (#158)
+* Removed the Rcpp dependency and the compiled code now uses C rather than C++ (#158)
 
 * BREAKING CHANGE: Fixed #57, #153: `htmlTemplate` output no longer inserts
   extra whitespace around {{...}} replacement values. (#154)
@@ -80,7 +118,7 @@
   written to the .html file. (Note that `save_html(tags$html(...))` is not
   supported at this time.) (#145)
 
-* Trailing commas now permited in `...` arguments to `css()`, `tagList()`, and
+* Trailing commas now permitted in `...` arguments to `css()`, `tagList()`, and
   the var-arg mutation functions: `tagAppendAttributes()`, `tagSetChildren()`,
   and `tagAppendChildren()`. (#145)
 

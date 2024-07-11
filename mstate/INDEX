@@ -1,5 +1,12 @@
+aidssi                  Data from the Amsterdam Cohort Studies on HIV
+                        infection and AIDS
+bmt                     BMT data from Klein and Moeschberger
+crprep.default          Function to create weighted data set for
+                        competing risks analyses
 Cuminc                  Calculate nonparametric cumulative incidence
                         functions and associated standard errors
+cutLMms                 Cut a multi-state data set at a landmark time
+                        point
 EBMT cause of death data
                         Data from the European Society for Blood and
                         Marrow Transplantation (EBMT)
@@ -12,17 +19,6 @@ EBMT year of relapse data
                         Data from the European Society for Blood and
                         Marrow Transplantation (EBMT)
 ELOS                    Expected length of stay
-LMAJ                    Landmark Aalen-Johansen method
-Liver cirrhosis data    Abnormal prothrombin levels in liver cirrhosis
-MarkovTest              Log-rank based test for the validity of the
-                        Markov assumption
-aidssi                  Data from the Amsterdam Cohort Studies on HIV
-                        infection and AIDS
-bmt                     BMT data from Klein and Moeschberger
-crprep.default          Function to create weighted data set for
-                        competing risks analyses
-cutLMms                 Cut a multi-state data set at a landmark time
-                        point
 etm2msdata              Converts between etm and msdata format
 events                  Count number of observed transitions
 expand.covs             Expand covariates in competing risks dataset in
@@ -31,6 +27,10 @@ expand.covs.msdata      Expand covariates in multi-state dataset in
                         long format
 haz_function            Helper function that calculates excess and
                         population hazards for a given transition
+Liver cirrhosis data    Abnormal prothrombin levels in liver cirrhosis
+LMAJ                    Landmark Aalen-Johansen method
+MarkovTest              Log-rank based test for the validity of the
+                        Markov assumption
 modify_transMat         Upgrade the transMat object for the
                         multi-state/relsurv setting.
 msboot                  Bootstrap function in multi-state models
@@ -68,8 +68,8 @@ summary.msfit           Summary method for an msfit object
 summary.probtrans       Summary method for a probtrans object
 trans2tra               Convert transition matrix from mstate to etm
                         format
-transMat                Define transition matrix for multi-state model
 transhelp               Help functions for transition matrix
+transMat                Define transition matrix for multi-state model
 varHaz.fixed            Upgrade the varHaz object
 vis.mirror.pt           Mirror plot comparing two probtrans objects
 vis.multiple.pt         Visualise multiple probtrans objects

@@ -1,3 +1,4 @@
+gam-package	gam-package
 .First.lib	gam-internal
 anova.Gam	anova.gam
 anova.Gamlist	gam-internal
@@ -5,6 +6,7 @@ as.anova	gam-internal
 as.data.frame.lo.smooth	gam-internal
 assign.list	gam-internal
 gam	gam
+gam-internal	gam-internal
 gam.control	gam.control
 gam.data	gam.data
 gam.exact	gam.exact
@@ -13,8 +15,8 @@ gam.lo	lo
 gam.match	gam-internal
 gam.newdata	gam.data
 gam.nlchisq	gam-internal
-gam.random	random
-gam.s	s
+gam.random	gam.random
+gam.s	gam.s
 gam.scope	gam.scope
 gam.smooth.list	gam.smoothers
 gam.smoothers	gam.smoothers
@@ -41,8 +43,8 @@ preplot.Gam	plot.gam
 print.Gam	gam-internal
 print.Gamex	gam-internal
 print.summary.Gam	gam-internal
-random	random
-s	s
+random	gam.random
+s	gam.s
 s.wam	gam-internal
 step.Gam	step.gam
 summary.Gam	anova.gam

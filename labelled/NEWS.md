@@ -1,3 +1,42 @@
+# labelled 2.12.0
+
+**New features**
+
+* support of variable labels for packed columns, see dedicated vignette (#142)
+* new helpers `label_attribute()`, `get_label_attribute()` and
+  `set_label_attribute()` to manipulate the "label" attribute on any
+  object (#142)
+* new functions `get_variable_labels()`, `get_value_labels()`, `get_na_values()`
+  and `get_na_range()` identical to `var_label()`, `val_labels()`, `na_values()`
+  and `na_range()`, respectively
+* `to_character()` method for data frames (#140)
+
+# labelled 2.11.0
+
+**Improvements**
+
+* `set_value_labels()`, `add_value_labels()`, `remove_value_labels()`,
+  `set_variable_labels()`, `set_na_range()` and `set_na_values()` can now be 
+  applied on a vector (#126)
+* new argument `null_action` for `var_label()` when applied on a 
+  data frame (#131)
+* `look_for()` now returns `"missing"` (number of `NA`s) by default (#133)
+
+**Bug fixes**
+
+* bug fix in `print.look_for()` (#135)
+* bug fix in `unlabelled()` for classic vectors, now remained unchanged (#137)
+
+# labelled 2.10.0
+
+* `look_for()` now accepts `survey` objects (#121)
+
+# labelled 2.9.1
+
+* improved error messages for missing variable names (#118, @ajb5d)
+* better implementation of `look_for()` when no keyword is provided (#116)
+* bug fix in `user_na_to_tagged_na()` (#114)
+
 # labelled 2.9.0
 
 **look_for() improvements:**

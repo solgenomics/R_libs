@@ -1,5 +1,6 @@
-HTML                    Mark Characters as HTML
 as.tags                 Convert a value to tags
+bindFillRole            Allow tags to intelligently fill their
+                        container
 browsable               Make an HTML object browsable
 builder                 Create HTML tags
 capturePlot             Capture a plot as a saved file
@@ -8,12 +9,13 @@ css                     CSS string helper
 defaultPngDevice        Determine the best PNG device for your system
 findDependencies        Collect attached dependencies from HTML tag
                         object
+HTML                    Mark Characters as HTML
+html_print              Implementation of the print method for HTML
 htmlDependencies        HTML dependency metadata
 htmlDependency          Define an HTML dependency
 htmlEscape              Escape HTML entities
 htmlPreserve            Preserve HTML regions
 htmlTemplate            Process an HTML template
-html_print              Implementation of the print method for HTML
 include                 Include Content From a File
 knitr_methods           Knitr S3 methods
 makeDependencyRelative

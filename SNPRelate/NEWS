@@ -1,3 +1,45 @@
+CHANGES IN VERSION 1.34.0
+-------------------------
+
+    o fix the compiler warning: sprintf is deprecated
+
+
+CHANGES IN VERSION 1.32.0
+-------------------------
+
+    o update the web links
+
+
+CHANGES IN VERSION 1.30.1
+-------------------------
+
+    o return a object of S3 class "snpgdsGRMClass" in `snpgdsGRM()` instead of
+      a list when `with.id=TRUE`
+
+    o fix a portable issue with Fortran character strings via
+      USE_FC_LEN_T & FCONE
+
+
+CHANGES IN VERSION 1.24.0
+-------------------------
+
+    o definition of IBS in the `snpgdsIBS()` help file
+
+
+CHANGES IN VERSION 1.22.0
+-------------------------
+
+    o 'allow.fork=TRUE' is the default in `snpgdsOpen()` since v1.21.2
+
+    o add `print.snpgdsPCAClass`, `print.snpgdsEigMixClass`,
+      `print.snpgdsPCASNPLoadingClass`, `print, snpgdsEigMixSNPLoadingClass`,
+      `print.snpgdsIBDClass`, `print.snpgdsDissClass`, `print.snpgdsIBSClass`
+
+    o fix a Win32 compiler issue with gcc-4.9
+
+    o update `snpgdsBED2GDS()` with comment.char=""
+
+
 CHANGES IN VERSION 1.20.1
 -------------------------
 
@@ -10,8 +52,8 @@ CHANGES IN VERSION 1.20.0
 
     o a leading tilde in the file path is allowed in `snpgdsGDS2BED()`
 
-    o change the file name "vignettes/SNPRelateTutorial.Rmd" to "vignettes/SNPRelate.Rmd",
-      so `vignette("SNPRelate")` can work directly
+    o change the file name "vignettes/SNPRelateTutorial.Rmd" to
+      "vignettes/SNPRelate.Rmd", so `vignette("SNPRelate")` can work directly
 
 
 CHANGES IN VERSION 1.18.1
@@ -30,9 +72,9 @@ CHANGES IN VERSION 1.18.0
 CHANGES IN VERSION 1.16.0
 -------------------------
 
-    o a new option 'useMatrix' for the packed symmetric matrix using the Matrix package
-      in `snpgdsIBDMoM()`, `snpgdsIBDKING()`, `snpgdsIBS()`, `snpgdsIndivBeta()` and
-      `snpgdsGRM()` to reduce memory usages
+    o a new option 'useMatrix' for the packed symmetric matrix using the Matrix
+      package in `snpgdsIBDMoM()`, `snpgdsIBDKING()`, `snpgdsIBS()`,
+      `snpgdsIndivBeta()` and `snpgdsGRM()` to reduce memory usages
 
     o fix a bug of missing sample and SNP IDs in the output of `snpgdsIndInb()`
 
@@ -51,7 +93,7 @@ CHANGES IN VERSION 1.14.0
       `snpgdsVCF2GDS()` and `snpgdsVCF2GDS_R()` for annotations
 
     o support Intel C++ compiler with SSE2/AVX2
-    
+
     o allow interrupting requests in the calculation
 
     o new method options in `snpgdsPairScore()`: GVH.major, GVH.minor,

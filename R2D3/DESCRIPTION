@@ -18,12 +18,12 @@ RemoteType: github
 RemoteHost: api.github.com
 RemoteRepo: R2D3
 RemoteUsername: jamesthomson
-RemoteRef: master
+RemoteRef: HEAD
 RemoteSha: be84f424ebc3f78b3eb88db4eecdd0dbbe900856
 GithubRepo: R2D3
 GithubUsername: jamesthomson
-GithubRef: master
+GithubRef: HEAD
 GithubSHA1: be84f424ebc3f78b3eb88db4eecdd0dbbe900856
 NeedsCompilation: no
-Packaged: 2022-01-04 09:49:08 UTC; isaak
-Built: R 3.6.3; ; 2022-01-04 09:49:09 UTC; unix
+Packaged: 2024-01-08 10:02:01 UTC; root
+Built: R 4.3.2; ; 2024-01-08 10:02:01 UTC; unix

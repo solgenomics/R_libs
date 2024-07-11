@@ -1,48 +1,58 @@
 Package: BSgenome.Hsapiens.UCSC.hg38
-Title: Full genome sequences for Homo sapiens (UCSC version hg38)
-Description: Full genome sequences for Homo sapiens (Human) as provided by UCSC (hg38, Dec. 2013) and stored in Biostrings objects.
-Version: 1.4.2
-Suggests: TxDb.Hsapiens.UCSC.hg38.knownGene
+Title: Full genomic sequences for Homo sapiens (UCSC genome hg38)
+Description: Full genomic sequences for Homo sapiens as provided by UCSC (genome hg38, based on assembly GRCh38.p14 since 2023/01/31). The sequences are stored in DNAString objects.
+Version: 1.4.5
 organism: Homo sapiens
 common_name: Human
 provider: UCSC
-provider_version: hg38
-release_date: Dec. 2013
-release_name: Genome Reference Consortium GRCh38
-source_url: http://hgdownload.cse.ucsc.edu/goldenPath/hg38/bigZips/
+genome: hg38
+release_date: 2023/01/31
+source_url: https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/p14/
 organism_biocview: Homo_sapiens
 BSgenomeObjname: Hsapiens
-circ_seqs: "chrM"
-SrcDataFiles: hg38.2bit from http://hgdownload.cse.ucsc.edu/goldenPath/hg38/bigZips/
-PkgExamples: genome$chr1  # same as genome[["chr1"]]
+SrcDataFiles: hg38.p14.2bit, downloaded from https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/p14/ on Feb 1st, 2023
+PkgExamples: ## Access individual sequences:
+	.
+	bsg$chr1  # same as bsg[["chr1"]]
+	alphabetFrequency(bsg[["chr1"]])
+	.
+	bsg[["chrM"]]  # same as bsg$chrM
+	reverseComplement(bsg$chrM)
 	.
 	## ---------------------------------------------------------------------
-	## Extract the upstream sequences
+	## Switch the sequence names back and forth between UCSC and NCBI
 	## ---------------------------------------------------------------------
-	## The upstream sequences located in
-	##   http://hgdownload.cse.ucsc.edu/goldenPath/hg38/bigZips/
-	## are based on RefSeq genes (RefSeq Genes track in the Genome Browser).
-	## Upstream sequences based on UCSC genes (UCSC Genes track in the
-	## Genome Browser) can easily be extracted from the full genome
-	## sequences with:
 	.
-	library(TxDb.Hsapiens.UCSC.hg38.knownGene)
-	knownGene_txdb <- TxDb.Hsapiens.UCSC.hg38.knownGene
-	knownGene_up1000seqs <- extractUpstreamSeqs(genome, knownGene_txdb)
+	## IMPORTANT NOTE: Even though hg38 is officially based on the
+	## GRCh38.p14 assembly (this is as of Jan 31, 2023, hg38 was based on
+	## GRCh38.p13 before that), it contains 2 sequences that do not belong
+	## to GRCh38.p14: chr11_KQ759759v1_fix and chr22_KQ759762v1_fix
+	## These 2 foreign sequences belong to GRCh38.p13 (they are named
+	## HG107_PATCH and HG1311_PATCH there), but they've been replaced with
+	## sequences HG107_HG2565_PATCH and HG1311_HG2539_PATCH in GRCh38.p14.
 	.
-	## Or, to get upstream sequences based on RefSeq genes:
+	seqinfo(bsg)
+	seqlevelsStyle(bsg)  # UCSC
 	.
-	refGene_txdb <- makeTxDbFromUCSC("hg38", "refGene")
-	refGene_up1000seqs <- extractUpstreamSeqs(genome, refGene_txdb)
+	## --- switch to NCBI names ---
 	.
-	## Note that you can make a TxDb object from various annotation
-	## resources. See the makeTxDbFromUCSC(), makeTxDbFromBiomart(), and
-	## makeTxDbFromGFF() functions in the GenomicFeatures package for more
-	## information.
-	## IMPORTANT: Make sure you use a TxDb package (or TxDb object) that
-	## contains a gene model based on hg38 or on a compatible genome (i.e.
-	## a genome with sequences identical to the sequences in hg38). See
-	## ?extractUpstreamSeqs in the GenomicFeatures package for more
-	## information.
-seqs_srcdir: /fh/fast/morgan_m/BioC/BSgenomeForge/srcdata/BSgenome.Hsapiens.UCSC.hg38/seqs
-seqfile_name: hg38.sorted.2bit
+	bsg0 <- bsg
+	seqlevelsStyle(bsg) <- "NCBI"
+	bsg
+	seqinfo(bsg)
+	bsg[["1"]]
+	.
+	## Surprise!
+	table(genome(bsg))   # 2 sequences belong to GRCh38.p13!
+	foreign_idx <- which(genome(bsg) == "GRCh38.p13")
+	seqinfo(bsg)[seqnames(bsg)[foreign_idx]]
+	seqlevelsStyle(bsg)  # NCBI
+	.
+	## --- switch back ---
+	.
+	seqlevelsStyle(bsg) <- "UCSC"
+	bsg
+	stopifnot(identical(bsg0, bsg))
+	seqinfo(bsg)[seqnames(bsg)[foreign_idx]]
+seqs_srcdir: /home/hpages/BSgenomeForge/srcdata/BSgenome.Hsapiens.UCSC.hg38/seqs
+seqfile_name: hg38.p14.2bit

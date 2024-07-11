@@ -1,6 +1,10 @@
 Changes to the plotmo package
 -----------------------------
 
+--- 3.6.2 May 21, 2022
+
+  Minor updates for R version 4.2.0.
+
 --- 3.6.1 Jun 2, 2021
 
   Minor updates for R version 4.1.0.

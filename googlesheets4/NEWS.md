@@ -1,3 +1,49 @@
+# googlesheets4 1.1.1
+
+* `gs4_auth(subject =)` is a new argument that can be used with
+  `gs4_auth(path =)`, i.e. when using a service account. The `path` and
+  `subject` arguments are ultimately processed by
+  `gargle::credentials_service_account()` and support the use of a service
+  account to impersonate a normal user.
+
+* `gs4_scopes()` is a new function to access scopes relevant to the Sheets and
+  Drive APIs. When called without arguments, `gs4_scopes()` returns a named
+  vector of scopes, where the names are the associated short aliases.
+  `gs4_scopes()` can also be called with a character vector; any element that's
+  recognized as a short alias is replaced with the associated full scope (#291).
+  
+* Various internal changes to sync up with gargle v1.5.0.
+
+# googlesheets4 1.1.0
+
+## Syncing up with gargle
+
+Version 1.3.0 of gargle introduced some changes around OAuth and googlesheets4 is syncing with up that:
+
+* `gs4_oauth_client()` is a new function to replace the now-deprecated `gs4_oauth_app()`.
+* The new `client` argument of `gs4_auth_configure()` replaces the now-deprecated `app` argument.
+* The documentation of `gs4_auth_configure()` emphasizes that the preferred way to "bring your own OAuth client" is by providing the JSON downloaded from Google Developers Console.
+
+## Other
+
+`gs4_auth()` now warns if the user specifies both `email` and `path`, because this is almost always an error.
+
+# googlesheets4 1.0.1
+
+The mere existence of an invalid named range no longer prevents googlesheets4 from dealing with a Sheet (#175).
+
+googlesheets4 now understands that Google Sheets can have 10 million cells (up from 5 million) (#257).
+
+## Internal matters
+
+Help files below `man/` have been re-generated, so that they give rise to valid HTML5. (This is the impetus for this release, to keep the package safely on CRAN.)
+
+Examples now use `@examplesIf` to express when a token or an interactive session is required for successful execution.
+
+Errors have been revised to (more often) reveal the most appropriate call, i.e. the high-level function called by the user as opposed to an internal helper (#255).
+
+Informative messages now route through `cli::cli_inform()`, instead of `cli::cli_bullets()`.
+
 # googlesheets4 1.0.0
 
 ## User interface

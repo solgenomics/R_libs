@@ -1,31 +1,30 @@
 ---
 title: "1. Simple Features for R"
-output:
-  html_document:
-    toc: true
-    toc_float:
-      collapsed: false
-      smooth_scroll: false
-    toc_depth: 2
+author: "Edzer Pebesma"
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{1. Simple Features for R}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
+**For a better version of the sf vignettes see** https://r-spatial.github.io/sf/articles/
+
 ```{r, echo=FALSE, include=FALSE}
+knitr::opts_chunk$set(fig.height = 4.5)
+knitr::opts_chunk$set(fig.width = 6)
 knitr::opts_chunk$set(collapse = TRUE)
 if (file.exists("nc.shp"))
 	file.remove("nc.shp", "nc.dbf", "nc.shx")
 ```
 
-[Simple features](https://en.wikipedia.org/wiki/Simple_Features) or [_simple feature access_](http://www.opengeospatial.org/standards/sfa) refers to a formal standard (ISO 19125-1:2004) that describes how objects in the real world can be represented in computers, with emphasis on the _spatial_ geometry of these objects. It also describes how such objects can be stored in and retrieved from databases, and which geometrical operations should be defined for them.
+[Simple features](https://en.wikipedia.org/wiki/Simple_Features) or [_simple feature access_](https://www.ogc.org/standard/sfa/) refers to a formal standard (ISO 19125-1:2004) that describes how objects in the real world can be represented in computers, with emphasis on the _spatial_ geometry of these objects. It also describes how such objects can be stored in and retrieved from databases, and which geometrical operations should be defined for them.
 
 The standard is widely implemented in spatial
-databases (such as PostGIS), commercial GIS (e.g., [ESRI
-ArcGIS](http://www.esri.com/)) and forms the vector data basis for
-libraries such as [GDAL](http://www.gdal.org/). A subset of
-simple features forms the [GeoJSON](http://geojson.org/) standard.
+databases (such as [PostGIS](https://postgis.net/)), commercial GIS (e.g., [ESRI
+ArcGIS](https://www.esri.com/en-us/home)) and forms the vector data basis for
+libraries such as [GDAL](https://gdal.org/). A subset of
+simple features forms the [GeoJSON](https://geojson.org/) standard.
 
 R has well-supported classes for storing spatial
 data ([sp](https://CRAN.R-project.org/package=sp))
@@ -34,22 +33,22 @@ and interfacing to the above mentioned environments
 [rgeos](https://CRAN.R-project.org/package=rgeos)), but has so far lacked a
 complete implementation of simple features, making conversions
 at times convoluted, inefficient or incomplete. The package
-[sf](http://github.com/r-spatial/sf) tries to fill this gap, and aims
+[sf](https://github.com/r-spatial/sf) tries to fill this gap, and aims
 at succeeding [sp](https://CRAN.R-project.org/package=sp) in the
 long term.
 
 This vignette:
 
-* explains what is meant by features, and by simple features
+* explains what is meant by features, and by `simple features`
 * shows how they are implemented in R
 * provides examples of how you can work with them
-* shows how they can be read from and written to external files or resources
-* discusses how they can be converted to and from sp objects
-* shows how they can be used for meaningful spatial analysis
+* shows how they can be read from and written to external files or resources (I/O)
+* discusses how they can be converted to and from `sp` objects
+* shows how they can be used for meaningful and applied spatial analysis
 
 # What is a feature?
 
-A feature is thought of as a thing, or an object in the real world,
+A `feature` is thought of as a thing, or an object in the real world,
 such as a building or a tree. As is the case with objects,
 they often consist of other objects. This is the case with features
 too: a set of features can form a single feature. A forest stand can
@@ -71,7 +70,7 @@ features are based on 2D geometry with linear interpolation between
 vertices._"  We will see soon that the same standard will extend
 its coverage beyond 2D and beyond linear interpolation. Here, we
 take simple features as the data structures and operations described
-in the [standard](http://www.opengeospatial.org/standards/sfa).
+in the [standard](https://www.ogc.org/standard/sfa/).
 
 ## Dimensions
 
@@ -92,7 +91,7 @@ The four possible cases then are:
 
 ## Simple feature geometry types
 
-The following seven simple feature types are the most common, and are for instance the only ones used for [GeoJSON](https://tools.ietf.org/html/rfc7946):
+The following seven simple feature types are the most common, and are for instance the only ones used for [GeoJSON](https://www.rfc-editor.org/rfc/rfc7946):
 
 | type | description                                        |
 | ---- | -------------------------------------------------- |
@@ -106,11 +105,11 @@ The following seven simple feature types are the most common, and are for instan
 
 Each of the geometry types can also be a (typed) empty set, containing zero coordinates (for `POINT` the standard is not clear how to represent the empty geometry). Empty geometries can be thought of being the analogue to missing (`NA`) attributes, NULL values or empty lists.
 
-The remaining geometries 10 are more rare, but increasingly find implementations:
+The remaining geometries 10 are rarer, but increasingly find implementations:
 
 | type | description                                        |
 | ---- | -------------------------------------------------- |
-| `CIRCULARSTRING` | The CIRCULARSTRING is the basic curve type, similar to a LINESTRING in the linear world. A single segment requires three points, the start and end points (first and third) and any other point on the arc. The exception to this is for a closed circle, where the start and end points are the same. In this case the second point MUST be the center of the arc, ie the opposite side of the circle. To chain arcs together, the last point of the previous arc becomes the first point of the next arc, just like in LINESTRING. This means that a valid circular string must have an odd number of points greated than 1. |
+| `CIRCULARSTRING` | The CIRCULARSTRING is the basic curve type, similar to a LINESTRING in the linear world. A single segment requires three points, the start and end points (first and third) and any other point on the arc. The exception to this is for a closed circle, where the start and end points are the same. In this case the second point MUST be the center of the arc, i.e., the opposite side of the circle. To chain arcs together, the last point of the previous arc becomes the first point of the next arc, just like in LINESTRING. This means that a valid circular string must have an odd number of points greater than 1. |
 | `COMPOUNDCURVE` | A compound curve is a single, continuous curve that has both curved (circular) segments and linear segments. That means that in addition to having well-formed components, the end point of every component (except the last) must be coincident with the start point of the following component. |
 | `CURVEPOLYGON` | Example compound curve in a curve polygon: CURVEPOLYGON(COMPOUNDCURVE(CIRCULARSTRING(0 0,2 0, 2 1, 2 3, 4 3),(4 3, 4 5, 1 4, 0 0)), CIRCULARSTRING(1.7 1, 1.4 0.4, 1.6 0.4, 1.6 0.5, 1.7 1) ) |
 | `MULTICURVE` |  A MultiCurve is a 1-dimensional GeometryCollection whose elements are Curves, it can include linear strings, circular strings or compound strings.  |
@@ -127,9 +126,12 @@ Note that `CIRCULASTRING`, `COMPOUNDCURVE` and `CURVEPOLYGON` are not described 
 ## Coordinate reference system
 
 Coordinates can only be placed on the Earth's surface when their coordinate
-reference system (CRS) is known; this may be an spheroid CRS such as WGS84, a projected, two-dimensional (Cartesian) CRS such as a UTM zone or Web Mercator, or a CRS
-in three-dimensions, or including time. Similarly, M-coordinates need an attribute reference
-system, e.g. a [measurement unit](https://CRAN.R-project.org/package=units).
+reference system (CRS) is known; this may be a spheroid CRS such
+as [WGS84](https://en.wikipedia.org/wiki/World_Geodetic_System), a
+projected, two-dimensional (Cartesian) CRS such as a UTM zone or Web
+Mercator, or a CRS in three-dimensions, or including time. Similarly,
+M-coordinates need an attribute reference system, e.g. a [measurement
+unit](https://CRAN.R-project.org/package=units).
 
 # How simple features in R are organized
 
@@ -158,7 +160,7 @@ We will now discuss each of these three classes.
 
 ## sf: objects with simple features
 
-As we usually do not work with geometries of single simple features,
+As we usually do not work with geometries of single `simple features`,
 but with datasets consisting of sets of features with attributes, the
 two are put together in `sf` (simple feature) objects.  The following
 command reads the `nc` dataset from a file that is contained in the
@@ -201,12 +203,12 @@ In the output we see:
 * in red a simple feature list-column (an object of class `sfc`, which is a column in the `data.frame`)
 * that although geometries are native R objects, they are printed as [well-known text](#wkb)
 
-Methods for `sf` objects are
+Methods for `sf` objects are:
 ```{r}
 methods(class = "sf")
 ```
 
-It is also possible to create `data.frame` objects with geometry list-columns that are not of class `sf`, e.g. by
+It is also possible to create `data.frame` objects with geometry list-columns that are not of class `sf`, e.g. by:
 ```{r}
 nc.no_sf <- as.data.frame(nc)
 class(nc.no_sf)
@@ -229,13 +231,13 @@ more general way uses `st_geometry`:
 ```
 
 Geometries are printed in abbreviated form, but we can
-can view a complete geometry by selecting it, e.g. the first one by
+view a complete geometry by selecting it, e.g. the first one by:
 
 ```{r}
 nc_geom[[1]]
 ```
 
-The way this is printed is called _well-known text_, and is part of the standards. The word `MULTIPOLYGON` is followed by three parenthesis, because it can consist of multiple polygons, in the form of `MULTIPOLYGON(POL1,POL2)`, where `POL1` might consist of an exterior ring and zero or more interior rings, as of `(EXT1,HOLE1,HOLE2)`. Sets of coordinates are held together with parenthesis, so we get `((crds_ext)(crds_hole1)(crds_hole2))` where `crds_` is a comma-separated set of coordinates of a ring. This leads to the case above, where `MULTIPOLYGON(((crds_ext)))` refers to the exterior ring (1), without holes (2), of the first polygon (3) - hence three parentheses.
+The way this is printed is called _well-known text_, and is part of the standards. The word `MULTIPOLYGON` is followed by three parentheses, because it can consist of multiple polygons, in the form of `MULTIPOLYGON(POL1,POL2)`, where `POL1` might consist of an exterior ring and zero or more interior rings, as of `(EXT1,HOLE1,HOLE2)`. Sets of coordinates belonging to a single polygon are held together with parentheses, so we get `((crds_ext)(crds_hole1)(crds_hole2))` where `crds_` is a comma-separated set of coordinates of a ring. This leads to the case above, where `MULTIPOLYGON(((crds_ext)))` refers to the exterior ring (1), without holes (2), of the first polygon (3) - hence three parentheses.
 
 We can see there is a single polygon with no rings:
 
@@ -245,7 +247,7 @@ plot(nc[1], reset = FALSE) # reset = FALSE: we want to add to a plot with a lege
 plot(nc[1,1], col = 'grey', add = TRUE)
 ```
 
-but some of the polygons in this dataset have multiple exterior rings; they can be identified by
+but some of the polygons in this dataset have multiple exterior rings; they can be identified by:
 ```{r fig.height=3.5}
 par(mar = c(0,0,1,0))
 (w <- which(sapply(nc_geom, length) > 1))
@@ -254,7 +256,7 @@ plot(nc[w,1], col = 2:7)
 
 Following the `MULTIPOLYGON` datastructure, in R we have a list of lists of lists of matrices. For instance,
 we get the first 3 coordinate pairs of the second exterior ring (first ring is always exterior) for the geometry
-of feature 4 by
+of feature 4 by:
 
 ```{r}
 nc_geom[[4]][[2]][[1]][1:3,]
@@ -266,7 +268,7 @@ Geometry columns have their own class,
 class(nc_geom)
 ```
 
-Methods for geometry list-columns include
+Methods for geometry list-columns include:
 ```{r}
 methods(class = 'sfc')
 ```
@@ -275,7 +277,7 @@ Coordinate reference systems (`st_crs` and `st_transform`) are discussed in the 
 `st_as_wkb` and `st_as_text` convert geometry list-columns into well-known-binary or well-known-text, explained [below](#wkb).
 `st_bbox` retrieves the coordinate bounding box.
 
-Attributes include
+Attributes include:
 ```{r}
 attributes(nc_geom)
 ```
@@ -452,7 +454,7 @@ may require some experimenting.
 
 ## Reading and writing
 
-As we've seen above, reading spatial data from an external file can be done by
+As we've seen above, reading spatial data from an external file can be done by:
 
 ```{r}
 filename <- system.file("shape/nc.shp", package="sf")
@@ -471,7 +473,7 @@ st_write(nc, "nc.shp")
 ```
 
 If we repeat this, we get an error message that the file already
-exists, and we can overwrite by
+exists, and we can overwrite by:
 
 ```{r}
 st_write(nc, "nc.shp", delete_layer = TRUE)
@@ -488,9 +490,9 @@ write_sf(nc, "nc.shp") # silently overwrites
 The `dsn` and `layer` arguments to `st_read` and `st_write`
 denote a data source name and optionally a layer name.  Their exact
 interpretation as well as the options they support vary per driver,
-the [GDAL driver documentation](http://www.gdal.org/ogr_formats.html)
+the [GDAL driver documentation](https://gdal.org/drivers/vector/index.html)
 is best consulted for this.  For instance, a PostGIS table in
-database `postgis` might be read by
+database `postgis` might be read by:
 
 ```{r eval=FALSE}
 meuse <- st_read("PG:dbname=postgis", "meuse")
@@ -520,7 +522,7 @@ st_layers(system.file("osm/overpass.osm", package="sf"))
 ```
 we see that in this case, the number of features is `NA` because
 for this xml file the whole file needs to be read, which may be
-costly for large files. We can force counting by
+costly for large files. We can force counting by:
 ```{r}
 Sys.setenv(OSM_USE_CUSTOM_INDEXING="NO")
 st_layers(system.file("osm/overpass.osm", package="sf"), do_count = TRUE)
@@ -534,6 +536,7 @@ download.file(u_shp, "biketrails.zip")
 unzip("biketrails.zip")
 u_kmz <- "http://coagisweb.cabq.gov/datadownload/BikePaths.kmz"
 download.file(u_kmz, "BikePaths.kmz")
+
 # Read file formats
 biketrails_shp <- st_read("biketrails.shp")
 if(Sys.info()[1] == "Linux") # may not work if not Linux
@@ -552,9 +555,9 @@ GDAL provides the
 creates, and has the following arguments to control update and delete:
 
 * `update=TRUE` causes an existing data source to be updated, if it
-exists; this options is by default `TRUE` for all database drivers,
+exists; this option is by default `TRUE` for all database drivers,
 where the database is updated by adding a table.
-* `delete_layer=TRUE` causes `st_write` try to open the the data
+* `delete_layer=TRUE` causes `st_write` try to open the data
 source and delete the layer; no errors are given if the data source is
 not present, or the layer does not exist in the data source.
 * `delete_dsn=TRUE` causes `st_write` to delete the data source when
@@ -562,59 +565,6 @@ present, before writing the layer in a newly created data source. No
 error is given when the data source does not exist. This option
 should be handled with care, as it may wipe complete directories
 or databases.
-
-### Benchmarks
-
-Benchmarks show that `st_read()` is faster than `rgdal::readOGR()`, for example:
-
-```{r, echo=TRUE, eval=FALSE}
-shp_read_sp <- function() rgdal::readOGR(dsn = ".", layer = "biketrails")
-shp_read_sf <- function() st_read("biketrails.shp")
-if(Sys.info()[1] == "Linux") {
-  kmz_read_sp <- function() rgdal::readOGR(dsn = "BikePaths.kmz")
-  kmz_read_sf <- function() st_read("BikePaths.kmz")
-} else {
-    kmz_read_sp <- function() message("NA")
-    kmz_read_sf <- function() message("NA")
-}
-kml_read_sp <- function() rgdal::readOGR("bikeraces.kml")
-kml_read_sf <- function() st_read("bikeraces.kml")
-microbenchmark::microbenchmark(shp_read_sp(), shp_read_sf(),
-                               kmz_read_sp(), kmz_read_sf(),
-                               kml_read_sp(), kml_read_sf(), times = 10)
-```
-
-```{r, echo=FALSE}
-# Tidy up
-files_to_remove <- list.files(pattern = "[B-b]ike")
-if(length(files_to_remove) > 0) file.remove(files_to_remove)
-```
-
-On a laptop with an Intel i5-4300M CPU @ 2.60GHz with ssd the
-results were as follows:
-
-```
-Unit: milliseconds
-          expr         min          lq       mean     median          uq
- shp_read_sp() 4993.954530 5010.798950 5072.94155 5049.68057 5116.050416
- shp_read_sf()  331.580349  341.608044  352.99233  353.00169  364.601151
- kmz_read_sp() 4940.108931 4966.177983 5021.47680 4989.82589 5038.393259
- kmz_read_sf() 1086.925988 1088.850196 1103.04846 1090.15794 1100.518670
- kml_read_sp()  167.556454  176.395750  182.10324  185.31941  187.720235
- kml_read_sf()    8.132629    8.268952   10.44328    8.52626    9.420043
-        max neval   cld
- 5186.16240    10     e
-  376.64045    10   c  
- 5282.25874    10     e
- 1178.42358    10    d
-  189.29191    10  b   
-   26.20221    10 a    
-```
-
-This shows that `sf::st_read()` is substantially faster than
-`rgdal::readOGR()`: by a factor of 14-18 for the Shapefile and KML
-files, and more than a factor of 4 for the KMZ file used in this
-benchmark, respectively.
 
 ### Connection to spatial databases
 
@@ -654,7 +604,7 @@ but may help reproducibility.
 
 Coordinate reference system transformations can be carried out using
 `st_transform`, e.g. converting longitudes/latitudes in NAD27 to
-web mercator (EPSG:3857) can be done by
+web mercator (EPSG:3857) can be done by:
 
 ```{r}
 nc.web_mercator <- st_transform(nc, 3857)
@@ -669,9 +619,11 @@ st_geometry(nc.web_mercator)[[4]][[2]][[1]][1:3,]
 showMethods("coerce", classes = "sf")
 methods(st_as_sf)
 methods(st_as_sfc)
+
 # anticipate that sp::CRS will expand proj4strings:
 p4s <- "+proj=longlat +datum=NAD27 +no_defs +ellps=clrk66 +nadgrids=@conus,@alaska,@ntv2_0.gsb,@ntv1_can.dat"
 st_crs(nc) <- p4s
+
 # anticipate geometry column name changes:
 names(nc)[15] = "geometry"
 attr(nc, "sf_column") = "geometry"
@@ -831,7 +783,7 @@ st_agr(meuse_sf)
 ```
 
 When not specified, this field is filled with `NA` values, but if non-`NA`, it has one
-of three possibilities
+of three possibilities:
 
 | value | meaning                           |
 |-------| ----------------------------------|
@@ -847,5 +799,5 @@ With this information (still to be done) we can for instance
 
 Further reading:
 
-1. S. Scheider, B. Gräler, E. Pebesma, C. Stasch, 2016. Modelling spatio-temporal information generation. Int J of Geographic Information Science, 30 (10), 1980-2008. ([pdf](http://pebesma.staff.ifgi.de/generativealgebra.pdf))
+1. S. Scheider, B. Gräler, E. Pebesma, C. Stasch, 2016. Modelling spatio-temporal information generation. Int J of Geographic Information Science, 30 (10), 1980-2008. ([open access](https://doi.org/10.1080/13658816.2016.1151520))
 2. Stasch, C., S. Scheider, E. Pebesma, W. Kuhn, 2014. Meaningful Spatial Prediction and Aggregation. Environmental Modelling & Software, 51, (149–165, [open access](http://dx.doi.org/10.1016/j.envsoft.2013.09.006)).

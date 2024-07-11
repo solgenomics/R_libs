@@ -1,5 +1,10 @@
 ## ---- include=FALSE-----------------------------------------------------------
-knitr::opts_chunk$set(eval = FALSE)
+knitr::opts_chunk$set(
+  eval = FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
+styler::cache_deactivate()
 
 ## -----------------------------------------------------------------------------
 #  call(
@@ -67,7 +72,6 @@ knitr::opts_chunk$set(eval = FALSE)
 #    p = 2,   g = gg(x),  n = 3 * 3, #
 #    31,    fds =    -1, gz = f / 3,
 #  )
-#  
 
 ## -----------------------------------------------------------------------------
 #  # all arguments of first column named -> must left align values after `=`,
@@ -100,7 +104,7 @@ knitr::opts_chunk$set(eval = FALSE)
 #    y = "hhjkjkbew", x = 3
 #  )
 #  
-#  tribble(
+#  tibble::tribble(
 #    ~x,        ~y,
 #    "another", 1:3,
 #    "b",       1211234

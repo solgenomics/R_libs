@@ -1,3 +1,30 @@
+# gh 1.4.0
+
+* `gh()` gains a new `.max_rate` parameter that sets the maximum number of 
+  requests per second.
+
+* gh is now powered by httr2. This should generally have little impact on normal
+  operation but if a request fails, you can use `httr2::last_response()` and 
+  `httr2::last_request()` to debug.
+  
+* `gh()` gains a new `.max_wait` argument which gives the maximum number of 
+  minutes to wait if you are rate limited (#67).
+
+* New `gh_rate_limits()` function reports on all rate limits for the active 
+  user.
+
+* gh can now validate GitHub
+  [fine-grained](https://github.blog/2022-10-18-introducing-fine-grained-personal-access-tokens-for-github/)
+  personal access tokens (@jvstein, #171).
+
+# gh 1.3.1
+
+* gh now accepts lower-case methods i.e. both `gh::gh("get /users/hadley/repos")` and `gh::gh("GET /users/hadley/repos")` work (@maelle, #167).
+
+* Response headers (`"response_headers"`) and response content
+  (`"response_content")` are now returned in error conditions so that error
+  handlers can use information, such as the rate limit reset header, when
+  handling `github_error`s (@gadenbuie, #117).
 
 # gh 1.3.0
 
@@ -35,7 +62,7 @@
 
 * The documentation for the GitHub REST API has moved to
   <https://docs.github.com/rest> and endpoints are now documented using
-  the URI template style of [RFC 6570](https://tools.ietf.org/html/rfc6570):
+  the URI template style of [RFC 6570](https://www.rfc-editor.org/rfc/rfc6570):
   - Old: `GET /repos/:owner/:repo/issues`
   - New: `GET /repos/{owner}/{repo}/issues`
 

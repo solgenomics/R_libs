@@ -24,7 +24,12 @@ params:
   author: "no data"
 ---
 
-```{r echo = FALSE}
+```{r global_options, include = FALSE}
+library(knitr)
+opts_chunk$set(echo = FALSE, comment = NA)
+```
+
+```{r}
 ## Form
 
 if (params$form == 2) stage <- "flowering"
@@ -131,7 +136,7 @@ Votes are recorded for men and women.
 `r if (nrm == 0) {"There were no data for the mother plot."}`
 `r if (nrm > 0) paste("The genotypes have been planted following a randomized complete block design with", nrm, "blocks. A group of men and women voted independently for the best genotypes at each block, so each men and women voted", nrm, "times.")`
 
-```{r echo = FALSE, fig.height = 5, fig.width = 8}
+```{r fig.height = 5, fig.width = 8}
 if (nrm > 0) {
   ggplot(moth, aes(x = group, y = value, fill = INSTN)) +
     geom_bar(stat = "identity", position = "dodge", color = "black") + 
@@ -144,7 +149,7 @@ if (nrm > 0) {
 
 `r if (nrm > 0) {"Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample."}`
 
-```{r echo = FALSE, fig.height = 5, fig.width = 8}
+```{r fig.height = 5, fig.width = 8}
 if (nrm > 0) {
   ggplot(mothp, aes(x = group, y = value, fill = INSTN)) +
     geom_bar(stat = "identity", position = "dodge", color = "black") + 
@@ -161,7 +166,7 @@ if (nrm > 0) {
 `r if (nrb == 0) {"There were no data for baby plots."}`
 `r if (nrb > 0) paste("The genotypes have been planted in", nrb, "baby plots. At each baby plot the complete set of genotypes is planted. A group of men and women voted independently for the best genotypes at each baby plot.")`
 
-```{r echo = FALSE, fig.height = 5, fig.width = 8}
+```{r fig.height = 5, fig.width = 8}
 if (nrb > 0) {
   ggplot(baby, aes(x = group, y = value, fill = INSTN)) +
     geom_bar(stat = "identity", position = "dodge", color = "black") + 
@@ -174,7 +179,7 @@ if (nrb > 0) {
 
 `r if (nrb > 0) {"Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample."}`
 
-```{r echo = FALSE, fig.height = 5, fig.width = 8}
+```{r fig.height = 5, fig.width = 8}
 if (nrb > 0) {
   ggplot(babyp, aes(x = group, y = value, fill = INSTN)) +
     geom_bar(stat = "identity", position = "dodge", color = "black") + 
@@ -193,7 +198,7 @@ if (nrb > 0) {
 
 `r if (nrb > 0 & nrm > 0) {"Here all the votes on the mother and baby plots are pooled together."}`
 
-```{r echo = FALSE, fig.height = 5, fig.width = 8}
+```{r fig.height = 5, fig.width = 8}
 if (nrb > 0 & nrm > 0) {
   ggplot(both, aes(x = group, y = value, fill = INSTN)) +
     geom_bar(stat = "identity", position = "dodge", color = "black") + 
@@ -206,7 +211,7 @@ if (nrb > 0 & nrm > 0) {
 
 `r if (nrb > 0 & nrm > 0) {"Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample."}`
 
-```{r echo = FALSE, fig.height = 5, fig.width = 8}
+```{r fig.height = 5, fig.width = 8}
 if (nrb > 0 & nrm > 0) {
   ggplot(bothp, aes(x = group, y = value, fill = INSTN)) +
     geom_bar(stat = "identity", position = "dodge", color = "black") + 
@@ -222,7 +227,7 @@ if (nrb > 0 & nrm > 0) {
 
 ## 5.1. Men's votes at mother trial
 
-```{r echo = FALSE}
+```{r}
 lc <- ck.rcbd("MSM", "INSTN", "REP", dfr)
 if (lc$nrep > 1 & lc$nmis == 0)
   friedman.t('MSM', 'INSTN', 'REP', dfr)
@@ -233,7 +238,7 @@ if (lc$nrep > 1 & lc$nmis == 0)
 
 ## 5.2. Women's votes at mother trial
 
-```{r echo = FALSE}
+```{r}
 lc <- ck.rcbd("MSWM", "INSTN", "REP", dfr)
 if (lc$nrep > 1 & lc$nmis == 0)
   friedman.t('MSWM', 'INSTN', 'REP', dfr)
@@ -244,7 +249,7 @@ if (lc$nrep > 1 & lc$nmis == 0)
 
 ## 5.3. Total votes at mother trial
 
-```{r echo = FALSE}
+```{r}
 lc <- ck.rcbd("MSGLO", "INSTN", "REP", dfr)
 if (lc$nrep > 1 & lc$nmis == 0)
   friedman.t('MSGLO', 'INSTN', 'REP', dfr)
@@ -255,7 +260,7 @@ if (lc$nrep > 1 & lc$nmis == 0)
 
 ## 5.4. Men's votes at baby trials
 
-```{r echo = FALSE}
+```{r}
 lc <- ck.rcbd("BSM", "INSTN", "REP", dfr)
 if (lc$nrep > 1 & lc$nmis == 0)
   friedman.t('BSM', 'INSTN', 'REP', dfr)
@@ -266,7 +271,7 @@ if (lc$nrep > 1 & lc$nmis == 0)
 
 ## 5.5. Women's votes at baby trials
 
-```{r echo = FALSE}
+```{r}
 lc <- ck.rcbd("BSWM", "INSTN", "REP", dfr)
 if (lc$nrep > 1 & lc$nmis == 0)
   friedman.t('BSWM', 'INSTN', 'REP', dfr)
@@ -277,7 +282,7 @@ if (lc$nrep > 1 & lc$nmis == 0)
 
 ## 5.6. Total votes at baby trials
 
-```{r echo = FALSE}
+```{r}
 lc <- ck.rcbd("BSGLO", "INSTN", "REP", dfr)
 if (lc$nrep > 1 & lc$nmis == 0)
   friedman.t('BSGLO', 'INSTN', 'REP', dfr)

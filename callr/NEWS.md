@@ -1,3 +1,28 @@
+# callr 3.7.3
+
+* Errors from callr now include the standard output (in `$stdout`) and
+  standard error (in `stderr`) again. The standard output and error are also
+  printed on error in non-interactive sessions, and a note is printed about
+  them in interactive sessions.
+
+# callr 3.7.2
+
+* New function `add_hook()` to hook into the callr process startup and
+  options. This is for experts and it is also currently experimental
+  (#203, @klmr).
+
+# callr 3.7.1
+
+* When copying existing startup files, an additional newline is appended to
+  protect against a missing newline at the end of the file. This would
+  cause R ignore that line (#205).
+
+* Serialization of objects passed between sessions now uses `compress=FALSE`
+  by default. The default can be changed by setting the
+  `callr.compress_transport` option (#223, @dfalbel).
+
+* We have revamped callr's error objects, with lots of improvements to the
+  output.
 
 # callr 3.7.0
 

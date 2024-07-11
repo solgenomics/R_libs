@@ -12,9 +12,13 @@ knitr::opts_chunk$set(
 #                         cache = gargle::gargle_oauth_cache(),
 #                         use_oob = gargle::gargle_oob_default(),
 #                         token = NULL) {
+#    # this catches a common error, where the user passes JSON for an OAuth client
+#    # to the `path` argument, which only expects a service account token
+#    gargle::check_is_service_account(path, hint = "drive_auth_configure")
+#  
 #    cred <- gargle::token_fetch(
 #      scopes = scopes,
-#      app = drive_oauth_app() %||% <BUILT_IN_DEFAULT_APP>,
+#      client = drive_oauth_client() %||% <BUILT_IN_DEFAULT_CLIENT>,
 #      email = email,
 #      path = path,
 #      package = "googledrive",
@@ -32,28 +36,33 @@ knitr::opts_chunk$set(
 #  }
 
 ## ----eval = FALSE-------------------------------------------------------------
-#  .auth <- gargle::init_AuthState(
-#    package     = "googledrive",
-#    auth_active = TRUE
-#    # app = NULL,
-#    # api_key = NULL,
-#    # cred = NULL
-#  )
+#  .auth <- NULL
+
+## -----------------------------------------------------------------------------
+.onLoad <- function(libname, pkgname) {
+  utils::assignInMyNamespace(
+    ".auth",
+    gargle::init_AuthState(package = "googledrive", auth_active = TRUE)
+  )
+  
+  # other stuff
+}
 
 ## ---- eval = FALSE------------------------------------------------------------
 #  library(googledrive)
 #  
-#  google_app <- httr::oauth_app(
-#    appname = "acme-corp",
-#    key     = "123456789.apps.googleusercontent.com",
-#    secret  = "abcdefghijklmnopqrstuvwxyz"
+#  # first: download the OAuth client as a JSON file
+#  drive_auth_configure(
+#    path = "/path/to/the/JSON/that/was/downloaded/from/gcp/console.json"
 #  )
-#  drive_auth_configure(app = google_app)
 #  
-#  drive_oauth_app()
-#  #> <oauth_app> acme-corp
-#  #>   key:    123456789.apps.googleusercontent.com
-#  #>   secret: <hidden>
+#  drive_oauth_client()
+#  #> <gargle_oauth_client>
+#  #> name: acme-corp-google-client
+#  #> id: 123456789.apps.googleusercontent.com
+#  #> secret: <REDACTED>
+#  #> type: installed
+#  #> redirect_uris: http://localhost
 
 ## ---- eval = FALSE------------------------------------------------------------
 #  library(googledrive)
@@ -86,16 +95,16 @@ knitr::opts_chunk$set(
 #                               params = list(),
 #                               key = NULL,
 #                               token = drive_token()) {
-#    ept <- .endpoints[[endpoint]]
+#    ept <- drive_endpoint(endpoint)
 #    if (is.null(ept)) {
-#      stop_glue("\nEndpoint not recognized:\n  * {endpoint}")
+#      # throw error about unrecognized endpoint
 #    }
 #  
 #    ## modifications specific to googledrive package
 #    params$key <- key %||% params$key %||%
 #      drive_api_key() %||% <BUILT_IN_DEFAULT_API_KEY>
-#    if (!is.null(ept$parameters$supportsTeamDrives)) {
-#      params$supportsTeamDrives <- TRUE
+#    if (!is.null(ept$parameters$supportsAllDrives)) {
+#      params$supportsAllDrives <- TRUE
 #    }
 #  
 #    req <- gargle::request_develop(endpoint = ept, params = params)
@@ -133,7 +142,7 @@ knitr::opts_chunk$set(
 #  drive_auth(email = "jane_doe@example.com") # gets a suitably scoped token
 #                                             # and stashes for googledrive use
 #  
-#  sheets_auth(token = drive_token())         # registers token with googlesheets4
+#  gs4_auth(token = drive_token())            # registers token with googlesheets4
 #  
 #  # now work with both packages freely ...
 

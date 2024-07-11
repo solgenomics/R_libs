@@ -1,14 +1,23 @@
-FROM ubuntu:16.04
+FROM ubuntu:22.04
 # minimal docker file to get sp and sf running on ubunty 16.04 image,
 # using gdal/geos/proj from ppa:ubuntugis/ubuntugis-unstable
+# 
 
 MAINTAINER "edzerpebesma" edzer.pebesma@uni-muenster.de
 
-RUN apt-get update && apt-get install -y software-properties-common
-RUN add-apt-repository ppa:ubuntugis/ubuntugis-unstable
+# update indices
+RUN apt-get update -qq
+# install two helper packages we need
+RUN apt-get install -y --no-install-recommends software-properties-common dirmngr
+# add the signing key (by Michael Rutter) for these repos
+# To verify key, run gpg --show-keys /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+# Fingerprint: E298A3A825C0D65DFD57CBB651716619E084DAB9
 
-RUN echo "deb http://cran.rstudio.com/bin/linux/ubuntu xenial/  " >> /etc/apt/sources.list
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+RUN export DEBIAN_FRONTEND=noninteractive; apt-get install -y wget
+RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+# add the R 4.0 repo from CRAN -- adjust 'focal' to 'groovy' or 'bionic' as needed
+
+RUN add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
 
 RUN apt-get update
 RUN apt-get upgrade -y
@@ -26,20 +35,22 @@ RUN export DEBIAN_FRONTEND=noninteractive; apt-get -y update \
 	libproj-dev \
 	libudunits2-dev
 
-RUN apt-get install -y texinfo \
+RUN export DEBIAN_FRONTEND=noninteractive; apt-get install -y \
+       texinfo \
        texlive-base \
        texlive-extra-utils \
        texlive-fonts-extra \
        texlive-fonts-recommended \
-       texlive-generic-recommended \
        texlive-latex-base \
        texlive-latex-extra \
        texlive-latex-recommended
 
+# texlive-generic-recommended \
+
 # stuff for the tmaptools/rmapshaper/geojsonio etc stack:
-RUN apt-get install -y libv8-3.14-dev libprotobuf-dev protobuf-compiler libcairo2-dev pandoc pandoc-citeproc 
-RUN add-apt-repository -y ppa:opencpu/jq
-RUN apt-get update
+RUN apt-get install -y libv8-dev libprotobuf-dev protobuf-compiler libcairo2-dev pandoc pandoc-citeproc 
+#RUN add-apt-repository -y ppa:opencpu/jq
+#RUN apt-get update
 RUN apt-get install -y libjq-dev
 
 ## Check out & build R-devel:
@@ -47,10 +58,13 @@ RUN apt-get install -y subversion
 
 RUN cd /tmp && svn co https://svn.r-project.org/R/trunk R-devel
 
+RUN apt-get install -y rsync
 RUN /tmp/R-devel/tools/rsync-recommended
 ## Build and install according the standard 'recipe' I emailed/posted years ago
 
 RUN apt-get install -y libreadline-dev libbz2-dev
+#RUN apt-get install -y gfortran
+RUN apt-get install -y r-base-dev
 
 RUN cd /tmp/R-devel \
 	&& R_PAPERSIZE=letter \
@@ -103,6 +117,12 @@ RUN Rscript -e 'install.packages(c("RPostgres"), dependencies = FALSE, repos = "
 
 RUN cd sf && git pull
 RUN PROJ_LIB=/usr/share/proj R CMD INSTALL sf_*tar.gz
-RUN PROJ_LIB=/usr/share/proj R CMD check --as-cran sf_*tar.gz
+
+RUN Rscript -e 'install.packages(c("RPostgreSQL"), dependencies = FALSE, repos = "https://cloud.r-project.org")'
+RUN cd sf && git  pull
+# RUN R CMD INSTALL sf
+# RUN R -e 'library(sf);library(testthat);source("sf/tests/testthat/test_tm.R")'
+RUN R CMD build --no-build-vignettes sf
+RUN _R_CHECK_FORCE_SUGGESTS_=false PROJ_LIB=/usr/share/proj R CMD check --as-cran sf_*tar.gz
 
 CMD ["/bin/bash"]

@@ -22,15 +22,19 @@ params:
   rep: "no data"
   block: "no data"
   k: "no data"
+  method: "no data"
   dfr: "no data"
   title: "no data"
   subtitle: "no data"
   author: "no data"
 ---
 
-```{r echo = FALSE}
+```{r global_options, include = FALSE}
 library(knitr)
+opts_chunk$set(echo = FALSE, comment = NA)
+```
 
+```{r}
 # Pass arguments
 
 traits <- params$traits
@@ -38,6 +42,7 @@ geno <- params$geno
 rep <- params$rep
 block <- params$block
 k <- params$k
+method <- params$method
 dfr <- params$dfr
 
 # Check factors structure
@@ -54,6 +59,9 @@ nmis.fac <- out$nmis.fac
 block <- dfr[, block]
 geno <- dfr[, geno]
 rep <- dfr[, rep]
+
+if (method == "VC")
+  geno <- as.factor(geno)
 ```
 
 # 1. Model specification and data description

@@ -1,16 +1,3 @@
-GenF                    Generalized F distribution
-GenF.orig               Generalized F distribution (original
-                        parameterisation)
-GenGamma                Generalized gamma distribution
-GenGamma.orig           Generalized gamma distribution (original
-                        parameterisation)
-Gompertz                The Gompertz distribution
-Llogis                  The log-logistic distribution
-Survspline              Royston/Parmar spline survival distribution
-Survsplinek             Royston/Parmar spline survival distribution
-                        functions
-WeibullPH               Weibull distribution in proportional hazards
-                        parameterisation
 ajfit                   Aalen-Johansen nonparametric estimates
                         comparable to a fitted flexsurvmix model
 ajfit_flexsurvmix       Forms a tidy data frame for plotting the fit of
@@ -29,6 +16,8 @@ bos                     Bronchiolitis obliterans syndrome after lung
                         transplants
 coef.flexsurvreg        Extract model coefficients from fitted flexible
                         survival models
+coxsnell_flexsurvreg    Cox-Snell residuals from a parametric survival
+                        model
 flexsurv-package        flexsurv: Flexible parametric survival and
                         multi-state models
 flexsurvmix             Flexible parametric mixture models for times to
@@ -44,12 +33,22 @@ fmixmsm                 Constructor for a mixture multi-state model
                         based on flexsurvmix
 fmsm                    Construct a multi-state model from a set of
                         parametric survival models
+GenF                    Generalized F distribution
+GenF.orig               Generalized F distribution (original
+                        parameterisation)
+GenGamma                Generalized gamma distribution
+GenGamma.orig           Generalized gamma distribution (original
+                        parameterisation)
 get_basepars            Evaluate baseline time-to-event distribution
                         parameters given covariate values in a
                         flexsurvmix model
 glance.flexsurvreg      Glance at a flexsurv model object
+Gompertz                The Gompertz distribution
 hexp                    Hazard and cumulative hazard functions
+hr_flexsurvreg          Hazard ratio as a function of time from a
+                        parametric survival model
 lines.flexsurvreg       Add fitted flexible survival curves to a plot
+Llogis                  The log-logistic distribution
 mean_exp                Mean and restricted mean survival functions
 mean_flexsurvmix        Mean times to events from a flexsurvmix model
 meanfinal_fmixmsm       Mean time to final state in a mixture
@@ -72,6 +71,8 @@ pdf_flexsurvmix         Fitted densities for times to events in a
 pfinal_fmsm             Probabilities of final states in a flexible
                         parametric competing risks model
 plot.flexsurvreg        Plots of fitted flexible survival models
+plot.standsurv          Plot standardized metrics from a fitted
+                        flexsurv model
 plot.survrtrunc         Plot nonparametric estimates of survival from
                         right-truncated data.
 pmatrix.fs              Transition probability matrix from a
@@ -105,15 +106,21 @@ simfs_bytrans           Reformat simulated multi-state data with one
                         row per simulated transition
 simt_flexsurvmix        Simulate times to competing events from a
                         mixture multi-state model
-simulate.flexsurvreg    Simulate datasets from a fitted flexsurvreg
-                        model
+simulate.flexsurvreg    Simulate censored time-to-event data from a
+                        fitted flexsurvreg model
+standsurv               Marginal survival and hazards of fitted
+                        flexsurvreg models
 summary.flexsurvreg     Summaries of fitted flexible survival models
 summary.flexsurvrtrunc
                         Summarise quantities of interest from fitted
                         flexsurvrtrunc models
 survrtrunc              Nonparametric estimator of survival from
                         right-truncated, uncensored data
+Survspline              Royston/Parmar spline survival distribution
+Survsplinek             Royston/Parmar spline survival distribution
+                        functions
 tidy.flexsurvreg        Tidy a flexsurv model object
+tidy.standsurv          Tidy a standsurv object.
 totlos.fs               Total length of stay in particular states for a
                         fully-parametric, time-inhomogeneous Markov
                         multi-state model
@@ -122,3 +129,5 @@ totlos.simfs            Expected total length of stay in specific
                         multi-state model
 unroll.function         Convert a function with matrix arguments to a
                         function with vector arguments.
+WeibullPH               Weibull distribution in proportional hazards
+                        parameterisation

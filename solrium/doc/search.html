@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Scott Chamberlain" />
+
+<meta name="date" content="2020-04-22" />
+
+<title>solr search</title>
+
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">solr search</h1>
+<h4 class="author">Scott Chamberlain</h4>
+<h4 class="date">2020-04-22</h4>
+
+
+
+<p><strong>A general purpose R interface to <a href="https://solr.apache.org/">Apache Solr</a></strong></p>
+<div id="installation" class="section level2">
+<h2>Installation</h2>
+<p>Stable version from CRAN</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;solrium&quot;</span>)</span></code></pre></div>
+<p>Or the development version from GitHub</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;ropensci/solrium&quot;</span>)</span></code></pre></div>
+<p>Load</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">library</span>(<span class="st">&quot;solrium&quot;</span>)</span></code></pre></div>
+</div>
+<div id="setup-connection" class="section level2">
+<h2>Setup connection</h2>
+<p>You can setup for a remote Solr instance or on your local machine.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>(conn &lt;-<span class="st"> </span>SolrClient<span class="op">$</span><span class="kw">new</span>(<span class="dt">host =</span> <span class="st">&quot;api.plos.org&quot;</span>, <span class="dt">path =</span> <span class="st">&quot;search&quot;</span>, <span class="dt">port =</span> <span class="ot">NULL</span>))</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; &lt;Solr Client&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt;   host: api.plos.org</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt;   path: search</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt;   port: </span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt;   scheme: http</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt;   errors: simple</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt;   proxy:</span></span></code></pre></div>
+</div>
+<div id="rundown" class="section level2">
+<h2>Rundown</h2>
+<p><code>solr_search()</code> only returns the <code>docs</code> element of a Solr response body. If <code>docs</code> is all you need, then this function will do the job. If you need facet data only, or mlt data only, see the appropriate functions for each of those below. Another function, <code>solr_all()</code> has a similar interface in terms of parameter as <code>solr_search()</code>, but returns all parts of the response body, including, facets, mlt, groups, stats, etc. as long as you request those.</p>
+</div>
+<div id="search-docs" class="section level2">
+<h2>Search docs</h2>
+<p><code>solr_search()</code> returns only docs. A basic search:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>conn<span class="op">$</span><span class="kw">search</span>(<span class="dt">params =</span> <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&#39;*:*&#39;</span>, <span class="dt">rows =</span> <span class="dv">2</span>, <span class="dt">fl =</span> <span class="st">&#39;id&#39;</span>))</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; # A tibble: 2 x 1</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt;   id                          </span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt;   &lt;chr&gt;                       </span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt; 1 10.1371/journal.pone.0020843</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt; 2 10.1371/journal.pone.0022257</span></span></code></pre></div>
+<p><strong>Search in specific fields with <code>:</code></strong></p>
+<p>Search for word ecology in title and cell in the body</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>conn<span class="op">$</span><span class="kw">search</span>(<span class="dt">params =</span> <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&#39;title:&quot;ecology&quot; AND body:&quot;cell&quot;&#39;</span>, <span class="dt">fl =</span> <span class="st">&#39;title&#39;</span>, <span class="dt">rows =</span> <span class="dv">5</span>))</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; # A tibble: 5 x 1</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt;   title                                                    </span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt;   &lt;chr&gt;                                                    </span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; 1 The Ecology of Collective Behavior                       </span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; 2 Chasing Ecological Interactions                          </span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; 3 Ecology&#39;s Big, Hot Idea                                  </span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; 4 Spatial Ecology of Bacteria at the Microscale in Soil    </span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; 5 Biofilm Formation As a Response to Ecological Competition</span></span></code></pre></div>
+<p><strong>Wildcards</strong></p>
+<p>Search for word that starts with “cell” in the title field</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>conn<span class="op">$</span><span class="kw">search</span>(<span class="dt">params =</span> <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&#39;title:&quot;cell*&quot;&#39;</span>, <span class="dt">fl =</span> <span class="st">&#39;title&#39;</span>, <span class="dt">rows =</span> <span class="dv">5</span>))</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt; # A tibble: 5 x 1</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt;   title                                                                         </span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt;   &lt;chr&gt;                                                                         </span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; 1 Altered Development of NKT Cells, γδ T Cells, CD8 T Cells and NK Cells in a P…</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; 2 Cancer Stem Cell-Like Side Population Cells in Clear Cell Renal Cell Carcinom…</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; 3 Cell-Cell Contact Preserves Cell Viability via Plakoglobin                    </span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; 4 Transgelin-2 in B-Cells Controls T-Cell Activation by Stabilizing T Cell - B …</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; 5 Tetherin Can Restrict Cell-Free and Cell-Cell Transmission of HIV from Primar…</span></span></code></pre></div>
+<p><strong>Proximity search</strong></p>
+<p>Search for words “sports” and “alcohol” within four words of each other</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>conn<span class="op">$</span><span class="kw">search</span>(<span class="dt">params =</span> <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&#39;everything:&quot;stem cell&quot;~7&#39;</span>, <span class="dt">fl =</span> <span class="st">&#39;title&#39;</span>, <span class="dt">rows =</span> <span class="dv">3</span>))</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co">#&gt; # A tibble: 3 x 1</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt;   title                                                                         </span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt;   &lt;chr&gt;                                                                         </span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt; 1 Effect of Dedifferentiation on Time to Mutation Acquisition in Stem Cell-Driv…</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt; 2 Symmetric vs. Asymmetric Stem Cell Divisions: An Adaptation against Cancer?   </span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; 3 Phenotypic Evolutionary Models in Stem Cell Biology: Replacement, Quiescence,…</span></span></code></pre></div>
+<p><strong>Range searches</strong></p>
+<p>Search for articles with Twitter count between 5 and 10</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>conn<span class="op">$</span><span class="kw">search</span>(<span class="dt">params =</span> <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&#39;*:*&#39;</span>, <span class="dt">fl =</span> <span class="kw">c</span>(<span class="st">&#39;alm_twitterCount&#39;</span>, <span class="st">&#39;id&#39;</span>), <span class="dt">fq =</span> <span class="st">&#39;alm_twitterCount:[5 TO 50]&#39;</span>, <span class="dt">rows =</span> <span class="dv">10</span>))</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt; # A tibble: 10 x 2</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt;    id                           alm_twitterCount</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt;    &lt;chr&gt;                                   &lt;int&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt;  1 10.1371/journal.pone.0020913               14</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt;  2 10.1371/journal.pone.0023176               12</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt;  3 10.1371/journal.pone.0023286               16</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt;  4 10.1371/journal.pone.0025390               32</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt;  5 10.1371/journal.pone.0013199               24</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt;  6 10.1371/journal.pone.0013196                5</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt;  7 10.1371/journal.pone.0009019               11</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt;  8 10.1371/journal.pone.0008993                6</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt;  9 10.1371/journal.pone.0021336               18</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt; 10 10.1371/journal.pone.0009042               18</span></span></code></pre></div>
+<p><strong>Boosts</strong></p>
+<p>Assign higher boost to title matches than to body matches (compare the two calls)</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>conn<span class="op">$</span><span class="kw">search</span>(<span class="dt">params =</span> <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&#39;title:&quot;cell&quot; abstract:&quot;science&quot;&#39;</span>, <span class="dt">fl =</span> <span class="st">&#39;title&#39;</span>, <span class="dt">rows =</span> <span class="dv">3</span>))</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#&gt; # A tibble: 3 x 1</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt;   title                                                                         </span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt;   &lt;chr&gt;                                                                         </span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt; 1 I Want More and Better Cells! – An Outreach Project about Stem Cells and Its …</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt; 2 Virtual Reconstruction and Three-Dimensional Printing of Blood Cells as a Too…</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt; 3 Globalization of Stem Cell Science: An Examination of Current and Past Collab…</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>conn<span class="op">$</span><span class="kw">search</span>(<span class="dt">params =</span> <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&#39;title:&quot;cell&quot;^1.5 AND abstract:&quot;science&quot;&#39;</span>, <span class="dt">fl =</span> <span class="st">&#39;title&#39;</span>, <span class="dt">rows =</span> <span class="dv">3</span>))</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co">#&gt; # A tibble: 3 x 1</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt;   title                                                                         </span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt;   &lt;chr&gt;                                                                         </span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt; 1 I Want More and Better Cells! – An Outreach Project about Stem Cells and Its …</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt; 2 Virtual Reconstruction and Three-Dimensional Printing of Blood Cells as a Too…</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt; 3 Globalization of Stem Cell Science: An Examination of Current and Past Collab…</span></span></code></pre></div>
+</div>
+<div id="search-all" class="section level2">
+<h2>Search all</h2>
+<p><code>solr_all()</code> differs from <code>solr_search()</code> in that it allows specifying facets, mlt, groups, stats, etc, and returns all of those. It defaults to <code>parsetype = &quot;list&quot;</code> and <code>wt=&quot;json&quot;</code>, whereas <code>solr_search()</code> defaults to <code>parsetype = &quot;df&quot;</code> and <code>wt=&quot;csv&quot;</code>. <code>solr_all()</code> returns by default a list, whereas <code>solr_search()</code> by default returns a data.frame.</p>
+<p>A basic search, just docs output</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>conn<span class="op">$</span><span class="kw">all</span>(<span class="dt">params =</span> <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&#39;*:*&#39;</span>, <span class="dt">rows =</span> <span class="dv">2</span>, <span class="dt">fl =</span> <span class="st">&#39;id&#39;</span>))</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co">#&gt; $search</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">#&gt; # A tibble: 2 x 1</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co">#&gt;   id                          </span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co">#&gt;   &lt;chr&gt;                       </span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="co">#&gt; 1 10.1371/journal.pone.0020843</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co">#&gt; 2 10.1371/journal.pone.0022257</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="co">#&gt; </span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="co">#&gt; $facet</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="co">#&gt; list()</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="co">#&gt; </span></span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="co">#&gt; $high</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="co">#&gt; # A tibble: 0 x 0</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="co">#&gt; </span></span>
+<span id="cb12-15"><a href="#cb12-15"></a><span class="co">#&gt; $mlt</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a><span class="co">#&gt; $mlt$docs</span></span>
+<span id="cb12-17"><a href="#cb12-17"></a><span class="co">#&gt; # A tibble: 2 x 1</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a><span class="co">#&gt;   id                          </span></span>
+<span id="cb12-19"><a href="#cb12-19"></a><span class="co">#&gt;   &lt;chr&gt;                       </span></span>
+<span id="cb12-20"><a href="#cb12-20"></a><span class="co">#&gt; 1 10.1371/journal.pone.0020843</span></span>
+<span id="cb12-21"><a href="#cb12-21"></a><span class="co">#&gt; 2 10.1371/journal.pone.0022257</span></span>
+<span id="cb12-22"><a href="#cb12-22"></a><span class="co">#&gt; </span></span>
+<span id="cb12-23"><a href="#cb12-23"></a><span class="co">#&gt; $mlt$mlt</span></span>
+<span id="cb12-24"><a href="#cb12-24"></a><span class="co">#&gt; list()</span></span>
+<span id="cb12-25"><a href="#cb12-25"></a><span class="co">#&gt; </span></span>
+<span id="cb12-26"><a href="#cb12-26"></a><span class="co">#&gt; </span></span>
+<span id="cb12-27"><a href="#cb12-27"></a><span class="co">#&gt; $group</span></span>
+<span id="cb12-28"><a href="#cb12-28"></a><span class="co">#&gt;   numFound start                           id</span></span>
+<span id="cb12-29"><a href="#cb12-29"></a><span class="co">#&gt; 1  2349539     0 10.1371/journal.pone.0020843</span></span>
+<span id="cb12-30"><a href="#cb12-30"></a><span class="co">#&gt; 2  2349539     0 10.1371/journal.pone.0022257</span></span>
+<span id="cb12-31"><a href="#cb12-31"></a><span class="co">#&gt; </span></span>
+<span id="cb12-32"><a href="#cb12-32"></a><span class="co">#&gt; $stats</span></span>
+<span id="cb12-33"><a href="#cb12-33"></a><span class="co">#&gt; NULL</span></span></code></pre></div>
+<p>Get docs, mlt, and stats output</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>conn<span class="op">$</span><span class="kw">all</span>(<span class="dt">params =</span> <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&#39;ecology&#39;</span>, <span class="dt">rows =</span> <span class="dv">2</span>, <span class="dt">fl =</span> <span class="st">&#39;id&#39;</span>, <span class="dt">mlt =</span> <span class="st">&#39;true&#39;</span>, <span class="dt">mlt.count =</span> <span class="dv">2</span>, <span class="dt">mlt.fl =</span> <span class="st">&#39;abstract&#39;</span>, <span class="dt">stats =</span> <span class="st">&#39;true&#39;</span>, <span class="dt">stats.field =</span> <span class="st">&#39;counter_total_all&#39;</span>))</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt; $search</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt; # A tibble: 2 x 1</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt;   id                          </span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#&gt;   &lt;chr&gt;                       </span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#&gt; 1 10.1371/journal.pone.0001248</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="co">#&gt; 2 10.1371/journal.pone.0059813</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="co">#&gt; </span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co">#&gt; $facet</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt; list()</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="co">#&gt; </span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="co">#&gt; $high</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="co">#&gt; # A tibble: 0 x 0</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="co">#&gt; </span></span>
+<span id="cb13-15"><a href="#cb13-15"></a><span class="co">#&gt; $mlt</span></span>
+<span id="cb13-16"><a href="#cb13-16"></a><span class="co">#&gt; $mlt$docs</span></span>
+<span id="cb13-17"><a href="#cb13-17"></a><span class="co">#&gt; # A tibble: 2 x 1</span></span>
+<span id="cb13-18"><a href="#cb13-18"></a><span class="co">#&gt;   id                          </span></span>
+<span id="cb13-19"><a href="#cb13-19"></a><span class="co">#&gt;   &lt;chr&gt;                       </span></span>
+<span id="cb13-20"><a href="#cb13-20"></a><span class="co">#&gt; 1 10.1371/journal.pone.0001248</span></span>
+<span id="cb13-21"><a href="#cb13-21"></a><span class="co">#&gt; 2 10.1371/journal.pone.0059813</span></span>
+<span id="cb13-22"><a href="#cb13-22"></a><span class="co">#&gt; </span></span>
+<span id="cb13-23"><a href="#cb13-23"></a><span class="co">#&gt; $mlt$mlt</span></span>
+<span id="cb13-24"><a href="#cb13-24"></a><span class="co">#&gt; $mlt$mlt$`10.1371/journal.pone.0001248`</span></span>
+<span id="cb13-25"><a href="#cb13-25"></a><span class="co">#&gt; # A tibble: 2 x 3</span></span>
+<span id="cb13-26"><a href="#cb13-26"></a><span class="co">#&gt;   numFound start id                          </span></span>
+<span id="cb13-27"><a href="#cb13-27"></a><span class="co">#&gt;      &lt;int&gt; &lt;int&gt; &lt;chr&gt;                       </span></span>
+<span id="cb13-28"><a href="#cb13-28"></a><span class="co">#&gt; 1   245661     0 10.1371/journal.pone.0001275</span></span>
+<span id="cb13-29"><a href="#cb13-29"></a><span class="co">#&gt; 2   245661     0 10.1371/journal.pbio.1002448</span></span>
+<span id="cb13-30"><a href="#cb13-30"></a><span class="co">#&gt; </span></span>
+<span id="cb13-31"><a href="#cb13-31"></a><span class="co">#&gt; $mlt$mlt$`10.1371/journal.pone.0059813`</span></span>
+<span id="cb13-32"><a href="#cb13-32"></a><span class="co">#&gt; # A tibble: 2 x 3</span></span>
+<span id="cb13-33"><a href="#cb13-33"></a><span class="co">#&gt;   numFound start id                          </span></span>
+<span id="cb13-34"><a href="#cb13-34"></a><span class="co">#&gt;      &lt;int&gt; &lt;int&gt; &lt;chr&gt;                       </span></span>
+<span id="cb13-35"><a href="#cb13-35"></a><span class="co">#&gt; 1   237548     0 10.1371/journal.pone.0210707</span></span>
+<span id="cb13-36"><a href="#cb13-36"></a><span class="co">#&gt; 2   237548     0 10.1371/journal.pone.0204749</span></span>
+<span id="cb13-37"><a href="#cb13-37"></a><span class="co">#&gt; </span></span>
+<span id="cb13-38"><a href="#cb13-38"></a><span class="co">#&gt; </span></span>
+<span id="cb13-39"><a href="#cb13-39"></a><span class="co">#&gt; </span></span>
+<span id="cb13-40"><a href="#cb13-40"></a><span class="co">#&gt; $group</span></span>
+<span id="cb13-41"><a href="#cb13-41"></a><span class="co">#&gt;   numFound start                           id</span></span>
+<span id="cb13-42"><a href="#cb13-42"></a><span class="co">#&gt; 1    51895     0 10.1371/journal.pone.0001248</span></span>
+<span id="cb13-43"><a href="#cb13-43"></a><span class="co">#&gt; 2    51895     0 10.1371/journal.pone.0059813</span></span>
+<span id="cb13-44"><a href="#cb13-44"></a><span class="co">#&gt; </span></span>
+<span id="cb13-45"><a href="#cb13-45"></a><span class="co">#&gt; $stats</span></span>
+<span id="cb13-46"><a href="#cb13-46"></a><span class="co">#&gt; $stats$data</span></span>
+<span id="cb13-47"><a href="#cb13-47"></a><span class="co">#&gt;                   min     max count missing       sum sumOfSquares     mean</span></span>
+<span id="cb13-48"><a href="#cb13-48"></a><span class="co">#&gt; counter_total_all   0 1532460 51895       0 324414287 1.533069e+13 6251.359</span></span>
+<span id="cb13-49"><a href="#cb13-49"></a><span class="co">#&gt;                     stddev</span></span>
+<span id="cb13-50"><a href="#cb13-50"></a><span class="co">#&gt; counter_total_all 16010.71</span></span>
+<span id="cb13-51"><a href="#cb13-51"></a><span class="co">#&gt; </span></span>
+<span id="cb13-52"><a href="#cb13-52"></a><span class="co">#&gt; $stats$facet</span></span>
+<span id="cb13-53"><a href="#cb13-53"></a><span class="co">#&gt; NULL</span></span></code></pre></div>
+</div>
+<div id="facet" class="section level2">
+<h2>Facet</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>conn<span class="op">$</span><span class="kw">facet</span>(<span class="dt">params =</span> <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&#39;*:*&#39;</span>, <span class="dt">facet.field =</span> <span class="st">&#39;journal&#39;</span>, <span class="dt">facet.query =</span> <span class="kw">c</span>(<span class="st">&#39;cell&#39;</span>, <span class="st">&#39;bird&#39;</span>)))</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="co">#&gt; $facet_queries</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="co">#&gt; # A tibble: 2 x 2</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co">#&gt;   term   value</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;int&gt;</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="co">#&gt; 1 cell  186815</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co">#&gt; 2 bird   20072</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="co">#&gt; </span></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="co">#&gt; $facet_fields</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="co">#&gt; $facet_fields$journal</span></span>
+<span id="cb14-11"><a href="#cb14-11"></a><span class="co">#&gt; # A tibble: 9 x 2</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a><span class="co">#&gt;   term                             value  </span></span>
+<span id="cb14-13"><a href="#cb14-13"></a><span class="co">#&gt;   &lt;fct&gt;                            &lt;fct&gt;  </span></span>
+<span id="cb14-14"><a href="#cb14-14"></a><span class="co">#&gt; 1 plos one                         1946213</span></span>
+<span id="cb14-15"><a href="#cb14-15"></a><span class="co">#&gt; 2 plos genetics                    72617  </span></span>
+<span id="cb14-16"><a href="#cb14-16"></a><span class="co">#&gt; 3 plos pathogens                   66100  </span></span>
+<span id="cb14-17"><a href="#cb14-17"></a><span class="co">#&gt; 4 plos neglected tropical diseases 65251  </span></span>
+<span id="cb14-18"><a href="#cb14-18"></a><span class="co">#&gt; 5 plos computational biology       59985  </span></span>
+<span id="cb14-19"><a href="#cb14-19"></a><span class="co">#&gt; 6 plos biology                     42060  </span></span>
+<span id="cb14-20"><a href="#cb14-20"></a><span class="co">#&gt; 7 plos medicine                    29915  </span></span>
+<span id="cb14-21"><a href="#cb14-21"></a><span class="co">#&gt; 8 plos clinical trials             521    </span></span>
+<span id="cb14-22"><a href="#cb14-22"></a><span class="co">#&gt; 9 plos medicin                     9      </span></span>
+<span id="cb14-23"><a href="#cb14-23"></a><span class="co">#&gt; </span></span>
+<span id="cb14-24"><a href="#cb14-24"></a><span class="co">#&gt; </span></span>
+<span id="cb14-25"><a href="#cb14-25"></a><span class="co">#&gt; $facet_pivot</span></span>
+<span id="cb14-26"><a href="#cb14-26"></a><span class="co">#&gt; NULL</span></span>
+<span id="cb14-27"><a href="#cb14-27"></a><span class="co">#&gt; </span></span>
+<span id="cb14-28"><a href="#cb14-28"></a><span class="co">#&gt; $facet_dates</span></span>
+<span id="cb14-29"><a href="#cb14-29"></a><span class="co">#&gt; NULL</span></span>
+<span id="cb14-30"><a href="#cb14-30"></a><span class="co">#&gt; </span></span>
+<span id="cb14-31"><a href="#cb14-31"></a><span class="co">#&gt; $facet_ranges</span></span>
+<span id="cb14-32"><a href="#cb14-32"></a><span class="co">#&gt; NULL</span></span></code></pre></div>
+</div>
+<div id="highlight" class="section level2">
+<h2>Highlight</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>conn<span class="op">$</span><span class="kw">highlight</span>(<span class="dt">params =</span> <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&#39;alcohol&#39;</span>, <span class="dt">hl.fl =</span> <span class="st">&#39;abstract&#39;</span>, <span class="dt">rows =</span> <span class="dv">2</span>))</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="co">#&gt; # A tibble: 2 x 2</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="co">#&gt;   names                 abstract                                                </span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co">#&gt;   &lt;chr&gt;                 &lt;chr&gt;                                                   </span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="co">#&gt; 1 10.1371/journal.pone… Background: Binge drinking, an increasingly common form…</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="co">#&gt; 2 10.1371/journal.pone… Background and Aim: Harmful &lt;em&gt;alcohol&lt;/em&gt; consumptio…</span></span></code></pre></div>
+</div>
+<div id="stats" class="section level2">
+<h2>Stats</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>out &lt;-<span class="st"> </span>conn<span class="op">$</span><span class="kw">stats</span>(<span class="dt">params =</span> <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&#39;ecology&#39;</span>, <span class="dt">stats.field =</span> <span class="kw">c</span>(<span class="st">&#39;counter_total_all&#39;</span>, <span class="st">&#39;alm_twitterCount&#39;</span>), <span class="dt">stats.facet =</span> <span class="kw">c</span>(<span class="st">&#39;journal&#39;</span>, <span class="st">&#39;volume&#39;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>out<span class="op">$</span>data</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="co">#&gt;                   min     max count missing       sum sumOfSquares        mean</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="co">#&gt; counter_total_all   0 1532460 51895       0 324414287 1.533069e+13 6251.359225</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="co">#&gt; alm_twitterCount    0    3439 51895       0    308886 8.194604e+07    5.952134</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="co">#&gt;                        stddev</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="co">#&gt; counter_total_all 16010.71374</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="co">#&gt; alm_twitterCount     39.28964</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>out<span class="op">$</span>facet</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="co">#&gt; $counter_total_all</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="co">#&gt; $counter_total_all$volume</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="co">#&gt; # A tibble: 18 x 9</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="co">#&gt;    volume   min     max count missing      sum  sumOfSquares   mean stddev</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="co">#&gt;    &lt;chr&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="co">#&gt;  1 11         0  300326  5264       0 26131455  498787135805  4964.  8374.</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="co">#&gt;  2 12         0  637916  5078       0 23045890  754959012682  4538. 11318.</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="co">#&gt;  3 13         0  187650  4772       0 14469852  185727513548  3032.  5453.</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="co">#&gt;  4 14         0  202041  4117       0  8965786  135038722582  2178.  5298.</span></span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="co">#&gt;  5 15         0   56955  1558       0  3703520   44446597378  2377.  4785.</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a><span class="co">#&gt;  6 16         0   51981   278       0  1639028   23503754454  5896.  7069.</span></span>
+<span id="cb18-13"><a href="#cb18-13"></a><span class="co">#&gt;  7 17         0   64350   145       0   957264   12461694744  6602.  6531.</span></span>
+<span id="cb18-14"><a href="#cb18-14"></a><span class="co">#&gt;  8 18        10   10293    25       0    87761     452935251  3510.  2457.</span></span>
+<span id="cb18-15"><a href="#cb18-15"></a><span class="co">#&gt;  9 1       2201  394613    81       0  2136280  281140741696 26374. 53009.</span></span>
+<span id="cb18-16"><a href="#cb18-16"></a><span class="co">#&gt; 10 2          0  160743   483       0  7874872  316645622198 16304. 19763.</span></span>
+<span id="cb18-17"><a href="#cb18-17"></a><span class="co">#&gt; 11 3          0  140263   743       0 10322036  340678112084 13892. 16306.</span></span>
+<span id="cb18-18"><a href="#cb18-18"></a><span class="co">#&gt; 12 4          0  421769  1010       0 13320977  619882873519 13189. 20982.</span></span>
+<span id="cb18-19"><a href="#cb18-19"></a><span class="co">#&gt; 13 5          0  261787  1539       0 17578591  518230843883 11422. 14367.</span></span>
+<span id="cb18-20"><a href="#cb18-20"></a><span class="co">#&gt; 14 6          0  421511  2949       0 27083643  844617111025  9184. 14217.</span></span>
+<span id="cb18-21"><a href="#cb18-21"></a><span class="co">#&gt; 15 7          0  337925  4826       0 39377491 1060307559235  8159. 12376.</span></span>
+<span id="cb18-22"><a href="#cb18-22"></a><span class="co">#&gt; 16 8          0  662892  6363       0 46269702 1567973982796  7272. 13913.</span></span>
+<span id="cb18-23"><a href="#cb18-23"></a><span class="co">#&gt; 17 9          0 1532460  6622       0 45978003 4777504680537  6943. 25949.</span></span>
+<span id="cb18-24"><a href="#cb18-24"></a><span class="co">#&gt; 18 10         0 1245813  6042       0 35472136 3348332631936  5871. 22799.</span></span>
+<span id="cb18-25"><a href="#cb18-25"></a><span class="co">#&gt; </span></span>
+<span id="cb18-26"><a href="#cb18-26"></a><span class="co">#&gt; $counter_total_all$journal</span></span>
+<span id="cb18-27"><a href="#cb18-27"></a><span class="co">#&gt; # A tibble: 9 x 9</span></span>
+<span id="cb18-28"><a href="#cb18-28"></a><span class="co">#&gt;   journal   min     max count missing       sum  sumOfSquares   mean stddev</span></span>
+<span id="cb18-29"><a href="#cb18-29"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;   &lt;int&gt;     &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span id="cb18-30"><a href="#cb18-30"></a><span class="co">#&gt; 1 1        1443  227764  1249       0   9827787  251663612483  7869. 11819.</span></span>
+<span id="cb18-31"><a href="#cb18-31"></a><span class="co">#&gt; 2 2           0  429864  1329       0  24811193 1527110853031 18669. 28304.</span></span>
+<span id="cb18-32"><a href="#cb18-32"></a><span class="co">#&gt; 3 3           0  337925   355       0   7588181  509085551899 21375. 31303.</span></span>
+<span id="cb18-33"><a href="#cb18-33"></a><span class="co">#&gt; 4 4        9559   19071     2       0     28630     455077522 14315   6726.</span></span>
+<span id="cb18-34"><a href="#cb18-34"></a><span class="co">#&gt; 5 5           0 1245813 43312       0 236610221 9778305707321  5463. 13997.</span></span>
+<span id="cb18-35"><a href="#cb18-35"></a><span class="co">#&gt; 6 6           0  181861   957       0   9440164  202232267528  9864. 10683.</span></span>
+<span id="cb18-36"><a href="#cb18-36"></a><span class="co">#&gt; 7 7           0  163569  1153       0  11587785  234170621039 10050. 10108.</span></span>
+<span id="cb18-37"><a href="#cb18-37"></a><span class="co">#&gt; 8 8           0  343133  2440       0  14360560  292773478918  5885.  9240.</span></span>
+<span id="cb18-38"><a href="#cb18-38"></a><span class="co">#&gt; 9 9           0 1532460  1098       0  10159766 2534894355612  9253. 47170.</span></span>
+<span id="cb18-39"><a href="#cb18-39"></a><span class="co">#&gt; </span></span>
+<span id="cb18-40"><a href="#cb18-40"></a><span class="co">#&gt; </span></span>
+<span id="cb18-41"><a href="#cb18-41"></a><span class="co">#&gt; $alm_twitterCount</span></span>
+<span id="cb18-42"><a href="#cb18-42"></a><span class="co">#&gt; $alm_twitterCount$volume</span></span>
+<span id="cb18-43"><a href="#cb18-43"></a><span class="co">#&gt; # A tibble: 18 x 9</span></span>
+<span id="cb18-44"><a href="#cb18-44"></a><span class="co">#&gt;    volume   min   max count missing   sum sumOfSquares  mean stddev</span></span>
+<span id="cb18-45"><a href="#cb18-45"></a><span class="co">#&gt;    &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;   &lt;int&gt; &lt;dbl&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span id="cb18-46"><a href="#cb18-46"></a><span class="co">#&gt;  1 11         0  2142  5264       0 52454     11452818  9.96 45.6  </span></span>
+<span id="cb18-47"><a href="#cb18-47"></a><span class="co">#&gt;  2 12         0  1890  5078       0 39451     11059295  7.77 46.0  </span></span>
+<span id="cb18-48"><a href="#cb18-48"></a><span class="co">#&gt;  3 13         0   581  4772       0 17551      2521623  3.68 22.7  </span></span>
+<span id="cb18-49"><a href="#cb18-49"></a><span class="co">#&gt;  4 14         0   984  4117       0 15341      4027537  3.73 31.1  </span></span>
+<span id="cb18-50"><a href="#cb18-50"></a><span class="co">#&gt;  5 15         0   453  1558       0  6235       912739  4.00 23.9  </span></span>
+<span id="cb18-51"><a href="#cb18-51"></a><span class="co">#&gt;  6 16         0   456   278       0  2853       414803 10.3  37.3  </span></span>
+<span id="cb18-52"><a href="#cb18-52"></a><span class="co">#&gt;  7 17         0    44   145       0   224         5628  1.54  6.06 </span></span>
+<span id="cb18-53"><a href="#cb18-53"></a><span class="co">#&gt;  8 18         0     3    25       0     5           11  0.2   0.645</span></span>
+<span id="cb18-54"><a href="#cb18-54"></a><span class="co">#&gt;  9 1          0    47    81       0   208         6306  2.57  8.49 </span></span>
+<span id="cb18-55"><a href="#cb18-55"></a><span class="co">#&gt; 10 2          0   125   483       0  1119        63677  2.32 11.3  </span></span>
+<span id="cb18-56"><a href="#cb18-56"></a><span class="co">#&gt; 11 3          0   504   743       0  1408       271870  1.90 19.0  </span></span>
+<span id="cb18-57"><a href="#cb18-57"></a><span class="co">#&gt; 12 4          0   313  1010       0  1658       155910  1.64 12.3  </span></span>
+<span id="cb18-58"><a href="#cb18-58"></a><span class="co">#&gt; 13 5          0   165  1539       0  2698       142098  1.75  9.45 </span></span>
+<span id="cb18-59"><a href="#cb18-59"></a><span class="co">#&gt; 14 6          0   972  2949       0  5733      1647077  1.94 23.6  </span></span>
+<span id="cb18-60"><a href="#cb18-60"></a><span class="co">#&gt; 15 7          0   864  4826       0 21873      2587889  4.53 22.7  </span></span>
+<span id="cb18-61"><a href="#cb18-61"></a><span class="co">#&gt; 16 8          0  2029  6363       0 40730     10857672  6.40 40.8  </span></span>
+<span id="cb18-62"><a href="#cb18-62"></a><span class="co">#&gt; 17 9          0  1880  6622       0 55312     17034646  8.35 50.0  </span></span>
+<span id="cb18-63"><a href="#cb18-63"></a><span class="co">#&gt; 18 10         0  3439  6042       0 44033     18784443  7.29 55.3  </span></span>
+<span id="cb18-64"><a href="#cb18-64"></a><span class="co">#&gt; </span></span>
+<span id="cb18-65"><a href="#cb18-65"></a><span class="co">#&gt; $alm_twitterCount$journal</span></span>
+<span id="cb18-66"><a href="#cb18-66"></a><span class="co">#&gt; # A tibble: 9 x 9</span></span>
+<span id="cb18-67"><a href="#cb18-67"></a><span class="co">#&gt;   journal   min   max count missing    sum sumOfSquares  mean stddev</span></span>
+<span id="cb18-68"><a href="#cb18-68"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;   &lt;int&gt;  &lt;dbl&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span id="cb18-69"><a href="#cb18-69"></a><span class="co">#&gt; 1 1           0   456  1249       0   7370       577214  5.90  20.7 </span></span>
+<span id="cb18-70"><a href="#cb18-70"></a><span class="co">#&gt; 2 2           0  2142  1329       0  39113     15093463 29.4  102.  </span></span>
+<span id="cb18-71"><a href="#cb18-71"></a><span class="co">#&gt; 3 3           0   832   355       0   5830      1219358 16.4   56.3 </span></span>
+<span id="cb18-72"><a href="#cb18-72"></a><span class="co">#&gt; 4 4           0     3     2       0      3            9  1.5    2.12</span></span>
+<span id="cb18-73"><a href="#cb18-73"></a><span class="co">#&gt; 5 5           0  3439 43312       0 216075     61407349  4.99  37.3 </span></span>
+<span id="cb18-74"><a href="#cb18-74"></a><span class="co">#&gt; 6 6           0   250   957       0   8508       415112  8.89  18.8 </span></span>
+<span id="cb18-75"><a href="#cb18-75"></a><span class="co">#&gt; 7 7           0   230  1153       0   9273       461699  8.04  18.3 </span></span>
+<span id="cb18-76"><a href="#cb18-76"></a><span class="co">#&gt; 8 8           0   972  2440       0  11854      1563704  4.86  24.8 </span></span>
+<span id="cb18-77"><a href="#cb18-77"></a><span class="co">#&gt; 9 9           0   581  1098       0  10860      1208134  9.89  31.7</span></span></code></pre></div>
+</div>
+<div id="more-like-this" class="section level2">
+<h2>More like this</h2>
+<p><code>solr_mlt</code> is a function to return similar documents to the one</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>out &lt;-<span class="st"> </span>conn<span class="op">$</span><span class="kw">mlt</span>(<span class="dt">params =</span> <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&#39;title:&quot;ecology&quot; AND body:&quot;cell&quot;&#39;</span>, <span class="dt">mlt.fl =</span> <span class="st">&#39;title&#39;</span>, <span class="dt">mlt.mindf =</span> <span class="dv">1</span>, <span class="dt">mlt.mintf =</span> <span class="dv">1</span>, <span class="dt">fl =</span> <span class="st">&#39;counter_total_all&#39;</span>, <span class="dt">rows =</span> <span class="dv">5</span>))</span>
+<span id="cb19-2"><a href="#cb19-2"></a>out<span class="op">$</span>docs</span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="co">#&gt; # A tibble: 5 x 2</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="co">#&gt;   id                           counter_total_all</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="co">#&gt;   &lt;chr&gt;                                    &lt;int&gt;</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a><span class="co">#&gt; 1 10.1371/journal.pbio.1001805             25190</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="co">#&gt; 2 10.1371/journal.pbio.1002559             13578</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="co">#&gt; 3 10.1371/journal.pbio.0020440             26486</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a><span class="co">#&gt; 4 10.1371/journal.pone.0087217             19956</span></span>
+<span id="cb19-10"><a href="#cb19-10"></a><span class="co">#&gt; 5 10.1371/journal.pbio.1002191             30074</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>out<span class="op">$</span>mlt</span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="co">#&gt; $`10.1371/journal.pbio.1001805`</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="co">#&gt; # A tibble: 5 x 4</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="co">#&gt;   numFound start id                           counter_total_all</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="co">#&gt;      &lt;int&gt; &lt;int&gt; &lt;chr&gt;                                    &lt;int&gt;</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="co">#&gt; 1     4900     0 10.1371/journal.pone.0098876              4302</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="co">#&gt; 2     4900     0 10.1371/journal.pone.0082578              3542</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a><span class="co">#&gt; 3     4900     0 10.1371/journal.pone.0193049              2661</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="co">#&gt; 4     4900     0 10.1371/journal.pone.0102159              2687</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a><span class="co">#&gt; 5     4900     0 10.1371/journal.pcbi.1002652              4687</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a><span class="co">#&gt; </span></span>
+<span id="cb20-12"><a href="#cb20-12"></a><span class="co">#&gt; $`10.1371/journal.pbio.1002559`</span></span>
+<span id="cb20-13"><a href="#cb20-13"></a><span class="co">#&gt; # A tibble: 5 x 4</span></span>
+<span id="cb20-14"><a href="#cb20-14"></a><span class="co">#&gt;   numFound start id                           counter_total_all</span></span>
+<span id="cb20-15"><a href="#cb20-15"></a><span class="co">#&gt;      &lt;int&gt; &lt;int&gt; &lt;chr&gt;                                    &lt;int&gt;</span></span>
+<span id="cb20-16"><a href="#cb20-16"></a><span class="co">#&gt; 1     6461     0 10.1371/journal.pone.0155028              4235</span></span>
+<span id="cb20-17"><a href="#cb20-17"></a><span class="co">#&gt; 2     6461     0 10.1371/journal.pone.0041684             29479</span></span>
+<span id="cb20-18"><a href="#cb20-18"></a><span class="co">#&gt; 3     6461     0 10.1371/journal.pone.0023086             10177</span></span>
+<span id="cb20-19"><a href="#cb20-19"></a><span class="co">#&gt; 4     6461     0 10.1371/journal.pone.0155989              3893</span></span>
+<span id="cb20-20"><a href="#cb20-20"></a><span class="co">#&gt; 5     6461     0 10.1371/journal.pone.0223982               728</span></span>
+<span id="cb20-21"><a href="#cb20-21"></a><span class="co">#&gt; </span></span>
+<span id="cb20-22"><a href="#cb20-22"></a><span class="co">#&gt; $`10.1371/journal.pbio.0020440`</span></span>
+<span id="cb20-23"><a href="#cb20-23"></a><span class="co">#&gt; # A tibble: 5 x 4</span></span>
+<span id="cb20-24"><a href="#cb20-24"></a><span class="co">#&gt;   numFound start id                           counter_total_all</span></span>
+<span id="cb20-25"><a href="#cb20-25"></a><span class="co">#&gt;      &lt;int&gt; &lt;int&gt; &lt;chr&gt;                                    &lt;int&gt;</span></span>
+<span id="cb20-26"><a href="#cb20-26"></a><span class="co">#&gt; 1     1428     0 10.1371/journal.pone.0162651              3981</span></span>
+<span id="cb20-27"><a href="#cb20-27"></a><span class="co">#&gt; 2     1428     0 10.1371/journal.pone.0003259              3543</span></span>
+<span id="cb20-28"><a href="#cb20-28"></a><span class="co">#&gt; 3     1428     0 10.1371/journal.pone.0102679              5638</span></span>
+<span id="cb20-29"><a href="#cb20-29"></a><span class="co">#&gt; 4     1428     0 10.1371/journal.pone.0068814             10143</span></span>
+<span id="cb20-30"><a href="#cb20-30"></a><span class="co">#&gt; 5     1428     0 10.1371/journal.pntd.0003377              4835</span></span>
+<span id="cb20-31"><a href="#cb20-31"></a><span class="co">#&gt; </span></span>
+<span id="cb20-32"><a href="#cb20-32"></a><span class="co">#&gt; $`10.1371/journal.pone.0087217`</span></span>
+<span id="cb20-33"><a href="#cb20-33"></a><span class="co">#&gt; # A tibble: 5 x 4</span></span>
+<span id="cb20-34"><a href="#cb20-34"></a><span class="co">#&gt;   numFound start id                           counter_total_all</span></span>
+<span id="cb20-35"><a href="#cb20-35"></a><span class="co">#&gt;      &lt;int&gt; &lt;int&gt; &lt;chr&gt;                                    &lt;int&gt;</span></span>
+<span id="cb20-36"><a href="#cb20-36"></a><span class="co">#&gt; 1     5802     0 10.1371/journal.pone.0175497              2448</span></span>
+<span id="cb20-37"><a href="#cb20-37"></a><span class="co">#&gt; 2     5802     0 10.1371/journal.pone.0204743               377</span></span>
+<span id="cb20-38"><a href="#cb20-38"></a><span class="co">#&gt; 3     5802     0 10.1371/journal.pone.0159131              6664</span></span>
+<span id="cb20-39"><a href="#cb20-39"></a><span class="co">#&gt; 4     5802     0 10.1371/journal.pone.0220409              1224</span></span>
+<span id="cb20-40"><a href="#cb20-40"></a><span class="co">#&gt; 5     5802     0 10.1371/journal.pone.0123774              2454</span></span>
+<span id="cb20-41"><a href="#cb20-41"></a><span class="co">#&gt; </span></span>
+<span id="cb20-42"><a href="#cb20-42"></a><span class="co">#&gt; $`10.1371/journal.pbio.1002191`</span></span>
+<span id="cb20-43"><a href="#cb20-43"></a><span class="co">#&gt; # A tibble: 5 x 4</span></span>
+<span id="cb20-44"><a href="#cb20-44"></a><span class="co">#&gt;   numFound start id                           counter_total_all</span></span>
+<span id="cb20-45"><a href="#cb20-45"></a><span class="co">#&gt;      &lt;int&gt; &lt;int&gt; &lt;chr&gt;                                    &lt;int&gt;</span></span>
+<span id="cb20-46"><a href="#cb20-46"></a><span class="co">#&gt; 1    15002     0 10.1371/journal.pbio.1002232                 0</span></span>
+<span id="cb20-47"><a href="#cb20-47"></a><span class="co">#&gt; 2    15002     0 10.1371/journal.pone.0131700              3824</span></span>
+<span id="cb20-48"><a href="#cb20-48"></a><span class="co">#&gt; 3    15002     0 10.1371/journal.pone.0070448              2713</span></span>
+<span id="cb20-49"><a href="#cb20-49"></a><span class="co">#&gt; 4    15002     0 10.1371/journal.pone.0191705              1971</span></span>
+<span id="cb20-50"><a href="#cb20-50"></a><span class="co">#&gt; 5    15002     0 10.1371/journal.pone.0160798              4387</span></span></code></pre></div>
+</div>
+<div id="groups" class="section level2">
+<h2>Groups</h2>
+<p><code>solr_groups()</code> is a function to return similar documents to the one</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>conn<span class="op">$</span><span class="kw">group</span>(<span class="dt">params =</span> <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&#39;ecology&#39;</span>, <span class="dt">group.field =</span> <span class="st">&#39;journal&#39;</span>, <span class="dt">group.limit =</span> <span class="dv">1</span>, <span class="dt">fl =</span> <span class="kw">c</span>(<span class="st">&#39;id&#39;</span>, <span class="st">&#39;alm_twitterCount&#39;</span>)))</span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="co">#&gt;                         groupValue numFound start                           id</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="co">#&gt; 1                         plos one    43312     0 10.1371/journal.pone.0001248</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="co">#&gt; 2       plos computational biology     1098     0 10.1371/journal.pcbi.1003594</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="co">#&gt; 3                     plos biology     1329     0 10.1371/journal.pbio.0060300</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="co">#&gt; 4                    plos genetics     1153     0 10.1371/journal.pgen.1005860</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="co">#&gt; 5 plos neglected tropical diseases     2440     0 10.1371/journal.pntd.0004689</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="co">#&gt; 6                   plos pathogens      957     0 10.1371/journal.ppat.1005780</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a><span class="co">#&gt; 7                             none     1249     0 10.1371/journal.pone.0046761</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a><span class="co">#&gt; 8                    plos medicine      355     0 10.1371/journal.pmed.1000303</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a><span class="co">#&gt; 9             plos clinical trials        2     0 10.1371/journal.pctr.0020010</span></span>
+<span id="cb21-12"><a href="#cb21-12"></a><span class="co">#&gt;   alm_twitterCount</span></span>
+<span id="cb21-13"><a href="#cb21-13"></a><span class="co">#&gt; 1                0</span></span>
+<span id="cb21-14"><a href="#cb21-14"></a><span class="co">#&gt; 2               21</span></span>
+<span id="cb21-15"><a href="#cb21-15"></a><span class="co">#&gt; 3                0</span></span>
+<span id="cb21-16"><a href="#cb21-16"></a><span class="co">#&gt; 4              135</span></span>
+<span id="cb21-17"><a href="#cb21-17"></a><span class="co">#&gt; 5               13</span></span>
+<span id="cb21-18"><a href="#cb21-18"></a><span class="co">#&gt; 6               19</span></span>
+<span id="cb21-19"><a href="#cb21-19"></a><span class="co">#&gt; 7                0</span></span>
+<span id="cb21-20"><a href="#cb21-20"></a><span class="co">#&gt; 8                1</span></span>
+<span id="cb21-21"><a href="#cb21-21"></a><span class="co">#&gt; 9                0</span></span></code></pre></div>
+</div>
+<div id="parsing" class="section level2">
+<h2>Parsing</h2>
+<p><code>solr_parse()</code> is a general purpose parser function with extension methods for parsing outputs from functions in <code>solr</code>. <code>solr_parse()</code> is used internally within functions to do parsing after retrieving data from the server. You can optionally get back raw <code>json</code>, <code>xml</code>, or <code>csv</code> with the <code>raw=TRUE</code>, and then parse afterwards with <code>solr_parse()</code>.</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>(out &lt;-<span class="st"> </span>conn<span class="op">$</span><span class="kw">highlight</span>(<span class="dt">params =</span> <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&#39;alcohol&#39;</span>, <span class="dt">hl.fl =</span> <span class="st">&#39;abstract&#39;</span>, <span class="dt">rows =</span> <span class="dv">2</span>), <span class="dt">raw =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="co">#&gt; [1] &quot;{\n  \&quot;response\&quot;:{\&quot;numFound\&quot;:32898,\&quot;start\&quot;:0,\&quot;maxScore\&quot;:4.737952,\&quot;docs\&quot;:[\n      {\n        \&quot;id\&quot;:\&quot;10.1371/journal.pone.0218147\&quot;,\n        \&quot;journal\&quot;:\&quot;PLOS ONE\&quot;,\n        \&quot;eissn\&quot;:\&quot;1932-6203\&quot;,\n        \&quot;publication_date\&quot;:\&quot;2019-12-10T00:00:00Z\&quot;,\n        \&quot;article_type\&quot;:\&quot;Research Article\&quot;,\n        \&quot;author_display\&quot;:[\&quot;Victor M. Jimenez Jr.\&quot;,\n          \&quot;Erik W. Settles\&quot;,\n          \&quot;Bart J. Currie\&quot;,\n          \&quot;Paul S. Keim\&quot;,\n          \&quot;Fernando P. Monroy\&quot;],\n        \&quot;abstract\&quot;:[\&quot;Background: Binge drinking, an increasingly common form of alcohol use disorder, is associated with substantial morbidity and mortality; yet, its effects on the immune system’s ability to defend against infectious agents are poorly understood. Burkholderia pseudomallei, the causative agent of melioidosis can occur in healthy humans, yet binge alcohol intoxication is increasingly being recognized as a major risk factor. Although our previous studies demonstrated that binge alcohol exposure increased B. pseudomallei near-neighbor virulence in vivo and increased paracellular diffusion and intracellular invasion, no experimental studies have examined the extent to which bacterial and alcohol dosage play a role in disease progression. In addition, the temporal effects of a single binge alcohol dose prior to infection has not been examined in vivo. Principal findings: In this study, we used B. thailandensis E264 a close genetic relative of B. pseudomallei, as useful BSL-2 model system. Eight-week-old female C57BL/6 mice were utilized in three distinct animal models to address the effects of 1) bacterial dosage, 2) alcohol dosage, and 3) the temporal effects, of a single binge alcohol episode. Alcohol was administered comparable to human binge drinking (≤ 4.4 g/kg) or PBS intraperitoneally before a non-lethal intranasal infection. Bacterial colonization of lung and spleen was increased in mice administered alcohol even after bacterial dose was decreased 10-fold. Lung and not spleen tissue were colonized even after alcohol dosage was decreased 20 times below the U.S legal limit. Temporally, a single binge alcohol episode affected lung bacterial colonization for more than 24 h after alcohol was no longer detected in the blood. Pulmonary and splenic cytokine expression (TNF-α, GM-CSF) remained suppressed, while IL-12/p40 increased in mice administered alcohol 6 or 24 h prior to infection. Increased lung and not intestinal bacterial invasion was observed in human and murine non-phagocytic epithelial cells exposed to 0.2% v/v alcohol in vitro. Conclusions: Our results indicate that the effects of a single binge alcohol episode are tissue specific. A single binge alcohol intoxication event increases bacterial colonization in mouse lung tissue even after very low BACs and decreases the dose required to colonize the lungs with less virulent B. thailandensis. Additionally, the temporal effects of binge alcohol alters lung and spleen cytokine expression for at least 24 h after alcohol is detected in the blood. Delayed recovery in lung and not spleen tissue may provide a means for B. pseudomallei and near-neighbors to successfully colonize lung tissue through increased intracellular invasion of non-phagocytic cells in patients with hazardous alcohol intake. \&quot;],\n        \&quot;title_display\&quot;:\&quot;Persistence of &lt;i&gt;Burkholderia thailandensis&lt;/i&gt; E264 in lung tissue after a single binge alcohol episode\&quot;,\n        \&quot;score\&quot;:4.737952},\n      {\n        \&quot;id\&quot;:\&quot;10.1371/journal.pone.0138021\&quot;,\n        \&quot;journal\&quot;:\&quot;PLOS ONE\&quot;,\n        \&quot;eissn\&quot;:\&quot;1932-6203\&quot;,\n        \&quot;publication_date\&quot;:\&quot;2015-09-16T00:00:00Z\&quot;,\n        \&quot;article_type\&quot;:\&quot;Research Article\&quot;,\n        \&quot;author_display\&quot;:[\&quot;Pavel Grigoriev\&quot;,\n          \&quot;Evgeny M. Andreev\&quot;],\n        \&quot;abstract\&quot;:[\&quot;Background and Aim: Harmful alcohol consumption has long been recognized as being the major determinant of male premature mortality in the European countries of the former USSR. Our focus here is on Belarus and Russia, two Slavic countries which continue to suffer enormously from the burden of the harmful consumption of alcohol. However, after a long period of deterioration, mortality trends in these countries have been improving over the past decade. We aim to investigate to what extent the recent declines in adult mortality in Belarus and Russia are attributable to the anti-alcohol measures introduced in these two countries in the 2000s. Data and Methods: We rely on the detailed cause-specific mortality series for the period 1980–2013. Our analysis focuses on the male population, and considers only a limited number of causes of death which we label as being alcohol-related: accidental poisoning by alcohol, liver cirrhosis, ischemic heart diseases, stroke, transportation accidents, and other external causes. For each of these causes we computed age-standardized death rates. The life table decomposition method was used to determine the age groups and the causes of death responsible for changes in life expectancy over time. Conclusion: Our results do not lead us to conclude that the schedule of anti-alcohol measures corresponds to the schedule of mortality changes. The continuous reduction in adult male mortality seen in Belarus and Russia cannot be fully explained by the anti-alcohol policies implemented in these countries, although these policies likely contributed to the large mortality reductions observed in Belarus and Russia in 2005–2006 and in Belarus in 2012. Thus, the effects of these policies appear to have been modest. We argue that the anti-alcohol measures implemented in Belarus and Russia simply coincided with fluctuations in alcohol-related mortality which originated in the past. If these trends had not been underway already, these huge mortality effects would not have occurred. \&quot;],\n        \&quot;title_display\&quot;:\&quot;The Huge Reduction in Adult Male Mortality in Belarus and Russia: Is It Attributable to Anti-Alcohol Measures?\&quot;,\n        \&quot;score\&quot;:4.7355423}]\n  },\n  \&quot;highlighting\&quot;:{\n    \&quot;10.1371/journal.pone.0218147\&quot;:{\n      \&quot;abstract\&quot;:[\&quot;Background: Binge drinking, an increasingly common form of &lt;em&gt;alcohol&lt;/em&gt; use disorder, is associated\&quot;]},\n    \&quot;10.1371/journal.pone.0138021\&quot;:{\n      \&quot;abstract\&quot;:[\&quot;Background and Aim: Harmful &lt;em&gt;alcohol&lt;/em&gt; consumption has long been recognized as being the major\&quot;]</span><span class="re">}}}</span><span class="co">\n&quot;</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="co">#&gt; attr(,&quot;class&quot;)</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="co">#&gt; [1] &quot;sr_high&quot;</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="co">#&gt; attr(,&quot;wt&quot;)</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="co">#&gt; [1] &quot;json&quot;</span></span></code></pre></div>
+<p>Then parse</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">solr_parse</span>(out, <span class="st">&#39;df&#39;</span>)</span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="co">#&gt; # A tibble: 2 x 2</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="co">#&gt;   names                 abstract                                                </span></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="co">#&gt;   &lt;chr&gt;                 &lt;chr&gt;                                                   </span></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="co">#&gt; 1 10.1371/journal.pone… Background: Binge drinking, an increasingly common form…</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a><span class="co">#&gt; 2 10.1371/journal.pone… Background and Aim: Harmful &lt;em&gt;alcohol&lt;/em&gt; consumptio…</span></span></code></pre></div>
+<p><a href="https://github.com/ropensci/solrium/issues">Please report any issues or bugs</a>.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

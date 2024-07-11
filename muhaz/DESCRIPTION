@@ -13,4 +13,4 @@ Packaged: 2021-04-21 07:38:10 UTC; hornik
 Repository: CRAN
 Date/Publication: 2021-04-21 10:43:31 UTC
 NeedsCompilation: yes
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2022-02-15 16:57:03 UTC; unix
+Built: R 4.3.0; x86_64-pc-linux-gnu; 2023-07-07 03:20:31 UTC; unix

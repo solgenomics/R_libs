@@ -1,3 +1,31 @@
+2.0.6
+ - Add new functions pkcs7_encrypt and pkcs7_decrypt
+ - Fix snprintf bug in hash functions
+
+2.0.5
+ - Replace sprintf with snprintf for CRAN
+
+2.0.4
+ - Fix strict-prototype warnings for CRAN
+
+2.0.3
+ - New function write_openssh_pem to support ed25519 in libssh2/gert
+
+2.0.2
+ - Disable tests that require internet access to comply with AON policy
+
+2.0.1
+ - Fix a unit test for a changed error message in openssl 3.0.2
+
+2.0.0
+ - The default fingerprint() for keys has changed from md5 to sha256. This is
+   a breaking change, but in line with other software phasing out md5, and needed
+   to support systems where use of MD5 has been disabled to comply with FIPS.
+ - Make the test-suite pass under FIPS on RHEL 8.
+ - New family of ssl_ctx functions to manipulate an SSL context from inside curl
+   https requests.
+ - Rd manuals have been markdownified
+
 1.4.6
  - Update unit tests to new pki.goog test servers
 
