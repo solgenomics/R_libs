@@ -1,7 +1,7 @@
 Package: genoDataFilter
 Type: Package
 Title: Filters Genotype Dataset
-Version: 0.1.4.4
+Version: 0.1.4.5
 Date: 20-03-2025
 Author: Isaak Y Tecle
 Maintainer: Isaak Y Tecle <iyt2@cornell.edu>
@@ -16,13 +16,13 @@ RemoteHost: api.github.com
 RemoteRepo: rPackages
 RemoteUsername: solgenomics
 RemoteRef: HEAD
-RemoteSha: b18f985451587465f9395f242893910d48bc52ba
+RemoteSha: 6d95c1f67e54a24fa3008431ca9196b5a0d8d317
 RemoteSubdir: genoDataFilter
 GithubRepo: rPackages
 GithubUsername: solgenomics
 GithubRef: HEAD
-GithubSHA1: b18f985451587465f9395f242893910d48bc52ba
+GithubSHA1: 6d95c1f67e54a24fa3008431ca9196b5a0d8d317
 GithubSubdir: genoDataFilter
 NeedsCompilation: no
-Packaged: 2025-03-20 08:29:02 UTC; root
-Built: R 4.4.1; ; 2025-03-20 08:29:02 UTC; unix
+Packaged: 2025-03-20 10:50:43 UTC; root
+Built: R 4.4.1; ; 2025-03-20 10:50:44 UTC; unix
