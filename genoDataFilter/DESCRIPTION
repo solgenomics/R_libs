@@ -1,8 +1,8 @@
 Package: genoDataFilter
 Type: Package
 Title: Filters Genotype Dataset
-Version: 0.1.4.3
-Date: 31-10-2022
+Version: 0.1.4.4
+Date: 20-03-2025
 Author: Isaak Y Tecle
 Maintainer: Isaak Y Tecle <iyt2@cornell.edu>
 Description: Filters genotype dataset for monomorphic markers, markers with minimum allele frequency (MAF) (e.g., < 5%), markers and accessions with missing values above given fraction.
@@ -16,13 +16,13 @@ RemoteHost: api.github.com
 RemoteRepo: rPackages
 RemoteUsername: solgenomics
 RemoteRef: HEAD
-RemoteSha: 392a5310f3f071ad7c0251b2c0df637f518fedbc
+RemoteSha: b18f985451587465f9395f242893910d48bc52ba
 RemoteSubdir: genoDataFilter
 GithubRepo: rPackages
 GithubUsername: solgenomics
 GithubRef: HEAD
-GithubSHA1: 392a5310f3f071ad7c0251b2c0df637f518fedbc
+GithubSHA1: b18f985451587465f9395f242893910d48bc52ba
 GithubSubdir: genoDataFilter
 NeedsCompilation: no
-Packaged: 2023-07-07 13:28:09 UTC; root
-Built: R 4.3.0; ; 2023-07-07 13:28:09 UTC; unix
+Packaged: 2025-03-20 08:29:02 UTC; root
+Built: R 4.4.1; ; 2025-03-20 08:29:02 UTC; unix
