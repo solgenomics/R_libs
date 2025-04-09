@@ -9,7 +9,7 @@ knitr::opts_chunk$set(
 
 ## ----echo = FALSE-------------------------------------------------------------
 library(FielDHub)
-library(magrittr)
+library(dplyr)
 library(knitr)
 library(kableExtra)
 
@@ -47,8 +47,8 @@ NAME <- c(paste0("Genotype", 1:10))
 df <- data.frame(ENTRY,NAME)
 
 ## ----echo = FALSE, results='asis'---------------------------------------------
-df %>%
-  kbl() %>%
+df |>
+  kbl() |>
   kable_styling()
 
 ## ----echo = TRUE--------------------------------------------------------------
@@ -73,15 +73,15 @@ optim_multi_prep <- multi_location_prep(
 print(head(optim_multi_prep$allocation, 10))
 
 ## ----echo=FALSE, eval=TRUE----------------------------------------------------
-optim_multi_prep$allocation %>%
-        dplyr::mutate(
-            Copies = rowSums(.),
-            Avg = Copies / 5
-        ) %>%
-        head(10) %>%
-        `rownames<-`(paste0("Gen-", 1:10)) %>%
-        kbl() %>%
-        kable_styling()
+optim_multi_prep$allocation |>
+  dplyr::mutate(
+    Copies = rowSums(across(everything())),
+    Avg = Copies / 5
+  ) |>
+    head(10) |>
+    `rownames<-`(paste0("Gen-", 1:10)) |>
+    kbl() |>
+    kable_styling()
 
 ## ----echo=TRUE, eval=FALSE----------------------------------------------------
 #  print(optim_multi_prep)
